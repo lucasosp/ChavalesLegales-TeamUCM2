@@ -1,11 +1,10 @@
 import { App } from "./App.js";
 import { LocalStorageSaveStore, MemorySaveStore } from "../services/saveStores.js";
-import { personImage, personPortrait, illustrations, framePortrait } from "../content/characterImages.js";
+import { personPortrait, illustrations, framePortrait } from "../content/characterImages.js";
 import { DrawingCanvasModal } from "../ui/DrawingCanvasModal.js";
 import { avatarStore } from "../services/avatarStore.js";
 
 export const SARA_SAVE_KEY = "sara.save";
-const escape = (value) => String(value).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const element = (tag, className, text) => {
   const node = document.createElement(tag);
   if (className) node.className = className;
@@ -24,6 +23,8 @@ export class SaraExperience {
     this.app = new App({ root, ...content, onExit, saveStore: new MemorySaveStore(), initialFlags: { resolution: "conviction" } });
     this.engine = this.app.engine;
     this.app.view.autoFocusStory = true;
+    this.novelTitle = "Sara · Mi historia sigue";
+    root.querySelector(".novel").setAttribute("aria-label", this.novelTitle);
     this.drawingModal = new DrawingCanvasModal({ container: root });
     this.phase2Triggered = false;
     this.phase3Triggered = false;
@@ -36,23 +37,9 @@ export class SaraExperience {
     root.classList.add("sara-has-cast");
     root.insertAdjacentHTML("beforeend", `
       <header class="sara-top" data-sara-chrome hidden>
-        <button class="sara-wordmark" type="button" data-sara-action="pause" aria-label="Sara: abrir menú de pausa">SARA<span>mi historia sigue</span></button>
-        <div class="sara-chapter"><span data-sara-chapter></span><progress data-sara-progress max="6" value="0" aria-label="Capítulos completados"></progress></div>
-        <div class="sara-avatar-badge" data-sara-avatar-badge hidden title="Tu foto de perfil">
-          <img data-sara-top-avatar alt="Foto de perfil del avatar" />
-          <span class="sara-avatar-status" data-sara-avatar-status>Perfil</span>
-        </div>
-        <button type="button" class="sara-icon-button" data-sara-action="help">Ayuda real</button>
-        <button type="button" class="sara-icon-button" data-sara-action="pause" aria-label="Pausar historia">Ⅱ <span class="sara-desktop">Pausa</span></button>
+        <div class="sara-chapter"><span class="sara-eyebrow" data-sara-chapter-number></span><span data-sara-chapter></span></div>
+        <button type="button" class="sara-menu-button" data-sara-action="pause" aria-label="Abrir menú de pausa"><span aria-hidden="true">Ⅱ</span> Menú</button>
       </header>
-      <p class="sara-location" data-sara-location hidden></p>
-      <div class="sara-speaker-card" data-sara-portrait hidden aria-hidden="true"></div>
-      <nav class="sara-bottom" data-sara-chrome hidden aria-label="Herramientas de la historia">
-        <button type="button" data-sara-action="back" disabled><span aria-hidden="true">←</span> Volver</button>
-        <button type="button" data-sara-action="map"><span aria-hidden="true">◎</span> Recorrido</button>
-        <button type="button" data-sara-action="people"><span aria-hidden="true">♧</span> Personas</button>
-        <button type="button" data-sara-action="notebook"><span aria-hidden="true">▤</span> Cuaderno <small data-sara-notes>0</small></button>
-      </nav>
       <section class="sara-overlay" data-sara-overlay hidden>
         <div class="sara-dialog" role="dialog" aria-modal="true" aria-labelledby="sara-dialog-title" tabindex="-1">
           <header class="sara-dialog-head"><span class="sara-eyebrow">CHAVALES LEGALES</span><button type="button" class="sara-close" data-sara-close aria-label="Cerrar panel y volver a la historia">Cerrar ×</button></header>
@@ -70,14 +57,7 @@ export class SaraExperience {
       const button = event.target.closest("[data-sara-action]");
       if (!button) return;
       const action = button.dataset.saraAction;
-      if (action === "back") {
-        if (this.engine.back()) {
-          this.app.view.skipTyping();
-          if (this.engine.currentNode.type === "dialogue") this.app.view.refs.advance.focus({ preventScroll: true });
-        }
-        return;
-      }
-      this.openPanel(action);
+      if (["pause", "help", "restart"].includes(action)) this.openPanel(action);
     };
     root.addEventListener("click", this.onRootClick);
     this.onKey = (event) => this.handleOverlayKey(event);
@@ -110,17 +90,13 @@ export class SaraExperience {
       <div class="sara-landing-grid">
         <div class="sara-landing-copy">
           <p class="sara-tagline">Mi historia sigue.</p>
-          <button type="button" class="sara-primary" data-sara-start>Acceder a la historia <span aria-hidden="true">→</span></button>
-          ${saved ? '<button type="button" class="sara-secondary" data-sara-resume>Continuar partida guardada</button>' : ""}
-          <div hidden>
-            <button type="button" data-sara-action="help">Ayuda fuera de la historia</button>
-            <input type="checkbox" data-sara-save checked>
-            <select data-sara-resolution><option value="conviction" selected>Con condena</option><option value="no-conviction">Sin condena</option></select>
-          </div>
+          <p class="sara-landing-intro">Acompaña a Sara, conoce a sus amigos y elige cómo seguir. Puedes leer a tu ritmo y parar cuando quieras.</p>
+          <button type="button" class="sara-primary" data-sara-start>Empezar la historia <span aria-hidden="true">→</span></button>
+          ${saved ? '<button type="button" class="sara-secondary" data-sara-resume>Continuar mi historia</button>' : ""}
+          <button type="button" class="sara-text-button" data-sara-exit>Volver al inicio</button>
         </div>
-        <div class="sara-hero">
-          <div class="sara-hero-orbit" aria-hidden="true">✦</div>
-          <img src="${illustrations.saraHappy.src}" alt="Sara, protagonista de la historia"/>
+        <div class="sara-hero" aria-hidden="true">
+          <img src="${illustrations.saraHappy.src}" alt="" draggable="false"/>
         </div>
       </div>`;
     this.body.querySelector("[data-sara-start]").addEventListener("click", () => this.begin(false));
@@ -130,10 +106,9 @@ export class SaraExperience {
   }
 
   begin(resume) {
-    const save = this.body.querySelector("[data-sara-save]")?.checked ?? true;
-    this.engine.saveStore = save ? this.localStore : new MemorySaveStore();
-    this.engine.initialFlags = { resolution: this.body.querySelector("[data-sara-resolution]")?.value ?? "conviction" };
-    if (!resume || !save) {
+    this.engine.saveStore = this.localStore;
+    this.engine.initialFlags = { resolution: "conviction" };
+    if (!resume) {
       this.localStore.clear();
       avatarStore.clear();
       this.phase2Triggered = false;
@@ -159,26 +134,8 @@ export class SaraExperience {
   }
 
   updateAvatarUI() {
-    const badge = this.root.querySelector("[data-sara-avatar-badge]");
-    const img = this.root.querySelector("[data-sara-top-avatar]");
-    const status = this.root.querySelector("[data-sara-avatar-status]");
-    const activeAvatar = avatarStore.getActiveAvatar();
-
-    if (badge && img) {
-      if (activeAvatar) {
-        badge.hidden = false;
-        img.src = activeAvatar;
-        if (status) {
-          status.textContent = avatarStore.isPhase3Completed()
-            ? "Definitivo"
-            : avatarStore.isPhase2Completed()
-            ? "Post-trauma"
-            : "Inicio";
-        }
-      } else {
-        badge.hidden = true;
-      }
-    }
+    // Drawings belong to the child's profile; story characters keep their artwork.
+    if (this.mode === "pause") this.renderPause();
   }
 
   renderEndingAvatarCard(choice, dataUrl) {
@@ -192,13 +149,13 @@ export class SaraExperience {
     }
     const chosen = dataUrl || avatarStore.getActiveAvatar();
     const isPhase1 = (choice || avatarStore.getFinalChoice()) === "phase1";
-    const label = isPhase1 ? "Dibujo 1 (Antes del evento)" : "Dibujo 2 (Post-trauma)";
+    const label = isPhase1 ? "Mi primer dibujo" : "Mi segundo dibujo";
     card.innerHTML = `
       <div class="sara-ending-avatar-wrap">
         <img src="${chosen}" alt="Avatar elegido" class="sara-ending-avatar-img">
       </div>
       <div class="sara-ending-avatar-info">
-        <strong>Avatar elegido para el desenlace</strong>
+        <strong>Tu dibujo para recordar esta historia</strong>
         <span>${label}</span>
       </div>
     `;
@@ -233,15 +190,12 @@ export class SaraExperience {
 
   openPanel(mode) {
     if (this.mode === "start" && mode === "help") this.helpFromLanding = true;
-    const titles = { map: "Un paso cada vez", people: "Personas que acompañan", notebook: "El cuaderno de Sara", help: "Ayuda fuera de la historia", pause: "Podemos parar aquí", restart: "Volver a empezar" };
+    const titles = { help: "¿Necesitas ayuda?", pause: "Un pequeño descanso", restart: "¿Empezamos otra vez?" };
     this.openShell(mode, titles[mode] ?? "Sara");
-    if (mode === "map") this.renderMap();
-    else if (mode === "people") this.renderPeople();
-    else if (mode === "notebook") this.renderNotebook();
-    else if (mode === "help") this.renderHelp();
+    if (mode === "help") this.renderHelp();
     else if (mode === "restart") {
-      this.body.append(element("p", "sara-panel-intro", "Empezar de nuevo borra el progreso de este caso en el dispositivo. Puedes elegir otra variante de demostración en la portada."));
-      this.button("Borrar progreso y empezar", () => { this.localStore.clear(); this.engine.saveStore?.clear(); avatarStore.clear(); this.showLanding(); }, "sara-primary");
+      this.body.append(element("p", "sara-panel-intro", "Volverás al principio de la historia y tus dibujos se borrarán de este dispositivo."));
+      this.button("Sí, volver a empezar", () => { this.localStore.clear(); this.engine.saveStore?.clear(); avatarStore.clear(); this.showLanding(); }, "sara-primary");
     } else this.renderPause();
   }
 
@@ -254,8 +208,21 @@ export class SaraExperience {
   }
 
   renderPause() {
-    this.body.append(element("p", "sara-panel-intro", "La historia está en pausa. Puedes volver a ella cuando quieras."));
+    this.body.replaceChildren();
+    this.body.append(element("p", "sara-panel-intro", "Sara te espera. Sigue cuando quieras."));
+    const avatar = avatarStore.getActiveAvatar();
+    if (avatar) {
+      const profile = element("div", "sara-pause-profile");
+      const image = element("img"); image.src = avatar; image.alt = "Tu dibujo";
+      profile.append(image, element("span", "", "Tu dibujo te acompaña"));
+      this.body.append(profile);
+    }
     this.button("Seguir con Sara", () => this.closePanel(), "sara-primary");
+    const previous = this.button("← Volver a la frase anterior", () => {
+      this.closePanel();
+      if (this.engine.back()) this.app.view.skipTyping();
+    });
+    previous.disabled = this.engine.history.length === 0 || this.engine.isFinished;
     const label = element("label", "sara-save-label");
     const input = document.createElement("input");
     input.type = "checkbox";
@@ -273,93 +240,20 @@ export class SaraExperience {
     const status = element("p", "sara-fineprint", input.checked ? "Guardado local activado." : "El progreso permanece solo durante esta visita.");
     status.setAttribute("role", "status");
     this.body.append(status);
-    this.button("Texto más grande / tamaño habitual", () => this.root.classList.toggle("sara-large-text"));
-    this.button("Reiniciar historia…", () => this.openPanel("restart"));
-    this.button("Borrar el guardado del dispositivo", () => {
-      const snapshot = this.engine.saveStore?.load();
-      this.localStore.clear(); this.engine.saveStore = new MemorySaveStore();
-      if (snapshot) this.engine.saveStore.save(snapshot);
-      input.checked = false;
-      status.textContent = "Guardado eliminado. Puedes seguir jugando en memoria.";
+    const largeText = this.button("Letra más grande", () => {
+      const enabled = this.root.classList.toggle("sara-large-text");
+      largeText.setAttribute("aria-pressed", String(enabled));
     });
+    largeText.setAttribute("aria-pressed", String(this.root.classList.contains("sara-large-text")));
+    const instant = this.button("Mostrar las frases de golpe", () => {
+      this.app.view.typewriter.instant = !this.app.view.typewriter.instant;
+      instant.setAttribute("aria-pressed", String(this.app.view.typewriter.instant));
+    });
+    instant.setAttribute("aria-pressed", String(Boolean(this.app.view.typewriter.instant)));
+    this.button("Necesito ayuda", () => this.openPanel("help"));
+    this.button("Reiniciar historia…", () => this.openPanel("restart"));
     this.button("Salir de la historia", () => this.onExit?.());
-    this.body.append(element("p", "sara-fineprint", "Salir cambia de pantalla. No borra el historial del navegador. Aquí no se recogen nombres ni relatos personales."));
-  }
 
-  renderMap() {
-    this.body.append(element("p", "sara-panel-intro", "Este es el recorrido de la historia de Sara. La protección y los apoyos pueden continuar mientras avanza el procedimiento. En la vida real, el orden y los tiempos pueden variar."));
-    const list = element("ol", "sara-map");
-    const current = this.engine.currentNode.chapter;
-    for (const [index, step] of this.guide.steps.entries()) {
-      const item = element("li", step.chapter < current || this.engine.isFinished ? "is-done" : step.chapter === current ? "is-current" : "");
-      const details = element("details", "sara-map-step");
-      const summary = element("summary");
-      summary.append(element("span", "sara-step-number", String(index + 1)), element("strong", "", step.title));
-      summary.append(element("small", "", step.chapter < current || this.engine.isFinished ? "Recorrido" : step.chapter === current ? "En este capítulo" : "Más adelante"));
-      details.append(summary, element("p", "", step.text));
-      item.append(details); list.append(item);
-    }
-    this.body.append(list, element("p", "sara-fineprint", "Abre cada etapa para entenderla. El mapa informa; no salta escenas ni cambia decisiones."));
-  }
-
-  renderPeople() {
-    this.body.append(element("p", "sara-panel-intro", "Abre una ficha para recordar a quién puede preguntar Sara y qué hace cada persona."));
-    const grid = element("div", "sara-people-grid");
-    for (const person of this.guide.people) {
-      const details = element("details", `sara-person ${person.color}`);
-      const summary = element("summary");
-      const avatar = element("span", "sara-avatar", person.initial);
-      avatar.setAttribute("aria-hidden", "true");
-      const portraitSource = personImage(person.name) ?? person.sprite;
-      if (portraitSource) { avatar.textContent = ""; const image = document.createElement("img"); image.src = portraitSource; image.alt = ""; avatar.append(image); }
-      const label = element("span"); label.append(element("strong", "", person.name), element("small", "", person.role));
-      summary.append(avatar, label);
-      details.append(summary, element("p", "", person.text));
-      if (!portraitSource) details.append(element("small", "sara-placeholder-note", "Retrato provisional"));
-      grid.append(details);
-    }
-    this.body.append(grid);
-    const gallery = element("details", "sara-art-gallery");
-    gallery.append(element("summary", "", "Ver todas las ilustraciones y expresiones"));
-    const images = element("div", "sara-art-grid");
-    for (const art of Object.values(illustrations)) {
-      const figure = element("figure");
-      const viewport = element("div", "sara-portrait-window");
-      const image = element("img");
-      image.addEventListener("load", () => framePortrait(image, art));
-      image.src = art.src;
-      image.alt = art.label;
-      image.loading = "lazy";
-      viewport.append(image);
-      figure.append(viewport, element("figcaption", "", art.label));
-      images.append(figure);
-    }
-    gallery.append(images);
-    this.body.append(gallery);
-  }
-
-  learned() {
-    return [...new Set([...this.engine.seen].flatMap((id) => this.engine.story[id]?.learn ?? []))];
-  }
-
-  renderNotebook() {
-    this.body.append(element("p", "sara-panel-intro", "Ideas que Sara ha ido encontrando. El cuaderno se completa con lo que lees y preguntas. No guarda experiencias personales."));
-    const notes = this.learned();
-    if (!notes.length) this.body.append(element("p", "sara-empty", "La primera página está en blanco. Las ideas aparecerán cuando Sara las descubra."));
-    for (const id of notes) {
-      const note = this.legal.notes[id];
-      if (!note) continue;
-      const card = element("article", "sara-note");
-      card.append(element("h2", "", note.title), element("p", "", note.text));
-      const sources = element("details", "sara-sources");
-      sources.append(element("summary", "", "De dónde viene esta información"));
-      for (const sourceId of note.sources) {
-        const source = this.legal.sources[sourceId];
-        sources.append(this.link(source.title, source.url));
-      }
-      card.append(sources); this.body.append(card);
-    }
-    this.body.append(element("p", "sara-fineprint", `Información educativa. Fuentes contrastadas: ${this.legal.checkedAt}. Las circunstancias y actuaciones cambian en cada caso.`));
   }
 
   link(title, href) {
@@ -425,14 +319,8 @@ export class SaraExperience {
     }
 
     const chapter = this.guide.chapters.find((c) => c.id === node.chapter);
-    this.root.querySelector("[data-sara-chapter]").textContent = `${node.chapter}/6 · ${chapter.title}`;
-    this.root.querySelector("[data-sara-progress]").value = this.engine.isFinished ? 6 : node.chapter - 1;
-    this.root.querySelector('[data-sara-action="back"]').disabled = this.engine.history.length === 0;
-    this.root.querySelector("[data-sara-notes]").textContent = String(this.learned().length);
-    const location = this.root.querySelector("[data-sara-location]");
-    location.hidden = node.type === "interstitial" || node.type === "ending";
-    location.textContent = this.engine.stage.background === "court-friendly" ? "Juzgado · sala de vistas" : this.engine.stage.background === "quiet-room" ? "Entorno judicial · sala de acompañamiento" : node.chapter === 3 ? "Atención social · espacio de acompañamiento" : node.chapter === 4 || node.chapter === 6 ? "La vida de Sara continúa" : "Instituto · un lugar para hablar";
-    this.root.querySelector("[data-sara-portrait]").hidden = true;
+    this.root.querySelector("[data-sara-chapter-number]").textContent = `Capítulo ${node.chapter} de ${this.guide.chapters.length}`;
+    this.root.querySelector("[data-sara-chapter]").textContent = chapter?.title ?? "La historia de Sara";
     this.renderCast(node);
   }
 
@@ -453,15 +341,13 @@ export class SaraExperience {
     if (node.type === "dialogue" && (!speaker || node.tone === "thought")) partner = null;
     const names = partner ? ["Sara", partner] : ["Sara"];
     this.cast.dataset.count = String(names.length);
-    const activeAvatar = avatarStore.getActiveAvatar();
     const frames = new Map([...this.cast.children].map(frame => [frame.dataset.person, frame]));
     for (const [name, frame] of frames) {
       if (!names.includes(name)) frame.remove();
     }
     for (const name of names) {
       const art = personPortrait(name, { expression, nodeId: this.engine.nodeId });
-      const customAvatar = name === "Sara" ? activeAvatar : null;
-      const source = customAvatar || art?.src;
+      const source = art?.src;
       if (!source) continue;
       let frame = frames.get(name);
       if (!frame) {
@@ -480,13 +366,7 @@ export class SaraExperience {
         if (!this.cast.contains(frame) || frame.dataset.source !== source) return;
         const previous = [...frame.querySelectorAll("img")];
         frame.querySelector(".sara-cast-fallback")?.remove();
-        if (customAvatar) {
-          // A user's drawing is an arbitrary canvas, not a photographed body.
-          image.style.cssText = "width:100%;height:100%;left:0;top:0;object-fit:contain;object-position:center bottom";
-          image.dataset.bodyRegion = "custom-drawing";
-        } else {
-          framePortrait(image, art);
-        }
+        framePortrait(image, art);
         image.classList.add("is-entering");
         frame.querySelector(".sara-portrait-window").append(image);
         previous.forEach(old => old.classList.add("is-leaving"));
@@ -503,7 +383,13 @@ export class SaraExperience {
   }
 
   handleOverlayKey(event) {
-    if (this.overlay.hidden) return;
+    if (this.drawingModal.modal) return;
+    if (this.overlay.hidden) {
+      if (event.key === "Escape" && this.engine.isRunning) {
+        event.preventDefault(); event.stopImmediatePropagation(); this.openPanel("pause");
+      }
+      return;
+    }
     event.stopImmediatePropagation();
     if (event.key === "Escape" && this.mode !== "start") { event.preventDefault(); this.closePanel(); return; }
     if (event.key !== "Tab") return;

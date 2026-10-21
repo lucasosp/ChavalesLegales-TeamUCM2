@@ -43,7 +43,7 @@ export default function Novela() {
   useEffect(() => {
     const handleNovelMessage = (event) => {
       const frame = document.getElementById('novela-frame')
-      if (event.origin !== location.origin && !event.origin.includes('localhost') && !event.origin.includes('127.0.0.1')) return
+      if (event.origin !== location.origin || event.source !== frame?.contentWindow) return
       
       // Salir de la novela
       if (event.data?.type === 'legalinstory:exit') {
