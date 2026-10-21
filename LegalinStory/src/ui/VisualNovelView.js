@@ -1,5 +1,6 @@
 import { appTemplate } from "./templates.js";
 import { Typewriter } from "./Typewriter.js";
+import { t } from "../i18n.js";
 
 /**
  * DOM presentation layer.
@@ -63,7 +64,7 @@ export class VisualNovelView {
       onAdvance,
       onChoose,
       onExit = null,
-      title = "Visual Novel",
+      title = t("novel.defaultTitle"),
       resolveCharacter = defaultCharacterSource,
       resolveCharacterName = defaultCharacterName,
       resolveBackground = null,
@@ -195,16 +196,16 @@ export class VisualNovelView {
 
   /* ------------------------------------------------------------ story events */
 
-  showDialogue({ speaker, remote, text, tone, stage }) {
+  showDialogue({ speaker, speakerKey, remote, text, tone, stage }) {
     this.#resetTransientOverlays();
     this.#leaveEnding();
     this.#awaitingChoice = false;
     this.#clearChoices();
     this.#applyStage(stage);
     const voice = tone === "thought"
-      ? (speaker ? `Pensamiento de ${speaker}` : "Pensamiento")
-      : speaker ?? (tone === "narration" ? "Narración" : null);
-    this.#setSpeaker(voice, remote);
+      ? (speaker ? t("novel.thoughtOf", { speaker }) : t("novel.thought"))
+      : speaker ?? (tone === "narration" ? t("novel.narration") : null);
+    this.#setSpeaker(voice, remote, tone === "thought" ? null : speakerKey);
     this.refs.announcement.textContent = `${voice ? `${voice}: ` : ""}${text}`;
 
     this.refs.panel.classList.toggle("is-narration", tone === "narration");
@@ -212,25 +213,25 @@ export class VisualNovelView {
     this.refs.panel.classList.toggle("is-poem", tone === "poem");
     this.refs.text.scrollTop = 0;
     this.refs.advance.hidden = false;
-    this.refs.advance.textContent = "Ver frase completa";
+    this.refs.advance.textContent = t("novel.seeFullLine");
 
     this.typewriter.play(text, () => {
       if (this.#awaitingChoice) return;
       this.refs.advance.hidden = false;
-      this.refs.advance.textContent = "Seguir →";
+      this.refs.advance.textContent = t("novel.nextLine");
     });
     if (this.autoFocusStory && !this.root.querySelector('[data-sara-overlay]:not([hidden])')) {
       this.refs.advance.focus({ preventScroll: true });
     }
   }
 
-  showChoices({ speaker, remote, prompt, tone, options, stage }) {
+  showChoices({ speaker, speakerKey, remote, prompt, tone, options, stage }) {
     this.#resetTransientOverlays();
     this.#leaveEnding();
     this.#awaitingChoice = false;
     this.#applyStage(stage);
-    const voice = speaker ?? "Ahora eliges tú";
-    this.#setSpeaker(voice, remote);
+    const voice = speaker ?? t("novel.yourTurn");
+    this.#setSpeaker(voice, remote, speaker ? speakerKey : null);
     this.refs.announcement.textContent = `${voice}: ${prompt}`;
     this.#clearChoices();
 
@@ -282,19 +283,19 @@ export class VisualNovelView {
 
   /* ------------------------------------------------------------ chat scenes */
 
-  showChat({ chatTitle, self, messages, stage }) {
+  showChat({ chatTitle, self, selfKey, messages, stage }) {
     this.#resetTransientOverlays();
     this.#applyStage(stage);
     this.refs.panel.hidden = true;
     this.refs.chat.hidden = false;
-    this.refs.chatTitle.textContent = chatTitle ?? "Mensajes";
-    this.refs.chatSelf.textContent = self ? `Desde el móvil de ${self}` : "";
+    this.refs.chatTitle.textContent = chatTitle ?? t("novel.messages");
+    this.refs.chatSelf.textContent = self ? t("novel.fromPhoneOf", { name: self }) : "";
     this.refs.chatLog.replaceChildren();
     this.refs.chatHint.hidden = true;
     this.refs.chatSkip.hidden = false;
     this.#chatAdvanceBlockedUntil = 0;
 
-    this.#chatSelf = self ?? null;
+    this.#chatSelf = selfKey ?? self ?? null;
     this.#chatMessages = Array.isArray(messages) ? messages : [];
     this.#chatIndex = 0;
     this.#chatRevealing = this.#chatMessages.length > 0;
@@ -373,9 +374,11 @@ export class VisualNovelView {
 
   #createChatBubble(message, self) {
     const row = document.createElement("div");
-    const system = message.system === true || message.from === "Sistema";
+    // Compare the untranslated author so localized names keep their role.
+    const from = message.fromKey ?? message.from;
+    const system = message.system === true || from === "Sistema";
     const side =
-      message.side ?? (system ? "system" : message.from === self ? "out" : "in");
+      message.side ?? (system ? "system" : from === self ? "out" : "in");
     row.className = `chat-row is-${side}`;
 
     if (system) {
@@ -402,7 +405,7 @@ export class VisualNovelView {
       const preview = document.createElement("div");
       preview.className = "censored-preview";
       preview.setAttribute("role", "img");
-      preview.setAttribute("aria-label", "Imagen censurada; el contenido no se muestra");
+      preview.setAttribute("aria-label", t("novel.censoredAria"));
       const mosaic = document.createElement("img");
       mosaic.className = "censored-preview-art";
       mosaic.src = new URL("assets/censored-preview.svg", document.baseURI).href;
@@ -410,7 +413,7 @@ export class VisualNovelView {
       mosaic.setAttribute("aria-hidden", "true");
       const label = document.createElement("span");
       label.className = "censored-preview-label";
-      label.textContent = "Imagen censurada";
+      label.textContent = t("novel.censored");
       label.setAttribute("aria-hidden", "true");
       preview.append(mosaic, label);
       bubble.append(preview);
@@ -464,7 +467,7 @@ export class VisualNovelView {
 
   showNotice(payload) {
     this.#hideNotice();
-    this.refs.noticeTitle.textContent = payload.title ?? "Aviso";
+    this.refs.noticeTitle.textContent = payload.title ?? t("novel.notice");
     this.refs.noticeText.textContent = payload.text ?? "";
     this.refs.noticeText.hidden = !payload.text;
     this.refs.noticeLesson.textContent = payload.lesson ?? "";
@@ -496,8 +499,8 @@ export class VisualNovelView {
 
     this.refs.lesson.hidden = false;
     this.refs.lesson.setAttribute("aria-hidden", "false");
-    this.refs.lessonTitle.textContent = payload.title ?? "Hay otra forma de hacerlo";
-    this.refs.lessonChoice.textContent = payload.label ? `Elegiste: «${payload.label}»` : "";
+    this.refs.lessonTitle.textContent = payload.title ?? t("novel.otherWay");
+    this.refs.lessonChoice.textContent = payload.label ? t("novel.youChose", { label: payload.label }) : "";
     this.refs.lessonChoice.hidden = !payload.label;
     this.refs.lessonConsequence.textContent = payload.consequence ?? "";
     this.refs.lessonConsequence.hidden = !payload.consequence;
@@ -530,7 +533,7 @@ export class VisualNovelView {
     this.#quizAnswers = [];
     this.#quizAnswered = false;
     this.#quizSummary = false;
-    this.#quizTitle = payload.title ?? "Cuatro ideas para llevarte";
+    this.#quizTitle = payload.title ?? t("novel.quizDefaultTitle");
 
     this.refs.quiz.hidden = false;
     this.refs.quiz.setAttribute("aria-hidden", "false");
@@ -548,10 +551,10 @@ export class VisualNovelView {
 
     this.#quizAnswered = false;
     this.refs.quizKicker.textContent = question.voice
-      ? `Taller de Elena · pregunta de ${question.voice}`
-      : "Taller de Elena · pregunta";
+      ? t("novel.quizKickerVoice", { voice: question.voice })
+      : t("novel.quizKicker");
     this.refs.quizPrompt.textContent = question.question ?? "";
-    this.refs.quizProgress.textContent = `Pregunta ${this.#quizIndex + 1} de ${this.#quizQuestions.length}`;
+    this.refs.quizProgress.textContent = t("novel.questionOf", { n: this.#quizIndex + 1, total: this.#quizQuestions.length });
     this.refs.quizOptions.replaceChildren();
     this.refs.quizFeedback.hidden = true;
     this.refs.quizFeedback.replaceChildren();
@@ -590,8 +593,8 @@ export class VisualNovelView {
     const result = document.createElement("p");
     result.className = option.correct ? "is-good" : "is-bad";
     result.textContent = option.correct
-      ? "Correcto. " + (option.feedback ?? question.explanation ?? "")
-      : "No exactamente. " +
+      ? t("novel.correct") + (option.feedback ?? question.explanation ?? "")
+      : t("novel.notQuite") +
         (question.options?.find((item) => item.correct)?.label ?? "") +
         ". " +
         (question.explanation ?? "");
@@ -604,7 +607,7 @@ export class VisualNovelView {
     feedback.hidden = false;
 
     const last = this.#quizIndex >= this.#quizQuestions.length - 1;
-    this.refs.quizNext.textContent = last ? "Ver resultado" : "Siguiente pregunta";
+    this.refs.quizNext.textContent = last ? t("novel.seeResult") : t("novel.nextQuestion");
     this.refs.quizNext.hidden = false;
     this.refs.quizNext.focus({ preventScroll: true });
   }
@@ -631,9 +634,9 @@ export class VisualNovelView {
 
     this.#quizAnswered = true;
     this.#quizSummary = true;
-    this.refs.quizKicker.textContent = "Taller de Elena · cierre";
-    this.refs.quizPrompt.textContent = "No hay nota ni castigo. Lo importante es que puedas reconocer estas ideas y pedir ayuda.";
-    this.refs.quizProgress.textContent = `${correct} de ${this.#quizQuestions.length} ideas reconocidas`;
+    this.refs.quizKicker.textContent = t("novel.quizKickerClose");
+    this.refs.quizPrompt.textContent = t("novel.quizSummaryPrompt");
+    this.refs.quizProgress.textContent = t("novel.quizRecognized", { correct, total: this.#quizQuestions.length });
     this.refs.quizOptions.replaceChildren();
 
     const feedback = this.refs.quizFeedback;
@@ -642,12 +645,12 @@ export class VisualNovelView {
     summary.className = "is-good";
     summary.textContent =
       correct === this.#quizQuestions.length
-        ? "Has reconocido todas las ideas clave. Puedes repasarlas siempre que quieras."
-        : "Puedes volver a la libreta y repasar las ideas que aún bailan. Pedir ayuda no exige acertarlo todo.";
+        ? t("novel.quizAllRight")
+        : t("novel.quizSomeWrong");
     feedback.append(summary);
     feedback.hidden = false;
 
-    this.refs.quizNext.textContent = "Continuar";
+    this.refs.quizNext.textContent = t("novel.continue");
     this.refs.quizNext.hidden = false;
     this.refs.quizNext.focus({ preventScroll: true });
   }
@@ -680,13 +683,13 @@ export class VisualNovelView {
 
     this.refs.minigame.hidden = false;
     this.refs.minigame.setAttribute("aria-hidden", "false");
-    this.refs.minigameTitle.textContent = payload.title ?? "Actividad";
+    this.refs.minigameTitle.textContent = payload.title ?? t("novel.activity");
     this.refs.minigamePrompt.textContent = payload.prompt ?? "";
     this.refs.minigameFeedback.hidden = true;
     this.refs.minigameFeedback.replaceChildren();
     this.refs.minigameContinue.hidden = true;
     this.refs.minigameCheck.hidden = false;
-    this.refs.minigameCheck.textContent = this.#minigameMode === "support" ? "Confirmar apoyos" : "Comprobar selección";
+    this.refs.minigameCheck.textContent = this.#minigameMode === "support" ? t("novel.confirmSupports") : t("novel.checkSelection");
     this.refs.minigameCheck.disabled = this.#minigameSelected.size === 0;
     this.#renderMinigameCards();
     this.refs.minigameCards.querySelector("button")?.focus({ preventScroll: true });
@@ -748,10 +751,10 @@ export class VisualNovelView {
     const summary = document.createElement("p");
     summary.className = support || allCorrect ? "is-good" : "is-bad";
     summary.textContent = support
-      ? "Estos apoyos pueden ayudarte a hablar con más tranquilidad. No hay una respuesta única y puedes pedir otros más adelante."
+      ? t("novel.supportFeedback")
       : allCorrect
-      ? "Bien. Esa información puede ayudar sin crear nuevas copias del contenido."
-      : "Revisa las tarjetas. No necesitas descargar ni reenviar el contenido para pedir ayuda.";
+      ? t("novel.infoGood")
+      : t("novel.infoBad");
     feedback.append(summary);
 
     for (const card of this.#minigameCards) {
@@ -760,7 +763,7 @@ export class VisualNovelView {
       const line = document.createElement("p");
       const matched = support || Boolean(card.correct) === selected;
       line.className = matched ? "is-good" : "is-bad";
-      line.textContent = `${support ? "✓" : selected ? "Seleccionada:" : "Sin seleccionar:"} ${card.text} — ${card.feedback ?? ""}`;
+      line.textContent = `${support ? "✓" : selected ? t("novel.selected") : t("novel.notSelected")} ${card.text} — ${card.feedback ?? ""}`;
       feedback.append(line);
     }
 
@@ -789,7 +792,7 @@ export class VisualNovelView {
     this.#rightsVisible = true;
     this.refs.rights.hidden = false;
     this.refs.rights.setAttribute("aria-hidden", "false");
-    this.refs.rightsTitle.textContent = this.rights.title ?? "Conoce tus derechos";
+    this.refs.rightsTitle.textContent = this.rights.title ?? t("novel.knowRights");
 
     const body = this.refs.rightsBody;
     body.replaceChildren();
@@ -805,7 +808,7 @@ export class VisualNovelView {
       section.className = "rights-section";
 
       const heading = document.createElement("h3");
-      heading.textContent = this.rights.resourcesTitle ?? "Recursos de apoyo";
+      heading.textContent = this.rights.resourcesTitle ?? t("novel.supportResources");
       section.append(heading);
 
       const list = document.createElement("ul");
@@ -819,7 +822,7 @@ export class VisualNovelView {
           link.href = resource.url;
           link.target = "_blank";
           link.rel = "noopener noreferrer";
-          link.textContent = ` Abrir ${resource.name} (nueva pestaña)`;
+          link.textContent = t("novel.openResource", { name: resource.name });
           item.append(link);
         }
         list.append(item);
@@ -1011,7 +1014,7 @@ export class VisualNovelView {
     this.onAdvance();
   }
 
-  #setSpeaker(name, remote = false) {
+  #setSpeaker(name, remote = false, key = null) {
     if (!name) {
       this.refs.speaker.hidden = true;
       this.refs.speaker.textContent = "";
@@ -1022,8 +1025,10 @@ export class VisualNovelView {
 
     this.refs.speaker.hidden = false;
     this.refs.speaker.textContent = name;
-    this.refs.speaker.dataset.speaker = name.toLowerCase();
-    const normalized = name
+    // El estilo depende de un identificador estable, no del texto traducido
+    const styleKey = key ?? (name === t("novel.narration") ? "narración" : name === t("novel.yourTurn") ? "decisión" : name);
+    this.refs.speaker.dataset.speaker = styleKey.toLowerCase();
+    const normalized = (key ?? name)
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
@@ -1106,10 +1111,10 @@ export class VisualNovelView {
 
   #setPerspective(perspective, mood) {
     const labels = {
-      maya: "Maya · en casa",
-      sofi: "Sofi · en el colegio",
-      elena: "Elena · taller",
-      red: "Red de apoyo",
+      maya: t("novel.perspectiveMaya"),
+      sofi: t("novel.perspectiveSofi"),
+      elena: t("novel.perspectiveElena"),
+      red: t("novel.perspectiveRed"),
     };
 
     this.refs.scene.dataset.mood = mood ?? "neutral";

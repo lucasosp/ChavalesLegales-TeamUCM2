@@ -91,4 +91,7 @@ export function fmtDuracion(ms) {
   const m = Math.floor(s / 60)
   return m ? `${m} min ${String(s % 60).padStart(2, '0')} s` : `${s} s`
 }
-export const fmtFecha = (t) => (t ? new Date(t).toLocaleString('es-ES', { dateStyle: 'long', timeStyle: 'short' }) : '—')
+// Locale BCP 47 para formatear fechas según el idioma activo de la interfaz
+const LOCALES = { es: 'es-ES', ca: 'ca-ES', va: 'ca-ES', gl: 'gl-ES', eu: 'eu-ES', oc: 'oc' }
+export const localeDe = (lang) => LOCALES[lang] ?? 'es-ES'
+export const fmtFecha = (t, lang = 'es') => (t ? new Date(t).toLocaleString(localeDe(lang), { dateStyle: 'long', timeStyle: 'short' }) : '—')

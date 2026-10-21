@@ -4,9 +4,19 @@ import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import MinijuegoNubes from './MinijuegoNubes'
 import { casoDesdeUrl, registrarEvento } from '../../lib/casos'
+import { useT } from '../../lib/i18n'
 
 export default function Novela() {
+  const t = useT()
   const router = useRouter()
+  const [iframeSrc, setIframeSrc] = useState('/novela/index.html')
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.search) {
+      setIframeSrc(`/novela/index.html${window.location.search}`)
+    }
+  }, [])
+
   const [minijuego, setMinijuego] = useState(null)
   const jugadosRef = useRef(new Set())
   const casoRef = useRef('DEMO')
@@ -37,7 +47,6 @@ export default function Novela() {
   const avisarFin = (game) => {
     document.getElementById('novela-frame')?.contentWindow?.postMessage({ type: 'legalinstory:minigame-done', game }, location.origin)
   }
-
   useEffect(() => {
     const handleNovelMessage = (event) => {
       const frame = document.getElementById('novela-frame')
@@ -97,7 +106,7 @@ export default function Novela() {
 
   return (
     <main style={{ position: 'fixed', inset: 0, zIndex: 100, background: '#461020' }}>
-      <iframe id="novela-frame" title="Sara · Mi historia sigue · Aventura interactiva" src="/novela/index.html" style={{ display: 'block', width: '100%', height: '100%', border: 0 }} />
+      <iframe id="novela-frame" title={t('juegos.novelaIframeTitulo')} src={iframeSrc} style={{ display: 'block', width: '100%', height: '100%', border: 0 }} />
       {minijuego && (
         <MinijuegoNubes
           key={minijuego.game}

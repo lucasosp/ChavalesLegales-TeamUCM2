@@ -2,6 +2,8 @@
 
 import styles from './cid.module.css'
 import { VIEW, seatAngleDeg, seatPosition } from './metrics'
+import { characterName, childLabel } from './config'
+import { useT } from '../../../lib/i18n'
 
 const TABLE_RX = 218
 const TABLE_RY = 120
@@ -227,6 +229,7 @@ function Centro({ theme }) {
 }
 
 export default function MesaCID({ totalSeats, seating, childSeat, childAvatar, theme, onSelect, onHover, locked }) {
+  const t = useT()
   const { width, height, cx, cy } = VIEW
   const occupied = new Map(seating.map((c) => [c.seat, c]))
   const lookOf = (c, i) => LOOKS[c.id] ?? FALLBACK_LOOKS[i % FALLBACK_LOOKS.length]
@@ -235,7 +238,7 @@ export default function MesaCID({ totalSeats, seating, childSeat, childAvatar, t
   const byDepth = [...seats].sort((a, b) => a.y - b.y)
 
   return (
-    <svg className={styles.svg} viewBox={`0 0 ${width} ${height}`} role="group" aria-label="Mesa con sillas: elige un asiento libre">
+    <svg className={styles.svg} viewBox={`0 0 ${width} ${height}`} role="group" aria-label={t('juegos.cidMesaAria')}>
       <defs>
         <pattern id="cid-floor" width="120" height="30" patternUnits="userSpaceOnUse">
           <rect width="120" height="30" fill="#a0683a" />
@@ -338,10 +341,10 @@ export default function MesaCID({ totalSeats, seating, childSeat, childAvatar, t
         const person = occupied.get(i)
         if (person) {
           const idx = seating.indexOf(person)
-          return <Persona key={`p-${i}`} x={x} y={y} color={person.color} label={person.name} look={lookOf(person, idx)} />
+          return <Persona key={`p-${i}`} x={x} y={y} color={person.color} label={characterName(t, person)} look={lookOf(person, idx)} />
         }
         if (childSeat === i) {
-          return <Persona key={`p-${i}`} x={x} y={y} color={childAvatar.color} label={childAvatar.label} look={LOOKS.child} isChild appear />
+          return <Persona key={`p-${i}`} x={x} y={y} color={childAvatar.color} label={childLabel(t, childAvatar)} look={LOOKS.child} isChild appear />
         }
         if (locked) return null
         return (
@@ -350,7 +353,7 @@ export default function MesaCID({ totalSeats, seating, childSeat, childAvatar, t
             className={styles.emptySeat}
             role="button"
             tabIndex={0}
-            aria-label={`Sentarte en la silla ${i + 1}`}
+            aria-label={t('juegos.cidSentarseAria', { n: i + 1 })}
             onClick={() => onSelect(i)}
             onPointerEnter={() => onHover?.(i)}
             onFocus={() => onHover?.(i)}
