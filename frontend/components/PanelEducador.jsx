@@ -246,10 +246,7 @@ export default function PanelEducador({ onCerrarSesion = null }) {
                   <span>Generando caso con IA...</span>
                 </>
               ) : (
-                <>
-                  <span style={{ fontSize: 18 }} aria-hidden="true">✨</span>
-                  <span>Generar caso con IA</span>
-                </>
+                <span>Generar caso con IA</span>
               )}
             </button>
           </form>
