@@ -1,10 +1,19 @@
 import { defineConfig } from "vite";
+import { fileURLToPath } from "node:url";
 import { validateContent } from "./scripts/validate-content.mjs";
 
 const formatErrors = (errors) =>
   `Content validation failed:\n${errors.map((error) => `  - ${error}`).join("\n")}`;
 
 export default defineConfig({
+  server: {
+    fs: {
+      allow: [
+        fileURLToPath(new URL("./", import.meta.url)),
+        fileURLToPath(new URL("../images/", import.meta.url)),
+      ],
+    },
+  },
   plugins: [
     {
       name: "validate-content-serve",
