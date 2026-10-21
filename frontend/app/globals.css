@@ -1305,7 +1305,150 @@ html, body {
   }
 }
 
-/* Selector de idioma */
+/* ==========================================================================
+   SELECTOR DE IDIOMA CUSTOM (ESTILO GLASSMORPHISM / WEB ADAPTADA)
+   ========================================================================== */
+.selector-idioma-custom {
+  position: relative;
+  display: inline-block;
+}
+
+.selector-idioma-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 1.1rem 0.55rem 0.65rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: var(--font-body);
+  user-select: none;
+}
+
+.selector-idioma-trigger .selector-idioma-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  color: #ffffff;
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.selector-idioma-trigger .selector-idioma-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+}
+
+.selector-idioma-trigger .selector-idioma-arrow {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.65);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.selector-idioma-trigger:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.selector-idioma-trigger:hover .selector-idioma-chip {
+  background: var(--verde-light);
+  color: var(--granate-deep);
+  transform: rotate(-8deg);
+}
+
+.selector-idioma-trigger:hover .selector-idioma-arrow {
+  color: #ffffff;
+}
+
+.selector-idioma-trigger:active {
+  transform: translateY(0);
+}
+
+/* Desplegable estilizado */
+.selector-idioma-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 170px;
+  background: #ffffff;
+  border: 2px solid #18181b;
+  border-radius: 16px;
+  padding: 6px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 4px 0 #18181b;
+  z-index: 100;
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  animation: dropdownFadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes dropdownFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.selector-idioma-dropdown li {
+  margin: 0;
+  padding: 0;
+}
+
+.selector-idioma-opt {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  text-align: left;
+}
+
+.selector-idioma-opt:hover {
+  background: #ecfdf5;
+  color: #065f46;
+}
+
+.selector-idioma-opt.is-selected {
+  background: #10b981;
+  color: #022c22;
+  font-weight: 900;
+}
+
+.selector-idioma-opt .opt-check {
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: #022c22;
+}
+
+/* Fallback o selector simple legacy */
 .selector-idioma {
   display: inline-flex;
   align-items: center;
@@ -1342,7 +1485,7 @@ html, body {
   white-space: nowrap;
 }
 
-/* Selector de idioma en la barra superior de la portada */
+/* Posicionamiento en barra superior */
 .kahoot-topbar .selector-idioma-topbar {
   margin-left: auto;
   flex-shrink: 0;
@@ -1351,5 +1494,9 @@ html, body {
 @media (max-width: 640px) {
   .kahoot-topbar .selector-idioma-topbar {
     margin-left: 0;
+  }
+  .selector-idioma-dropdown {
+    right: auto;
+    left: 0;
   }
 }

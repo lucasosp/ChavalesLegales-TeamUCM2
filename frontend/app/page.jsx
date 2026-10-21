@@ -53,7 +53,7 @@ export default function Home() {
       if (typeof window !== 'undefined') {
         sessionStorage.setItem('chavales_asistente_social_auth', 'true')
       }
-      router.push('/asistentes-sociales')
+      router.push('/informe')
       return
     }
 
@@ -377,7 +377,7 @@ export default function Home() {
             <span>•</span>
             <a href="https://www.administraciondejusticia.gob.es/" target="_blank" rel="noopener noreferrer" className="footer-link">{t('inicio.pieAdminJusticia')}</a>
             <span>•</span>
-            <Link href="/asistentes-sociales" className="footer-link">Pide ayuda</Link>
+            <Link href="/informe" className="footer-link">Pide ayuda</Link>
           </div>
         </div>
       </footer>
