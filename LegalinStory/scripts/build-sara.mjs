@@ -95,10 +95,13 @@ choice("c3-choice2", "¿Qué le gustaría acordar a Sara para los próximos día
 ]);
 say("c3-contact", "Irene", "Dejaremos claros los contactos del equipo y qué hacer si cambia la situación. Si hay peligro inmediato, se pide ayuda de emergencia. No tienes que valorar tú sola si todo está bien.", "c3-end");
 say("c3-school", "Irene", "Lo coordinaremos con Laura. Pediremos ajustes concretos, como organizar entregas y recuperar apuntes, sin explicar tu historia a toda la clase.", "c3-end");
-narration("c3-end", "Esa noche Dani le pide que mire un dibujo de un dragón. Sara encuentra una estrella en la esquina y dibuja otra al lado. Todavía hay sitio para cosas pequeñas.", "c4-card", { scene: "bedroom-evening", cast: { sara: "smile" } });
+narration("c3-end", "Esa noche Dani le pide que mire un dibujo de un dragón. Sara encuentra una estrella en la esquina y dibuja otra al lado. Todavía hay sitio para cosas pequeñas.", "c3-mesa", { scene: "bedroom-evening", cast: { sara: "smile" } });
+// Minijuegos externos: la plataforma los muestra dentro de una nube de pensamiento y luego la historia sigue.
+add("c3-mesa", { type: "external", game: "cid-table", text: "Y se quedó pensando en dónde se sentaría dependiendo de la gente que vaya a comer.", next: "c4-card", cast: { sara: "smile" } });
 
 chapter = 4;
-card("c4-card", "Mi vida continúa", "Días después. Fuera de las entrevistas.", "c4-01", "patio-day");
+card("c4-card", "Mi vida continúa", "Días después. Fuera de las entrevistas.", "c4-perros", "patio-day");
+add("c4-perros", { type: "external", game: "caja-arena", text: "Empezó a ver los diferentes perros, y las aventuras que podría vivir con ellos.", next: "c4-01", cast: { sara: "smile" } });
 say("c4-01", "Paula", "He guardado tus apuntes. También un vídeo de mi peor saque, pero eso requiere un pacto de silencio.", "c4-02");
 say("c4-02", "Sara", "Los apuntes sí. El vídeo… me lo pienso. Me viene bien que me hables de otras cosas.", "c4-choice", { cast: { sara: "smile" } });
 choice("c4-choice", "Irene pregunta qué parte de su vida quiere recuperar primero. Sara elige…", [

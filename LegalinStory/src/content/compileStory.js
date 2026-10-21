@@ -117,6 +117,8 @@ function compileNode(id, node, context) {
     compiled.cards = (node.cards ?? []).map((card) => ({ ...card }));
   }
 
+  if (node.type === "external") compiled.game = node.game;
+
   if (node.type === "reconduction") {
     compiled.lesson = node.lesson;
     compiled.returnTo = node.returnTo;

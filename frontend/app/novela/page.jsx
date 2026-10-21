@@ -1,10 +1,18 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import MinijuegoNubes from './MinijuegoNubes'
 
 export default function Novela() {
   const router = useRouter()
+  const [minijuego, setMinijuego] = useState(null)
+  const jugadosRef = useRef(new Set())
+
+  const avisarFin = (game) => {
+    document.getElementById('novela-frame')?.contentWindow?.postMessage({ type: 'legalinstory:minigame-done', game }, location.origin)
+  }
+
   useEffect(() => {
     const handleNovelMessage = (event) => {
       const frame = document.getElementById('novela-frame')
@@ -13,6 +21,17 @@ export default function Novela() {
       // Salir de la novela
       if (event.data?.type === 'legalinstory:exit') {
         router.push('/')
+        return
+      }
+
+      // Minijuego dentro de la historia: cada uno se juega una sola vez por partida
+      if (event.data?.type === 'legalinstory:minigame') {
+        const { game, text } = event.data
+        if (jugadosRef.current.has(game)) avisarFin(game)
+        else {
+          jugadosRef.current.add(game)
+          setMinijuego({ game, text })
+        }
         return
       }
 
@@ -45,6 +64,17 @@ export default function Novela() {
   return (
     <main style={{ position: 'fixed', inset: 0, zIndex: 100, background: '#461020' }}>
       <iframe id="novela-frame" title="Sara · Mi historia sigue · Aventura interactiva" src="/novela/index.html" style={{ display: 'block', width: '100%', height: '100%', border: 0 }} />
+      {minijuego && (
+        <MinijuegoNubes
+          key={minijuego.game}
+          game={minijuego.game}
+          text={minijuego.text}
+          onDone={() => {
+            avisarFin(minijuego.game)
+            setMinijuego(null)
+          }}
+        />
+      )}
     </main>
   )
 }
