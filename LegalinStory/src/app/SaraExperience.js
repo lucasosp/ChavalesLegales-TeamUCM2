@@ -1,5 +1,6 @@
 import { App } from "./App.js";
 import { LocalStorageSaveStore, MemorySaveStore } from "../services/saveStores.js";
+import { personImage, speakerSprite, imageUrl, hasCharacterImages } from "../content/characterImages.js";
 
 export const SARA_SAVE_KEY = "sara.save";
 const escape = (value) => String(value).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -105,7 +106,7 @@ export class SaraExperience {
         </div>
         <div class="sara-hero">
           <div class="sara-hero-orbit" aria-hidden="true">✦</div>
-          <img src="assets/characters/sara/smile.svg" alt="Sara, protagonista de la historia"/>
+          <img src="${hasCharacterImages() ? imageUrl("sara_feliz.png") : "assets/characters/sara/smile.svg"}" alt="Sara, protagonista de la historia"/>
         </div>
       </div>`;
     this.body.querySelector("[data-sara-start]").addEventListener("click", () => this.begin(false));
@@ -229,11 +230,12 @@ export class SaraExperience {
       const summary = element("summary");
       const avatar = element("span", "sara-avatar", person.initial);
       avatar.setAttribute("aria-hidden", "true");
-      if (person.sprite) { avatar.textContent = ""; const image = document.createElement("img"); image.src = person.sprite; image.alt = ""; avatar.append(image); }
+      const portraitSource = personImage(person.name) ?? person.sprite;
+      if (portraitSource) { avatar.textContent = ""; const image = document.createElement("img"); image.src = portraitSource; image.alt = ""; avatar.append(image); }
       const label = element("span"); label.append(element("strong", "", person.name), element("small", "", person.role));
       summary.append(avatar, label);
       details.append(summary, element("p", "", person.text));
-      if (!person.sprite) details.append(element("small", "sara-placeholder-note", "Retrato provisional"));
+      if (!portraitSource) details.append(element("small", "sara-placeholder-note", "Retrato provisional"));
       grid.append(details);
     }
     this.body.append(grid);
@@ -295,12 +297,24 @@ export class SaraExperience {
     location.textContent = this.engine.stage.background === "quiet-room" ? "Entorno judicial · ilustración provisional" : node.chapter === 3 ? "Atención social · escenario reutilizado" : node.chapter === 4 || node.chapter === 6 ? "La vida de Sara continúa" : "Instituto · un lugar para hablar";
     const portrait = this.root.querySelector("[data-sara-portrait]");
     const speaker = node.type === "dialogue" ? node.speaker : null;
-    portrait.hidden = !speaker || speaker === "Sara";
+    const name = speaker?.split(" · ")[0];
+    const source = name ? speakerSprite(name) : null;
+    if (source && name !== "Sara") this.app.view.showSpeakerSprite(source, name);
+    portrait.hidden = !speaker || speaker === "Sara" || Boolean(source);
     if (!portrait.hidden) {
-      const name = speaker.split(" · ")[0];
       const person = this.guide.people.find((p) => p.name === name);
       portrait.className = `sara-speaker-card ${person?.color ?? "green"}`;
-      portrait.replaceChildren(element("span", "sara-monogram", person?.initial ?? name[0]), element("strong", "", name), element("span", "", person?.role ?? "Profesional de apoyo"), element("small", "", "Retrato provisional"));
+      const portraitSource = personImage(name);
+      const avatar = element("span", "sara-monogram", person?.initial ?? name[0]);
+      if (portraitSource) {
+        avatar.textContent = "";
+        const image = document.createElement("img");
+        image.src = portraitSource;
+        image.alt = "";
+        avatar.append(image);
+      }
+      portrait.replaceChildren(avatar, element("strong", "", name), element("span", "", person?.role ?? "Profesional de apoyo"));
+      if (!portraitSource) portrait.append(element("small", "", "Retrato provisional"));
     }
   }
 

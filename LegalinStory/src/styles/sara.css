@@ -28,7 +28,9 @@
 .sara-mode .nameplate { color: var(--sara-purple); }
 .sara-mode .nameplate[data-speaker="narración"], .sara-mode .nameplate[data-speaker="decisión"] { color: var(--sara-green); }
 .sara-mode .advance { color: var(--sara-green); animation: none; }
-.sara-mode .character { bottom: 180px; height: min(70dvh, 650px); }
+.sara-mode .character { bottom: 0; height: min(88dvh, 820px); max-width: 46vw; }
+.sara-mode .character .sprite { object-position: center bottom; }
+.sara-mode .character.speaker-sprite { left: 66%; }
 .sara-mode .scene:has(.choices:not([hidden])) .dialogue { top: 118px; bottom: auto; height: auto; max-height: calc(35dvh - 30px); padding: 16px 24px; }
 .sara-mode .scene:has(.choices:not([hidden])) .choices { bottom: 88px; max-height: calc(55dvh - 65px); width: min(760px, 94vw); }
 .sara-mode .choice { min-height: 58px; padding: 13px 16px; border-color: var(--sara-ink); border-radius: 16px; box-shadow: 0 4px 0 var(--sara-ink); }
@@ -40,6 +42,7 @@
 .sara-speaker-card > span:not(.sara-monogram) { text-align: center; font-size: .8rem; }
 .sara-speaker-card small { color: #665b6d; font-size: .65rem; }
 .sara-monogram { width: 88px; height: 88px; border-radius: 50%; display: grid; place-items: center; color: var(--sara-ink); background: #e0d1f1; border: 2px solid var(--sara-ink); font-size: 2.8rem; font-weight: 800; }
+.sara-monogram img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 50%; }
 .green .sara-monogram, .green .sara-avatar { background: #d8e8d6; }
 .pink .sara-monogram, .pink .sara-avatar { background: #f4cedc; }
 .blue .sara-monogram, .blue .sara-avatar { background: #ccdfed; }
@@ -127,7 +130,8 @@
   .sara-bottom button > span { font-size: 1.05rem; }
   .sara-bottom small { font-size: .6rem; min-width: 16px; height: 16px; }
   .sara-mode .dialogue { bottom: 80px; padding: 18px 20px 14px; height: clamp(235px, 34dvh, 300px); }
-  .sara-mode .character { height: 58dvh; bottom: 205px; }
+  .sara-mode .character { bottom: 170px; left: 58%; width: min(82vw, 380px); height: min(70dvh, 580px); max-width: none; aspect-ratio: auto; }
+  .sara-mode .character.speaker-sprite { left: 58%; }
   .sara-mode .scene:has(.choices:not([hidden])) .dialogue { top: 115px; padding: 15px 20px; max-height: calc(34dvh - 30px); }
   .sara-mode .scene:has(.choices:not([hidden])) .choices { bottom: 80px; max-height: calc(50dvh - 35px); }
   .sara-mode .choice { min-height: 58px; padding: 10px 14px; }
@@ -156,7 +160,7 @@
   .sara-location { top: 62px; }
   .sara-mode .dialogue { bottom: 60px; height: min(58dvh, 215px); min-height: 145px; width: min(650px, 94vw); padding: 12px 20px; }
   .sara-mode .dialogue-text { font-size: 1rem; }
-  .sara-mode .character { bottom: 70px; height: 75dvh; }
+  .sara-mode .character { bottom: 0; height: 91dvh; max-width: 42vw; }
   .sara-speaker-card { left: 20%; top: 98px; width: 160px; padding: 12px; }
   .sara-mode .scene:has(.choices:not([hidden])) .dialogue { top: 95px; left: 3%; transform: none; width: 43%; max-height: calc(100dvh - 160px); min-height: 0; }
   .sara-mode .scene:has(.choices:not([hidden])) .choices { left: auto; right: 3%; transform: none; bottom: 60px; width: 47%; max-height: calc(100dvh - 150px); }
