@@ -276,3 +276,82 @@ export async function resetTelemetria() {
   }
   return { status: 'fallback' }
 }
+
+export async function getResumenDibujosTelemetria() {
+  const base = getApiBaseUrl()
+  try {
+    const r = await fetch(`${base}/api/telemetria/dibujos/resumen`)
+    if (r.ok) return await r.json()
+  } catch (err) {
+    console.warn('Backend API resumen dibujos no disponible, usando fallback local:', err)
+  }
+
+  // Fallback con datos de localStorage si el backend no está disponible
+  if (typeof window !== 'undefined') {
+    try {
+      const raw = localStorage.getItem('legalinstory_avatar_drawings')
+      if (raw) {
+        const parsed = JSON.parse(raw)
+        if (parsed.phase2Metrics && parsed.deltaMetrics) {
+          return {
+            total_evaluations: 1,
+            average_tremor_delta: parsed.deltaMetrics.delta_tremor_index || 0,
+            average_occupancy_delta: parsed.deltaMetrics.delta_occupancy_ratio || 0,
+            average_latency_delta_ms: parsed.deltaMetrics.delta_initial_latency_ms || 0,
+            active_alerts_count: (parsed.alerts || []).length,
+            alert_breakdown: {},
+            recent_cases: [
+              {
+                id: 'local_current_session',
+                student_nickname: 'Sesión Actual (Sara)',
+                session_pin: 'Local',
+                timestamp: new Date().toISOString(),
+                metrics: parsed.phase2Metrics,
+                delta: parsed.deltaMetrics,
+                alerts: parsed.alerts || [],
+                phase1_preview: parsed.phase1,
+                phase2_preview: parsed.phase2,
+              },
+            ],
+          }
+        }
+      }
+    } catch {}
+  }
+
+  return {
+    total_evaluations: 0,
+    average_tremor_delta: 0,
+    average_occupancy_delta: 0,
+    average_latency_delta_ms: 0,
+    active_alerts_count: 0,
+    alert_breakdown: {},
+    recent_cases: [],
+  }
+}
+
+export async function getDibujosTelemetria(limit = 50) {
+  const base = getApiBaseUrl()
+  try {
+    const r = await fetch(`${base}/api/telemetria/dibujos?limit=${limit}`)
+    if (r.ok) return await r.json()
+  } catch (err) {
+    console.warn('Backend API dibujos no disponible:', err)
+  }
+  return []
+}
+
+export async function registrarDibujoTelemetria(payload) {
+  const base = getApiBaseUrl()
+  try {
+    const r = await fetch(`${base}/api/telemetria/dibujo`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+    if (r.ok) return await r.json()
+  } catch (err) {
+    console.warn('Error registrando dibujo telemetria:', err)
+  }
+  return { status: 'fallback' }
+}

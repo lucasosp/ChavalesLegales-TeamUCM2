@@ -1,4 +1,5 @@
 import { avatarStore } from "../services/avatarStore.js";
+import { DrawingMetricsCollector } from "../services/DrawingMetricsCollector.js";
 
 /**
  * Interactive projective drawing modal supporting 3 sequential phases:
@@ -13,6 +14,7 @@ export class DrawingCanvasModal {
     this.modal = null;
     this.canvas = null;
     this.ctx = null;
+    this.collector = null;
     this.isDrawing = false;
     this.lastX = 0;
     this.lastY = 0;
@@ -32,6 +34,10 @@ export class DrawingCanvasModal {
     overlay.setAttribute("role", "dialog");
     overlay.setAttribute("aria-modal", "true");
     overlay.setAttribute("aria-labelledby", "sara-drawing-title");
+
+    if (phase !== "phase3") {
+      this.collector = new DrawingMetricsCollector({ canvasWidth: 400, canvasHeight: 400 });
+    }
 
     if (phase === "phase3") {
       this.#renderPhase3(overlay, onConfirm);
@@ -116,6 +122,7 @@ export class DrawingCanvasModal {
         btn.classList.add("is-active");
         this.currentColor = btn.dataset.color;
         this.isEraser = false;
+        this.collector?.recordToolChange({ color: this.currentColor, isEraser: false });
       });
     });
 
@@ -124,6 +131,7 @@ export class DrawingCanvasModal {
       card.querySelectorAll(".sara-color-btn").forEach((b) => b.classList.remove("is-active"));
       eraserBtn.classList.add("is-active");
       this.isEraser = true;
+      this.collector?.recordToolChange({ isEraser: true });
     });
 
     card.querySelectorAll("[data-size]").forEach((btn) => {
@@ -131,22 +139,30 @@ export class DrawingCanvasModal {
         card.querySelectorAll(".sara-size-btn").forEach((b) => b.classList.remove("is-active"));
         btn.classList.add("is-active");
         this.baseWidth = Number(btn.dataset.size);
+        this.collector?.recordToolChange({ size: this.baseWidth });
       });
     });
 
-    card.querySelector('[data-action="undo"]').addEventListener("click", () => this.#undo());
-    card.querySelector('[data-action="clear"]').addEventListener("click", () => this.#clear());
+    card.querySelector('[data-action="undo"]').addEventListener("click", () => {
+      this.collector?.recordUndo();
+      this.#undo();
+    });
+    card.querySelector('[data-action="clear"]').addEventListener("click", () => {
+      this.collector?.recordClear();
+      this.#clear();
+    });
 
     card.querySelector('[data-action="confirm"]').addEventListener("click", () => {
       const dataUrl = this.canvas.toDataURL("image/png");
+      const metrics = this.collector ? this.collector.finalize(phase) : null;
       if (isPhase1) {
-        avatarStore.savePhase1(dataUrl);
+        avatarStore.savePhase1(dataUrl, metrics);
       } else {
-        avatarStore.savePhase2(dataUrl);
+        avatarStore.savePhase2(dataUrl, metrics);
       }
       this.destroy();
-      onConfirm?.(dataUrl);
-      this.onComplete?.(phase, dataUrl);
+      onConfirm?.(dataUrl, metrics);
+      this.onComplete?.(phase, dataUrl, metrics);
     });
   }
 
@@ -267,12 +283,14 @@ export class DrawingCanvasModal {
       this.lastX = pos.x;
       this.lastY = pos.y;
       if (hint) hint.style.display = "none";
+      this.collector?.onPointerDown({ x: pos.x, y: pos.y, pressure: pos.pressure, width: this.baseWidth });
       this.#drawStroke(pos.x, pos.y, pos.pressure, true);
     };
 
     const onPointerMove = (e) => {
       if (!this.isDrawing) return;
       const pos = getPos(e);
+      this.collector?.onPointerMove({ x: pos.x, y: pos.y, pressure: pos.pressure, width: this.baseWidth });
       this.#drawStroke(pos.x, pos.y, pos.pressure, false);
       this.lastX = pos.x;
       this.lastY = pos.y;
@@ -282,6 +300,7 @@ export class DrawingCanvasModal {
       if (!this.isDrawing) return;
       this.isDrawing = false;
       this.hasDrawn = true;
+      this.collector?.onPointerUp();
       this.canvas.releasePointerCapture?.(e.pointerId);
       this.#saveSnapshot();
     };

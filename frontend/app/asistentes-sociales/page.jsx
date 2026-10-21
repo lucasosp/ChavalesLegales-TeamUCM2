@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
-import { getResumenTelemetria, getDecisionesTelemetria, resetTelemetria } from '../../lib/api'
+import { getResumenTelemetria, getDecisionesTelemetria, resetTelemetria, getResumenDibujosTelemetria } from '../../lib/api'
 
 // Clave de acceso institucional para asistentes sociales
 const DEFAULT_ACCESS_CODE = 'SOCIAL2026'
@@ -17,6 +17,8 @@ export default function DashboardAsistentesSociales() {
   const [loading, setLoading] = useState(true)
   const [summaryData, setSummaryData] = useState(null)
   const [decisionsList, setDecisionsList] = useState([])
+  const [drawingsSummary, setDrawingsSummary] = useState(null)
+  const [selectedDrawingIndex, setSelectedDrawingIndex] = useState(0)
   const [selectedStory, setSelectedStory] = useState('all')
   const [hesitationFilter, setHesitationFilter] = useState('all') // 'all' | 'high' | 'medium' | 'fast'
   const [searchQuery, setSearchQuery] = useState('')
@@ -43,14 +45,16 @@ export default function DashboardAsistentesSociales() {
 
     async function fetchData() {
       try {
-        const [summary, rawDecisions] = await Promise.all([
+        const [summary, rawDecisions, drawingsRes] = await Promise.all([
           getResumenTelemetria(selectedStory),
           getDecisionesTelemetria(selectedStory, 200),
+          getResumenDibujosTelemetria(),
         ])
 
         if (isMounted) {
           setSummaryData(summary)
           setDecisionsList(rawDecisions)
+          setDrawingsSummary(drawingsRes)
           setLoading(false)
         }
       } catch (err) {
@@ -572,6 +576,23 @@ export default function DashboardAsistentesSociales() {
               }}
             >
               💡 Guía de Interpretación Social
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('dibujos')}
+              style={{
+                padding: '10px 18px',
+                borderRadius: 12,
+                fontSize: 14,
+                fontWeight: 900,
+                border: '2px solid #18181B',
+                cursor: 'pointer',
+                background: activeTab === 'dibujos' ? '#10B981' : '#FFFFFF',
+                color: activeTab === 'dibujos' ? '#022C22' : '#475569',
+                boxShadow: activeTab === 'dibujos' ? '0 3px 0 #18181B' : 'none',
+              }}
+            >
+              🎨 Evaluación Proyectiva Gráfica ({drawingsSummary?.recent_cases?.length || 0})
             </button>
           </div>
 
@@ -1219,6 +1240,260 @@ export default function DashboardAsistentesSociales() {
                 <li><strong>Garantizar confidencialidad:</strong> Recordar siempre los canales de ayuda seguros y anónimos (116 111, 017 y Servicios Sociales locales).</li>
               </ul>
             </div>
+          </div>
+        )}
+
+        {activeTab === 'dibujos' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+            {/* Header explicativo */}
+            <div style={{
+              background: '#FFFFFF',
+              borderRadius: 22,
+              border: '2px solid #18181B',
+              boxShadow: '0 4px 0 #18181B',
+              padding: '26px 30px',
+            }}>
+              <span style={{
+                display: 'inline-block',
+                fontSize: 12,
+                fontWeight: 900,
+                color: '#6366F1',
+                textTransform: 'uppercase',
+                letterSpacing: 1,
+                marginBottom: 6,
+              }}>
+                Psicología Jurídica y Forense · Técnica Proyectiva Digital
+              </span>
+              <h2 style={{ fontSize: 24, fontWeight: 900, color: '#0F172A', margin: '0 0 10px' }}>
+                Evaluación Grafométrica y Psicomotora del Dibujo Infantil (3 Fases)
+              </h2>
+              <p style={{ margin: 0, color: '#475569', fontSize: 15, lineHeight: 1.6, maxWidth: 900 }}>
+                Esta herramienta analiza de manera no intrusiva las variables cinemáticas del trazo (temblor/microvacilaciones, presión continua, latencia inicial, pausas aéreas, ocupación espacial y uso del color) antes y después del momento traumático en la novela, ayudando a detectar signos somáticos y defensivos de estrés agudo.
+              </p>
+            </div>
+
+            {/* Tarjetas resumen KPI */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gap: 16,
+            }}>
+              <div style={{ background: '#FFFFFF', padding: '18px 20px', borderRadius: 18, border: '2px solid #18181B', boxShadow: '0 3px 0 #18181B' }}>
+                <span style={{ fontSize: 12, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>Casos Evaluados</span>
+                <div style={{ fontSize: 28, fontWeight: 900, color: '#0F172A', marginTop: 4 }}>
+                  {drawingsSummary?.total_evaluations || 0}
+                </div>
+                <span style={{ fontSize: 12, color: '#64748B' }}>Fases 1 y 2 completadas</span>
+              </div>
+
+              <div style={{ background: '#FFFFFF', padding: '18px 20px', borderRadius: 18, border: '2px solid #18181B', boxShadow: '0 3px 0 #18181B' }}>
+                <span style={{ fontSize: 12, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>Δ Temblor Promedio</span>
+                <div style={{ fontSize: 28, fontWeight: 900, color: (drawingsSummary?.average_tremor_delta || 0) > 0 ? '#DC2626' : '#10B981', marginTop: 4 }}>
+                  {(drawingsSummary?.average_tremor_delta || 0) > 0 ? `+${drawingsSummary?.average_tremor_delta}` : drawingsSummary?.average_tremor_delta || 0}
+                </div>
+                <span style={{ fontSize: 12, color: '#64748B' }}>Micro-oscilaciones post-trauma</span>
+              </div>
+
+              <div style={{ background: '#FFFFFF', padding: '18px 20px', borderRadius: 18, border: '2px solid #18181B', boxShadow: '0 3px 0 #18181B' }}>
+                <span style={{ fontSize: 12, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>Δ Ocupación del Lienzo</span>
+                <div style={{ fontSize: 28, fontWeight: 900, color: (drawingsSummary?.average_occupancy_delta || 0) < 0 ? '#D97706' : '#0F172A', marginTop: 4 }}>
+                  {((drawingsSummary?.average_occupancy_delta || 0) * 100).toFixed(1)}%
+                </div>
+                <span style={{ fontSize: 12, color: '#64748B' }}>Retracción espacial relativa</span>
+              </div>
+
+              <div style={{ background: '#FFFFFF', padding: '18px 20px', borderRadius: 18, border: '2px solid #18181B', boxShadow: '0 3px 0 #18181B' }}>
+                <span style={{ fontSize: 12, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>Alertas Activas</span>
+                <div style={{ fontSize: 28, fontWeight: 900, color: (drawingsSummary?.active_alerts_count || 0) > 0 ? '#E11D48' : '#10B981', marginTop: 4 }}>
+                  {drawingsSummary?.active_alerts_count || 0}
+                </div>
+                <span style={{ fontSize: 12, color: '#64748B' }}>Indicadores para entrevista</span>
+              </div>
+            </div>
+
+            {/* Selector de caso y ficha detallada */}
+            {drawingsSummary?.recent_cases?.length > 0 ? (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                {/* Selector de alumnos */}
+                <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+                  <span style={{ fontSize: 13, fontWeight: 800, color: '#475569' }}>Seleccionar Expediente:</span>
+                  {drawingsSummary.recent_cases.map((c, idx) => (
+                    <button
+                      key={c.id || idx}
+                      type="button"
+                      onClick={() => setSelectedDrawingIndex(idx)}
+                      style={{
+                        padding: '8px 16px',
+                        borderRadius: 12,
+                        border: '2px solid #18181B',
+                        fontWeight: 800,
+                        fontSize: 13,
+                        cursor: 'pointer',
+                        background: selectedDrawingIndex === idx ? '#4F46E5' : '#FFFFFF',
+                        color: selectedDrawingIndex === idx ? '#FFFFFF' : '#1E293B',
+                        boxShadow: selectedDrawingIndex === idx ? '0 3px 0 #18181B' : 'none',
+                      }}
+                    >
+                      {c.student_nickname || `Alumno ${idx + 1}`} ({c.session_pin || 'PIN'})
+                    </button>
+                  ))}
+                </div>
+
+                {/* Ficha pericial del caso seleccionado */}
+                {(() => {
+                  const currentCase = drawingsSummary.recent_cases[selectedDrawingIndex] || drawingsSummary.recent_cases[0]
+                  const m = currentCase.metrics || {}
+                  const d = currentCase.delta || {}
+                  const alerts = currentCase.alerts || []
+
+                  return (
+                    <div style={{
+                      background: '#FFFFFF',
+                      borderRadius: 22,
+                      border: '2px solid #18181B',
+                      boxShadow: '0 4px 0 #18181B',
+                      padding: '28px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 24,
+                    }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, borderBottom: '2px solid #E2E8F0', paddingBottom: 16 }}>
+                        <div>
+                          <span style={{ fontSize: 12, fontWeight: 800, color: '#4F46E5', textTransform: 'uppercase' }}>Ficha Grafométrica del Menor</span>
+                          <h3 style={{ fontSize: 22, fontWeight: 900, color: '#0F172A', margin: '4px 0' }}>
+                            {currentCase.student_nickname || 'Alumno evaluado'}
+                          </h3>
+                          <span style={{ fontSize: 13, color: '#64748B' }}>
+                            Fecha de captura: {currentCase.timestamp ? new Date(currentCase.timestamp).toLocaleString('es-ES') : 'Reciente'} · Sesión PIN: {currentCase.session_pin || 'N/A'}
+                          </span>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(currentCase, null, 2))
+                            const a = document.createElement('a')
+                            a.href = dataStr
+                            a.download = `informe_grafometrico_${(currentCase.student_nickname || 'alumno').toLowerCase().replace(/\s+/g, '_')}.json`
+                            a.click()
+                          }}
+                          style={{
+                            padding: '8px 16px',
+                            borderRadius: 10,
+                            border: '1.5px solid #18181B',
+                            background: '#F8FAFC',
+                            fontWeight: 800,
+                            fontSize: 13,
+                            cursor: 'pointer',
+                          }}
+                        >
+                          ⬇ Exportar Informe JSON
+                        </button>
+                      </div>
+
+                      {/* Comparativa de variables psicomotoras */}
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 18 }}>
+                        {/* 1. Temblor / Inestabilidad */}
+                        <div style={{ padding: 18, borderRadius: 16, border: '1.5px solid #E2E8F0', background: '#F8FAFC' }}>
+                          <span style={{ fontSize: 12, fontWeight: 800, color: '#475569', textTransform: 'uppercase' }}>1. Temblor y Tensión Motora</span>
+                          <div style={{ fontSize: 24, fontWeight: 900, color: '#0F172A', margin: '6px 0' }}>
+                            {m.tremor?.jitter_index || 0} <span style={{ fontSize: 13, color: '#64748B', fontWeight: 600 }}>/ 100</span>
+                          </div>
+                          <div style={{ fontSize: 13, color: (d.delta_tremor_index || 0) > 0 ? '#DC2626' : '#10B981', fontWeight: 700, marginBottom: 8 }}>
+                            Variación post-trauma: {(d.delta_tremor_index || 0) > 0 ? `+${d.delta_tremor_index}` : d.delta_tremor_index || 0} ({d.tremor_change_percent || 0}%)
+                          </div>
+                          <p style={{ margin: 0, fontSize: 12, color: '#475569', lineHeight: 1.5 }}>
+                            Evalúa micro-inflexiones angulares bruscas (&gt;60°) en distancias cortas. Picos elevados indican ansiedad somatizada o miedo agudo.
+                          </p>
+                        </div>
+
+                        {/* 2. Presión y Fuerza */}
+                        <div style={{ padding: 18, borderRadius: 16, border: '1.5px solid #E2E8F0', background: '#F8FAFC' }}>
+                          <span style={{ fontSize: 12, fontWeight: 800, color: '#475569', textTransform: 'uppercase' }}>2. Presión Continua del Trazo</span>
+                          <div style={{ fontSize: 24, fontWeight: 900, color: '#0F172A', margin: '6px 0' }}>
+                            {m.pressure?.mean || 0.5} <span style={{ fontSize: 13, color: '#64748B', fontWeight: 600 }}>media (máx: {m.pressure?.max || 0.5})</span>
+                          </div>
+                          <div style={{ fontSize: 13, color: (d.delta_pressure_mean || 0) < 0 ? '#D97706' : '#0F172A', fontWeight: 700, marginBottom: 8 }}>
+                            Variación post-trauma: {d.delta_pressure_mean > 0 ? `+${d.delta_pressure_mean}` : d.delta_pressure_mean || 0} ({d.pressure_change_percent || 0}%)
+                          </div>
+                          <p style={{ margin: 0, fontSize: 12, color: '#475569', lineHeight: 1.5 }}>
+                            {m.pressure?.mean < 0.3 ? 'Presión hipotónica (posible inhibición/desesperanza).' : m.pressure?.mean > 0.7 ? 'Presión hipertónica (tensión/descarga agresiva contenida).' : 'Tono neuromuscular dentro del rango esperado.'}
+                          </p>
+                        </div>
+
+                        {/* 3. Ocupación Espacial (Micrografismo) */}
+                        <div style={{ padding: 18, borderRadius: 16, border: '1.5px solid #E2E8F0', background: '#F8FAFC' }}>
+                          <span style={{ fontSize: 12, fontWeight: 800, color: '#475569', textTransform: 'uppercase' }}>3. Emplazamiento y Tamaño</span>
+                          <div style={{ fontSize: 24, fontWeight: 900, color: '#0F172A', margin: '6px 0' }}>
+                            {((m.spatial?.occupancy_ratio || 0) * 100).toFixed(0)}% <span style={{ fontSize: 13, color: '#64748B', fontWeight: 600 }}>del lienzo</span>
+                          </div>
+                          <div style={{ fontSize: 13, color: (d.delta_occupancy_ratio || 0) < 0 ? '#DC2626' : '#10B981', fontWeight: 700, marginBottom: 8 }}>
+                            Retracción post-trauma: {((d.delta_occupancy_ratio || 0) * 100).toFixed(1)}% ({d.occupancy_change_percent || 0}%)
+                          </div>
+                          <p style={{ margin: 0, fontSize: 12, color: '#475569', lineHeight: 1.5 }}>
+                            Cuadrante predominante: <strong>{m.spatial?.predominant_quadrant || 'centro'}</strong>. Una contracción gráfica intensa post-trauma sugiere repliegue defensivo.
+                          </p>
+                        </div>
+
+                        {/* 4. Latencias y Pausas */}
+                        <div style={{ padding: 18, borderRadius: 16, border: '1.5px solid #E2E8F0', background: '#F8FAFC' }}>
+                          <span style={{ fontSize: 12, fontWeight: 800, color: '#475569', textTransform: 'uppercase' }}>4. Tiempo de Reacción y Pausas</span>
+                          <div style={{ fontSize: 24, fontWeight: 900, color: '#0F172A', margin: '6px 0' }}>
+                            {((m.initial_latency_ms || 0) / 1000).toFixed(1)}s <span style={{ fontSize: 13, color: '#64748B', fontWeight: 600 }}>latencia inicial</span>
+                          </div>
+                          <div style={{ fontSize: 13, color: (d.delta_initial_latency_ms || 0) > 2000 ? '#DC2626' : '#475569', fontWeight: 700, marginBottom: 8 }}>
+                            Retardo post-trauma: {d.delta_initial_latency_ms > 0 ? `+${(d.delta_initial_latency_ms / 1000).toFixed(1)}s` : `${((d.delta_initial_latency_ms || 0) / 1000).toFixed(1)}s`}
+                          </div>
+                          <p style={{ margin: 0, fontSize: 12, color: '#475569', lineHeight: 1.5 }}>
+                            Pausas de suspensión aérea &gt;2s: {m.hesitation_pauses_count || 0}. El retardo prolongado mide choque o resistencia al iniciar la representación.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Alertas periciales orientativas */}
+                      <div>
+                        <h4 style={{ fontSize: 16, fontWeight: 900, color: '#0F172A', margin: '0 0 12px' }}>
+                          Indicadores Psicológicos y Alertas para la Entrevista:
+                        </h4>
+                        {alerts.length > 0 ? (
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                            {alerts.map((al, aIdx) => (
+                              <div
+                                key={aIdx}
+                                style={{
+                                  padding: '14px 18px',
+                                  borderRadius: 14,
+                                  border: '1.5px solid #FCA5A5',
+                                  background: '#FEF2F2',
+                                  display: 'flex',
+                                  flexDirection: 'column',
+                                  gap: 4,
+                                }}
+                              >
+                                <strong style={{ fontSize: 14, color: '#991B1B' }}>
+                                  ⚠️ {al.title}
+                                </strong>
+                                <span style={{ fontSize: 13, color: '#7F1D1D', lineHeight: 1.5 }}>
+                                  {al.detail}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <div style={{ padding: 14, borderRadius: 12, background: '#F0FDF4', border: '1.5px solid #86EFAC', color: '#166534', fontSize: 13 }}>
+                            ✔ No se han detectado variaciones psicomotoras extremas en la comparativa de este expediente.
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )
+                })()}
+              </div>
+            ) : (
+              <div style={{ background: '#FFFFFF', padding: 30, borderRadius: 18, border: '2px solid #18181B', textAlign: 'center', color: '#64748B' }}>
+                No hay sesiones de dibujo registradas todavía. Los datos aparecerán automáticamente en cuanto un menor juegue a la novela visual.
+              </div>
+            )}
           </div>
         )}
       </main>
