@@ -1304,3 +1304,52 @@ html, body {
     gap: 8px;
   }
 }
+
+/* Selector de idioma */
+.selector-idioma {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+
+.selector-idioma select {
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: 700 14px/1.2 var(--font-body);
+  cursor: pointer;
+  padding-right: 4px;
+}
+
+.selector-idioma select option {
+  color: #111827;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Selector de idioma en la barra superior de la portada */
+.kahoot-topbar .selector-idioma-topbar {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .kahoot-topbar .selector-idioma-topbar {
+    margin-left: 0;
+  }
+}
