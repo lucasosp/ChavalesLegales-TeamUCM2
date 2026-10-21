@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="bg-title bg-desc">
+  <title id="bg-title">Salón de casa, luz fría</title>
+  <desc id="bg-desc">Un salón ordenado con sofá, mesa baja, televisión apagada y una ventana nocturna. La luz es azulada y tensa.</desc>
+  <defs>
+    <linearGradient id="hl-wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#59636f" />
+      <stop offset="0.55" stop-color="#414a57" />
+      <stop offset="1" stop-color="#252c38" />
+    </linearGradient>
+    <linearGradient id="hl-floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a403c" />
+      <stop offset="0.55" stop-color="#332c2b" />
+      <stop offset="1" stop-color="#1a1719" />
+    </linearGradient>
+    <linearGradient id="hl-night" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#101a30" />
+      <stop offset="0.6" stop-color="#273a58" />
+      <stop offset="1" stop-color="#586b83" />
+    </linearGradient>
+    <radialGradient id="hl-lamp" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#dfe9ff" stop-opacity="0.45" />
+      <stop offset="0.55" stop-color="#aebede" stop-opacity="0.16" />
+      <stop offset="1" stop-color="#8c9fbe" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="hl-vignette" cx="0.5" cy="0.48" r="0.74">
+      <stop offset="0.5" stop-color="#05070d" stop-opacity="0" />
+      <stop offset="1" stop-color="#05070d" stop-opacity="0.62" />
+    </radialGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#hl-wall)" />
+
+  <!-- window with cold night -->
+  <g>
+    <rect x="1190" y="130" width="520" height="450" fill="url(#hl-night)" />
+    <circle cx="1580" cy="260" r="46" fill="#dce8ff" opacity="0.75" />
+    <g fill="#c8d8f5" opacity="0.55">
+      <circle cx="1300" cy="220" r="3" />
+      <circle cx="1380" cy="190" r="2" />
+      <circle cx="1460" cy="250" r="2.5" />
+      <circle cx="1330" cy="330" r="2" />
+      <circle cx="1640" cy="350" r="2" />
+    </g>
+    <path d="M1240 420 C1330 390 1420 410 1510 386 C1590 366 1660 380 1710 402" fill="none" stroke="#9fb3d3" stroke-width="14" stroke-linecap="round" opacity="0.18" />
+    <rect x="1190" y="130" width="520" height="450" fill="none" stroke="#242b35" stroke-width="24" />
+    <rect x="1442" y="130" width="16" height="450" fill="#242b35" />
+    <rect x="1190" y="348" width="520" height="16" fill="#242b35" />
+    <path d="M1160 580 H1740 V616 H1160 Z" fill="#242b35" />
+    <path d="M1190 616 L1740 616 L1820 980 L1110 980 Z" fill="#a8bfe4" opacity="0.08" />
+  </g>
+
+  <!-- sofa -->
+  <g>
+    <rect x="120" y="650" width="760" height="230" rx="34" fill="#3f4654" />
+    <rect x="150" y="690" width="700" height="120" rx="28" fill="#505a6a" />
+    <rect x="180" y="670" width="210" height="96" rx="24" fill="#5c6779" />
+    <rect x="420" y="670" width="210" height="96" rx="24" fill="#596374" />
+    <rect x="660" y="670" width="170" height="96" rx="24" fill="#5c6779" />
+    <rect x="90" y="860" width="820" height="54" rx="14" fill="#2c323d" />
+    <rect x="150" y="914" width="26" height="70" fill="#222832" />
+    <rect x="820" y="914" width="26" height="70" fill="#222832" />
+  </g>
+
+  <!-- coffee table and objects -->
+  <g>
+    <rect x="560" y="760" width="540" height="30" rx="8" fill="#655348" />
+    <rect x="610" y="790" width="24" height="160" fill="#4a3a33" />
+    <rect x="1020" y="790" width="24" height="160" fill="#4a3a33" />
+    <rect x="760" y="716" width="120" height="44" rx="4" fill="#d9d3c8" opacity="0.7" transform="rotate(-4 820 738)" />
+    <rect x="900" y="706" width="92" height="54" rx="8" fill="#1b1e26" stroke="#6c7786" stroke-width="3" />
+  </g>
+
+  <!-- television, off -->
+  <g>
+    <rect x="1340" y="660" width="360" height="210" rx="8" fill="#151922" stroke="#353d4a" stroke-width="10" />
+    <rect x="1364" y="684" width="312" height="162" rx="4" fill="#1d2531" />
+    <rect x="1460" y="870" width="120" height="18" fill="#252c37" />
+    <rect x="1420" y="888" width="200" height="12" rx="4" fill="#252c37" />
+  </g>
+
+  <!-- door and shelf -->
+  <g>
+    <rect x="90" y="170" width="250" height="500" rx="4" fill="#3b3a3f" stroke="#25262b" stroke-width="12" />
+    <circle cx="314" cy="430" r="9" fill="#8d939e" />
+    <rect x="430" y="210" width="360" height="20" fill="#3a3a41" />
+    <rect x="460" y="230" width="30" height="90" fill="#5b4c4a" />
+    <rect x="500" y="240" width="22" height="80" fill="#4c5a64" />
+    <rect x="532" y="226" width="34" height="94" fill="#6a5b4f" />
+    <rect x="576" y="246" width="26" height="74" fill="#4f4b63" />
+    <rect x="612" y="232" width="30" height="88" fill="#52645e" />
+  </g>
+
+  <!-- cold lamp light -->
+  <g>
+    <path d="M1080 0 V170" stroke="#272c35" stroke-width="5" />
+    <path d="M1020 210 Q1080 165 1140 210 L1114 248 H1046 Z" fill="#4a5360" />
+    <ellipse cx="1080" cy="248" rx="34" ry="10" fill="#e3ecff" />
+    <path d="M940 248 L1220 248 L1320 860 L840 860 Z" fill="url(#hl-lamp)" opacity="0.45" />
+  </g>
+
+  <path d="M0 700 H1920 V1080 H0 Z" fill="url(#hl-floor)" opacity="0.72" />
+  <path d="M0 1040 H1920 V1080 H0 Z" fill="#0b0d12" />
+  <rect width="1920" height="1080" fill="url(#hl-vignette)" />
+</svg>

@@ -1,0 +1,29 @@
+{
+  "name": "between-the-lines",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A short linear visual novel built with a small, extensible story engine.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "assets:build": "node scripts/build-hana-svgs.mjs && node scripts/build-character-svgs.mjs",
+    "validate": "node scripts/validate-content.mjs",
+    "test": "node scripts/validate-content.mjs && node scripts/validation-smoke.mjs && node scripts/ui-smoke.mjs && node scripts/library-smoke.mjs && node scripts/no-lo-reenvies-smoke.mjs && node scripts/no-soy-yo-smoke.mjs && node scripts/dos-voces-smoke.mjs && node scripts/dos-voces-endings-smoke.mjs && node scripts/input-buffer-smoke.mjs && node scripts/engine-regressions.mjs && node scripts/sara-smoke.mjs",
+    "test:sara": "node scripts/sara-smoke.mjs",
+    "test:browser": "node scripts/sara-browser.mjs",
+    "story:build": "node scripts/build-no-lo-reenvies.mjs",
+    "story:build:dos-voces": "node scripts/build-dos-voces.mjs",
+    "story:sara": "node scripts/build-sara.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "^30.1.3",
+    "vite": "^8.0.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

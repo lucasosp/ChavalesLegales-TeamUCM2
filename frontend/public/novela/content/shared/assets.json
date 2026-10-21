@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "basePath": "assets",
+  "characters": {
+    "hana": {
+      "displayName": "Hana",
+      "size": { "width": 840, "height": 1240 },
+      "pivot": { "x": 0.5, "y": 1.0 },
+      "defaultExpression": "neutral",
+      "expressions": {
+        "neutral": "characters/hana/neutral.svg",
+        "smile": "characters/hana/smile.svg",
+        "happy": "characters/hana/happy.svg",
+        "sad": "characters/hana/sad.svg",
+        "surprised": "characters/hana/surprised.svg"
+      }
+    },
+    "sara": {
+      "displayName": "Sara",
+      "size": { "width": 840, "height": 1240 },
+      "pivot": { "x": 0.5, "y": 1.0 },
+      "defaultExpression": "neutral",
+      "expressions": {
+        "neutral": "characters/sara/neutral.svg",
+        "smile": "characters/sara/smile.svg",
+        "happy": "characters/sara/happy.svg",
+        "sad": "characters/sara/sad.svg",
+        "surprised": "characters/sara/surprised.svg"
+      }
+    },
+    "julia": {
+      "displayName": "Julia",
+      "size": { "width": 840, "height": 1240 },
+      "pivot": { "x": 0.5, "y": 1.0 },
+      "defaultExpression": "neutral",
+      "expressions": {
+        "neutral": "characters/julia/neutral.svg",
+        "smile": "characters/julia/smile.svg",
+        "happy": "characters/julia/happy.svg",
+        "sad": "characters/julia/sad.svg",
+        "surprised": "characters/julia/surprised.svg"
+      }
+    },
+    "sergio": {
+      "displayName": "Sergio",
+      "size": { "width": 840, "height": 1240 },
+      "pivot": { "x": 0.5, "y": 1.0 },
+      "defaultExpression": "neutral",
+      "expressions": {
+        "neutral": "characters/sergio/neutral.svg",
+        "smile": "characters/sergio/smile.svg",
+        "happy": "characters/sergio/happy.svg",
+        "sad": "characters/sergio/sad.svg",
+        "surprised": "characters/sergio/surprised.svg"
+      }
+    },
+    "hugo": {
+      "displayName": "Hugo",
+      "size": { "width": 840, "height": 1240 },
+      "pivot": { "x": 0.5, "y": 1.0 },
+      "defaultExpression": "neutral",
+      "expressions": {
+        "neutral": "characters/hugo/neutral.svg",
+        "smile": "characters/hugo/smile.svg",
+        "happy": "characters/hugo/happy.svg",
+        "sad": "characters/hugo/sad.svg",
+        "surprised": "characters/hugo/surprised.svg"
+      }
+    },
+    "marina": {
+      "displayName": "Marina",
+      "size": { "width": 840, "height": 1240 },
+      "pivot": { "x": 0.5, "y": 1.0 },
+      "defaultExpression": "neutral",
+      "expressions": {
+        "neutral": "characters/marina/neutral.svg",
+        "smile": "characters/marina/smile.svg",
+        "happy": "characters/marina/happy.svg",
+        "sad": "characters/marina/sad.svg",
+        "surprised": "characters/marina/surprised.svg"
+      }
+    }
+  },
+  "backgrounds": {
+    "classroom-dusk": {
+      "size": { "width": 1920, "height": 1080 },
+      "src": "backgrounds/photos/classroom.jpg"
+    },
+    "hallway-dusk": {
+      "size": { "width": 1920, "height": 1080 },
+      "src": "backgrounds/photos/school-hallway.jpg"
+    },
+    "clubroom": {
+      "size": { "width": 1920, "height": 1080 },
+      "src": "backgrounds/photos/library.jpg"
+    },
+    "hallway-day": {
+      "size": { "width": 1920, "height": 1080 },
+      "src": "backgrounds/photos/school-hallway.jpg"
+    },
+    "classroom-day": {
+      "size": { "width": 1920, "height": 1080 },
+      "src": "backgrounds/photos/classroom.jpg"
+    },
+    "bedroom-evening": {
+      "size": { "width": 1920, "height": 1080 },
+      "src": "backgrounds/photos/bedroom.jpg"
+    },
+    "patio-day": {
+      "size": { "width": 1920, "height": 1080 },
+      "src": "backgrounds/photos/school-courtyard.jpg"
+    },
+    "orientation-office": {
+      "size": { "width": 1920, "height": 1080 },
+      "src": "backgrounds/photos/guidance-office.jpg"
+    },
+    "quiet-room": {
+      "size": { "width": 1920, "height": 1080 },
+      "src": "backgrounds/photos/quiet-room.jpg"
+    }
+  }
+}

@@ -1,0 +1,1833 @@
+{
+  "version": 1,
+  "start": "start",
+  "nodes": {
+    "start": {
+      "type": "interstitial",
+      "kicker": "Chavales Legales",
+      "title": "No lo reenvíes",
+      "text": "Una novela visual sobre acoso, intimidad y derecho a pedir ayuda.",
+      "next": "prologo-1"
+    },
+    "prologo-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Lunes, 08:15. El timbre anuncia el inicio de las clases. Sara camina con Julia hacia su aula.",
+      "next": "prologo-2",
+      "scene": "hallway-day",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "prologo-2": {
+      "type": "dialogue",
+      "speaker": "Julia",
+      "text": "Otra vez con Sergio...",
+      "next": "prologo-3",
+      "cast": {
+        "julia": "neutral"
+      }
+    },
+    "prologo-3": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Es que no entiendo qué gracia les hace.",
+      "next": "prologo-4",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "prologo-4": {
+      "type": "dialogue",
+      "speaker": "Julia",
+      "text": "Ya. Pero como les digas algo, empiezan contigo también.",
+      "next": "prologo-5",
+      "cast": {
+        "julia": "neutral"
+      }
+    },
+    "prologo-5": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Al pasar junto a las taquillas, Sara ve a varios chicos riéndose alrededor de un móvil.",
+      "next": "prologo-6"
+    },
+    "prologo-6": {
+      "type": "dialogue",
+      "speaker": "Hugo",
+      "text": "Tío, mirad lo que han puesto de Sergio.",
+      "next": "prologo-7",
+      "cast": {
+        "hugo": "neutral"
+      }
+    },
+    "prologo-7": {
+      "type": "dialogue",
+      "speaker": "Dani",
+      "text": "JAJAJA. Qué cabrones.",
+      "next": "prologo-8",
+      "cast": {
+        "sara": null
+      }
+    },
+    "prologo-8": {
+      "type": "dialogue",
+      "speaker": "Sergio",
+      "text": "¿Podéis quitar eso ya?",
+      "next": "prologo-9",
+      "cast": {
+        "sergio": "neutral"
+      }
+    },
+    "prologo-9": {
+      "type": "dialogue",
+      "speaker": "Hugo",
+      "text": "Pero si es una broma. No te rayes.",
+      "next": "prologo-10",
+      "cast": {
+        "hugo": "neutral"
+      }
+    },
+    "prologo-10": {
+      "type": "dialogue",
+      "speaker": "Sergio",
+      "text": "Os he dicho que lo borréis.",
+      "next": "prologo-11",
+      "cast": {
+        "sergio": "neutral"
+      }
+    },
+    "prologo-11": {
+      "type": "dialogue",
+      "speaker": "Hugo",
+      "text": "Vale, vale. Tampoco te pongas así.",
+      "next": "prologo-12",
+      "cast": {
+        "hugo": "neutral"
+      }
+    },
+    "prologo-12": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sergio recoge su mochila y se aleja. Sara reconoce al chico del taller de radio.",
+      "next": "decision-1"
+    },
+    "decision-1": {
+      "type": "choice",
+      "prompt": "Sara ve lo que está pasando. ¿Qué hace?",
+      "options": [
+        {
+          "id": "intervene",
+          "label": "Intervenir y pedir que dejen de burlarse.",
+          "next": "d1-intervene",
+          "flags": {
+            "intervened": true
+          }
+        },
+        {
+          "id": "talk",
+          "label": "Buscar a Sergio después para preguntarle cómo está.",
+          "next": "d1-talk",
+          "flags": {
+            "talkedSergio": true
+          }
+        },
+        {
+          "id": "avoid",
+          "label": "Seguir caminando para no meterse en problemas.",
+          "next": "d1-avoid",
+          "flags": {
+            "avoidedSergio": true
+          }
+        }
+      ],
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "d1-intervene": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "No os riáis de él. Eso no es una broma.",
+      "next": "d1-intervene-2",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "d1-intervene-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Hugo guarda el móvil por un momento. Sergio levanta la vista, sorprendido.",
+      "next": "d1-intervene-3"
+    },
+    "d1-intervene-3": {
+      "type": "dialogue",
+      "speaker": "Sergio",
+      "text": "Gracias...",
+      "next": "prologo-end",
+      "cast": {
+        "sergio": "neutral"
+      }
+    },
+    "d1-talk": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Durante el recreo, Sara se acerca a Sergio.",
+      "next": "d1-talk-2",
+      "scene": "patio-day"
+    },
+    "d1-talk-2": {
+      "type": "dialogue",
+      "speaker": "Sergio",
+      "text": "Estoy cansado de que se rían de mí.",
+      "next": "d1-talk-3",
+      "cast": {
+        "sergio": "neutral"
+      }
+    },
+    "d1-talk-3": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Lo siento. No deberían hacerlo.",
+      "next": "prologo-end",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "d1-avoid": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sara sigue caminando hacia clase. Sergio se marcha solo.",
+      "next": "d1-avoid-2"
+    },
+    "d1-avoid-2": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "«Quizá debería haber dicho algo...»",
+      "next": "prologo-end",
+      "cast": {
+        "sara": "neutral"
+      },
+      "tone": "thought"
+    },
+    "prologo-end": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "A veces resulta fácil saber que algo está mal. Lo difícil es decidir qué hacer cuando todos los demás se ríen.",
+      "next": "chapter1-card",
+      "scene": "hallway-day"
+    },
+    "chapter1-card": {
+      "type": "interstitial",
+      "title": "Capítulo 1",
+      "text": "Martes, 18:42.",
+      "next": "ch1-1"
+    },
+    "ch1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sara intenta terminar los ejercicios de Matemáticas. Suena una notificación. Después otra. Y otra.",
+      "next": "ch1-chat-1",
+      "scene": "bedroom-evening",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch1-chat-1": {
+      "type": "chat",
+      "chatTitle": "4.º ESO | Los de siempre",
+      "self": "Sara",
+      "messages": [
+        {
+          "from": "Hugo",
+          "text": "alguien ha visto lo de Sara??",
+          "time": "18:39"
+        },
+        {
+          "from": "Dani",
+          "text": "qué dices",
+          "time": "18:39"
+        },
+        {
+          "from": "Hugo",
+          "text": "jajajaj",
+          "time": "18:40"
+        },
+        {
+          "from": "Hugo",
+          "text": "Imagen oculta",
+          "time": "18:40",
+          "hidden": true
+        },
+        {
+          "from": "Dani",
+          "text": "borra eso tío",
+          "time": "18:41"
+        },
+        {
+          "from": "Hugo",
+          "text": "Mensaje eliminado.",
+          "time": "18:42",
+          "deleted": true
+        }
+      ],
+      "next": "ch1-2"
+    },
+    "ch1-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sara deja de escribir. El móvil sigue vibrando sobre el cuaderno.",
+      "next": "ch1-chat-2"
+    },
+    "ch1-chat-2": {
+      "type": "chat",
+      "chatTitle": "Julia",
+      "self": "Sara",
+      "messages": [
+        {
+          "from": "Julia",
+          "text": "sara estas?",
+          "time": "18:42"
+        },
+        {
+          "from": "Sara",
+          "text": "sii\nqué pasa?",
+          "time": "18:42"
+        },
+        {
+          "from": "Julia",
+          "text": "tengo q contarte algo\npero no te asustes",
+          "time": "18:42"
+        },
+        {
+          "from": "Sara",
+          "text": "pues me estás asustando 😭",
+          "time": "18:43"
+        },
+        {
+          "from": "Julia",
+          "text": "están pasando una foto tuya por un grupo",
+          "time": "18:43"
+        },
+        {
+          "from": "Sara",
+          "text": "cómo que una foto mía??",
+          "time": "18:43"
+        },
+        {
+          "from": "Julia",
+          "text": "dicen que es una foto íntima",
+          "time": "18:44"
+        },
+        {
+          "from": "Sara",
+          "text": "QUÉ\npero qué foto???",
+          "time": "18:44"
+        },
+        {
+          "from": "Julia",
+          "text": "no lo sé bien\nno sé si es real o está editada",
+          "time": "18:44"
+        },
+        {
+          "from": "Sara",
+          "text": "pero quién la tiene?",
+          "time": "18:45"
+        },
+        {
+          "from": "Julia",
+          "text": "creo que gente de 4ºB",
+          "time": "18:45"
+        },
+        {
+          "from": "Sara",
+          "text": "tía yo no he mandado nada a esa gente\nno entiendo nada",
+          "time": "18:45"
+        },
+        {
+          "from": "Julia",
+          "text": "ya\ny no quiero que nadie siga pasándola",
+          "time": "18:46"
+        },
+        {
+          "from": "Sara",
+          "text": "no se lo digas a nadie por favor",
+          "time": "18:46"
+        },
+        {
+          "from": "Julia",
+          "text": "estoy contigo vale?\nvamos a ver qué hacemos",
+          "time": "18:46"
+        }
+      ],
+      "next": "ch1-3"
+    },
+    "ch1-3": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "«¿Y si mañana todo el mundo me ha visto?»",
+      "next": "decision-2",
+      "cast": {
+        "sara": "neutral"
+      },
+      "tone": "thought"
+    },
+    "decision-2": {
+      "type": "choice",
+      "prompt": "¿Qué hace Sara?",
+      "options": [
+        {
+          "id": "investigate",
+          "label": "Pedir a Julia que le ayude a identificar dónde circula, sin reenviarla.",
+          "next": "d2-investigate",
+          "flags": {
+            "investigated": true
+          }
+        },
+        {
+          "id": "hugo",
+          "label": "Escribir a Hugo para exigirle explicaciones.",
+          "next": "d2-hugo",
+          "flags": {
+            "confrontedHugo": true
+          }
+        },
+        {
+          "id": "avoid",
+          "label": "Apagar el teléfono y esperar a que el problema desaparezca.",
+          "next": "d2-avoid",
+          "flags": {
+            "avoidedPhone": true
+          }
+        }
+      ],
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "d2-investigate": {
+      "type": "dialogue",
+      "speaker": "Julia",
+      "text": "Vale. No la reenvío. Podemos mirar en qué grupo empezó y hablarlo con alguien de confianza.",
+      "next": "d2-investigate-2",
+      "cast": {
+        "julia": "neutral"
+      }
+    },
+    "d2-investigate-2": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Gracias. No quiero que siga pasando.",
+      "next": "ch1-end",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "d2-hugo": {
+      "type": "chat",
+      "chatTitle": "Hugo",
+      "self": "Sara",
+      "messages": [
+        {
+          "from": "Sara",
+          "text": "Hugo, ¿qué es esa foto?",
+          "time": "18:50"
+        },
+        {
+          "from": "Hugo",
+          "text": "qué foto",
+          "time": "18:50"
+        },
+        {
+          "from": "Sara",
+          "text": "la que estáis pasando",
+          "time": "18:51"
+        },
+        {
+          "from": "Hugo",
+          "text": "yo no he pasado nada",
+          "time": "18:51"
+        },
+        {
+          "from": "Hugo",
+          "text": "pregúntale a los de 4ºB",
+          "time": "18:52"
+        }
+      ],
+      "next": "d2-hugo-2"
+    },
+    "d2-hugo-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "La conversación no le ha dado respuestas. Sara siente que ha empeorado.",
+      "next": "ch1-end"
+    },
+    "d2-avoid": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sara apaga el teléfono y lo deja a un lado. Pero la preocupación no desaparece.",
+      "next": "d2-avoid-2"
+    },
+    "d2-avoid-2": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "«Mañana tendré que ir al instituto.»",
+      "next": "ch1-end",
+      "cast": {
+        "sara": "neutral"
+      },
+      "tone": "thought"
+    },
+    "ch1-end": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Ninguna opción implica que Sara sea responsable de lo sucedido. Pedir ayuda no es enfrentarse a quien lo hizo.",
+      "next": "chapter2-card"
+    },
+    "chapter2-card": {
+      "type": "interstitial",
+      "title": "Capítulo 2",
+      "text": "Martes, 19:03. Mientras Sara intenta entender qué ocurre, a Julia le llega un mensaje.",
+      "next": "ch2-1"
+    },
+    "ch2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Julia abre la conversación. Hugo le ha enviado la imagen que circula sobre Sara.",
+      "next": "ch2-chat-1",
+      "scene": "bedroom-evening",
+      "cast": {
+        "julia": "neutral"
+      }
+    },
+    "ch2-chat-1": {
+      "type": "chat",
+      "chatTitle": "Hugo",
+      "self": "Julia",
+      "messages": [
+        {
+          "from": "Hugo",
+          "text": "mira lo que están pasando por ahí",
+          "time": "19:03"
+        },
+        {
+          "from": "Hugo",
+          "text": "Imagen oculta",
+          "time": "19:03",
+          "hidden": true
+        },
+        {
+          "from": "Hugo",
+          "text": "pásaselo a alguien de 4ºA\na ver qué dicen JAJA",
+          "time": "19:04"
+        },
+        {
+          "from": "Julia",
+          "text": "pero esto de dónde ha salido?",
+          "time": "19:04"
+        },
+        {
+          "from": "Hugo",
+          "text": "ni idea\nestá por todos lados",
+          "time": "19:05"
+        }
+      ],
+      "next": "ch2-2"
+    },
+    "ch2-2": {
+      "type": "dialogue",
+      "speaker": "Julia",
+      "text": "«No sé si esto es real. Tampoco sé quién lo ha hecho. Pero Sara me ha pedido que no se lo diga a nadie.»",
+      "next": "decision-3",
+      "cast": {
+        "julia": "neutral"
+      },
+      "tone": "thought"
+    },
+    "decision-3": {
+      "type": "choice",
+      "prompt": "¿Qué hace Julia?",
+      "options": [
+        {
+          "id": "forward",
+          "label": "Reenviarlo a otra amiga para comprobar si es auténtico.",
+          "next": "d3-forward",
+          "flags": {
+            "juliaForwarded": true
+          }
+        },
+        {
+          "id": "help",
+          "label": "Negarse a reenviarlo y buscar ayuda para Sara.",
+          "next": "d3-help-hugo",
+          "flags": {
+            "juliaHelped": true
+          }
+        },
+        {
+          "id": "exit",
+          "label": "Salir de la conversación y no involucrarse.",
+          "next": "d3-exit",
+          "flags": {
+            "juliaDisengaged": true
+          }
+        }
+      ],
+      "cast": {
+        "julia": "neutral"
+      }
+    },
+    "d3-forward": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Julia reenvía el archivo a otra amiga. En cuestión de segundos, aparecen nuevas burbujas de chat.",
+      "next": "d3-forward-2"
+    },
+    "d3-forward-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El reenvío ha creado otra copia de la imagen. Aunque Julia quería comprobar de dónde venía, ahora otra persona la tiene.",
+      "next": "d3-forward-3"
+    },
+    "d3-forward-3": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Julia se queda mirando el chat. Ya no puede retirar lo que la otra persona ha recibido.",
+      "next": "ch2-end"
+    },
+    "d3-help-hugo": {
+      "type": "chat",
+      "chatTitle": "Hugo",
+      "self": "Julia",
+      "messages": [
+        {
+          "from": "Julia",
+          "text": "no voy a pasarlo",
+          "time": "19:06"
+        },
+        {
+          "from": "Julia",
+          "text": "es una foto privada y Sara no ha dado permiso",
+          "time": "19:06"
+        },
+        {
+          "from": "Julia",
+          "text": "dejad de compartirla",
+          "time": "19:06"
+        },
+        {
+          "from": "Hugo",
+          "text": "tía no es para tanto",
+          "time": "19:07"
+        },
+        {
+          "from": "Julia",
+          "text": "no. no voy a seguir con esto.",
+          "time": "19:07"
+        }
+      ],
+      "next": "d3-help-sara"
+    },
+    "d3-help-sara": {
+      "type": "chat",
+      "chatTitle": "Sara",
+      "self": "Julia",
+      "messages": [
+        {
+          "from": "Julia",
+          "text": "estoy contigo",
+          "time": "19:08"
+        },
+        {
+          "from": "Julia",
+          "text": "mañana podemos hablar con Marina si quieres",
+          "time": "19:08"
+        },
+        {
+          "from": "Sara",
+          "text": "gracias",
+          "time": "19:09"
+        }
+      ],
+      "next": "d3-help-end"
+    },
+    "d3-help-end": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Julia ha decidido no ampliar la difusión y acompañar a Sara.",
+      "next": "ch2-end"
+    },
+    "d3-exit": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Julia cierra la conversación. El móvil continúa vibrando.",
+      "next": "d3-exit-2"
+    },
+    "d3-exit-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Julia no ha reenviado la imagen, aunque Sara todavía necesita apoyo.",
+      "next": "ch2-end"
+    },
+    "ch2-end": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Al día siguiente, Sara vuelve al instituto.",
+      "next": "chapter3-card"
+    },
+    "chapter3-card": {
+      "type": "interstitial",
+      "title": "Capítulo 3",
+      "text": "Miércoles, 08:05.",
+      "next": "ch3-1"
+    },
+    "ch3-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sara entra en clase. Dos compañeros dejan de hablar cuando la ven.",
+      "next": "ch3-2",
+      "scene": "classroom-day",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch3-2": {
+      "type": "dialogue",
+      "speaker": "Compañera",
+      "text": "¿Es ella?",
+      "next": "ch3-3",
+      "cast": {
+        "sara": null
+      }
+    },
+    "ch3-3": {
+      "type": "dialogue",
+      "speaker": "Otro alumno",
+      "text": "No sé, tío.",
+      "next": "ch3-4",
+      "cast": {
+        "sara": null
+      }
+    },
+    "ch3-4": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "«Antes me preocupaba suspender Matemáticas. Ahora solo quiero que nadie me mire.»",
+      "next": "ch3-5",
+      "cast": {
+        "sara": "neutral"
+      },
+      "tone": "thought"
+    },
+    "ch3-5": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "En el recreo, Sara recibe un mensaje de Sergio.",
+      "next": "ch3-chat-sergio",
+      "scene": "patio-day"
+    },
+    "ch3-chat-sergio": {
+      "type": "chat",
+      "chatTitle": "Sergio",
+      "self": "Sara",
+      "messages": [
+        {
+          "from": "Sergio",
+          "text": "oye Sara",
+          "time": "11:12"
+        },
+        {
+          "from": "Sergio",
+          "text": "he visto que están diciendo cosas de ti",
+          "time": "11:12"
+        },
+        {
+          "from": "Sara",
+          "text": "genial\ntambién te has enterado tú",
+          "time": "11:13"
+        },
+        {
+          "from": "Sergio",
+          "text": "perdona\nno quería molestarte",
+          "time": "11:13"
+        },
+        {
+          "from": "Sara",
+          "text": "no tranqui\nes que estoy harta",
+          "time": "11:13"
+        },
+        {
+          "from": "Sergio",
+          "text": "te entiendo\nconmigo llevan meses así",
+          "time": "11:14"
+        },
+        {
+          "from": "Sara",
+          "text": "ya lo sé\nvi lo del otro día",
+          "time": "11:14"
+        },
+        {
+          "from": "Sergio",
+          "text": "al principio pensé que pararían\npero cada vez es peor\nhay días que ni quiero venir a clase",
+          "time": "11:14"
+        },
+        {
+          "from": "Sara",
+          "text": "lo siento mucho",
+          "time": "11:15"
+        },
+        {
+          "from": "Sergio",
+          "text": "Marina me dijo hace poco que podía hablar con ella\npero todavía no he ido",
+          "time": "11:15"
+        },
+        {
+          "from": "Sara",
+          "text": "y no te da miedo?",
+          "time": "11:15"
+        },
+        {
+          "from": "Sergio",
+          "text": "muchísimo\nsobre todo que se enteren y luego sea peor",
+          "time": "11:16"
+        },
+        {
+          "from": "Sara",
+          "text": "a mí me pasa igual",
+          "time": "11:16"
+        },
+        {
+          "from": "Sergio",
+          "text": "podemos ir juntos si quieres",
+          "time": "11:16"
+        }
+      ],
+      "next": "ch3-6"
+    },
+    "ch3-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sergio lleva meses esperando que alguien haga algo. Sara empieza a comprender ese miedo.",
+      "next": "decision-4"
+    },
+    "decision-4": {
+      "type": "choice",
+      "prompt": "¿A quién acude Sara?",
+      "options": [
+        {
+          "id": "together",
+          "label": "Ir con Sergio a hablar con Marina.",
+          "next": "d4-together",
+          "flags": {
+            "helpRoute": true
+          }
+        },
+        {
+          "id": "family",
+          "label": "Contárselo primero a un familiar u otra persona adulta de confianza.",
+          "next": "d4-family",
+          "flags": {
+            "familyRoute": true
+          }
+        },
+        {
+          "id": "notReady",
+          "label": "Decidir que todavía no está preparada para contarlo.",
+          "next": "d4-not-ready",
+          "flags": {
+            "notReady": true
+          }
+        }
+      ],
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "d4-together": {
+      "type": "dialogue",
+      "speaker": "Sergio",
+      "text": "¿Vamos juntos?",
+      "next": "d4-together-2",
+      "cast": {
+        "sergio": "neutral"
+      }
+    },
+    "d4-together-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sergio la acompaña hasta la puerta del Departamento de Orientación.",
+      "next": "chapter4-card",
+      "scene": "hallway-day",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "d4-family": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Esa noche, Sara habla con su familia. Le cuesta encontrar las palabras, pero no está sola.",
+      "next": "d4-family-2",
+      "scene": "bedroom-evening",
+      "cast": {
+        "sara": "sad"
+      }
+    },
+    "d4-family-2": {
+      "type": "dialogue",
+      "speaker": "Madre",
+      "text": "Gracias por contárnoslo. Vamos a buscar ayuda juntos.",
+      "next": "d4-family-3",
+      "cast": {
+        "sara": null
+      }
+    },
+    "d4-family-3": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Al día siguiente, la acompañan al instituto y le proponen hablar con Marina.",
+      "next": "chapter4-card"
+    },
+    "d4-not-ready": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sara no se siente preparada. Guarda el móvil y decide esperar.",
+      "next": "late-1",
+      "scene": "bedroom-evening",
+      "cast": {
+        "sara": "sad"
+      }
+    },
+    "late-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Pasan los días. Los rumores no desaparecen y Sara sigue evitando a sus compañeros.",
+      "next": "late-2",
+      "scene": "classroom-day",
+      "cast": {
+        "sara": "sad"
+      }
+    },
+    "late-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El viernes por la noche, Sara abre la conversación de Marina. Escribe un mensaje, pero no se atreve a enviarlo.",
+      "next": "late-choice",
+      "scene": "bedroom-evening",
+      "cast": {
+        "sara": "sad"
+      }
+    },
+    "late-choice": {
+      "type": "choice",
+      "prompt": "¿Quieres ayudar a Sara a dar el primer paso?",
+      "options": [
+        {
+          "id": "send",
+          "label": "Enviar el mensaje a Marina.",
+          "next": "late-send",
+          "flags": {
+            "delayedHelp": true
+          }
+        },
+        {
+          "id": "keep",
+          "label": "No enviarlo todavía.",
+          "next": "late-not-send",
+          "flags": {
+            "neverAsked": true
+          }
+        }
+      ],
+      "cast": {
+        "sara": "sad"
+      }
+    },
+    "late-send": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sara respira hondo y envía el mensaje.",
+      "next": "late-send-2"
+    },
+    "late-send-2": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "El lunes, cuando llegues al instituto, podemos hablar. No tienes que enfrentarte sola.",
+      "next": "late-send-3",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "late-send-3": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El lunes, Sara acude al Departamento de Orientación.",
+      "next": "chapter4-card"
+    },
+    "late-not-send": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sara observa el mensaje. Su dedo se acerca al botón de enviar. La pantalla se congela.",
+      "next": "late-not-send-router"
+    },
+    "late-not-send-router": {
+      "type": "branch",
+      "when": {
+        "flag": "juliaForwarded"
+      },
+      "then": "final3-scene",
+      "else": "final4-scene"
+    },
+    "chapter4-card": {
+      "type": "interstitial",
+      "title": "Capítulo 4",
+      "text": "Departamento de Orientación.",
+      "next": "ch4-0"
+    },
+    "ch4-0": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sara está sentada frente a Marina. La puerta se cierra y, por un momento, el pasillo queda en silencio.",
+      "next": "ch4-1",
+      "scene": "orientation-office",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch4-1": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "Hola, Sara. ¿Quieres contarme qué ha pasado?",
+      "next": "ch4-2",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "ch4-2": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Es que no sé ni por dónde empezar.",
+      "next": "ch4-3",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch4-3": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "Está bien. Tenemos tiempo.",
+      "next": "ch4-4",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "ch4-4": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Hay una foto mía por ahí. O eso dicen.",
+      "next": "ch4-5",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch4-5": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "¿Sabes dónde la han compartido?",
+      "next": "ch4-6",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "ch4-6": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "En grupos del instituto. Pero no sé si es real.",
+      "next": "ch4-7",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch4-7": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "Entiendo. ¿Y qué es lo que más te preocupa ahora mismo?",
+      "next": "ch4-8",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "ch4-8": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Que todo el mundo la haya visto. Y que si lo cuento sea todavía peor.",
+      "next": "ch4-9",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch4-9": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "Gracias por confiar en mí. Vamos a ver qué podemos hacer para protegerte.",
+      "next": "ch4-10",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "ch4-10": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "¿Se lo vas a decir a mis padres?",
+      "next": "ch4-11",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch4-11": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "Puede que necesitemos informar a tu familia y a otros profesionales para ayudarte. Te explicaré lo que tengamos que hacer y por qué. No vamos a convertir esto en un anuncio delante de tus compañeros.",
+      "next": "ch4-12",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "ch4-12": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "¿Y si quiero denunciar?",
+      "next": "ch4-13",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch4-13": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "Podemos ayudarte a conocer los recursos y los pasos para hacerlo. También debemos abordar lo que está ocurriendo aquí, en el centro.",
+      "next": "ch4-14",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "ch4-14": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "¿Pero denunciar significa que voy a tener que ir a un juicio?",
+      "next": "ch4-15",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch4-15": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "No necesariamente. Hay diferentes actuaciones posibles. Te las voy a explicar para que entiendas qué puede suceder.",
+      "next": "ch4-16",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "ch4-16": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Es que tengo miedo de que me pregunten cosas que no sé.",
+      "next": "ch4-17",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch4-17": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "No tienes que saberlo todo. Puedes contar lo que recuerdes y expresar lo que necesites.",
+      "next": "needs-menu",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "needs-menu": {
+      "type": "interstitial",
+      "kicker": "Apoyos",
+      "title": "Hablar con apoyo",
+      "text": "Sara puede pedir compañía, explicaciones sencillas o una pausa. También puede preguntar qué medidas de protección ofrece el instituto.",
+      "next": "needs-response"
+    },
+    "needs-response": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "Vamos a ir paso a paso. Puedes pedir que alguien te acompañe, que te lo expliquen con palabras sencillas, parar cuando lo necesites y solicitar medidas de protección en el centro.",
+      "next": "ch4-after",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "ch4-after": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "Primero vamos a ordenar lo que sabemos. Después podemos revisar qué ayuda necesitas y qué actuaciones corresponden.",
+      "next": "chapter5-card",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "chapter5-card": {
+      "type": "interstitial",
+      "title": "Capítulo 5",
+      "text": "Con Marina. Un paso cada vez.",
+      "next": "ch5-1"
+    },
+    "ch5-1": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "No tienes que conseguir la foto. Podemos identificar dónde se ha compartido y pedir orientación para comunicarlo de forma segura.",
+      "next": "ch5-minigame",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "ch5-minigame": {
+      "type": "interstitial",
+      "kicker": "Información útil",
+      "title": "Qué información conviene guardar",
+      "text": "Guarda conversaciones con comentarios ofensivos, fechas y nombres de usuario; el nombre del grupo o enlace donde se publicó; e información de quienes lo vieron. No hace falta descargar ni reenviar contenido íntimo para pedir ayuda.",
+      "next": "ch5-2"
+    },
+    "ch5-2": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "Podemos trabajar en varias cosas a la vez: solicitar medidas de protección en el instituto, pedir orientación para denunciar y comunicar el contenido a la plataforma donde se ha difundido.",
+      "next": "ch5-3",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "ch5-3": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "¿Y si no consiguen quitar la foto?",
+      "next": "ch5-4",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch5-4": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "No podemos prometer que desaparezca inmediatamente. Pero existen mecanismos para solicitar su retirada y profesionales que pueden ayudarte.",
+      "next": "ch5-5",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "ch5-5": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "¿Quién investiga lo que ha pasado?",
+      "next": "ch5-6",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch5-6": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "Depende de los hechos. Si existen indicios de delito, pueden intervenir la Policía y, cuando corresponda por la edad de las personas implicadas, la Fiscalía de Menores.",
+      "next": "ch5-7",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "ch5-7": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "¿Y qué es la Fiscalía de Menores?",
+      "next": "ch5-8",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch5-8": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "Investiga los posibles delitos cometidos por adolescentes de 14 a 17 años y también vela por los derechos de los menores.",
+      "next": "ch5-9",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "ch5-9": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "No todos los casos siguen el mismo procedimiento ni terminan en un juicio. Te explicaré las opciones que correspondan a tu situación.",
+      "next": "chapter6-card",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "chapter6-card": {
+      "type": "interstitial",
+      "title": "Capítulo 6",
+      "text": "Días después. Una sala tranquila.",
+      "next": "ch6-1"
+    },
+    "ch6-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Días después, Sara se reúne con una profesional de apoyo. Ella le explica para qué es la conversación y que puede pedir una pausa.",
+      "next": "ch6-2",
+      "scene": "quiet-room",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch6-2": {
+      "type": "dialogue",
+      "speaker": "Profesional",
+      "text": "Hola, Sara. ¿Recuerdas cuándo te enteraste de que compartían esa imagen? Si algo no está claro, puedes preguntármelo.",
+      "next": "ch6-3",
+      "cast": {
+        "sara": null
+      }
+    },
+    "ch6-3": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Vale.",
+      "next": "decision-6",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "decision-6": {
+      "type": "choice",
+      "prompt": "¿Cómo responde Sara?",
+      "options": [
+        {
+          "id": "precise",
+          "label": "«No recuerdo la hora exacta, pero Julia me lo contó el martes por la tarde».",
+          "next": "d6-precise",
+          "flags": {
+            "preciseRecall": true
+          }
+        },
+        {
+          "id": "guess",
+          "label": "«A las seis en punto», aunque no está segura.",
+          "next": "d6-guess",
+          "flags": {
+            "guessedTime": true
+          }
+        },
+        {
+          "id": "repeat",
+          "label": "«Estoy nerviosa. ¿Puedes repetirme la pregunta?».",
+          "next": "d6-repeat",
+          "flags": {
+            "askedRepeat": true
+          }
+        }
+      ],
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "d6-precise": {
+      "type": "dialogue",
+      "speaker": "Profesional",
+      "text": "Gracias por distinguir lo que recuerdas de lo que no. Eso ayuda.",
+      "next": "ch6-4",
+      "cast": {
+        "sara": null
+      }
+    },
+    "d6-guess": {
+      "type": "dialogue",
+      "speaker": "Profesional",
+      "text": "No necesitas adivinar datos. Si no estás segura, puedes decirlo.",
+      "next": "ch6-4",
+      "cast": {
+        "sara": null
+      }
+    },
+    "d6-repeat": {
+      "type": "dialogue",
+      "speaker": "Profesional",
+      "text": "Claro. ¿Recuerdas cuándo te enteraste de que estaban compartiendo esa imagen?",
+      "next": "d6-repeat-2",
+      "cast": {
+        "sara": null
+      }
+    },
+    "d6-repeat-2": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "No recuerdo la hora exacta. Julia me lo contó el martes por la tarde.",
+      "next": "ch6-4",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch6-4": {
+      "type": "dialogue",
+      "speaker": "Profesional",
+      "text": "¿Sabes quién creó la imagen?",
+      "next": "ch6-5",
+      "cast": {
+        "sara": null
+      }
+    },
+    "ch6-5": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "No.",
+      "next": "ch6-6",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch6-6": {
+      "type": "dialogue",
+      "speaker": "Profesional",
+      "text": "¿Y quién la compartió?",
+      "next": "ch6-7",
+      "cast": {
+        "sara": null
+      }
+    },
+    "ch6-7": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Vi mensajes de Hugo, pero no sé quién la había enviado antes.",
+      "next": "ch6-8",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch6-8": {
+      "type": "dialogue",
+      "speaker": "Profesional",
+      "text": "Está bien. Es importante diferenciar lo que sabes de lo que supones.",
+      "next": "ch6-9",
+      "cast": {
+        "sara": null
+      }
+    },
+    "ch6-9": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "¿Y ahora qué va a pasar?",
+      "next": "ch6-10",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch6-10": {
+      "type": "dialogue",
+      "speaker": "Profesional",
+      "text": "Eso dependerá de lo que se averigüe y de las actuaciones que correspondan. Te iremos explicando los siguientes pasos.",
+      "next": "ch6-11",
+      "cast": {
+        "sara": null
+      }
+    },
+    "ch6-11": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "¿Voy a tener que hablar otra vez de todo esto?",
+      "next": "ch6-12",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch6-12": {
+      "type": "dialogue",
+      "speaker": "Profesional",
+      "text": "Intentaremos evitar que tengas que repetir innecesariamente lo ocurrido. Existen medidas de protección para menores, y los profesionales valorarán cuáles corresponden en tu situación.",
+      "next": "ch6-13",
+      "cast": {
+        "sara": null
+      }
+    },
+    "ch6-13": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "¿Y si mañana tengo que volver a verlos en clase?",
+      "next": "ch6-14",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch6-14": {
+      "type": "dialogue",
+      "speaker": "Profesional",
+      "text": "Es importante que lo digas. Tu seguridad y tus preocupaciones deben tenerse en cuenta para valorar las medidas adecuadas.",
+      "next": "ch6-15",
+      "cast": {
+        "sara": null
+      }
+    },
+    "ch6-15": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sara respira más despacio.",
+      "next": "ch6-16"
+    },
+    "ch6-16": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Pensaba que tenía que saber responder a todo.",
+      "next": "ch6-17",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "ch6-17": {
+      "type": "dialogue",
+      "speaker": "Profesional",
+      "text": "No. Lo importante es que puedas contar lo que recuerdas, hacer preguntas y recibir la ayuda que necesites.",
+      "next": "ch6-18",
+      "cast": {
+        "sara": null
+      }
+    },
+    "ch6-18": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "La pantalla comienza a oscurecerse. Sara todavía no sabe cómo terminará todo. Pero ahora comprende mejor qué está pasando y quién puede ayudarla.",
+      "next": "ending-router-forward"
+    },
+    "ending-router-forward": {
+      "type": "branch",
+      "when": {
+        "flag": "juliaForwarded"
+      },
+      "then": "final3-scene",
+      "else": "ending-router-help"
+    },
+    "ending-router-help": {
+      "type": "branch",
+      "when": {
+        "any": [
+          {
+            "flag": "helpRoute"
+          },
+          {
+            "flag": "familyRoute"
+          }
+        ]
+      },
+      "then": "ending-router-julia",
+      "else": "ending-router-delay"
+    },
+    "ending-router-julia": {
+      "type": "branch",
+      "when": {
+        "flag": "juliaHelped"
+      },
+      "then": "final1-julia-helped",
+      "else": "final1-julia-disengaged"
+    },
+    "final1-julia-helped": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Julia ha evitado seguir difundiendo el contenido y les ha ayudado a identificar dónde solicitar apoyo.",
+      "next": "final1-scene",
+      "scene": "patio-day",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "final1-julia-disengaged": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Julia no supo cómo actuar al principio, pero Sara encontró apoyo en otras personas.",
+      "next": "final1-scene",
+      "scene": "patio-day",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "final1-scene": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sara y Sergio están sentados en un banco del patio.",
+      "next": "final1-d1"
+    },
+    "final1-d1": {
+      "type": "dialogue",
+      "speaker": "Sergio",
+      "text": "¿Crees que van a parar?",
+      "next": "final1-d2",
+      "cast": {
+        "sergio": "neutral"
+      }
+    },
+    "final1-d2": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "No lo sé.",
+      "next": "final1-d3",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "final1-d3": {
+      "type": "dialogue",
+      "speaker": "Sergio",
+      "text": "Yo antes pensaba que era mejor no contárselo a nadie.",
+      "next": "final1-d4",
+      "cast": {
+        "sergio": "neutral"
+      }
+    },
+    "final1-d4": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Yo también.",
+      "next": "final1-d5",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "final1-d5": {
+      "type": "dialogue",
+      "speaker": "Sergio",
+      "text": "¿Entramos?",
+      "next": "final1-d6",
+      "cast": {
+        "sergio": "neutral"
+      }
+    },
+    "final1-d6": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Venga.",
+      "next": "final1-d7",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "final1-d7": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Ambos se levantan y caminan hacia el edificio.",
+      "next": "final1"
+    },
+    "final1": {
+      "type": "ending",
+      "kicker": "Final 1",
+      "title": "Ya no estamos solos",
+      "text": "Pedir ayuda no hace desaparecer todos los problemas, pero permite que no tengas que afrontarlos sin apoyo."
+    },
+    "ending-router-delay": {
+      "type": "branch",
+      "when": {
+        "flag": "delayedHelp"
+      },
+      "then": "final2-scene",
+      "else": "final4-scene"
+    },
+    "final2-scene": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sara está sentada frente a Marina. Ha tardado en dar el paso, pero por fin está allí.",
+      "next": "final2-d1",
+      "scene": "orientation-office",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "final2-d1": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Perdona por no haber venido antes.",
+      "next": "final2-d2",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "final2-d2": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "No tienes que disculparte.",
+      "next": "final2-d3",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "final2-d3": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Es que pensaba que podía solucionarlo sola.",
+      "next": "final2-d4",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "final2-d4": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "Lo importante es que ahora podemos hablar y ver qué apoyo necesitas.",
+      "next": "final2-d5",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "final2-d5": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "¿Todavía se puede hacer algo?",
+      "next": "final2-d6",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "final2-d6": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "Vamos a revisar lo ocurrido y las opciones disponibles.",
+      "next": "final2-d7",
+      "cast": {
+        "marina": "neutral"
+      }
+    },
+    "final2-d7": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sara escucha. Ya no tiene que resolverlo todo a la vez.",
+      "next": "final2"
+    },
+    "final2": {
+      "type": "ending",
+      "kicker": "Final 2",
+      "title": "Aún estamos a tiempo",
+      "text": "Aunque haya pasado tiempo, puedes pedir ayuda. No necesitas tener todas las respuestas para empezar."
+    },
+    "final3-scene": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Julia se acerca a Sara en el patio.",
+      "next": "final3-d1",
+      "scene": "patio-day",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "final3-d1": {
+      "type": "dialogue",
+      "speaker": "Julia",
+      "text": "Tengo que contarte una cosa.",
+      "next": "final3-d2",
+      "cast": {
+        "julia": "neutral"
+      }
+    },
+    "final3-d2": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Dime.",
+      "next": "final3-d3",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "final3-d3": {
+      "type": "dialogue",
+      "speaker": "Julia",
+      "text": "Cuando me llegó la imagen, se la pasé a otra persona.",
+      "next": "final3-d4",
+      "cast": {
+        "julia": "neutral"
+      }
+    },
+    "final3-d4": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sara guarda silencio.",
+      "next": "final3-d5"
+    },
+    "final3-d5": {
+      "type": "dialogue",
+      "speaker": "Julia",
+      "text": "Pensé que así podía averiguar de dónde había salido.",
+      "next": "final3-d6",
+      "cast": {
+        "julia": "neutral"
+      }
+    },
+    "final3-d6": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Te pedí que no se la enseñaras a nadie.",
+      "next": "final3-d7",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "final3-d7": {
+      "type": "dialogue",
+      "speaker": "Julia",
+      "text": "Ya. Lo siento. Hice mal.",
+      "next": "final3-d8",
+      "cast": {
+        "julia": "neutral"
+      }
+    },
+    "final3-d8": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Ahora hay otra persona que la tiene.",
+      "next": "final3-d9",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "final3-d9": {
+      "type": "dialogue",
+      "speaker": "Julia",
+      "text": "Lo sé. Voy a contar lo que hice y pedir ayuda para intentar detenerlo.",
+      "next": "final3-d10",
+      "cast": {
+        "julia": "neutral"
+      }
+    },
+    "final3-d10": {
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Necesito tiempo.",
+      "next": "final3-d11",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "final3-d11": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Julia asiente.",
+      "next": "final3"
+    },
+    "final3": {
+      "type": "ending",
+      "kicker": "Final 3",
+      "title": "Un reenvío más",
+      "text": "Reenviar contenido íntimo sin consentimiento puede causar más daño y tener consecuencias legales. Reconocer un error es importante, pero también lo es dejar de difundir y buscar ayuda para actuar responsablemente."
+    },
+    "final4-scene": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Es viernes por la noche. La habitación está a oscuras. Sara está sentada en la cama con el móvil.",
+      "next": "final4",
+      "scene": "bedroom-evening",
+      "cast": {
+        "sara": "sad"
+      }
+    },
+    "final4": {
+      "type": "ending",
+      "kicker": "Final 4",
+      "title": "El mensaje sin enviar",
+      "text": "A veces, pedir ayuda empieza con un mensaje que cuesta mucho escribir. También puedes hablar con una persona de confianza para dar el primer paso. No tienes que afrontar esta situación sin apoyo."
+    }
+  }
+}

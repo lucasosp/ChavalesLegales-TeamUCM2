@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "stage": {
+    "width": 1920,
+    "height": 1080,
+    "safeArea": 0.9
+  },
+  "presets": {
+    "positions": {
+      "left": { "x": 0.27, "y": 1.0, "scale": 0.92 },
+      "center": { "x": 0.5, "y": 1.0, "scale": 1.0 },
+      "right": { "x": 0.73, "y": 1.0, "scale": 0.92 }
+    },
+    "transitions": {
+      "cut": { "type": "cut" },
+      "fade": { "type": "fade", "duration": 400 }
+    }
+  },
+  "scenes": {
+    "hallway-dusk": {
+      "label": "Hallway at dusk",
+      "layers": [
+        {
+          "id": "bg",
+          "type": "image",
+          "asset": "backgrounds/hallway-dusk",
+          "fit": "cover"
+        },
+        {
+          "id": "hana",
+          "type": "character",
+          "asset": "characters/hana",
+          "expression": "neutral",
+          "at": "right",
+          "z": 20
+        },
+        {
+          "id": "grain",
+          "type": "effect",
+          "effect": "grain",
+          "opacity": 0.12,
+          "z": 90
+        }
+      ]
+    }
+  }
+}

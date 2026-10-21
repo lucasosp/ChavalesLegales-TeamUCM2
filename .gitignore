@@ -1,0 +1,22 @@
+# --- Node ---
+node_modules/
+.next/
+npm-debug.log*
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# --- Entorno / secretos ---
+.env
+.env.*
+!.env.example
+
+# --- Editores / SO ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

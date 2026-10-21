@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "title": "Conoce tus derechos",
+  "intro": "Después de cualquiera de los finales, este resumen recuerda lo esencial. No sustituye la orientación de un profesional, pero puede ayudarte a saber por dónde empezar.",
+  "sections": [
+    {
+      "title": "1. El ciberacoso es acoso.",
+      "text": "Insultos, humillaciones, suplantación de identidad o difusión de contenido para ridiculizar a alguien pueden constituir acoso. No es una broma si la persona que lo sufre no participa ni se ríe."
+    },
+    {
+      "title": "2. Tu identidad digital también se protege.",
+      "text": "Crear un perfil falso con el nombre o la imagen de otra persona, o publicar contenido editado para dañarla, puede tener consecuencias. No tienes que demostrar tu inocencia reenviando el contenido."
+    },
+    {
+      "title": "3. Documentar no es difundir.",
+      "text": "Puedes guardar capturas, fechas, nombres de usuario y enlaces sin reenviar el contenido humillante. Evita descargar o compartir material íntimo o violento."
+    },
+    {
+      "title": "4. Puedes bloquear y reportar.",
+      "text": "Bloquear a quienes te acosan y reportar la cuenta o las publicaciones a la plataforma puede reducir el daño. Guarda el número de incidencia o la respuesta que recibas."
+    },
+    {
+      "title": "5. Pedir ayuda es un derecho.",
+      "text": "Puedes contarlo a una persona adulta de confianza, al centro educativo o a profesionales de protección. No tienes que tener todas las pruebas ni saber quién lo ha hecho."
+    },
+    {
+      "title": "6. El centro debe protegerte.",
+      "text": "Los centros educativos cuentan con protocolos de protección. Pueden adoptar medidas para que puedas seguir asistiendo a clase con seguridad y sin sentirte expuesto."
+    },
+    {
+      "title": "7. La vía legal existe.",
+      "text": "Si hay indicios de delito, pueden intervenir la Policía y, según la edad de las personas implicadas, la Fiscalía de Menores. No todos los casos terminan en juicio ni siguen el mismo procedimiento."
+    },
+    {
+      "title": "8. Tu tiempo y tus límites cuentan.",
+      "text": "Puedes pedir una pausa, que te expliquen las cosas con palabras sencillas y que te acompañe alguien de confianza. Nadie debería obligarte a contar más de lo que puedes en ese momento."
+    }
+  ],
+  "resourcesTitle": "Recursos de apoyo",
+  "resources": [
+    {
+      "name": "INCIBE 017",
+      "text": "Ayuda en ciberseguridad para menores, familias y centros educativos.",
+      "url": "https://www.incibe.es/linea-de-ayuda-en-ciberseguridad"
+    },
+    {
+      "name": "AEPD: suplantación de identidad",
+      "text": "Orientación para comunicar un perfil falso a la plataforma y valorar los siguientes pasos.",
+      "url": "https://www.aepd.es/preguntas-frecuentes/17-internet-y-redes-sociales/FAQ-1702-ante-la-suplantacion-de-mi-identidad-que-puedo-hacer"
+    },
+    {
+      "name": "Policía y Fiscalía de Menores",
+      "text": "Cuando existan indicios de delito, pueden intervenir la Policía y, según la edad de las personas implicadas, la Fiscalía de Menores."
+    },
+    {
+      "name": "Orientación y coordinación de bienestar",
+      "text": "El centro educativo debe activar sus protocolos y valorar las medidas de protección disponibles."
+    }
+  ],
+  "closing": "Nadie tiene derecho a usar tu identidad para hacerte daño. Pedir ayuda no es exagerar: es protegerte."
+}

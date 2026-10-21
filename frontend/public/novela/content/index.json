@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "stories": [
+    {
+      "id": "no-lo-reenvies",
+      "title": "No lo reenvíes",
+      "subtitle": "Una novela visual sobre acoso, intimidad y derecho a pedir ayuda.",
+      "manifest": "stories/no-lo-reenvies/novel.json",
+      "cover": "assets/backgrounds/hallway-day.svg"
+    },
+    {
+      "id": "no-soy-yo",
+      "title": "No soy yo",
+      "subtitle": "Una historia sobre ciberacoso, identidad y derecho a pedir ayuda.",
+      "manifest": "stories/no-soy-yo/novel.json",
+      "cover": "assets/backgrounds/bedroom-evening.svg"
+    }
+  ]
+}

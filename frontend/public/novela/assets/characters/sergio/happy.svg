@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="840"
+  height="1240"
+  viewBox="0 0 420 620"
+  role="img"
+  aria-labelledby="sergio-title sergio-desc"
+  data-character="sergio"
+  data-expression="happy"
+>
+  <style>
+    .sp-sprite {
+      transform-box: fill-box;
+      transform-origin: 50% 100%;
+      animation: sergio-breathe 7s ease-in-out infinite;
+    }
+    .sp-eyelids rect {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: sergio-blink 6.5s infinite;
+    }
+    @keyframes sergio-breathe {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-2px) scale(1.006); }
+    }
+    @keyframes sergio-blink {
+      0%, 95.4%, 100% { transform: scaleY(0); }
+      96.2%, 97.6% { transform: scaleY(1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sp-sprite, .sp-eyelids rect { animation: none; }
+    }
+  </style>
+
+  <title id="sergio-title">Sergio — happy</title>
+  <desc id="sergio-desc">Sergio, a character in No lo reenvíes.</desc>
+
+  <defs>
+    <linearGradient id="sergio-hair-fill" x1="210" y1="70" x2="210" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4a3428" />
+      <stop offset="1" stop-color="#302017" />
+    </linearGradient>
+    <linearGradient id="sergio-clothes-fill" x1="210" y1="430" x2="210" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2f3b5c" />
+      <stop offset="1" stop-color="#20283f" />
+    </linearGradient>
+    <radialGradient id="sergio-skin-fill" cx="0.42" cy="0.32" r="0.8">
+      <stop stop-color="#e8b89a" />
+      <stop offset="1" stop-color="#ce9b7d" />
+    </radialGradient>
+  </defs>
+
+  <g class="sp-sprite">
+
+  <path d="M122 212C122 128 160 84 210 84C260 84 298 128 298 212V270H122Z" fill="url(#sergio-hair-fill)" />
+
+    <path d="M186 330H234V444C226 462 194 462 186 444V330Z" fill="#ce9b7d" />
+    <ellipse cx="133" cy="236" rx="12" ry="18" fill="#e8b89a" />
+    <ellipse cx="287" cy="236" rx="12" ry="18" fill="#e8b89a" />
+    <ellipse cx="210" cy="226" rx="78" ry="94" fill="url(#sergio-skin-fill)" />
+
+
+  <path d="M118 620C122 492 154 438 210 438C266 438 298 492 302 620H118Z" fill="url(#sergio-clothes-fill)" />
+  <path d="M170 438L210 470L250 438L266 620H154L170 438Z" fill="#dbe7f0" />
+  
+  <path d="M170 438L210 470L196 500L160 462L170 438Z" fill="#fbf7f1" />
+  <path d="M250 438L210 470L224 500L260 462L250 438Z" fill="#e6ded2" />
+  
+  <path d="M210 470L198 500L206 554L214 554L222 500Z" fill="#4a5a7a" />
+  <path d="M198 500L210 512L222 500L210 492Z" fill="#4a5a7a" opacity="0.7" />
+  
+
+  <path d="M132 210C130 142 164 108 210 108C256 108 290 142 288 210C280 180 264 162 244 154C250 176 244 192 234 200C226 172 204 156 186 164C194 184 190 198 178 208C170 188 156 180 148 196C142 202 136 208 132 210Z" fill="url(#sergio-hair-fill)" />
+
+
+  <path class="sp-brow sp-brow-left" d="M158 208C168 200 184 200 192 207" stroke="#4b2831" stroke-width="5" stroke-linecap="round" />
+  <path class="sp-brow sp-brow-right" d="M228 207C236 200 252 200 262 208" stroke="#4b2831" stroke-width="5" stroke-linecap="round" />
+
+  <g class="sp-eyes sp-eyes-happy">
+    <path d="M158 242C168 228 184 228 192 242" stroke="#3b2028" stroke-width="5" stroke-linecap="round" />
+    <path d="M228 242C236 228 252 228 262 242" stroke="#3b2028" stroke-width="5" stroke-linecap="round" />
+  </g>
+
+    <path d="M209 252C207 260 205 265 210 267" stroke="#ce9b7d" stroke-width="3" stroke-linecap="round" />
+
+  <ellipse class="sp-blush" cx="158" cy="269" rx="18" ry="8" fill="#f08a96" opacity="0.55" />
+  <ellipse class="sp-blush" cx="262" cy="269" rx="18" ry="8" fill="#f08a96" opacity="0.55" />
+<g class="sp-mouth sp-mouth-happy">
+    <path d="M192 280C200 302 220 302 228 280C218 288 202 288 192 280Z" fill="#a85560" />
+    <path d="M198 290C204 296 216 296 222 290" stroke="#f4b3b5" stroke-width="3" stroke-linecap="round" /></g>
+    <path d="M186 330H234V358C224 370 196 370 186 358V330Z" fill="#ce9b7d" opacity="0.4" />
+
+  </g>
+</svg>

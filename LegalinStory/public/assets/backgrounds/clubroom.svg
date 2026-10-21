@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="bg-title bg-desc">
+  <title id="bg-title">Literature clubroom</title>
+  <desc id="bg-desc">A warm clubroom with tall bookshelves, a window at sunset, and a reading table.</desc>
+  <defs>
+    <linearGradient id="bg-wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2c1b22" />
+      <stop offset="0.7" stop-color="#1d1219" />
+      <stop offset="1" stop-color="#120b11" />
+    </linearGradient>
+    <linearGradient id="bg-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a2a52" />
+      <stop offset="0.45" stop-color="#94546b" />
+      <stop offset="0.72" stop-color="#e88d70" />
+      <stop offset="1" stop-color="#ffd9a0" />
+    </linearGradient>
+    <radialGradient id="bg-sun" cx="0.5" cy="0.55" r="0.5">
+      <stop offset="0" stop-color="#fff4d2" />
+      <stop offset="0.4" stop-color="#ffd79a" stop-opacity="0.9" />
+      <stop offset="1" stop-color="#ff9f6d" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="bg-floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#38232a" />
+      <stop offset="0.4" stop-color="#21141b" />
+      <stop offset="1" stop-color="#0c070d" />
+    </linearGradient>
+    <linearGradient id="bg-lamp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe6b8" stop-opacity="0.65" />
+      <stop offset="1" stop-color="#ffb36e" stop-opacity="0" />
+    </linearGradient>
+    <radialGradient id="bg-vignette" cx="0.5" cy="0.46" r="0.72">
+      <stop offset="0.4" stop-color="#05030a" stop-opacity="0" />
+      <stop offset="1" stop-color="#05030a" stop-opacity="0.4" />
+    </radialGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#bg-wall)" />
+
+  <!-- window -->
+  <g>
+    <rect x="1170" y="110" width="600" height="540" fill="url(#bg-sky)" />
+    <circle cx="1460" cy="540" r="190" fill="url(#bg-sun)" />
+    <path d="M1240 320 C1330 290 1400 306 1470 280 C1540 254 1620 268 1690 300" fill="none" stroke="#ffd2ab" stroke-width="16" stroke-linecap="round" opacity="0.2" />
+    <rect x="1170" y="110" width="600" height="540" fill="none" stroke="#1a1018" stroke-width="30" />
+    <rect x="1462" y="110" width="22" height="540" fill="#1a1018" />
+    <rect x="1170" y="366" width="600" height="22" fill="#1a1018" />
+    <path d="M1140 650 H1800 V690 H1140 Z" fill="#1a1018" />
+  </g>
+
+  <!-- left bookshelf -->
+  <g>
+    <rect x="70" y="120" width="470" height="710" fill="#2a1a20" stroke="#150d12" stroke-width="10" />
+    <g fill="#3b262c">
+      <rect x="86" y="238" width="438" height="14" />
+      <rect x="86" y="386" width="438" height="14" />
+      <rect x="86" y="534" width="438" height="14" />
+      <rect x="86" y="682" width="438" height="14" />
+    </g>
+    <g>
+      <rect x="104" y="156" width="22" height="82" fill="#6b3f49" />
+      <rect x="132" y="168" width="18" height="70" fill="#8a5a53" />
+      <rect x="156" y="148" width="26" height="90" fill="#4b5c6b" />
+      <rect x="190" y="176" width="20" height="62" fill="#7d6a4b" />
+      <rect x="218" y="160" width="30" height="78" fill="#5b3b5d" />
+      <rect x="258" y="184" width="18" height="54" fill="#8b4a44" />
+      <rect x="288" y="150" width="24" height="88" fill="#3e5f59" />
+      <rect x="322" y="170" width="20" height="68" fill="#7a4b5e" />
+      <rect x="350" y="158" width="28" height="80" fill="#4d476b" />
+      <rect x="388" y="180" width="18" height="58" fill="#806044" />
+      <rect x="416" y="152" width="24" height="86" fill="#5e3c3f" />
+      <rect x="450" y="172" width="20" height="66" fill="#41606a" />
+      <rect x="480" y="162" width="28" height="76" fill="#7d5a68" />
+    </g>
+    <g>
+      <rect x="104" y="306" width="24" height="80" fill="#4f5f6e" />
+      <rect x="136" y="318" width="18" height="68" fill="#7b4a4c" />
+      <rect x="162" y="300" width="28" height="86" fill="#6a4a5f" />
+      <rect x="198" y="326" width="20" height="60" fill="#87654a" />
+      <rect x="226" y="310" width="24" height="76" fill="#3f5b57" />
+      <rect x="258" y="332" width="18" height="54" fill="#70434f" />
+      <rect x="284" y="302" width="30" height="84" fill="#554f75" />
+      <rect x="322" y="320" width="18" height="66" fill="#8a5b50" />
+      <rect x="348" y="308" width="26" height="78" fill="#465f63" />
+      <rect x="382" y="330" width="20" height="56" fill="#7a4a5b" />
+      <rect x="410" y="304" width="24" height="82" fill="#62653f" />
+      <rect x="442" y="322" width="18" height="64" fill="#8c5e47" />
+      <rect x="468" y="312" width="30" height="74" fill="#4d3f63" />
+    </g>
+    <g>
+      <rect x="104" y="454" width="20" height="80" fill="#7f5646" />
+      <rect x="132" y="468" width="26" height="66" fill="#4a5f68" />
+      <rect x="166" y="448" width="18" height="86" fill="#6f4254" />
+      <rect x="192" y="474" width="24" height="60" fill="#8a6a49" />
+      <rect x="224" y="458" width="28" height="76" fill="#415a55" />
+      <rect x="260" y="480" width="18" height="54" fill="#744a5f" />
+      <rect x="286" y="452" width="22" height="82" fill="#5b5375" />
+      <rect x="316" y="470" width="26" height="64" fill="#8b5a4f" />
+      <rect x="350" y="456" width="18" height="78" fill="#4c6267" />
+      <rect x="376" y="478" width="24" height="56" fill="#7c4b5c" />
+      <rect x="408" y="450" width="28" height="84" fill="#60633f" />
+      <rect x="444" y="472" width="18" height="62" fill="#8b5c45" />
+      <rect x="470" y="460" width="26" height="74" fill="#4a3d61" />
+    </g>
+  </g>
+
+  <!-- floor -->
+  <path d="M0 710 H1920 V1080 H0 Z" fill="url(#bg-floor)" />
+  <path d="M1120 710 H1740 L1880 1080 H980 Z" fill="#ffd8a1" opacity="0.12" />
+  <path d="M0 710 H1920" stroke="#4b3038" stroke-width="3" opacity="0.5" />
+
+  <!-- rug -->
+  <ellipse cx="960" cy="950" rx="560" ry="150" fill="#25151c" opacity="0.85" />
+  <ellipse cx="960" cy="950" rx="500" ry="125" fill="none" stroke="#5b3741" stroke-width="8" opacity="0.5" />
+
+  <!-- table -->
+  <g>
+    <ellipse cx="960" cy="842" rx="410" ry="118" fill="#3a2328" />
+    <ellipse cx="960" cy="826" rx="410" ry="112" fill="#4b2e33" />
+    <ellipse cx="960" cy="826" rx="350" ry="88" fill="#5b3a3d" opacity="0.55" />
+    <rect x="640" y="842" width="30" height="160" fill="#2a181e" />
+    <rect x="1250" y="842" width="30" height="160" fill="#2a181e" />
+  </g>
+
+  <!-- open book and lamp on the table -->
+  <g>
+    <path d="M850 812 Q900 796 950 812 L950 858 Q900 842 850 858 Z" fill="#e9ddc9" />
+    <path d="M1050 812 Q1000 796 950 812 L950 858 Q1000 842 1050 858 Z" fill="#f4e9d6" />
+    <path d="M950 812 V858" stroke="#bda98f" stroke-width="3" />
+    <path d="M870 826 H930" stroke="#b7a48c" stroke-width="3" opacity="0.7" />
+    <path d="M870 838 H930" stroke="#b7a48c" stroke-width="3" opacity="0.55" />
+    <path d="M970 826 H1030" stroke="#b7a48c" stroke-width="3" opacity="0.7" />
+    <path d="M970 838 H1030" stroke="#b7a48c" stroke-width="3" opacity="0.55" />
+  </g>
+
+  <!-- hanging lamp -->
+  <g>
+    <path d="M960 0 V164" stroke="#24151a" stroke-width="5" />
+    <path d="M900 208 Q960 160 1020 208 L992 246 H928 Z" fill="#3a2229" />
+    <ellipse cx="960" cy="246" rx="32" ry="10" fill="#ffdca6" />
+    <path d="M860 246 L1060 246 L1120 760 L800 760 Z" fill="url(#bg-lamp)" opacity="0.3" />
+  </g>
+
+  <!-- chairs -->
+  <g fill="#160e13" opacity="0.92">
+    <path d="M390 790 Q470 760 550 790 L540 960 H510 L500 850 H440 L430 960 H400 Z" />
+    <path d="M1370 790 Q1450 760 1530 790 L1520 960 H1490 L1480 850 H1420 L1410 960 H1380 Z" />
+  </g>
+
+  <!-- shelves on the right wall, below the window -->
+  <g>
+    <rect x="1660" y="700" width="220" height="210" fill="#2a1a20" stroke="#150d12" stroke-width="8" />
+    <rect x="1668" y="780" width="204" height="10" fill="#3b262c" />
+    <g fill="#6b3f49">
+      <rect x="1680" y="724" width="18" height="52" />
+      <rect x="1704" y="734" width="16" height="42" fill="#4b5c6b" />
+      <rect x="1726" y="718" width="22" height="58" fill="#7d6a4b" />
+      <rect x="1754" y="740" width="18" height="36" fill="#5b3b5d" />
+    </g>
+    <g fill="#4f5f6e">
+      <rect x="1680" y="806" width="20" height="76" />
+      <rect x="1708" y="820" width="16" height="62" fill="#7b4a4c" />
+      <rect x="1730" y="800" width="24" height="82" fill="#6a4a5f" />
+      <rect x="1760" y="828" width="18" height="54" fill="#87654a" />
+    </g>
+  </g>
+
+  <!-- dust and light -->
+  <g fill="#ffe3b4" opacity="0.4">
+    <circle cx="1280" cy="420" r="3" />
+    <circle cx="1360" cy="360" r="2" />
+    <circle cx="1460" cy="460" r="3" />
+    <circle cx="1540" cy="390" r="2" />
+    <circle cx="1220" cy="540" r="2" />
+    <circle cx="1420" cy="620" r="3" />
+  </g>
+
+  <rect width="1920" height="1080" fill="url(#bg-vignette)" />
+</svg>

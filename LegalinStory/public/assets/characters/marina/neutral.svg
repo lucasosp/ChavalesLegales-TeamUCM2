@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="840"
+  height="1240"
+  viewBox="0 0 420 620"
+  role="img"
+  aria-labelledby="marina-title marina-desc"
+  data-character="marina"
+  data-expression="neutral"
+>
+  <style>
+    .sp-sprite {
+      transform-box: fill-box;
+      transform-origin: 50% 100%;
+      animation: marina-breathe 7s ease-in-out infinite;
+    }
+    .sp-eyelids rect {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: marina-blink 6.5s infinite;
+    }
+    @keyframes marina-breathe {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-2px) scale(1.006); }
+    }
+    @keyframes marina-blink {
+      0%, 95.4%, 100% { transform: scaleY(0); }
+      96.2%, 97.6% { transform: scaleY(1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sp-sprite, .sp-eyelids rect { animation: none; }
+    }
+  </style>
+
+  <title id="marina-title">Marina — neutral</title>
+  <desc id="marina-desc">Marina, a character in Chavales Legales.</desc>
+
+  <defs>
+    <linearGradient id="marina-hair-fill" x1="210" y1="70" x2="210" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3b2a2a" />
+      <stop offset="1" stop-color="#241818" />
+    </linearGradient>
+    <linearGradient id="marina-clothes-fill" x1="210" y1="430" x2="210" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6b3f4a" />
+      <stop offset="1" stop-color="#4d2b34" />
+    </linearGradient>
+    <radialGradient id="marina-skin-fill" cx="0.42" cy="0.32" r="0.8">
+      <stop stop-color="#e8c4ad" />
+      <stop offset="1" stop-color="#cea78f" />
+    </radialGradient>
+  </defs>
+
+  <g class="sp-sprite">
+
+  <ellipse cx="210" cy="86" rx="54" ry="42" fill="url(#marina-hair-fill)" />
+  <path d="M126 210C126 130 160 90 210 90C260 90 294 130 294 210V270H126Z" fill="url(#marina-hair-fill)" />
+  <path d="M168 100C184 82 236 82 252 100" fill="none" stroke="#241818" stroke-width="6" opacity="0.55" />
+
+    <path d="M186 330H234V444C226 462 194 462 186 444V330Z" fill="#cea78f" />
+    <ellipse cx="133" cy="236" rx="12" ry="18" fill="#e8c4ad" />
+    <ellipse cx="287" cy="236" rx="12" ry="18" fill="#e8c4ad" />
+    <ellipse cx="210" cy="226" rx="78" ry="94" fill="url(#marina-skin-fill)" />
+
+
+  <path d="M118 620C122 492 154 438 210 438C266 438 298 492 302 620H118Z" fill="url(#marina-clothes-fill)" />
+  <path d="M170 438L210 470L250 438L266 620H154L170 438Z" fill="#efe6da" />
+  <path d="M168 440L210 470L196 500L160 462Z" fill="#efe6da" opacity="0.9" />
+  <path d="M252 440L210 470L224 500L260 462Z" fill="#efe6da" opacity="0.75" />
+  <path d="M196 500L210 470L224 500L214 620H206Z" fill="#4d2b34" opacity="0.7" />
+
+  <path d="M126 212C124 136 160 96 210 96C258 96 294 136 292 212C282 174 262 152 240 146C248 176 242 196 230 204C222 174 204 158 188 164C196 186 190 200 178 210C168 186 152 178 144 196C138 204 132 210 126 212Z" fill="url(#marina-hair-fill)" />
+
+
+  <path class="sp-brow sp-brow-left" d="M158 208C168 200 184 200 192 207" stroke="#4b2831" stroke-width="5" stroke-linecap="round" />
+  <path class="sp-brow sp-brow-right" d="M228 207C236 200 252 200 262 208" stroke="#4b2831" stroke-width="5" stroke-linecap="round" />
+
+  <g class="sp-eyes sp-eyes-open">
+    <ellipse cx="175" cy="239" rx="16" ry="20" fill="#fffaf5" />
+    <ellipse cx="245" cy="239" rx="16" ry="20" fill="#fffaf5" />
+    <g class="sp-gaze" transform="translate(0 0)">
+      <circle cx="176" cy="241" r="11" fill="#4a3026" />
+      <circle cx="244" cy="241" r="11" fill="#4a3026" />
+      <circle cx="176" cy="242" r="5.5" fill="#2a1a22" />
+      <circle cx="244" cy="242" r="5.5" fill="#2a1a22" />
+      <circle cx="180" cy="235" r="4" fill="#fff" />
+      <circle cx="248" cy="235" r="4" fill="#fff" />
+      <circle cx="172" cy="246" r="2" fill="#ffe6c7" />
+      <circle cx="240" cy="246" r="2" fill="#ffe6c7" />
+    </g>
+    <path d="M158 226C168 215 184 215 192 225" stroke="#3b2028" stroke-width="4.5" stroke-linecap="round" />
+    <path d="M228 225C236 215 252 215 262 226" stroke="#3b2028" stroke-width="4.5" stroke-linecap="round" />
+  </g>
+
+  <g class="sp-eyelids">
+    <rect x="157" y="216" width="38" height="44" rx="19" fill="#e8c4ad" transform="translate(0 238) scale(1 0) translate(0 -238)" />
+    <rect x="227" y="216" width="38" height="44" rx="19" fill="#e8c4ad" transform="translate(0 238) scale(1 0) translate(0 -238)" />
+  </g>
+    <path d="M209 252C207 260 205 265 210 267" stroke="#cea78f" stroke-width="3" stroke-linecap="round" />
+
+  <ellipse class="sp-blush" cx="158" cy="269" rx="18" ry="8" fill="#f08a96" opacity="0.32" />
+  <ellipse class="sp-blush" cx="262" cy="269" rx="18" ry="8" fill="#f08a96" opacity="0.32" />
+<g class="sp-mouth sp-mouth-neutral"><path d="M200 286C206 290 214 290 220 286" stroke="#8f4a52" stroke-width="4" stroke-linecap="round" /></g>
+    <path d="M186 330H234V358C224 370 196 370 186 358V330Z" fill="#cea78f" opacity="0.4" />
+
+  <g class="sp-glasses" fill="none" stroke="#5a453f" stroke-width="3" opacity="0.78">
+    <ellipse cx="175" cy="239" rx="28" ry="24" />
+    <ellipse cx="245" cy="239" rx="28" ry="24" />
+    <path d="M203 239H217" />
+    <path d="M147 232L132 226" />
+    <path d="M273 232L288 226" />
+  </g>
+  </g>
+</svg>

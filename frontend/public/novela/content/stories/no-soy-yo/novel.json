@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "no-soy-yo",
+  "title": "No soy yo",
+  "content": {
+    "story": "story.json",
+    "assets": "../../shared/assets.json",
+    "scenes": "scene.json",
+    "rights": "rights.json"
+  },
+  "stage": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "node": "start",
+    "scene": "bedroom-evening"
+  },
+  "save": {
+    "key": "no-soy-yo.save",
+    "version": 1
+  }
+}

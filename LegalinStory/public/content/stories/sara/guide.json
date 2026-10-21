@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "chapters": [
+    {
+      "id": 1,
+      "title": "Algo no va bien"
+    },
+    {
+      "id": 2,
+      "title": "Alguien escucha"
+    },
+    {
+      "id": 3,
+      "title": "¿Qué va a pasar conmigo?"
+    },
+    {
+      "id": 4,
+      "title": "Mi vida continúa"
+    },
+    {
+      "id": 5,
+      "title": "El juzgado"
+    },
+    {
+      "id": 6,
+      "title": "Después de todo"
+    }
+  ],
+  "steps": [
+    {
+      "chapter": 1,
+      "title": "Una señal",
+      "text": "El centro escucha y atiende indicios de violencia."
+    },
+    {
+      "chapter": 2,
+      "title": "Pedir ayuda",
+      "text": "El personal coordina la comunicación y los apoyos para proteger."
+    },
+    {
+      "chapter": 3,
+      "title": "Valorar y proteger",
+      "text": "Servicios Sociales y protección de menores valoran necesidades y seguridad."
+    },
+    {
+      "chapter": 4,
+      "title": "Seguir viviendo",
+      "text": "Acompañamiento socioeducativo: clases, vínculos y actividades."
+    },
+    {
+      "chapter": 5,
+      "title": "Entender la citación",
+      "text": "Se explica para qué es la actuación y quién interviene."
+    },
+    {
+      "chapter": 5,
+      "title": "Participar con apoyos",
+      "text": "Se valoran medidas para la declaración. La demo omite las preguntas sobre violencia."
+    },
+    {
+      "chapter": 6,
+      "title": "Esperar información",
+      "text": "El procedimiento continúa. Los tiempos y actuaciones varían."
+    },
+    {
+      "chapter": 6,
+      "title": "Resolución y continuidad",
+      "text": "Se explica la resolución. Los apoyos se revisan según las necesidades."
+    }
+  ],
+  "people": [
+    {
+      "name": "Sara",
+      "role": "15 años · 4.º de ESO",
+      "initial": "S",
+      "color": "peach",
+      "text": "Le gusta el voleibol, dibuja en los márgenes y tiene una amiga llamada Paula. Su vida es más amplia que el procedimiento.",
+      "sprite": "assets/characters/sara/smile.svg"
+    },
+    {
+      "name": "Paula",
+      "role": "Su mejor amiga",
+      "initial": "P",
+      "color": "pink",
+      "text": "Ofrece compañía y conserva los planes compartidos. No tiene que investigar ni resolver la situación."
+    },
+    {
+      "name": "Laura",
+      "role": "Profesora",
+      "initial": "L",
+      "color": "green",
+      "text": "Escucha, atiende señales y coordina la comunicación mediante el protocolo del centro. No investiga delitos."
+    },
+    {
+      "name": "Irene",
+      "role": "Educadora social",
+      "initial": "I",
+      "color": "purple",
+      "text": "Acompaña la vida cotidiana y coordina apoyos con el equipo. No dicta medidas judiciales ni sentencias."
+    },
+    {
+      "name": "Elena",
+      "role": "Abogada",
+      "initial": "E",
+      "color": "blue",
+      "text": "Asesora a Sara, explica las actuaciones y defiende sus intereses. La defensa de Javier corresponde a otro profesional."
+    },
+    {
+      "name": "Jueza",
+      "role": "Autoridad judicial",
+      "initial": "J",
+      "color": "purple",
+      "text": "Dirige las actuaciones que le corresponden y adopta decisiones con las garantías del procedimiento."
+    },
+    {
+      "name": "Fiscalía",
+      "role": "Ministerio Fiscal",
+      "initial": "F",
+      "color": "green",
+      "text": "Promueve la acción de la justicia y vela por la legalidad y los derechos. Que Sara sea menor no convierte la causa contra su padre en justicia penal de menores."
+    },
+    {
+      "name": "Equipo de apoyo",
+      "role": "Servicios Sociales y atención a víctimas",
+      "initial": "+",
+      "color": "blue",
+      "text": "Sus funciones son distintas: la protección de menores valora la seguridad familiar; la asistencia a víctimas informa y ofrece apoyos en el proceso."
+    },
+    {
+      "name": "Su familia",
+      "role": "Dani, su madre y Javier",
+      "initial": "D",
+      "color": "peach",
+      "text": "Dani tiene diez años. Su madre también recibe apoyo. Javier, el padre, es responsable de su conducta; Sara no tiene que cambiarla para merecer protección."
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "title": "Conoce tus derechos",
+  "intro": "Después de cualquiera de los finales, este resumen recuerda lo esencial. No sustituye la orientación de un profesional, pero puede ayudarte a saber por dónde empezar.",
+  "sections": [
+    {
+      "title": "1. El acoso escolar no debe normalizarse.",
+      "text": "Los insultos, humillaciones y conductas reiteradas de hostigamiento requieren atención y protección. Dependiendo de los hechos, pueden existir también consecuencias jurídicas."
+    },
+    {
+      "title": "2. Difundir imágenes íntimas sin consentimiento puede ser delito.",
+      "text": "El hecho de recibir una imagen no autoriza a compartirla. Las consecuencias legales dependen de las características concretas del contenido, su obtención, la difusión y las circunstancias de las personas implicadas."
+    },
+    {
+      "title": "3. Pedir ayuda es un derecho.",
+      "text": "Los menores pueden comunicar situaciones de violencia a adultos de confianza y a profesionales de protección. También tienen derecho a recibir información adaptada a su edad."
+    },
+    {
+      "title": "4. No necesitas investigarlo todo por tu cuenta.",
+      "text": "Puedes comunicar los mensajes, las fechas, los perfiles implicados y la información disponible sin redistribuir contenidos íntimos."
+    },
+    {
+      "title": "5. Existen recursos de apoyo.",
+      "text": "Personas adultas de confianza, profesorado y orientación escolar. El centro educativo cuenta con protocolos de protección que deben activarse cuando se conoce una situación de violencia."
+    }
+  ],
+  "resourcesTitle": "Recursos de apoyo",
+  "resources": [
+    {
+      "name": "INCIBE 017",
+      "text": "Orientación en ciberseguridad para menores, familias y centros educativos. Este servicio no presenta una denuncia por ti.",
+      "url": "https://www.incibe.es/linea-de-ayuda-en-ciberseguridad"
+    },
+    {
+      "name": "Canal Prioritario de la AEPD",
+      "text": "Si el contenido sexual o violento se ha publicado en Internet y existe un riesgo grave, permite solicitar su retirada urgente. No equivale a presentar una denuncia penal.",
+      "url": "https://www.aepd.es/canalprioritario"
+    },
+    {
+      "name": "Policía y Fiscalía de Menores",
+      "text": "Cuando existan indicios de delito, pueden intervenir la Policía y, según la edad de las personas implicadas, la Fiscalía de Menores."
+    },
+    {
+      "name": "Coordinación de bienestar y protección",
+      "text": "El centro educativo debe activar sus protocolos y valorar las medidas de protección disponibles."
+    }
+  ],
+  "closing": "Conocer tus derechos es el primer paso para poder ejercerlos."
+}

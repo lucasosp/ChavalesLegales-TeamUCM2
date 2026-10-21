@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "sara",
+  "title": "Sara · Mi historia sigue",
+  "content": {
+    "story": "story.json",
+    "assets": "assets.json",
+    "scenes": "scene.json"
+  },
+  "stage": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "node": "start",
+    "scene": "classroom-day"
+  },
+  "save": {
+    "key": "sara.save",
+    "version": 1
+  }
+}

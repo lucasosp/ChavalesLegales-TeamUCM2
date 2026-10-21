@@ -1,0 +1,276 @@
+{
+  "version": 1,
+  "stage": {
+    "width": 1920,
+    "height": 1080,
+    "safeArea": 0.9
+  },
+  "presets": {
+    "positions": {
+      "left": {
+        "x": 0.27,
+        "y": 1,
+        "scale": 0.92
+      },
+      "center": {
+        "x": 0.5,
+        "y": 1,
+        "scale": 1
+      },
+      "right": {
+        "x": 0.73,
+        "y": 1,
+        "scale": 0.92
+      }
+    },
+    "transitions": {
+      "cut": {
+        "type": "cut"
+      },
+      "fade": {
+        "type": "fade",
+        "duration": 400
+      },
+      "dissolve": {
+        "type": "dissolve",
+        "duration": 700
+      }
+    }
+  },
+  "scenes": {
+    "home-living-cold": {
+      "label": "Casa · Salón",
+      "layers": [
+        {
+          "id": "bg",
+          "type": "image",
+          "asset": "backgrounds/home-living-cold",
+          "fit": "cover"
+        },
+        {
+          "id": "maya",
+          "type": "character",
+          "asset": "characters/maya",
+          "expression": "neutral",
+          "at": "center",
+          "z": 20
+        },
+        {
+          "id": "vignette",
+          "type": "effect",
+          "effect": "vignette",
+          "opacity": 0.28,
+          "z": 90
+        }
+      ]
+    },
+    "home-kitchen-cold": {
+      "label": "Casa · Cocina",
+      "layers": [
+        {
+          "id": "bg",
+          "type": "image",
+          "asset": "backgrounds/home-kitchen-cold",
+          "fit": "cover"
+        },
+        {
+          "id": "maya",
+          "type": "character",
+          "asset": "characters/maya",
+          "expression": "neutral",
+          "at": "center",
+          "z": 20
+        },
+        {
+          "id": "vignette",
+          "type": "effect",
+          "effect": "vignette",
+          "opacity": 0.26,
+          "z": 90
+        }
+      ]
+    },
+    "hallway-day": {
+      "label": "Instituto · Pasillo",
+      "layers": [
+        {
+          "id": "bg",
+          "type": "image",
+          "asset": "backgrounds/hallway-day",
+          "fit": "cover"
+        },
+        {
+          "id": "maya",
+          "type": "character",
+          "asset": "characters/maya",
+          "expression": "neutral",
+          "at": "center",
+          "z": 20
+        },
+        {
+          "id": "vignette",
+          "type": "effect",
+          "effect": "vignette",
+          "opacity": 0.18,
+          "z": 90
+        }
+      ]
+    },
+    "patio-day": {
+      "label": "Instituto · Patio",
+      "layers": [
+        {
+          "id": "bg",
+          "type": "image",
+          "asset": "backgrounds/patio-day",
+          "fit": "cover"
+        },
+        {
+          "id": "maya",
+          "type": "character",
+          "asset": "characters/maya",
+          "expression": "neutral",
+          "at": "center",
+          "z": 20
+        },
+        {
+          "id": "vignette",
+          "type": "effect",
+          "effect": "vignette",
+          "opacity": 0.18,
+          "z": 90
+        }
+      ]
+    },
+    "classroom-day": {
+      "label": "Instituto · Aula",
+      "layers": [
+        {
+          "id": "bg",
+          "type": "image",
+          "asset": "backgrounds/classroom-day",
+          "fit": "cover"
+        },
+        {
+          "id": "maya",
+          "type": "character",
+          "asset": "characters/maya",
+          "expression": "neutral",
+          "at": "center",
+          "z": 20
+        },
+        {
+          "id": "vignette",
+          "type": "effect",
+          "effect": "vignette",
+          "opacity": 0.18,
+          "z": 90
+        }
+      ]
+    },
+    "orientation-office": {
+      "label": "Instituto · Orientación",
+      "layers": [
+        {
+          "id": "bg",
+          "type": "image",
+          "asset": "backgrounds/orientation-office",
+          "fit": "cover"
+        },
+        {
+          "id": "maya",
+          "type": "character",
+          "asset": "characters/maya",
+          "expression": "neutral",
+          "at": "center",
+          "z": 20
+        },
+        {
+          "id": "vignette",
+          "type": "effect",
+          "effect": "vignette",
+          "opacity": 0.16,
+          "z": 90
+        }
+      ]
+    },
+    "court-friendly": {
+      "label": "Sala amigable",
+      "layers": [
+        {
+          "id": "bg",
+          "type": "image",
+          "asset": "backgrounds/court-friendly",
+          "fit": "cover"
+        },
+        {
+          "id": "maya",
+          "type": "character",
+          "asset": "characters/maya",
+          "expression": "neutral",
+          "at": "center",
+          "z": 20
+        },
+        {
+          "id": "vignette",
+          "type": "effect",
+          "effect": "vignette",
+          "opacity": 0.14,
+          "z": 90
+        }
+      ]
+    },
+    "shelter-room": {
+      "label": "Recurso de acogida",
+      "layers": [
+        {
+          "id": "bg",
+          "type": "image",
+          "asset": "backgrounds/shelter-room",
+          "fit": "cover"
+        },
+        {
+          "id": "maya",
+          "type": "character",
+          "asset": "characters/maya",
+          "expression": "neutral",
+          "at": "center",
+          "z": 20
+        },
+        {
+          "id": "vignette",
+          "type": "effect",
+          "effect": "vignette",
+          "opacity": 0.14,
+          "z": 90
+        }
+      ]
+    },
+    "bedroom-evening": {
+      "label": "Casa de Sofi · Habitación",
+      "layers": [
+        {
+          "id": "bg",
+          "type": "image",
+          "asset": "backgrounds/bedroom-evening",
+          "fit": "cover"
+        },
+        {
+          "id": "sofi",
+          "type": "character",
+          "asset": "characters/sofi",
+          "expression": "neutral",
+          "at": "center",
+          "z": 20
+        },
+        {
+          "id": "vignette",
+          "type": "effect",
+          "effect": "vignette",
+          "opacity": 0.2,
+          "z": 90
+        }
+      ]
+    }
+  }
+}

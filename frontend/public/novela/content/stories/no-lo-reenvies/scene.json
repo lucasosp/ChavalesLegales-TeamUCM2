@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "stage": {
+    "width": 1920,
+    "height": 1080,
+    "safeArea": 0.9
+  },
+  "presets": {
+    "positions": {
+      "left": {
+        "x": 0.27,
+        "y": 1,
+        "scale": 0.92
+      },
+      "center": {
+        "x": 0.5,
+        "y": 1,
+        "scale": 1
+      },
+      "right": {
+        "x": 0.73,
+        "y": 1,
+        "scale": 0.92
+      }
+    },
+    "transitions": {
+      "cut": {
+        "type": "cut"
+      },
+      "fade": {
+        "type": "fade",
+        "duration": 400
+      },
+      "dissolve": {
+        "type": "dissolve",
+        "duration": 700
+      }
+    }
+  },
+  "scenes": {
+    "hallway-day": {
+      "label": "Pasillo del instituto, lunes por la mañana",
+      "layers": [
+        {
+          "id": "bg",
+          "type": "image",
+          "asset": "backgrounds/hallway-day",
+          "fit": "cover"
+        },
+        {
+          "id": "sara",
+          "type": "character",
+          "asset": "characters/sara",
+          "expression": "neutral",
+          "at": "center",
+          "z": 20
+        },
+        {
+          "id": "vignette",
+          "type": "effect",
+          "effect": "vignette",
+          "opacity": 0.24,
+          "z": 90
+        }
+      ]
+    },
+    "classroom-day": {
+      "label": "Aula, miércoles por la mañana",
+      "layers": [
+        {
+          "id": "bg",
+          "type": "image",
+          "asset": "backgrounds/classroom-day",
+          "fit": "cover"
+        },
+        {
+          "id": "sara",
+          "type": "character",
+          "asset": "characters/sara",
+          "expression": "neutral",
+          "at": "center",
+          "z": 20
+        },
+        {
+          "id": "vignette",
+          "type": "effect",
+          "effect": "vignette",
+          "opacity": 0.24,
+          "z": 90
+        }
+      ]
+    },
+    "bedroom-evening": {
+      "label": "Habitación de Sara, martes por la noche",
+      "layers": [
+        {
+          "id": "bg",
+          "type": "image",
+          "asset": "backgrounds/bedroom-evening",
+          "fit": "cover"
+        },
+        {
+          "id": "sara",
+          "type": "character",
+          "asset": "characters/sara",
+          "expression": "neutral",
+          "at": "center",
+          "z": 20
+        },
+        {
+          "id": "vignette",
+          "type": "effect",
+          "effect": "vignette",
+          "opacity": 0.24,
+          "z": 90
+        }
+      ]
+    },
+    "patio-day": {
+      "label": "Patio del instituto",
+      "layers": [
+        {
+          "id": "bg",
+          "type": "image",
+          "asset": "backgrounds/patio-day",
+          "fit": "cover"
+        },
+        {
+          "id": "sara",
+          "type": "character",
+          "asset": "characters/sara",
+          "expression": "neutral",
+          "at": "center",
+          "z": 20
+        },
+        {
+          "id": "vignette",
+          "type": "effect",
+          "effect": "vignette",
+          "opacity": 0.24,
+          "z": 90
+        }
+      ]
+    },
+    "orientation-office": {
+      "label": "Departamento de Orientación",
+      "layers": [
+        {
+          "id": "bg",
+          "type": "image",
+          "asset": "backgrounds/orientation-office",
+          "fit": "cover"
+        },
+        {
+          "id": "sara",
+          "type": "character",
+          "asset": "characters/sara",
+          "expression": "neutral",
+          "at": "center",
+          "z": 20
+        },
+        {
+          "id": "vignette",
+          "type": "effect",
+          "effect": "vignette",
+          "opacity": 0.24,
+          "z": 90
+        }
+      ]
+    },
+    "quiet-room": {
+      "label": "Sala tranquila de atención profesional",
+      "layers": [
+        {
+          "id": "bg",
+          "type": "image",
+          "asset": "backgrounds/quiet-room",
+          "fit": "cover"
+        },
+        {
+          "id": "sara",
+          "type": "character",
+          "asset": "characters/sara",
+          "expression": "neutral",
+          "at": "center",
+          "z": 20
+        },
+        {
+          "id": "vignette",
+          "type": "effect",
+          "effect": "vignette",
+          "opacity": 0.24,
+          "z": 90
+        }
+      ]
+    }
+  }
+}

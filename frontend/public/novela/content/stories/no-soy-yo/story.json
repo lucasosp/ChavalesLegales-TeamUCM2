@@ -1,0 +1,913 @@
+{
+  "version": 1,
+  "start": "start",
+  "nodes": {
+    "start": {
+      "type": "interstitial",
+      "kicker": "Chavales Legales",
+      "title": "No soy yo",
+      "text": "Una historia sobre ciberacoso, identidad y derecho a pedir ayuda.",
+      "scene": "bedroom-evening",
+      "next": "prologo-1"
+    },
+    "prologo-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Martes, 21:17. Sergio está en su habitación cuando el móvil empieza a vibrar sin parar.",
+      "scene": "bedroom-evening",
+      "cast": {
+        "sergio": "neutral"
+      },
+      "next": "prologo-2"
+    },
+    "prologo-2": {
+      "type": "chat",
+      "chatTitle": "4.º ESO | Los de siempre",
+      "self": "Sergio",
+      "messages": [
+        {
+          "from": "Hugo",
+          "text": "tío habéis visto la cuenta esa??",
+          "time": "21:12"
+        },
+        {
+          "from": "Dani",
+          "text": "qué cuenta",
+          "time": "21:12"
+        },
+        {
+          "from": "Hugo",
+          "text": "la de Sergio JAJAJA",
+          "time": "21:12"
+        },
+        {
+          "from": "Sergio",
+          "text": "¿qué cuenta?",
+          "time": "21:13"
+        },
+        {
+          "from": "Hugo",
+          "text": "una que se ha hecho con tu nombre",
+          "time": "21:13"
+        },
+        {
+          "from": "Hugo",
+          "text": "Imagen censurada",
+          "time": "21:13",
+          "hidden": true
+        },
+        {
+          "from": "Dani",
+          "text": "quién la ha hecho? 😂",
+          "time": "21:14"
+        },
+        {
+          "from": "Hugo",
+          "text": "ni idea pero está por todos lados",
+          "time": "21:14"
+        },
+        {
+          "from": "Sergio",
+          "text": "¿sabéis quién es?",
+          "time": "21:15"
+        },
+        {
+          "from": "Hugo",
+          "text": "yo solo la he visto",
+          "time": "21:15"
+        },
+        {
+          "from": "Julia",
+          "text": "sergio no contestes ahí. te escribo por privado",
+          "time": "21:16"
+        }
+      ],
+      "next": "prologo-3"
+    },
+    "prologo-3": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "La cuenta usa su nombre, su foto de perfil y publica bromas que él no ha escrito. Sergio siente que todo el instituto lo está mirando.",
+      "tone": "thought",
+      "cast": {
+        "sergio": "sad"
+      },
+      "next": "prologo-chat-julia"
+    },
+    "prologo-chat-julia": {
+      "type": "chat",
+      "chatTitle": "Julia",
+      "self": "Sergio",
+      "messages": [
+        {
+          "from": "Julia",
+          "text": "¿estás bien?",
+          "time": "21:17"
+        },
+        {
+          "from": "Sergio",
+          "text": "no mucho",
+          "time": "21:17"
+        },
+        {
+          "from": "Julia",
+          "text": "la cuenta es falsa seguro",
+          "time": "21:18"
+        },
+        {
+          "from": "Sergio",
+          "text": "pues hay gente que se lo está creyendo",
+          "time": "21:18"
+        },
+        {
+          "from": "Julia",
+          "text": "¿qué quieres hacer?",
+          "time": "21:19"
+        },
+        {
+          "from": "Sergio",
+          "text": "no lo sé\nme da que si lo cuento va a ser peor",
+          "time": "21:19"
+        },
+        {
+          "from": "Julia",
+          "text": "si quieres mañana vamos a hablar con Marina",
+          "time": "21:20"
+        }
+      ],
+      "next": "prologo-4"
+    },
+    "prologo-4": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "«Si lo ignoro, quizá se aburran. Pero cada vez hay más gente metida en el grupo.»",
+      "tone": "thought",
+      "next": "decision-1"
+    },
+    "decision-1": {
+      "type": "choice",
+      "prompt": "¿Qué hace Sergio esta noche?",
+      "options": [
+        {
+          "id": "respond",
+          "label": "Responder a los comentarios de la cuenta falsa desde su propio perfil.",
+          "next": "d1-respond",
+          "flags": {
+            "respondedPublicly": true
+          }
+        },
+        {
+          "id": "evidence",
+          "label": "Guardar capturas y hablar con Julia sin responder.",
+          "next": "d1-evidence",
+          "flags": {
+            "savedEvidence": true,
+            "talkedJulia": true
+          }
+        },
+        {
+          "id": "ignore",
+          "label": "Apagar el móvil y fingir que no le afecta.",
+          "next": "d1-ignore",
+          "flags": {
+            "ignoredAccount": true
+          }
+        }
+      ]
+    },
+    "d1-respond": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sergio escribe un mensaje enfadado en la cuenta falsa. En segundos, recibe diez respuestas burlándose de él.",
+      "next": "d1-respond-2"
+    },
+    "d1-respond-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "«Ahora hay más gente mirando.»",
+      "tone": "thought",
+      "next": "d1-respond-3"
+    },
+    "d1-respond-3": {
+      "type": "dialogue",
+      "speaker": "Julia",
+      "text": "Sergio, borra eso. No les des más material.",
+      "cast": {
+        "julia": "sad"
+      },
+      "next": "prologo-end"
+    },
+    "d1-evidence": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sergio respira hondo y hace capturas de la cuenta, de los comentarios y de la fecha. No responde a las provocaciones.",
+      "next": "d1-evidence-2"
+    },
+    "d1-evidence-2": {
+      "type": "dialogue",
+      "speaker": "Julia",
+      "text": "Bien. Así tenemos pruebas sin reenviar lo que han publicado.",
+      "cast": {
+        "julia": "smile"
+      },
+      "next": "prologo-end"
+    },
+    "d1-ignore": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sergio apaga el móvil y lo mete en un cajón. Durante un rato consigue no mirarlo.",
+      "next": "d1-ignore-2"
+    },
+    "d1-ignore-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "«Mañana habrá desaparecido. Seguro.»",
+      "tone": "thought",
+      "next": "prologo-end"
+    },
+    "prologo-end": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "A la mañana siguiente, la cuenta sigue activa y ha ganado seguidores.",
+      "scene": "hallway-day",
+      "cast": {
+        "sergio": "neutral"
+      },
+      "next": "chapter1-card"
+    },
+    "chapter1-card": {
+      "type": "interstitial",
+      "title": "Capítulo 1",
+      "text": "Miércoles, 08:10.",
+      "next": "ch1-1"
+    },
+    "ch1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sergio cruza el pasillo mirando el suelo. Dos compañeros dejan de hablar cuando pasa.",
+      "scene": "hallway-day",
+      "cast": {
+        "sergio": "sad"
+      },
+      "next": "ch1-2"
+    },
+    "ch1-2": {
+      "type": "dialogue",
+      "speaker": "Compañero",
+      "text": "Tío, ¿es verdad lo que dice la cuenta?",
+      "next": "ch1-3"
+    },
+    "ch1-3": {
+      "type": "dialogue",
+      "speaker": "Sergio",
+      "text": "No. Yo no he escrito nada de eso.",
+      "next": "ch1-4"
+    },
+    "ch1-4": {
+      "type": "dialogue",
+      "speaker": "Compañero",
+      "text": "Ya, pero es tu cara.",
+      "next": "ch1-5"
+    },
+    "ch1-5": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "«No es mi cara. Al menos, no del todo.»",
+      "tone": "thought",
+      "next": "ch1-6"
+    },
+    "ch1-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "En el recreo, Julia le enseña su móvil. La cuenta ha publicado una foto editada con un texto humillante.",
+      "scene": "patio-day",
+      "cast": {
+        "sergio": "sad"
+      },
+      "next": "decision-2"
+    },
+    "decision-2": {
+      "type": "choice",
+      "prompt": "Julia espera a que Sergio decida.",
+      "speaker": "Julia",
+      "options": [
+        {
+          "id": "school",
+          "label": "Ir juntos a hablar con Marina en Orientación.",
+          "next": "d2-school",
+          "flags": {
+            "toldMarina": true,
+            "juliaSupport": true
+          }
+        },
+        {
+          "id": "platform",
+          "label": "Reportar la cuenta a la plataforma y pedir ayuda para reunir pruebas.",
+          "next": "d2-platform",
+          "flags": {
+            "reportedPlatform": true
+          }
+        },
+        {
+          "id": "investigate",
+          "label": "Investigar por su cuenta quién ha creado la cuenta.",
+          "next": "d2-investigate",
+          "flags": {
+            "investigatedAlone": true
+          }
+        }
+      ]
+    },
+    "d2-school": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "Gracias por venir. Vamos a escuchar lo que ha pasado y a valorar qué medidas podemos tomar.",
+      "scene": "orientation-office",
+      "cast": {
+        "marina": "neutral"
+      },
+      "next": "d2-school-2"
+    },
+    "d2-school-2": {
+      "type": "dialogue",
+      "speaker": "Sergio",
+      "text": "¿Se lo vais a contar a todo el mundo?",
+      "cast": {
+        "sergio": "sad"
+      },
+      "next": "d2-school-3"
+    },
+    "d2-school-3": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "No vamos a exponerte delante de tus compañeros. Te explicaremos qué pasos hay que dar y por qué.",
+      "cast": {
+        "marina": "neutral"
+      },
+      "next": "chapter2-card"
+    },
+    "d2-platform": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sergio reporta la cuenta desde la propia red social y guarda el número de incidencia. También bloquea a quienes insultan.",
+      "next": "d2-platform-2"
+    },
+    "d2-platform-2": {
+      "type": "dialogue",
+      "speaker": "Julia",
+      "text": "Eso no lo arregla todo, pero dejas de estar solo delante de la pantalla.",
+      "cast": {
+        "julia": "neutral"
+      },
+      "next": "d2-platform-3"
+    },
+    "d2-platform-3": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "«Sigo sin saber quién ha sido. Y mañana tengo que volver a clase.»",
+      "tone": "thought",
+      "cast": {
+        "sergio": "sad"
+      },
+      "next": "chapter2-card"
+    },
+    "d2-investigate": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sergio empieza a buscar pistas: nombres, horarios, quién pudo ver su móvil. Pasa la tarde leyendo mensajes que le hacen daño.",
+      "next": "d2-investigate-2"
+    },
+    "d2-investigate-2": {
+      "type": "dialogue",
+      "speaker": "Julia",
+      "text": "Sergio, esto no lo tienes que resolver tú solo.",
+      "cast": {
+        "julia": "sad"
+      },
+      "next": "d2-investigate-3"
+    },
+    "d2-investigate-3": {
+      "type": "dialogue",
+      "speaker": "Sergio",
+      "text": "Quiero saber quién ha sido.",
+      "cast": {
+        "sergio": "sad"
+      },
+      "next": "d2-investigate-4"
+    },
+    "d2-investigate-4": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "«Cuanto más busca, más grande parece la cuenta.»",
+      "tone": "thought",
+      "next": "chapter2-card"
+    },
+    "chapter2-card": {
+      "type": "interstitial",
+      "title": "Capítulo 2",
+      "text": "No todo el mundo que ve el acoso participa. Pero quedarse mirando también tiene consecuencias.",
+      "next": "ch2-1"
+    },
+    "ch2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Hugo está en el patio. La cuenta falsa aparece en su móvil y alguien le pide que la comparta en el grupo grande.",
+      "scene": "patio-day",
+      "cast": {
+        "hugo": "neutral"
+      },
+      "next": "ch2-chat"
+    },
+    "ch2-chat": {
+      "type": "chat",
+      "chatTitle": "Dani",
+      "self": "Hugo",
+      "messages": [
+        {
+          "from": "Dani",
+          "text": "pásalo al grupo grande",
+          "time": "11:20"
+        },
+        {
+          "from": "Hugo",
+          "text": "no sé tío",
+          "time": "11:20"
+        },
+        {
+          "from": "Dani",
+          "text": "es una broma",
+          "time": "11:21"
+        },
+        {
+          "from": "Hugo",
+          "text": "a Sergio no le hace gracia",
+          "time": "11:21"
+        },
+        {
+          "from": "Dani",
+          "text": "desde cuándo te importa",
+          "time": "11:21"
+        },
+        {
+          "from": "Dani",
+          "text": "Imagen censurada",
+          "time": "11:22",
+          "hidden": true
+        },
+        {
+          "from": "Hugo",
+          "text": "me da que esto ya no es una broma",
+          "time": "11:22"
+        }
+      ],
+      "next": "decision-3"
+    },
+    "decision-3": {
+      "type": "choice",
+      "prompt": "¿Qué hace Hugo?",
+      "options": [
+        {
+          "id": "forward",
+          "label": "Reenviar la publicación al grupo grande para que la vean todos.",
+          "next": "d3-forward",
+          "flags": {
+            "hugoForwarded": true
+          }
+        },
+        {
+          "id": "delete",
+          "label": "Borrar el mensaje y no compartirlo.",
+          "next": "d3-delete",
+          "flags": {
+            "hugoDeleted": true
+          }
+        },
+        {
+          "id": "support",
+          "label": "No reenviarlo y escribir a Sergio para preguntarle cómo está.",
+          "next": "d3-support",
+          "flags": {
+            "hugoDeleted": true,
+            "hugoSupport": true
+          }
+        }
+      ]
+    },
+    "d3-forward": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Hugo reenvía la publicación. En pocos minutos llega a tres grupos más.",
+      "next": "d3-forward-2"
+    },
+    "d3-forward-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "«Ya está hecho. Tampoco es para tanto.»",
+      "tone": "thought",
+      "next": "d3-forward-3"
+    },
+    "d3-forward-3": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Pero la cuenta suma más comentarios. Sergio deja de escribir en el grupo de clase.",
+      "next": "chapter3-card"
+    },
+    "d3-delete": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Hugo borra el mensaje. No lo reenvía, pero tampoco dice nada.",
+      "next": "d3-delete-2"
+    },
+    "d3-delete-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "«Si no lo paso yo, lo hará otro.»",
+      "tone": "thought",
+      "next": "chapter3-card"
+    },
+    "d3-support": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Hugo borra el mensaje y escribe a Sergio por privado.",
+      "next": "d3-support-chat"
+    },
+    "d3-support-chat": {
+      "type": "chat",
+      "chatTitle": "Sergio",
+      "self": "Hugo",
+      "messages": [
+        {
+          "from": "Hugo",
+          "text": "tío, he visto la cuenta esa",
+          "time": "11:24"
+        },
+        {
+          "from": "Hugo",
+          "text": "yo no la voy a pasar",
+          "time": "11:24"
+        },
+        {
+          "from": "Sergio",
+          "text": "gracias",
+          "time": "11:25"
+        },
+        {
+          "from": "Hugo",
+          "text": "¿quieres que vaya contigo a hablar con alguien?",
+          "time": "11:25"
+        },
+        {
+          "from": "Sergio",
+          "text": "no sé si quiero contarlo",
+          "time": "11:26"
+        },
+        {
+          "from": "Hugo",
+          "text": "vale. pero no estás solo",
+          "time": "11:26"
+        }
+      ],
+      "next": "d3-support-2"
+    },
+    "d3-support-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "«No hacía falta ser un héroe. Bastaba con no participar y ofrecer compañía.»",
+      "tone": "thought",
+      "next": "chapter3-card"
+    },
+    "chapter3-card": {
+      "type": "interstitial",
+      "title": "Capítulo 3",
+      "text": "Jueves, 17:30. Orientación.",
+      "next": "ch3-1"
+    },
+    "ch3-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sergio está sentado frente a Marina. No sabe si contar todo lo que ha pasado.",
+      "scene": "orientation-office",
+      "cast": {
+        "sergio": "sad"
+      },
+      "next": "ch3-2"
+    },
+    "ch3-2": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "No tienes que saber quién lo ha hecho para pedir ayuda.",
+      "cast": {
+        "marina": "neutral"
+      },
+      "next": "ch3-3"
+    },
+    "ch3-3": {
+      "type": "dialogue",
+      "speaker": "Sergio",
+      "text": "¿Y si la cuenta sigue ahí mañana?",
+      "cast": {
+        "sergio": "sad"
+      },
+      "next": "ch3-4"
+    },
+    "ch3-4": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "Vamos a ordenar lo que sabemos. Antes de actuar, necesitamos saber qué información es útil y cuál puede hacer más daño.",
+      "cast": {
+        "marina": "neutral"
+      },
+      "next": "ch3-minigame"
+    },
+    "ch3-minigame": {
+      "type": "interstitial",
+      "kicker": "Información útil",
+      "title": "Qué hago con las pruebas",
+      "text": "Puede ser útil guardar capturas de la cuenta, publicaciones, fechas, nombres de usuario, enlaces y quién vio los mensajes. No hace falta reenviar las publicaciones ni intentar entrar en la cuenta: pide ayuda y repórtala.",
+      "next": "ch3-5"
+    },
+    "ch3-5": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "También puedes pedir a la plataforma que retire el contenido y bloquear a las cuentas que te insultan. Eso no sustituye a pedir ayuda, pero puede reducir el daño.",
+      "next": "ch3-6"
+    },
+    "ch3-6": {
+      "type": "dialogue",
+      "speaker": "Sergio",
+      "text": "¿Y si quiero denunciar?",
+      "cast": {
+        "sergio": "neutral"
+      },
+      "next": "ch3-7"
+    },
+    "ch3-7": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "Podemos orientarte sobre cómo hacerlo. En algunos casos, si hay indicios de delito, pueden intervenir la Policía y la Fiscalía de Menores. No todos los casos siguen el mismo camino.",
+      "cast": {
+        "marina": "neutral"
+      },
+      "next": "ch3-8"
+    },
+    "ch3-8": {
+      "type": "dialogue",
+      "speaker": "Sergio",
+      "text": "Me da miedo que esto empeore si hablo.",
+      "cast": {
+        "sergio": "sad"
+      },
+      "next": "ch3-9"
+    },
+    "ch3-9": {
+      "type": "dialogue",
+      "speaker": "Marina",
+      "text": "Es normal. Por eso vamos a explicarte cada paso y a valorar medidas de protección en el centro. No vas a recorrerlo solo.",
+      "cast": {
+        "marina": "smile"
+      },
+      "next": "chapter4-card"
+    },
+    "chapter4-card": {
+      "type": "interstitial",
+      "title": "Capítulo 4",
+      "text": "Viernes. Patio del instituto.",
+      "next": "ch4-1"
+    },
+    "ch4-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "La cuenta falsa sigue activa. Pero esta vez Sergio no está mirando el móvil a solas.",
+      "scene": "patio-day",
+      "cast": {
+        "sergio": "neutral"
+      },
+      "next": "ending-router-help"
+    },
+    "ending-router-help": {
+      "type": "branch",
+      "when": {
+        "any": [
+          {
+            "flag": "toldMarina"
+          },
+          {
+            "flag": "reportedPlatform"
+          }
+        ]
+      },
+      "then": "final1-scene",
+      "else": "ending-router-friend"
+    },
+    "ending-router-friend": {
+      "type": "branch",
+      "when": {
+        "any": [
+          {
+            "flag": "talkedJulia"
+          },
+          {
+            "flag": "savedEvidence"
+          },
+          {
+            "flag": "juliaSupport"
+          },
+          {
+            "flag": "hugoSupport"
+          }
+        ]
+      },
+      "then": "final2-scene",
+      "else": "final3-scene"
+    },
+    "final1-scene": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El viernes por la tarde, Sergio vuelve a casa con el móvil en la mochila. La cuenta falsa todavía existe, pero ya no es un secreto.",
+      "scene": "bedroom-evening",
+      "cast": {
+        "sergio": "neutral"
+      },
+      "next": "final1-d1"
+    },
+    "final1-d1": {
+      "type": "dialogue",
+      "speaker": "Julia",
+      "text": "¿Cómo estás?",
+      "cast": {
+        "julia": "neutral"
+      },
+      "next": "final1-d2"
+    },
+    "final1-d2": {
+      "type": "dialogue",
+      "speaker": "Sergio",
+      "text": "Raro. Pero mejor que el martes.",
+      "cast": {
+        "sergio": "neutral"
+      },
+      "next": "final1-d3"
+    },
+    "final1-d3": {
+      "type": "dialogue",
+      "speaker": "Julia",
+      "text": "Marina ha dicho que van a revisar lo que ha pasado.",
+      "cast": {
+        "julia": "smile"
+      },
+      "next": "final1-d4"
+    },
+    "final1-d4": {
+      "type": "dialogue",
+      "speaker": "Sergio",
+      "text": "No sé si van a cerrar la cuenta.",
+      "cast": {
+        "sergio": "neutral"
+      },
+      "next": "final1-d5"
+    },
+    "final1-d5": {
+      "type": "dialogue",
+      "speaker": "Julia",
+      "text": "Puede que no sea inmediato. Pero ya no estás solo con esto.",
+      "cast": {
+        "julia": "smile"
+      },
+      "next": "final1-d6"
+    },
+    "final1-d6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sergio abre el grupo de clase y escribe: «La cuenta no es mía. Si alguien la comparte, está participando en el acoso.»",
+      "cast": {
+        "sergio": "neutral"
+      },
+      "next": "final1-d7"
+    },
+    "final1-d7": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Algunos compañeros reaccionan.",
+      "cast": {
+        "sergio": "neutral"
+      },
+      "next": "final1-router"
+    },
+    "final1-router": {
+      "type": "branch",
+      "when": {
+        "flag": "hugoForwarded"
+      },
+      "then": "final1-repair",
+      "else": "final1-ack"
+    },
+    "final1-repair": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Hugo escribe a Sergio: «Lo reenvié. Lo siento. Voy a borrarlo y a contar lo que hice». Reconocer un error no borra el daño, pero deja de aumentarlo.",
+      "cast": {
+        "sergio": "neutral"
+      },
+      "next": "final1"
+    },
+    "final1-ack": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Otros compañeros dejan de seguir la cuenta y algunos se disculpan por haber participado.",
+      "cast": {
+        "sergio": "neutral"
+      },
+      "next": "final1"
+    },
+    "final1": {
+      "type": "ending",
+      "kicker": "Final 1",
+      "title": "No estás solo",
+      "text": "Pedir ayuda no hace desaparecer el problema de inmediato, pero permite que deje de ser algo que afrontas a solas. Guardar pruebas, bloquear, reportar la cuenta y contar lo que pasa son pasos que pueden hacerse con apoyo."
+    },
+    "final2-scene": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sergio y Julia están sentados en el patio. La cuenta sigue activa, pero han decidido no seguir mirándola en silencio.",
+      "scene": "patio-day",
+      "cast": {
+        "sergio": "neutral"
+      },
+      "next": "final2-d1"
+    },
+    "final2-d1": {
+      "type": "dialogue",
+      "speaker": "Sergio",
+      "text": "Todavía no he contado todo a un adulto.",
+      "next": "final2-d2"
+    },
+    "final2-d2": {
+      "type": "dialogue",
+      "speaker": "Julia",
+      "text": "No pasa nada. Has empezado por guardar pruebas y no responder. Eso también es protegerte.",
+      "cast": {
+        "julia": "neutral"
+      },
+      "next": "final2-d3"
+    },
+    "final2-d3": {
+      "type": "dialogue",
+      "speaker": "Sergio",
+      "text": "¿Y si mañana voy a hablar con Marina?",
+      "cast": {
+        "sergio": "neutral"
+      },
+      "next": "final2-d4"
+    },
+    "final2-d4": {
+      "type": "dialogue",
+      "speaker": "Julia",
+      "text": "Te acompaño.",
+      "cast": {
+        "julia": "smile"
+      },
+      "next": "final2"
+    },
+    "final2": {
+      "type": "ending",
+      "kicker": "Final 2",
+      "title": "El primer paso",
+      "text": "No necesitas tener todas las respuestas para empezar. Guardar pruebas sin difundirlas, no responder a las provocaciones y contárselo a alguien de confianza son formas de afrontar el ciberacoso. Siempre puedes pedir más ayuda después."
+    },
+    "final3-scene": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sergio está tumbado en la cama. La cuenta falsa sigue publicando. Él ha decidido no mirar, pero el móvil vibra igual.",
+      "scene": "bedroom-evening",
+      "cast": {
+        "sergio": "sad"
+      },
+      "next": "final3-d1"
+    },
+    "final3-d1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "«Si no hago nada, quizá pare. Si hablo, quizá empeore.»",
+      "tone": "thought",
+      "next": "final3-d2"
+    },
+    "final3-d2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Hay una conversación con Marina sin abrir. Y otra con Julia.",
+      "next": "final3-d3"
+    },
+    "final3-d3": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sergio no tiene que decidirlo todo esta noche. Pero no está obligado a cargar con esto solo.",
+      "next": "final3"
+    },
+    "final3": {
+      "type": "ending",
+      "kicker": "Final 3",
+      "title": "La puerta sigue abierta",
+      "text": "Ignorar el acoso puede ser una forma de protegerte un rato, pero no siempre lo detiene. Si el contenido sigue circulando, guardar pruebas, bloquear, reportar la cuenta y hablar con una persona adulta de confianza puede ayudarte a recuperar el control. Pedir ayuda también es una forma de defenderse."
+    }
+  }
+}

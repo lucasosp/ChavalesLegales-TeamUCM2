@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="bg-title bg-desc">
+  <title id="bg-title">School hallway in the morning</title>
+  <desc id="bg-desc">A bright school hallway with lockers, doors, and morning light.</desc>
+  <defs>
+    <linearGradient id="hd-wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d9d2c4" />
+      <stop offset="1" stop-color="#b8ad9c" />
+    </linearGradient>
+    <linearGradient id="hd-floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c9b18f" />
+      <stop offset="0.45" stop-color="#a98d6e" />
+      <stop offset="1" stop-color="#6f5744" />
+    </linearGradient>
+    <linearGradient id="hd-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9fc9e8" />
+      <stop offset="0.6" stop-color="#d8ecf5" />
+      <stop offset="1" stop-color="#fff3d7" />
+    </linearGradient>
+    <radialGradient id="hd-sun" cx="0.5" cy="0.42" r="0.55">
+      <stop offset="0" stop-color="#fff8de" />
+      <stop offset="0.5" stop-color="#ffe2a8" stop-opacity="0.85" />
+      <stop offset="1" stop-color="#ffd28e" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="hd-light" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#fff0c6" stop-opacity="0.65" />
+      <stop offset="1" stop-color="#ffe0a2" stop-opacity="0" />
+    </linearGradient>
+    <radialGradient id="hd-vignette" cx="0.5" cy="0.48" r="0.76">
+      <stop offset="0.55" stop-color="#2a1c22" stop-opacity="0" />
+      <stop offset="1" stop-color="#2a1c22" stop-opacity="0.28" />
+    </radialGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#hd-wall)" />
+
+  <!-- perspective shell -->
+  <path d="M0 0 L960 486 L1920 0 Z" fill="#e6e0d4" />
+  <path d="M0 0 L960 486 L0 1080 Z" fill="url(#hd-wall)" />
+  <path d="M1920 0 L960 486 L1920 1080 Z" fill="#cdc3b2" />
+  <path d="M0 1080 L960 486 L1920 1080 Z" fill="url(#hd-floor)" />
+
+  <!-- windows on the left wall -->
+  <g>
+    <path d="M34 190 L250 278 L250 690 L34 780 Z" fill="#bfe0f2" />
+    <path d="M270 304 L438 366 L438 620 L270 664 Z" fill="#cde7f4" />
+    <g stroke="#8f8070" stroke-width="8" opacity="0.65">
+      <path d="M142 234 L142 734" />
+      <path d="M250 278 L250 690" />
+      <path d="M270 366 L438 402" />
+      <path d="M352 334 L352 646" />
+    </g>
+  </g>
+
+  <!-- far window -->
+  <g>
+    <rect x="842" y="320" width="236" height="300" fill="url(#hd-sky)" />
+    <circle cx="1010" cy="456" r="54" fill="url(#hd-sun)" />
+    <rect x="842" y="320" width="236" height="300" fill="none" stroke="#6f6154" stroke-width="12" />
+    <rect x="956" y="320" width="8" height="300" fill="#6f6154" />
+    <circle cx="960" cy="500" r="220" fill="url(#hd-sun)" opacity="0.55" />
+  </g>
+
+  <!-- doors and lockers -->
+  <g fill="#8b6a4c" stroke="#5f4634" stroke-width="5">
+    <path d="M120 330 L280 386 L280 760 L120 850 Z" />
+    <path d="M470 430 L590 466 L590 664 L470 704 Z" />
+  </g>
+  <g fill="#94a0a4" stroke="#5f6a6e" stroke-width="4">
+    <path d="M1600 320 L1860 320 L1860 900 L1600 790 Z" />
+    <path d="M1540 370 L1600 370 L1600 770 L1540 730 Z" />
+  </g>
+  <g stroke="#6b777b" stroke-width="3" opacity="0.7">
+    <path d="M1640 340 V826" />
+    <path d="M1690 336 V842" />
+    <path d="M1740 332 V858" />
+    <path d="M1790 328 V874" />
+    <path d="M1840 324 V890" />
+  </g>
+  <g fill="#4b5558" opacity="0.8">
+    <rect x="1668" y="500" width="8" height="34" rx="4" />
+    <rect x="1768" y="496" width="8" height="34" rx="4" />
+    <rect x="1818" y="494" width="8" height="34" rx="4" />
+  </g>
+
+  <!-- ceiling lights -->
+  <g fill="#fff8df" opacity="0.85">
+    <rect x="880" y="96" width="160" height="14" rx="7" />
+    <rect x="906" y="220" width="108" height="10" rx="5" opacity="0.7" />
+    <rect x="924" y="318" width="72" height="8" rx="4" opacity="0.55" />
+  </g>
+
+  <!-- floor seams and sunlight -->
+  <g stroke="#8a6d50" stroke-width="2" opacity="0.4">
+    <path d="M0 1080 L960 486" />
+    <path d="M1920 1080 L960 486" />
+    <path d="M300 1080 L760 486" />
+    <path d="M1620 1080 L1160 486" />
+    <path d="M720 1080 L900 486" />
+    <path d="M1200 1080 L1020 486" />
+  </g>
+  <path d="M250 760 L600 760 L880 1080 L120 1080 Z" fill="url(#hd-light)" opacity="0.45" />
+  <path d="M842 620 L1078 620 L1200 1080 L720 1080 Z" fill="url(#hd-light)" opacity="0.3" />
+
+  <rect width="1920" height="1080" fill="url(#hd-vignette)" />
+</svg>

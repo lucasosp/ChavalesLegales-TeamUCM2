@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "the-locker-note",
+  "title": "The Locker Note",
+  "content": {
+    "story": "story.json",
+    "assets": "../../shared/assets.json",
+    "scenes": "scene.json"
+  },
+  "stage": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "node": "start",
+    "scene": "hallway-dusk"
+  },
+  "save": {
+    "key": "the-locker-note.save",
+    "version": 1
+  }
+}
