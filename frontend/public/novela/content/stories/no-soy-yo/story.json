@@ -6,7 +6,7 @@
       "type": "interstitial",
       "kicker": "Chavales Legales",
       "title": "No soy yo",
-      "text": "Una historia sobre ciberacoso, identidad y derecho a pedir ayuda.",
+      "text": "Un caso independiente sobre ciberacoso, identidad y derecho a pedir ayuda.",
       "scene": "bedroom-evening",
       "next": "prologo-1"
     },
@@ -88,7 +88,7 @@
       "type": "dialogue",
       "speaker": null,
       "text": "La cuenta usa su nombre, su foto de perfil y publica bromas que él no ha escrito. Sergio siente que todo el instituto lo está mirando.",
-      "tone": "thought",
+      "tone": "narration",
       "cast": {
         "sergio": "sad"
       },
@@ -139,7 +139,7 @@
     },
     "prologo-4": {
       "type": "dialogue",
-      "speaker": null,
+      "speaker": "Sergio",
       "text": "«Si lo ignoro, quizá se aburran. Pero cada vez hay más gente metida en el grupo.»",
       "tone": "thought",
       "next": "decision-1"
@@ -183,7 +183,7 @@
     },
     "d1-respond-2": {
       "type": "dialogue",
-      "speaker": null,
+      "speaker": "Sergio",
       "text": "«Ahora hay más gente mirando.»",
       "tone": "thought",
       "next": "d1-respond-3"
@@ -220,7 +220,7 @@
     },
     "d1-ignore-2": {
       "type": "dialogue",
-      "speaker": null,
+      "speaker": "Sergio",
       "text": "«Mañana habrá desaparecido. Seguro.»",
       "tone": "thought",
       "next": "prologo-end"
@@ -271,7 +271,7 @@
     },
     "ch1-5": {
       "type": "dialogue",
-      "speaker": null,
+      "speaker": "Sergio",
       "text": "«No es mi cara. Al menos, no del todo.»",
       "tone": "thought",
       "next": "ch1-6"
@@ -288,8 +288,7 @@
     },
     "decision-2": {
       "type": "choice",
-      "prompt": "Julia espera a que Sergio decida.",
-      "speaker": "Julia",
+      "prompt": "¿Qué decide hacer Sergio con la cuenta falsa?",
       "options": [
         {
           "id": "school",
@@ -363,7 +362,7 @@
     },
     "d2-platform-3": {
       "type": "dialogue",
-      "speaker": null,
+      "speaker": "Sergio",
       "text": "«Sigo sin saber quién ha sido. Y mañana tengo que volver a clase.»",
       "tone": "thought",
       "cast": {
@@ -374,7 +373,7 @@
     "d2-investigate": {
       "type": "dialogue",
       "speaker": null,
-      "text": "Sergio empieza a buscar pistas: nombres, horarios, quién pudo ver su móvil. Pasa la tarde leyendo mensajes que le hacen daño.",
+      "text": "Sergio empieza a buscar pistas: nombres, horarios, quién pudo ver su móvil. Pasa el resto del recreo leyendo mensajes que le hacen daño.",
       "next": "d2-investigate-2"
     },
     "d2-investigate-2": {
@@ -398,14 +397,13 @@
     "d2-investigate-4": {
       "type": "dialogue",
       "speaker": null,
-      "text": "«Cuanto más busca, más grande parece la cuenta.»",
-      "tone": "thought",
+      "text": "Cuanto más busca Sergio, más grande le parece la cuenta.",
       "next": "chapter2-card"
     },
     "chapter2-card": {
       "type": "interstitial",
       "title": "Capítulo 2",
-      "text": "No todo el mundo que ve el acoso participa. Pero quedarse mirando también tiene consecuencias.",
+      "text": "Miércoles, 11:20. El mensaje llega ahora al móvil de Hugo.",
       "next": "ch2-1"
     },
     "ch2-1": {
@@ -501,7 +499,7 @@
     },
     "d3-forward-2": {
       "type": "dialogue",
-      "speaker": null,
+      "speaker": "Hugo",
       "text": "«Ya está hecho. Tampoco es para tanto.»",
       "tone": "thought",
       "next": "d3-forward-3"
@@ -510,25 +508,25 @@
       "type": "dialogue",
       "speaker": null,
       "text": "Pero la cuenta suma más comentarios. Sergio deja de escribir en el grupo de clase.",
-      "next": "chapter3-card"
+      "next": "chapter3-route"
     },
     "d3-delete": {
       "type": "dialogue",
       "speaker": null,
-      "text": "Hugo borra el mensaje. No lo reenvía, pero tampoco dice nada.",
+      "text": "Hugo elimina de su móvil la imagen que le envió Dani. No la reenvía, pero tampoco dice nada.",
       "next": "d3-delete-2"
     },
     "d3-delete-2": {
       "type": "dialogue",
-      "speaker": null,
+      "speaker": "Hugo",
       "text": "«Si no lo paso yo, lo hará otro.»",
       "tone": "thought",
-      "next": "chapter3-card"
+      "next": "chapter3-route"
     },
     "d3-support": {
       "type": "dialogue",
       "speaker": null,
-      "text": "Hugo borra el mensaje y escribe a Sergio por privado.",
+      "text": "Hugo elimina la imagen que recibió y escribe a Sergio por privado.",
       "next": "d3-support-chat"
     },
     "d3-support-chat": {
@@ -572,14 +570,50 @@
     "d3-support-2": {
       "type": "dialogue",
       "speaker": null,
-      "text": "«No hacía falta ser un héroe. Bastaba con no participar y ofrecer compañía.»",
-      "tone": "thought",
-      "next": "chapter3-card"
+      "text": "Hugo no ha participado en la difusión y le ha ofrecido compañía a Sergio.",
+      "next": "chapter3-route"
+    },
+    "chapter3-route": {
+      "type": "branch",
+      "when": { "flag": "toldMarina" },
+      "then": "chapter3-card",
+      "else": "chapter3-choice-card"
+    },
+    "chapter3-choice-card": {
+      "type": "interstitial",
+      "title": "Capítulo 3",
+      "text": "Jueves, 10:30. Sergio vuelve a pensar en hablar con Marina.",
+      "next": "ch3-choice"
+    },
+    "ch3-choice": {
+      "type": "choice",
+      "prompt": "¿Qué decide hacer Sergio ahora?",
+      "scene": "patio-day",
+      "cast": { "sergio": "sad" },
+      "options": [
+        {
+          "id": "go",
+          "label": "Ir con Julia a hablar con Marina.",
+          "next": "ch3-1",
+          "flags": { "toldMarina": true, "juliaSupport": true }
+        },
+        {
+          "id": "wait",
+          "label": "Todavía no se siente preparado para hablar con ella.",
+          "next": "ch3-wait"
+        }
+      ]
+    },
+    "ch3-wait": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sergio guarda el móvil. La posibilidad de hablar con Marina sigue ahí para cuando se sienta preparado.",
+      "next": "chapter4-card"
     },
     "chapter3-card": {
       "type": "interstitial",
       "title": "Capítulo 3",
-      "text": "Jueves, 17:30. Orientación.",
+      "text": "Jueves, 10:30. Departamento de Orientación.",
       "next": "ch3-1"
     },
     "ch3-1": {
@@ -686,16 +720,7 @@
     },
     "ending-router-help": {
       "type": "branch",
-      "when": {
-        "any": [
-          {
-            "flag": "toldMarina"
-          },
-          {
-            "flag": "reportedPlatform"
-          }
-        ]
-      },
+      "when": { "flag": "toldMarina" },
       "then": "final1-scene",
       "else": "ending-router-friend"
     },
@@ -714,6 +739,9 @@
           },
           {
             "flag": "hugoSupport"
+          },
+          {
+            "flag": "reportedPlatform"
           }
         ]
       },
@@ -723,7 +751,7 @@
     "final1-scene": {
       "type": "dialogue",
       "speaker": null,
-      "text": "El viernes por la tarde, Sergio vuelve a casa con el móvil en la mochila. La cuenta falsa todavía existe, pero ya no es un secreto.",
+      "text": "El viernes por la tarde, Sergio vuelve a casa con el móvil en la mochila. La cuenta falsa todavía existe, pero ya ha pedido ayuda en el instituto.",
       "scene": "bedroom-evening",
       "cast": {
         "sergio": "neutral"
@@ -844,7 +872,7 @@
     "final2-d2": {
       "type": "dialogue",
       "speaker": "Julia",
-      "text": "No pasa nada. Has empezado por guardar pruebas y no responder. Eso también es protegerte.",
+      "text": "Podemos buscar más apoyo cuando te sientas preparado. No tienes que resolverlo solo.",
       "cast": {
         "julia": "neutral"
       },
@@ -853,7 +881,7 @@
     "final2-d3": {
       "type": "dialogue",
       "speaker": "Sergio",
-      "text": "¿Y si mañana voy a hablar con Marina?",
+      "text": "¿Y si el lunes voy a hablar con Marina?",
       "cast": {
         "sergio": "neutral"
       },
@@ -877,7 +905,7 @@
     "final3-scene": {
       "type": "dialogue",
       "speaker": null,
-      "text": "Sergio está tumbado en la cama. La cuenta falsa sigue publicando. Él ha decidido no mirar, pero el móvil vibra igual.",
+      "text": "Sergio está tumbado en la cama. La cuenta falsa sigue publicando. Aparta el móvil, pero continúa vibrando.",
       "scene": "bedroom-evening",
       "cast": {
         "sergio": "sad"
@@ -886,7 +914,7 @@
     },
     "final3-d1": {
       "type": "dialogue",
-      "speaker": null,
+      "speaker": "Sergio",
       "text": "«Si no hago nada, quizá pare. Si hablo, quizá empeore.»",
       "tone": "thought",
       "next": "final3-d2"
@@ -894,7 +922,7 @@
     "final3-d2": {
       "type": "dialogue",
       "speaker": null,
-      "text": "Hay una conversación con Marina sin abrir. Y otra con Julia.",
+      "text": "Sergio tiene guardado el contacto de Marina y un mensaje de Julia sin responder.",
       "next": "final3-d3"
     },
     "final3-d3": {
@@ -907,7 +935,7 @@
       "type": "ending",
       "kicker": "Final 3",
       "title": "La puerta sigue abierta",
-      "text": "Ignorar el acoso puede ser una forma de protegerte un rato, pero no siempre lo detiene. Si el contenido sigue circulando, guardar pruebas, bloquear, reportar la cuenta y hablar con una persona adulta de confianza puede ayudarte a recuperar el control. Pedir ayuda también es una forma de defenderse."
+      "text": "Aunque todavía no sepas qué hacer, puedes pedir ayuda más adelante. Guardar pruebas, bloquear, reportar la cuenta y hablar con una persona adulta de confianza son opciones para afrontar lo que está pasando. Pedir ayuda también es una forma de protegerte."
     }
   }
 }

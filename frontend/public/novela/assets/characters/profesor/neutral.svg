@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="840"
+  height="1240"
+  viewBox="0 0 420 620"
+  role="img"
+  aria-labelledby="profesor-title profesor-desc"
+  data-character="profesor"
+  data-expression="neutral"
+>
+  <style>
+    .sp-sprite {
+      transform-box: fill-box;
+      transform-origin: 50% 100%;
+      animation: profesor-breathe 7s ease-in-out infinite;
+    }
+    .sp-eyelids rect {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: profesor-blink 6.5s infinite;
+    }
+    @keyframes profesor-breathe {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-2px) scale(1.006); }
+    }
+    @keyframes profesor-blink {
+      0%, 95.4%, 100% { transform: scaleY(0); }
+      96.2%, 97.6% { transform: scaleY(1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sp-sprite, .sp-eyelids rect { animation: none; }
+    }
+  </style>
+
+  <title id="profesor-title">Profesor — neutral</title>
+  <desc id="profesor-desc">Profesor, a character in Chavales Legales.</desc>
+
+  <defs>
+    <linearGradient id="profesor-hair-fill" x1="210" y1="70" x2="210" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#463832" />
+      <stop offset="1" stop-color="#2a211e" />
+    </linearGradient>
+    <linearGradient id="profesor-clothes-fill" x1="210" y1="430" x2="210" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4a5d6b" />
+      <stop offset="1" stop-color="#33424d" />
+    </linearGradient>
+    <radialGradient id="profesor-skin-fill" cx="0.42" cy="0.32" r="0.8">
+      <stop stop-color="#d9ad92" />
+      <stop offset="1" stop-color="#b98a6e" />
+    </radialGradient>
+  </defs>
+
+  <g class="sp-sprite">
+
+  <path d="M122 212C122 128 160 84 210 84C260 84 298 128 298 212V270H122Z" fill="url(#profesor-hair-fill)" />
+
+    <path d="M186 330H234V444C226 462 194 462 186 444V330Z" fill="#b98a6e" />
+    <ellipse cx="133" cy="236" rx="12" ry="18" fill="#d9ad92" />
+    <ellipse cx="287" cy="236" rx="12" ry="18" fill="#d9ad92" />
+    <ellipse cx="210" cy="226" rx="78" ry="94" fill="url(#profesor-skin-fill)" />
+
+
+  <path d="M118 620C122 492 154 438 210 438C266 438 298 492 302 620H118Z" fill="url(#profesor-clothes-fill)" />
+  <path d="M170 438L210 470L250 438L266 620H154L170 438Z" fill="#eae2d6" />
+  <path d="M168 440L210 470L196 500L160 462Z" fill="#eae2d6" opacity="0.9" />
+  <path d="M252 440L210 470L224 500L260 462Z" fill="#eae2d6" opacity="0.75" />
+  <path d="M196 500L210 470L224 500L214 620H206Z" fill="#33424d" opacity="0.7" />
+
+  <path d="M132 210C130 142 164 108 210 108C256 108 290 142 288 210C280 180 264 162 244 154C250 176 244 192 234 200C226 172 204 156 186 164C194 184 190 198 178 208C170 188 156 180 148 196C142 202 136 208 132 210Z" fill="url(#profesor-hair-fill)" />
+
+
+  <path class="sp-brow sp-brow-left" d="M158 208C168 200 184 200 192 207" stroke="#4b2831" stroke-width="5" stroke-linecap="round" />
+  <path class="sp-brow sp-brow-right" d="M228 207C236 200 252 200 262 208" stroke="#4b2831" stroke-width="5" stroke-linecap="round" />
+
+  <g class="sp-eyes sp-eyes-open">
+    <ellipse cx="175" cy="239" rx="16" ry="20" fill="#fffaf5" />
+    <ellipse cx="245" cy="239" rx="16" ry="20" fill="#fffaf5" />
+    <g class="sp-gaze" transform="translate(0 0)">
+      <circle cx="176" cy="241" r="11" fill="#4f5b67" />
+      <circle cx="244" cy="241" r="11" fill="#4f5b67" />
+      <circle cx="176" cy="242" r="5.5" fill="#2a1a22" />
+      <circle cx="244" cy="242" r="5.5" fill="#2a1a22" />
+      <circle cx="180" cy="235" r="4" fill="#fff" />
+      <circle cx="248" cy="235" r="4" fill="#fff" />
+      <circle cx="172" cy="246" r="2" fill="#ffe6c7" />
+      <circle cx="240" cy="246" r="2" fill="#ffe6c7" />
+    </g>
+    <path d="M158 226C168 215 184 215 192 225" stroke="#3b2028" stroke-width="4.5" stroke-linecap="round" />
+    <path d="M228 225C236 215 252 215 262 226" stroke="#3b2028" stroke-width="4.5" stroke-linecap="round" />
+  </g>
+
+  <g class="sp-eyelids">
+    <rect x="157" y="216" width="38" height="44" rx="19" fill="#d9ad92" transform="translate(0 238) scale(1 0) translate(0 -238)" />
+    <rect x="227" y="216" width="38" height="44" rx="19" fill="#d9ad92" transform="translate(0 238) scale(1 0) translate(0 -238)" />
+  </g>
+    <path d="M209 252C207 260 205 265 210 267" stroke="#b98a6e" stroke-width="3" stroke-linecap="round" />
+
+  <ellipse class="sp-blush" cx="158" cy="269" rx="18" ry="8" fill="#f08a96" opacity="0.32" />
+  <ellipse class="sp-blush" cx="262" cy="269" rx="18" ry="8" fill="#f08a96" opacity="0.32" />
+<g class="sp-mouth sp-mouth-neutral"><path d="M200 286C206 290 214 290 220 286" stroke="#8f4a52" stroke-width="4" stroke-linecap="round" /></g>
+    <path d="M186 330H234V358C224 370 196 370 186 358V330Z" fill="#b98a6e" opacity="0.4" />
+
+  <g class="sp-glasses" fill="none" stroke="#5a453f" stroke-width="3" opacity="0.78">
+    <ellipse cx="175" cy="239" rx="28" ry="24" />
+    <ellipse cx="245" cy="239" rx="28" ry="24" />
+    <path d="M203 239H217" />
+    <path d="M147 232L132 226" />
+    <path d="M273 232L288 226" />
+  </g>
+  </g>
+</svg>

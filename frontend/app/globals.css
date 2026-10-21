@@ -340,6 +340,7 @@ html, body {
     -5px 5px 0 var(--title-shadow-1, #92400e),
     -6px 6px 1px rgba(0, 0, 0, 0.4),
     -8px 8px 12px rgba(0, 0, 0, 0.45);
+  will-change: transform;
   transition: color 0.35s ease;
 }
 
@@ -351,6 +352,7 @@ html, body {
   line-height: 0.80;
   margin-left: 0.2rem;
   letter-spacing: -0.01em;
+  will-change: transform;
   text-shadow:
     -1px 1px 0 var(--title-shadow-2, #059669),
     -2px 2px 0 var(--title-shadow-2, #059669),
@@ -362,6 +364,44 @@ html, body {
     -9px 9px 1px rgba(0, 0, 0, 0.4),
     -11px 11px 16px rgba(0, 0, 0, 0.55);
   transition: color 0.35s ease;
+}
+
+/* Bote escalonado para partes del logo */
+.title-left-col .title-word:nth-child(1) {
+  animation: logoPartBounce 2.4s ease-in-out infinite;
+}
+
+.title-left-col .title-word:nth-child(2) {
+  animation: logoPartBounce 2.4s ease-in-out infinite 0.18s;
+}
+
+.title-suffix-es {
+  animation: logoPartBounce 2.4s ease-in-out infinite 0.36s;
+}
+
+@keyframes logoPartBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  24% {
+    transform: translateY(-8px);
+  }
+  40% {
+    transform: translateY(0);
+  }
+  54% {
+    transform: translateY(-3px);
+  }
+  68%, 100% {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title-left-col .title-word,
+  .title-suffix-es {
+    animation: none;
+  }
 }
 
 @keyframes logoEntrance {

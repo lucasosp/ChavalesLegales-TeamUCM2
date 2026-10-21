@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="bg-title bg-desc">
+  <title id="bg-title">Sala amigable para la infancia</title>
+  <desc id="bg-desc">Una sala luminosa y sin barreras con sillas cómodas, una mesa baja, plantas y una ventana grande. Un espacio pensado para escuchar sin intimidar.</desc>
+  <defs>
+    <linearGradient id="cf-wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#efe7d8" />
+      <stop offset="0.62" stop-color="#d9cdb9" />
+      <stop offset="1" stop-color="#b7a992" />
+    </linearGradient>
+    <linearGradient id="cf-floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c1a37e" />
+      <stop offset="0.55" stop-color="#9d7f5d" />
+      <stop offset="1" stop-color="#67503a" />
+    </linearGradient>
+    <linearGradient id="cf-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b9dcef" />
+      <stop offset="0.65" stop-color="#dff1f2" />
+      <stop offset="1" stop-color="#fff3d9" />
+    </linearGradient>
+    <radialGradient id="cf-light" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff8e2" stop-opacity="0.85" />
+      <stop offset="0.55" stop-color="#ffe6ad" stop-opacity="0.28" />
+      <stop offset="1" stop-color="#ffd88e" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="cf-vignette" cx="0.5" cy="0.48" r="0.76">
+      <stop offset="0.58" stop-color="#2a1c22" stop-opacity="0" />
+      <stop offset="1" stop-color="#2a1c22" stop-opacity="0.24" />
+    </radialGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#cf-wall)" />
+
+  <!-- large window -->
+  <g>
+    <rect x="1130" y="120" width="620" height="500" fill="url(#cf-sky)" />
+    <circle cx="1560" cy="330" r="92" fill="#fff7da" opacity="0.8" />
+    <path d="M1200 270 C1300 240 1380 258 1460 234 C1540 212 1620 226 1690 254" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round" opacity="0.32" />
+    <rect x="1130" y="120" width="620" height="500" fill="none" stroke="#8a7660" stroke-width="24" />
+    <rect x="1432" y="120" width="16" height="500" fill="#8a7660" />
+    <rect x="1130" y="362" width="620" height="16" fill="#8a7660" />
+    <path d="M1100 620 H1780 V656 H1100 Z" fill="#8a7660" />
+    <path d="M1130 656 L1780 656 L1860 1010 L1050 1010 Z" fill="url(#cf-light)" opacity="0.36" />
+  </g>
+
+  <!-- low table with paper and glass of water -->
+  <g>
+    <ellipse cx="820" cy="790" rx="300" ry="70" fill="#8d7254" />
+    <ellipse cx="820" cy="776" rx="300" ry="70" fill="#c2a37c" />
+    <rect x="760" y="700" width="180" height="70" rx="4" fill="#f6efe2" transform="rotate(-4 850 735)" />
+    <g stroke="#cbbda8" stroke-width="4" opacity="0.8" transform="rotate(-4 850 735)">
+      <path d="M790 725 H900" />
+      <path d="M790 744 H880" />
+    </g>
+    <rect x="990" y="690" width="34" height="70" rx="5" fill="#d6e8ea" opacity="0.75" />
+    <ellipse cx="1007" cy="690" rx="17" ry="6" fill="#eef7f8" opacity="0.8" />
+  </g>
+
+  <!-- soft chairs -->
+  <g>
+    <path d="M270 720 Q390 660 510 720 L530 960 H488 L470 810 H310 L292 960 H250 Z" fill="#8d9f99" />
+    <path d="M210 700 Q330 620 450 700 L430 756 H230 Z" fill="#a3b3ac" />
+    <path d="M300 960 H490 L510 1010 H280 Z" fill="#5f716c" />
+    <path d="M1090 720 Q1210 660 1330 720 L1350 960 H1308 L1290 810 H1130 L1112 960 H1070 Z" fill="#8d9f99" />
+    <path d="M1030 700 Q1150 620 1270 700 L1250 756 H1050 Z" fill="#a3b3ac" />
+    <path d="M1120 960 H1310 L1330 1010 H1100 Z" fill="#5f716c" />
+  </g>
+
+  <!-- shelf and plants -->
+  <g>
+    <rect x="150" y="210" width="390" height="18" fill="#8a6f52" />
+    <rect x="180" y="228" width="26" height="80" fill="#8b4a44" />
+    <rect x="212" y="240" width="20" height="68" fill="#4b5c6b" />
+    <rect x="240" y="224" width="30" height="84" fill="#7d6a4b" />
+    <rect x="280" y="246" width="22" height="62" fill="#5b3b5d" />
+    <rect x="312" y="230" width="28" height="78" fill="#3e5f59" />
+    <rect x="350" y="252" width="20" height="56" fill="#7a4b5e" />
+  </g>
+  <g>
+    <path d="M620 1010 H740 L720 850 H640 Z" fill="#a07a5c" />
+    <path d="M680 850 C620 770 620 700 670 650" fill="none" stroke="#5e7f52" stroke-width="12" stroke-linecap="round" />
+    <path d="M680 850 C740 780 770 710 740 650" fill="none" stroke="#71945f" stroke-width="12" stroke-linecap="round" />
+    <ellipse cx="670" cy="650" rx="38" ry="66" fill="#71945f" transform="rotate(-20 670 650)" />
+    <ellipse cx="740" cy="660" rx="34" ry="62" fill="#5e7f52" transform="rotate(18 740 660)" />
+  </g>
+
+  <path d="M0 730 H1920 V1080 H0 Z" fill="url(#cf-floor)" />
+  <path d="M0 730 H1920" stroke="#8b6a4b" stroke-width="3" opacity="0.5" />
+  <rect width="1920" height="1080" fill="url(#cf-vignette)" />
+</svg>

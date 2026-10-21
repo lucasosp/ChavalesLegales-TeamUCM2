@@ -1,0 +1,4904 @@
+{
+  "version": 1,
+  "start": "start",
+  "nodes": {
+    "start": {
+      "type": "interstitial",
+      "kicker": "Chavales Legales",
+      "title": "Dos voces",
+      "text": "Maya tiene 12 años. En casa hay gritos. En el colegio, Sofi nota que algo no va bien.\n\nVas a ver la historia desde las dos. No hay respuestas perfectas: hay formas más seguras de actuar.",
+      "next": "modo",
+      "scene": "home-living-cold",
+      "perspective": "maya",
+      "mood": "cold",
+      "flags": {
+        "modoAdolescente": false,
+        "banderas_rojas": 0,
+        "nivel_seguridad": 0,
+        "apoyo_emocional": 0,
+        "confidencialidad": 0,
+        "errores": 0,
+        "quizScore": 0,
+        "quizTotal": 0,
+        "quizPerfect": false
+      }
+    },
+    "modo": {
+      "type": "choice",
+      "prompt": "Antes de empezar, elige cómo quieres que te acompañe esta historia.",
+      "options": [
+        {
+          "id": "modo-nino",
+          "label": "Tengo entre 7 y 11 años. Quiero palabras sencillas.",
+          "next": "prologo-nino"
+        },
+        {
+          "id": "modo-teen",
+          "label": "Tengo entre 12 y 16 años. Quiero hablar de control, privacidad y consentimiento.",
+          "next": "prologo-teen",
+          "flags": {
+            "modoAdolescente": true
+          }
+        }
+      ],
+      "perspective": "maya",
+      "mood": "cold"
+    },
+    "prologo-nino": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "En casa, los mayores discuten. No es culpa de los hijos. Si algo te da miedo, pide ayuda a un adulto de confianza.",
+      "next": "prologo",
+      "scene": "home-living-cold",
+      "perspective": "maya",
+      "mood": "cold"
+    },
+    "prologo-teen": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "La violencia no siempre deja marcas. También es control: mirar el móvil, pedir contraseñas, humillar o aislar.",
+      "next": "prologo",
+      "scene": "home-living-cold",
+      "perspective": "maya",
+      "mood": "cold"
+    },
+    "prologo-2": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Si me quedo quieta, quizá acabe antes. Si me voy, quizá se enfade más. Si grito, quizá me escuche.»",
+      "next": "cap1",
+      "cast": {
+        "maya": "sad"
+      },
+      "tone": "thought"
+    },
+    "prologo": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Lunes, 20:41. Maya está en el salón. Su padre grita y su madre habla muy bajito.",
+      "next": "prologo-2",
+      "scene": "home-living-cold",
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "maya",
+      "mood": "cold"
+    },
+    "cap1": {
+      "type": "interstitial",
+      "kicker": "Capítulo 1",
+      "title": "Señales, control y alarmas",
+      "text": "Maya aprende a ver lo que pasa sin culparse. Sofi aprende a acompañar sin invadir.",
+      "next": "cap1-talk",
+      "scene": "home-living-cold",
+      "perspective": "maya",
+      "mood": "cold"
+    },
+    "cap1-talk-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Vale.»",
+      "next": "c1-m1",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "cap1-talk-4": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«Si necesitas algo, estoy en la cocina.»",
+      "next": "cap1-talk-5",
+      "cast": {
+        "madre": "neutral"
+      }
+    },
+    "cap1-talk-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Bien. Como siempre.»",
+      "next": "cap1-talk-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "cap1-talk-2": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«¿Qué tal el día?»",
+      "next": "cap1-talk-3",
+      "cast": {
+        "madre": "neutral"
+      }
+    },
+    "cap1-talk": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya llega a casa. Deja la mochila y se quita los zapatos.",
+      "next": "cap1-talk-2",
+      "scene": "home-living-cold",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m1": {
+      "type": "choice",
+      "prompt": "El padre da un golpe en la mesa. La madre se queda callada. ¿Qué hace Maya?",
+      "options": [
+        {
+          "id": "c1-m1-safe",
+          "label": "Esperar a que baje la tensión y acompañar a mamá después, sin ponerse en medio.",
+          "next": "c1-m1-ok",
+          "effects": {
+            "nivel_seguridad": {
+              "add": 1
+            },
+            "banderas_rojas": {
+              "add": 1
+            }
+          }
+        },
+        {
+          "id": "c1-m1-risk1",
+          "label": "Ponerse delante de papá para que pare.",
+          "safe": false,
+          "consequence": "Maya se pone en medio. Papá se enfada con ella. El miedo crece. No es su trabajo poner el cuerpo.",
+          "lesson": "Interponerse puede aumentar el riesgo para ti o para la persona que intentas proteger. Busca un momento seguro para acompañar y avisar a un adulto.",
+          "lessonTitle": "Tu cuerpo no es un escudo",
+          "next": "c1-m1-risk1-1"
+        },
+        {
+          "id": "c1-m1-risk2",
+          "label": "Subir el volumen de los auriculares y pensar que es culpa suya.",
+          "safe": false,
+          "consequence": "La música no tapa los gritos. Maya se queda sola con una culpa que no le corresponde.",
+          "lesson": "La violencia es responsabilidad de quien la ejerce. Aislarte con culpa no te protege. Busca a una persona segura y cuéntale lo que has visto.",
+          "lessonTitle": "La culpa no es tuya",
+          "next": "c1-m1-risk2-1"
+        }
+      ],
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "cold",
+      "scene": "home-living-cold"
+    },
+    "c1-m1-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "Tu cuerpo no es un escudo",
+      "text": "Maya se pone en medio. Papá se enfada con ella. El miedo crece. No es su trabajo poner el cuerpo.",
+      "lesson": "Interponerse puede aumentar el riesgo para ti o para la persona que intentas proteger. Busca un momento seguro para acompañar y avisar a un adulto.",
+      "returnTo": "c1-m1",
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "cold",
+      "continueTo": "c1-m2"
+    },
+    "c1-m1-risk1-7": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El momento pasa. Maya ya sabe que no puede con esto sola.",
+      "next": "c1-m1-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c1-m1-risk1-6": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«Maya, por favor...»",
+      "next": "c1-m1-risk1-7",
+      "cast": {
+        "madre": "neutral"
+      }
+    },
+    "c1-m1-risk1-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No me voy a ir.»",
+      "next": "c1-m1-risk1-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m1-risk1-4": {
+      "type": "dialogue",
+      "speaker": "Papá",
+      "text": "«Esto no es asunto tuyo. Vete a tu cuarto.»",
+      "next": "c1-m1-risk1-5",
+      "cast": {
+        "padre": "neutral"
+      }
+    },
+    "c1-m1-risk1-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«¡Para! ¡No le hables así!»",
+      "next": "c1-m1-risk1-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m1-risk1-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Papá se gira hacia Maya. La puerta del salón sigue abierta.",
+      "next": "c1-m1-risk1-3"
+    },
+    "c1-m1-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya se pone en medio. Papá se enfada con ella. El miedo crece. No es su trabajo poner el cuerpo.",
+      "next": "c1-m1-risk1-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c1-m1-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "La culpa no es tuya",
+      "text": "La música no tapa los gritos. Maya se queda sola con una culpa que no le corresponde.",
+      "lesson": "La violencia es responsabilidad de quien la ejerce. Aislarte con culpa no te protege. Busca a una persona segura y cuéntale lo que has visto.",
+      "returnTo": "c1-m1",
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "cold",
+      "continueTo": "c1-m2"
+    },
+    "c1-m1-risk2-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Nadie dice nada. La decisión sigue delante.",
+      "next": "c1-m1-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c1-m1-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Ahora no.»",
+      "next": "c1-m1-risk2-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m1-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«¿Puedes mirarme?»",
+      "next": "c1-m1-risk2-5",
+      "cast": {
+        "madre": "neutral"
+      }
+    },
+    "c1-m1-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Sí. No quiero oír nada.»",
+      "next": "c1-m1-risk2-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m1-risk2-2": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«Maya, ¿estás ahí?»",
+      "next": "c1-m1-risk2-3",
+      "cast": {
+        "madre": "neutral"
+      }
+    },
+    "c1-m1-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "La música no tapa los gritos. Maya se queda en el sofá con los auriculares puestos.",
+      "next": "c1-m1-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c1-m1-ok-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No debería, pero lo he visto. Y no puedo hacer como si no.»",
+      "next": "c1-m2",
+      "cast": {
+        "maya": "neutral"
+      },
+      "tone": "thought"
+    },
+    "c1-m1-ok-2": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«Gracias, cariño. No deberías haber visto eso.»",
+      "next": "c1-m1-ok-3",
+      "cast": {
+        "madre": "neutral"
+      }
+    },
+    "c1-m1-ok": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya espera a que papá cierre la puerta. Entra en la cocina y se sienta con mamá. Le da un vaso de agua.",
+      "next": "c1-m1-ok-2",
+      "scene": "home-kitchen-cold",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m2": {
+      "type": "choice",
+      "prompt": "El padre pide las contraseñas del móvil de mamá «para saber que no hay secretos». ¿Qué aconseja Maya?",
+      "options": [
+        {
+          "id": "c1-m2-safe",
+          "label": "Ayudar a mamá a revisar la privacidad de sus cuentas y anotar lo ocurrido en la libreta.",
+          "next": "c1-m2-ok",
+          "effects": {
+            "confidencialidad": {
+              "add": 1
+            },
+            "banderas_rojas": {
+              "add": 1
+            }
+          }
+        },
+        {
+          "id": "c1-m2-risk1",
+          "label": "Decirle a mamá que las dé: así habrá paz.",
+          "safe": false,
+          "consequence": "La paz dura una tarde. Al día siguiente, papá revisa el móvil de mamá y la acusa otra vez.",
+          "lesson": "Dar contraseñas no te protege: da más control. La privacidad es un límite, no algo que tengas que demostrar.",
+          "lessonTitle": "Una contraseña no es una prueba de amor",
+          "next": "c1-m2-risk1-1"
+        },
+        {
+          "id": "c1-m2-risk2",
+          "label": "Borrar los chats para que no quede nada.",
+          "safe": false,
+          "consequence": "Maya borra conversaciones que explicaban lo que pasaba. Luego siente más miedo.",
+          "lesson": "Borrar mensajes puede destruir información útil. Guarda las pruebas y pide ayuda antes de decidir.",
+          "lessonTitle": "Documentar no es difundir",
+          "next": "c1-m2-risk2-1"
+        }
+      ],
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "maya",
+      "mood": "cold",
+      "scene": "home-kitchen-cold"
+    },
+    "c1-m2-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "Una contraseña no es una prueba de amor",
+      "text": "La paz dura una tarde. Al día siguiente, papá revisa el móvil de mamá y la acusa otra vez.",
+      "lesson": "Dar contraseñas no te protege: da más control. La privacidad es un límite, no algo que tengas que demostrar.",
+      "returnTo": "c1-m2",
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "maya",
+      "mood": "cold",
+      "continueTo": "c1-m3"
+    },
+    "c1-m2-risk1-7": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Nadie dice nada. La decisión sigue delante.",
+      "next": "c1-m2-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c1-m2-risk1-6": {
+      "type": "dialogue",
+      "speaker": "Papá",
+      "text": "«¿Cómo dices?»",
+      "next": "c1-m2-risk1-7",
+      "cast": {
+        "padre": "neutral"
+      }
+    },
+    "c1-m2-risk1-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No deberías haberlo hecho.»",
+      "next": "c1-m2-risk1-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m2-risk1-4": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«Te he dado la contraseña. Ya está.»",
+      "next": "c1-m2-risk1-5",
+      "cast": {
+        "madre": "neutral"
+      }
+    },
+    "c1-m2-risk1-3": {
+      "type": "dialogue",
+      "speaker": "Papá",
+      "text": "«¿Ves? No había nada que esconder.»",
+      "next": "c1-m2-risk1-4",
+      "cast": {
+        "padre": "neutral"
+      }
+    },
+    "c1-m2-risk1-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "La puerta de la cocina se abre. Papá entra y mira el móvil de mamá.",
+      "next": "c1-m2-risk1-3"
+    },
+    "c1-m2-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "La paz dura una tarde. Al día siguiente, papá revisa el móvil de mamá y la acusa otra vez.",
+      "next": "c1-m2-risk1-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m2-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "Guardar pruebas no es traicionar",
+      "text": "Maya borra conversaciones que explicaban lo que pasaba. Luego siente más miedo.",
+      "lesson": "Borrar mensajes puede destruir información útil. Guarda las pruebas y pide ayuda antes de decidir.",
+      "returnTo": "c1-m2",
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "maya",
+      "mood": "cold",
+      "continueTo": "c1-m3"
+    },
+    "c1-m2-risk2-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El silencio dura un poco más. Puede elegir otra vez.",
+      "next": "c1-m2-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c1-m2-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Ya.»",
+      "next": "c1-m2-risk2-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m2-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«Ahora ya no queda nada.»",
+      "next": "c1-m2-risk2-5",
+      "cast": {
+        "madre": "neutral"
+      }
+    },
+    "c1-m2-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Sí. Por si la veía.»",
+      "next": "c1-m2-risk2-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m2-risk2-2": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«¿Has borrado la conversación?»",
+      "next": "c1-m2-risk2-3",
+      "cast": {
+        "madre": "neutral"
+      }
+    },
+    "c1-m2-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya borra conversaciones que explicaban lo que pasaba. Luego siente más miedo.",
+      "next": "c1-m2-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m2-ok-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Sirve para que no pueda entrar. Y si vuelve a pasar, lo contamos.»",
+      "next": "c1-m3",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m2-ok-2": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«No sé si esto sirve de algo.»",
+      "next": "c1-m2-ok-3",
+      "cast": {
+        "madre": "neutral"
+      }
+    },
+    "c1-m2-ok": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya ayuda a mamá a cambiar la contraseña. Luego escribe: «Martes. Papá pidió las claves. Mamá dijo que no.»",
+      "next": "c1-m2-ok-2",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m3": {
+      "type": "choice",
+      "prompt": "Maya ha empezado una libreta con fechas y frases. ¿Dónde la guarda?",
+      "options": [
+        {
+          "id": "c1-m3-safe",
+          "label": "En una app protegida con clave, sin compartirla con nadie.",
+          "next": "c1-m3-ok",
+          "effects": {
+            "banderas_rojas": {
+              "add": 1
+            },
+            "nivel_seguridad": {
+              "add": 1
+            },
+            "confidencialidad": {
+              "add": 1
+            }
+          }
+        },
+        {
+          "id": "c1-m3-risk1",
+          "label": "Dejarla en el escritorio: total, es solo un cuaderno.",
+          "safe": false,
+          "consequence": "Papá encuentra la libreta y la lee. Luego dice que Maya inventa cosas.",
+          "lesson": "Guarda las pruebas en un lugar protegido. Tenerlas no es traicionar: es cuidar lo que sabes.",
+          "lessonTitle": "Un lugar seguro para tus pruebas",
+          "next": "c1-m3-risk1-1"
+        },
+        {
+          "id": "c1-m3-risk2",
+          "label": "Romper las notas para que nadie las lea.",
+          "safe": false,
+          "consequence": "Maya rompe sus notas. Ahora le costará más explicar lo que pasó.",
+          "lesson": "Romper las notas no borra lo ocurrido. Puedes guardarlas en un lugar seguro y decidir después con quién compartirlas.",
+          "lessonTitle": "Tus recuerdos también cuentan",
+          "next": "c1-m3-risk2-1"
+        }
+      ],
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "maya",
+      "mood": "cold",
+      "scene": "home-kitchen-cold"
+    },
+    "c1-m3-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "Un lugar seguro para tus pruebas",
+      "text": "Papá encuentra la libreta y la lee. Luego dice que Maya inventa cosas.",
+      "lesson": "Guarda las pruebas en un lugar protegido. Tenerlas no es traicionar: es cuidar lo que sabes.",
+      "returnTo": "c1-m3",
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "maya",
+      "mood": "cold",
+      "continueTo": "c1-m4"
+    },
+    "c1-m3-risk1-7": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El silencio dura un poco más. Puede elegir otra vez.",
+      "next": "c1-m3-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c1-m3-risk1-6": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No es nada, de verdad.»",
+      "next": "c1-m3-risk1-7",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m3-risk1-5": {
+      "type": "dialogue",
+      "speaker": "Papá",
+      "text": "«No me mientas.»",
+      "next": "c1-m3-risk1-6",
+      "cast": {
+        "padre": "neutral"
+      }
+    },
+    "c1-m3-risk1-4": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Nada. Es para el colegio.»",
+      "next": "c1-m3-risk1-5",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m3-risk1-3": {
+      "type": "dialogue",
+      "speaker": "Papá",
+      "text": "«¿Y esto? ¿Qué escribe mi hija?»",
+      "next": "c1-m3-risk1-4",
+      "cast": {
+        "padre": "neutral"
+      }
+    },
+    "c1-m3-risk1-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "La puerta de la cocina se abre sin llamar. Papá ve la libreta sobre la mesa.",
+      "next": "c1-m3-risk1-3"
+    },
+    "c1-m3-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Papá encuentra la libreta y la lee. Luego dice que Maya inventa cosas.",
+      "next": "c1-m3-risk1-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m3-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "Tus recuerdos también cuentan",
+      "text": "Maya rompe sus notas. Ahora le costará más explicar lo que pasó.",
+      "lesson": "Romper las notas no borra lo ocurrido. Puedes guardarlas en un lugar seguro y decidir después con quién compartirlas.",
+      "returnTo": "c1-m3",
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "maya",
+      "mood": "cold",
+      "continueTo": "c1-m4"
+    },
+    "c1-m3-risk2-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya respira hondo. Puede volver a decidir.",
+      "next": "c1-m3-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c1-m3-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No quiero que nadie los lea.»",
+      "next": "c1-m3-risk2-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m3-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«¿No los necesitas?»",
+      "next": "c1-m3-risk2-5",
+      "cast": {
+        "madre": "neutral"
+      }
+    },
+    "c1-m3-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Nada. Los rompo.»",
+      "next": "c1-m3-risk2-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m3-risk2-2": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«¿Qué haces con esos papeles?»",
+      "next": "c1-m3-risk2-3",
+      "cast": {
+        "madre": "neutral"
+      }
+    },
+    "c1-m3-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya rompe sus notas. Ahora le costará más explicar lo que pasó.",
+      "next": "c1-m3-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m3-ok-2": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No es un diario. Son las cosas que pasan, apuntadas.»",
+      "next": "c1-m3-safe-talk-3-pausa",
+      "cast": {
+        "maya": "neutral"
+      },
+      "tone": "thought"
+    },
+    "c1-m3-ok": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya guarda la libreta con clave. Deja una copia cerrada en la mochila. No la comparte con nadie.",
+      "next": "c1-m3-ok-2",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m4": {
+      "type": "choice",
+      "prompt": "El sábado, el padre trae flores y sonríe. Dice que «ya está todo arreglado». ¿Qué piensa Maya?",
+      "options": [
+        {
+          "id": "c1-m4-safe",
+          "label": "Mantener la observación prudente: una sonrisa no borra lo anterior.",
+          "next": "c1-m4-ok",
+          "effects": {
+            "banderas_rojas": {
+              "add": 1
+            }
+          }
+        },
+        {
+          "id": "c1-m4-risk1",
+          "label": "Creer que la violencia ha terminado y olvidar la libreta.",
+          "safe": false,
+          "consequence": "El domingo vuelven los gritos. Papá no ha cambiado.",
+          "lesson": "La calma después de un estallido no significa que el problema haya terminado. Mira los hechos y mantén cerca a tu gente de confianza.",
+          "lessonTitle": "La calma aparente no es una solución",
+          "next": "c1-m4-risk1-1"
+        },
+        {
+          "id": "c1-m4-risk2",
+          "label": "Reprochar a mamá que disimule y sonría.",
+          "safe": false,
+          "consequence": "Mamá se calla. Reprocharle no ayuda.",
+          "lesson": "La persona que sufre violencia no necesita reproches. Necesita información, tiempo y una red que no la juzgue.",
+          "lessonTitle": "Acompañar sin juzgar",
+          "next": "c1-m4-risk2-1"
+        }
+      ],
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "maya",
+      "mood": "cold",
+      "scene": "home-living-cold"
+    },
+    "c1-m4-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "La calma aparente no es una solución",
+      "text": "El domingo vuelven los gritos. Papá no ha cambiado.",
+      "lesson": "La calma después de un estallido no significa que el problema haya terminado. Mira los hechos y mantén cerca a tu gente de confianza.",
+      "returnTo": "c1-m4",
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "maya",
+      "mood": "cold",
+      "continueTo": "persp-sofi-1"
+    },
+    "c1-m4-risk1-7": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Nadie dice nada. La decisión sigue delante.",
+      "next": "c1-m4-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c1-m4-risk1-6": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Sí. Ya está todo bien.»",
+      "next": "c1-m4-risk1-7",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m4-risk1-5": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«Maya, ¿estás bien?»",
+      "next": "c1-m4-risk1-6",
+      "cast": {
+        "madre": "neutral"
+      }
+    },
+    "c1-m4-risk1-4": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Sí, papá.»",
+      "next": "c1-m4-risk1-5",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m4-risk1-3": {
+      "type": "dialogue",
+      "speaker": "Papá",
+      "text": "«¿Ves? Todo arreglado.»",
+      "next": "c1-m4-risk1-4",
+      "cast": {
+        "padre": "neutral"
+      }
+    },
+    "c1-m4-risk1-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Papá entra en el salón con una sonrisa y una bolsa de la compra.",
+      "next": "c1-m4-risk1-3"
+    },
+    "c1-m4-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El domingo vuelven los gritos. Papá no ha cambiado.",
+      "next": "c1-m4-risk1-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m4-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "Acompañar sin juzgar",
+      "text": "Mamá se calla. Reprocharle no ayuda.",
+      "lesson": "La persona que sufre violencia no necesita reproches. Necesita información, tiempo y una red que no la juzgue.",
+      "returnTo": "c1-m4",
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "maya",
+      "mood": "cold",
+      "continueTo": "persp-sofi-1"
+    },
+    "c1-m4-risk2-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El momento pasa. Maya ya sabe que no puede con esto sola.",
+      "next": "c1-m4-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c1-m4-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«No me hables así.»",
+      "next": "c1-m4-risk2-6",
+      "cast": {
+        "madre": "neutral"
+      }
+    },
+    "c1-m4-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Sí lo entiendo. Estás disimulando.»",
+      "next": "c1-m4-risk2-5",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m4-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«No lo entiendes, cariño.»",
+      "next": "c1-m4-risk2-4",
+      "cast": {
+        "madre": "neutral"
+      }
+    },
+    "c1-m4-risk2-2": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«¿Por qué sonríes? No está todo bien.»",
+      "next": "c1-m4-risk2-3",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m4-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Mamá se calla. Reprocharle no ayuda.",
+      "next": "c1-m4-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-m4-ok-2": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Una tarde tranquila no arregla nada.»",
+      "next": "persp-sofi-1",
+      "cast": {
+        "maya": "neutral"
+      },
+      "tone": "thought"
+    },
+    "c1-m4-ok": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya acepta el helado y no discute. Pero esa noche escribe: «Sábado. Flores. Domingo volvió a gritar.»",
+      "next": "c1-m4-ok-2",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "persp-sofi-1": {
+      "type": "interstitial",
+      "kicker": "Perspectiva de Sofi",
+      "title": "El colegio",
+      "text": "Sofi ha notado cambios en Maya. Ahora vuelve a mirar la misma semana desde su lado.",
+      "next": "persp-sofi-1-talk",
+      "scene": "hallway-day",
+      "perspective": "sofi",
+      "mood": "warm"
+    },
+    "persp-sofi-1-talk-4": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Vale. ¿Te sientas conmigo?»",
+      "next": "c1-s1",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "persp-sofi-1-talk-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No tenía ganas.»",
+      "next": "persp-sofi-1-talk-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "persp-sofi-1-talk-2": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Hoy no te has sentado con nadie.»",
+      "next": "persp-sofi-1-talk-3",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "persp-sofi-1-talk": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi ve a Maya entrar en el patio con la mirada baja. Se acerca sin correr.",
+      "next": "persp-sofi-1-talk-2",
+      "scene": "patio-day",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c1-s1": {
+      "type": "choice",
+      "prompt": "Maya llega tarde, con el pelo sin peinar y la mirada perdida. ¿Qué hace Sofi?",
+      "options": [
+        {
+          "id": "c1-s1-safe",
+          "label": "Acercarse con afecto y preguntarle a solas, sin presión.",
+          "next": "c1-s1-ok",
+          "effects": {
+            "apoyo_emocional": {
+              "add": 1
+            }
+          }
+        },
+        {
+          "id": "c1-s1-risk1",
+          "label": "Ignorar los cambios: seguramente esté cansada.",
+          "safe": false,
+          "consequence": "Pasan los días. Maya se queda más sola y Sofi no se acerca.",
+          "lesson": "Notar un cambio no te obliga a resolverlo. Pero ignorarlo deja sola a la persona. Un saludo tranquilo puede abrir una puerta.",
+          "lessonTitle": "Mirar también es acompañar",
+          "next": "c1-s1-risk1-1"
+        },
+        {
+          "id": "c1-s1-risk2",
+          "label": "Preguntarle a gritos delante de todos.",
+          "safe": false,
+          "consequence": "Maya se pone roja. Todos miran. Sofi quería ayudar, pero la ha expuesto.",
+          "lesson": "La privacidad también protege. Busca un lugar tranquilo y pregunta sin público.",
+          "lessonTitle": "La ayuda no necesita público",
+          "next": "c1-s1-risk2-1"
+        }
+      ],
+      "cast": {
+        "sofi": "neutral"
+      },
+      "perspective": "sofi",
+      "mood": "warm",
+      "scene": "patio-day"
+    },
+    "c1-s1-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "Mirar también es acompañar",
+      "text": "Pasan los días. Maya se queda más sola y Sofi no se acerca.",
+      "lesson": "Notar un cambio no te obliga a resolverlo. Pero ignorarlo deja sola a la persona. Un saludo tranquilo puede abrir una puerta.",
+      "returnTo": "c1-s1",
+      "cast": {
+        "sofi": "neutral"
+      },
+      "perspective": "sofi",
+      "mood": "warm",
+      "continueTo": "c1-s2"
+    },
+    "c1-s1-risk1-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Suena el timbre. Sofi puede decidir otra vez.",
+      "next": "c1-s1-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c1-s1-risk1-5": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Ya hablamos otro día.»",
+      "next": "c1-s1-risk1-6",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c1-s1-risk1-4": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Vale.»",
+      "next": "c1-s1-risk1-5",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-s1-risk1-3": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Ahora estoy con otras cosas.»",
+      "next": "c1-s1-risk1-4",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c1-s1-risk1-2": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Sofi, ¿puedo sentarme contigo?»",
+      "next": "c1-s1-risk1-3",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-s1-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Pasan los días. Maya se queda más sola y Sofi no se acerca.",
+      "next": "c1-s1-risk1-2",
+      "tone": "narration",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c1-s1-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "La ayuda no necesita público",
+      "text": "Maya se pone roja. Todos miran. Sofi quería ayudar, pero la ha expuesto.",
+      "lesson": "La privacidad también protege. Busca un lugar tranquilo y pregunta sin público.",
+      "returnTo": "c1-s1",
+      "cast": {
+        "sofi": "neutral"
+      },
+      "perspective": "sofi",
+      "mood": "warm",
+      "continueTo": "c1-s2"
+    },
+    "c1-s1-risk2-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi calla. Puede elegir otra forma de estar cerca.",
+      "next": "c1-s1-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c1-s1-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«No lo sé, está rara.»",
+      "next": "c1-s1-risk2-6",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c1-s1-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Compañera",
+      "text": "«¿Qué le pasa?»",
+      "next": "c1-s1-risk2-5",
+      "cast": {
+        "companera": "neutral"
+      }
+    },
+    "c1-s1-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Nada. ¿Puedes bajar la voz?»",
+      "next": "c1-s1-risk2-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-s1-risk2-2": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«¡Maya! ¿Qué te pasa? ¡Llevas toda la semana rara!»",
+      "next": "c1-s1-risk2-3",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c1-s1-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya se pone roja. Todos miran. Sofi quería ayudar, pero la ha expuesto.",
+      "next": "c1-s1-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c1-s1-ok-3": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Vale. Si algún día no estás bien, no hace falta que lo cuentes todo. Yo estoy aquí.»",
+      "next": "c1-s1-safe-talk-3-pausa",
+      "cast": {
+        "sofi": "smile"
+      }
+    },
+    "c1-s1-ok-2": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Estoy bien. Solo he dormido mal.»",
+      "next": "c1-s1-ok-3",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c1-s1-ok": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi se sienta a su lado en el patio. Le ofrece la mitad de su bocadillo.",
+      "next": "c1-s1-ok-2",
+      "scene": "patio-day",
+      "cast": {
+        "sofi": "smile"
+      }
+    },
+    "c1-s2": {
+      "type": "choice",
+      "prompt": "Esa noche, Sofi llama a Maya. Al fondo se oyen gritos. ¿Qué hace?",
+      "options": [
+        {
+          "id": "c1-s2-safe",
+          "label": "Validar lo que oye y ofrecerle un mensaje tranquilo: «No estás sola. ¿Quieres que mañana hablemos con Lucía?»",
+          "next": "c1-s2-ok",
+          "effects": {
+            "apoyo_emocional": {
+              "add": 1
+            },
+            "banderas_rojas": {
+              "add": 1
+            }
+          }
+        },
+        {
+          "id": "c1-s2-risk1",
+          "label": "Enviarle veinte mensajes seguidos para que conteste ya.",
+          "safe": false,
+          "consequence": "Maya se bloquea. Siente que tiene que calmar a Sofi además de sobrevivir a la noche.",
+          "lesson": "Tu prisa por ayudar no debe ser otra carga. Quédate cerca y deja que la otra persona responda a su ritmo.",
+          "lessonTitle": "Tu prisa también puede pesar",
+          "next": "c1-s2-risk1-1"
+        },
+        {
+          "id": "c1-s2-risk2",
+          "label": "Llamar a casa de Maya para encarar al padre.",
+          "safe": false,
+          "consequence": "El padre contesta y la conversación se vuelve una amenaza. Sofi ha puesto a Maya en más riesgo.",
+          "lesson": "No te enfrentes solo a quien ejerce violencia. Avisa a un adulto del centro o llama a una línea de ayuda.",
+          "lessonTitle": "No confrontes en solitario",
+          "next": "c1-s2-risk2-1"
+        }
+      ],
+      "cast": {
+        "sofi": "sad"
+      },
+      "perspective": "sofi",
+      "mood": "tense",
+      "scene": "bedroom-evening"
+    },
+    "c1-s2-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "Tu prisa también puede pesar",
+      "text": "Maya se bloquea. Siente que tiene que calmar a Sofi además de sobrevivir a la noche.",
+      "lesson": "Tu prisa por ayudar no debe ser otra carga. Quédate cerca y deja que la otra persona responda a su ritmo.",
+      "returnTo": "c1-s2",
+      "cast": {
+        "sofi": "sad"
+      },
+      "perspective": "sofi",
+      "mood": "tense",
+      "continueTo": "cap2"
+    },
+    "c1-s2-risk1-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi calla. Puede elegir otra forma de estar cerca.",
+      "next": "c1-s2-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c1-s2-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya se bloquea. Siente que tiene que calmar a Sofi además de sobrevivir a la noche.",
+      "next": "c1-s2-risk1-chat",
+      "tone": "narration",
+      "cast": {
+        "sofi": "sad"
+      }
+    },
+    "c1-s2-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "No confrontes en solitario",
+      "text": "El padre contesta y la conversación se vuelve una amenaza. Sofi ha puesto a Maya en más riesgo.",
+      "lesson": "No te enfrentes solo a quien ejerce violencia. Avisa a un adulto del centro o llama a una línea de ayuda.",
+      "returnTo": "c1-s2",
+      "cast": {
+        "sofi": "sad"
+      },
+      "perspective": "sofi",
+      "mood": "tense",
+      "continueTo": "cap2"
+    },
+    "c1-s2-risk2-8": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "La habitación sigue en silencio. Sofi ya no oye lo mismo.",
+      "next": "c1-s2-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c1-s2-risk2-7": {
+      "type": "dialogue",
+      "speaker": "Papá",
+      "text": "«No vuelvas a llamar.»",
+      "next": "c1-s2-risk2-8",
+      "remote": true
+    },
+    "c1-s2-risk2-6": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Pero...»",
+      "next": "c1-s2-risk2-7",
+      "remote": false,
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c1-s2-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Papá",
+      "text": "«Maya no está disponible. No vuelvas a llamar.»",
+      "next": "c1-s2-risk2-6",
+      "remote": true
+    },
+    "c1-s2-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Soy Sofi. Quiero hablar con Maya.»",
+      "next": "c1-s2-risk2-5",
+      "remote": false,
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c1-s2-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Papá",
+      "text": "«¿Quién es?»",
+      "next": "c1-s2-risk2-4",
+      "remote": true
+    },
+    "c1-s2-risk2-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Al otro lado del teléfono, una voz de hombre responde.",
+      "next": "c1-s2-risk2-3",
+      "remote": false
+    },
+    "c1-s2-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El padre contesta. La llamada se vuelve una amenaza para Maya.",
+      "next": "c1-s2-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "sofi": "sad"
+      }
+    },
+    "c1-s2-ok-3": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«No hace falta que lo decidas esta noche. Yo no me voy.»",
+      "next": "cap2",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c1-s2-ok-2": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Mañana no sé si podré.»",
+      "next": "c1-s2-ok-3",
+      "cast": {
+        "sofi": "neutral"
+      },
+      "remote": true
+    },
+    "c1-s2-ok": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Te he oído. No haré nada que te ponga en peligro. Mañana, si quieres, vamos juntas a ver a Lucía.»",
+      "next": "c1-s2-ok-2",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "cap2": {
+      "type": "interstitial",
+      "kicker": "Capítulo 2",
+      "title": "Contar o callar",
+      "text": "Maya decide cuánto contar. Sofi decide qué hacer con un secreto difícil.",
+      "next": "c2-edad-router",
+      "scene": "home-living-cold",
+      "perspective": "maya",
+      "mood": "cold"
+    },
+    "c2-edad-router": {
+      "type": "branch",
+      "when": {
+        "flag": "modoAdolescente"
+      },
+      "then": "c2-teen",
+      "else": "c2-child"
+    },
+    "c2-teen-4": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«No tienes que contarlo todo hoy. Podemos buscar ayuda.»",
+      "next": "c2-m1",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-teen-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Grita. Revisa el móvil de mamá. Le pide las contraseñas.»",
+      "next": "c2-teen-4",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c2-teen-2": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«¿Qué hace tu padre?»",
+      "next": "c2-teen-3",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-teen": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi ha venido a casa de Maya. El padre no está. Maya le cuenta lo de los gritos y el control del móvil. No sabe si es violencia.",
+      "next": "c2-teen-2",
+      "scene": "home-living-cold",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c2-child-4": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Puedes decirlo poco a poco. Yo no me voy.»",
+      "next": "c2-m1",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-child-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«En casa hay gritos. Y tengo miedo. No sé cómo decirlo.»",
+      "next": "c2-child-4",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c2-child-2": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«¿Estás triste por algo?»",
+      "next": "c2-child-3",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-child": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi ha venido a casa de Maya. El padre no está. Maya le cuenta dos secretos: los gritos en casa y el miedo que siente.",
+      "next": "c2-child-2",
+      "scene": "home-living-cold",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c2-m1": {
+      "type": "choice",
+      "prompt": "Sofi ya sabe una parte. Maya teme contar el resto. ¿Qué hace?",
+      "options": [
+        {
+          "id": "c2-m1-safe",
+          "label": "Pedir ayuda con franqueza, sin contarlo todo de golpe.",
+          "next": "c2-m1-ok",
+          "effects": {
+            "nivel_seguridad": {
+              "add": 1
+            },
+            "apoyo_emocional": {
+              "add": 1
+            }
+          }
+        },
+        {
+          "id": "c2-m1-risk1",
+          "label": "Exigir a Sofi un pacto de silencio: «si lo cuentas, dejo de hablarte».",
+          "safe": false,
+          "consequence": "Sofi acepta con miedo. Ahora carga sola con el secreto.",
+          "lesson": "Los pactos de silencio aíslan a las dos. Puedes pedir privacidad y, a la vez, dejar que un adulto de confianza ayude.",
+          "lessonTitle": "Un secreto que pesa no es lealtad",
+          "next": "c2-m1-risk1-1"
+        },
+        {
+          "id": "c2-m1-risk2",
+          "label": "Decir que «solo fue una discusión», para que no se preocupe.",
+          "safe": false,
+          "consequence": "Sofi se queda tranquila. Maya sigue sola con su miedo.",
+          "lesson": "Minimizar no protege a nadie. Puedes decir «no quiero contarlo todo todavía» sin negar lo que está pasando.",
+          "lessonTitle": "No tienes que contarlo todo",
+          "next": "c2-m1-risk2-1"
+        }
+      ],
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "cold",
+      "scene": "home-living-cold"
+    },
+    "c2-m1-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "Un secreto que pesa no es lealtad",
+      "text": "Sofi acepta con miedo. Ahora carga sola con el secreto.",
+      "lesson": "Los pactos de silencio aíslan a las dos. Puedes pedir privacidad y, a la vez, dejar que un adulto de confianza ayude.",
+      "returnTo": "c2-m1",
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "cold",
+      "continueTo": "c2-m3"
+    },
+    "c2-m1-risk1-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya respira hondo. Puede volver a decidir.",
+      "next": "c2-m1-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c2-m1-risk1-5": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«...Vale.»",
+      "next": "c2-m1-risk1-6",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-m1-risk1-4": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Prométemelo.»",
+      "next": "c2-m1-risk1-5",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-m1-risk1-3": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Maya, no me pidas eso.»",
+      "next": "c2-m1-risk1-4",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-m1-risk1-2": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Si se lo cuentas a alguien, no vuelvo a hablarte.»",
+      "next": "c2-m1-risk1-3",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-m1-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi acepta con miedo. Ahora carga sola con el secreto.",
+      "next": "c2-m1-risk1-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c2-m1-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "No tienes que contarlo todo",
+      "text": "Sofi se queda tranquila. Maya sigue sola con su miedo.",
+      "lesson": "Minimizar no protege a nadie. Puedes decir «no quiero contarlo todo todavía» sin negar lo que está pasando.",
+      "returnTo": "c2-m1",
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "cold",
+      "continueTo": "c2-m3"
+    },
+    "c2-m1-risk2-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El momento pasa. Maya ya sabe que no puede con esto sola.",
+      "next": "c2-m1-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c2-m1-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Te lo diré.»",
+      "next": "c2-m1-risk2-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-m1-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Vale. Si necesitas algo, me dices.»",
+      "next": "c2-m1-risk2-5",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-m1-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Sí. Nada importante.»",
+      "next": "c2-m1-risk2-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-m1-risk2-2": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«¿Solo fue una discusión?»",
+      "next": "c2-m1-risk2-3",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-m1-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi se queda tranquila. Maya sigue sola con su miedo.",
+      "next": "c2-m1-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c2-m1-ok-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Sí. Pero primero necesito guardar pruebas.»",
+      "next": "c2-m1-call-lucia",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-m1-ok-2": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«No tienes que contarlo todo hoy. Podemos ir paso a paso. ¿Quieres que te acompañe a hablar con Lucía?»",
+      "next": "c2-m1-ok-3",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-m1-ok": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Tengo miedo. Si lo cuento, todo puede empeorar.»",
+      "next": "c2-m1-ok-2",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c2-m3": {
+      "type": "choice",
+      "prompt": "Maya no quiere volver a casa. ¿Dónde busca ayuda?",
+      "options": [
+        {
+          "id": "c2-m3-safe",
+          "label": "Acudir a orientación junto a Sofi y pedir hablar con Lucía.",
+          "next": "c2-m3-ok",
+          "effects": {
+            "nivel_seguridad": {
+              "add": 1
+            },
+            "apoyo_emocional": {
+              "add": 1
+            }
+          }
+        },
+        {
+          "id": "c2-m3-risk1",
+          "label": "Escaparse sola sin decir a nadie dónde va.",
+          "safe": false,
+          "consequence": "Maya se va sola. No avisa a ningún adulto.",
+          "lesson": "Huir sin avisar puede aumentar el peligro. Si necesitas salir de una situación, busca un lugar seguro y avisa a alguien de confianza.",
+          "lessonTitle": "Un lugar seguro y una persona avisada",
+          "next": "c2-m3-risk1-1"
+        },
+        {
+          "id": "c2-m3-risk2",
+          "label": "Esconderse en los baños a oscuras hasta que cierren.",
+          "safe": false,
+          "consequence": "El centro se vacía. Nadie sabe que Maya necesita ayuda.",
+          "lesson": "Esconderse no es protegerse. Pide a una persona de confianza que se quede contigo y avise a orientación.",
+          "lessonTitle": "Protegerse es pedir compañía",
+          "next": "c2-m3-risk2-1"
+        }
+      ],
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "tense",
+      "scene": "hallway-day"
+    },
+    "c2-m3-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "Un lugar seguro y una persona avisada",
+      "text": "Maya se va sola. No avisa a ningún adulto.",
+      "lesson": "Huir sin avisar puede aumentar el peligro. Si necesitas salir de una situación, busca un lugar seguro y avisa a alguien de confianza.",
+      "returnTo": "c2-m3",
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "tense",
+      "continueTo": "c2-m4-whatsapp"
+    },
+    "c2-m3-risk1-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Nadie dice nada. La decisión sigue delante.",
+      "next": "c2-m3-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c2-m3-risk1-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No. No quiero que vengas.»",
+      "next": "c2-m3-risk1-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-m3-risk1-4": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Espera, voy contigo.»",
+      "next": "c2-m3-risk1-5",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-m3-risk1-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No lo sé. Lejos.»",
+      "next": "c2-m3-risk1-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-m3-risk1-2": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«¿Dónde vas?»",
+      "next": "c2-m3-risk1-3",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-m3-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya se va sola. No avisa a ningún adulto.",
+      "next": "c2-m3-risk1-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c2-m3-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "Protegerse es pedir compañía",
+      "text": "El centro se vacía. Nadie sabe que Maya necesita ayuda.",
+      "lesson": "Esconderse no es protegerse. Pide a una persona de confianza que se quede contigo y avise a orientación.",
+      "returnTo": "c2-m3",
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "tense",
+      "continueTo": "c2-m4-whatsapp"
+    },
+    "c2-m3-risk2-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El silencio dura un poco más. Puede elegir otra vez.",
+      "next": "c2-m3-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c2-m3-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Por favor, vete.»",
+      "next": "c2-m3-risk2-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-m3-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«No voy a dejar que te quedes sola.»",
+      "next": "c2-m3-risk2-5",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-m3-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Déjame.»",
+      "next": "c2-m3-risk2-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-m3-risk2-2": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«¿Maya? ¿Estás ahí?»",
+      "next": "c2-m3-risk2-3",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-m3-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El centro se vacía. Nadie sabe que Maya necesita ayuda.",
+      "next": "c2-m3-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c2-m3-ok-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Mi padre grita y controla a mamá. No sé cómo empezar.»",
+      "next": "c2-m3-to-home",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c2-m3-ok-2": {
+      "type": "dialogue",
+      "speaker": "Lucía",
+      "text": "«Estoy aquí. No tienes que tenerlo todo claro. Vamos a escucharte con calma.»",
+      "next": "c2-m3-ok-3",
+      "cast": {
+        "lucia": "smile"
+      }
+    },
+    "c2-m3-ok": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi coge la mano de Maya y la lleva a orientación. Lucía abre la puerta.",
+      "next": "c2-m3-ok-2",
+      "scene": "orientation-office",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-m4-whatsapp": {
+      "type": "chat",
+      "chatTitle": "Papá",
+      "self": "Maya",
+      "messages": [
+        {
+          "from": "Papá",
+          "text": "maya contéstame",
+          "time": "21:03"
+        },
+        {
+          "from": "Papá",
+          "text": "sé que has hablado con alguien",
+          "time": "21:04"
+        },
+        {
+          "from": "Papá",
+          "text": "si cuentas algo\ntu madre lo va a pasar peor",
+          "time": "21:04"
+        },
+        {
+          "from": "Papá",
+          "text": "piénsalo",
+          "time": "21:05"
+        }
+      ],
+      "next": "c2-m4-pausa",
+      "scene": "home-living-cold",
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "tense"
+    },
+    "c2-m4": {
+      "type": "choice",
+      "prompt": "El padre envía un mensaje: «Si cuentas algo, tu madre lo va a pasar peor». ¿Qué hace Maya?",
+      "options": [
+        {
+          "id": "c2-m4-safe",
+          "label": "No responder, guardar el mensaje y mostrárselo a Lucía.",
+          "next": "c2-m4-ok",
+          "effects": {
+            "nivel_seguridad": {
+              "add": 1
+            },
+            "banderas_rojas": {
+              "add": 1
+            },
+            "confidencialidad": {
+              "add": 1
+            }
+          }
+        },
+        {
+          "id": "c2-m4-risk1",
+          "label": "Responder para defender a mamá.",
+          "safe": false,
+          "consequence": "El padre usa la respuesta para seguir discutiendo. Maya entra en un juego que no puede ganar.",
+          "lesson": "No tienes que responder a una amenaza para demostrar que quieres a tu madre. Guarda el mensaje y enséñaselo a un adulto de confianza.",
+          "lessonTitle": "No respondas al chantaje",
+          "next": "c2-m4-risk1-1"
+        },
+        {
+          "id": "c2-m4-risk2",
+          "label": "Borrar los mensajes para que no los vea nadie.",
+          "safe": false,
+          "consequence": "Maya borra una prueba de la presión que está sufriendo. Después se pregunta si lo habrá imaginado.",
+          "lesson": "Los mensajes que dan miedo también son importantes. No los borres: guárdalos en un lugar seguro y pide ayuda.",
+          "lessonTitle": "El miedo también deja pruebas",
+          "next": "c2-m4-risk2-1"
+        }
+      ],
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "tense",
+      "scene": "home-living-cold"
+    },
+    "c2-m4-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "No respondas al chantaje",
+      "text": "El padre usa la respuesta para seguir discutiendo. Maya entra en un juego que no puede ganar.",
+      "lesson": "No tienes que responder a una amenaza para demostrar que quieres a tu madre. Guarda el mensaje y enséñaselo a un adulto de confianza.",
+      "returnTo": "c2-m4",
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "tense",
+      "continueTo": "persp-sofi-2"
+    },
+    "c2-m4-risk1-7": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El silencio dura un poco más. Puede elegir otra vez.",
+      "next": "c2-m4-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c2-m4-risk1-6": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«...»",
+      "next": "c2-m4-risk1-7",
+      "remote": false,
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-m4-risk1-5": {
+      "type": "dialogue",
+      "speaker": "Papá",
+      "text": "«Te vas a arrepentir de haberme contestado.»",
+      "next": "c2-m4-risk1-6",
+      "remote": true
+    },
+    "c2-m4-risk1-4": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No me amenaces tú a mamá.»",
+      "next": "c2-m4-risk1-5",
+      "remote": false,
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-m4-risk1-3": {
+      "type": "dialogue",
+      "speaker": "Papá",
+      "text": "«¿Así que ahora me amenazas?»",
+      "next": "c2-m4-risk1-4",
+      "remote": true
+    },
+    "c2-m4-risk1-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El móvil vibra sobre la mesa. Es un mensaje de Papá.",
+      "next": "c2-m4-risk1-3",
+      "remote": false
+    },
+    "c2-m4-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El padre usa la respuesta para seguir discutiendo. Maya entra en un juego que no puede ganar.",
+      "next": "c2-m4-risk1-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c2-m4-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "El miedo también deja pruebas",
+      "text": "Maya borra una prueba de la presión que está sufriendo. Después se pregunta si lo habrá imaginado.",
+      "lesson": "Los mensajes que dan miedo también son importantes. No los borres: guárdalos en un lugar seguro y pide ayuda.",
+      "returnTo": "c2-m4",
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "tense",
+      "continueTo": "persp-sofi-2"
+    },
+    "c2-m4-risk2-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Nadie dice nada. La decisión sigue delante.",
+      "next": "c2-m4-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c2-m4-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Porque me daba miedo.»",
+      "next": "c2-m4-risk2-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-m4-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Lucía",
+      "text": "«¿Por qué?»",
+      "next": "c2-m4-risk2-5",
+      "cast": {
+        "maya": "neutral"
+      },
+      "remote": true
+    },
+    "c2-m4-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Lo he borrado.»",
+      "next": "c2-m4-risk2-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-m4-risk2-2": {
+      "type": "dialogue",
+      "speaker": "Lucía",
+      "text": "«¿Me enseñas el mensaje?»",
+      "next": "c2-m4-risk2-3",
+      "cast": {
+        "maya": "neutral"
+      },
+      "remote": true
+    },
+    "c2-m4-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya borra la prueba antes de que Lucía pueda verla. Cuando Lucía la llama, no sabe qué decir.",
+      "next": "c2-m4-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c2-m4-ok-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No contestar también es una forma de decir que no.»",
+      "next": "persp-sofi-2",
+      "cast": {
+        "maya": "neutral"
+      },
+      "tone": "thought"
+    },
+    "c2-m4-ok-2": {
+      "type": "dialogue",
+      "speaker": "Lucía",
+      "text": "«Esto no es tu culpa. Y no tienes que cargarlo sola.»",
+      "next": "c2-m4-ok-3",
+      "cast": {
+        "lucia": "neutral"
+      }
+    },
+    "c2-m4-ok": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya no contesta. Guarda el mensaje en la carpeta protegida.",
+      "next": "c2-m4-to-lucia",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "persp-sofi-2": {
+      "type": "interstitial",
+      "kicker": "Perspectiva de Sofi",
+      "title": "La promesa",
+      "text": "Sofi ha prometido no contar lo de la casa de Maya en clase. Mientras Maya habla con Lucía, ella decide hasta dónde puede guardar el secreto.",
+      "next": "persp-sofi-2-talk",
+      "scene": "classroom-day",
+      "perspective": "sofi",
+      "mood": "warm"
+    },
+    "persp-sofi-2-talk-4": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Vale. Pero si un día no puedo, te lo digo antes de hacer nada.»",
+      "next": "c2-s1",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "persp-sofi-2-talk-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Solo necesito que no se lo cuentes en clase.»",
+      "next": "persp-sofi-2-talk-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "persp-sofi-2-talk-2": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«No sé si puedo guardarlo sin hacer nada.»",
+      "next": "persp-sofi-2-talk-3",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "persp-sofi-2-talk": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya le ha pedido a Sofi que no cuente lo de su casa en clase. Sofi no sabe qué hacer.",
+      "next": "persp-sofi-2-talk-2",
+      "scene": "classroom-day",
+      "cast": {
+        "sofi": "sad"
+      }
+    },
+    "c2-s1": {
+      "type": "choice",
+      "prompt": "Maya le pide a Sofi que no cuente lo de su casa en clase. ¿Qué hace Sofi?",
+      "options": [
+        {
+          "id": "c2-s1-safe",
+          "label": "Respetar el límite y hablar con Lucía si el peligro crece.",
+          "next": "c2-s1-ok",
+          "effects": {
+            "apoyo_emocional": {
+              "add": 2
+            }
+          }
+        },
+        {
+          "id": "c2-s1-risk1",
+          "label": "Guardar el secreto por lealtad y no buscar ayuda cuando el rumor crece.",
+          "safe": false,
+          "consequence": "Pasan las semanas. El rumor crece y Sofi se siente mal por no hacer nada.",
+          "lesson": "La lealtad no puede significar dejar a una amiga sin protección. Puedes respetar su silencio y, a la vez, buscar ayuda con ella.",
+          "lessonTitle": "La lealtad también protege",
+          "next": "c2-s1-risk1-1"
+        },
+        {
+          "id": "c2-s1-risk2",
+          "label": "Contarlo en el colegio para pedir consejo.",
+          "safe": false,
+          "consequence": "Los detalles se convierten en cotilleo. Maya se entera de que su historia circula sin su permiso.",
+          "lesson": "Para pedir consejo no hace falta contar la vida privada de otra persona. Habla con un adulto o con una línea de ayuda, no con todo el mundo.",
+          "lessonTitle": "Pedir ayuda sin cotillear",
+          "next": "c2-s1-risk2-1"
+        }
+      ],
+      "cast": {
+        "sofi": "sad"
+      },
+      "perspective": "sofi",
+      "mood": "warm",
+      "scene": "classroom-day"
+    },
+    "c2-s1-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "La lealtad también protege",
+      "text": "Pasan las semanas. El rumor crece y Sofi se siente mal por no hacer nada.",
+      "lesson": "La lealtad no puede significar dejar a una amiga sin protección. Puedes respetar su silencio y, a la vez, buscar ayuda con ella.",
+      "returnTo": "c2-s1",
+      "cast": {
+        "sofi": "sad"
+      },
+      "perspective": "sofi",
+      "mood": "warm",
+      "continueTo": "c2-s3"
+    },
+    "c2-s1-risk1-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi calla. Puede elegir otra forma de estar cerca.",
+      "next": "c2-s1-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c2-s1-risk1-5": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Pero no sé si estoy haciendo lo correcto.»",
+      "next": "c2-s1-risk1-6",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-s1-risk1-4": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Gracias. Pero me siento sola.»",
+      "next": "c2-s1-risk1-5",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-s1-risk1-3": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«No he dicho nada. Te lo prometí.»",
+      "next": "c2-s1-risk1-4",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-s1-risk1-2": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«¿Has visto lo que dicen de mí?»",
+      "next": "c2-s1-risk1-3",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-s1-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Pasan las semanas. El rumor crece y Sofi se siente mal por no hacer nada.",
+      "next": "c2-s1-risk1-2",
+      "tone": "narration",
+      "cast": {
+        "sofi": "sad"
+      }
+    },
+    "c2-s1-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "Pedir ayuda sin cotillear",
+      "text": "Los detalles se convierten en cotilleo. Maya se entera de que su historia circula sin su permiso.",
+      "lesson": "Para pedir consejo no hace falta contar la vida privada de otra persona. Habla con un adulto o con una línea de ayuda, no con todo el mundo.",
+      "returnTo": "c2-s1",
+      "cast": {
+        "sofi": "sad"
+      },
+      "perspective": "sofi",
+      "mood": "warm",
+      "continueTo": "c2-s3"
+    },
+    "c2-s1-risk2-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Suena el timbre. Sofi puede decidir otra vez.",
+      "next": "c2-s1-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c2-s1-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Era mi historia.»",
+      "next": "c2-s1-risk2-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-s1-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Solo pedía consejo.»",
+      "next": "c2-s1-risk2-5",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-s1-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«¿Qué has contado?»",
+      "next": "c2-s1-risk2-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-s1-risk2-2": {
+      "type": "dialogue",
+      "speaker": "Compañera",
+      "text": "«¿Es verdad lo que dice Sofi?»",
+      "next": "c2-s1-risk2-3",
+      "cast": {
+        "companera": "neutral"
+      }
+    },
+    "c2-s1-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El secreto se convierte en cotilleo. Maya se entera de que su historia circula.",
+      "next": "c2-s1-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "sofi": "sad"
+      }
+    },
+    "c2-s1-ok-3": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Estoy contigo. No estás sola.»",
+      "next": "c2-s2-safe-talk-3-pausa",
+      "cast": {
+        "sofi": "smile"
+      }
+    },
+    "c2-s1-ok-2": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«¿Y si me odias por esto?»",
+      "next": "c2-s1-ok-3",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c2-s1-ok": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«No voy a contar tu historia en clase. Pero si veo que estás en peligro, te lo diré antes de hablar con Lucía.»",
+      "next": "c2-s1-ok-2",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-s3": {
+      "type": "choice",
+      "prompt": "Maya se queda paralizada antes de entrar en orientación. ¿Qué hace Sofi?",
+      "options": [
+        {
+          "id": "c2-s3-safe",
+          "label": "Cogerle la mano y entrar juntas, sin obligarla a hablar.",
+          "next": "c2-s3-ok",
+          "effects": {
+            "apoyo_emocional": {
+              "add": 1
+            }
+          }
+        },
+        {
+          "id": "c2-s3-risk1",
+          "label": "Dejarla marchar porque parece que no quiere.",
+          "safe": false,
+          "consequence": "Maya se va sola. La puerta de orientación se cierra.",
+          "lesson": "Callar o quedarse paralizada no siempre significa «déjame». Ofrece compañía sin forzar y pregunta qué necesita.",
+          "lessonTitle": "La parálisis no es un no",
+          "next": "c2-s3-risk1-1"
+        },
+        {
+          "id": "c2-s3-risk2",
+          "label": "Empujarla a la fuerza al despacho.",
+          "safe": false,
+          "consequence": "Maya se siente atrapada. La ayuda parece una orden.",
+          "lesson": "Acompañar no es empujar. La persona debe poder decidir cómo y cuándo contar su historia.",
+          "lessonTitle": "Acompañar no es empujar",
+          "next": "c2-s3-risk2-1"
+        }
+      ],
+      "cast": {
+        "sofi": "neutral"
+      },
+      "perspective": "sofi",
+      "mood": "warm",
+      "scene": "hallway-day"
+    },
+    "c2-s3-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "La parálisis no es un no",
+      "text": "Maya se va sola. La puerta de orientación se cierra.",
+      "lesson": "Callar o quedarse paralizada no siempre significa «déjame». Ofrece compañía sin forzar y pregunta qué necesita.",
+      "returnTo": "c2-s3",
+      "cast": {
+        "sofi": "neutral"
+      },
+      "perspective": "sofi",
+      "mood": "warm",
+      "continueTo": "cap3"
+    },
+    "c2-s3-risk1-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi calla. Puede elegir otra forma de estar cerca.",
+      "next": "c2-s3-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c2-s3-risk1-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«...»",
+      "next": "c2-s3-risk1-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-s3-risk1-4": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Vale. Ya me dices.»",
+      "next": "c2-s3-risk1-5",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-s3-risk1-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No sé.»",
+      "next": "c2-s3-risk1-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-s3-risk1-2": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Si no quieres entrar, lo entiendo.»",
+      "next": "c2-s3-risk1-3",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-s3-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya se va sola. La puerta de orientación se cierra.",
+      "next": "c2-s3-risk1-2",
+      "tone": "narration",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-s3-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "Acompañar no es empujar",
+      "text": "Maya se siente atrapada. La ayuda parece una orden.",
+      "lesson": "Acompañar no es empujar. La persona debe poder decidir cómo y cuándo contar su historia.",
+      "returnTo": "c2-s3",
+      "cast": {
+        "sofi": "neutral"
+      },
+      "perspective": "sofi",
+      "mood": "warm",
+      "continueTo": "cap3"
+    },
+    "c2-s3-risk2-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El pasillo se queda en silencio. Sofi ya no oye lo mismo.",
+      "next": "c2-s3-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c2-s3-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«¡Que me sueltes!»",
+      "next": "c2-s3-risk2-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-s3-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«No puedes seguir así.»",
+      "next": "c2-s3-risk2-5",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-s3-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Suéltame.»",
+      "next": "c2-s3-risk2-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-s3-risk2-2": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Maya, entra. Es por tu bien.»",
+      "next": "c2-s3-risk2-3",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-s3-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya se siente atrapada. La ayuda parece una orden.",
+      "next": "c2-s3-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c2-s3-ok-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Creo que necesito ayuda.»",
+      "next": "cap3",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c2-s3-ok-2": {
+      "type": "dialogue",
+      "speaker": "Lucía",
+      "text": "«Pasad. Aquí no hay prisa.»",
+      "next": "c2-s3-ok-3",
+      "cast": {
+        "lucia": "smile"
+      }
+    },
+    "c2-s3-ok": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi no dice nada. Le coge la mano y espera. Cuando Maya asiente, llaman a la puerta.",
+      "next": "c2-s3-ok-2",
+      "scene": "orientation-office",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "cap3": {
+      "type": "interstitial",
+      "kicker": "Capítulo 3",
+      "title": "Dónde pedir ayuda",
+      "text": "Pedir ayuda tiene nombres, números y personas. Maya y Sofi no están solas.",
+      "next": "cap3-talk",
+      "scene": "home-kitchen-cold",
+      "perspective": "maya",
+      "mood": "tense"
+    },
+    "cap3-talk-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Vale. Creo que voy a llamar.»",
+      "next": "c3-m1",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "cap3-talk-4": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«Solo que no estabas bien. Nada más.»",
+      "next": "cap3-talk-5",
+      "cast": {
+        "madre": "neutral"
+      }
+    },
+    "cap3-talk-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«¿Le has contado algo?»",
+      "next": "cap3-talk-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "cap3-talk-2": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«Lucía ha llamado. Dice que si quieres, puedes hablar con ella.»",
+      "next": "cap3-talk-3",
+      "cast": {
+        "madre": "neutral"
+      }
+    },
+    "cap3-talk": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya está en la cocina con el móvil en la mano. La pantalla de Lucía sigue abierta.",
+      "next": "cap3-talk-2",
+      "scene": "home-kitchen-cold",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m1": {
+      "type": "choice",
+      "prompt": "Lucía le ha dado a Maya el número 116 111 por teléfono. Maya duda. ¿Qué hace?",
+      "options": [
+        {
+          "id": "c3-m1-safe",
+          "label": "Llamar y contar lo que apuntó en su libreta, sin inventar nada.",
+          "next": "c3-m1-ok",
+          "effects": {
+            "nivel_seguridad": {
+              "add": 1
+            },
+            "banderas_rojas": {
+              "add": 1
+            }
+          }
+        },
+        {
+          "id": "c3-m1-risk1",
+          "label": "Colgar por miedo a que salga en la factura del teléfono.",
+          "safe": false,
+          "consequence": "Maya se queda con el teléfono en la mano. El miedo a una consecuencia inventada le impide pedir ayuda.",
+          "lesson": "Las líneas de ayuda a la infancia son gratuitas y privadas. No te obligan a dar tu nombre.",
+          "lessonTitle": "Las líneas de ayuda son gratuitas",
+          "next": "c3-m1-risk1-1"
+        },
+        {
+          "id": "c3-m1-risk2",
+          "label": "Inventar datos para que la atiendan más rápido.",
+          "safe": false,
+          "consequence": "Si inventas datos, la persona que atiende no puede ayudarte bien.",
+          "lesson": "No necesitas exagerar ni inventar. Cuenta lo que sabes, con tus palabras y con las fechas que recuerdes.",
+          "lessonTitle": "Tu relato ya es suficiente",
+          "next": "c3-m1-risk2-1"
+        }
+      ],
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "maya",
+      "mood": "tense",
+      "scene": "home-kitchen-cold"
+    },
+    "c3-m1-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "Las líneas de ayuda son gratuitas",
+      "text": "Maya se queda con el teléfono en la mano. El miedo a una consecuencia inventada le impide pedir ayuda.",
+      "lesson": "Las líneas de ayuda a la infancia son gratuitas y privadas. No te obligan a dar tu nombre.",
+      "returnTo": "c3-m1",
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "maya",
+      "mood": "tense",
+      "continueTo": "c3-m2"
+    },
+    "c3-m1-risk1-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El silencio dura un poco más. Puede elegir otra vez.",
+      "next": "c3-m1-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c3-m1-risk1-5": {
+      "type": "dialogue",
+      "speaker": "Lucía",
+      "text": "«Maya...»",
+      "next": "c3-m1-risk1-6",
+      "cast": {
+        "maya": "neutral"
+      },
+      "remote": true
+    },
+    "c3-m1-risk1-4": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No lo sé. Pero no puedo.»",
+      "next": "c3-m1-risk1-5",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m1-risk1-3": {
+      "type": "dialogue",
+      "speaker": "Lucía",
+      "text": "«¿Quién te ha dicho eso?»",
+      "next": "c3-m1-risk1-4",
+      "cast": {
+        "maya": "neutral"
+      },
+      "remote": true
+    },
+    "c3-m1-risk1-2": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No, no puedo llamar. Saldrá en la factura.»",
+      "next": "c3-m1-risk1-3",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m1-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya se queda con el teléfono en la mano. El miedo le impide llamar.",
+      "next": "c3-m1-risk1-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m1-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "Tu relato ya es suficiente",
+      "text": "Si inventas datos, la persona que atiende no puede ayudarte bien.",
+      "lesson": "No necesitas exagerar ni inventar. Cuenta lo que sabes, con tus palabras y con las fechas que recuerdes.",
+      "returnTo": "c3-m1",
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "maya",
+      "mood": "tense",
+      "continueTo": "c3-m2"
+    },
+    "c3-m1-risk2-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Nadie dice nada. La decisión sigue delante.",
+      "next": "c3-m1-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c3-m1-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No sé si me estoy explicando.»",
+      "next": "c3-m1-risk2-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m1-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Operadora",
+      "text": "«Respira. Cuéntame lo que recuerdes.»",
+      "next": "c3-m1-risk2-5",
+      "remote": true,
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m1-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Sí. Mi padre... bueno, no. Mi vecino...»",
+      "next": "c3-m1-risk2-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m1-risk2-2": {
+      "type": "dialogue",
+      "speaker": "Operadora",
+      "text": "«¿Puedes decirme qué ha pasado?»",
+      "next": "c3-m1-risk2-3",
+      "remote": true,
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m1-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Si inventas datos, la persona que atiende no puede ayudarte bien.",
+      "next": "c3-m1-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m1-ok-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No me han dicho que exagero. Me han escuchado.»",
+      "next": "c3-m2",
+      "cast": {
+        "maya": "neutral"
+      },
+      "tone": "thought"
+    },
+    "c3-m1-ok-2": {
+      "type": "dialogue",
+      "speaker": "Línea 116 111",
+      "text": "«Gracias por llamar. No estás sola. Vamos a pensar juntas los siguientes pasos.»",
+      "next": "c3-m1-ok-3",
+      "cast": {
+        "maya": "neutral"
+      },
+      "remote": true
+    },
+    "c3-m1-ok": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya llama. Le tiembla la voz. Lee su libreta: «Martes, gritos. Jueves, contraseñas. Sábado, flores. Domingo, otra vez.»",
+      "next": "c3-m1-ok-2",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c3-m2": {
+      "type": "choice",
+      "prompt": "El tío de Maya la llama: «No arruines a la familia. Retira lo que has contado.» ¿Qué hace?",
+      "options": [
+        {
+          "id": "c3-m2-safe",
+          "label": "Contárselo a Lucía y seguir el plan acordado.",
+          "next": "c3-m2-ok",
+          "effects": {
+            "nivel_seguridad": {
+              "add": 1
+            },
+            "apoyo_emocional": {
+              "add": 1
+            }
+          }
+        },
+        {
+          "id": "c3-m2-risk1",
+          "label": "Ceder a la amenaza y cancelar la ayuda.",
+          "safe": false,
+          "consequence": "La presión familiar gana tiempo. Maya vuelve a quedarse sin protección.",
+          "lesson": "Proteger a la familia no es ocultar violencia. Puedes querer a tu familia y, a la vez, pedir que se detenga el daño.",
+          "lessonTitle": "Querer no es callar",
+          "next": "c3-m2-risk1-1"
+        },
+        {
+          "id": "c3-m2-risk2",
+          "label": "Insultar al tío y colgar.",
+          "safe": false,
+          "consequence": "La conversación se rompe. Maya se queda con rabia y sin un adulto que interceda.",
+          "lesson": "La rabia es normal, pero no puede ser tu única salida. Cuéntale la presión a una persona profesional.",
+          "lessonTitle": "La rabia necesita un cauce seguro",
+          "next": "c3-m2-risk2-1"
+        }
+      ],
+      "cast": {
+        "maya": "surprised"
+      },
+      "perspective": "maya",
+      "mood": "tense",
+      "scene": "home-kitchen-cold"
+    },
+    "c3-m2-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "Querer no es callar",
+      "text": "La presión familiar gana tiempo. Maya vuelve a quedarse sin protección.",
+      "lesson": "Proteger a la familia no es ocultar violencia. Puedes querer a tu familia y, a la vez, pedir que se detenga el daño.",
+      "returnTo": "c3-m2",
+      "cast": {
+        "maya": "surprised"
+      },
+      "perspective": "maya",
+      "mood": "tense",
+      "continueTo": "c3-m3"
+    },
+    "c3-m2-risk1-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya respira hondo. Puede volver a decidir.",
+      "next": "c3-m2-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c3-m2-risk1-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Vale. Lo pensaré.»",
+      "next": "c3-m2-risk1-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m2-risk1-4": {
+      "type": "dialogue",
+      "speaker": "Tío",
+      "text": "«Piénsalo. Es tu familia.»",
+      "next": "c3-m2-risk1-5",
+      "remote": true,
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m2-risk1-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No sé si puedo.»",
+      "next": "c3-m2-risk1-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m2-risk1-2": {
+      "type": "dialogue",
+      "speaker": "Tío",
+      "text": "«Si retiras lo que has dicho, todo vuelve a la normalidad.»",
+      "next": "c3-m2-risk1-3",
+      "remote": true,
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m2-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El tío llama a Maya. La presión de la familia le hace dudar.",
+      "next": "c3-m2-risk1-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "surprised"
+      }
+    },
+    "c3-m2-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "La rabia necesita una salida segura",
+      "text": "La conversación se rompe. Maya se queda con rabia y sin un adulto que intervenga.",
+      "lesson": "La rabia es normal, pero no puede ser tu única salida. Cuéntale la presión a una persona profesional.",
+      "returnTo": "c3-m2",
+      "cast": {
+        "maya": "surprised"
+      },
+      "perspective": "maya",
+      "mood": "tense",
+      "continueTo": "c3-m3"
+    },
+    "c3-m2-risk2-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El momento pasa. Maya ya sabe que no puede con esto sola.",
+      "next": "c3-m2-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c3-m2-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Tío",
+      "text": "«Luego no digas que no te avisé.»",
+      "next": "c3-m2-risk2-6",
+      "remote": true,
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m2-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«¡Déjame en paz!»",
+      "next": "c3-m2-risk2-5",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m2-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Tío",
+      "text": "«¿Así me hablas?»",
+      "next": "c3-m2-risk2-4",
+      "remote": true,
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m2-risk2-2": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«¡No tienes derecho a decirme eso!»",
+      "next": "c3-m2-risk2-3",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m2-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El tío llama a Maya. La conversación acaba mal y Maya se queda sola con su rabia.",
+      "next": "c3-m2-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "surprised"
+      }
+    },
+    "c3-m2-ok-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No estoy traicionando a nadie por decir la verdad.»",
+      "next": "c3-m2-to-office",
+      "cast": {
+        "maya": "neutral"
+      },
+      "tone": "thought"
+    },
+    "c3-m2-ok-2": {
+      "type": "dialogue",
+      "speaker": "Lucía",
+      "text": "«No tienes que convencer a tu familia de que te crea. Nosotras te creemos.»",
+      "next": "c3-m2-ok-3",
+      "cast": {
+        "maya": "neutral"
+      },
+      "remote": true
+    },
+    "c3-m2-ok": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya llama a Lucía y le cuenta lo que ha dicho su tío. Lucía lo apunta y dice que la presión de la familia también cuenta.",
+      "next": "c3-m2-ok-2",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m3": {
+      "type": "choice",
+      "prompt": "En la entrevista con Servicios Sociales, Maya teme que la separen de su madre. ¿Qué hace?",
+      "options": [
+        {
+          "id": "c3-m3-safe",
+          "label": "Expresar sus dudas y preguntar qué va a pasar con ella y con su madre.",
+          "next": "c3-m3-ok",
+          "effects": {
+            "nivel_seguridad": {
+              "add": 1
+            },
+            "apoyo_emocional": {
+              "add": 1
+            }
+          }
+        },
+        {
+          "id": "c3-m3-risk1",
+          "label": "Retractarse de todo para que no la lleven a un centro.",
+          "safe": false,
+          "consequence": "Maya se calla. La protección se detiene y el miedo sigue en casa.",
+          "lesson": "Puedes preguntar qué va a pasar antes de contar más. La protección busca seguridad, no castigar a la víctima.",
+          "lessonTitle": "Preguntar también es un derecho",
+          "next": "c3-m3-risk1-1"
+        },
+        {
+          "id": "c3-m3-risk2",
+          "label": "Huir de casa con su madre por su cuenta.",
+          "safe": false,
+          "consequence": "Madre e hija se quedan sin un lugar seguro y sin apoyo profesional. El aislamiento crece.",
+          "lesson": "Huir sin un plan puede aumentar el riesgo. Los lugares de acogida existen para que podáis estar juntas y protegidas.",
+          "lessonTitle": "Un plan seguro es mejor que una huida",
+          "next": "c3-m3-risk2-1"
+        }
+      ],
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "tense",
+      "scene": "orientation-office"
+    },
+    "c3-m3-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "Preguntar también es un derecho",
+      "text": "Maya se calla. La protección se detiene y el miedo sigue en casa.",
+      "lesson": "Puedes preguntar qué va a pasar antes de contar más. La protección busca seguridad, no castigar a la víctima.",
+      "returnTo": "c3-m3",
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "tense",
+      "continueTo": "persp-sofi-3"
+    },
+    "c3-m3-risk1-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "La sala sigue en silencio. Maya no puede con esto sola.",
+      "next": "c3-m3-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c3-m3-risk1-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Sí. Quiero volver a casa.»",
+      "next": "c3-m3-risk1-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m3-risk1-4": {
+      "type": "dialogue",
+      "speaker": "Trabajadora social",
+      "text": "«¿Estás segura?»",
+      "next": "c3-m3-risk1-5"
+    },
+    "c3-m3-risk1-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No. Lo que dije antes no era verdad.»",
+      "next": "c3-m3-risk1-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m3-risk1-2": {
+      "type": "dialogue",
+      "speaker": "Trabajadora social",
+      "text": "«¿Quieres añadir algo más?»",
+      "next": "c3-m3-risk1-3"
+    },
+    "c3-m3-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya se calla. La protección se detiene y el miedo sigue en casa.",
+      "next": "c3-m3-risk1-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c3-m3-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "Un plan seguro es mejor que una huida",
+      "text": "Madre e hija se quedan sin un lugar seguro y sin apoyo. Se quedan más solas.",
+      "lesson": "Huir sin un plan puede aumentar el riesgo. Los lugares de acogida existen para que podáis estar juntas y protegidas.",
+      "returnTo": "c3-m3",
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "tense",
+      "continueTo": "persp-sofi-3"
+    },
+    "c3-m3-risk2-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Nadie dice nada. La decisión sigue delante.",
+      "next": "c3-m3-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c3-m3-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«No tenemos nada preparado, cariño.»",
+      "next": "c3-m3-risk2-6",
+      "cast": {
+        "maya": "neutral"
+      },
+      "remote": true
+    },
+    "c3-m3-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No lo sé. Lejos de aquí.»",
+      "next": "c3-m3-risk2-5",
+      "cast": {
+        "maya": "neutral"
+      },
+      "remote": false
+    },
+    "c3-m3-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«¿Y adónde vamos?»",
+      "next": "c3-m3-risk2-4",
+      "cast": {
+        "maya": "neutral"
+      },
+      "remote": true
+    },
+    "c3-m3-risk2-2": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Mamá, vámonos. Podemos coger el tren.»",
+      "next": "c3-m3-risk2-3",
+      "cast": {
+        "maya": "neutral"
+      },
+      "remote": false
+    },
+    "c3-m3-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya llama a su madre. Deciden huir sin plan y se quedan sin un lugar seguro.",
+      "next": "c3-m3-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c3-m3-ok-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Entonces quiero contarlo. Pero quiero entenderlo.»",
+      "next": "c3-m3-after-interview",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-m3-ok-2": {
+      "type": "dialogue",
+      "speaker": "Trabajadora social",
+      "text": "«Son buenas preguntas. Vamos a explicarte cada paso y a buscar un lugar donde estéis juntas y seguras.»",
+      "next": "c3-m3-ok-3",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c3-m3-ok": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«¿Mi madre y yo vamos a estar juntas? ¿Qué pasa si él vuelve?»",
+      "next": "c3-m3-ok-2",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "persp-sofi-3": {
+      "type": "interstitial",
+      "kicker": "Perspectiva de Sofi",
+      "title": "Buscar ayuda sin exponerla",
+      "text": "Sofi también se prepara para la entrevista. Busca cómo ayudar sin exponer a Maya.",
+      "next": "persp-sofi-3-talk",
+      "scene": "orientation-office",
+      "perspective": "sofi",
+      "mood": "warm"
+    },
+    "persp-sofi-3-talk-4": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Vale. Primero pregunto.»",
+      "next": "c3-s2",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "persp-sofi-3-talk-3": {
+      "type": "dialogue",
+      "speaker": "Lucía",
+      "text": "«Empieza por las oficiales. Y no compartas nada sin hablarlo.»",
+      "next": "persp-sofi-3-talk-4",
+      "cast": {
+        "lucia": "neutral"
+      }
+    },
+    "persp-sofi-3-talk-2": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Hay demasiadas páginas. No sé cuál es de verdad.»",
+      "next": "persp-sofi-3-talk-3",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "persp-sofi-3-talk": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi abre tres pestañas a la vez. Todas dicen cosas distintas.",
+      "next": "persp-sofi-3-talk-2",
+      "scene": "orientation-office",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c3-s2": {
+      "type": "choice",
+      "prompt": "Maya entra en pánico antes de la entrevista. ¿Qué hace Sofi?",
+      "options": [
+        {
+          "id": "c3-s2-safe",
+          "label": "Guiarla en una respiración lenta y recordarle que no está sola.",
+          "next": "c3-s2-ok",
+          "effects": {
+            "apoyo_emocional": {
+              "add": 1
+            }
+          }
+        },
+        {
+          "id": "c3-s2-risk1",
+          "label": "Decirle que está exagerando.",
+          "safe": false,
+          "consequence": "Maya siente que su miedo molesta. Se calla y deja de contar lo que necesita.",
+          "lesson": "El miedo no es exagerado: es una respuesta. Escucha lo que siente antes de proponer un paso.",
+          "lessonTitle": "El miedo no se discute",
+          "next": "c3-s2-risk1-1"
+        },
+        {
+          "id": "c3-s2-risk2",
+          "label": "Ponerse a llorar con ella y contagiarle más pánico.",
+          "safe": false,
+          "consequence": "Las dos se bloquean. El miedo de una alimenta el de la otra.",
+          "lesson": "Puedes sentir mucho y, a la vez, mantener la calma. Respira tú primero y propón un paso pequeño.",
+          "lessonTitle": "También puedes sostener la calma",
+          "next": "c3-s2-risk2-1"
+        }
+      ],
+      "cast": {
+        "sofi": "sad"
+      },
+      "perspective": "sofi",
+      "mood": "warm",
+      "scene": "orientation-office"
+    },
+    "c3-s2-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "El miedo no se discute",
+      "text": "Maya siente que su miedo molesta. Se calla y deja de contar lo que necesita.",
+      "lesson": "El miedo no es exagerado: es una respuesta. Escucha lo que siente antes de proponer un paso.",
+      "returnTo": "c3-s2",
+      "cast": {
+        "sofi": "sad"
+      },
+      "perspective": "sofi",
+      "mood": "warm",
+      "continueTo": "cap4"
+    },
+    "c3-s2-risk1-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi respira. Puede intentarlo de otra manera.",
+      "next": "c3-s2-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c3-s2-risk1-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Da igual.»",
+      "next": "c3-s2-risk1-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-s2-risk1-4": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«No, no quería decir eso.»",
+      "next": "c3-s2-risk1-5",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c3-s2-risk1-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Vale. Entonces no te cuento más.»",
+      "next": "c3-s2-risk1-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-s2-risk1-2": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Creo que estás exagerando.»",
+      "next": "c3-s2-risk1-3",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c3-s2-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya siente que su miedo molesta. Se calla y deja de contar lo que necesita.",
+      "next": "c3-s2-risk1-2",
+      "tone": "narration",
+      "cast": {
+        "sofi": "sad"
+      }
+    },
+    "c3-s2-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "También puedes mantener la calma",
+      "text": "Las dos se bloquean. El miedo de una alimenta el de la otra.",
+      "lesson": "Puedes sentir mucho y, a la vez, mantener la calma. Respira tú primero y propón un paso pequeño.",
+      "returnTo": "c3-s2",
+      "cast": {
+        "sofi": "sad"
+      },
+      "perspective": "sofi",
+      "mood": "warm",
+      "continueTo": "cap4"
+    },
+    "c3-s2-risk2-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "La puerta de orientación sigue cerrada. Sofi puede decidir otra vez.",
+      "next": "c3-s2-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c3-s2-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Yo tampoco.»",
+      "next": "c3-s2-risk2-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-s2-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Lo siento. No sé qué hacer.»",
+      "next": "c3-s2-risk2-5",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c3-s2-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Sofi, me estás asustando más.»",
+      "next": "c3-s2-risk2-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c3-s2-risk2-2": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«No puedo más. Me da miedo todo.»",
+      "next": "c3-s2-risk2-3",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c3-s2-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Las dos se bloquean. El miedo de una alimenta el de la otra.",
+      "next": "c3-s2-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "sofi": "sad"
+      }
+    },
+    "c3-s2-ok-3": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Ya. Yo me quedo fuera. Si necesitas parar, pides parar.»",
+      "next": "cap4",
+      "cast": {
+        "sofi": "smile"
+      }
+    },
+    "c3-s2-ok-2": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Me tiembla todo.»",
+      "next": "c3-s2-ok-3",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c3-s2-ok": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Respira conmigo. Cuatro tiempos para inspirar, seis para soltar. No tienes que hacerlo perfecto.»",
+      "next": "c3-s2-ok-2",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "cap4": {
+      "type": "interstitial",
+      "kicker": "Capítulo 4",
+      "title": "Justicia y protección",
+      "text": "La justicia también puede escuchar con cuidado. La seguridad también depende de detalles pequeños.",
+      "next": "c4-edad-router",
+      "scene": "court-friendly",
+      "perspective": "maya",
+      "mood": "safe"
+    },
+    "c4-edad-router": {
+      "type": "branch",
+      "when": {
+        "flag": "modoAdolescente"
+      },
+      "then": "c4-teen",
+      "else": "c4-child"
+    },
+    "c4-teen-4": {
+      "type": "dialogue",
+      "speaker": "Lucía",
+      "text": "«Entonces paramos y respiramos.»",
+      "next": "c4-m1",
+      "cast": {
+        "lucia": "neutral"
+      }
+    },
+    "c4-teen-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«¿Y si me quedo en blanco?»",
+      "next": "c4-teen-4",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c4-teen-2": {
+      "type": "dialogue",
+      "speaker": "Lucía",
+      "text": "«Hoy no vienes a un examen. Vienes a que te escuchen.»",
+      "next": "c4-teen-3",
+      "cast": {
+        "lucia": "smile"
+      }
+    },
+    "c4-teen": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya entra en una sala con sofás. No hay tribunal. Una psicóloga le dice que puede declarar sin ver a quien le da miedo.",
+      "next": "c4-teen-2",
+      "scene": "court-friendly",
+      "cast": {
+        "maya": "surprised"
+      }
+    },
+    "c4-child-4": {
+      "type": "dialogue",
+      "speaker": "Lucía",
+      "text": "«Entonces paramos y respiramos.»",
+      "next": "c4-m1",
+      "cast": {
+        "lucia": "neutral"
+      }
+    },
+    "c4-child-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«¿Y si me quedo en blanco?»",
+      "next": "c4-child-4",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c4-child-2": {
+      "type": "dialogue",
+      "speaker": "Lucía",
+      "text": "«Hoy no vienes a un examen. Vienes a que te escuchen.»",
+      "next": "c4-child-3",
+      "cast": {
+        "lucia": "smile"
+      }
+    },
+    "c4-child": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya entra en una sala con sofás y dibujos. Una psicóloga le dice que puede hablar despacio.",
+      "next": "c4-child-2",
+      "scene": "court-friendly",
+      "cast": {
+        "maya": "surprised"
+      }
+    },
+    "c4-m1": {
+      "type": "choice",
+      "prompt": "La psicóloga le pide que cuente lo que ha visto. ¿Qué hace Maya?",
+      "options": [
+        {
+          "id": "c4-m1-safe",
+          "label": "Declarar en la sala adaptada, con la psicóloga y con pausas.",
+          "next": "c4-m1-ok",
+          "effects": {
+            "nivel_seguridad": {
+              "add": 1
+            },
+            "banderas_rojas": {
+              "add": 1
+            }
+          }
+        },
+        {
+          "id": "c4-m1-risk1",
+          "label": "Retractarse por pena hacia su padre.",
+          "safe": false,
+          "consequence": "Maya se calla. La protección se complica y ella sigue con miedo.",
+          "lesson": "Sentir pena no significa que lo ocurrido no importe. Puedes decir la verdad y, a la vez, sentir cosas difíciles.",
+          "lessonTitle": "La pena no borra el daño",
+          "next": "c4-m1-risk1-1"
+        },
+        {
+          "id": "c4-m1-risk2",
+          "label": "Cerrarse en el silencio y no responder nada.",
+          "safe": false,
+          "consequence": "La sala respeta su silencio. Pero la información tarda más en llegar.",
+          "lesson": "Pedir una pausa es distinto de cerrarse. Puedes decir «necesito parar» y retomar cuando te sientas preparada.",
+          "lessonTitle": "Puedes pedir una pausa",
+          "next": "c4-m1-risk2-1"
+        }
+      ],
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "safe",
+      "scene": "court-friendly"
+    },
+    "c4-m1-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "La pena no borra el daño",
+      "text": "Maya se calla. La protección se complica y ella sigue con miedo.",
+      "lesson": "Sentir pena no significa que lo ocurrido no importe. Puedes decir la verdad y, a la vez, sentir cosas difíciles.",
+      "returnTo": "c4-m1",
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "safe",
+      "continueTo": "c4-m2-whatsapp"
+    },
+    "c4-m1-risk1-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "La sala sigue en silencio. Maya puede volver a decidir.",
+      "next": "c4-m1-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c4-m1-risk1-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«A mí no me pasa nada.»",
+      "next": "c4-m1-risk1-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m1-risk1-4": {
+      "type": "dialogue",
+      "speaker": "Psicóloga",
+      "text": "«¿Y a ti?»",
+      "next": "c4-m1-risk1-5"
+    },
+    "c4-m1-risk1-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No. No quiero que le pase nada a mi padre.»",
+      "next": "c4-m1-risk1-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m1-risk1-2": {
+      "type": "dialogue",
+      "speaker": "Psicóloga",
+      "text": "«¿Quieres decir algo más?»",
+      "next": "c4-m1-risk1-3"
+    },
+    "c4-m1-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya se calla. La protección se complica y ella sigue con miedo.",
+      "next": "c4-m1-risk1-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c4-m1-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "Puedes pedir una pausa",
+      "text": "La sala respeta su silencio. Pero la información tarda más en llegar.",
+      "lesson": "Pedir una pausa es distinto de cerrarse. Puedes decir «necesito parar» y retomar cuando te sientas preparada.",
+      "returnTo": "c4-m1",
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "safe",
+      "continueTo": "c4-m2-whatsapp"
+    },
+    "c4-m1-risk2-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El silencio dura un poco más. Puede elegir otra vez.",
+      "next": "c4-m1-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c4-m1-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No quiero hablar.»",
+      "next": "c4-m1-risk2-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m1-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Psicóloga",
+      "text": "«No tienes que contestar ahora.»",
+      "next": "c4-m1-risk2-5"
+    },
+    "c4-m1-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«...»",
+      "next": "c4-m1-risk2-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m1-risk2-2": {
+      "type": "dialogue",
+      "speaker": "Psicóloga",
+      "text": "«Maya, ¿puedes contarme qué pasó?»",
+      "next": "c4-m1-risk2-3"
+    },
+    "c4-m1-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "La sala respeta su silencio. Pero la información tarda más en llegar.",
+      "next": "c4-m1-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c4-m1-ok-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Me han escuchado sin prisa.»",
+      "next": "c4-m1-to-shelter",
+      "cast": {
+        "maya": "smile"
+      },
+      "tone": "thought"
+    },
+    "c4-m1-ok-2": {
+      "type": "dialogue",
+      "speaker": "Psicóloga",
+      "text": "«Gracias por contar algo tan difícil. No tienes que hacerlo perfecto.»",
+      "next": "c4-m1-ok-3",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m1-ok": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya habla despacio. La psicóloga le recuerda que puede parar. Al terminar, se siente más ligera.",
+      "next": "c4-m1-ok-2",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m2-whatsapp": {
+      "type": "chat",
+      "chatTitle": "Papá",
+      "self": "Mamá",
+      "messages": [
+        {
+          "from": "Papá",
+          "text": "si no retiráis la denuncia\nos quedáis sin nada",
+          "time": "10:02"
+        },
+        {
+          "from": "Papá",
+          "text": "lo digo por vosotras",
+          "time": "10:03"
+        },
+        {
+          "from": "Mamá",
+          "text": "no me escribas más",
+          "time": "10:04"
+        },
+        {
+          "from": "Papá",
+          "text": "tú verás",
+          "time": "10:04"
+        }
+      ],
+      "next": "c4-m2-pausa",
+      "scene": "shelter-room",
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "tense"
+    },
+    "c4-m2": {
+      "type": "choice",
+      "prompt": "El padre manda un mensaje a la madre: «Si no retiráis la denuncia, os quedaréis sin nada». ¿Qué hace Maya?",
+      "options": [
+        {
+          "id": "c4-m2-safe",
+          "label": "Entregar el mensaje a la abogada y no responder.",
+          "next": "c4-m2-ok",
+          "effects": {
+            "nivel_seguridad": {
+              "add": 1
+            },
+            "confidencialidad": {
+              "add": 1
+            },
+            "banderas_rojas": {
+              "add": 1
+            }
+          }
+        },
+        {
+          "id": "c4-m2-risk1",
+          "label": "Convencer a su madre de retirar la denuncia por miedo a quedarse sin dinero.",
+          "safe": false,
+          "consequence": "El miedo a quedarse sin dinero hace que Maya piense en callar.",
+          "lesson": "El miedo a quedarte sin dinero es normal, pero retirar una denuncia por chantaje no te protege. Cuéntaselo a la abogada.",
+          "lessonTitle": "El chantaje no es una razón para callar",
+          "next": "c4-m2-risk1-1"
+        },
+        {
+          "id": "c4-m2-risk2",
+          "label": "Responder al padre con insultos.",
+          "safe": false,
+          "consequence": "Papá usa la respuesta para justificarse. Maya descarga rabia, pero no gana protección.",
+          "lesson": "La rabia es normal, pero responder no suele detener el chantaje. Guarda el mensaje y entrégaselo a quien lleva el caso.",
+          "lessonTitle": "Guarda el mensaje, no la respuesta",
+          "next": "c4-m2-risk2-1"
+        }
+      ],
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "tense",
+      "scene": "shelter-room"
+    },
+    "c4-m2-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "El chantaje no es una razón para callar",
+      "text": "El miedo a quedarse sin dinero hace que Maya piense en callar.",
+      "lesson": "El miedo a quedarte sin dinero es normal, pero retirar una denuncia por chantaje no te protege. Cuéntaselo a la abogada.",
+      "returnTo": "c4-m2",
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "tense",
+      "continueTo": "c4-m3"
+    },
+    "c4-m2-risk1-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El silencio dura un poco más. Puede elegir otra vez.",
+      "next": "c4-m2-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c4-m2-risk1-5": {
+      "type": "dialogue",
+      "speaker": "Abogada",
+      "text": "«Ese miedo es precisamente lo que él quiere.»",
+      "next": "c4-m2-risk1-6"
+    },
+    "c4-m2-risk1-4": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Si no, nos quedamos sin nada.»",
+      "next": "c4-m2-risk1-5",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m2-risk1-3": {
+      "type": "dialogue",
+      "speaker": "Mamá",
+      "text": "«¿Tú crees?»",
+      "next": "c4-m2-risk1-4",
+      "cast": {
+        "madre": "neutral"
+      }
+    },
+    "c4-m2-risk1-2": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Mamá, quizá deberíamos retirarlo.»",
+      "next": "c4-m2-risk1-3",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m2-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El miedo a quedarse sin dinero hace que Maya piense en callar.",
+      "next": "c4-m2-risk1-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c4-m2-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "Guarda el mensaje, no la respuesta",
+      "text": "Papá usa la respuesta para justificarse. Maya descarga rabia, pero no gana protección.",
+      "lesson": "La rabia es normal, pero responder no suele detener el chantaje. Guarda el mensaje y entrégaselo a quien lleva el caso.",
+      "returnTo": "c4-m2",
+      "cast": {
+        "maya": "sad"
+      },
+      "perspective": "maya",
+      "mood": "tense",
+      "continueTo": "c4-m3"
+    },
+    "c4-m2-risk2-7": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "La sala sigue en silencio. Maya puede volver a decidir.",
+      "next": "c4-m2-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c4-m2-risk2-6": {
+      "type": "dialogue",
+      "speaker": "Abogada",
+      "text": "«Maya, no respondas. Guarda el mensaje.»",
+      "next": "c4-m2-risk2-7",
+      "remote": false,
+      "cast": {
+        "lucia": "neutral"
+      }
+    },
+    "c4-m2-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«¡No vuelvas a escribirnos!»",
+      "next": "c4-m2-risk2-6",
+      "remote": false,
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m2-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Papá",
+      "text": "«¿Ah, no? Ya veremos.»",
+      "next": "c4-m2-risk2-5",
+      "remote": true
+    },
+    "c4-m2-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Eres un cobarde. No te tengo miedo.»",
+      "next": "c4-m2-risk2-4",
+      "remote": false,
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m2-risk2-2": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El móvil de mamá se ilumina. Es otro mensaje de Papá.",
+      "next": "c4-m2-risk2-3",
+      "remote": false
+    },
+    "c4-m2-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Papá usa la respuesta para justificarse. Maya descarga rabia, pero no gana protección.",
+      "next": "c4-m2-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "sad"
+      }
+    },
+    "c4-m2-ok-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No he respondido. Pero no me he callado.»",
+      "next": "c4-m3",
+      "cast": {
+        "maya": "neutral"
+      },
+      "tone": "thought"
+    },
+    "c4-m2-ok-2": {
+      "type": "dialogue",
+      "speaker": "Abogada",
+      "text": "«Que él amenace no significa que tenga razón.»",
+      "next": "c4-m2-ok-3",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m2-ok": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya guarda el mensaje y se lo da a la abogada. No contesta. La abogada dice que el chantaje también se puede denunciar.",
+      "next": "c4-m2-ok-2",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m3": {
+      "type": "choice",
+      "prompt": "Maya y su madre llegan a un recurso de acogida. ¿Qué hace Maya el primer día?",
+      "options": [
+        {
+          "id": "c4-m3-safe",
+          "label": "Hablar con el equipo y preguntar cómo funciona el lugar.",
+          "next": "c4-m3-ok",
+          "effects": {
+            "nivel_seguridad": {
+              "add": 1
+            },
+            "apoyo_emocional": {
+              "add": 1
+            }
+          }
+        },
+        {
+          "id": "c4-m3-risk1",
+          "label": "Aislarse en la habitación sin hablar con el equipo.",
+          "safe": false,
+          "consequence": "El equipo respeta su espacio, pero tarda más en saber qué necesita. Maya se siente sola.",
+          "lesson": "El primer día puede ser muy difícil. No tienes que contarlo todo, pero sí puedes decir «necesito tiempo» y aceptar compañía.",
+          "lessonTitle": "Puedes pedir tiempo sin desaparecer",
+          "next": "c4-m3-risk1-1"
+        },
+        {
+          "id": "c4-m3-risk2",
+          "label": "Contar en redes dónde está el nuevo lugar.",
+          "safe": false,
+          "consequence": "La ubicación del recurso puede quedar expuesta. La seguridad de todas las personas del lugar se resiente.",
+          "lesson": "La seguridad también está en el móvil. No publiques ubicaciones, horarios ni datos que puedan identificar un lugar de acogida.",
+          "lessonTitle": "Tu ubicación también te protege",
+          "next": "c4-m3-risk2-1"
+        }
+      ],
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "maya",
+      "mood": "safe",
+      "scene": "shelter-room"
+    },
+    "c4-m3-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "Puedes pedir tiempo sin desaparecer",
+      "text": "El equipo respeta su espacio, pero tarda más en saber qué necesita. Maya se siente sola.",
+      "lesson": "El primer día puede ser muy difícil. No tienes que contarlo todo, pero sí puedes decir «necesito tiempo» y aceptar compañía.",
+      "returnTo": "c4-m3",
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "maya",
+      "mood": "safe",
+      "continueTo": "persp-sofi-4"
+    },
+    "c4-m3-risk1-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya respira hondo. Puede volver a decidir.",
+      "next": "c4-m3-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c4-m3-risk1-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«...Gracias.»",
+      "next": "c4-m3-risk1-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m3-risk1-4": {
+      "type": "dialogue",
+      "speaker": "Equipo de acogida",
+      "text": "«Vale. Si necesitas algo, estamos al otro lado.»",
+      "next": "c4-m3-risk1-5"
+    },
+    "c4-m3-risk1-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Prefiero quedarme aquí.»",
+      "next": "c4-m3-risk1-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m3-risk1-2": {
+      "type": "dialogue",
+      "speaker": "Equipo de acogida",
+      "text": "«Maya, ¿quieres cenar con nosotras?»",
+      "next": "c4-m3-risk1-3"
+    },
+    "c4-m3-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El equipo respeta su espacio, pero tarda más en saber qué necesita. Maya se siente sola.",
+      "next": "c4-m3-risk1-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m3-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "Tu ubicación también te protege",
+      "text": "La ubicación del lugar puede quedar expuesta. La seguridad de todas las personas queda en peligro.",
+      "lesson": "La seguridad también está en el móvil. No publiques ubicaciones, horarios ni datos que puedan identificar un lugar de acogida.",
+      "returnTo": "c4-m3",
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "maya",
+      "mood": "safe",
+      "continueTo": "persp-sofi-4"
+    },
+    "c4-m3-risk2-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "La habitación sigue en silencio. La decisión sigue delante.",
+      "next": "c4-m3-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c4-m3-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«¿Por qué?»",
+      "next": "c4-m3-risk2-6",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m3-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Bórrala. Por favor.»",
+      "next": "c4-m3-risk2-5",
+      "cast": {
+        "maya": "neutral"
+      },
+      "remote": true
+    },
+    "c4-m3-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Sí. Quería que vieras dónde estoy.»",
+      "next": "c4-m3-risk2-4",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m3-risk2-2": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«¿Has contado en redes dónde estás?»",
+      "next": "c4-m3-risk2-3",
+      "cast": {
+        "maya": "neutral"
+      },
+      "remote": true
+    },
+    "c4-m3-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi llama a Maya. Si comparten la ubicación, el lugar seguro deja de ser seguro.",
+      "next": "c4-m3-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m3-ok-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No es mi casa. Pero hoy puedo cerrar la puerta.»",
+      "next": "persp-sofi-4",
+      "cast": {
+        "maya": "smile"
+      },
+      "tone": "thought"
+    },
+    "c4-m3-ok-2": {
+      "type": "dialogue",
+      "speaker": "Equipo de acogida",
+      "text": "«Aquí puedes ir despacio. Y puedes pedir ayuda sin tener que explicarlo todo.»",
+      "next": "c4-m3-ok-3",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "c4-m3-ok": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya pregunta dónde dejar sus cosas, cuándo se cena y quién puede acompañarla si no puede dormir.",
+      "next": "c4-m3-ok-2",
+      "scene": "shelter-room",
+      "cast": {
+        "maya": "neutral"
+      }
+    },
+    "persp-sofi-4": {
+      "type": "interstitial",
+      "kicker": "Perspectiva de Sofi",
+      "title": "Cerca sin invadir",
+      "text": "Maya ya está en un lugar de acogida. Sofi aprende a estar cerca sin saberlo todo.",
+      "next": "persp-sofi-4-talk",
+      "scene": "hallway-day",
+      "perspective": "sofi",
+      "mood": "warm"
+    },
+    "persp-sofi-4-talk-4": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Vale. Así lo haré.»",
+      "next": "c4-s1",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "persp-sofi-4-talk-3": {
+      "type": "dialogue",
+      "speaker": "Lucía",
+      "text": "«Pregúntale cómo está. No dónde está.»",
+      "next": "persp-sofi-4-talk-4",
+      "cast": {
+        "lucia": "neutral"
+      }
+    },
+    "persp-sofi-4-talk-2": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«No sé qué decirle a Maya sin preguntarle dónde está.»",
+      "next": "persp-sofi-4-talk-3",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "persp-sofi-4-talk": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi mira el móvil sin escribir. No quiere preguntar lo que no debe.",
+      "next": "persp-sofi-4-talk-2",
+      "scene": "hallway-day",
+      "cast": {
+        "sofi": "sad"
+      }
+    },
+    "c4-s1": {
+      "type": "choice",
+      "prompt": "Maya está en un recurso protegido. ¿Cómo mantiene Sofi el contacto?",
+      "options": [
+        {
+          "id": "c4-s1-safe",
+          "label": "Mantener llamadas seguras y no pedir la dirección del lugar.",
+          "next": "c4-s1-call",
+          "effects": {
+            "apoyo_emocional": {
+              "add": 1
+            },
+            "confidencialidad": {
+              "add": 1
+            }
+          }
+        },
+        {
+          "id": "c4-s1-risk1",
+          "label": "Exigir la dirección del piso para ir a verla.",
+          "safe": false,
+          "consequence": "La ubicación de Maya se convierte en información compartida. El recurso tiene que intervenir.",
+          "lesson": "La ubicación de un lugar de acogida no se comparte. Puedes mantener el contacto por llamadas seguras y mensajes acordados.",
+          "lessonTitle": "La ubicación no se comparte",
+          "next": "c4-s1-risk1-1"
+        },
+        {
+          "id": "c4-s1-risk2",
+          "label": "Enfadarse porque no pueden quedar como antes.",
+          "safe": false,
+          "consequence": "Maya siente que tiene que cuidar también el enfado de Sofi. La amistad se llena de culpa.",
+          "lesson": "La amistad cambia cuando hay protección de por medio. Puedes decir que echas de menos sin exigir lo que no puede dar.",
+          "lessonTitle": "Echar de menos no es exigir",
+          "next": "c4-s1-risk2-1"
+        }
+      ],
+      "cast": {
+        "sofi": "sad"
+      },
+      "perspective": "sofi",
+      "mood": "warm",
+      "scene": "hallway-day"
+    },
+    "c4-s1-risk1-reconduction": {
+      "type": "reconduction",
+      "title": "La ubicación no se comparte",
+      "text": "La ubicación de Maya se convierte en información compartida. El recurso tiene que intervenir.",
+      "lesson": "La ubicación de un lugar de acogida no se comparte. Puedes mantener el contacto por llamadas seguras y mensajes acordados.",
+      "returnTo": "c4-s1",
+      "cast": {
+        "sofi": "sad"
+      },
+      "perspective": "sofi",
+      "mood": "warm",
+      "continueTo": "cap5"
+    },
+    "c4-s1-risk1-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi respira. Puede intentarlo de otra manera.",
+      "next": "c4-s1-risk1-reconduction",
+      "tone": "narration"
+    },
+    "c4-s1-risk1-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Porque no es seguro. Ni para ti.»",
+      "next": "c4-s1-risk1-6",
+      "cast": {
+        "sofi": "neutral"
+      },
+      "remote": true
+    },
+    "c4-s1-risk1-4": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«¿Por qué no?»",
+      "next": "c4-s1-risk1-5",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c4-s1-risk1-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«No puedo decírtelo.»",
+      "next": "c4-s1-risk1-4",
+      "cast": {
+        "sofi": "neutral"
+      },
+      "remote": true
+    },
+    "c4-s1-risk1-2": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«¿Puedes decirme dónde estás? Quiero verte.»",
+      "next": "c4-s1-risk1-3",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c4-s1-risk1-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi le pide a Maya la dirección. Compartirla pone en peligro el lugar.",
+      "next": "c4-s1-risk1-2",
+      "tone": "narration",
+      "cast": {
+        "sofi": "sad"
+      }
+    },
+    "c4-s1-risk2-reconduction": {
+      "type": "reconduction",
+      "title": "Echar de menos no es exigir",
+      "text": "Maya siente que tiene que cuidar también el enfado de Sofi. La amistad se llena de culpa.",
+      "lesson": "La amistad cambia cuando hay protección de por medio. Puedes decir que echas de menos sin exigir lo que no puede dar.",
+      "returnTo": "c4-s1",
+      "cast": {
+        "sofi": "sad"
+      },
+      "perspective": "sofi",
+      "mood": "warm",
+      "continueTo": "cap5"
+    },
+    "c4-s1-risk2-6": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El pasillo sigue lleno de voces. Sofi ya no oye lo mismo.",
+      "next": "c4-s1-risk2-reconduction",
+      "tone": "narration"
+    },
+    "c4-s1-risk2-5": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Me importa. Pero no puedo hacer más.»",
+      "next": "c4-s1-risk2-6",
+      "cast": {
+        "sofi": "neutral"
+      },
+      "remote": true
+    },
+    "c4-s1-risk2-4": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Parece que no te importa.»",
+      "next": "c4-s1-risk2-5",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c4-s1-risk2-3": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Lo sé. Yo también lo echo de menos.»",
+      "next": "c4-s1-risk2-4",
+      "cast": {
+        "sofi": "neutral"
+      },
+      "remote": true
+    },
+    "c4-s1-risk2-2": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Ya no podemos quedar como antes.»",
+      "next": "c4-s1-risk2-3",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "c4-s1-risk2-1": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi llama a Maya. Maya siente que ahora también tiene que cuidar el enfado de Sofi.",
+      "next": "c4-s1-risk2-2",
+      "tone": "narration",
+      "cast": {
+        "sofi": "sad"
+      }
+    },
+    "c4-s1-ok-3": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«Me alegro. Mañana te cuento el examen de mates.»",
+      "next": "c4-s2-to-return",
+      "cast": {
+        "sofi": "smile"
+      }
+    },
+    "c4-s1-ok-2": {
+      "type": "dialogue",
+      "speaker": "Maya",
+      "text": "«Hoy he dormido. Y he comido. Eso es raro.»",
+      "next": "c4-s1-ok-3",
+      "cast": {
+        "sofi": "neutral"
+      },
+      "remote": true
+    },
+    "c4-s1-ok": {
+      "type": "dialogue",
+      "speaker": "Sofi",
+      "text": "«No necesito saber dónde estás. Solo necesito saber que estás bien cuando puedas decírmelo.»",
+      "next": "c4-s1-ok-2",
+      "cast": {
+        "sofi": "neutral"
+      }
+    },
+    "cap5": {
+      "type": "interstitial",
+      "kicker": "Capítulo 5",
+      "title": "El taller de Elena",
+      "text": "Elena entra en el aula. No viene a dar una charla: viene a escuchar y a explicar las cosas claras.",
+      "next": "c5-intro",
+      "scene": "classroom-day",
+      "perspective": "elena",
+      "mood": "warm"
+    },
+    "c5-intro-3": {
+      "type": "dialogue",
+      "speaker": "Elena",
+      "text": "«Antes del cuestionario, repasemos dos ideas clave sobre la violencia en casa.»",
+      "next": "c5-quiz-intro",
+      "cast": {
+        "elena": "neutral"
+      }
+    },
+    "c5-intro-2": {
+      "type": "dialogue",
+      "speaker": "Elena",
+      "text": "«Soy Elena. Trabajo en justicia. Hoy no vengo a hablar de castigos. Vengo a hablar de cómo se protege a quien pide ayuda.»",
+      "next": "c5-intro-3",
+      "cast": {
+        "elena": "smile"
+      }
+    },
+    "c5-intro": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Elena entra en el aula con una carpeta. Deja el móvil boca abajo y mira a la clase.",
+      "next": "c5-intro-2",
+      "scene": "classroom-day",
+      "cast": {
+        "elena": "neutral"
+      }
+    },
+    "c5-quiz-intro": {
+      "type": "dialogue",
+      "speaker": "Elena",
+      "text": "«Ahora, dos preguntas. No hay nota. Si algo no lo sabes, puedes preguntarlo después.»",
+      "next": "final-quiz",
+      "cast": {
+        "elena": "smile"
+      }
+    },
+    "final-quiz": {
+      "type": "quiz",
+      "title": "Cuatro ideas para llevarte",
+      "prompt": "Responde con calma. Cada respuesta abre una explicación.",
+      "questions": [
+        {
+          "id": "q-violencia",
+          "voice": "Maya",
+          "flag": "quizViolencia",
+          "question": "¿Qué es violencia psicológica?",
+          "explanation": "Controlar, humillar, aislar o amenazar.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Dos personas discuten y luego se escuchan.",
+              "correct": false,
+              "feedback": "Una discusión no es violencia por sí sola."
+            },
+            {
+              "id": "b",
+              "label": "Revisar el móvil, humillar y pedir contraseñas.",
+              "correct": true,
+              "feedback": "Eso es control y busca someter."
+            },
+            {
+              "id": "c",
+              "label": "Una persona dice que necesita espacio.",
+              "correct": false,
+              "feedback": "Poner un límite no es violencia."
+            }
+          ]
+        },
+        {
+          "id": "q-culpa",
+          "voice": "Sofi",
+          "flag": "quizCulpa",
+          "question": "Si una amiga te cuenta que sufre violencia, ¿de quién es la culpa?",
+          "explanation": "Nunca es culpa de la víctima.",
+          "options": [
+            {
+              "id": "a",
+              "label": "De ella, por no haber hablado antes.",
+              "correct": false,
+              "feedback": "Callar no es culpa."
+            },
+            {
+              "id": "b",
+              "label": "De quien ejerce la violencia, nunca de la víctima.",
+              "correct": true,
+              "feedback": "La responsabilidad es de quien controla o daña."
+            },
+            {
+              "id": "c",
+              "label": "De toda la familia por igual.",
+              "correct": false,
+              "feedback": "La familia también puede estar sufriendo."
+            }
+          ]
+        }
+      ],
+      "next": "final-router",
+      "scene": "classroom-day",
+      "cast": {
+        "elena": "neutral"
+      },
+      "perspective": "elena",
+      "mood": "warm"
+    },
+    "final-router": {
+      "type": "branch",
+      "when": {
+        "all": [
+          {
+            "gte": [
+              {
+                "flag": "quizScore"
+              },
+              2
+            ]
+          },
+          {
+            "lte": [
+              {
+                "flag": "errores"
+              },
+              1
+            ]
+          }
+        ]
+      },
+      "then": "final1",
+      "else": "final-router2"
+    },
+    "final-router2": {
+      "type": "branch",
+      "when": {
+        "lte": [
+          {
+            "flag": "errores"
+          },
+          3
+        ]
+      },
+      "then": "final-router3",
+      "else": "final4"
+    },
+    "final1": {
+      "type": "ending",
+      "kicker": "Final 1",
+      "title": "Una red que sostiene",
+      "text": "Maya no ha resuelto su historia de golpe. Pero ha aprendido a reconocer el control, a guardar pruebas sin compartirlas, a pedir ayuda y a dejar que otros la sostengan. Sofi ha aprendido que la lealtad también es acompañar. La justicia puede ser un lugar donde te escuchan con cuidado.",
+      "scene": "classroom-day",
+      "cast": {
+        "maya": "smile"
+      },
+      "perspective": "red",
+      "mood": "hope"
+    },
+    "final2": {
+      "type": "ending",
+      "kicker": "Final 2",
+      "title": "El primer paso",
+      "text": "Maya ha dado pasos importantes: ha hablado, ha guardado pruebas y ha pedido ayuda. Todavía hay cosas que no entiende y el miedo no desaparece de un día para otro. Sofi sigue cerca sin pedirle que esté bien.",
+      "scene": "shelter-room",
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "red",
+      "mood": "safe"
+    },
+    "final3": {
+      "type": "ending",
+      "kicker": "Final 3",
+      "title": "La puerta sigue abierta",
+      "text": "Maya ha reconocido que algo no estaba bien, aunque todavía le cuesta confiar en las líneas de ayuda y en el proceso. No está sola: la libreta, Sofi, Lucía y los servicios de protección siguen ahí. Pedir ayuda también se aprende.",
+      "scene": "orientation-office",
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "red",
+      "mood": "safe"
+    },
+    "c1-m3-safe-talk-3-pausa": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El sábado, Maya baja al salón. Papá ha traído flores.",
+      "tone": "narration",
+      "next": "c1-m4",
+      "cast": {
+        "maya": "neutral"
+      },
+      "scene": "home-living-cold"
+    },
+    "c1-s1-safe-talk-3-pausa": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Esa noche, Sofi llama a Maya desde su habitación.",
+      "tone": "narration",
+      "next": "c1-s2",
+      "cast": {
+        "sofi": "neutral"
+      },
+      "scene": "bedroom-evening"
+    },
+    "c2-s2-safe-talk-3-pausa": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi sale al pasillo.",
+      "tone": "narration",
+      "next": "c2-s3",
+      "cast": {
+        "sofi": "neutral"
+      },
+      "scene": "hallway-day"
+    },
+    "c2-m1-call-lucia": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi y Maya llaman a Lucía. Lucía les dice que vayan a verla al día siguiente.",
+      "next": "c2-m2-to-school",
+      "scene": "home-living-cold",
+      "cast": {
+        "maya": "neutral"
+      },
+      "tone": "narration"
+    },
+    "c2-m2-to-school": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Al día siguiente, Maya llega al instituto.",
+      "next": "c2-m3",
+      "scene": "hallway-day",
+      "cast": {
+        "maya": "sad"
+      },
+      "tone": "narration",
+      "perspective": "maya",
+      "mood": "tense"
+    },
+    "c2-m3-to-home": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Esa noche, Maya está en casa. El móvil se ilumina.",
+      "next": "c2-m4-whatsapp",
+      "scene": "home-living-cold",
+      "cast": {
+        "maya": "sad"
+      },
+      "tone": "narration",
+      "perspective": "maya",
+      "mood": "tense"
+    },
+    "c2-m4-pausa": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya deja el móvil boca abajo.",
+      "next": "c2-m4",
+      "scene": "home-living-cold",
+      "cast": {
+        "maya": "sad"
+      },
+      "tone": "narration",
+      "perspective": "maya",
+      "mood": "tense"
+    },
+    "c2-m4-to-lucia": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Al día siguiente, Maya enseña el mensaje a Lucía.",
+      "next": "c2-m4-ok-2",
+      "scene": "orientation-office",
+      "cast": {
+        "maya": "neutral"
+      },
+      "tone": "narration"
+    },
+    "c3-m2-to-office": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Días después, Maya y su madre van a orientación.",
+      "next": "c3-m3",
+      "scene": "orientation-office",
+      "cast": {
+        "maya": "neutral"
+      },
+      "tone": "narration",
+      "perspective": "maya",
+      "mood": "tense"
+    },
+    "c3-m3-after-interview": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sofi espera fuera.",
+      "next": "persp-sofi-3",
+      "scene": "orientation-office",
+      "cast": {
+        "sofi": "neutral"
+      },
+      "tone": "narration"
+    },
+    "c4-m1-to-shelter": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Esa tarde, Maya y su madre llegan al lugar de acogida.",
+      "next": "c4-m2-whatsapp",
+      "scene": "shelter-room",
+      "cast": {
+        "maya": "sad"
+      },
+      "tone": "narration",
+      "perspective": "maya",
+      "mood": "tense"
+    },
+    "c4-m2-pausa": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Maya lee los mensajes de su madre. No dice nada.",
+      "next": "c4-m2",
+      "scene": "shelter-room",
+      "cast": {
+        "maya": "sad"
+      },
+      "tone": "narration",
+      "perspective": "maya",
+      "mood": "tense"
+    },
+    "c4-s1-call": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Esa tarde, Sofi llama a Maya.",
+      "next": "c4-s1-ok",
+      "scene": "hallway-day",
+      "cast": {
+        "sofi": "neutral"
+      },
+      "tone": "narration"
+    },
+    "c4-s2-to-return": {
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Días después, Maya vuelve al colegio.",
+      "next": "cap5",
+      "scene": "classroom-day",
+      "cast": {
+        "sofi": "neutral"
+      },
+      "tone": "narration",
+      "perspective": "sofi",
+      "mood": "warm"
+    },
+    "c1-s2-risk1-chat": {
+      "type": "chat",
+      "chatTitle": "Maya",
+      "self": "Sofi",
+      "messages": [
+        {
+          "from": "Sofi",
+          "text": "maya??",
+          "time": "22:14"
+        },
+        {
+          "from": "Sofi",
+          "text": "maya contéstame",
+          "time": "22:14"
+        },
+        {
+          "from": "Sofi",
+          "text": "necesito saber que estás bien",
+          "time": "22:15"
+        },
+        {
+          "from": "Maya",
+          "text": "no puedo contestar ahora",
+          "time": "22:16"
+        },
+        {
+          "from": "Sofi",
+          "text": "pero estoy preocupada",
+          "time": "22:16"
+        },
+        {
+          "from": "Maya",
+          "text": "y yo no puedo cuidarte a ti también",
+          "time": "22:17"
+        }
+      ],
+      "next": "c1-s2-risk1-6",
+      "scene": "bedroom-evening",
+      "cast": {
+        "sofi": "sad"
+      },
+      "perspective": "sofi",
+      "mood": "tense"
+    },
+    "final-router3": {
+      "type": "branch",
+      "when": {
+        "gte": [
+          {
+            "flag": "quizScore"
+          },
+          1
+        ]
+      },
+      "then": "final2",
+      "else": "final3"
+    },
+    "final4": {
+      "type": "ending",
+      "kicker": "Final 4",
+      "title": "La puerta no se cierra",
+      "text": "Maya ha tomado decisiones que la han acercado al miedo y ha necesitado más de un aviso. Aun así, Sofi, Lucía y los servicios de protección siguen ahí. Pedir ayuda otra vez sigue siendo posible.",
+      "scene": "orientation-office",
+      "cast": {
+        "maya": "neutral"
+      },
+      "perspective": "red",
+      "mood": "safe"
+    }
+  }
+}

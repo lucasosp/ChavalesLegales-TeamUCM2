@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "dos-voces",
+  "title": "Dos voces",
+  "content": {
+    "story": "story.json",
+    "assets": "../../shared/assets.json",
+    "scenes": "scene.json",
+    "rights": "rights.json"
+  },
+  "stage": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "node": "start",
+    "scene": "home-living-cold"
+  },
+  "save": {
+    "key": "dos-voces.save",
+    "version": 1
+  }
+}

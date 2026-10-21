@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="bg-title bg-desc">
+  <title id="bg-title">Habitación de un recurso de acogida</title>
+  <desc id="bg-desc">Una habitación sencilla y cálida con cama, escritorio, lámpara, planta y una ventana con luz de mañana. Un lugar seguro y tranquilo.</desc>
+  <defs>
+    <linearGradient id="sr-wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#efe0c8" />
+      <stop offset="0.62" stop-color="#d8c3a6" />
+      <stop offset="1" stop-color="#b59d80" />
+    </linearGradient>
+    <linearGradient id="sr-floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b98f67" />
+      <stop offset="0.55" stop-color="#936c4a" />
+      <stop offset="1" stop-color="#5d422e" />
+    </linearGradient>
+    <linearGradient id="sr-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a9d4ea" />
+      <stop offset="0.55" stop-color="#d8edf0" />
+      <stop offset="1" stop-color="#fff2d4" />
+    </linearGradient>
+    <radialGradient id="sr-lamp" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff3cf" stop-opacity="0.8" />
+      <stop offset="0.55" stop-color="#ffd58f" stop-opacity="0.24" />
+      <stop offset="1" stop-color="#ffc477" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="sr-vignette" cx="0.5" cy="0.48" r="0.76">
+      <stop offset="0.58" stop-color="#2a1c22" stop-opacity="0" />
+      <stop offset="1" stop-color="#2a1c22" stop-opacity="0.22" />
+    </radialGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#sr-wall)" />
+
+  <!-- window -->
+  <g>
+    <rect x="1220" y="140" width="480" height="420" fill="url(#sr-sky)" />
+    <circle cx="1570" cy="300" r="70" fill="#fff8dd" opacity="0.75" />
+    <path d="M1270 290 C1360 260 1440 278 1520 254 C1600 232 1660 246 1710 270" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round" opacity="0.3" />
+    <rect x="1220" y="140" width="480" height="420" fill="none" stroke="#8d765c" stroke-width="22" />
+    <rect x="1452" y="140" width="14" height="420" fill="#8d765c" />
+    <rect x="1220" y="342" width="480" height="14" fill="#8d765c" />
+    <path d="M1190 560 H1730 V596 H1190 Z" fill="#8d765c" />
+    <path d="M1220 596 L1730 596 L1820 950 L1130 950 Z" fill="#fff0c4" opacity="0.18" />
+  </g>
+
+  <!-- bed -->
+  <g>
+    <rect x="90" y="760" width="700" height="230" rx="26" fill="#7d5b45" />
+    <rect x="90" y="720" width="700" height="82" rx="24" fill="#a87d5c" />
+    <rect x="120" y="694" width="210" height="90" rx="24" fill="#e4d4bd" />
+    <rect x="340" y="728" width="400" height="66" rx="20" fill="#cdb595" />
+    <rect x="70" y="988" width="740" height="34" fill="#4e3626" />
+    <rect x="740" y="760" width="40" height="230" fill="#5e4331" />
+  </g>
+
+  <!-- desk and chair -->
+  <g>
+    <rect x="900" y="720" width="560" height="34" rx="6" fill="#9a7857" />
+    <rect x="940" y="754" width="26" height="240" fill="#7a5c42" />
+    <rect x="1390" y="754" width="26" height="240" fill="#7a5c42" />
+    <rect x="990" y="654" width="260" height="46" rx="4" fill="#f0e5d2" />
+    <rect x="1010" y="670" width="180" height="12" rx="6" fill="#c9b89e" />
+    <rect x="1280" y="632" width="120" height="66" rx="6" fill="#6b7f76" />
+    <path d="M1130 834 Q1200 800 1270 834 L1262 1000 H1234 L1224 900 H1180 L1170 1000 H1142 Z" fill="#7f8c83" />
+  </g>
+
+  <!-- lamp and plant -->
+  <g>
+    <path d="M880 0 V240" stroke="#5b4433" stroke-width="5" />
+    <path d="M830 280 Q880 236 930 280 L906 316 H854 Z" fill="#8b6a4b" />
+    <ellipse cx="880" cy="316" rx="30" ry="10" fill="#ffe6b2" />
+    <path d="M760 316 L1000 316 L1080 820 L680 820 Z" fill="url(#sr-lamp)" opacity="0.3" />
+  </g>
+  <g>
+    <path d="M1700 1010 H1810 L1792 860 H1718 Z" fill="#9a6a50" />
+    <path d="M1755 860 C1700 790 1700 720 1748 680" fill="none" stroke="#5f7d4a" stroke-width="11" stroke-linecap="round" />
+    <path d="M1755 860 C1810 800 1830 730 1800 680" fill="none" stroke="#73945c" stroke-width="11" stroke-linecap="round" />
+    <ellipse cx="1748" cy="680" rx="34" ry="60" fill="#73945c" transform="rotate(-18 1748 680)" />
+    <ellipse cx="1800" cy="690" rx="30" ry="56" fill="#5f7d4a" transform="rotate(16 1800 690)" />
+  </g>
+
+  <path d="M0 740 H1920 V1080 H0 Z" fill="url(#sr-floor)" />
+  <path d="M0 740 H1920" stroke="#8b6a4b" stroke-width="3" opacity="0.5" />
+  <rect width="1920" height="1080" fill="url(#sr-vignette)" />
+</svg>

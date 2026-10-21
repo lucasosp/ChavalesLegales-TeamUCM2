@@ -1,0 +1,1565 @@
+{
+  "version": 1,
+  "start": "start",
+  "initialFlags": {
+    "resolution": "conviction"
+  },
+  "nodes": {
+    "start": {
+      "chapter": 1,
+      "type": "interstitial",
+      "kicker": "SARA · CAPÍTULO 1 DE 6",
+      "title": "Algo no va bien",
+      "text": "El lunes. Un saque que no sale.",
+      "next": "c1-01",
+      "scene": "classroom-day",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c1-01": {
+      "chapter": 1,
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sara tiene quince años, juega al voleibol y dibuja estrellas en los márgenes de sus apuntes. Le queda una por terminar cuando suena el timbre de cuarto de ESO.",
+      "next": "c1-02",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c1-02": {
+      "chapter": 1,
+      "type": "dialogue",
+      "speaker": "Paula",
+      "text": "Esta tarde practicamos el saque. El mío está saliendo más hacia la puerta que hacia la pista.",
+      "next": "c1-03",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c1-03": {
+      "chapter": 1,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "El mío también podría presentarse a delegado de pasillo. Pero hoy… creo que no voy.",
+      "next": "c1-04",
+      "cast": {
+        "sara": "smile"
+      }
+    },
+    "c1-04": {
+      "chapter": 1,
+      "type": "dialogue",
+      "speaker": null,
+      "text": "En casa, Javier, su padre, revisa sus mensajes y decide a quién puede ver. La insulta cuando algo no le gusta. Algunas veces la ha empujado o golpeado. No mostramos esas escenas.",
+      "next": "c1-05",
+      "cast": {
+        "sara": "sad"
+      }
+    },
+    "c1-05": {
+      "chapter": 1,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Ayer me quitó el móvil otra vez. Dani estaba en la otra habitación. Solo tiene diez años. No sé cuánto escuchó.",
+      "next": "c1-06",
+      "cast": {
+        "sara": "sad"
+      },
+      "tone": "thought"
+    },
+    "c1-06": {
+      "chapter": 1,
+      "type": "dialogue",
+      "speaker": "Paula",
+      "text": "Vale. Si cambias de idea, te guardo sitio. Y si quieres contarme algo, también.",
+      "next": "c1-07",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c1-07": {
+      "chapter": 1,
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Al recoger, Sara deja caer su estuche. Laura, su profesora, se agacha a ayudarla. Ha notado sus ausencias y que últimamente se sobresalta con facilidad.",
+      "next": "c1-08",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c1-08": {
+      "chapter": 1,
+      "type": "dialogue",
+      "speaker": "Laura",
+      "text": "Te veo más callada estos días. No sé qué te pasa y no quiero adivinarlo. ¿Te vendría bien hablar un momento en un lugar tranquilo?",
+      "next": "c1-choice",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c1-choice": {
+      "chapter": 1,
+      "type": "choice",
+      "prompt": "A Sara le cuesta empezar. ¿Qué necesita decir primero?",
+      "options": [
+        {
+          "id": "partial",
+          "label": "«En casa pasan cosas que me dan miedo».",
+          "next": "c1-partial",
+          "flags": {
+            "opening": "partial"
+          }
+        },
+        {
+          "id": "time",
+          "label": "«Necesito un poco de tiempo».",
+          "next": "c1-time",
+          "flags": {
+            "opening": "time"
+          }
+        },
+        {
+          "id": "what",
+          "label": "«Si te cuento algo, ¿qué va a pasar?».",
+          "next": "c1-what",
+          "flags": {
+            "opening": "what"
+          }
+        }
+      ],
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c1-partial": {
+      "chapter": 1,
+      "type": "dialogue",
+      "speaker": "Laura",
+      "text": "Gracias por decírmelo. No tienes que explicarlo todo ahora. Lo que te hace daño merece atención, aunque todavía no sepas cómo llamarlo.",
+      "next": "c1-close",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c1-time": {
+      "chapter": 1,
+      "type": "dialogue",
+      "speaker": "Laura",
+      "text": "Podemos ir despacio. Me quedaré aquí contigo. Aunque hoy te cueste hablar, mi responsabilidad es atender las señales que me preocupan y buscar ayuda.",
+      "next": "c1-close",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c1-what": {
+      "chapter": 1,
+      "type": "dialogue",
+      "speaker": "Laura",
+      "text": "Te iré explicando los pasos. Si creo que puedes estar en peligro, tengo que pedir ayuda a quienes pueden protegerte. Puedes preguntarme qué voy a comunicar.",
+      "next": "c1-close",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c1-close": {
+      "chapter": 1,
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sara se sienta. Laura aparta los exámenes para escucharla. Por primera vez esa mañana, nadie parece tener prisa por terminar la conversación.",
+      "next": "c1-choice2",
+      "cast": {
+        "sara": "neutral"
+      },
+      "scene": "orientation-office"
+    },
+    "c1-choice2": {
+      "chapter": 1,
+      "type": "choice",
+      "prompt": "Antes de seguir, ¿qué le ayudaría a Sara?",
+      "options": [
+        {
+          "id": "door",
+          "label": "Pedir que no entren compañeros mientras habla.",
+          "next": "c1-door",
+          "flags": {
+            "schoolPrivacy": true
+          }
+        },
+        {
+          "id": "company",
+          "label": "Preguntar si Paula puede esperarla fuera.",
+          "next": "c1-company",
+          "flags": {
+            "paulaWaiting": true
+          }
+        }
+      ],
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c1-door": {
+      "chapter": 1,
+      "type": "dialogue",
+      "speaker": "Laura",
+      "text": "Buscaremos un espacio donde podamos hablar con intimidad. Si alguien pregunta por ti, no tiene por qué conocer tu historia.",
+      "next": "c2-card",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c1-company": {
+      "chapter": 1,
+      "type": "dialogue",
+      "speaker": "Laura",
+      "text": "Le diremos que estás acompañada y que saldrás cuando terminemos. Tú puedes decidir qué quieres contarle después.",
+      "next": "c2-card",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c2-card": {
+      "chapter": 2,
+      "type": "interstitial",
+      "kicker": "SARA · CAPÍTULO 2 DE 6",
+      "title": "Alguien escucha",
+      "text": "En el instituto. Una conversación, paso a paso.",
+      "next": "c2-01",
+      "scene": "orientation-office",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c2-01": {
+      "chapter": 2,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "A veces pienso que si hubiera contestado de otra forma… Pero ayer no hice nada. Y aun así se enfadó.",
+      "next": "c2-02",
+      "cast": {
+        "sara": "sad"
+      }
+    },
+    "c2-02": {
+      "chapter": 2,
+      "type": "dialogue",
+      "speaker": "Laura",
+      "text": "Nada de lo que digas justifica que alguien te haga daño. No tienes que encontrar la frase perfecta para que te ayudemos.",
+      "next": "c2-03",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c2-03": {
+      "chapter": 2,
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sara cuenta una parte de lo ocurrido. Laura escucha sin pedirle que repita los detalles. Le pregunta por su seguridad al salir del instituto.",
+      "next": "c2-04",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c2-04": {
+      "chapter": 2,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "No quiero volver a casa y que él se entere de golpe. Me da miedo lo que pueda pasar.",
+      "next": "c2-05",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c2-05": {
+      "chapter": 2,
+      "type": "dialogue",
+      "speaker": "Laura",
+      "text": "Lo tendremos en cuenta antes de contactar con nadie. Voy a hablar con la coordinación de bienestar y a comunicar la situación a los servicios que deben intervenir.",
+      "next": "c2-protection",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c2-protection": {
+      "chapter": 2,
+      "type": "dialogue",
+      "speaker": "Laura",
+      "text": "Me toca pedir ayuda y activar el protocolo del centro. Tú no tienes que ir a denunciar sola para que empecemos a protegerte. Vamos a explicarte lo que hagamos.",
+      "next": "c2-choice",
+      "cast": {
+        "sara": null
+      },
+      "learn": [
+        "protection"
+      ]
+    },
+    "c2-choice": {
+      "chapter": 2,
+      "type": "choice",
+      "prompt": "¿Qué pregunta Sara mientras Laura organiza la ayuda?",
+      "options": [
+        {
+          "id": "privacy",
+          "label": "«¿Se lo contarás a todo el profesorado?».",
+          "next": "c2-privacy",
+          "flags": {
+            "concernPrivacy": true
+          }
+        },
+        {
+          "id": "dad",
+          "label": "«¿Vais a llamar ahora mismo a mi padre?».",
+          "next": "c2-dad",
+          "flags": {
+            "concernDad": true
+          }
+        },
+        {
+          "id": "alone",
+          "label": "«¿Tengo que ir yo a denunciar?».",
+          "next": "c2-alone",
+          "flags": {
+            "concernAlone": true
+          }
+        }
+      ],
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c2-privacy": {
+      "chapter": 2,
+      "type": "dialogue",
+      "speaker": "Laura",
+      "text": "No puedo prometerte que esto quede entre nosotras. Te explicaré quién necesita intervenir y para qué. Lo que compartamos tendrá que servir para protegerte.",
+      "next": "c2-06",
+      "cast": {
+        "sara": null
+      },
+      "learn": [
+        "privacy"
+      ]
+    },
+    "c2-dad": {
+      "chapter": 2,
+      "type": "dialogue",
+      "speaker": "Laura",
+      "text": "No vamos a improvisar una llamada ignorando tu miedo. Los profesionales coordinarán cómo actuar de forma segura. Te explicaré lo que sepamos.",
+      "next": "c2-06",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c2-alone": {
+      "chapter": 2,
+      "type": "dialogue",
+      "speaker": "Laura",
+      "text": "No tienes que organizarlo tú sola. Pedir ayuda aquí ya permite que las personas responsables actúen. Te acompañarán y te explicarán las actuaciones que correspondan.",
+      "next": "c2-06",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c2-06": {
+      "chapter": 2,
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El centro coordina la atención con los servicios de protección. La seguridad se atiende desde el principio. Esta historia reúne varios encuentros; no representa un calendario obligatorio.",
+      "next": "c2-07",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c2-07": {
+      "chapter": 2,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Hola, Sara. Soy Irene, educadora social. Voy a acompañarte junto con el equipo. Mi trabajo también tiene que ver con cómo estás en clase, con tus amigas y en tu día a día.",
+      "next": "c2-08",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c2-08": {
+      "chapter": 2,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "¿Tendré que contarlo entero otra vez? No sé ni por dónde he empezado antes.",
+      "next": "c2-09",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c2-09": {
+      "chapter": 2,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Intentaremos coordinarnos para que no tengas que repetirlo sin necesidad. Antes de preguntarte algo, puedo explicarte para qué lo necesitamos.",
+      "next": "c2-choice2",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c2-choice2": {
+      "chapter": 2,
+      "type": "choice",
+      "prompt": "Irene acerca una silla. ¿Cómo prefiere Sara que empiecen?",
+      "options": [
+        {
+          "id": "short",
+          "label": "Una cosa cada vez, con explicaciones cortas.",
+          "next": "c2-short",
+          "flags": {
+            "shortExplanations": true
+          }
+        },
+        {
+          "id": "overview",
+          "label": "Ver primero el recorrido general.",
+          "next": "c2-overview",
+          "flags": {
+            "overviewFirst": true
+          }
+        }
+      ],
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c2-short": {
+      "chapter": 2,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "De acuerdo. Primero: atender tu seguridad. Después iremos viendo los siguientes pasos. Si me enrollo, puedes decírmelo.",
+      "next": "c3-card",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c2-overview": {
+      "chapter": 2,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Miraremos tu situación familiar, organizaremos apoyos y te explicaremos las actuaciones que se inicien. Puedes abrir el mapa cuando necesites ubicarte.",
+      "next": "c3-card",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c3-card": {
+      "chapter": 3,
+      "type": "interstitial",
+      "kicker": "SARA · CAPÍTULO 3 DE 6",
+      "title": "¿Qué va a pasar conmigo?",
+      "text": "Servicios Sociales. Poner nombre a las preocupaciones.",
+      "next": "c3-01",
+      "scene": "orientation-office",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c3-01": {
+      "chapter": 3,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "¿Valorar mi situación significa que me vais a poner una nota? Porque últimamente no saco muy buenas.",
+      "next": "c3-02",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c3-02": {
+      "chapter": 3,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Ninguna nota. Queremos conocer qué está pasando, qué riesgos hay y qué ayuda necesitáis. También escucharemos a tu madre y valoraremos cómo está Dani.",
+      "next": "c3-social",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c3-social": {
+      "chapter": 3,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Valorar significa conocer qué necesitáis y si estáis seguros. Ese es el trabajo de los servicios de protección. Si se investiga un posible delito, es otro proceso, con otros profesionales.",
+      "next": "c3-choice",
+      "cast": {
+        "sara": null
+      },
+      "learn": [
+        "social"
+      ]
+    },
+    "c3-choice": {
+      "chapter": 3,
+      "type": "choice",
+      "prompt": "Sara tiene muchas preguntas. ¿Cuál hace primero?",
+      "options": [
+        {
+          "id": "dani",
+          "label": "«¿Qué va a pasar con Dani?».",
+          "next": "c3-dani",
+          "flags": {
+            "concernDani": true
+          }
+        },
+        {
+          "id": "privacy",
+          "label": "«¿Quién va a conocer mi historia?».",
+          "next": "c3-privacy",
+          "flags": {
+            "concernPrivacy": true
+          }
+        },
+        {
+          "id": "home",
+          "label": "«¿Tendré que abandonar mi casa?».",
+          "next": "c3-home",
+          "flags": {
+            "concernHome": true
+          }
+        }
+      ],
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c3-dani": {
+      "chapter": 3,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Dani también será escuchado y el equipo valorará qué necesita. No te corresponde vigilar que todo salga bien. Eso nos toca a las personas adultas.",
+      "next": "c3-03",
+      "cast": {
+        "sara": null
+      },
+      "learn": [
+        "brother"
+      ]
+    },
+    "c3-privacy": {
+      "chapter": 3,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "No puedo prometerte que esto quede entre nosotras. Te explicaré quién necesita intervenir y para qué. Lo que compartamos tendrá que servir para protegerte.",
+      "next": "c3-03",
+      "cast": {
+        "sara": null
+      },
+      "learn": [
+        "privacy"
+      ]
+    },
+    "c3-home": {
+      "chapter": 3,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Pedir ayuda no significa que tengas que irte de casa automáticamente. Hay que valorar vuestra seguridad y las medidas posibles. Tu opinión importa y tienen que escucharte.",
+      "next": "c3-03",
+      "cast": {
+        "sara": null
+      },
+      "learn": [
+        "housing"
+      ]
+    },
+    "c3-03": {
+      "chapter": 3,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Mi madre sabe algunas cosas, pero no todas. A veces me dice que intente no discutir. No sé qué espera que haga.",
+      "next": "c3-04",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c3-04": {
+      "chapter": 3,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Tú no eres responsable de controlar la conducta de Javier. Tu madre también necesita apoyo. La seguridad de cada uno se valora por separado y en conjunto.",
+      "next": "c3-05",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c3-05": {
+      "chapter": 3,
+      "type": "dialogue",
+      "speaker": null,
+      "text": "En este caso ficticio se organiza una estancia segura con su madre y Dani, en casa de una tía, mientras los profesionales valoran las medidas. Sara conserva el contacto con su instituto.",
+      "next": "c3-06",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c3-06": {
+      "chapter": 3,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "He metido las zapatillas de voleibol en la mochila. No sé si las voy a usar, pero no quería dejarlas.",
+      "next": "c3-07",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c3-07": {
+      "chapter": 3,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Me parece importante que las hayas traído. Podemos hablar de lo que necesitas esta semana, además de las citas.",
+      "next": "c3-choice2",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c3-choice2": {
+      "chapter": 3,
+      "type": "choice",
+      "prompt": "¿Qué le gustaría acordar a Sara para los próximos días?",
+      "options": [
+        {
+          "id": "contact",
+          "label": "Saber a quién avisar si cambia algo o siente miedo.",
+          "next": "c3-contact",
+          "flags": {
+            "wantsContact": true
+          }
+        },
+        {
+          "id": "school",
+          "label": "Organizar las faltas y las tareas del instituto.",
+          "next": "c3-school",
+          "flags": {
+            "wantsSchoolPlan": true
+          }
+        }
+      ],
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c3-contact": {
+      "chapter": 3,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Dejaremos claros los contactos del equipo y qué hacer si cambia la situación. Si hay peligro inmediato, se pide ayuda de emergencia. No tienes que valorar tú sola si todo está bien.",
+      "next": "c3-end",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c3-school": {
+      "chapter": 3,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Lo coordinaremos con Laura. Pediremos ajustes concretos, como organizar entregas y recuperar apuntes, sin explicar tu historia a toda la clase.",
+      "next": "c3-end",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c3-end": {
+      "chapter": 3,
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Esa noche Dani le pide que mire un dibujo de un dragón. Sara encuentra una estrella en la esquina y dibuja otra al lado. Todavía hay sitio para cosas pequeñas.",
+      "next": "c4-card",
+      "cast": {
+        "sara": "smile"
+      },
+      "scene": "bedroom-evening"
+    },
+    "c4-card": {
+      "chapter": 4,
+      "type": "interstitial",
+      "kicker": "SARA · CAPÍTULO 4 DE 6",
+      "title": "Mi vida continúa",
+      "text": "Días después. Fuera de las entrevistas.",
+      "next": "c4-01",
+      "scene": "patio-day",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c4-01": {
+      "chapter": 4,
+      "type": "dialogue",
+      "speaker": "Paula",
+      "text": "He guardado tus apuntes. También un vídeo de mi peor saque, pero eso requiere un pacto de silencio.",
+      "next": "c4-02",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c4-02": {
+      "chapter": 4,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Los apuntes sí. El vídeo… me lo pienso. Me viene bien que me hables de otras cosas.",
+      "next": "c4-choice",
+      "cast": {
+        "sara": "smile"
+      }
+    },
+    "c4-choice": {
+      "chapter": 4,
+      "type": "choice",
+      "prompt": "Irene pregunta qué parte de su vida quiere recuperar primero. Sara elige…",
+      "options": [
+        {
+          "id": "volleyball",
+          "label": "Volver a entrenar al voleibol.",
+          "next": "c4-volley",
+          "flags": {
+            "everyday": "volleyball"
+          }
+        },
+        {
+          "id": "school",
+          "label": "Recuperar el ritmo de las clases.",
+          "next": "c4-school",
+          "flags": {
+            "everyday": "school"
+          }
+        },
+        {
+          "id": "friends",
+          "label": "Quedar con Paula sin hablar siempre del proceso.",
+          "next": "c4-friends",
+          "flags": {
+            "everyday": "friends"
+          }
+        }
+      ],
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c4-volley": {
+      "chapter": 4,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Podemos empezar por un entrenamiento, sin exigirte que juegues como antes. Acordaremos los detalles prácticos con las personas que te cuidan.",
+      "next": "c4-volley2",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c4-volley2": {
+      "chapter": 4,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Solo quiero volver a escuchar el balón contra el suelo y pensar en dónde colocarme. Aunque falle todos los saques.",
+      "next": "c4-dani-route",
+      "cast": {
+        "sara": "happy"
+      }
+    },
+    "c4-school": {
+      "chapter": 4,
+      "type": "dialogue",
+      "speaker": "Laura",
+      "text": "Vamos a elegir dos tareas para esta semana. Recuperarlo todo de golpe sería demasiado. Que un día no puedas concentrarte no significa que hayas dejado de saber.",
+      "next": "c4-school2",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c4-school2": {
+      "chapter": 4,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Las mates primero. Si dejo de entender una página, la siguiente parece escrita en otro idioma.",
+      "next": "c4-dani-route",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c4-friends": {
+      "chapter": 4,
+      "type": "dialogue",
+      "speaker": "Paula",
+      "text": "Podemos pasear, hablar de música o no decir mucho. No hace falta que cada vez que quedemos me pongas al día de todo.",
+      "next": "c4-friends2",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c4-friends2": {
+      "chapter": 4,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Entonces hoy quiero discutir contigo sobre esa playlist. En eso sí me siento preparada.",
+      "next": "c4-dani-route",
+      "cast": {
+        "sara": "happy"
+      }
+    },
+    "c4-dani-route": {
+      "chapter": 4,
+      "type": "branch",
+      "when": {
+        "flag": "concernDani"
+      },
+      "then": "c4-dani",
+      "else": "c4-general"
+    },
+    "c4-dani": {
+      "chapter": 4,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "La última vez te preocupaba mucho Dani. El equipo también está escuchando lo que él necesita. Hoy puedes ocuparte de tu plan sin sentir que le estás fallando.",
+      "next": "c4-info",
+      "cast": {
+        "sara": null
+      },
+      "learn": [
+        "brother"
+      ]
+    },
+    "c4-general": {
+      "chapter": 4,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Seguimos revisando cómo estáis tú, Dani y tu madre. No hace falta que una sola persona se encargue de las preocupaciones de toda la familia.",
+      "next": "c4-info",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c4-info": {
+      "chapter": 4,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Podemos ocuparnos de las citas y también de tus entrenamientos, tus estudios y tus amigas. No hace falta aparcar todo lo que te importa para recibir apoyo.",
+      "next": "c4-choice2",
+      "cast": {
+        "sara": null
+      },
+      "learn": [
+        "everyday"
+      ]
+    },
+    "c4-choice2": {
+      "chapter": 4,
+      "type": "choice",
+      "prompt": "En el instituto alguien pregunta por sus ausencias. ¿Qué quiere Sara?",
+      "options": [
+        {
+          "id": "boundary",
+          "label": "Preparar una respuesta breve con Paula.",
+          "next": "c4-boundary",
+          "flags": {
+            "boundaryWithPaula": true
+          }
+        },
+        {
+          "id": "laura",
+          "label": "Pedir a Laura que la ayude a cuidar su privacidad.",
+          "next": "c4-laura",
+          "flags": {
+            "schoolPrivacy": true
+          }
+        }
+      ],
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c4-boundary": {
+      "chapter": 4,
+      "type": "dialogue",
+      "speaker": "Paula",
+      "text": "Puedes decir: «Estoy resolviendo unas cosas con ayuda y no quiero hablar de ello». Si quieres, cambio de tema después. No tienes que dar explicaciones para estar con nosotras.",
+      "next": "c4-end",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c4-laura": {
+      "chapter": 4,
+      "type": "dialogue",
+      "speaker": "Laura",
+      "text": "Podemos acordar qué necesita saber el profesorado y cómo cuidar tu intimidad. Con tus amigas también puedes poner límites a lo que quieras contar.",
+      "next": "c4-end",
+      "cast": {
+        "sara": null
+      },
+      "learn": [
+        "school"
+      ]
+    },
+    "c4-end": {
+      "chapter": 4,
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Hay días tranquilos y otros que cuestan más. Las citas continúan, pero Sara ya tiene algo en la agenda que no es una entrevista: un plan que ha elegido ella.",
+      "next": "c5-card",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c5-card": {
+      "chapter": 5,
+      "type": "interstitial",
+      "kicker": "SARA · CAPÍTULO 5 DE 6",
+      "title": "El juzgado",
+      "text": "Tiempo después. Saber dónde estoy.",
+      "next": "c5-01",
+      "scene": "quiet-room",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c5-01": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Se ha abierto una investigación penal sobre lo ocurrido. La abogada explica una citación a Sara y a quienes la acompañan. Esta escena resume distintas actuaciones, sin fijar sus plazos.",
+      "next": "c5-02",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c5-02": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "La carta parecía escrita para alguien que ya sabe cómo funciona todo. Yo no sé ni dónde sentarme.",
+      "next": "c5-03",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c5-03": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": "Elena · abogada",
+      "text": "La leemos juntas. Una citación indica que debes acudir a una actuación: hay que comprobar para qué, dónde y con qué apoyos. Si algo no se entiende, lo preguntamos antes.",
+      "next": "c5-justice",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c5-justice": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": "Elena · abogada",
+      "text": "Aquí se investiga lo que ha pasado y la posible responsabilidad de tu padre. El apoyo y la protección siguen su propio camino. Que tú seas menor no convierte la causa contra Javier en justicia penal de menores.",
+      "next": "c5-choice",
+      "cast": {
+        "sara": null
+      },
+      "learn": [
+        "justice"
+      ]
+    },
+    "c5-choice": {
+      "chapter": 5,
+      "type": "choice",
+      "prompt": "Antes de la actuación, ¿qué quiere conocer Sara?",
+      "options": [
+        {
+          "id": "people",
+          "label": "Quién estará y qué hace cada profesional.",
+          "next": "c5-people",
+          "flags": {
+            "askedProfessionals": true
+          }
+        },
+        {
+          "id": "room",
+          "label": "Cómo es el espacio y si tendrá que ver a su padre.",
+          "next": "c5-room",
+          "flags": {
+            "askedRoom": true
+          }
+        },
+        {
+          "id": "rights",
+          "label": "Qué apoyos puede pedir y a quién se los dice.",
+          "next": "c5-rights",
+          "flags": {
+            "askedSupports": true
+          }
+        }
+      ],
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c5-people": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": "Elena · abogada",
+      "text": "La jueza dirige la actuación. Fiscalía interviene para promover la acción de la justicia. Las abogadas y abogados defienden los intereses de sus representados. Yo te explicaré quién está y por qué.",
+      "next": "c5-people2",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c5-people2": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Mi función es acompañarte en lo socioeducativo y coordinar apoyos. No decido la sentencia. Puedes abrir las fichas de profesionales cuando se te mezclen los nombres.",
+      "next": "c5-supports",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c5-room": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": "Elena · abogada",
+      "text": "Antes de ir comprobaremos dónde esperarás y cómo será la actuación. Plantearemos lo que te preocupa sobre encontrarte con tu padre para que se valoren las medidas adecuadas.",
+      "next": "c5-supports",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c5-rights": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": "Elena · abogada",
+      "text": "Puedes explicarme qué necesitas, preguntar quién estará y avisar de lo que te hace sentir insegura. Lo comunicaremos para que se valore antes de la actuación.",
+      "next": "c5-supports",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c5-supports": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": "Elena · abogada",
+      "text": "Antes de declarar se valorará qué apoyos necesitas y cómo evitar que pases más miedo. El espacio y las medidas cambian según el caso; tener quince años no determina una sala concreta.",
+      "next": "c5-privacy-route",
+      "cast": {
+        "sara": null
+      },
+      "learn": [
+        "supports"
+      ]
+    },
+    "c5-privacy-route": {
+      "chapter": 5,
+      "type": "branch",
+      "when": {
+        "flag": "concernPrivacy"
+      },
+      "then": "c5-privacy",
+      "else": "c5-pace-route"
+    },
+    "c5-privacy": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Te preocupaba quién iba a conocer tu historia. Por eso hoy repasamos quién puede estar en esta actuación. La intimidad se cuida también al organizar el espacio y la información.",
+      "next": "c5-pace-route",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c5-pace-route": {
+      "chapter": 5,
+      "type": "branch",
+      "when": {
+        "flag": "shortExplanations"
+      },
+      "then": "c5-short",
+      "else": "c5-overview"
+    },
+    "c5-short": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Como me pediste, una cosa cada vez: primero vemos quién te recibe. Después, qué va a pasar. Y podemos parar para preguntar entre una cosa y otra.",
+      "next": "c5-simulation",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c5-overview": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Primero te recibirán y explicarán la actuación; después podrás intervenir con los apoyos que se hayan acordado. Al terminar, revisaremos qué viene después.",
+      "next": "c5-simulation",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c5-simulation": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Antes de la actuación, practican cómo comunicar una necesidad. No ensayan lo que Sara contará ni hacen preguntas sobre la violencia. En este pequeño ejercicio no hay respuestas que den más puntos.",
+      "next": "c5-choice2",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c5-choice2": {
+      "chapter": 5,
+      "type": "choice",
+      "prompt": "¿Qué frase quiere recordar Sara para expresar lo que necesita durante la actuación?",
+      "options": [
+        {
+          "id": "repeat",
+          "label": "«No lo he entendido. ¿Puedes repetirlo?».",
+          "next": "c5-repeat",
+          "flags": {
+            "communication": "repeat"
+          }
+        },
+        {
+          "id": "memory",
+          "label": "«Ese dato no lo recuerdo con exactitud».",
+          "next": "c5-memory",
+          "flags": {
+            "communication": "memory"
+          }
+        },
+        {
+          "id": "pause",
+          "label": "«Necesito una pausa».",
+          "next": "c5-pause",
+          "flags": {
+            "communication": "pause"
+          }
+        }
+      ],
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c5-repeat": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": "Elena · abogada",
+      "text": "Puedes decir que no entiendes y pedir otra explicación. Vamos a prepararte para comprender la actuación. Lo que cuentes sobre los hechos tendrá que salir de lo que tú recuerdes.",
+      "next": "c5-04",
+      "cast": {
+        "sara": null
+      },
+      "learn": [
+        "repeat"
+      ]
+    },
+    "c5-memory": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": "Elena · abogada",
+      "text": "Si algo no lo recuerdas con exactitud, puedes decirlo así. No hace falta inventar una hora o un detalle para completar una respuesta.",
+      "next": "c5-04",
+      "cast": {
+        "sara": null
+      },
+      "learn": [
+        "memory"
+      ]
+    },
+    "c5-pause": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": "Elena · abogada",
+      "text": "Puedes decir que necesitas parar. Lo comunicaremos a quien dirija la actuación para que valore cómo atenderlo. Pedirlo permite que sepan lo que necesitas.",
+      "next": "c5-04",
+      "cast": {
+        "sara": null
+      },
+      "learn": [
+        "pause"
+      ]
+    },
+    "c5-04": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Pensaba que si me quedaba en blanco iba a estropearlo todo. Me ayuda saber que puedo decir que no entiendo algo.",
+      "next": "c5-05",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c5-05": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Llega el día. En este caso, se ha acordado una organización para evitar que Sara se encuentre con Javier en la espera y durante su intervención. El personal le explica dónde estará cada persona.",
+      "next": "c5-06",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c5-06": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": "Jueza",
+      "text": "Antes de empezar, vamos a comprobar que entiendes para qué estamos aquí. Si no comprendes algo, puedes decirlo.",
+      "next": "c5-07",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c5-07": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Sara participa en la actuación con las medidas acordadas. La historia deja fuera las preguntas sobre lo sucedido. Al terminar, Irene la espera para acompañarla.",
+      "next": "c5-08",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c5-08": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Estoy cansada. ¿Podemos estar un rato sin hablar de esto?",
+      "next": "c5-09",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c5-09": {
+      "chapter": 5,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Sí. Después revisaremos con Elena la información que necesites. Ahora podemos sentarnos un momento.",
+      "next": "c6-card",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c6-card": {
+      "chapter": 6,
+      "type": "interstitial",
+      "kicker": "SARA · CAPÍTULO 6 DE 6",
+      "title": "Después de todo",
+      "text": "La espera también forma parte del camino.",
+      "next": "c6-01",
+      "scene": "patio-day",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c6-01": {
+      "chapter": 6,
+      "type": "dialogue",
+      "speaker": null,
+      "text": "El procedimiento sigue su curso. Hay días sin novedades. Mientras se practican las actuaciones necesarias, continúan las citas de apoyo y la atención a la seguridad de la familia.",
+      "next": "c6-02",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c6-02": {
+      "chapter": 6,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Todo el mundo dice «te avisaremos». A veces miro el móvil y no sé si quiero un mensaje o que no haya ninguno.",
+      "next": "c6-choice",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c6-choice": {
+      "chapter": 6,
+      "type": "choice",
+      "prompt": "Hoy, ¿qué quiere poner Sara sobre la mesa?",
+      "options": [
+        {
+          "id": "news",
+          "label": "Preguntar cómo puede saber en qué punto está el procedimiento.",
+          "next": "c6-news",
+          "flags": {
+            "waiting": "news"
+          }
+        },
+        {
+          "id": "dad",
+          "label": "Decir que a veces echa de menos a su padre.",
+          "next": "c6-dad",
+          "flags": {
+            "waiting": "mixed"
+          }
+        },
+        {
+          "id": "privacy",
+          "label": "Pedir ayuda con las preguntas que le hacen en el instituto.",
+          "next": "c6-school",
+          "flags": {
+            "waiting": "privacy"
+          }
+        }
+      ],
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c6-news": {
+      "chapter": 6,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Podemos consultar con Elena qué información te corresponde recibir y cómo pedirla. No sé darte una fecha exacta; sí podemos aclarar con quién hablar cuando tengas dudas.",
+      "next": "c6-03",
+      "cast": {
+        "sara": null
+      },
+      "learn": [
+        "waiting"
+      ]
+    },
+    "c6-dad": {
+      "chapter": 6,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Puedes echar de menos momentos buenos y, a la vez, necesitar estar protegida. No tienes que sentir una sola cosa por tu padre. Hablarlo no cambia que lo que te hizo estuvo mal.",
+      "next": "c6-03",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c6-school": {
+      "chapter": 6,
+      "type": "dialogue",
+      "speaker": "Laura",
+      "text": "Podemos acordar qué necesita saber el profesorado y cómo cuidar tu intimidad. Con tus amigas también puedes poner límites a lo que quieras contar.",
+      "next": "c6-03",
+      "cast": {
+        "sara": null
+      },
+      "learn": [
+        "school"
+      ]
+    },
+    "c6-03": {
+      "chapter": 6,
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Tiempo después, tras las actuaciones y el juicio, Elena se reúne con Sara para explicar una sentencia simulada. El resultado de esta demo está fijado antes de jugar: ninguna elección emocional decide la resolución.",
+      "next": "resolution-route",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "resolution-route": {
+      "chapter": 6,
+      "type": "branch",
+      "when": {
+        "eq": [
+          {
+            "flag": "resolution"
+          },
+          "no-conviction"
+        ]
+      },
+      "then": "c6-no-conviction",
+      "else": "c6-conviction"
+    },
+    "c6-conviction": {
+      "chapter": 6,
+      "type": "dialogue",
+      "speaker": "Elena · abogada",
+      "text": "En este caso ficticio, el tribunal ha considerado probados hechos de violencia y ha dictado una sentencia condenatoria contra Javier. Vamos a explicar su alcance, las medidas acordadas y si cabe recurrir.",
+      "next": "c6-human",
+      "cast": {
+        "sara": null
+      },
+      "learn": [
+        "resolution"
+      ]
+    },
+    "c6-no-conviction": {
+      "chapter": 6,
+      "type": "dialogue",
+      "speaker": "Elena · abogada",
+      "text": "En esta variante ficticia, el tribunal ha dictado una sentencia absolutoria: la prueba no ha permitido una condena con las garantías necesarias. Te explicaré la resolución y las posibilidades de recurso que correspondan.",
+      "next": "c6-human",
+      "cast": {
+        "sara": null
+      },
+      "learn": [
+        "resolution"
+      ]
+    },
+    "c6-human": {
+      "chapter": 6,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "No sé muy bien qué siento. Pensaba que al leer una resolución todo iba a encajar de golpe.",
+      "next": "c6-04",
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c6-04": {
+      "chapter": 6,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "No tienes que sentirte de una manera concreta. Vamos a revisar cómo estás y qué apoyo necesitas. La protección y la convivencia se valoran por vuestra seguridad, no por cómo recibas la noticia.",
+      "next": "c6-dani-route",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c6-dani-route": {
+      "chapter": 6,
+      "type": "branch",
+      "when": {
+        "flag": "concernDani"
+      },
+      "then": "c6-dani",
+      "else": "c6-home-route"
+    },
+    "c6-dani": {
+      "chapter": 6,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Y retomaremos lo que preguntaste por Dani: el equipo sigue pendiente de él. Puedes ser su hermana sin tener que convertirte en la persona adulta que resuelve todo.",
+      "next": "c6-home-route",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c6-home-route": {
+      "chapter": 6,
+      "type": "branch",
+      "when": {
+        "flag": "concernHome"
+      },
+      "then": "c6-home",
+      "else": "c6-choice2"
+    },
+    "c6-home": {
+      "chapter": 6,
+      "type": "dialogue",
+      "speaker": "Irene",
+      "text": "Al principio te preguntabas dónde ibais a vivir. Cualquier cambio de convivencia se revisará contigo y con el equipo responsable. La sentencia no sustituye esa valoración.",
+      "next": "c6-choice2",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c6-choice2": {
+      "chapter": 6,
+      "type": "choice",
+      "prompt": "Al salir, Sara quiere reservar espacio para algo suyo. ¿Qué propone?",
+      "options": [
+        {
+          "id": "play",
+          "label": "Quedar con Paula y llevar el balón.",
+          "next": "c6-play",
+          "flags": {
+            "nextPlan": "play"
+          }
+        },
+        {
+          "id": "quiet",
+          "label": "Ir con Dani a dibujar y dejar el móvil un rato.",
+          "next": "c6-quiet",
+          "flags": {
+            "nextPlan": "quiet"
+          }
+        }
+      ],
+      "cast": {
+        "sara": "neutral"
+      }
+    },
+    "c6-play": {
+      "chapter": 6,
+      "type": "dialogue",
+      "speaker": "Paula",
+      "text": "He practicado el saque. Ahora ya casi nunca sale por la puerta. Pero si hoy prefieres solo sentarte en la grada, también me sirve.",
+      "next": "epilogue-route",
+      "cast": {
+        "sara": null
+      }
+    },
+    "c6-quiet": {
+      "chapter": 6,
+      "type": "dialogue",
+      "speaker": null,
+      "text": "Dani saca el dibujo del dragón. Sara le pide un lápiz azul. Durante un rato, lo más urgente es decidir si los dragones pueden llevar zapatillas.",
+      "next": "epilogue-route",
+      "cast": {
+        "sara": "neutral"
+      },
+      "scene": "bedroom-evening"
+    },
+    "epilogue-route": {
+      "chapter": 6,
+      "type": "branch",
+      "when": {
+        "eq": [
+          {
+            "flag": "everyday"
+          },
+          "volleyball"
+        ]
+      },
+      "then": "epilogue-volley",
+      "else": "epilogue-study-route"
+    },
+    "epilogue-volley": {
+      "chapter": 6,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "¿Te acuerdas de cuando dije que quería volver a entrenar? Hoy el saque ha entrado. Y si mañana no entra, sigo teniendo sitio en el equipo.",
+      "next": "epilogue",
+      "cast": {
+        "sara": "happy"
+      }
+    },
+    "epilogue-study-route": {
+      "chapter": 6,
+      "type": "branch",
+      "when": {
+        "eq": [
+          {
+            "flag": "everyday"
+          },
+          "school"
+        ]
+      },
+      "then": "epilogue-school",
+      "else": "epilogue-friends"
+    },
+    "epilogue-school": {
+      "chapter": 6,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "He terminado aquella página de mates. Parece una tontería, pero volver a entender algo que había dejado a medias también cuenta.",
+      "next": "epilogue",
+      "cast": {
+        "sara": "smile"
+      }
+    },
+    "epilogue-friends": {
+      "chapter": 6,
+      "type": "dialogue",
+      "speaker": "Sara",
+      "text": "Hoy he estado con Paula y no hemos hablado todo el rato de lo mismo. Me ha sentado bien seguir siendo su amiga, con todas las cosas que eso significa.",
+      "next": "epilogue",
+      "cast": {
+        "sara": "happy"
+      }
+    },
+    "epilogue": {
+      "chapter": 6,
+      "type": "ending",
+      "kicker": "SARA · MI HISTORIA SIGUE",
+      "title": "Todavía tengo planes",
+      "text": "Sara sigue siendo hermana, amiga, estudiante y jugadora de voleibol. Habrá días distintos y el apoyo puede continuar. No tiene que recorrerlos sola.",
+      "scene": "patio-day",
+      "cast": {
+        "sara": "happy"
+      }
+    }
+  }
+}

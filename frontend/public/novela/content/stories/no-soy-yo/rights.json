@@ -40,11 +40,13 @@
   "resources": [
     {
       "name": "INCIBE 017",
-      "text": "Ayuda en ciberseguridad para menores, familias y centros educativos."
+      "text": "Ayuda en ciberseguridad para menores, familias y centros educativos.",
+      "url": "https://www.incibe.es/linea-de-ayuda-en-ciberseguridad"
     },
     {
-      "name": "Canal Prioritario de la AEPD",
-      "text": "Solicitud urgente de retirada de contenidos sexuales o violentos cuando proceda."
+      "name": "AEPD: suplantación de identidad",
+      "text": "Orientación para comunicar un perfil falso a la plataforma y valorar los siguientes pasos.",
+      "url": "https://www.aepd.es/preguntas-frecuentes/17-internet-y-redes-sociales/FAQ-1702-ante-la-suplantacion-de-mi-identidad-que-puedo-hacer"
     },
     {
       "name": "Policía y Fiscalía de Menores",

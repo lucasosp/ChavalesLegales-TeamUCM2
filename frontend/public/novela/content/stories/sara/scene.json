@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "stage": {
+    "width": 1920,
+    "height": 1080
+  },
+  "presets": {
+    "positions": {
+      "center": {
+        "x": 0.5,
+        "y": 1,
+        "scale": 1
+      }
+    },
+    "transitions": {
+      "fade": {
+        "type": "fade",
+        "duration": 300
+      }
+    }
+  },
+  "scenes": {
+    "classroom-day": {
+      "layers": [
+        {
+          "id": "background",
+          "type": "image",
+          "asset": "backgrounds/classroom-day",
+          "fit": "cover"
+        }
+      ]
+    },
+    "orientation-office": {
+      "layers": [
+        {
+          "id": "background",
+          "type": "image",
+          "asset": "backgrounds/orientation-office",
+          "fit": "cover"
+        }
+      ]
+    },
+    "bedroom-evening": {
+      "layers": [
+        {
+          "id": "background",
+          "type": "image",
+          "asset": "backgrounds/bedroom-evening",
+          "fit": "cover"
+        }
+      ]
+    },
+    "patio-day": {
+      "layers": [
+        {
+          "id": "background",
+          "type": "image",
+          "asset": "backgrounds/patio-day",
+          "fit": "cover"
+        }
+      ]
+    },
+    "quiet-room": {
+      "layers": [
+        {
+          "id": "background",
+          "type": "image",
+          "asset": "backgrounds/quiet-room",
+          "fit": "cover"
+        }
+      ]
+    }
+  }
+}
