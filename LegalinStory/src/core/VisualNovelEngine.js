@@ -76,6 +76,7 @@ export class VisualNovelEngine {
     this.checkpoint = null;
     this.isRunning = false;
     this.isFinished = false;
+    this._choicePresentedAt = null;
 
     /** @type {Map<string, { present: (node: any) => void, next?: (node: any) => string|null, auto?: boolean }>} */
     this.nodeHandlers = new Map();
@@ -243,6 +244,43 @@ export class VisualNovelEngine {
 
     const option = node.options.find((candidate) => candidate.id === optionId);
     if (!option || !this.#matches(option.when)) return false;
+
+    // Telemetria de tiempos de eleccion para asistentes sociales
+    let elapsedSec = 6.0;
+    let elapsedMs = 6000;
+    if (this._choicePresentedAt) {
+      const now = (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
+      elapsedMs = Math.max(400, Math.round(now - this._choicePresentedAt));
+      elapsedSec = Number((elapsedMs / 1000).toFixed(1));
+      this._choicePresentedAt = null;
+    }
+    if (typeof window !== "undefined") {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const storyId = urlParams.get("story") || "sara";
+        const telemetryPayload = {
+          type: "legalinstory:decision",
+          story_id: storyId,
+          node_id: node.id || this.nodeId,
+          chapter: node.chapter || 1,
+          prompt: node.prompt,
+          option_id: option.id,
+          option_label: option.label,
+          all_options: (node.options || []).map((o) => ({ id: o.id, label: o.label })),
+          time_seconds: elapsedSec,
+          time_ms: elapsedMs,
+          timestamp: Date.now() / 1000,
+        };
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage(telemetryPayload, "*");
+        }
+        fetch("/api/telemetria/decision", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(telemetryPayload),
+        }).catch(() => {});
+      } catch (_) {}
+    }
 
     this.#remember();
     if (isRewindOption(option)) {
@@ -424,6 +462,7 @@ export class VisualNovelEngine {
       throw new Error(`Choice node "${this.nodeId}" has no available options`);
     }
 
+    this._choicePresentedAt = (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
     this.bus.emit("choice", {
       id: node.id,
       speaker: node.speaker ?? null,

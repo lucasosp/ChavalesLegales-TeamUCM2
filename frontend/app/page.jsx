@@ -41,8 +41,20 @@ export default function Home() {
   // =========================================================================
   const handlePinSubmit = async (e) => {
     e.preventDefault()
-    const cleanPin = pin.replace(/\s+/g, '').trim()
-    if (!cleanPin) return
+    const rawInput = pin.trim()
+    if (!rawInput) return
+
+    // Acceso inteligente: si se introduce el codigo de Asistentes Sociales en la casilla principal
+    const upper = rawInput.toUpperCase().replace(/\s+/g, '')
+    if (upper.includes('SOCIAL') || upper.startsWith('SOC') || upper.includes('ASISTENT') || upper === '2026') {
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('chavales_asistente_social_auth', 'true')
+      }
+      router.push('/asistentes-sociales')
+      return
+    }
+
+    const cleanPin = rawInput.replace(/\s+/g, '')
 
     router.push('/novela')
   }
@@ -164,8 +176,8 @@ export default function Home() {
         </svg>
       </div>
 
-      {/* Acceso a profesores en la barra superior */}
-      <header className="kahoot-topbar">
+      {/* Accesos profesionales en la barra superior */}
+      <header className="kahoot-topbar" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}>
         <Link
           href="/profesores"
           className="btn-pro-opt1"
@@ -178,6 +190,28 @@ export default function Home() {
           </span>
           <span className="pro-label">Acceso a educadores sociales</span>
           <span className="pro-arrow" aria-hidden="true">→</span>
+        </Link>
+
+        {/* Acceso exclusivo a la vista de Asistentes Sociales */}
+        <Link
+          href="/asistentes-sociales"
+          className="btn-pro-opt1 btn-social-opt"
+          aria-label="Vista de Asistentes Sociales"
+          title="Panel exclusivo para Asistentes y Trabajadores Sociales"
+          style={{
+            background: 'rgba(16, 185, 129, 0.16)',
+            borderColor: 'rgba(52, 211, 153, 0.45)',
+          }}
+        >
+          <span className="pro-icon-chip" style={{ background: '#059669' }} aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              <path d="M12 8v4" />
+              <path d="M12 16h.01" />
+            </svg>
+          </span>
+          <span className="pro-label" style={{ color: '#E6FFFA' }}>Asistentes Sociales</span>
+          <span className="pro-arrow" style={{ color: '#34D399' }} aria-hidden="true">→</span>
         </Link>
       </header>
 
@@ -237,10 +271,8 @@ export default function Home() {
                 <div className="pin-input-container">
                   <input
                     type="text"
-                    inputMode="numeric"
-                    pattern="[0-9]*"
-                    maxLength={9}
-                    placeholder="Introduce el PIN"
+                    maxLength={20}
+                    placeholder="Introduce el PIN o clave"
                     className="pin-input"
                     value={pin}
                     onChange={(e) => setPin(e.target.value)}
