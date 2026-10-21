@@ -21,9 +21,9 @@ venv/
 .idea/
 .DS_Store
 Thumbs.db
-
 # --- Datos locales / telemetría ---
 backend/telemetry_data.json
 backend/telemetry_drawings.json
+backend/casos_data.json
 *.telemetry.json
 *telemetry*.json

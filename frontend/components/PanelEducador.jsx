@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { guardarMetaCaso } from '../lib/casos'
 
 export default function PanelEducador({ onCerrarSesion = null }) {
   const router = useRouter()
@@ -35,6 +36,12 @@ export default function PanelEducador({ onCerrarSesion = null }) {
 
       const riesgoSeleccionado = opcionesRiesgo.find((r) => r.value === tipoRiesgo)?.label || tipoRiesgo
 
+      guardarMetaCaso(casoId, {
+        nombreJoven: nombreJoven.trim() || 'Joven participante',
+        tipoRiesgo: riesgoSeleccionado,
+        contexto: contexto.trim(),
+        creadoEn: new Date().toISOString(),
+      })
       setCasoGenerado({
         id: casoId,
         enlace: linkUnico,
@@ -62,7 +69,7 @@ export default function PanelEducador({ onCerrarSesion = null }) {
 
   // Previsualizar caso en la novela gráfica
   const handlePrevisualizarCaso = () => {
-    router.push('/novela')
+    router.push(`/novela?caso=${casoGenerado.id}`)
   }
 
   // Reiniciar formulario para otro caso
@@ -395,6 +402,13 @@ export default function PanelEducador({ onCerrarSesion = null }) {
                 <span>Previsualizar caso</span>
                 <span aria-hidden="true">→</span>
               </button>
+              <Link
+                href={`/informe/${casoGenerado.id}`}
+                style={{ flex: 1, minWidth: 220, background: '#FEF08A', color: '#0F172A', border: '3px solid #18181B', borderRadius: 16, padding: '14px 20px', fontSize: 15, fontWeight: 900, boxShadow: '0 5px 0 #18181B', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, textDecoration: 'none' }}
+              >
+                <span>Ver informe del caso</span>
+                <span aria-hidden="true">▤</span>
+              </Link>
 
               {/* Botón Crear otro caso */}
               <button
