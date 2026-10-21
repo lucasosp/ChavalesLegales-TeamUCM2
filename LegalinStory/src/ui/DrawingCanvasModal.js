@@ -29,12 +29,17 @@ export class DrawingCanvasModal {
 
   open({ phase, onConfirm }) {
     this.destroy();
+    this.returnFocus = document.activeElement;
+    this.currentColor = "#1e1b26";
+    this.baseWidth = 6;
+    this.isEraser = false;
 
     const overlay = document.createElement("div");
     overlay.className = "sara-drawing-overlay";
     overlay.setAttribute("role", "dialog");
     overlay.setAttribute("aria-modal", "true");
     overlay.setAttribute("aria-labelledby", "sara-drawing-title");
+    overlay.addEventListener("keydown", event => event.stopPropagation());
 
     if (phase !== "phase3") {
       this.collector = new DrawingMetricsCollector({ canvasWidth: 400, canvasHeight: 400 });
@@ -47,7 +52,23 @@ export class DrawingCanvasModal {
     }
 
     this.modal = overlay;
+    this.blockedElements = [...this.container.children].map(element => ({ element, inert: element.inert }));
+    this.blockedElements.forEach(({ element }) => { element.inert = true; });
     this.container.append(overlay);
+    this.onModalKey = event => {
+      if (!this.modal) return;
+      if (event.key !== "Tab") return;
+      event.stopImmediatePropagation();
+      const controls = [...this.modal.querySelectorAll("button, [tabindex='0']")].filter(control => !control.disabled);
+      const first = controls[0], last = controls.at(-1);
+      if (event.shiftKey && (document.activeElement === first || !this.modal.contains(document.activeElement))) {
+        event.preventDefault(); last?.focus();
+      } else if (!event.shiftKey && (document.activeElement === last || !this.modal.contains(document.activeElement))) {
+        event.preventDefault(); first?.focus();
+      }
+    };
+    document.addEventListener("keydown", this.onModalKey, true);
+    overlay.querySelector("button, [tabindex='0']")?.focus({ preventScroll: true });
 
     if (phase !== "phase3") {
       this.#setupCanvas();
@@ -56,16 +77,16 @@ export class DrawingCanvasModal {
 
   #renderCanvasPhase(overlay, phase, onConfirm) {
     const isPhase1 = phase === "phase1";
-    const titleText = isPhase1 ? t("drawing.phase1Title") : t("drawing.phase2Title");
+    const titleText = isPhase1 ? "Tu historia empieza con un dibujo" : "Una pausa para dibujar";
     const introText = isPhase1
-      ? t("drawing.phase1Intro")
-      : t("drawing.phase2Intro");
-    const confirmLabel = isPhase1 ? t("drawing.phase1Confirm") : t("drawing.phase2Confirm");
+      ? "¿Cómo te imaginas a Sara? Dibújala a tu manera. Puedes usar el dedo, el ratón o un lápiz digital."
+      : "Sara ha dado un paso importante. Si te apetece, dibújala otra vez como te la imaginas ahora. Tómate el tiempo que necesites.";
+    const confirmLabel = isPhase1 ? "Guardar y empezar →" : "Guardar y seguir →";
 
     overlay.innerHTML = `
       <div class="sara-drawing-card">
         <header class="sara-drawing-header">
-          <span class="sara-eyebrow">${t("drawing.eyebrow")}</span>
+          <span class="sara-eyebrow">UN MOMENTO PARA CREAR</span>
           <h2 id="sara-drawing-title" class="sara-drawing-title">${titleText}</h2>
           <p class="sara-drawing-instruction">${introText}</p>
         </header>
@@ -73,7 +94,7 @@ export class DrawingCanvasModal {
         <div class="sara-drawing-workspace">
           <div class="sara-canvas-container">
             <canvas class="sara-drawing-canvas" width="400" height="400"></canvas>
-            <div class="sara-canvas-hint" data-canvas-hint>${t("drawing.hint")}</div>
+            <div class="sara-canvas-hint" data-canvas-hint>Tu dibujo empieza aquí</div>
           </div>
 
           <aside class="sara-drawing-controls" aria-label="${t("drawing.toolsAria")}">
@@ -90,13 +111,13 @@ export class DrawingCanvasModal {
             </div>
 
             <div class="sara-control-group">
-              <span class="sara-control-label">${t("drawing.strokeWidth")}</span>
+              <span class="sara-control-label">Tamaño del lápiz</span>
               <div class="sara-size-grid">
                 <button type="button" class="sara-size-btn" data-size="3" aria-label="${t("drawing.thin")}"><span style="width:4px;height:4px;"></span></button>
                 <button type="button" class="sara-size-btn is-active" data-size="6" aria-label="${t("drawing.medium")}"><span style="width:8px;height:8px;"></span></button>
                 <button type="button" class="sara-size-btn" data-size="14" aria-label="${t("drawing.thick")}"><span style="width:14px;height:14px;"></span></button>
               </div>
-              <small class="sara-pressure-note">${t("drawing.pressureNote")}</small>
+              <small class="sara-pressure-note">Prueba el tamaño que más te guste</small>
             </div>
 
             <div class="sara-control-group sara-action-buttons">
@@ -108,7 +129,7 @@ export class DrawingCanvasModal {
 
         <footer class="sara-drawing-footer">
           <p class="sara-lock-warning" aria-live="polite">
-            🔒 <em>${t("drawing.lockWarning")}</em>
+            No tiene que quedar perfecto. Este dibujo es tuyo.
           </p>
           <button type="button" class="sara-primary sara-confirm-draw" data-action="confirm">${confirmLabel}</button>
         </footer>
@@ -175,38 +196,38 @@ export class DrawingCanvasModal {
     overlay.innerHTML = `
       <div class="sara-drawing-card sara-phase3-card">
         <header class="sara-drawing-header">
-          <span class="sara-eyebrow">${t("drawing.phase3Eyebrow")}</span>
-          <h2 id="sara-drawing-title" class="sara-drawing-title">${t("drawing.phase3Title")}</h2>
+          <span class="sara-eyebrow">UN RECUERDO DE TU HISTORIA</span>
+          <h2 id="sara-drawing-title" class="sara-drawing-title">¿Cuál de los dos dibujos prefieres?</h2>
           <p class="sara-drawing-instruction">
-            ${t("drawing.phase3Intro")}
+            Has acompañado a Sara hasta aquí. Mira tus dibujos y elige el que quieres guardar como recuerdo.
           </p>
         </header>
 
         <div class="sara-comparison-grid">
           <div class="sara-choice-option" data-choice="phase1" tabindex="0" role="button" aria-pressed="false">
             <div class="sara-choice-preview">
-              ${avatar1 ? `<img src="${avatar1}" alt="${t("drawing.avatar1Alt")}">` : `<div class="sara-empty-avatar">${t("drawing.noDrawing")}</div>`}
+              ${avatar1 ? `<img src="${avatar1}" alt="Tu primer dibujo">` : '<div class="sara-empty-avatar">Sin dibujo</div>'}
             </div>
-            <strong class="sara-choice-title">${t("drawing.drawing1Title")}</strong>
-            <p class="sara-choice-desc">${t("drawing.drawing1Desc")}</p>
-            <span class="sara-choice-tag">${t("drawing.select")}</span>
+            <strong class="sara-choice-title">Mi primer dibujo</strong>
+            <p class="sara-choice-desc">Así imaginabas a Sara al empezar.</p>
+            <span class="sara-choice-tag">Seleccionar</span>
           </div>
 
           <div class="sara-choice-option is-selected" data-choice="phase2" tabindex="0" role="button" aria-pressed="true">
             <div class="sara-choice-preview">
-              ${avatar2 ? `<img src="${avatar2}" alt="${t("drawing.avatar2Alt")}">` : `<div class="sara-empty-avatar">${t("drawing.noDrawing")}</div>`}
+              ${avatar2 ? `<img src="${avatar2}" alt="Tu segundo dibujo">` : '<div class="sara-empty-avatar">Sin dibujo</div>'}
             </div>
-            <strong class="sara-choice-title">${t("drawing.drawing2Title")}</strong>
-            <p class="sara-choice-desc">${t("drawing.drawing2Desc")}</p>
-            <span class="sara-choice-tag">${t("drawing.select")}</span>
+            <strong class="sara-choice-title">Mi segundo dibujo</strong>
+            <p class="sara-choice-desc">Así imaginabas a Sara más adelante.</p>
+            <span class="sara-choice-tag">Seleccionar</span>
           </div>
         </div>
 
         <footer class="sara-drawing-footer">
           <p class="sara-lock-warning">
-            🔒 <em>${t("drawing.phase3Warning")}</em>
+            Elige el que más te guste. Los dos forman parte de tu historia.
           </p>
-          <button type="button" class="sara-primary sara-confirm-choice" data-action="confirm-choice">${t("drawing.keepSelected")}</button>
+          <button type="button" class="sara-primary sara-confirm-choice" data-action="confirm-choice">Guardar mi recuerdo →</button>
         </footer>
       </div>
     `;
@@ -251,10 +272,9 @@ export class DrawingCanvasModal {
     this.hasDrawn = false;
 
     // High DPI scaling
-    const rect = this.canvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-    const width = rect.width || 400;
-    const height = rect.height || 400;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const width = 400;
+    const height = 400;
 
     this.canvas.width = width * dpr;
     this.canvas.height = height * dpr;
@@ -271,8 +291,8 @@ export class DrawingCanvasModal {
     const getPos = (e) => {
       const r = this.canvas.getBoundingClientRect();
       return {
-        x: e.clientX - r.left,
-        y: e.clientY - r.top,
+        x: (e.clientX - r.left) * 400 / r.width,
+        y: (e.clientY - r.top) * 400 / r.height,
         pressure: typeof e.pressure === "number" ? e.pressure : 0.5,
       };
     };
@@ -361,15 +381,19 @@ export class DrawingCanvasModal {
 
   #clear() {
     if (!this.ctx || !this.canvas) return;
-    const rect = this.canvas.getBoundingClientRect();
     this.ctx.fillStyle = "#ffffff";
-    this.ctx.fillRect(0, 0, rect.width, rect.height);
+    this.ctx.fillRect(0, 0, 400, 400);
     this.#saveSnapshot();
     const hint = this.modal?.querySelector("[data-canvas-hint]");
     if (hint) hint.style.display = "block";
   }
 
   destroy() {
+    if (this.onModalKey) document.removeEventListener("keydown", this.onModalKey, true);
+    this.blockedElements?.forEach(({ element, inert }) => { element.inert = inert; });
+    this.blockedElements = [];
+    const returnFocus = this.returnFocus;
+    this.returnFocus = null;
     if (this.modal) {
       this.modal.remove();
       this.modal = null;
@@ -378,5 +402,6 @@ export class DrawingCanvasModal {
     this.ctx = null;
     this.isDrawing = false;
     this.undoStack = [];
+    if (returnFocus?.isConnected) returnFocus.focus({ preventScroll: true });
   }
 }

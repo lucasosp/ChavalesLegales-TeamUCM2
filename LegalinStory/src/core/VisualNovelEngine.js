@@ -273,9 +273,8 @@ export class VisualNovelEngine {
           timestamp: Date.now() / 1000,
         };
         if (window.parent && window.parent !== window) {
-          window.parent.postMessage(telemetryPayload, "*");
-        }
-        fetch("/api/telemetria/decision", {
+          window.parent.postMessage(telemetryPayload, window.location.origin);
+        } else fetch("/api/telemetria/decision", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(telemetryPayload),

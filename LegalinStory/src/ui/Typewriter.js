@@ -33,11 +33,12 @@ export class Typewriter {
     this.#fullText = String(text ?? "");
     this.#shown = 0;
     this.#onComplete = onComplete;
+    this.element.scrollTop = 0;
     // The dialogue frame has a stable height; the text scrolls within its row.
     this.element.textContent = "";
     this.element.classList.add("is-typing");
 
-    if (this.prefersReducedMotion) {
+    if (this.prefersReducedMotion || this.instant) {
       this.skip();
       return;
     }
@@ -53,7 +54,6 @@ export class Typewriter {
       if (target !== this.#shown) {
         this.#shown = target;
         this.element.textContent = this.#fullText.slice(0, target);
-        this.element.scrollTop = this.element.scrollHeight;
       }
 
       if (this.#shown < this.#fullText.length) {
@@ -76,7 +76,7 @@ export class Typewriter {
 
     this.#shown = this.#fullText.length;
     this.element.textContent = this.#fullText;
-    this.element.scrollTop = this.element.scrollHeight;
+    this.element.scrollTop = 0;
     this.#finish();
   }
 

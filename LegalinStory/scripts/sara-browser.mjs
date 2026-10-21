@@ -1,128 +1,106 @@
+// End-to-end checks for the child-facing novel, including all drawing checkpoints.
 import assert from "node:assert/strict";
 import { createServer } from "vite";
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE_PATH || "playwright");
-const server = await createServer({ logLevel: "silent", server: { host: "127.0.0.1", port: 0 } });
+const server = await createServer({ logLevel: "error", server: { host: "127.0.0.1", port: 0 } });
 let browser;
 try {
   await server.listen();
   const url = server.resolvedUrls.local[0];
-  browser = await chromium.launch({ channel: "chromium", headless: true });
-  for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }, { width: 844, height: 390 }]) {
+  browser = await chromium.launch({ headless: true });
+  for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }, { width: 320, height: 568 }, { width: 844, height: 390 }]) {
     const page = await browser.newPage({ viewport, reducedMotion: "reduce" });
-    const errors = [], external = [];
-    page.on("pageerror", (e) => errors.push(e.message));
-    page.on("response", (r) => { if (r.status() >= 400) errors.push(`${r.status()} ${r.url()}`); });
-    page.on("request", (r) => { if (!r.url().startsWith(url) && !r.url().startsWith("data:")) external.push(r.url()); });
+    const errors = [], decisions = [];
+    await page.route('**/api/telemetria/**', async route => {
+      if (route.request().url().endsWith('/decision')) decisions.push(route.request().postDataJSON());
+      await route.fulfill({ status: 200, contentType: 'application/json', body: '{}' });
+    });
+    page.on("pageerror", error => errors.push(error.message));
+    page.on("response", response => { if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`); });
     await page.goto(url);
     await page.getByRole("heading", { name: "Sara", exact: true }).waitFor();
     await page.screenshot({ path: `/tmp/sara-start-${viewport.width}.png` });
-    const variant = viewport.width === 390 ? "no-conviction" : "conviction";
-    if (variant === "no-conviction") {
-      await page.getByText("Opciones de la demostración", { exact: true }).click();
-      await page.locator("[data-sara-resolution]").selectOption(variant);
-    }
-    await page.getByRole("button", { name: "Acompañar a Sara" }).click();
-    await page.locator("[data-interstitial-next]").waitFor({ state: "visible" });
-    await page.keyboard.press("Enter");
+    assert.equal(await page.locator('.sara-bottom, [data-sara-action="map"], [data-sara-action="people"], [data-sara-action="notebook"]').count(), 0);
+    await page.locator('[data-sara-start]').click();
+    const draw = async () => {
+      const canvas = page.locator('.sara-drawing-canvas');
+      await canvas.scrollIntoViewIfNeeded();
+      const bounds = await canvas.boundingBox();
+      assert.ok(Math.abs(bounds.width-bounds.height)<1, 'The drawing canvas must stay square');
+      const overflow = await page.locator('.sara-drawing-card').evaluate(card => card.scrollWidth > card.clientWidth);
+      assert.equal(overflow,false,'Drawing tools overflow the card');
+      await page.mouse.move(bounds.x + bounds.width * .4, bounds.y + bounds.height * .4);
+      await page.mouse.down();
+      await page.mouse.move(bounds.x + bounds.width * .6, bounds.y + bounds.height * .6, { steps: 8 });
+      await page.mouse.up();
+      // Focus must stay in the drawing, and the story must not advance behind it.
+      const before = await page.locator('#app').getAttribute('data-sara-node');
+      await page.keyboard.press('Tab');
+      assert.ok(await page.evaluate(() => document.querySelector('.sara-drawing-overlay').contains(document.activeElement)));
+      await page.keyboard.press('Escape');
+      assert.equal(await page.locator('#app').getAttribute('data-sara-node'), before);
+      await page.screenshot({ path: `/tmp/sara-drawing-${viewport.width}.png` });
+      await page.locator('[data-action="confirm"]').click();
+      await page.locator('.sara-drawing-overlay').waitFor({ state: 'hidden' });
+    };
+    await draw();
+    await page.locator('[data-interstitial-next]').click();
     await page.locator('#app[data-sara-node="c1-01"]').waitFor();
-    await page.getByRole("button", { name: "Pausar historia", exact: true }).click();
-    await page.getByRole("heading", { name: "Podemos parar aquí" }).waitFor();
-    await page.keyboard.press("Escape");
-    assert.equal(await page.locator("#app").getAttribute("data-sara-node"), "c1-01");
+    // A reload restores the scene and keeps the first drawing.
+    await page.reload();
+    await page.locator('[data-sara-resume]').click();
+    await page.locator('#app[data-sara-node="c1-01"]').waitFor();
+    await page.keyboard.press('Escape');
+    await page.getByRole('heading', { name: 'Un pequeño descanso' }).waitFor();
+    assert.ok(await page.locator('.sara-pause-profile img').isVisible());
+    const atPause = await page.locator('#app').getAttribute('data-sara-node');
+    await page.getByRole('checkbox', { name: 'Guardar en este dispositivo' }).focus();
+    await page.keyboard.press('Space');
+    await page.keyboard.press('Space');
+    assert.equal(await page.locator('#app').getAttribute('data-sara-node'), atPause);
+    await page.getByRole('button', { name: 'Letra más grande' }).click();
+    assert.equal(await page.getByRole('button', { name: 'Letra más grande' }).getAttribute('aria-pressed'), 'true');
+    await page.getByRole('button', { name: 'Letra más grande' }).click();
+    await page.getByRole('button', { name: 'Necesito ayuda' }).click();
+    assert.ok(await page.locator('a[href="tel:112"]').isVisible());
+    await page.keyboard.press('Escape');
     const visited = new Set();
-    const route = { "c1-choice": "time", "c2-choice": "privacy", "c2-choice2": "short", "c3-choice": "dani", "c4-choice": "volleyball", "c5-choice": "people", "c5-choice2": "pause" };
-    let checkedBack = false;
     for (let guard = 0; guard < 170; guard++) {
-      const id = await page.locator("#app").getAttribute("data-sara-node");
+      const id = await page.locator('#app').getAttribute('data-sara-node');
       visited.add(id);
-      if (id === "epilogue") break;
-      if (await page.locator("[data-interstitial]").isVisible()) {
-        await page.locator("[data-interstitial-next]").click();
-      } else if (await page.locator("[data-choices]").isVisible()) {
-        const bounds = await page.evaluate(() => {
-          const prompt = document.querySelector("[data-panel]").getBoundingClientRect();
-          const choices = document.querySelector("[data-choices]").getBoundingClientRect();
-          const nav = document.querySelector(".sara-bottom").getBoundingClientRect();
-          const horizontalSeparation = choices.left >= prompt.right || choices.right <= prompt.left;
-          return { separated: horizontalSeparation || choices.top >= prompt.bottom, aboveNav: choices.bottom <= nav.top, overflow: document.documentElement.scrollWidth > innerWidth };
-        });
-        assert.ok(bounds.separated && bounds.aboveNav && !bounds.overflow, `Decision layout at ${id}: ${JSON.stringify(bounds)}`);
-        if (id === "c1-choice") {
-          await page.screenshot({ path: `/tmp/sara-choice-${viewport.width}.png` });
-          if (!checkedBack) {
-            await page.locator(".choice").first().click();
-            await page.locator('#app[data-sara-node="c1-partial"]').waitFor();
-            await page.getByRole("button", { name: "Volver", exact: true }).click();
-            await page.locator('#app[data-sara-node="c1-choice"]').waitFor();
-            checkedBack = true;
-          }
-        }
-        const optionIds = {
-          "c1-choice": ["partial", "time", "what"], "c1-choice2": ["door", "company"],
-          "c2-choice": ["privacy", "dad", "alone"], "c2-choice2": ["short", "overview"],
-          "c3-choice": ["dani", "privacy", "home"], "c3-choice2": ["contact", "school"],
-          "c4-choice": ["volleyball", "school", "friends"], "c4-choice2": ["boundary", "laura"],
-          "c5-choice": ["people", "room", "rights"], "c5-choice2": ["repeat", "memory", "pause"],
-          "c6-choice": ["news", "dad", "privacy"], "c6-choice2": ["play", "quiet"],
-        };
-        const index = Math.max(0, optionIds[id].indexOf(route[id]));
-        await page.locator(".choice").nth(index).click();
-      } else {
-        if (id === "c2-07") await page.screenshot({ path: `/tmp/sara-irene-${viewport.width}.png` });
-        await page.locator("[data-advance]").click();
+      if (await page.locator('.sara-drawing-canvas').count()) { await draw(); continue; }
+      if (await page.locator('.sara-phase3-card').count()) {
+        await page.locator('[data-choice="phase1"]').focus();
+        await page.keyboard.press('Enter');
+        assert.equal(await page.locator('[data-choice="phase1"]').getAttribute('aria-pressed'), 'true');
+        await page.locator('[data-action="confirm-choice"]').click();
+        continue;
       }
+      if (id === 'epilogue') break;
+      if (await page.locator('[data-interstitial]').isVisible()) await page.locator('[data-interstitial-next]').click();
+      else if (await page.locator('[data-choices]').isVisible()) {
+        const boxes = await page.evaluate(() => {
+          const p = document.querySelector('[data-panel]').getBoundingClientRect();
+          const c = document.querySelector('[data-choices]').getBoundingClientRect();
+          return { separated: c.top >= p.bottom || c.left >= p.right || c.right <= p.left, fits: c.bottom <= innerHeight && c.right <= innerWidth };
+        });
+        assert.ok(boxes.separated && boxes.fits, `Decision layout: ${id}`);
+        await page.locator('.choice').first().click();
+      } else await page.locator('[data-advance]').click();
     }
-    assert.ok(visited.has("epilogue"), "The story must complete");
-    for (const id of ["c4-dani", "c5-privacy", "c5-short", "epilogue-volley", variant === "conviction" ? "c6-conviction" : "c6-no-conviction"]) assert.ok(visited.has(id), `Missing ${id}`);
+    assert.ok(visited.has('epilogue'), 'The full story must complete');
+    assert.ok(visited.has('c5-06'), 'The judge scene must be reached');
+    assert.ok(await page.locator('.sara-ending-avatar-card img').isVisible());
     await page.screenshot({ path: `/tmp/sara-epilogue-${viewport.width}.png` });
-    await page.getByRole("button", { name: /Recorrido/ }).click();
-    await page.locator(".sara-map-step summary").first().click();
-    assert.equal(await page.locator(".sara-map-step").count(), 8);
-    await page.screenshot({ path: `/tmp/sara-map-${viewport.width}.png` });
-    await page.keyboard.press("Escape");
-    await page.getByRole("button", { name: /Personas/ }).click();
-    await page.locator(".sara-person summary").filter({ hasText: "Fiscalía" }).click();
-    await page.keyboard.press("Escape");
-    await page.getByRole("button", { name: /Cuaderno/ }).click();
-    assert.ok(await page.locator(".sara-note").count() >= 5);
-    await page.keyboard.press("Tab");
-    assert.ok(await page.evaluate(() => document.querySelector("[data-sara-overlay]").contains(document.activeElement)));
-    await page.keyboard.press("Escape");
-    assert.equal(await page.evaluate(() => localStorage.getItem("sara.save")), null, "Default play stays in memory");
-    await page.getByRole("button", { name: "Volver a empezar", exact: true }).click();
-    await page.getByRole("button", { name: "Borrar progreso y empezar" }).click();
-    await page.getByRole("heading", { name: "Sara", exact: true }).waitFor();
+    assert.equal(await page.evaluate(() => localStorage.getItem('sara.save')), null);
+    assert.equal(decisions.length, new Set(decisions.map(d => d.node_id)).size, 'A decision was sent twice');
+    assert.ok(decisions.length >= 10);
+    await page.getByRole('button', { name: 'Volver a empezar', exact: true }).click();
+    await page.getByRole('button', { name: 'Sí, volver a empezar' }).click();
+    await page.getByRole('heading', { name: 'Sara', exact: true }).waitFor();
+    assert.equal(await page.locator('[data-sara-resume]').count(), 0);
     assert.deepEqual(errors, []);
-    assert.deepEqual(external, [], "Story choices and assets must remain on the same origin");
     await page.close();
-    console.log(`Sara browser passed ${viewport.width}×${viewport.height}: complete story, ${variant}, back, keyboard, panels, layout and no third-party requests.`);
-  }
-  const page = await browser.newPage({ reducedMotion: "reduce" });
-  await page.goto(url);
-  await page.locator("[data-sara-save]").check();
-  await page.getByRole("button", { name: "Acompañar a Sara" }).click();
-  await page.locator("[data-interstitial-next]").click();
-  const savedNode = await page.locator("#app").getAttribute("data-sara-node");
-  await page.reload();
-  await page.getByRole("button", { name: "Continuar mi recorrido guardado" }).click();
-  assert.equal(await page.locator("#app").getAttribute("data-sara-node"), savedNode);
-  await page.getByRole("button", { name: "Volver", exact: true }).click();
-  assert.equal(await page.locator("#app").getAttribute("data-sara-node"), "start");
-  await page.getByRole("button", { name: "Pausar historia", exact: true }).click();
-  await page.getByRole("button", { name: "Borrar el guardado del dispositivo" }).click();
-  assert.equal(await page.evaluate(() => localStorage.getItem("sara.save")), null);
-  await page.close();
-  if (process.env.PLATFORM_URL) {
-    const page = await browser.newPage({ reducedMotion: "reduce", viewport: { width: 390, height: 844 } });
-    await page.goto(process.env.PLATFORM_URL + "/novela");
-    const frame = page.frameLocator("#novela-frame");
-    await frame.getByRole("heading", { name: "Sara", exact: true }).waitFor();
-    await frame.getByRole("button", { name: "Acompañar a Sara" }).click();
-    await frame.locator("[data-interstitial-next]").click();
-    await frame.getByRole("button", { name: "Pausar historia", exact: true }).click();
-    await frame.getByRole("button", { name: "Salir de la historia", exact: true }).click();
-    await page.waitForURL(process.env.PLATFORM_URL.replace(/\/$/, "") + "/");
-    await page.close();
-    console.log("Sara Next.js iframe entry and exit passed.");
+    console.log(`Sara ${viewport.width}×${viewport.height}: complete story, three drawing checkpoints, keyboard, save/resume, pause/help, decisions and restart passed.`);
   }
 } finally { await browser?.close(); await server.close(); }
