@@ -1,0 +1,12 @@
+Tool: built-in image_gen, transparent_background=true.
+Source: images/Distinguished Judge with Documents.png
+Output: images/jueza-transparente.png
+
+Use case: background-extraction. Edit target: the provided judge illustration.
+Remove ONLY the solid black background, replace it with genuine alpha transparency.
+Preserve exactly the same woman, face, glasses, gray hair, expression, judicial robe,
+lace cuffs, hands, watch, documents, colors and illustration style. Preserve the
+complete existing silhouette and original portrait composition from top of head to
+the bottom edge. Do not remove the dark robe or dark documents: they belong to the
+subject. Do not add anything or change pose. Transparent PNG cutout for a visual
+novel sprite.

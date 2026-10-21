@@ -30,7 +30,7 @@ try {
     assert.equal(root.querySelector("[data-interstitial-title]").textContent, "Dos voces");
     root.querySelector("[data-interstitial-next]").click();
     assert.equal(app.engine.nodeId, "modo");
-    assert.ok(root.querySelector(".scene-bg.is-active").style.backgroundImage.includes("home-living-cold.svg"));
+    assert.ok(root.querySelector(".scene-bg.is-active").style.backgroundImage.includes("3mjvj13mjvj13mjv"));
     assert.ok(root.querySelector("[data-text]").textContent.length > 0);
   } finally { app.destroy(); dom.window.close(); }
   console.log("Published experience HTTP smoke test passed");
