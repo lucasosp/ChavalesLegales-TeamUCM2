@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import SalaEsperaAlumnos from '../../components/SalaEsperaAlumnos'
+import PanelEducador from '../../components/PanelEducador'
 import { crearSala } from '../../lib/api'
 import { getWsBaseUrl, createGameSocket } from '../../lib/socket'
 
@@ -14,6 +15,12 @@ export default function ApartadoProfesores({ initialPin = null }) {
   const [roomState, setRoomState] = useState(null)
   const [cargando, setCargando] = useState(false)
   const [error, setError] = useState(null)
+  const [isAuth, setIsAuth] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('educador_auth') === 'true'
+    }
+    return false
+  })
   const socketRef = useRef(null)
 
   // Recuperar sesión activa si se pasa initialPin o hay una sala abierta en sesión
@@ -220,152 +227,151 @@ export default function ApartadoProfesores({ initialPin = null }) {
           boxSizing: 'border-box',
         }}
       >
-        <div style={{ maxWidth: 680, width: '100%', textAlign: 'center' }}>
-          <div
-            style={{
-              background: '#FFFFFF',
-              border: 'none',
-              borderRadius: 28,
-              boxShadow: '0 16px 36px rgba(0, 0, 0, 0.35)',
-              padding: '36px 32px',
-              color: '#18181B',
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
-            <div
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                height: 8,
-                background: 'linear-gradient(90deg, #FACC15 0%, #22C55E 50%, #4A1A1C 100%)',
+        <div style={{ maxWidth: 760, width: '100%', textAlign: 'center' }}>
+          {isAuth ? (
+            <PanelEducador
+              onCerrarSesion={() => {
+                setIsAuth(false)
+                if (typeof window !== 'undefined') {
+                  sessionStorage.removeItem('educador_auth')
+                }
               }}
             />
-
+          ) : (
             <div
               style={{
-                width: 64,
-                height: 64,
-                borderRadius: 20,
-                background: '#FEF08A',
+                maxWidth: 580,
+                margin: '0 auto',
+                background: '#FFFFFF',
                 border: '3px solid #18181B',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 4px 0 #18181B',
-                marginBottom: 16,
+                borderRadius: 28,
+                boxShadow: '0 16px 36px rgba(0, 0, 0, 0.35)',
+                padding: '36px 32px',
+                color: '#18181B',
+                position: 'relative',
+                overflow: 'hidden',
               }}
             >
-              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#4A1A1C" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-              </svg>
-            </div>
-
-            <h1 style={{ fontSize: 28, fontWeight: 900, color: '#4A1A1C', margin: '0 0 10px' }}>
-              Portal de Profesores
-            </h1>
-
-            <p style={{ color: '#475569', fontSize: 16, lineHeight: 1.4, margin: '0 0 28px' }}>
-              Solicita un código automático para abrir el aula virtual. Los alumnos se conectarán al instante con el PIN.
-            </p>
-
-            <button
-              type="button"
-              onClick={() => handleSolicitarCodigo('general')}
-              disabled={cargando}
-              style={{
-                background: '#22C55E',
-                color: '#0F172A',
-                border: '3px solid #18181B',
-                borderRadius: 18,
-                padding: '16px 36px',
-                fontSize: 18,
-                fontWeight: 900,
-                cursor: cargando ? 'wait' : 'pointer',
-                boxShadow: '0 6px 0 #18181B',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 12,
-                transition: 'transform 0.1s ease',
-              }}
-            >
-              <span>{cargando ? 'Generando código...' : 'Solicitar código de clase'}</span>
-            </button>
-
-            {error && (
               <div
                 style={{
-                  marginTop: 18,
-                  background: '#FEF2F2',
-                  border: '2px solid #EF4444',
-                  borderRadius: 12,
-                  padding: '10px 14px',
-                  color: '#B91C1C',
-                  fontWeight: 700,
-                  fontSize: 13,
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: 8,
+                  background: 'linear-gradient(90deg, #FACC15 0%, #22C55E 50%, #4A1A1C 100%)',
+                }}
+              />
+
+              <div
+                style={{
+                  width: 64,
+                  height: 64,
+                  borderRadius: 20,
+                  background: '#FEF08A',
+                  border: '3px solid #18181B',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 4px 0 #18181B',
+                  marginBottom: 16,
                 }}
               >
-                {error}
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#4A1A1C" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
               </div>
-            )}
-          </div>
 
-          {/* ====================================================================
-              LOS BOTONES GRANDES DE JUEGOS:
-              1. Superior: "Modo historieta"
-              ==================================================================== */}
-          <div className="teacher-buttons-stack" style={{ marginTop: 28 }}>
-            {/* BOTÓN SUPERIOR: MODO HISTORIETA */}
-            <div className="teacher-game-btn teacher-game-btn--historia">
-              <div className="game-btn-left">
-                <div className="game-btn-icon-wrapper" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                  </svg>
+              <h1 style={{ fontSize: 26, fontWeight: 900, color: '#4A1A1C', margin: '0 0 10px' }}>
+                Acceso para Educadores Sociales
+              </h1>
+
+              <p style={{ color: '#475569', fontSize: 15, lineHeight: 1.4, margin: '0 0 24px' }}>
+                Identifícate con tus credenciales profesionales para generar casos individualizados con IA y gestionar enlaces de intervención.
+              </p>
+
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  setIsAuth(true)
+                  if (typeof window !== 'undefined') {
+                    sessionStorage.setItem('educador_auth', 'true')
+                  }
+                }}
+                style={{ display: 'flex', flexDirection: 'column', gap: 14, textAlign: 'left' }}
+              >
+                <div>
+                  <label style={{ display: 'block', fontSize: 13, fontWeight: 800, marginBottom: 6 }}>
+                    Email profesional o colegial
+                  </label>
+                  <input
+                    type="email"
+                    defaultValue="educador.social@chavaleslegales.es"
+                    required
+                    style={{
+                      width: '100%',
+                      padding: '12px 14px',
+                      borderRadius: 14,
+                      border: '2px solid #18181B',
+                      fontSize: 14,
+                      fontWeight: 600,
+                      background: '#F8FAFC',
+                      outline: 'none',
+                      boxSizing: 'border-box',
+                    }}
+                  />
                 </div>
-                <div className="game-btn-text-group">
-                  <span className="game-btn-badge">Narrativa & Toma de decisiones</span>
-                  <span className="game-btn-title">Sara · Mi historia sigue</span>
-                  <span className="game-btn-desc">
-                    Acompaña a Sara en una historia sobre protección, apoyo y acceso a la justicia.
-                  </span>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: 13, fontWeight: 800, marginBottom: 6 }}>
+                    Clave de acreditación
+                  </label>
+                  <input
+                    type="password"
+                    defaultValue="demo1234"
+                    required
+                    style={{
+                      width: '100%',
+                      padding: '12px 14px',
+                      borderRadius: 14,
+                      border: '2px solid #18181B',
+                      fontSize: 14,
+                      fontWeight: 600,
+                      background: '#F8FAFC',
+                      outline: 'none',
+                      boxSizing: 'border-box',
+                    }}
+                  />
                 </div>
-              </div>
-              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+
                 <button
-                  type="button"
-                  onClick={() => handleSolicitarCodigo('historieta')}
+                  type="submit"
                   style={{
+                    marginTop: 10,
                     background: '#22C55E',
                     color: '#0F172A',
-                    border: '2px solid #18181B',
-                    borderRadius: 10,
-                    padding: '8px 14px',
-                    fontSize: 13,
+                    border: '3px solid #18181B',
+                    borderRadius: 16,
+                    padding: '14px 24px',
+                    fontSize: 16,
                     fontWeight: 900,
                     cursor: 'pointer',
-                    boxShadow: '0 2px 0 #18181B',
+                    boxShadow: '0 5px 0 #18181B',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 8,
                   }}
-                  title="Abrir sala multijugador con código PIN para que juegue toda la clase"
                 >
-                  Lanzar en el aula
+                  <span>Acceder al Panel de Casos</span>
+                  <span aria-hidden="true">→</span>
                 </button>
-                <Link
-                  href="/novela"
-                  className="game-btn-action"
-                  aria-label="Abrir la aventura de Sara"
-                >
-                  <span>Proyectar</span>
-                  <span>→</span>
-                </Link>
-              </div>
+              </form>
             </div>
-
-          </div>
+          )}
         </div>
       </main>
     </div>
