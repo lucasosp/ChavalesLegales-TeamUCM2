@@ -13,6 +13,7 @@ from models import (
     RoomState,
 )
 from rooms import room_manager
+from telemetry import telemetry_store, DecisionRecord
 
 app = FastAPI(title="Chavales Legales API")
 
@@ -121,6 +122,35 @@ async def unirse_a_sala(pin: str, req: JoinRoomRequest):
         capacidad_aula=room.capacidad_aula,
         modo_infinito=room.modo_infinito,
     )
+
+
+# =============================================================================
+# ENDPOINTS DE TELEMETRÍA Y TIEMPOS DE DECISIÓN (PARA ASISTENTES SOCIALES)
+# =============================================================================
+
+@app.post("/api/telemetria/decision")
+async def registrar_decision(record: DecisionRecord):
+    """Registra el tiempo y la opción elegida por un niño en una pregunta de la novela."""
+    created = telemetry_store.add_decision(record)
+    return {"status": "ok", "record": created}
+
+
+@app.get("/api/telemetria/decisiones")
+def obtener_decisiones(story_id: Optional[str] = None, limit: int = 500):
+    """Obtiene el listado individual de decisiones registradas."""
+    return telemetry_store.get_all(story_id=story_id, limit=limit)
+
+
+@app.get("/api/telemetria/resumen")
+def obtener_resumen_telemetria(story_id: Optional[str] = None):
+    """Devuelve el resumen estadístico con tiempos por pregunta y opción para el dashboard."""
+    return telemetry_store.get_summary(story_id=story_id)
+
+
+@app.post("/api/telemetria/reset")
+def reiniciar_telemetria():
+    """Reinicia el almacén con el conjunto de datos de muestra enriquecido."""
+    return telemetry_store.reset_to_seed()
 
 
 # =============================================================================

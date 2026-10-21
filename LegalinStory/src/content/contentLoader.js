@@ -1,4 +1,5 @@
 import { compileStory } from "./compileStory.js";
+import { characterImage } from "./characterImages.js";
 
 const CONTENT_BASE = new URL("content/", document.baseURI);
 
@@ -55,6 +56,8 @@ export async function loadStory(entry) {
 }
 
 export function resolveCharacterAsset(assets, character) {
+  const illustration = characterImage(character);
+  if (illustration) return illustration;
   const definition = assets?.characters?.[character.id];
   if (!definition) {
     throw new Error(`Unknown character "${character.id}"`);

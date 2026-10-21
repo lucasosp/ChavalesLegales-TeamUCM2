@@ -1071,6 +1071,20 @@ export class VisualNovelView {
     }
   }
 
+  showSpeakerSprite(source, name) {
+    this.#characterKey = null;
+    this.refs.character.className = "character is-visible speaker-sprite";
+    this.refs.character.dataset.character = name.toLowerCase();
+    this.refs.character.dataset.position = "right";
+    if (this.refs.sprite.getAttribute("src") !== source) {
+      this.refs.sprite.src = source;
+      this.refs.sprite.classList.remove("sprite-swap");
+      void this.refs.sprite.offsetWidth;
+      this.refs.sprite.classList.add("sprite-swap");
+    }
+    this.refs.sprite.alt = "";
+  }
+
   #resolveCharacterSource(character) {
     try {
       return this.resolveCharacter(character);

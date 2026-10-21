@@ -208,3 +208,71 @@ export async function unirseASala(pin, nickname, avatar = {}) {
 
   return await r.json()
 }
+
+
+// ============================================================================
+// FUNCIONES DE TELEMETRÍA Y TIEMPOS (PARA EL DASHBOARD DE ASISTENTES SOCIALES)
+// ============================================================================
+
+export async function getResumenTelemetria(storyId = 'all') {
+  const base = getApiBaseUrl()
+  const query = storyId && storyId !== 'all' ? `?story_id=${encodeURIComponent(storyId)}` : ''
+  try {
+    const r = await fetch(`${base}/api/telemetria/resumen${query}`)
+    if (r.ok) {
+      return await r.json()
+    }
+  } catch (err) {
+    console.warn('Backend API telemetria no disponible, usando fallback local:', err)
+  }
+
+  // Fallback si la API no está disponible
+  return {
+    total_decisions: 0,
+    overall_avg_time: 0,
+    overall_median_time: 0,
+    fastest_decision_time: 0,
+    slowest_decision_time: 0,
+    questions: [],
+    story_stats: [],
+  }
+}
+
+export async function getDecisionesTelemetria(storyId = 'all', limit = 200) {
+  const base = getApiBaseUrl()
+  const params = new URLSearchParams()
+  if (storyId && storyId !== 'all') params.set('story_id', storyId)
+  if (limit) params.set('limit', String(limit))
+
+  try {
+    const r = await fetch(`${base}/api/telemetria/decisiones?${params.toString()}`)
+    if (r.ok) {
+      return await r.json()
+    }
+  } catch (err) {
+    console.warn('Backend API decisiones no disponible:', err)
+  }
+
+  if (typeof window !== 'undefined') {
+    try {
+      const stored = localStorage.getItem('chavales_telemetria_decisiones')
+      if (stored) {
+        const list = JSON.parse(stored)
+        return storyId && storyId !== 'all' ? list.filter(item => item.story_id === storyId) : list
+      }
+    } catch {}
+  }
+
+  return []
+}
+
+export async function resetTelemetria() {
+  const base = getApiBaseUrl()
+  try {
+    const r = await fetch(`${base}/api/telemetria/reset`, { method: 'POST' })
+    if (r.ok) return await r.json()
+  } catch (err) {
+    console.warn('Error al reiniciar telemetría:', err)
+  }
+  return { status: 'fallback' }
+}
