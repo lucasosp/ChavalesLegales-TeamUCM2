@@ -72,7 +72,26 @@ export class SaraExperience {
     this.start();
   }
 
-  start() { this.showLanding(); }
+  start() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("avatar") === "1" || params.get("mode") === "avatar") {
+      this.engine.saveStore = this.localStore;
+      this.engine.initialFlags = { resolution: "conviction" };
+      this.phase2Triggered = false;
+      this.phase3Triggered = false;
+      this.closePanel(true);
+      this.drawingModal.open({
+        phase: "phase1",
+        onConfirm: () => {
+          this.engine.history = [];
+          this.updateAvatarUI();
+          this.engine.start({ resume: false });
+        },
+      });
+      return;
+    }
+    this.showLanding();
+  }
 
   validSave() {
     const saved = this.localStore.load();
