@@ -7,6 +7,18 @@ from typing import Dict, List, Optional, Any
 from pydantic import BaseModel
 
 DATA_FILE = os.path.join(os.path.dirname(__file__), "telemetry_data.json")
+DRAWING_DATA_FILE = os.path.join(os.path.dirname(__file__), "telemetry_drawings.json")
+
+class ProjectiveDrawingRecord(BaseModel):
+    id: Optional[str] = None
+    phase: str
+    student_nickname: Optional[str] = "Alumno"
+    session_pin: Optional[str] = None
+    timestamp: Optional[str] = None
+    metrics: Optional[Dict[str, Any]] = None
+    delta: Optional[Dict[str, Any]] = None
+    alerts: Optional[List[Dict[str, Any]]] = None
+    preview: Optional[str] = None
 
 class DecisionRecord(BaseModel):
     id: Optional[str] = None
@@ -28,9 +40,13 @@ class DecisionRecord(BaseModel):
 class TelemetryStore:
     def __init__(self):
         self.decisions: List[Dict[str, Any]] = []
+        self.drawing_records: List[Dict[str, Any]] = []
         self._load()
+        self._load_drawings()
         if not self.decisions:
             self._seed_initial_data()
+        if not self.drawing_records:
+            self._seed_drawing_data()
 
     def _load(self):
         if os.path.exists(DATA_FILE):
@@ -47,6 +63,163 @@ class TelemetryStore:
                 json.dump(self.decisions, f, ensure_ascii=False, indent=2)
         except Exception as e:
             print(f"[TelemetryStore] Error al guardar {DATA_FILE}: {e}")
+
+    def _load_drawings(self):
+        if os.path.exists(DRAWING_DATA_FILE):
+            try:
+                with open(DRAWING_DATA_FILE, "r", encoding="utf-8") as f:
+                    self.drawing_records = json.load(f)
+            except Exception as e:
+                print(f"[TelemetryStore] Error al cargar {DRAWING_DATA_FILE}: {e}")
+                self.drawing_records = []
+
+    def _save_drawings(self):
+        try:
+            with open(DRAWING_DATA_FILE, "w", encoding="utf-8") as f:
+                json.dump(self.drawing_records, f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            print(f"[TelemetryStore] Error al guardar {DRAWING_DATA_FILE}: {e}")
+
+    def add_drawing_record(self, record: ProjectiveDrawingRecord) -> Dict[str, Any]:
+        data = record.dict()
+        if not data.get("id"):
+            data["id"] = f"draw_{int(time.time() * 1000)}_{random.randint(100, 999)}"
+        if not data.get("timestamp"):
+            data["timestamp"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+
+        self.drawing_records.insert(0, data)
+        self._save_drawings()
+        return data
+
+    def get_drawing_records(self, limit: int = 50) -> List[Dict[str, Any]]:
+        return self.drawing_records[:limit]
+
+    def get_drawing_summary(self) -> Dict[str, Any]:
+        phase2_evaluations = [d for d in self.drawing_records if d.get("phase") == "phase2" and d.get("delta")]
+        total_evals = len(phase2_evaluations)
+
+        alert_counts = {}
+        avg_tremor_delta = 0.0
+        avg_occupancy_delta = 0.0
+        avg_latency_delta = 0.0
+
+        if total_evals > 0:
+            for item in phase2_evaluations:
+                delta = item.get("delta", {})
+                avg_tremor_delta += delta.get("delta_tremor_index", 0)
+                avg_occupancy_delta += delta.get("delta_occupancy_ratio", 0)
+                avg_latency_delta += delta.get("delta_initial_latency_ms", 0)
+
+                for alert in item.get("alerts", []):
+                    atype = alert.get("type", "other")
+                    alert_counts[atype] = alert_counts.get(atype, 0) + 1
+
+            avg_tremor_delta = round(avg_tremor_delta / total_evals, 2)
+            avg_occupancy_delta = round(avg_occupancy_delta / total_evals, 3)
+            avg_latency_delta = round(avg_latency_delta / total_evals, 1)
+
+        return {
+            "total_evaluations": total_evals,
+            "average_tremor_delta": avg_tremor_delta,
+            "average_occupancy_delta": avg_occupancy_delta,
+            "average_latency_delta_ms": avg_latency_delta,
+            "active_alerts_count": sum(alert_counts.values()),
+            "alert_breakdown": alert_counts,
+            "recent_cases": self.drawing_records[:15],
+        }
+
+    def _seed_drawing_data(self):
+        """Genera casos de ejemplo enriquecidos con métricas periciales para demostración."""
+        demo_cases = [
+            {
+                "id": "seed_draw_01",
+                "phase": "phase2",
+                "student_nickname": "Sara (Caso Principal)",
+                "session_pin": "481 920",
+                "timestamp": "2026-10-21T18:40:00Z",
+                "metrics": {
+                    "duration_total_ms": 28400,
+                    "initial_latency_ms": 6200,
+                    "pressure": { "mean": 0.42, "max": 0.81, "std_dev": 0.18, "high_pressure_ratio": 0.12, "low_pressure_ratio": 0.22 },
+                    "velocity_px_per_ms": { "mean": 0.31, "max": 1.15 },
+                    "tremor": { "jitter_index": 22.4, "inflections_count": 58 },
+                    "spatial": { "occupancy_ratio": 0.28, "predominant_quadrant": "bottom-left" },
+                    "chromatic": { "colors_used": ["#1e1b26"], "is_monochrome": True, "primary_color": "#1e1b26" },
+                    "corrections": { "eraser_strokes": 4, "undo_count": 3 }
+                },
+                "delta": {
+                    "delta_tremor_index": 12.6,
+                    "tremor_change_percent": 128.5,
+                    "delta_pressure_mean": -0.16,
+                    "pressure_change_percent": -27.5,
+                    "delta_occupancy_ratio": -0.24,
+                    "occupancy_change_percent": -46.1,
+                    "delta_initial_latency_ms": 4100,
+                    "delta_air_time_ratio": 0.18,
+                    "delta_velocity_mean": -0.15,
+                    "delta_eraser_strokes": 3
+                },
+                "alerts": [
+                    {
+                        "type": "tremor_increase",
+                        "severity": "warning",
+                        "title": "Incremento significativo de temblor / inestabilidad motora",
+                        "detail": "El índice de micro-oscilaciones aumentó un 128.5% post-trauma (9.8 → 22.4). Refleja angustia aguda y tensión neuromuscular al rememorar la agresión."
+                    },
+                    {
+                        "type": "micrographism",
+                        "severity": "warning",
+                        "title": "Retracción espacial / Micrografismo defensivo",
+                        "detail": "La ocupación del lienzo se redujo un 46.1% (52% → 28%). Asociado a repliegue afectivo, sensación de indefensión y contracción de la autoimagen."
+                    },
+                    {
+                        "type": "latency_block",
+                        "severity": "warning",
+                        "title": "Latencia de reacción prolongada (Bloqueo emocional)",
+                        "detail": "Tardó 6.2s en iniciar el primer trazo (+4.1s sobre la línea base). Indica impacto inicial ante la consigna traumática."
+                    }
+                ]
+            },
+            {
+                "id": "seed_draw_02",
+                "phase": "phase2",
+                "student_nickname": "Lucas R.",
+                "session_pin": "312 804",
+                "timestamp": "2026-10-20T16:15:00Z",
+                "metrics": {
+                    "duration_total_ms": 32100,
+                    "initial_latency_ms": 3800,
+                    "pressure": { "mean": 0.76, "max": 0.98, "std_dev": 0.14, "high_pressure_ratio": 0.44, "low_pressure_ratio": 0.02 },
+                    "velocity_px_per_ms": { "mean": 0.65, "max": 2.20 },
+                    "tremor": { "jitter_index": 16.8, "inflections_count": 39 },
+                    "spatial": { "occupancy_ratio": 0.64, "predominant_quadrant": "center" },
+                    "chromatic": { "colors_used": ["#b93b3b", "#1e1b26"], "is_monochrome": False, "primary_color": "#b93b3b" },
+                    "corrections": { "eraser_strokes": 1, "undo_count": 1 }
+                },
+                "delta": {
+                    "delta_tremor_index": 5.2,
+                    "tremor_change_percent": 44.8,
+                    "delta_pressure_mean": 0.22,
+                    "pressure_change_percent": 40.7,
+                    "delta_occupancy_ratio": 0.12,
+                    "occupancy_change_percent": 23.0,
+                    "delta_initial_latency_ms": 800,
+                    "delta_air_time_ratio": -0.05,
+                    "delta_velocity_mean": 0.18,
+                    "delta_eraser_strokes": 0
+                },
+                "alerts": [
+                    {
+                        "type": "high_pressure",
+                        "severity": "warning",
+                        "title": "Hipertonía y tensión gráfica (Picos de presión)",
+                        "detail": "La presión media aumentó un 40.7% (0.54 → 0.76) con un 44% de trazos en presión máxima. Sugiere respuesta de cólera, descarga reactiva o hipervigilancia."
+                    }
+                ]
+            }
+        ]
+        self.drawing_records = demo_cases
+        self._save_drawings()
 
     def add_decision(self, record: DecisionRecord) -> Dict[str, Any]:
         data = record.dict()

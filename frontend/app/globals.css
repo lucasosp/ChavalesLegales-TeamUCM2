@@ -1243,8 +1243,8 @@ html, body {
 /* Selector compacto de juegos individuales (cabe en una pantalla sin scroll) */
 .solo-games-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
   width: 100%;
 }
 
@@ -1253,7 +1253,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  padding: 12px 8px 12px;
+  padding: 10px 4px 10px;
   border-radius: 16px;
   border: 3px solid #18181b;
   background: #fff;
@@ -1291,8 +1291,16 @@ html, body {
 }
 
 .solo-game-title {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 900;
   line-height: 1.2;
   color: #18181b;
+  word-break: break-word;
+}
+
+@media (max-width: 440px) {
+  .solo-games-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
 }

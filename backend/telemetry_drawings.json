@@ -1,0 +1,213 @@
+[
+  {
+    "id": "draw_1792619774590_507",
+    "phase": "phase1",
+    "student_nickname": "Alumno",
+    "session_pin": null,
+    "timestamp": "2026-10-21T21:56:14.562Z",
+    "metrics": {
+      "phase": "phase1",
+      "captured_at": "2026-10-21T21:56:14.561Z",
+      "duration_total_ms": 50442,
+      "initial_latency_ms": 8381,
+      "active_drawing_time_ms": 14375,
+      "air_hesitation_time_ms": 36067.20000000298,
+      "air_time_ratio": 0.715,
+      "hesitation_pauses_count": 3,
+      "max_pause_duration_ms": 3557,
+      "strokes_count": 12,
+      "total_path_length_px": 1306,
+      "pressure": {
+        "mean": 0.5,
+        "max": 0.5,
+        "std_dev": 0,
+        "high_pressure_ratio": 0,
+        "low_pressure_ratio": 0
+      },
+      "velocity_px_per_ms": {
+        "mean": 0.139,
+        "max": 0.794
+      },
+      "tremor": {
+        "jitter_index": 22.21,
+        "inflections_count": 29
+      },
+      "spatial": {
+        "occupancy_ratio": 0.272,
+        "bounding_box": {
+          "x_min": 102,
+          "y_min": 5,
+          "x_max": 348,
+          "y_max": 181,
+          "width": 247,
+          "height": 176
+        },
+        "centroid": {
+          "x": 0.45,
+          "y": 0.23
+        },
+        "predominant_quadrant": "center"
+      },
+      "chromatic": {
+        "colors_used": [
+          "#1e1b26",
+          "#b93b3b",
+          "#d9822b",
+          "#2d6a4f"
+        ],
+        "color_switches": 3,
+        "distribution": {
+          "#1e1b26": 0.08,
+          "#b93b3b": 0.55,
+          "#d9822b": 0.11,
+          "#2d6a4f": 0.25
+        },
+        "is_monochrome": false
+      },
+      "corrections": {
+        "eraser_strokes": 0,
+        "eraser_time_ms": 0,
+        "undo_count": 0,
+        "clear_count": 0
+      }
+    },
+    "delta": null,
+    "alerts": null,
+    "preview": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfEAAAHxCAYAAAB9MoV9AAAQAElEQVR4AexdBYBdNdb+Tu4bqbsLpVCguJVSrLgui7MLC4ssuou7u7t7cXcpDhXcC9QphZa6e6cz827y..."
+  },
+  {
+    "id": "seed_draw_01",
+    "phase": "phase2",
+    "student_nickname": "Sara (Caso Principal)",
+    "session_pin": "481 920",
+    "timestamp": "2026-10-21T18:40:00Z",
+    "metrics": {
+      "duration_total_ms": 28400,
+      "initial_latency_ms": 6200,
+      "pressure": {
+        "mean": 0.42,
+        "max": 0.81,
+        "std_dev": 0.18,
+        "high_pressure_ratio": 0.12,
+        "low_pressure_ratio": 0.22
+      },
+      "velocity_px_per_ms": {
+        "mean": 0.31,
+        "max": 1.15
+      },
+      "tremor": {
+        "jitter_index": 22.4,
+        "inflections_count": 58
+      },
+      "spatial": {
+        "occupancy_ratio": 0.28,
+        "predominant_quadrant": "bottom-left"
+      },
+      "chromatic": {
+        "colors_used": [
+          "#1e1b26"
+        ],
+        "is_monochrome": true,
+        "primary_color": "#1e1b26"
+      },
+      "corrections": {
+        "eraser_strokes": 4,
+        "undo_count": 3
+      }
+    },
+    "delta": {
+      "delta_tremor_index": 12.6,
+      "tremor_change_percent": 128.5,
+      "delta_pressure_mean": -0.16,
+      "pressure_change_percent": -27.5,
+      "delta_occupancy_ratio": -0.24,
+      "occupancy_change_percent": -46.1,
+      "delta_initial_latency_ms": 4100,
+      "delta_air_time_ratio": 0.18,
+      "delta_velocity_mean": -0.15,
+      "delta_eraser_strokes": 3
+    },
+    "alerts": [
+      {
+        "type": "tremor_increase",
+        "severity": "warning",
+        "title": "Incremento significativo de temblor / inestabilidad motora",
+        "detail": "El índice de micro-oscilaciones aumentó un 128.5% post-trauma (9.8 → 22.4). Refleja angustia aguda y tensión neuromuscular al rememorar la agresión."
+      },
+      {
+        "type": "micrographism",
+        "severity": "warning",
+        "title": "Retracción espacial / Micrografismo defensivo",
+        "detail": "La ocupación del lienzo se redujo un 46.1% (52% → 28%). Asociado a repliegue afectivo, sensación de indefensión y contracción de la autoimagen."
+      },
+      {
+        "type": "latency_block",
+        "severity": "warning",
+        "title": "Latencia de reacción prolongada (Bloqueo emocional)",
+        "detail": "Tardó 6.2s en iniciar el primer trazo (+4.1s sobre la línea base). Indica impacto inicial ante la consigna traumática."
+      }
+    ]
+  },
+  {
+    "id": "seed_draw_02",
+    "phase": "phase2",
+    "student_nickname": "Lucas R.",
+    "session_pin": "312 804",
+    "timestamp": "2026-10-20T16:15:00Z",
+    "metrics": {
+      "duration_total_ms": 32100,
+      "initial_latency_ms": 3800,
+      "pressure": {
+        "mean": 0.76,
+        "max": 0.98,
+        "std_dev": 0.14,
+        "high_pressure_ratio": 0.44,
+        "low_pressure_ratio": 0.02
+      },
+      "velocity_px_per_ms": {
+        "mean": 0.65,
+        "max": 2.2
+      },
+      "tremor": {
+        "jitter_index": 16.8,
+        "inflections_count": 39
+      },
+      "spatial": {
+        "occupancy_ratio": 0.64,
+        "predominant_quadrant": "center"
+      },
+      "chromatic": {
+        "colors_used": [
+          "#b93b3b",
+          "#1e1b26"
+        ],
+        "is_monochrome": false,
+        "primary_color": "#b93b3b"
+      },
+      "corrections": {
+        "eraser_strokes": 1,
+        "undo_count": 1
+      }
+    },
+    "delta": {
+      "delta_tremor_index": 5.2,
+      "tremor_change_percent": 44.8,
+      "delta_pressure_mean": 0.22,
+      "pressure_change_percent": 40.7,
+      "delta_occupancy_ratio": 0.12,
+      "occupancy_change_percent": 23.0,
+      "delta_initial_latency_ms": 800,
+      "delta_air_time_ratio": -0.05,
+      "delta_velocity_mean": 0.18,
+      "delta_eraser_strokes": 0
+    },
+    "alerts": [
+      {
+        "type": "high_pressure",
+        "severity": "warning",
+        "title": "Hipertonía y tensión gráfica (Picos de presión)",
+        "detail": "La presión media aumentó un 40.7% (0.54 → 0.76) con un 44% de trazos en presión máxima. Sugiere respuesta de cólera, descarga reactiva o hipervigilancia."
+      }
+    ]
+  }
+]

@@ -200,12 +200,12 @@ export class DrawingMetricsCollector {
         const d1 = Math.hypot(v1x, v1y);
         const d2 = Math.hypot(v2x, v2y);
 
-        if (d1 > 0 && d2 > 0 && d1 + d2 < 20) {
+        if (d1 > 0 && d2 > 0 && d1 + d2 < 40) {
           const angle1 = Math.atan2(v1y, v1x);
           const angle2 = Math.atan2(v2y, v2x);
           let diff = Math.abs(angle2 - angle1);
           if (diff > Math.PI) diff = 2 * Math.PI - diff;
-          if (diff > Math.PI / 3) { // > 60 degree acute change
+          if (diff > Math.PI / 4) { // > 45 degree acute change
             highFrequencyInflections += 1;
           }
         }

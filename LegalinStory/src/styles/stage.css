@@ -1,0 +1,118 @@
+/* Reserve actual layout space: no character may extend behind the dialogue. */
+#app .scene {
+  --stage-top: 78px;
+  --stage-bottom: 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto auto;
+  gap: 0;
+  padding: var(--stage-top) max(14px, 3vw) var(--stage-bottom);
+}
+#app.sara-mode .scene { --stage-top: 116px; --stage-bottom: 88px; }
+#app .scene > .dialogue {
+  position: relative;
+  inset: auto;
+  grid-area: 2 / 1;
+  justify-self: center;
+  width: min(900px, 100%);
+  height: clamp(155px, 23dvh, 230px);
+  min-height: 0;
+  max-height: none;
+  margin: 0;
+  padding: 16px 24px 12px;
+  transform: none;
+}
+#app .scene:has(.choices:not([hidden])) > .dialogue {
+  height: auto;
+  max-height: 24dvh;
+}
+#app .scene > .choices {
+  position: relative;
+  inset: auto;
+  grid-area: 3 / 1;
+  justify-self: center;
+  width: min(900px, 100%);
+  max-height: 31dvh;
+  min-height: 0;
+  margin-top: 12px;
+  padding: 4px;
+  overflow: auto;
+  transform: none;
+}
+#app .scene > .sara-cast,
+#app:not(.sara-mode) .scene > .character {
+  position: relative;
+  inset: auto;
+  grid-area: 1 / 1;
+  align-self: stretch;
+  justify-self: center;
+  width: min(900px, 100%);
+  height: 100%;
+  min-height: 0;
+  max-width: none;
+  aspect-ratio: auto;
+  transform: none;
+}
+#app .scene > .sara-cast { display: flex; justify-content: space-around; gap: 16px; container-type: size; --sprite-width: 45cqw; }
+#app .scene > .sara-cast[hidden] { display: none; }
+#app.sara-mode .scene > .character { position: absolute; visibility: hidden; }
+#app .sara-cast .sara-cast-person {
+  height: min(100cqh, calc(var(--sprite-width) / .8));
+  width: min(var(--sprite-width), 80cqh);
+  align-self: end;
+  min-height: 0;
+  overflow: visible;
+  border-radius: 0;
+  transition: filter 180ms ease;
+  animation: cast-arrive 180ms ease;
+}
+#app .sara-cast[data-count="1"] { --sprite-width: 70cqw; }
+#app .sara-cast-person img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  transform: none;
+  opacity: 1;
+  transition: opacity 160ms ease;
+}
+#app .sara-cast-person img.is-entering { animation: cast-arrive 160ms ease; }
+#app .sara-cast-person img.is-leaving { opacity: 0; }
+#app .scene > .character .sprite { object-fit: contain; object-position: center bottom; }
+#app .scene-bg.is-image { filter: blur(2.5px); transform: scale(1.025); }
+.sara-portrait-window { position: absolute; inset: 0; overflow: hidden; }
+.sara-portrait-window > img { position: absolute; max-width: none; object-fit: fill; }
+.sara-art-grid .sara-portrait-window { position: relative; inset: auto; width: 100%; aspect-ratio: .8; }
+#app .sara-cast::after { content: ""; position: absolute; inset: auto 0 -2px; height: 2px; background: var(--sara-ink); }
+@keyframes cast-arrive { from { opacity: 0; } to { opacity: 1; } }
+
+@media (max-width: 700px) {
+  #app.sara-mode .scene { --stage-top: 110px; --stage-bottom: max(80px, calc(68px + env(safe-area-inset-bottom))); }
+  #app .scene { gap: 0; padding-inline: 10px; }
+  #app .scene > .dialogue { height: clamp(210px, 30dvh, 260px); padding: 14px 18px 10px; }
+  #app .scene > .sara-cast { gap: 6px; --sprite-width: 49cqw; }
+  #app .scene .choice { min-height: 48px; }
+}
+@media (max-height: 550px) and (min-width: 600px) {
+  #app .scene {
+    --stage-top: 64px;
+    --stage-bottom: 18px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+  #app.sara-mode .scene { --stage-top: 92px; --stage-bottom: 64px; }
+  #app .scene > .sara-cast,
+  #app:not(.sara-mode) .scene > .character { grid-area: 1 / 1 / 3 / 2; }
+  #app .scene > .dialogue,
+  #app .scene:has(.choices:not([hidden])) > .dialogue { grid-area: 1 / 2; height: 100%; max-height: none; padding: 10px 16px; }
+  #app .scene > .choices { grid-area: 2 / 2; max-height: min(40dvh, calc((100dvh - var(--stage-top) - var(--stage-bottom)) * .6)); }
+  #app .scene > .sara-cast { margin-right: 12px; }
+  #app .sara-cast::after { bottom: -12px; height: 12px; background: var(--sara-paper); border-top: 2px solid var(--sara-ink); border-radius: 0 0 10px 10px; }
+  #app .scene .choice { min-height: 44px; padding: 8px 12px; }
+  #app .scene .choice-label { font-size: .9rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #app .sara-cast-person, #app .sara-cast-person img, #app .scene-bg { animation: none; transition: none; }
+}

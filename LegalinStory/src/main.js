@@ -8,6 +8,7 @@ import {
 import { LocalStorageSaveStore } from "./services/saveStores.js";
 import "./styles/main.css";
 import "./styles/sara.css";
+import "./styles/stage.css";
 
 const root = document.querySelector("#app");
 

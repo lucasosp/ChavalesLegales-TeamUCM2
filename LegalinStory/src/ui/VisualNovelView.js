@@ -12,6 +12,7 @@ export class VisualNovelView {
   #background = null;
   #characterKey = null;
   #activeBackgroundLayer = 0;
+  #backgroundRequest = 0;
   #awaitingChoice = false;
   #endingVisible = false;
   #choiceReadyTimer = null;
@@ -1117,19 +1118,25 @@ export class VisualNovelView {
 
     this.#background = name;
 
-    const nextIndex = 1 - this.#activeBackgroundLayer;
-    const nextLayer = this.refs.backgrounds[nextIndex];
-    const previousLayer = this.refs.backgrounds[this.#activeBackgroundLayer];
     const image = this.resolveBackground?.(name) ?? null;
-
-    nextLayer.className = image ? "scene-bg is-image" : `scene-bg bg-${name}`;
-    nextLayer.style.backgroundImage = image ? `url("${image}")` : "";
-    // Force a style flush so the opacity transition always runs.
-    void nextLayer.offsetWidth;
-    nextLayer.classList.add("is-active");
-    previousLayer.classList.remove("is-active");
-
-    this.#activeBackgroundLayer = nextIndex;
+    const request = ++this.#backgroundRequest;
+    const activate = (source) => {
+      if (request !== this.#backgroundRequest) return;
+      const nextIndex = 1 - this.#activeBackgroundLayer;
+      const nextLayer = this.refs.backgrounds[nextIndex];
+      const previousLayer = this.refs.backgrounds[this.#activeBackgroundLayer];
+      nextLayer.className = source ? "scene-bg is-image" : `scene-bg bg-${name}`;
+      nextLayer.style.backgroundImage = source ? `url("${source}")` : "";
+      void nextLayer.offsetWidth;
+      nextLayer.classList.add("is-active");
+      previousLayer.classList.remove("is-active");
+      this.#activeBackgroundLayer = nextIndex;
+    };
+    if (!image || typeof Image !== "function") { activate(image); return; }
+    const preload = new Image();
+    preload.src = image;
+    if (typeof preload.decode === "function") preload.decode().then(() => activate(image), () => activate(null));
+    else { preload.onload = () => activate(image); preload.onerror = () => activate(null); }
   }
 
 

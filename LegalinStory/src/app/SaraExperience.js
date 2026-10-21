@@ -1,6 +1,6 @@
 import { App } from "./App.js";
 import { LocalStorageSaveStore, MemorySaveStore } from "../services/saveStores.js";
-import { personImage, personPortrait, illustrations } from "../content/characterImages.js";
+import { personImage, personPortrait, illustrations, framePortrait } from "../content/characterImages.js";
 import { DrawingCanvasModal } from "../ui/DrawingCanvasModal.js";
 import { avatarStore } from "../services/avatarStore.js";
 
@@ -324,11 +324,14 @@ export class SaraExperience {
     const images = element("div", "sara-art-grid");
     for (const art of Object.values(illustrations)) {
       const figure = element("figure");
+      const viewport = element("div", "sara-portrait-window");
       const image = element("img");
+      image.addEventListener("load", () => framePortrait(image, art));
       image.src = art.src;
       image.alt = art.label;
       image.loading = "lazy";
-      figure.append(image, element("figcaption", "", art.label));
+      viewport.append(image);
+      figure.append(viewport, element("figcaption", "", art.label));
       images.append(figure);
     }
     gallery.append(images);
@@ -428,7 +431,7 @@ export class SaraExperience {
     this.root.querySelector("[data-sara-notes]").textContent = String(this.learned().length);
     const location = this.root.querySelector("[data-sara-location]");
     location.hidden = node.type === "interstitial" || node.type === "ending";
-    location.textContent = this.engine.stage.background === "quiet-room" ? "Entorno judicial · ilustración provisional" : node.chapter === 3 ? "Atención social · escenario reutilizado" : node.chapter === 4 || node.chapter === 6 ? "La vida de Sara continúa" : "Instituto · un lugar para hablar";
+    location.textContent = this.engine.stage.background === "court-friendly" ? "Juzgado · sala de vistas" : this.engine.stage.background === "quiet-room" ? "Entorno judicial · sala de acompañamiento" : node.chapter === 3 ? "Atención social · espacio de acompañamiento" : node.chapter === 4 || node.chapter === 6 ? "La vida de Sara continúa" : "Instituto · un lugar para hablar";
     this.root.querySelector("[data-sara-portrait]").hidden = true;
     this.renderCast(node);
   }
@@ -451,27 +454,51 @@ export class SaraExperience {
     const names = partner ? ["Sara", partner] : ["Sara"];
     this.cast.dataset.count = String(names.length);
     const activeAvatar = avatarStore.getActiveAvatar();
-    const signature = JSON.stringify([names, expression, this.engine.nodeId, speaker, activeAvatar]);
-    if (signature === this.cast.dataset.signature) return;
-    this.cast.dataset.signature = signature;
-    this.cast.replaceChildren();
+    const frames = new Map([...this.cast.children].map(frame => [frame.dataset.person, frame]));
+    for (const [name, frame] of frames) {
+      if (!names.includes(name)) frame.remove();
+    }
     for (const name of names) {
       const art = personPortrait(name, { expression, nodeId: this.engine.nodeId });
-      if (!art && !(name === "Sara" && activeAvatar)) continue;
-      const frame = element("div", "sara-cast-person");
-      frame.dataset.person = name;
+      const customAvatar = name === "Sara" ? activeAvatar : null;
+      const source = customAvatar || art?.src;
+      if (!source) continue;
+      let frame = frames.get(name);
+      if (!frame) {
+        frame = element("div", "sara-cast-person");
+        frame.dataset.person = name;
+        frame.append(element("div", "sara-portrait-window"));
+        this.cast.append(frame);
+      }
       frame.classList.toggle("is-speaking", name === speaker);
-      frame.style.setProperty("--portrait-zoom", art?.zoom ?? 1);
+      if (frame.dataset.source === source) continue;
+      frame.dataset.source = source;
       const image = element("img");
-      image.src = (name === "Sara" && activeAvatar) ? activeAvatar : art.src;
       image.alt = "";
       image.draggable = false;
-      image.addEventListener("error", () => {
-        image.hidden = true;
-        frame.append(element("span", "sara-cast-fallback", name));
-      }, { once: true });
-      frame.append(image);
-      this.cast.append(frame);
+      const ready = () => {
+        if (!this.cast.contains(frame) || frame.dataset.source !== source) return;
+        const previous = [...frame.querySelectorAll("img")];
+        frame.querySelector(".sara-cast-fallback")?.remove();
+        if (customAvatar) {
+          // A user's drawing is an arbitrary canvas, not a photographed body.
+          image.style.cssText = "width:100%;height:100%;left:0;top:0;object-fit:contain;object-position:center bottom";
+          image.dataset.bodyRegion = "custom-drawing";
+        } else {
+          framePortrait(image, art);
+        }
+        image.classList.add("is-entering");
+        frame.querySelector(".sara-portrait-window").append(image);
+        previous.forEach(old => old.classList.add("is-leaving"));
+        window.setTimeout(() => previous.forEach(old => old.remove()), 180);
+      };
+      const failed = () => {
+        if (!this.cast.contains(frame) || frame.dataset.source !== source || frame.querySelector("img")) return;
+        frame.querySelector(".sara-portrait-window").replaceChildren(element("span", "sara-cast-fallback", name));
+      };
+      image.src = source;
+      if (typeof image.decode === "function") image.decode().then(ready, failed);
+      else { image.onload = ready; image.onerror = failed; }
     }
   }
 

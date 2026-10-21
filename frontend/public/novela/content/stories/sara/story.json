@@ -12,7 +12,7 @@
       "title": "Algo no va bien",
       "text": "El lunes. Un saque que no sale.",
       "next": "c1-01",
-      "scene": "classroom-day",
+      "scene": "school-exterior",
       "cast": {
         "sara": "neutral"
       }
@@ -25,7 +25,8 @@
       "next": "c1-02",
       "cast": {
         "sara": "neutral"
-      }
+      },
+      "scene": "classroom-day"
     },
     "c1-02": {
       "chapter": 1,
@@ -786,7 +787,8 @@
       "next": "c4-school2",
       "cast": {
         "sara": null
-      }
+      },
+      "scene": "clubroom"
     },
     "c4-school2": {
       "chapter": 4,
@@ -887,7 +889,8 @@
       ],
       "cast": {
         "sara": "neutral"
-      }
+      },
+      "scene": "hallway-day"
     },
     "c4-boundary": {
       "chapter": 4,
@@ -1223,7 +1226,8 @@
       "next": "c5-07",
       "cast": {
         "sara": null
-      }
+      },
+      "scene": "court-friendly"
     },
     "c5-07": {
       "chapter": 5,

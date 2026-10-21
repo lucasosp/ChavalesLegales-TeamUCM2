@@ -19,8 +19,8 @@ const explain = (id, speaker, key, next) => say(id, speaker, legal.notes[key].di
 const branch = (id, when, then, otherwise) => add(id, { type: "branch", when, then, else: otherwise });
 const card = (id, title, text, next, scene) => add(id, { type: "interstitial", kicker: `SARA · CAPÍTULO ${chapter} DE 6`, title, text, next, scene, cast: { sara: "neutral" } });
 
-card("start", "Algo no va bien", "El lunes. Un saque que no sale.", "c1-01", "classroom-day");
-narration("c1-01", "Sara tiene quince años, juega al voleibol y dibuja estrellas en los márgenes de sus apuntes. Le queda una por terminar cuando suena el timbre de cuarto de ESO.", "c1-02");
+card("start", "Algo no va bien", "El lunes. Un saque que no sale.", "c1-01", "school-exterior");
+narration("c1-01", "Sara tiene quince años, juega al voleibol y dibuja estrellas en los márgenes de sus apuntes. Le queda una por terminar cuando suena el timbre de cuarto de ESO.", "c1-02", { scene: "classroom-day" });
 say("c1-02", "Paula", "Esta tarde practicamos el saque. El mío está saliendo más hacia la puerta que hacia la pista.", "c1-03");
 say("c1-03", "Sara", "El mío también podría presentarse a delegado de pasillo. Pero hoy… creo que no voy.", "c1-04", { cast: { sara: "smile" } });
 narration("c1-04", "En casa, Javier, su padre, revisa sus mensajes y decide a quién puede ver. La insulta cuando algo no le gusta. Algunas veces la ha empujado o golpeado. No mostramos esas escenas.", "c1-05", { cast: { sara: "sad" } });
@@ -111,7 +111,7 @@ choice("c4-choice", "Irene pregunta qué parte de su vida quiere recuperar prime
 ]);
 say("c4-volley", "Irene", "Podemos empezar por un entrenamiento, sin exigirte que juegues como antes. Acordaremos los detalles prácticos con las personas que te cuidan.", "c4-volley2");
 say("c4-volley2", "Sara", "Solo quiero volver a escuchar el balón contra el suelo y pensar en dónde colocarme. Aunque falle todos los saques.", "c4-dani-route", { cast: { sara: "happy" } });
-say("c4-school", "Laura", "Vamos a elegir dos tareas para esta semana. Recuperarlo todo de golpe sería demasiado. Que un día no puedas concentrarte no significa que hayas dejado de saber.", "c4-school2");
+say("c4-school", "Laura", "Vamos a elegir dos tareas para esta semana. Recuperarlo todo de golpe sería demasiado. Que un día no puedas concentrarte no significa que hayas dejado de saber.", "c4-school2", { scene: "clubroom" });
 say("c4-school2", "Sara", "Las mates primero. Si dejo de entender una página, la siguiente parece escrita en otro idioma.", "c4-dani-route");
 say("c4-friends", "Paula", "Podemos pasear, hablar de música o no decir mucho. No hace falta que cada vez que quedemos me pongas al día de todo.", "c4-friends2");
 say("c4-friends2", "Sara", "Entonces hoy quiero discutir contigo sobre esa playlist. En eso sí me siento preparada.", "c4-dani-route", { cast: { sara: "happy" } });
@@ -159,7 +159,7 @@ explain("c5-memory", "Elena · abogada", "memory", "c5-04");
 explain("c5-pause", "Elena · abogada", "pause", "c5-04");
 say("c5-04", "Sara", "Pensaba que si me quedaba en blanco iba a estropearlo todo. Me ayuda saber que puedo decir que no entiendo algo.", "c5-05");
 narration("c5-05", "Llega el día. En este caso, se ha acordado una organización para evitar que Sara se encuentre con Javier en la espera y durante su intervención. El personal le explica dónde estará cada persona.", "c5-06");
-say("c5-06", "Jueza", "Antes de empezar, vamos a comprobar que entiendes para qué estamos aquí. Si no comprendes algo, puedes decirlo.", "c5-07");
+say("c5-06", "Jueza", "Antes de empezar, vamos a comprobar que entiendes para qué estamos aquí. Si no comprendes algo, puedes decirlo.", "c5-07", { scene: "court-friendly" });
 narration("c5-07", "Sara participa en la actuación con las medidas acordadas. La historia deja fuera las preguntas sobre lo sucedido. Al terminar, Irene la espera para acompañarla.", "c5-08");
 say("c5-08", "Sara", "Estoy cansada. ¿Podemos estar un rato sin hablar de esto?", "c5-09");
 say("c5-09", "Irene", "Sí. Después revisaremos con Elena la información que necesites. Ahora podemos sentarnos un momento.", "c6-card");
@@ -227,9 +227,10 @@ const guide = {
 };
 const shared = JSON.parse(await readFile(new URL("../public/content/shared/assets.json", import.meta.url), "utf8"));
 for (const [id, bg] of Object.entries(shared.backgrounds)) bg.src = `backgrounds/${id}.svg`;
-const sceneNames = ["classroom-day", "orientation-office", "bedroom-evening", "patio-day", "quiet-room"];
+nodes["c4-choice2"].scene = "hallway-day";
+const sceneNames = ["classroom-day", "orientation-office", "bedroom-evening", "patio-day", "quiet-room", "school-exterior", "clubroom", "hallway-day", "court-friendly"];
 const scenes = { version: 1, stage: { width: 1920, height: 1080 }, presets: { positions: { center: { x: .5, y: 1, scale: 1 } }, transitions: { fade: { type: "fade", duration: 300 } } }, scenes: {} };
-for (const id of sceneNames) scenes.scenes[id] = { layers: [{ id: "background", type: "image", asset: `backgrounds/${id}`, fit: "cover" }] };
-const manifest = { version: 1, id: "sara", title: "Sara · Mi historia sigue", content: { story: "story.json", assets: "assets.json", scenes: "scene.json" }, stage: { width: 1920, height: 1080 }, start: { node: "start", scene: "classroom-day" }, save: { key: "sara.save", version: 1 } };
+for (const id of sceneNames) scenes.scenes[id] = { layers: [{ id: "background", type: "image", asset: `backgrounds/${id === "school-exterior" ? "patio-day" : id === "court-friendly" ? "quiet-room" : id}`, fit: "cover" }] };
+const manifest = { version: 1, id: "sara", title: "Sara · Mi historia sigue", content: { story: "story.json", assets: "assets.json", scenes: "scene.json" }, stage: { width: 1920, height: 1080 }, start: { node: "start", scene: "school-exterior" }, save: { key: "sara.save", version: 1 } };
 for (const [name, value] of Object.entries({ "story.json": { version: 1, start: "start", initialFlags: { resolution: "conviction" }, nodes }, "guide.json": guide, "assets.json": shared, "scene.json": scenes, "novel.json": manifest })) await writeFile(new URL(name, dir), JSON.stringify(value, null, 2) + "\n");
 console.log(`Sara: ${Object.keys(nodes).length} nodes, six chapters. Legal source: legal.json.`);

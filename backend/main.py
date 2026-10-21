@@ -13,7 +13,7 @@ from models import (
     RoomState,
 )
 from rooms import room_manager
-from telemetry import telemetry_store, DecisionRecord
+from telemetry import telemetry_store, DecisionRecord, ProjectiveDrawingRecord
 from casos import caso_store
 from typing import Any, Dict
 from fastapi import Body
@@ -177,6 +177,25 @@ def registrar_evento_caso(caso_id: str, evento: Dict[str, Any] = Body(...)):
 def reiniciar_telemetria():
     """Reinicia el almacén con el conjunto de datos de muestra enriquecido."""
     return telemetry_store.reset_to_seed()
+
+
+@app.post("/api/telemetria/dibujo")
+async def registrar_dibujo(record: ProjectiveDrawingRecord):
+    """Registra la telemetría grafométrica y psicomotora de un dibujo en la novela."""
+    created = telemetry_store.add_drawing_record(record)
+    return {"status": "ok", "record": created}
+
+
+@app.get("/api/telemetria/dibujos")
+def obtener_dibujos(limit: int = 50):
+    """Obtiene el listado de evaluaciones proyectivas y grafometría registradas."""
+    return telemetry_store.get_drawing_records(limit=limit)
+
+
+@app.get("/api/telemetria/dibujos/resumen")
+def obtener_resumen_dibujos():
+    """Devuelve el resumen estadístico y alertas psicológicas de los dibujos infantiles."""
+    return telemetry_store.get_drawing_summary()
 
 
 # =============================================================================
