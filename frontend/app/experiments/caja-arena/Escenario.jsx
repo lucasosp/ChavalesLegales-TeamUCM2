@@ -2,6 +2,7 @@
 
 import { memo } from 'react'
 import { SHELF, TRAY, VIEW, ZONES, smoothPath } from './config'
+import { useT } from '../../../lib/i18n'
 
 const ZONE_FILL = {
   bosque: 'url(#ar-bosque)',
@@ -106,6 +107,7 @@ function Flores({ x, y, seed }) {
 }
 
 function Caseta({ x, y }) {
+  const t = useT()
   return (
     <g transform={`translate(${x} ${y})`}>
       <ellipse cx="10" cy="2" rx="62" ry="12" fill="rgba(0,0,0,.28)" />
@@ -115,7 +117,7 @@ function Caseta({ x, y }) {
       <path d="M0 -104 L60 -58 L50 -54 L0 -92 Z" fill="#5c1d0b" />
       <path d="M-20 2 V-26 A20 20 0 0 1 20 -26 V2 Z" fill="#2a120a" />
       <rect x="-22" y="-80" width="44" height="13" rx="3" fill="#fef3c7" />
-      <text y="-70" textAnchor="middle" fontSize="10" fontWeight="800" fill="#7c2d12" fontFamily="Fredoka, sans-serif">CASA</text>
+      <text y="-70" textAnchor="middle" fontSize="10" fontWeight="800" fill="#7c2d12" fontFamily="Fredoka, sans-serif">{t('juegos.arenaCasa')}</text>
     </g>
   )
 }

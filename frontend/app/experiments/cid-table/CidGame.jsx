@@ -5,12 +5,14 @@ import Link from 'next/link'
 import styles from './cid.module.css'
 import MesaCID from './MesaCID'
 import AjustesModal from './AjustesModal'
-import { DEFAULT_CONFIG, ROUNDS, STORAGE_KEYS } from './config'
+import { DEFAULT_CONFIG, ROUNDS, STORAGE_KEYS, roundNarrative, roundTitle } from './config'
 import { buildReport, computeRoundMetrics, seatingForRound } from './metrics'
 import { downloadJson, readStorage, useLongPress, writeStorage } from '../shared'
+import { useT } from '../../../lib/i18n'
 
 // Las métricas se registran en silencio: el niño solo ve la historia, el profesional las exporta desde Ajustes
 export default function CidGame({ embedded = false, onFinish }) {
+  const t = useT()
   const [config, setConfig] = useState(DEFAULT_CONFIG)
   const [started, setStarted] = useState(false)
   const [roundIndex, setRoundIndex] = useState(0)
@@ -84,24 +86,24 @@ export default function CidGame({ embedded = false, onFinish }) {
   return (
     <div className={styles.page}>
       <header className={styles.topbar}>
-        {embedded ? <span /> : <Link href="/" className={styles.btnGhost} aria-label="Volver al inicio">← Inicio</Link>}
-        <div className={styles.progress} aria-label={`Parte ${roundIndex + 1} de ${ROUNDS.length}`}>
+        {embedded ? <span /> : <Link href="/" className={styles.btnGhost} aria-label={t('juegos.volverInicio')}>{t('juegos.inicioBtn')}</Link>}
+        <div className={styles.progress} aria-label={t('juegos.cidProgresoAria', { n: roundIndex + 1, total: ROUNDS.length })}>
           {ROUNDS.map((r, i) => (
             <span key={r.id} className={i < results.length ? styles.dotDone : i === roundIndex ? styles.dotNow : styles.dot} />
           ))}
         </div>
-        <button type="button" className={styles.gear} title="Mantén pulsado: ajustes del profesional" aria-label="Ajustes del profesional (mantén pulsado)" {...settingsPress}>
+        <button type="button" className={styles.gear} title={t('juegos.cidAjustesHint')} aria-label={t('juegos.cidAjustesAria')} {...settingsPress}>
           <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.6 7.6 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.6 7.6 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.6 7.6 0 0 0 1.7 1l.4 2.6h4l.4-2.6a7.6 7.6 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)" /></svg>
         </button>
       </header>
 
       <div className={styles.banner} key={`${roundIndex}-${childSeat !== null}`}>
-        <span className={styles.badge}>{round.title}</span>
+        <span className={styles.badge}>{roundTitle(t, round)}</span>
         <p className={styles.narrative}>
-          {childSeat === null ? round.narrative : '¡Ya estás en la mesa! Cuando quieras, seguimos.'}
+          {childSeat === null ? roundNarrative(t, round) : t('juegos.cidYaEnMesa')}
         </p>
         {childSeat !== null && !finished && (
-          <button type="button" className={styles.btnPrimary} onClick={handleNextRound}>Continuar →</button>
+          <button type="button" className={styles.btnPrimary} onClick={handleNextRound}>{t('juegos.cidContinuar')}</button>
         )}
       </div>
 
@@ -121,13 +123,12 @@ export default function CidGame({ embedded = false, onFinish }) {
       {!started && (
         <div className={styles.overlay}>
           <div className={styles.dialog}>
-            <span className={styles.badge}>La mesa de la familia</span>
-            <h1 className={styles.dialogTitle}>¡Vamos a cenar!</h1>
+            <span className={styles.badge}>{t('juegos.cidIntroBadge')}</span>
+            <h1 className={styles.dialogTitle}>{t('juegos.cidIntroTitulo')}</h1>
             <p className={styles.dialogText}>
-              Vas a ver una mesa con algunas personas. En cada parte de la historia elige la silla libre donde te
-              apetezca sentarte. No hay respuestas buenas ni malas.
+              {t('juegos.cidIntroTexto')}
             </p>
-            <button type="button" className={styles.btnPrimary} onClick={() => setStarted(true)}>Empezar</button>
+            <button type="button" className={styles.btnPrimary} onClick={() => setStarted(true)}>{t('juegos.cidEmpezar')}</button>
           </div>
         </div>
       )}
@@ -136,15 +137,15 @@ export default function CidGame({ embedded = false, onFinish }) {
         <div className={styles.overlay}>
           <div className={styles.dialog}>
             <div className={styles.stars} aria-hidden="true">★ ★ ★</div>
-            <h1 className={styles.dialogTitle}>¡Muchas gracias!</h1>
-            <p className={styles.dialogText}>Has terminado la historia de la cena. ¡Lo has hecho genial!</p>
+            <h1 className={styles.dialogTitle}>{t('juegos.graciasTitulo')}</h1>
+            <p className={styles.dialogText}>{t('juegos.cidFinTexto')}</p>
             <div className={styles.row}>
               {embedded ? (
-                <button type="button" className={styles.btnPrimary} onClick={() => onFinish?.(buildReport(config, results))}>Seguir con la historia →</button>
+                <button type="button" className={styles.btnPrimary} onClick={() => onFinish?.(buildReport(config, results))}>{t('juegos.seguirHistoria')}</button>
               ) : (
                 <>
-                  <Link href="/" className={styles.btnPrimary}>Volver al inicio</Link>
-                  <button type="button" className={styles.btnGhost} onClick={() => handleRestart()}>Jugar otra vez</button>
+                  <Link href="/" className={styles.btnPrimary}>{t('juegos.volverInicio')}</Link>
+                  <button type="button" className={styles.btnGhost} onClick={() => handleRestart()}>{t('juegos.cidJugarOtra')}</button>
                 </>
               )}
             </div>

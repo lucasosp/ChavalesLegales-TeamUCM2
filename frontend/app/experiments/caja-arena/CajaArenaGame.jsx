@@ -6,9 +6,10 @@ import styles from './arena.module.css'
 import Escenario from './Escenario'
 import Clima from './Clima'
 import { DOGS, Perro } from './Perros'
-import { SHELF, STORAGE_KEY, TRAY, VIEW, WEATHER_LABEL, WEATHER_MAX_MS, WEATHER_MIN_MS, ZONES, inTray, zoneAt } from './config'
+import { SHELF, STORAGE_KEY, TRAY, VIEW, WEATHER_MAX_MS, WEATHER_MIN_MS, ZONES, inTray, zoneAt } from './config'
 import { buildReport } from './metrics'
 import { downloadJson, readStorage, useLongPress, writeStorage } from '../shared'
+import { useT } from '../../../lib/i18n'
 
 const SLOT_W = (TRAY.w - 220) / (DOGS.length - 1)
 const shelfSlot = (i) => ({ x: TRAY.x + 100 + i * SLOT_W, y: SHELF.y + 128 })
@@ -16,6 +17,7 @@ const initialPositions = () => Object.fromEntries(DOGS.map((d, i) => [d.id, { ..
 const snap = (p) => ({ x: Math.round(p.x), y: Math.round(p.y), zone: p.placed ? zoneAt(p.x, p.y) : 'estante' })
 
 export default function CajaArenaGame({ embedded = false, onFinish }) {
+  const t = useT()
   const [phase, setPhase] = useState('intro') // intro | play | story | done
   const [positions, setPositions] = useState(initialPositions)
   const [dragging, setDragging] = useState(null)
@@ -69,7 +71,7 @@ export default function CajaArenaGame({ embedded = false, onFinish }) {
         return p.placed && zoneAt(p.x, p.y) === zone.id
       }).map((d) => d.id),
     })
-    setToast(`¡Oh! Empieza ${WEATHER_LABEL[type]} en ${zone.name}…`)
+    setToast({ zone: zone.id, type })
     setTimeout(() => setToast(null), 5200)
   }, [])
 
@@ -192,15 +194,15 @@ export default function CajaArenaGame({ embedded = false, onFinish }) {
   return (
     <div className={styles.page}>
       <header className={styles.topbar}>
-        {embedded ? <span /> : <Link href="/" className={styles.btnGhost}>← Inicio</Link>}
-        <h1 className={styles.title}>Mi caja de arena</h1>
+        {embedded ? <span /> : <Link href="/" className={styles.btnGhost}>{t('juegos.inicioBtn')}</Link>}
+        <h1 className={styles.title}>{t('juegos.arenaTitulo')}</h1>
         <div className={styles.topRight}>
           {phase === 'play' && (
             <button type="button" className={styles.btnPrimary} onClick={finish} disabled={placedCount === 0}>
-              He terminado ✓
+              {t('juegos.arenaTerminado')}
             </button>
           )}
-          <button type="button" className={styles.gear} title="Mantén pulsado: panel del profesional" aria-label="Panel del profesional (mantén pulsado)" {...panelPress}>
+          <button type="button" className={styles.gear} title={t('juegos.arenaPanelHint')} aria-label={t('juegos.arenaPanelAria')} {...panelPress}>
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.6 7.6 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.6 7.6 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.6 7.6 0 0 0 1.7 1l.4 2.6h4l.4-2.6a7.6 7.6 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)" /></svg>
           </button>
         </div>
@@ -218,14 +220,14 @@ export default function CajaArenaGame({ embedded = false, onFinish }) {
             onPointerUp={onUp}
             onPointerCancel={onUp}
             role="application"
-            aria-label="Caja de arena: arrastra los perros desde el estante hasta la arena"
+            aria-label={t('juegos.arenaAria')}
           >
             {DOGS.map((d, i) => {
               const s = shelfSlot(i)
               return (
                 <g key={`tag-${d.id}`} transform={`translate(${s.x} ${SHELF.y + 156})`} opacity={positions[d.id].placed ? 0.35 : 1}>
                   <text textAnchor="middle" className={styles.dogName}>{d.name}</text>
-                  <text y="17" textAnchor="middle" className={styles.dogTrait}>{d.trait}</text>
+                  <text y="17" textAnchor="middle" className={styles.dogTrait}>{t(`juegos.arenaRasgo_${d.id}`)}</text>
                 </g>
               )
             })}
@@ -238,7 +240,7 @@ export default function CajaArenaGame({ embedded = false, onFinish }) {
                   className={phase === 'play' ? styles.dog : undefined}
                   onPointerDown={(e) => onDogDown(e, d.id)}
                   role="button"
-                  aria-label={`${d.name}, el perro ${d.trait}`}
+                  aria-label={t('juegos.arenaPerroAria', { nombre: d.name, rasgo: t(`juegos.arenaRasgo_${d.id}`) })}
                 >
                   <rect x={-d.width * 0.5} y="-120" width={d.width} height="130" fill="transparent" />
                   <Perro dog={d} flip={p.flip} lifted={dragging === d.id} idle={p.placed && dragging !== d.id} />
@@ -247,20 +249,18 @@ export default function CajaArenaGame({ embedded = false, onFinish }) {
             })}
           </svg>
         </div>
-        {toast && <div className={styles.toast} role="status">{toast}</div>}
+        {toast && <div className={styles.toast} role="status">{t(`juegos.arenaClima_${toast.zone}_${toast.type}`)}</div>}
       </main>
 
       {phase === 'intro' && (
         <div className={styles.overlay}>
           <div className={styles.dialog}>
-            <span className={styles.badge}>Tu propio mundo</span>
-            <h2 className={styles.dialogTitle}>Esta es tu caja de arena</h2>
+            <span className={styles.badge}>{t('juegos.arenaIntroBadge')}</span>
+            <h2 className={styles.dialogTitle}>{t('juegos.arenaIntroTitulo')}</h2>
             <p className={styles.dialogText}>
-              Hay un bosque, montañas, un lago, una pradera y un desierto. Abajo te esperan unos perros.
-              Arrástralos y colócalos donde tú quieras. Si tocas un perro, se da la vuelta.
-              Puedes moverlos todas las veces que quieras. No hay nada bien ni mal.
+              {t('juegos.arenaIntroTexto')}
             </p>
-            <button type="button" className={styles.btnPrimary} onClick={start}>¡Empezar!</button>
+            <button type="button" className={styles.btnPrimary} onClick={start}>{t('juegos.arenaEmpezar')}</button>
           </div>
         </div>
       )}
@@ -268,12 +268,12 @@ export default function CajaArenaGame({ embedded = false, onFinish }) {
       {phase === 'story' && (
         <div className={styles.overlay}>
           <div className={styles.dialog}>
-            <h2 className={styles.dialogTitle}>¡Qué mundo tan bonito!</h2>
-            <p className={styles.dialogText}>Si te apetece, cuéntanos qué está pasando en tu mundo.</p>
-            <textarea className={styles.textarea} rows={4} value={story} onChange={(e) => setStory(e.target.value)} placeholder="En mi mundo…" maxLength={1200} />
+            <h2 className={styles.dialogTitle}>{t('juegos.arenaHistoriaTitulo')}</h2>
+            <p className={styles.dialogText}>{t('juegos.arenaHistoriaTexto')}</p>
+            <textarea className={styles.textarea} rows={4} value={story} onChange={(e) => setStory(e.target.value)} placeholder={t('juegos.arenaHistoriaPlaceholder')} maxLength={1200} />
             <div className={styles.row}>
-              <button type="button" className={styles.btnGhost} onClick={() => setPhase('play')}>Seguir jugando</button>
-              <button type="button" className={styles.btnPrimary} onClick={saveAndClose}>Terminar</button>
+              <button type="button" className={styles.btnGhost} onClick={() => setPhase('play')}>{t('juegos.arenaSeguirJugando')}</button>
+              <button type="button" className={styles.btnPrimary} onClick={saveAndClose}>{t('juegos.arenaTerminar')}</button>
             </div>
           </div>
         </div>
@@ -283,15 +283,15 @@ export default function CajaArenaGame({ embedded = false, onFinish }) {
         <div className={styles.overlay}>
           <div className={styles.dialog}>
             <div className={styles.stars} aria-hidden="true">★ ★ ★</div>
-            <h2 className={styles.dialogTitle}>¡Muchas gracias!</h2>
-            <p className={styles.dialogText}>Los perros están muy contentos en el mundo que has creado.</p>
+            <h2 className={styles.dialogTitle}>{t('juegos.graciasTitulo')}</h2>
+            <p className={styles.dialogText}>{t('juegos.arenaFinTexto')}</p>
             <div className={styles.row}>
               {embedded ? (
-                <button type="button" className={styles.btnPrimary} onClick={() => onFinish?.(reportRef.current)}>Seguir con la historia →</button>
+                <button type="button" className={styles.btnPrimary} onClick={() => onFinish?.(reportRef.current)}>{t('juegos.seguirHistoria')}</button>
               ) : (
                 <>
-                  <Link href="/" className={styles.btnPrimary}>Volver al inicio</Link>
-                  <button type="button" className={styles.btnGhost} onClick={restart}>Crear otro mundo</button>
+                  <Link href="/" className={styles.btnPrimary}>{t('juegos.volverInicio')}</Link>
+                  <button type="button" className={styles.btnGhost} onClick={restart}>{t('juegos.arenaOtroMundo')}</button>
                 </>
               )}
             </div>
@@ -302,30 +302,29 @@ export default function CajaArenaGame({ embedded = false, onFinish }) {
       {showPanel && (
         <div className={styles.overlay} onClick={() => setShowPanel(false)}>
           <div className={styles.panel} onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="ar-panel-title">
-            <h2 id="ar-panel-title" className={styles.panelTitle}>Panel del profesional</h2>
+            <h2 id="ar-panel-title" className={styles.panelTitle}>{t('juegos.arenaPanelTitulo')}</h2>
             <p className={styles.panelText}>
-              Registro de la Técnica del Mundo (Lowenfeld). Se guardan colocaciones, movimientos, tiempos, distancias,
-              ecosistemas y la reacción al evento meteorológico. Nada de esto se muestra al niño.
-              Sesiones guardadas en este navegador: <strong>{savedCount}</strong>.
+              {t('juegos.arenaPanelTexto')}{' '}
+              {t('juegos.arenaSesionesGuardadas')} <strong>{savedCount}</strong>.
             </p>
             <div className={styles.row}>
               <button type="button" className={styles.btn} disabled={phase === 'intro' && !reportRef.current}
                 onClick={() => downloadJson(reportRef.current && phase === 'done' ? reportRef.current : makeReport(), 'caja-arena')}>
-                Exportar partida actual
+                {t('juegos.exportarActual')}
               </button>
               <button type="button" className={styles.btn} onClick={() => downloadJson(readStorage(STORAGE_KEY, []), 'caja-arena-sesiones')}>
-                Exportar todas las sesiones
+                {t('juegos.exportarTodas')}
               </button>
               {phase === 'play' && !weather && (
-                <button type="button" className={styles.btn} onClick={() => { triggerWeather(); setShowPanel(false) }}>Lanzar evento ahora</button>
+                <button type="button" className={styles.btn} onClick={() => { triggerWeather(); setShowPanel(false) }}>{t('juegos.arenaLanzarEvento')}</button>
               )}
               <button type="button" className={styles.btnDanger} onClick={() => {
-                if (confirm('¿Borrar todas las sesiones guardadas en este navegador?')) {
+                if (confirm(t('juegos.arenaBorrarConfirm'))) {
                   writeStorage(STORAGE_KEY, [])
                   setSavedCount(0)
                 }
-              }}>Borrar sesiones</button>
-              <button type="button" className={styles.btnGhost} onClick={() => setShowPanel(false)}>Cerrar</button>
+              }}>{t('juegos.arenaBorrar')}</button>
+              <button type="button" className={styles.btnGhost} onClick={() => setShowPanel(false)}>{t('juegos.cerrar')}</button>
             </div>
           </div>
         </div>

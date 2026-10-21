@@ -4,8 +4,10 @@ import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import MinijuegoNubes from './MinijuegoNubes'
 import { casoDesdeUrl, registrarEvento } from '../../lib/casos'
+import { useT } from '../../lib/i18n'
 
 export default function Novela() {
+  const t = useT()
   const router = useRouter()
   const [minijuego, setMinijuego] = useState(null)
   const jugadosRef = useRef(new Set())
@@ -97,7 +99,7 @@ export default function Novela() {
 
   return (
     <main style={{ position: 'fixed', inset: 0, zIndex: 100, background: '#461020' }}>
-      <iframe id="novela-frame" title="Sara · Mi historia sigue · Aventura interactiva" src="/novela/index.html" style={{ display: 'block', width: '100%', height: '100%', border: 0 }} />
+      <iframe id="novela-frame" title={t('juegos.novelaIframeTitulo')} src="/novela/index.html" style={{ display: 'block', width: '100%', height: '100%', border: 0 }} />
       {minijuego && (
         <MinijuegoNubes
           key={minijuego.game}
