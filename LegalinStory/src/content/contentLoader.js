@@ -1,5 +1,6 @@
 import { compileStory } from "./compileStory.js";
 import { characterImage } from "./characterImages.js";
+import { photoBackground } from "./backgroundImages.js";
 
 const CONTENT_BASE = new URL("content/", document.baseURI);
 
@@ -78,6 +79,8 @@ export function resolveCharacterAsset(assets, character) {
 }
 
 export function resolveBackgroundAsset(scenes, assets, sceneId) {
+  const photo = photoBackground(sceneId);
+  if (photo) return photo;
   const scene = scenes?.scenes?.[sceneId];
   const layer = findImageLayer(scene?.layers ?? []);
   if (!layer) return null;

@@ -11,6 +11,7 @@ export default defineConfig({
       allow: [
         fileURLToPath(new URL("./", import.meta.url)),
         fileURLToPath(new URL("../images/", import.meta.url)),
+        fileURLToPath(new URL("../fotoss/", import.meta.url)),
       ],
     },
   },
