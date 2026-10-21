@@ -91,7 +91,26 @@ export class SaraExperience {
     this.start();
   }
 
-  start() { this.showLanding(); }
+  start() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("avatar") === "1" || params.get("mode") === "avatar") {
+      this.engine.saveStore = this.localStore;
+      this.engine.initialFlags = { resolution: "conviction" };
+      this.phase2Triggered = false;
+      this.phase3Triggered = false;
+      this.closePanel(true);
+      this.drawingModal.open({
+        phase: "phase1",
+        onConfirm: () => {
+          this.engine.history = [];
+          this.updateAvatarUI();
+          this.engine.start({ resume: false });
+        },
+      });
+      return;
+    }
+    this.showLanding();
+  }
 
   validSave() {
     const saved = this.localStore.load();
@@ -453,15 +472,13 @@ export class SaraExperience {
     if (node.type === "dialogue" && (!speaker || node.tone === "thought")) partner = null;
     const names = partner ? ["Sara", partner] : ["Sara"];
     this.cast.dataset.count = String(names.length);
-    const activeAvatar = avatarStore.getActiveAvatar();
     const frames = new Map([...this.cast.children].map(frame => [frame.dataset.person, frame]));
     for (const [name, frame] of frames) {
       if (!names.includes(name)) frame.remove();
     }
     for (const name of names) {
       const art = personPortrait(name, { expression, nodeId: this.engine.nodeId });
-      const customAvatar = name === "Sara" ? activeAvatar : null;
-      const source = customAvatar || art?.src;
+      const source = art?.src;
       if (!source) continue;
       let frame = frames.get(name);
       if (!frame) {
@@ -480,13 +497,7 @@ export class SaraExperience {
         if (!this.cast.contains(frame) || frame.dataset.source !== source) return;
         const previous = [...frame.querySelectorAll("img")];
         frame.querySelector(".sara-cast-fallback")?.remove();
-        if (customAvatar) {
-          // A user's drawing is an arbitrary canvas, not a photographed body.
-          image.style.cssText = "width:100%;height:100%;left:0;top:0;object-fit:contain;object-position:center bottom";
-          image.dataset.bodyRegion = "custom-drawing";
-        } else {
-          framePortrait(image, art);
-        }
+        framePortrait(image, art);
         image.classList.add("is-entering");
         frame.querySelector(".sara-portrait-window").append(image);
         previous.forEach(old => old.classList.add("is-leaving"));

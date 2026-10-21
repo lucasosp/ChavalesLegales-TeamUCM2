@@ -369,7 +369,7 @@ export default function Home() {
                 { href: '/novela', tag: 'Historia', title: 'Sara · Mi historia sigue', bg: '#FEF08A', color: '#854D0E', icon: <><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></> },
                 { href: '/experiments/cid-table', tag: 'Familia', title: 'La mesa de la familia', bg: '#D1FAE5', color: '#047857', icon: <><ellipse cx="12" cy="12" rx="7" ry="4.5"/><circle cx="12" cy="4" r="1.6"/><circle cx="12" cy="20" r="1.6"/><circle cx="3" cy="12" r="1.6"/><circle cx="21" cy="12" r="1.6"/></> },
                 { href: '/experiments/caja-arena', tag: 'Caja de arena', title: 'Mi mundo con perros', bg: '#FFEDD5', color: '#C2410C', icon: <><path d="M4 7c0-1.5 1-2.5 2.5-2.5L9 7h3.5c2.5 0 4.5 2 4.5 4.5V13l3 1v3h-3l-1 3H8l-1-3H5.5L4 13z"/><circle cx="7.5" cy="8.5" r=".7" fill="currentColor"/></> },
-                { href: '/avatar', tag: 'Avatar', title: 'Haz tu avatar', bg: '#EDE9FE', color: '#6D28D9', icon: <><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></> },
+                { href: '/novela?avatar=1', tag: 'Avatar', title: 'Haz tu avatar', bg: '#EDE9FE', color: '#6D28D9', icon: <><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></> },
               ].map((g) => (
                 <Link key={g.href} href={g.href} className="solo-game-tile">
                   <span className="solo-game-icon" style={{ background: g.bg, color: g.color }}>
