@@ -21,6 +21,16 @@ export default function Home() {
   const [selectedSoloGame, setSelectedSoloGame] = useState(null)
   const socketRef = useRef(null)
 
+  // Enrutado directo si se accede con enlace que incluye PIN/caso/sesion
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const searchParams = new URLSearchParams(window.location.search)
+    const directPin = searchParams.get('pin') || searchParams.get('caso') || searchParams.get('sesion')
+    if (directPin) {
+      router.push('/novela')
+    }
+  }, [router])
+
   const handleSoloGameSelect = (gameKey) => {
     // De momento no navega; listo para enlazar próximamente (ej. /historia o /juicio)
     setSelectedSoloGame((prev) => (prev === gameKey ? null : gameKey))
@@ -34,20 +44,7 @@ export default function Home() {
     const cleanPin = pin.replace(/\s+/g, '').trim()
     if (!cleanPin) return
 
-    setCargando(true)
-    setErrorMsg(null)
-    try {
-      const info = await getInfoSala(cleanPin)
-      if (!info.is_open) {
-        throw new Error('La partida ya ha comenzado en esta sala.')
-      }
-      setPin(cleanPin)
-      setStep('NICKNAME')
-    } catch (err) {
-      setErrorMsg(err.message || 'No se pudo conectar a la sala con ese PIN.')
-    } finally {
-      setCargando(false)
-    }
+    router.push('/novela')
   }
 
   // =========================================================================
@@ -58,24 +55,7 @@ export default function Home() {
     const cleanNick = nickname.trim()
     if (!cleanNick) return
 
-    setCargando(true)
-    setErrorMsg(null)
-    try {
-      let miAvatar = {}
-      if (typeof window !== 'undefined') {
-        try {
-          const guardado = localStorage.getItem('chavales_mi_avatar')
-          if (guardado) miAvatar = JSON.parse(guardado)
-        } catch {}
-      }
-      const res = await unirseASala(pin, cleanNick, miAvatar)
-      setPlayerData(res)
-      setStep('GAME')
-    } catch (err) {
-      setErrorMsg(err.message || 'Error al entrar en la sala.')
-    } finally {
-      setCargando(false)
-    }
+    router.push('/novela')
   }
 
   // =========================================================================
@@ -143,47 +123,8 @@ export default function Home() {
   // VISTA DEL ALUMNO EN LA SALA DE ESPERA (ESPERANDO A QUE EL PROFESOR LANCE EL JUEGO)
   // =========================================================================
   if (step === 'GAME') {
-    const formattedPin = pin.length === 6 ? `${pin.slice(0, 3)} ${pin.slice(3)}` : pin
-    const player = gameState?.player || playerData
-
-    const studentList = (gameState?.players && gameState.players.length > 0)
-      ? gameState.players
-      : (player ? [{
-          id: player.id || player.player_id,
-          nombre: player.nickname,
-          seatIndex: player.seat_index,
-          avatarTipo: player.avatar_tipo,
-          baseType: player.base_type,
-          colorPelo: player.color_pelo,
-          colorRopa: player.color_ropa,
-          tieneGorro: player.tiene_gorro,
-        }] : [])
-
-    return (
-      <SalaEsperaAlumnos
-        pin={formattedPin}
-        cleanPin={pin}
-        students={studentList}
-        isHost={false}
-        currentSeat={player?.seat_index ?? (player?.seatIndex ?? 0)}
-        roomUrl={`http://localhost:3001/profesores/sala/${pin}`}
-        onVolver={handleSalirPartida}
-        onUpdateAvatar={(nuevoAvatar) => {
-          socketRef.current?.send('UPDATE_AVATAR', {
-            baseType: nuevoAvatar.baseType,
-            base_type: nuevoAvatar.baseType,
-            colorPelo: nuevoAvatar.colorPelo,
-            color_pelo: nuevoAvatar.colorPelo,
-            colorRopa: nuevoAvatar.colorRopa,
-            color_ropa: nuevoAvatar.colorRopa,
-            tieneGorro: nuevoAvatar.tieneGorro,
-            tiene_gorro: nuevoAvatar.tieneGorro,
-          })
-        }}
-        capacidad={gameState?.capacidad_aula ?? playerData?.capacidad_aula}
-        modoInfinito={gameState?.modo_infinito ?? playerData?.modo_infinito}
-      />
-    )
+    router.push('/novela')
+    return null
   }
 
   // =========================================================================
@@ -228,14 +169,14 @@ export default function Home() {
         <Link
           href="/profesores"
           className="btn-pro-opt1"
-          aria-label="Acceso a profesores"
+          aria-label="Acceso a educadores sociales"
         >
           <span className="pro-icon-chip" aria-hidden="true">
             <svg viewBox="0 0 24 24">
               <path d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18C5 19.94 8.13 22 12 22C15.87 22 19 19.94 19 17.18V13.18L12 17L5 13.18Z" />
             </svg>
           </span>
-          <span className="pro-label">Acceso a profesores</span>
+          <span className="pro-label">Acceso a educadores sociales</span>
           <span className="pro-arrow" aria-hidden="true">→</span>
         </Link>
       </header>
@@ -246,10 +187,40 @@ export default function Home() {
           <Link href="/" className="brand-title-link" style={{ textDecoration: 'none' }}>
             <h1 className="brand-title" aria-label="Chavales Legales">
               <span className="title-left-col">
-                <span className="title-word">CHAVAL</span>
-                <span className="title-word">LEGAL</span>
+                <span className="title-word">
+                  {'CHAVAL'.split('').map((char, idx) => (
+                    <span
+                      key={idx}
+                      className="title-letter"
+                      style={{ '--char-index': idx, animationDelay: `${idx * 0.055}s` }}
+                    >
+                      {char}
+                    </span>
+                  ))}
+                </span>
+                <span className="title-word">
+                  {'LEGAL'.split('').map((char, idx) => (
+                    <span
+                      key={idx}
+                      className="title-letter"
+                      style={{ '--char-index': 6 + idx, animationDelay: `${(6 + idx) * 0.055}s` }}
+                    >
+                      {char}
+                    </span>
+                  ))}
+                </span>
               </span>
-              <span className="title-suffix-es">ES</span>
+              <span className="title-suffix-es">
+                {'ES'.split('').map((char, idx) => (
+                  <span
+                    key={idx}
+                    className="title-letter"
+                    style={{ '--char-index': 11 + idx, animationDelay: `${(11 + idx) * 0.055}s` }}
+                  >
+                    {char}
+                  </span>
+                ))}
+              </span>
             </h1>
           </Link>
         </div>
@@ -257,9 +228,9 @@ export default function Home() {
         <div className="kahoot-sections-stack">
           {/* PASO 1: INTRODUCE PIN */}
           {step === 'PIN' && (
-            <section className="pin-section-card" aria-label="Acceso por PIN a sesiones">
+            <section className="pin-section-card" aria-label="Acceso por PIN a sesión individual">
               <div className="pin-card-header">
-                <span className="pin-badge-title">PIN DE LA SESIÓN</span>
+                <span className="pin-badge-title">PIN DE LA SESIÓN INDIVIDUAL</span>
               </div>
 
               <form className="pin-form" onSubmit={handlePinSubmit}>
@@ -298,9 +269,9 @@ export default function Home() {
 
           {/* PASO 2: INTRODUCE APODO / NOMBRE */}
           {step === 'NICKNAME' && (
-            <section className="pin-section-card" aria-label="Elegir apodo de clase">
+            <section className="pin-section-card" aria-label="Elegir apodo de la sesión individual">
               <div className="pin-card-header">
-                <span className="pin-badge-title">SALA {pin} · TU NOMBRE</span>
+                <span className="pin-badge-title">SESIÓN {pin} · TU NOMBRE</span>
               </div>
 
               <form className="pin-form" onSubmit={handleNicknameSubmit}>
@@ -308,7 +279,7 @@ export default function Home() {
                   <input
                     type="text"
                     maxLength={18}
-                    placeholder="¿Cómo te llamas en clase?"
+                    placeholder="¿Cómo te llamas?"
                     className="pin-input"
                     value={nickname}
                     onChange={(e) => setNickname(e.target.value)}
@@ -371,10 +342,10 @@ export default function Home() {
                   textTransform: 'uppercase',
                 }}
               >
-                Modo Individual
+                Sesión Individual
               </span>
               <h2 className="solo-title" style={{ margin: 0, fontSize: 16 }}>
-                Jugar sin PIN · Elige un modo
+                Jugar sin PIN · Sesión individual
               </h2>
             </div>
 

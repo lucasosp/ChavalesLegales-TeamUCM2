@@ -1,0 +1,486 @@
+'use client'
+
+import { useState } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+
+export default function PanelEducador({ onCerrarSesion = null }) {
+  const router = useRouter()
+  const [nombreJoven, setNombreJoven] = useState('')
+  const [tipoRiesgo, setTipoRiesgo] = useState('ciberacoso')
+  const [contexto, setContexto] = useState('')
+  const [cargando, setCargando] = useState(false)
+  const [casoGenerado, setCasoGenerado] = useState(null)
+  const [copiado, setCopiado] = useState(false)
+
+  // Opciones estéticas de tipo de riesgo
+  const opcionesRiesgo = [
+    { value: 'ciberacoso', label: 'Ciberacoso y difusión no consentida' },
+    { value: 'suplantacion', label: 'Suplantación de identidad en redes' },
+    { value: 'grooming', label: 'Grooming / Contacto sospechoso con adultos' },
+    { value: 'control_pareja', label: 'Control digital en parejas jóvenes' },
+    { value: 'privacidad', label: 'Sobreexposición y pérdida de privacidad' },
+  ]
+
+  // Simulación de generación de caso con IA
+  const handleGenerarCaso = (e) => {
+    e.preventDefault()
+    setCargando(true)
+
+    setTimeout(() => {
+      const randomId = Math.floor(10000 + Math.random() * 90000)
+      const casoId = `CL-${randomId}`
+      const baseOrigin = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000'
+      const linkUnico = `${baseOrigin}/novela?caso=${casoId}`
+
+      const riesgoSeleccionado = opcionesRiesgo.find((r) => r.value === tipoRiesgo)?.label || tipoRiesgo
+
+      setCasoGenerado({
+        id: casoId,
+        enlace: linkUnico,
+        nombreJoven: nombreJoven.trim() || 'Joven participante',
+        tipoRiesgo: riesgoSeleccionado,
+        contexto: contexto.trim() || 'Sin observaciones adicionales.',
+        fecha: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }),
+      })
+      setCargando(false)
+    }, 1400)
+  }
+
+  // Copiar enlace generado al portapapeles
+  const handleCopiarEnlace = async () => {
+    if (!casoGenerado?.enlace) return
+    try {
+      await navigator.clipboard.writeText(casoGenerado.enlace)
+      setCopiado(true)
+      setTimeout(() => setCopiado(false), 2200)
+    } catch {
+      setCopiado(true)
+      setTimeout(() => setCopiado(false), 2200)
+    }
+  }
+
+  // Previsualizar caso en la novela gráfica
+  const handlePrevisualizarCaso = () => {
+    router.push('/novela')
+  }
+
+  // Reiniciar formulario para otro caso
+  const handleCrearOtroCaso = () => {
+    setCasoGenerado(null)
+    setNombreJoven('')
+    setContexto('')
+    setCopiado(false)
+  }
+
+  return (
+    <div style={{ maxWidth: 760, width: '100%', margin: '0 auto', textAlign: 'left' }}>
+      {/* Tarjeta principal del panel */}
+      <div
+        style={{
+          background: '#FFFFFF',
+          borderRadius: 28,
+          boxShadow: '0 16px 36px rgba(0, 0, 0, 0.28)',
+          border: '3px solid #18181B',
+          padding: '34px 32px',
+          color: '#18181B',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Barra superior decorativa tricolor */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 8,
+            background: 'linear-gradient(90deg, #FACC15 0%, #22C55E 50%, #4A1A1C 100%)',
+          }}
+        />
+
+        {/* Cabecera del panel */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            justifyContent: 'space-between',
+            gap: 16,
+            marginBottom: 24,
+            flexWrap: 'wrap',
+          }}
+        >
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+              <span
+                style={{
+                  fontSize: 11,
+                  fontWeight: 900,
+                  color: '#065F46',
+                  background: '#D1FAE5',
+                  border: '1.5px solid #059669',
+                  borderRadius: 999,
+                  padding: '3px 10px',
+                  letterSpacing: '0.04em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Intervención 1 a 1 · Enlace Único
+              </span>
+              <span
+                style={{
+                  fontSize: 11,
+                  fontWeight: 800,
+                  color: '#475569',
+                  background: '#F1F5F9',
+                  borderRadius: 999,
+                  padding: '3px 10px',
+                }}
+              >
+                Educación Social
+              </span>
+            </div>
+            <h1 style={{ fontSize: 26, fontWeight: 900, color: '#4A1A1C', margin: '0 0 6px' }}>
+              Panel de Generación de Casos
+            </h1>
+            <p style={{ color: '#475569', fontSize: 14, margin: 0, lineHeight: 1.4 }}>
+              Configura un escenario individualizado. Cada joven recibe un enlace único para su sesión.
+            </p>
+          </div>
+
+          {onCerrarSesion && (
+            <button
+              type="button"
+              onClick={onCerrarSesion}
+              style={{
+                background: '#F1F5F9',
+                color: '#475569',
+                border: '1.5px solid #CBD5E1',
+                borderRadius: 12,
+                padding: '6px 12px',
+                fontSize: 12,
+                fontWeight: 800,
+                cursor: 'pointer',
+              }}
+            >
+              Cerrar sesión
+            </button>
+          )}
+        </div>
+
+        {/* ===================================================================
+            ESTADO 1: FORMULARIO DE GENERACIÓN DE CASO (CUANDO NO SE HA GENERADO)
+           =================================================================== */}
+        {!casoGenerado ? (
+          <form onSubmit={handleGenerarCaso}>
+            {/* Campo: Nombre del joven */}
+            <div style={{ marginBottom: 18 }}>
+              <label
+                htmlFor="input-nombre-joven"
+                style={{ display: 'block', fontSize: 13, fontWeight: 800, color: '#18181B', marginBottom: 6 }}
+              >
+                Nombre o alias del joven <span style={{ color: '#DC2626' }}>*</span>
+              </label>
+              <input
+                id="input-nombre-joven"
+                type="text"
+                required
+                placeholder="Ej. Mateo, Lucía, Álex..."
+                value={nombreJoven}
+                onChange={(e) => setNombreJoven(e.target.value)}
+                disabled={cargando}
+                style={{
+                  width: '100%',
+                  padding: '12px 14px',
+                  fontSize: 15,
+                  fontWeight: 600,
+                  borderRadius: 14,
+                  border: '2px solid #18181B',
+                  background: '#F8FAFC',
+                  outline: 'none',
+                  boxSizing: 'border-box',
+                }}
+              />
+            </div>
+
+            {/* Campo: Tipo de riesgo */}
+            <div style={{ marginBottom: 18 }}>
+              <label
+                htmlFor="select-tipo-riesgo"
+                style={{ display: 'block', fontSize: 13, fontWeight: 800, color: '#18181B', marginBottom: 6 }}
+              >
+                Tipo de riesgo o foco pedagógico <span style={{ color: '#DC2626' }}>*</span>
+              </label>
+              <select
+                id="select-tipo-riesgo"
+                value={tipoRiesgo}
+                onChange={(e) => setTipoRiesgo(e.target.value)}
+                disabled={cargando}
+                style={{
+                  width: '100%',
+                  padding: '12px 14px',
+                  fontSize: 15,
+                  fontWeight: 600,
+                  borderRadius: 14,
+                  border: '2px solid #18181B',
+                  background: '#F8FAFC',
+                  outline: 'none',
+                  boxSizing: 'border-box',
+                  cursor: 'pointer',
+                }}
+              >
+                {opcionesRiesgo.map((op) => (
+                  <option key={op.value} value={op.value}>
+                    {op.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Campo: Contexto */}
+            <div style={{ marginBottom: 22 }}>
+              <label
+                htmlFor="textarea-contexto"
+                style={{ display: 'block', fontSize: 13, fontWeight: 800, color: '#18181B', marginBottom: 6 }}
+              >
+                Contexto y observaciones del educador
+              </label>
+              <textarea
+                id="textarea-contexto"
+                rows={3}
+                placeholder="Indica factores de vulnerabilidad, dinámica familiar o incidentes previos para orientar la narrativa..."
+                value={contexto}
+                onChange={(e) => setContexto(e.target.value)}
+                disabled={cargando}
+                style={{
+                  width: '100%',
+                  padding: '12px 14px',
+                  fontSize: 14,
+                  fontWeight: 500,
+                  borderRadius: 14,
+                  border: '2px solid #18181B',
+                  background: '#F8FAFC',
+                  outline: 'none',
+                  boxSizing: 'border-box',
+                  resize: 'vertical',
+                  fontFamily: 'inherit',
+                }}
+              />
+            </div>
+
+            {/* Botón de Generar caso con IA */}
+            <button
+              type="submit"
+              disabled={cargando || !nombreJoven.trim()}
+              style={{
+                width: '100%',
+                background: cargando ? '#E2E8F0' : '#22C55E',
+                color: cargando ? '#64748B' : '#0F172A',
+                border: '3px solid #18181B',
+                borderRadius: 16,
+                padding: '15px 24px',
+                fontSize: 16,
+                fontWeight: 900,
+                cursor: cargando || !nombreJoven.trim() ? 'not-allowed' : 'pointer',
+                boxShadow: cargando ? 'none' : '0 5px 0 #18181B',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 10,
+                transition: 'all 0.15s ease',
+              }}
+            >
+              {cargando ? (
+                <>
+                  <svg
+                    style={{ animation: 'spin 1s linear infinite', width: 20, height: 20 }}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                  >
+                    <circle cx="12" cy="12" r="10" strokeDasharray="32" strokeDashoffset="12" />
+                  </svg>
+                  <span>Generando caso con IA...</span>
+                </>
+              ) : (
+                <>
+                  <span style={{ fontSize: 18 }} aria-hidden="true">✨</span>
+                  <span>Generar caso con IA</span>
+                </>
+              )}
+            </button>
+          </form>
+        ) : (
+          /* ===================================================================
+              ESTADO 2: CASO GENERADO (ENLACE ÚNICO Y PREVISUALIZACIÓN)
+             =================================================================== */
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+            {/* Banner de confirmación */}
+            <div
+              style={{
+                background: '#ECFDF5',
+                border: '2.5px solid #059669',
+                borderRadius: 18,
+                padding: '16px 20px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 14,
+              }}
+            >
+              <div
+                style={{
+                  width: 44,
+                  height: 44,
+                  borderRadius: 12,
+                  background: '#22C55E',
+                  border: '2px solid #18181B',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                  fontSize: 22,
+                }}
+              >
+                ✓
+              </div>
+              <div>
+                <strong style={{ display: 'block', fontSize: 16, color: '#065F46', fontWeight: 900 }}>
+                  ¡Caso hiper-personalizado generado con éxito!
+                </strong>
+                <span style={{ fontSize: 13, color: '#047857' }}>
+                  ID de sesión: <strong>{casoGenerado.id}</strong> · Adaptado para{' '}
+                  <strong>{casoGenerado.nombreJoven}</strong>
+                </span>
+              </div>
+            </div>
+
+            {/* Ficha resumen del caso */}
+            <div
+              style={{
+                background: '#F8FAFC',
+                border: '2px solid #18181B',
+                borderRadius: 18,
+                padding: '18px 20px',
+              }}
+            >
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 14 }}>
+                <div>
+                  <span style={{ display: 'block', fontSize: 11, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>
+                    Joven
+                  </span>
+                  <span style={{ fontSize: 15, fontWeight: 800, color: '#18181B' }}>
+                    {casoGenerado.nombreJoven}
+                  </span>
+                </div>
+                <div>
+                  <span style={{ display: 'block', fontSize: 11, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>
+                    Foco de intervención
+                  </span>
+                  <span style={{ fontSize: 14, fontWeight: 700, color: '#18181B' }}>
+                    {casoGenerado.tipoRiesgo}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Enlace único autogenerado con botón copiar */}
+            <div>
+              <label style={{ display: 'block', fontSize: 13, fontWeight: 800, color: '#18181B', marginBottom: 6 }}>
+                Enlace único para la sesión del joven
+              </label>
+              <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                <input
+                  type="text"
+                  readOnly
+                  value={casoGenerado.enlace}
+                  style={{
+                    flex: 1,
+                    padding: '12px 14px',
+                    fontSize: 14,
+                    fontWeight: 700,
+                    borderRadius: 14,
+                    border: '2px solid #18181B',
+                    background: '#FFFFFF',
+                    color: '#334155',
+                    outline: 'none',
+                    boxSizing: 'border-box',
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={handleCopiarEnlace}
+                  style={{
+                    background: copiado ? '#22C55E' : '#FEF08A',
+                    color: '#18181B',
+                    border: '2px solid #18181B',
+                    borderRadius: 14,
+                    padding: '12px 18px',
+                    fontSize: 13,
+                    fontWeight: 900,
+                    cursor: 'pointer',
+                    boxShadow: '0 3px 0 #18181B',
+                    whiteSpace: 'nowrap',
+                    transition: 'background 0.2s ease',
+                  }}
+                >
+                  {copiado ? '✓ ¡Copiado!' : 'Copiar enlace'}
+                </button>
+              </div>
+            </div>
+
+            {/* Acciones principales: Previsualizar caso y Generar otro */}
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 6 }}>
+              {/* Botón Previsualizar caso (enruta a /novela) */}
+              <button
+                type="button"
+                onClick={handlePrevisualizarCaso}
+                style={{
+                  flex: 1,
+                  minWidth: 220,
+                  background: '#22C55E',
+                  color: '#0F172A',
+                  border: '3px solid #18181B',
+                  borderRadius: 16,
+                  padding: '14px 20px',
+                  fontSize: 15,
+                  fontWeight: 900,
+                  cursor: 'pointer',
+                  boxShadow: '0 5px 0 #18181B',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 8,
+                }}
+              >
+                <span>Previsualizar caso</span>
+                <span aria-hidden="true">→</span>
+              </button>
+
+              {/* Botón Crear otro caso */}
+              <button
+                type="button"
+                onClick={handleCrearOtroCaso}
+                style={{
+                  background: '#FFFFFF',
+                  color: '#18181B',
+                  border: '2px solid #18181B',
+                  borderRadius: 16,
+                  padding: '14px 20px',
+                  fontSize: 14,
+                  fontWeight: 800,
+                  cursor: 'pointer',
+                  boxShadow: '0 3px 0 #18181B',
+                }}
+              >
+                Crear otro caso
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
