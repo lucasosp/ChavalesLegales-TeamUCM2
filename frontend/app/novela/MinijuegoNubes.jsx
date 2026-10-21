@@ -60,10 +60,10 @@ export default function MinijuegoNubes({ game, text, onDone }) {
     later(() => setPhase('play'), 1200)
   }
 
-  const finish = () => {
+  const finish = (report) => {
     setPhase('close')
     later(() => setPhase('leave'), 1500)
-    later(onDone, 2900)
+    later(() => onDone(report), 2900)
   }
 
   const covered = phase === 'think' || phase === 'close'

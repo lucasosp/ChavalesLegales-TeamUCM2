@@ -139,6 +139,12 @@ export class App {
   }
 
   #wireEvents() {
+    // Progreso para el informe del caso: la plataforma mide ritmo de lectura y relecturas
+    this.bus.on("state", ({ nodeId }) => {
+      if (window.parent === window) return;
+      const node = this.engine.story[nodeId];
+      window.parent.postMessage({ type: "legalinstory:progress", node_id: nodeId, chapter: node?.chapter ?? null, node_type: node?.type ?? null }, location.origin);
+    });
     this.bus.on("dialogue", (payload) => this.view.showDialogue(payload));
     this.bus.on("choice", (payload) => this.view.showChoices(payload));
     this.bus.on("ending", (payload) => this.view.showEnding(payload));

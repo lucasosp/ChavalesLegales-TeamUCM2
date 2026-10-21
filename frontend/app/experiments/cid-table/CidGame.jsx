@@ -140,7 +140,7 @@ export default function CidGame({ embedded = false, onFinish }) {
             <p className={styles.dialogText}>Has terminado la historia de la cena. ¡Lo has hecho genial!</p>
             <div className={styles.row}>
               {embedded ? (
-                <button type="button" className={styles.btnPrimary} onClick={onFinish}>Seguir con la historia →</button>
+                <button type="button" className={styles.btnPrimary} onClick={() => onFinish?.(buildReport(config, results))}>Seguir con la historia →</button>
               ) : (
                 <>
                   <Link href="/" className={styles.btnPrimary}>Volver al inicio</Link>

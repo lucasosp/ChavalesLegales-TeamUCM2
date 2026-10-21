@@ -14,6 +14,9 @@ from models import (
 )
 from rooms import room_manager
 from telemetry import telemetry_store, DecisionRecord
+from casos import caso_store
+from typing import Any, Dict
+from fastapi import Body
 
 app = FastAPI(title="Chavales Legales API")
 
@@ -145,6 +148,29 @@ def obtener_decisiones(story_id: Optional[str] = None, limit: int = 500):
 def obtener_resumen_telemetria(story_id: Optional[str] = None):
     """Devuelve el resumen estadístico con tiempos por pregunta y opción para el dashboard."""
     return telemetry_store.get_summary(story_id=story_id)
+
+
+@app.get("/api/casos")
+def listar_casos():
+    return caso_store.listar()
+
+
+@app.get("/api/casos/{caso_id}")
+def obtener_caso(caso_id: str):
+    caso = caso_store.get(caso_id)
+    if not caso:
+        raise HTTPException(status_code=404, detail="Caso no encontrado")
+    return caso
+
+
+@app.post("/api/casos/{caso_id}/meta")
+def guardar_meta_caso(caso_id: str, meta: Dict[str, Any] = Body(...)):
+    return caso_store.set_meta(caso_id, meta)
+
+
+@app.post("/api/casos/{caso_id}/eventos")
+def registrar_evento_caso(caso_id: str, evento: Dict[str, Any] = Body(...)):
+    return {"total": caso_store.add_evento(caso_id, evento)}
 
 
 @app.post("/api/telemetria/reset")

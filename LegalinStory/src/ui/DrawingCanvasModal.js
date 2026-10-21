@@ -1,4 +1,5 @@
 import { avatarStore } from "../services/avatarStore.js";
+import { DrawingMetricsCollector } from "../services/DrawingMetricsCollector.js";
 
 /**
  * Interactive projective drawing modal supporting 3 sequential phases:
@@ -116,6 +117,7 @@ export class DrawingCanvasModal {
         btn.classList.add("is-active");
         this.currentColor = btn.dataset.color;
         this.isEraser = false;
+        this.metrics?.recordToolChange({ color: this.currentColor, size: this.baseWidth, isEraser: false });
       });
     });
 
@@ -124,6 +126,7 @@ export class DrawingCanvasModal {
       card.querySelectorAll(".sara-color-btn").forEach((b) => b.classList.remove("is-active"));
       eraserBtn.classList.add("is-active");
       this.isEraser = true;
+      this.metrics?.recordToolChange({ color: this.currentColor, size: this.baseWidth, isEraser: true });
     });
 
     card.querySelectorAll("[data-size]").forEach((btn) => {
@@ -131,18 +134,32 @@ export class DrawingCanvasModal {
         card.querySelectorAll(".sara-size-btn").forEach((b) => b.classList.remove("is-active"));
         btn.classList.add("is-active");
         this.baseWidth = Number(btn.dataset.size);
+        this.metrics?.recordToolChange({ color: this.currentColor, size: this.baseWidth, isEraser: this.isEraser });
       });
     });
 
-    card.querySelector('[data-action="undo"]').addEventListener("click", () => this.#undo());
-    card.querySelector('[data-action="clear"]').addEventListener("click", () => this.#clear());
+    card.querySelector('[data-action="undo"]').addEventListener("click", () => {
+      this.metrics?.recordUndo();
+      this.#undo();
+    });
+    card.querySelector('[data-action="clear"]').addEventListener("click", () => {
+      this.metrics?.recordClear();
+      this.#clear();
+    });
 
     card.querySelector('[data-action="confirm"]').addEventListener("click", () => {
       const dataUrl = this.canvas.toDataURL("image/png");
+      // Métricas grafomotoras para el informe del profesional
+      let metrics = null;
+      try {
+        metrics = this.metrics?.finalize(isPhase1 ? "phase1" : "phase2") ?? null;
+      } catch {
+        metrics = null;
+      }
       if (isPhase1) {
-        avatarStore.savePhase1(dataUrl);
+        avatarStore.savePhase1(dataUrl, metrics);
       } else {
-        avatarStore.savePhase2(dataUrl);
+        avatarStore.savePhase2(dataUrl, metrics);
       }
       this.destroy();
       onConfirm?.(dataUrl);
@@ -247,6 +264,7 @@ export class DrawingCanvasModal {
     this.ctx.fillStyle = "#ffffff";
     this.ctx.fillRect(0, 0, width, height);
     this.#saveSnapshot();
+    this.metrics = new DrawingMetricsCollector({ canvasWidth: width, canvasHeight: height });
 
     // Pointer Events with stylus pressure
     const hint = this.modal.querySelector("[data-canvas-hint]");
@@ -267,12 +285,14 @@ export class DrawingCanvasModal {
       this.lastX = pos.x;
       this.lastY = pos.y;
       if (hint) hint.style.display = "none";
+      this.metrics?.onPointerDown({ ...pos, width: this.baseWidth });
       this.#drawStroke(pos.x, pos.y, pos.pressure, true);
     };
 
     const onPointerMove = (e) => {
       if (!this.isDrawing) return;
       const pos = getPos(e);
+      this.metrics?.onPointerMove({ ...pos, width: this.baseWidth });
       this.#drawStroke(pos.x, pos.y, pos.pressure, false);
       this.lastX = pos.x;
       this.lastY = pos.y;
@@ -282,6 +302,7 @@ export class DrawingCanvasModal {
       if (!this.isDrawing) return;
       this.isDrawing = false;
       this.hasDrawn = true;
+      this.metrics?.onPointerUp();
       this.canvas.releasePointerCapture?.(e.pointerId);
       this.#saveSnapshot();
     };
