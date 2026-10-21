@@ -81,7 +81,7 @@ assert.deepEqual(engine.flags, { resolution: "conviction" });
 assert.equal(engine.history.length, 0);
 assert.equal(engine.back(), false);
 
-// Exercise the actual UI container, opt-in saving, pause and both epilogues.
+// Exercise the clean UI, saving, pause and restart. Canvas behavior is covered in Chromium.
 const dom = new JSDOM('<!doctype html><html lang="es"><body><div id="app"></div></body></html>', { url: "http://localhost/", pretendToBeVisual: true });
 for (const key of ["window", "document", "HTMLElement", "Element", "localStorage"]) globalThis[key] = key === "window" ? dom.window : dom.window[key];
 globalThis.requestAnimationFrame = dom.window.requestAnimationFrame.bind(dom.window);
@@ -91,15 +91,11 @@ const { SaraExperience, SARA_SAVE_KEY } = await import("../src/app/SaraExperienc
 const { resolveCharacterAsset, resolveBackgroundAsset } = await import("../src/content/contentLoader.js");
 const root = document.querySelector("#app");
 const experience = new SaraExperience({ root, content: { story, startId: "start", title: "Sara", resolveCharacter: (c) => resolveCharacterAsset(assets, c), resolveBackground: (s) => resolveBackgroundAsset(scenes, assets, s) }, guide, legal, onExit() {} });
+experience.drawingModal.open = ({ onConfirm }) => onConfirm?.();
 const click = (selector) => { const node = root.querySelector(selector); assert.ok(node, selector); node.click(); };
 try {
   assert.equal(localStorage.getItem(SARA_SAVE_KEY), null);
-  click('[data-sara-action="help"]');
-  assert.ok(root.querySelector('[href="tel:112"]'));
-  experience.closePanel();
-  assert.equal(experience.mode, "start");
-  root.querySelector("[data-sara-save]").checked = true;
-  root.querySelector("[data-sara-resolution]").value = "no-conviction";
+  assert.equal(root.querySelector('[data-sara-action="map"], [data-sara-action="people"], [data-sara-action="notebook"], .sara-bottom'), null);
   click("[data-sara-start]");
   assert.ok(localStorage.getItem(SARA_SAVE_KEY));
   const pausedAt = experience.engine.nodeId;
@@ -115,24 +111,23 @@ try {
     if (node.type === "choice") {
       const selected = node.options.find((o) => o.id === route[experience.engine.nodeId]) ?? node.options[0];
       const optionIndex = node.options.indexOf(selected);
+      await new Promise(resolve => setTimeout(resolve, 220));
       root.querySelectorAll(".choice")[optionIndex].click();
     } else if (node.type === "interstitial") click("[data-interstitial-next]");
     else experience.app.advance();
   }
   assert.equal(experience.engine.isFinished, true);
-  for (const id of ["c4-dani", "c5-privacy", "c5-short", "c6-no-conviction", "c6-dani", "epilogue-volley"]) assert.ok(played.has(id), id);
+  for (const id of ["c4-dani", "c5-privacy", "c5-short", "c6-conviction", "c6-dani", "epilogue-volley"]) assert.ok(played.has(id), id);
   assert.equal(localStorage.getItem(SARA_SAVE_KEY), null, "Completion removes the local save");
-  experience.openPanel("map");
-  assert.equal(root.querySelectorAll(".sara-map-step").length, 8);
+  experience.openPanel("pause");
+  const toggles = [...root.querySelectorAll('button[aria-pressed]')];
+  assert.equal(toggles.length, 2);
+  toggles[0].click(); assert.ok(root.classList.contains('sara-large-text'));
+  toggles[1].click(); assert.equal(experience.app.view.typewriter.instant, true);
+  experience.openPanel("help");
+  assert.ok(root.querySelector('[href="tel:112"]'));
   experience.closePanel();
-  experience.openPanel("people");
-  assert.equal(root.querySelectorAll(".sara-person").length, guide.people.length);
-  experience.closePanel();
-  experience.openPanel("notebook");
-  assert.ok(root.querySelectorAll(".sara-note").length >= 5);
-  assert.ok(root.querySelectorAll('.sara-sources a[href^="https://www.boe.es/"]').length >= 5);
-  experience.closePanel();
-  assert.equal(experience.engine.back(), true, "Back from the epilogue restores the story");
+  assert.equal(experience.engine.back(), false, "The final drawing checkpoint clears rewind history");
   experience.openPanel("restart");
   root.querySelector(".sara-primary").click();
   assert.equal(experience.mode, "start");
