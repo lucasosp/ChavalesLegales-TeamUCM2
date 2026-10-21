@@ -1,3 +1,4 @@
+import { t } from "../i18n.js";
 import { EventBus } from "./EventBus.js";
 import { evaluateCondition } from "./conditions.js";
 
@@ -307,7 +308,7 @@ export class VisualNovelEngine {
         choiceId: this.nodeId,
         optionId: option.id,
         label: option.label,
-        title: option.lessonTitle ?? "Hay otra forma de hacerlo",
+        title: option.lessonTitle ?? t("novel.otherWay"),
         consequence: option.consequence ?? "",
         lesson: option.lesson ?? "",
         rewinds: this.rewinds,
@@ -447,6 +448,7 @@ export class VisualNovelEngine {
     this.bus.emit("dialogue", {
       id: node.id,
       speaker: node.speaker ?? null,
+      ...(node.speakerKey ? { speakerKey: node.speakerKey } : {}),
       remote: node.remote === true,
       text: node.text,
       tone: node.tone ?? (node.speaker ? "spoken" : "narration"),
@@ -465,6 +467,7 @@ export class VisualNovelEngine {
     this.bus.emit("choice", {
       id: node.id,
       speaker: node.speaker ?? null,
+      ...(node.speakerKey ? { speakerKey: node.speakerKey } : {}),
       remote: node.remote === true,
       prompt: node.prompt,
       tone: node.tone ?? "narration",
@@ -495,7 +498,7 @@ export class VisualNovelEngine {
   #presentReconduction(node) {
     const checkpoint = this.checkpoint;
     const notice = {
-      title: node.title ?? "Aviso",
+      title: node.title ?? t("novel.notice"),
       text: node.text ?? "",
       lesson: node.lesson ?? "",
       rewinds: this.rewinds,

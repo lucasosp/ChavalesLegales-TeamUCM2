@@ -1,5 +1,6 @@
 import { avatarStore } from "../services/avatarStore.js";
 import { DrawingMetricsCollector } from "../services/DrawingMetricsCollector.js";
+import { t } from "../i18n.js";
 
 /**
  * Interactive projective drawing modal supporting 3 sequential phases:
@@ -96,32 +97,32 @@ export class DrawingCanvasModal {
             <div class="sara-canvas-hint" data-canvas-hint>Tu dibujo empieza aquí</div>
           </div>
 
-          <aside class="sara-drawing-controls" aria-label="Herramientas de dibujo">
+          <aside class="sara-drawing-controls" aria-label="${t("drawing.toolsAria")}">
             <div class="sara-control-group">
-              <span class="sara-control-label">Color</span>
+              <span class="sara-control-label">${t("drawing.color")}</span>
               <div class="sara-palette-grid">
-                <button type="button" class="sara-color-btn is-active" data-color="#1e1b26" style="background:#1e1b26" aria-label="Negro grafito"></button>
-                <button type="button" class="sara-color-btn" data-color="#2b4c7e" style="background:#2b4c7e" aria-label="Azul pizarra"></button>
-                <button type="button" class="sara-color-btn" data-color="#b93b3b" style="background:#b93b3b" aria-label="Rojo terracota"></button>
-                <button type="button" class="sara-color-btn" data-color="#d9822b" style="background:#d9822b" aria-label="Ocre cálido"></button>
-                <button type="button" class="sara-color-btn" data-color="#2d6a4f" style="background:#2d6a4f" aria-label="Verde bosque"></button>
-                <button type="button" class="sara-color-btn sara-eraser-btn" data-action="eraser" aria-label="Goma de borrar">⌫</button>
+                <button type="button" class="sara-color-btn is-active" data-color="#1e1b26" style="background:#1e1b26" aria-label="${t("drawing.black")}"></button>
+                <button type="button" class="sara-color-btn" data-color="#2b4c7e" style="background:#2b4c7e" aria-label="${t("drawing.blue")}"></button>
+                <button type="button" class="sara-color-btn" data-color="#b93b3b" style="background:#b93b3b" aria-label="${t("drawing.red")}"></button>
+                <button type="button" class="sara-color-btn" data-color="#d9822b" style="background:#d9822b" aria-label="${t("drawing.ochre")}"></button>
+                <button type="button" class="sara-color-btn" data-color="#2d6a4f" style="background:#2d6a4f" aria-label="${t("drawing.green")}"></button>
+                <button type="button" class="sara-color-btn sara-eraser-btn" data-action="eraser" aria-label="${t("drawing.eraser")}">⌫</button>
               </div>
             </div>
 
             <div class="sara-control-group">
               <span class="sara-control-label">Tamaño del lápiz</span>
               <div class="sara-size-grid">
-                <button type="button" class="sara-size-btn" data-size="3" aria-label="Fino"><span style="width:4px;height:4px;"></span></button>
-                <button type="button" class="sara-size-btn is-active" data-size="6" aria-label="Medio"><span style="width:8px;height:8px;"></span></button>
-                <button type="button" class="sara-size-btn" data-size="14" aria-label="Grueso"><span style="width:14px;height:14px;"></span></button>
+                <button type="button" class="sara-size-btn" data-size="3" aria-label="${t("drawing.thin")}"><span style="width:4px;height:4px;"></span></button>
+                <button type="button" class="sara-size-btn is-active" data-size="6" aria-label="${t("drawing.medium")}"><span style="width:8px;height:8px;"></span></button>
+                <button type="button" class="sara-size-btn" data-size="14" aria-label="${t("drawing.thick")}"><span style="width:14px;height:14px;"></span></button>
               </div>
               <small class="sara-pressure-note">Prueba el tamaño que más te guste</small>
             </div>
 
             <div class="sara-control-group sara-action-buttons">
-              <button type="button" class="sara-tool-btn" data-action="undo" aria-label="Deshacer último trazo">↺ Deshacer</button>
-              <button type="button" class="sara-tool-btn" data-action="clear" aria-label="Limpiar lienzo">🗑 Limpiar</button>
+              <button type="button" class="sara-tool-btn" data-action="undo" aria-label="${t("drawing.undoAria")}">${t("drawing.undo")}</button>
+              <button type="button" class="sara-tool-btn" data-action="clear" aria-label="${t("drawing.clearAria")}">${t("drawing.clear")}</button>
             </div>
           </aside>
         </div>

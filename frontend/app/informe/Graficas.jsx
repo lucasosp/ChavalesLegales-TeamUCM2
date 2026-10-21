@@ -1,6 +1,7 @@
 'use client'
 
 import styles from './informe.module.css'
+import { useT } from '../../lib/i18n'
 
 const ACENTO = '#0f766e'
 const DESTACADO = '#c2410c'
@@ -16,6 +17,7 @@ function ticks(max, n = 4) {
 
 // Barras verticales con línea de referencia opcional (p. ej. la mediana del propio menor)
 export function Barras({ datos, unidad = '', referencia, alto = 220, formato = (v) => v }) {
+  const t = useT()
   const W = 720
   const H = alto
   const m = { t: 30, r: 16, b: 46, l: 60 }
@@ -25,7 +27,7 @@ export function Barras({ datos, unidad = '', referencia, alto = 220, formato = (
   const y = (v) => m.t + (H - m.t - m.b) * (1 - v / top)
   const bw = (W - m.l - m.r) / Math.max(datos.length, 1)
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className={styles.chart} role="img" aria-label="Gráfico de barras">
+    <svg viewBox={`0 0 ${W} ${H}`} className={styles.chart} role="img" aria-label={t('informe.ariaBarras')}>
       {ts.map((t) => (
         <g key={t}>
           <line x1={m.l} x2={W - m.r} y1={y(t)} y2={y(t)} stroke={REJILLA} />
@@ -58,13 +60,14 @@ export function Barras({ datos, unidad = '', referencia, alto = 220, formato = (
 
 // Barras horizontales para comparar categorías con nombre largo
 export function BarrasH({ datos, unidad = '', formato = (v) => v, ancho = 720 }) {
+  const t = useT()
   const fila = 30
   const W = ancho
   const l = ancho < 500 ? 100 : 170
   const H = datos.length * fila + 12
   const max = Math.max(...datos.map((d) => d.valor), 0) * 1.12 || 1
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className={styles.chart} role="img" aria-label="Gráfico de barras horizontales">
+    <svg viewBox={`0 0 ${W} ${H}`} className={styles.chart} role="img" aria-label={t('informe.ariaBarrasH')}>
       {datos.map((d, i) => {
         const w = ((W - l - 60) * d.valor) / max
         const yy = 6 + i * fila
@@ -83,6 +86,7 @@ export function BarrasH({ datos, unidad = '', formato = (v) => v, ancho = 720 })
 
 // Línea temporal de acciones con marcadores de eventos
 export function LineaTiempo({ duracion, marcas, eventos = [] }) {
+  const t = useT()
   const W = 720
   const H = 96
   const l = 20
@@ -90,7 +94,7 @@ export function LineaTiempo({ duracion, marcas, eventos = [] }) {
   const x = (t) => l + ((W - l - r) * t) / Math.max(duracion, 1)
   const colores = { colocar: ACENTO, mover: '#0284c7', girar: '#7c3aed', retirar: '#94a3b8' }
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className={styles.chart} role="img" aria-label="Línea temporal de acciones">
+    <svg viewBox={`0 0 ${W} ${H}`} className={styles.chart} role="img" aria-label={t('informe.ariaLineaTiempo')}>
       <line x1={l} x2={W - r} y1={50} y2={50} stroke="#cbd5e1" strokeWidth="2" />
       {eventos.map((e) => (
         <line key={e.etiqueta} x1={x(e.t)} x2={x(e.t)} y1={14} y2={70} stroke={DESTACADO} strokeWidth="2" strokeDasharray="4 3">
@@ -110,7 +114,7 @@ export function LineaTiempo({ duracion, marcas, eventos = [] }) {
       {Object.entries(colores).map(([k, c], i) => (
         <g key={k} transform={`translate(${200 + i * 100} 82)`}>
           <circle r="5" fill={c} cy="2" />
-          <text x="10" y="6" fontSize="11" fill={TEXTO}>{k}</text>
+          <text x="10" y="6" fontSize="11" fill={TEXTO}>{t(`informe.accion_${k}`)}</text>
         </g>
       ))}
     </svg>

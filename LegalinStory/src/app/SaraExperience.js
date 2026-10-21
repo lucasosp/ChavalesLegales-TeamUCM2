@@ -3,6 +3,15 @@ import { LocalStorageSaveStore, MemorySaveStore } from "../services/saveStores.j
 import { personPortrait, illustrations, framePortrait } from "../content/characterImages.js";
 import { DrawingCanvasModal } from "../ui/DrawingCanvasModal.js";
 import { avatarStore } from "../services/avatarStore.js";
+import { t } from "../i18n.js";
+
+const ART_EXPRESSIONS = { "neutral": "neutral", "alegre": "happy", "triste": "sad", "llorando": "crying", "tímida": "shy", "tímida, variante": "shyAlt", "tímida, variante 2": "shyAlt2" };
+/** Illustration labels are authored in Spanish; translate the expression part when shown. */
+const artLabel = (label) => {
+  if (label === "Jueza") return t("sara.art.judge");
+  const [name, expression] = label.split(" · ");
+  return expression && ART_EXPRESSIONS[expression] ? `${name} · ${t(`sara.art.${ART_EXPRESSIONS[expression]}`)}` : label;
+};
 
 export const SARA_SAVE_KEY = "sara.save";
 const element = (tag, className, text) => {
@@ -42,7 +51,7 @@ export class SaraExperience {
       </header>
       <section class="sara-overlay" data-sara-overlay hidden>
         <div class="sara-dialog" role="dialog" aria-modal="true" aria-labelledby="sara-dialog-title" tabindex="-1">
-          <header class="sara-dialog-head"><span class="sara-eyebrow">CHAVALES LEGALES</span><button type="button" class="sara-close" data-sara-close aria-label="Cerrar panel y volver a la historia">Cerrar ×</button></header>
+          <header class="sara-dialog-head"><span class="sara-eyebrow">CHAVALES LEGALES</span><button type="button" class="sara-close" data-sara-close aria-label="${t("sara.closeAria")}">${t("sara.close")}</button></header>
           <h1 id="sara-dialog-title"></h1><div data-sara-body></div>
         </div>
       </section>`);
@@ -64,7 +73,7 @@ export class SaraExperience {
     document.addEventListener("keydown", this.onKey, true);
     this.unsubscribe = this.app.bus.on("state", () => this.sync());
     // The epilogue offers a real restart, using the same menu as mid-story pause.
-    const restart = element("button", "ending-library", "Volver a empezar");
+    const restart = element("button", "ending-library", t("sara.restart"));
     restart.type = "button";
     restart.dataset.saraAction = "restart";
     root.querySelector(".ending-actions").append(restart);
@@ -171,7 +180,7 @@ export class SaraExperience {
     const label = isPhase1 ? "Mi primer dibujo" : "Mi segundo dibujo";
     card.innerHTML = `
       <div class="sara-ending-avatar-wrap">
-        <img src="${chosen}" alt="Avatar elegido" class="sara-ending-avatar-img">
+        <img src="${chosen}" alt="${t("sara.chosenAvatarAlt")}" class="sara-ending-avatar-img">
       </div>
       <div class="sara-ending-avatar-info">
         <strong>Tu dibujo para recordar esta historia</strong>
@@ -252,11 +261,11 @@ export class SaraExperience {
         this.engine.saveStore = this.localStore;
         if (snapshot) this.localStore.save(snapshot);
       } else { this.localStore.clear(); this.engine.saveStore = new MemorySaveStore(); if (snapshot) this.engine.saveStore.save(snapshot); }
-      status.textContent = input.checked ? "Progreso guardado solo en este dispositivo." : "El progreso permanece solo durante esta visita.";
+      status.textContent = input.checked ? t("sara.savedDeviceOnly") : t("sara.visitOnly");
     });
-    label.append(input, document.createTextNode(" Guardar en este dispositivo"));
+    label.append(input, document.createTextNode(t("sara.saveOnDevice")));
     this.body.append(label);
-    const status = element("p", "sara-fineprint", input.checked ? "Guardado local activado." : "El progreso permanece solo durante esta visita.");
+    const status = element("p", "sara-fineprint", input.checked ? t("sara.localSaveOn") : t("sara.visitOnly"));
     status.setAttribute("role", "status");
     this.body.append(status);
     const largeText = this.button("Letra más grande", () => {
@@ -278,20 +287,20 @@ export class SaraExperience {
   link(title, href) {
     const link = element("a", "sara-resource-link", title + " ↗");
     link.href = href; link.target = "_blank"; link.rel = "noopener noreferrer"; link.referrerPolicy = "no-referrer";
-    link.setAttribute("aria-label", `${title} (nueva pestaña)`);
+    link.setAttribute("aria-label", t("sara.newTab", { title }));
     return link;
   }
 
   renderHelp() {
-    this.body.append(element("p", "sara-panel-intro", "Esta sección habla de ayuda real en España. No hace falta contar nada personal en este juego."));
+    this.body.append(element("p", "sara-panel-intro", t("sara.helpIntro")));
     for (const resource of this.legal.help) {
       const card = element("article", "sara-note");
       card.append(element("h2", "", resource.title), element("p", "", resource.text));
-      if (resource.phone) { const phone = element("a", "sara-phone", `Llamar al ${resource.phone === "112" ? "112" : "900 20 20 10"}`); phone.href = `tel:${resource.phone}`; card.append(phone); }
-      if (resource.url) card.append(this.link("Consultar el recurso oficial", resource.url));
+      if (resource.phone) { const phone = element("a", "sara-phone", t("sara.call", { phone: resource.phone === "112" ? "112" : "900 20 20 10" })); phone.href = `tel:${resource.phone}`; card.append(phone); }
+      if (resource.url) card.append(this.link(t("sara.officialResource"), resource.url));
       this.body.append(card);
     }
-    this.body.append(element("p", "sara-fineprint", `Recursos comprobados el ${this.legal.checkedAt}. Esta demo no atiende emergencias ni presenta denuncias.`));
+    this.body.append(element("p", "sara-fineprint", t("sara.helpNote", { date: this.legal.checkedAt })));
   }
 
   sync() {
@@ -346,13 +355,14 @@ export class SaraExperience {
   renderCast(node) {
     this.cast.hidden = !["dialogue", "choice"].includes(node.type);
     if (this.cast.hidden) return;
-    const speaker = node.speaker?.split(" · ")[0];
+    // Portraits are keyed by the untranslated speaker name.
+    const speaker = (node.speakerKey ?? node.speaker)?.split(" · ")[0];
     let partner = speaker && speaker !== "Sara" ? speaker : null;
     let expression = this.engine.stage.character?.expression;
     for (const snapshot of [...this.engine.history].reverse()) {
       const previous = this.engine.story[snapshot.nodeId];
       if (previous.chapter !== node.chapter || previous.type === "interstitial" || snapshot.stage?.background !== this.engine.stage.background) break;
-      const name = previous.speaker?.split(" · ")[0];
+      const name = (previous.speakerKey ?? previous.speaker)?.split(" · ")[0];
       if (!partner && name && name !== "Sara" && personPortrait(name)) partner = name;
       if (!expression && snapshot.stage?.character?.id === "sara") expression = snapshot.stage.character.expression;
       if (partner && expression) break;
