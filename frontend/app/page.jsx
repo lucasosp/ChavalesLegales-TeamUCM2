@@ -359,23 +359,6 @@ export default function Home() {
           {/* SECCIÓN INFERIOR: JUGAR SIN PIN (SELECTOR DE JUEGOS MODO HISTORIETA Y MODO JUICIO) */}
           <section className="solo-section-card" aria-label="Jugar sin PIN">
             <div style={{ textAlign: 'center', marginBottom: 2 }}>
-              <span
-                style={{
-                  display: 'inline-block',
-                  fontSize: 11,
-                  fontWeight: 800,
-                  color: '#4A1A1C',
-                  background: '#FEF08A',
-                  border: '1.5px solid #18181B',
-                  borderRadius: 999,
-                  padding: '2px 10px',
-                  marginBottom: 6,
-                  letterSpacing: '0.04em',
-                  textTransform: 'uppercase',
-                }}
-              >
-                Sesión Individual
-              </span>
               <h2 className="solo-title" style={{ margin: 0, fontSize: 16 }}>
                 Jugar sin PIN · Sesión individual
               </h2>
@@ -403,11 +386,10 @@ export default function Home() {
       {/* Pie de página */}
       <footer className="kahoot-footer">
         <div className="footer-inner">
-          <p className="footer-highlight">Chavales Legales · Tu escudo digital</p>
           <div className="footer-links-row">
             <a href="https://www.ucm.es/" target="_blank" rel="noopener noreferrer" className="footer-link">UCM</a>
             <span>•</span>
-            <a href="https://www.juventudinfancia.gob.es/" target="_blank" rel="noopener noreferrer" className="footer-link">Infancia y juventud</a>
+            <a href="https://dataforumjusticia.es/datathon-2026/" target="_blank" rel="noopener noreferrer" className="footer-link">Datathon Justicia</a>
             <span>•</span>
             <a href="https://www.administraciondejusticia.gob.es/" target="_blank" rel="noopener noreferrer" className="footer-link">Administración de Justicia</a>
           </div>
