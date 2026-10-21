@@ -11,3 +11,4 @@ export default function AsistentesSocialesRedirect() {
 
   return null
 }
+
