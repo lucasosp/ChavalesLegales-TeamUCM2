@@ -1,6 +1,8 @@
 import { App } from "./App.js";
 import { LocalStorageSaveStore, MemorySaveStore } from "../services/saveStores.js";
 import { personImage, speakerSprite, imageUrl, hasCharacterImages } from "../content/characterImages.js";
+import { DrawingCanvasModal } from "../ui/DrawingCanvasModal.js";
+import { avatarStore } from "../services/avatarStore.js";
 
 export const SARA_SAVE_KEY = "sara.save";
 const escape = (value) => String(value).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -22,12 +24,19 @@ export class SaraExperience {
     this.app = new App({ root, ...content, onExit, saveStore: new MemorySaveStore(), initialFlags: { resolution: "conviction" } });
     this.engine = this.app.engine;
     this.app.view.autoFocusStory = true;
+    this.drawingModal = new DrawingCanvasModal({ container: root });
+    this.phase2Triggered = false;
+    this.phase3Triggered = false;
     root.classList.add("sara-mode");
     this.novel = root.querySelector(".novel");
     root.insertAdjacentHTML("beforeend", `
       <header class="sara-top" data-sara-chrome hidden>
         <button class="sara-wordmark" type="button" data-sara-action="pause" aria-label="Sara: abrir menú de pausa">SARA<span>mi historia sigue</span></button>
         <div class="sara-chapter"><span data-sara-chapter></span><progress data-sara-progress max="6" value="0" aria-label="Capítulos completados"></progress></div>
+        <div class="sara-avatar-badge" data-sara-avatar-badge hidden title="Tu foto de perfil">
+          <img data-sara-top-avatar alt="Foto de perfil del avatar" />
+          <span class="sara-avatar-status" data-sara-avatar-status>Perfil</span>
+        </div>
         <button type="button" class="sara-icon-button" data-sara-action="help">Ayuda real</button>
         <button type="button" class="sara-icon-button" data-sara-action="pause" aria-label="Pausar historia">Ⅱ <span class="sara-desktop">Pausa</span></button>
       </header>
@@ -119,9 +128,75 @@ export class SaraExperience {
     const save = this.body.querySelector("[data-sara-save]")?.checked ?? true;
     this.engine.saveStore = save ? this.localStore : new MemorySaveStore();
     this.engine.initialFlags = { resolution: this.body.querySelector("[data-sara-resolution]")?.value ?? "conviction" };
-    if (!resume || !save) this.localStore.clear();
+    if (!resume || !save) {
+      this.localStore.clear();
+      avatarStore.clear();
+      this.phase2Triggered = false;
+      this.phase3Triggered = false;
+    }
+
+    if (!resume && !avatarStore.isPhase1Completed()) {
+      this.closePanel(true);
+      this.drawingModal.open({
+        phase: "phase1",
+        onConfirm: () => {
+          this.engine.history = [];
+          this.updateAvatarUI();
+          this.engine.start({ resume: false });
+        },
+      });
+      return;
+    }
+
     this.closePanel(true);
     this.engine.start({ resume });
+    this.updateAvatarUI();
+  }
+
+  updateAvatarUI() {
+    const badge = this.root.querySelector("[data-sara-avatar-badge]");
+    const img = this.root.querySelector("[data-sara-top-avatar]");
+    const status = this.root.querySelector("[data-sara-avatar-status]");
+    const activeAvatar = avatarStore.getActiveAvatar();
+
+    if (badge && img) {
+      if (activeAvatar) {
+        badge.hidden = false;
+        img.src = activeAvatar;
+        if (status) {
+          status.textContent = avatarStore.isPhase3Completed()
+            ? "Definitivo"
+            : avatarStore.isPhase2Completed()
+            ? "Post-trauma"
+            : "Inicio";
+        }
+      } else {
+        badge.hidden = true;
+      }
+    }
+  }
+
+  renderEndingAvatarCard(choice, dataUrl) {
+    const endingActions = this.root.querySelector(".ending-actions");
+    if (!endingActions) return;
+    let card = this.root.querySelector(".sara-ending-avatar-card");
+    if (!card) {
+      card = document.createElement("div");
+      card.className = "sara-ending-avatar-card";
+      endingActions.parentNode.insertBefore(card, endingActions);
+    }
+    const chosen = dataUrl || avatarStore.getActiveAvatar();
+    const isPhase1 = (choice || avatarStore.getFinalChoice()) === "phase1";
+    const label = isPhase1 ? "Dibujo 1 (Antes del evento)" : "Dibujo 2 (Post-trauma)";
+    card.innerHTML = `
+      <div class="sara-ending-avatar-wrap">
+        <img src="${chosen}" alt="Avatar elegido" class="sara-ending-avatar-img">
+      </div>
+      <div class="sara-ending-avatar-info">
+        <strong>Avatar elegido para el desenlace</strong>
+        <span>${label}</span>
+      </div>
+    `;
   }
 
   openShell(mode, title) {
@@ -161,7 +236,7 @@ export class SaraExperience {
     else if (mode === "help") this.renderHelp();
     else if (mode === "restart") {
       this.body.append(element("p", "sara-panel-intro", "Empezar de nuevo borra el progreso de este caso en el dispositivo. Puedes elegir otra variante de demostración en la portada."));
-      this.button("Borrar progreso y empezar", () => { this.localStore.clear(); this.engine.saveStore?.clear(); this.showLanding(); }, "sara-primary");
+      this.button("Borrar progreso y empezar", () => { this.localStore.clear(); this.engine.saveStore?.clear(); avatarStore.clear(); this.showLanding(); }, "sara-primary");
     } else this.renderPause();
   }
 
@@ -287,6 +362,46 @@ export class SaraExperience {
   sync() {
     const node = this.engine.currentNode;
     this.root.dataset.saraNode = this.engine.nodeId;
+
+    // Check for Phase 2 trigger (Post-Trauma: node c2-04, domestic crisis disclosure)
+    if (this.engine.nodeId === "c2-04" && !avatarStore.isPhase2Completed() && !this.phase2Triggered) {
+      this.phase2Triggered = true;
+      this.engine.history = []; // Crucial: barrier to prevent rewinding before the trauma drawing
+      this.app.paused = true;
+      this.app.view.skipTyping();
+      this.drawingModal.open({
+        phase: "phase2",
+        onConfirm: () => {
+          this.engine.history = []; // Irreversible
+          this.updateAvatarUI();
+          this.app.paused = false;
+          this.sync();
+        },
+      });
+      return;
+    }
+
+    // Check for Phase 3 trigger (Ending / Epilogue: final integration & choice)
+    if (node.type === "ending" && !avatarStore.isPhase3Completed() && !this.phase3Triggered) {
+      this.phase3Triggered = true;
+      this.engine.history = []; // Irreversible
+      this.app.paused = true;
+      this.drawingModal.open({
+        phase: "phase3",
+        onConfirm: (choice, dataUrl) => {
+          this.engine.history = [];
+          this.updateAvatarUI();
+          this.app.paused = false;
+          this.renderEndingAvatarCard(choice, dataUrl);
+        },
+      });
+      return;
+    }
+
+    if (node.type === "ending" && avatarStore.isPhase3Completed()) {
+      this.renderEndingAvatarCard();
+    }
+
     const chapter = this.guide.chapters.find((c) => c.id === node.chapter);
     this.root.querySelector("[data-sara-chapter]").textContent = `${node.chapter}/6 · ${chapter.title}`;
     this.root.querySelector("[data-sara-progress]").value = this.engine.isFinished ? 6 : node.chapter - 1;
@@ -300,21 +415,44 @@ export class SaraExperience {
     const name = speaker?.split(" · ")[0];
     const source = name ? speakerSprite(name) : null;
     if (source && name !== "Sara") this.app.view.showSpeakerSprite(source, name);
-    portrait.hidden = !speaker || speaker === "Sara" || Boolean(source);
-    if (!portrait.hidden) {
-      const person = this.guide.people.find((p) => p.name === name);
-      portrait.className = `sara-speaker-card ${person?.color ?? "green"}`;
-      const portraitSource = personImage(name);
-      const avatar = element("span", "sara-monogram", person?.initial ?? name[0]);
-      if (portraitSource) {
+
+    if (name === "Sara") {
+      const activeAvatar = avatarStore.getActiveAvatar();
+      if (activeAvatar) {
+        portrait.hidden = false;
+        portrait.className = "sara-speaker-card is-sara";
+        const avatar = element("span", "sara-monogram");
         avatar.textContent = "";
         const image = document.createElement("img");
-        image.src = portraitSource;
-        image.alt = "";
+        image.src = activeAvatar;
+        image.alt = "Tu avatar";
         avatar.append(image);
+        portrait.replaceChildren(
+          avatar,
+          element("strong", "", "Sara"),
+          element("span", "", avatarStore.isPhase2Completed() ? "Foto de perfil (Post-trauma)" : "Tu avatar (Fase 1)"),
+          element("small", "", "Dibujo del usuario")
+        );
+      } else {
+        portrait.hidden = true;
       }
-      portrait.replaceChildren(avatar, element("strong", "", name), element("span", "", person?.role ?? "Profesional de apoyo"));
-      if (!portraitSource) portrait.append(element("small", "", "Retrato provisional"));
+    } else {
+      portrait.hidden = !speaker || Boolean(source);
+      if (!portrait.hidden) {
+        const person = this.guide.people.find((p) => p.name === name);
+        portrait.className = `sara-speaker-card ${person?.color ?? "green"}`;
+        const portraitSource = personImage(name);
+        const avatar = element("span", "sara-monogram", person?.initial ?? name[0]);
+        if (portraitSource) {
+          avatar.textContent = "";
+          const image = document.createElement("img");
+          image.src = portraitSource;
+          image.alt = "";
+          avatar.append(image);
+        }
+        portrait.replaceChildren(avatar, element("strong", "", name), element("span", "", person?.role ?? "Profesional de apoyo"));
+        if (!portraitSource) portrait.append(element("small", "", "Retrato provisional"));
+      }
     }
   }
 
@@ -330,6 +468,7 @@ export class SaraExperience {
   }
 
   destroy() {
+    this.drawingModal?.destroy();
     this.unsubscribe();
     document.removeEventListener("keydown", this.onKey, true);
     this.root.removeEventListener("click", this.onRootClick);
