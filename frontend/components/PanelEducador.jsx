@@ -3,9 +3,15 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { guardarMetaCaso } from '../lib/casos'
+import { useI18n } from '../lib/i18n'
+
+// Locale para formatear fechas según el idioma activo
+const LOCALES_FECHA = { es: 'es-ES', ca: 'ca-ES', va: 'ca-ES-valencia', gl: 'gl-ES', eu: 'eu-ES', oc: 'oc' }
 
 export default function PanelEducador({ onCerrarSesion = null }) {
   const router = useRouter()
+  const { t, lang } = useI18n()
   const [nombreJoven, setNombreJoven] = useState('')
   const [tipoRiesgo, setTipoRiesgo] = useState('ciberacoso')
   const [contexto, setContexto] = useState('')
@@ -35,13 +41,20 @@ export default function PanelEducador({ onCerrarSesion = null }) {
 
       const riesgoSeleccionado = opcionesRiesgo.find((r) => r.value === tipoRiesgo)?.label || tipoRiesgo
 
+      guardarMetaCaso(casoId, {
+        nombreJoven: nombreJoven.trim() || 'Joven participante',
+        tipoRiesgo: riesgoSeleccionado,
+        contexto: contexto.trim(),
+        creadoEn: new Date().toISOString(),
+      })
       setCasoGenerado({
         id: casoId,
         enlace: linkUnico,
-        nombreJoven: nombreJoven.trim() || 'Joven participante',
+        nombreJoven: nombreJoven.trim() || t('profesores.jovenParticipante'),
         tipoRiesgo: riesgoSeleccionado,
-        contexto: contexto.trim() || 'Sin observaciones adicionales.',
-        fecha: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }),
+        tipoRiesgoId: tipoRiesgo,
+        contexto: contexto.trim() || t('profesores.sinObservaciones'),
+        fecha: new Date().toLocaleDateString(LOCALES_FECHA[lang] || 'es-ES', { day: '2-digit', month: 'short', year: 'numeric' }),
       })
       setCargando(false)
     }, 1400)
@@ -62,7 +75,7 @@ export default function PanelEducador({ onCerrarSesion = null }) {
 
   // Previsualizar caso en la novela gráfica
   const handlePrevisualizarCaso = () => {
-    router.push('/novela')
+    router.push(`/novela?caso=${casoGenerado.id}`)
   }
 
   // Reiniciar formulario para otro caso
@@ -103,10 +116,10 @@ export default function PanelEducador({ onCerrarSesion = null }) {
         {/* Cabecera del panel */}
         <div style={{ marginBottom: 24 }}>
           <h1 style={{ fontSize: 26, fontWeight: 900, color: '#4A1A1C', margin: '0 0 6px' }}>
-            Panel de Generación de Casos
+            {t('profesores.panelTitulo')}
           </h1>
           <p style={{ color: '#475569', fontSize: 14, margin: 0, lineHeight: 1.4 }}>
-            Configura un escenario individualizado. Cada joven recibe un enlace único para su sesión.
+            {t('profesores.panelSubtitulo')}
           </p>
         </div>
 
@@ -121,13 +134,13 @@ export default function PanelEducador({ onCerrarSesion = null }) {
                 htmlFor="input-nombre-joven"
                 style={{ display: 'block', fontSize: 13, fontWeight: 800, color: '#18181B', marginBottom: 6 }}
               >
-                Nombre o alias del joven <span style={{ color: '#DC2626' }}>*</span>
+                {t('profesores.nombreJovenLabel')} <span style={{ color: '#DC2626' }}>*</span>
               </label>
               <input
                 id="input-nombre-joven"
                 type="text"
                 required
-                placeholder="Ej. Mateo, Lucía, Álex..."
+                placeholder={t('profesores.nombreJovenPlaceholder')}
                 value={nombreJoven}
                 onChange={(e) => setNombreJoven(e.target.value)}
                 disabled={cargando}
@@ -151,7 +164,7 @@ export default function PanelEducador({ onCerrarSesion = null }) {
                 htmlFor="select-tipo-riesgo"
                 style={{ display: 'block', fontSize: 13, fontWeight: 800, color: '#18181B', marginBottom: 6 }}
               >
-                Tipo de riesgo o foco pedagógico <span style={{ color: '#DC2626' }}>*</span>
+                {t('profesores.tipoRiesgoLabel')} <span style={{ color: '#DC2626' }}>*</span>
               </label>
               <select
                 id="select-tipo-riesgo"
@@ -173,7 +186,7 @@ export default function PanelEducador({ onCerrarSesion = null }) {
               >
                 {opcionesRiesgo.map((op) => (
                   <option key={op.value} value={op.value}>
-                    {op.label}
+                    {t(`profesores.riesgo_${op.value}`)}
                   </option>
                 ))}
               </select>
@@ -185,12 +198,12 @@ export default function PanelEducador({ onCerrarSesion = null }) {
                 htmlFor="textarea-contexto"
                 style={{ display: 'block', fontSize: 13, fontWeight: 800, color: '#18181B', marginBottom: 6 }}
               >
-                Contexto y observaciones del educador
+                {t('profesores.contextoLabel')}
               </label>
               <textarea
                 id="textarea-contexto"
                 rows={3}
-                placeholder="Indica factores de vulnerabilidad, dinámica familiar o incidentes previos para orientar la narrativa..."
+                placeholder={t('profesores.contextoPlaceholder')}
                 value={contexto}
                 onChange={(e) => setContexto(e.target.value)}
                 disabled={cargando}
@@ -243,10 +256,10 @@ export default function PanelEducador({ onCerrarSesion = null }) {
                   >
                     <circle cx="12" cy="12" r="10" strokeDasharray="32" strokeDashoffset="12" />
                   </svg>
-                  <span>Generando caso con IA...</span>
+                  <span>{t('profesores.generandoCaso')}</span>
                 </>
               ) : (
-                <span>Generar caso con IA</span>
+                <span>{t('profesores.generarCaso')}</span>
               )}
             </button>
           </form>
@@ -285,10 +298,10 @@ export default function PanelEducador({ onCerrarSesion = null }) {
               </div>
               <div>
                 <strong style={{ display: 'block', fontSize: 16, color: '#065F46', fontWeight: 900 }}>
-                  ¡Caso hiper-personalizado generado con éxito!
+                  {t('profesores.casoGeneradoExito')}
                 </strong>
                 <span style={{ fontSize: 13, color: '#047857' }}>
-                  ID de sesión: <strong>{casoGenerado.id}</strong> · Adaptado para{' '}
+                  {t('profesores.idSesion')} <strong>{casoGenerado.id}</strong> · {t('profesores.adaptadoPara')}{' '}
                   <strong>{casoGenerado.nombreJoven}</strong>
                 </span>
               </div>
@@ -306,7 +319,7 @@ export default function PanelEducador({ onCerrarSesion = null }) {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 14 }}>
                 <div>
                   <span style={{ display: 'block', fontSize: 11, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>
-                    Joven
+                    {t('profesores.joven')}
                   </span>
                   <span style={{ fontSize: 15, fontWeight: 800, color: '#18181B' }}>
                     {casoGenerado.nombreJoven}
@@ -314,10 +327,10 @@ export default function PanelEducador({ onCerrarSesion = null }) {
                 </div>
                 <div>
                   <span style={{ display: 'block', fontSize: 11, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>
-                    Foco de intervención
+                    {t('profesores.focoIntervencion')}
                   </span>
                   <span style={{ fontSize: 14, fontWeight: 700, color: '#18181B' }}>
-                    {casoGenerado.tipoRiesgo}
+                    {casoGenerado.tipoRiesgoId ? t(`profesores.riesgo_${casoGenerado.tipoRiesgoId}`) : casoGenerado.tipoRiesgo}
                   </span>
                 </div>
               </div>
@@ -326,7 +339,7 @@ export default function PanelEducador({ onCerrarSesion = null }) {
             {/* Enlace único autogenerado con botón copiar */}
             <div>
               <label style={{ display: 'block', fontSize: 13, fontWeight: 800, color: '#18181B', marginBottom: 6 }}>
-                Enlace único para la sesión del joven
+                {t('profesores.enlaceUnicoLabel')}
               </label>
               <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                 <input
@@ -363,7 +376,7 @@ export default function PanelEducador({ onCerrarSesion = null }) {
                     transition: 'background 0.2s ease',
                   }}
                 >
-                  {copiado ? '✓ ¡Copiado!' : 'Copiar enlace'}
+                  {copiado ? t('profesores.copiado') : t('profesores.copiarEnlace')}
                 </button>
               </div>
             </div>
@@ -392,9 +405,16 @@ export default function PanelEducador({ onCerrarSesion = null }) {
                   gap: 8,
                 }}
               >
-                <span>Previsualizar caso</span>
+                <span>{t('profesores.previsualizarCaso')}</span>
                 <span aria-hidden="true">→</span>
               </button>
+              <Link
+                href={`/informe/${casoGenerado.id}`}
+                style={{ flex: 1, minWidth: 220, background: '#FEF08A', color: '#0F172A', border: '3px solid #18181B', borderRadius: 16, padding: '14px 20px', fontSize: 15, fontWeight: 900, boxShadow: '0 5px 0 #18181B', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, textDecoration: 'none' }}
+              >
+                <span>{t('profesores.verInforme')}</span>
+                <span aria-hidden="true">▤</span>
+              </Link>
 
               {/* Botón Crear otro caso */}
               <button
@@ -412,7 +432,7 @@ export default function PanelEducador({ onCerrarSesion = null }) {
                   boxShadow: '0 3px 0 #18181B',
                 }}
               >
-                Crear otro caso
+                {t('profesores.crearOtroCaso')}
               </button>
             </div>
           </div>

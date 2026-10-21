@@ -1,4 +1,5 @@
 import './globals.css'
+import { I18nProvider } from '../lib/i18n'
 
 export const metadata = {
   title: 'Chavales Legales · Historias que acompañan',
@@ -30,7 +31,7 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body><I18nProvider>{children}</I18nProvider></body>
     </html>
   )
 }

@@ -35,6 +35,17 @@ export const ROUNDS = [
   },
 ]
 
+// Traducción al pintar: los valores por defecto se muestran en el idioma activo;
+// si el profesional los personalizó, se muestran tal cual
+const camel = (id) => id.replace(/-(\w)/g, (_, c) => c.toUpperCase())
+export const roundTitle = (t, round) => t(`juegos.cidRondaTitulo_${camel(round.id)}`)
+export const roundNarrative = (t, round) => t(`juegos.cidRondaTexto_${camel(round.id)}`)
+export function characterName(t, character) {
+  const def = DEFAULT_CONFIG.characters.find((c) => c.id === character.id)
+  return def && def.name === character.name ? t(`juegos.cidPersonaje_${character.id}`) : character.name
+}
+export const childLabel = (t, avatar) => (avatar.label === DEFAULT_CONFIG.childAvatar.label ? t('juegos.cidTu') : avatar.label)
+
 export const STORAGE_KEYS = {
   config: 'cid_table_config',
   sessions: 'cid_table_sessions',

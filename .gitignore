@@ -21,3 +21,4 @@ venv/
 .idea/
 .DS_Store
 Thumbs.db
+backend/casos_data.json

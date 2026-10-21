@@ -22,6 +22,7 @@ const NODE_TYPES = new Set([
   "chat",
   "interstitial",
   "minigame",
+  "external",
   "quiz",
   "reconduction",
 ]);
@@ -54,6 +55,7 @@ const NODE_KEYS = {
   ending: [...COMMON_NODE_KEYS, "kicker", "title", "text"],
   chat: [...COMMON_NODE_KEYS, "chatTitle", "self", "messages", "next"],
   interstitial: [...COMMON_NODE_KEYS, "kicker", "title", "text", "next"],
+  external: [...COMMON_NODE_KEYS, "game", "text", "next"],
   minigame: [...COMMON_NODE_KEYS, "title", "prompt", "cards", "next", "mode"],
   quiz: [...COMMON_NODE_KEYS, "title", "prompt", "questions", "next"],
   reconduction: [...COMMON_NODE_KEYS, "title", "text", "lesson", "returnTo", "continueTo"],
@@ -1044,6 +1046,13 @@ function validateStory(storyDoc, tag, catalog, sceneIndex, ctx) {
       requireText(node.title, `${at}.title`, ctx);
       if (node.text !== undefined) requireText(node.text, `${at}.text`, ctx);
       if (node.kicker !== undefined) requireString(node.kicker, `${at}.kicker`, ctx);
+      requireRef(node.next, `${at}.next`, nodeIds, ctx);
+      if (node.next) outgoing.push(node.next);
+    }
+
+    if (node.type === "external") {
+      requireString(node.game, `${at}.game`, ctx);
+      requireText(node.text, `${at}.text`, ctx);
       requireRef(node.next, `${at}.next`, nodeIds, ctx);
       if (node.next) outgoing.push(node.next);
     }

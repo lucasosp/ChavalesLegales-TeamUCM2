@@ -667,11 +667,21 @@
       "type": "dialogue",
       "speaker": null,
       "text": "Esa noche Dani le pide que mire un dibujo de un dragón. Sara encuentra una estrella en la esquina y dibuja otra al lado. Todavía hay sitio para cosas pequeñas.",
-      "next": "c4-card",
+      "next": "c3-mesa",
       "cast": {
         "sara": "smile"
       },
       "scene": "bedroom-evening"
+    },
+    "c3-mesa": {
+      "chapter": 3,
+      "type": "external",
+      "game": "cid-table",
+      "text": "Y se quedó pensando en dónde se sentaría dependiendo de la gente que vaya a comer.",
+      "next": "c4-card",
+      "cast": {
+        "sara": "smile"
+      }
     },
     "c4-card": {
       "chapter": 4,
@@ -679,10 +689,20 @@
       "kicker": "SARA · CAPÍTULO 4 DE 6",
       "title": "Mi vida continúa",
       "text": "Días después. Fuera de las entrevistas.",
-      "next": "c4-01",
+      "next": "c4-perros",
       "scene": "patio-day",
       "cast": {
         "sara": "neutral"
+      }
+    },
+    "c4-perros": {
+      "chapter": 4,
+      "type": "external",
+      "game": "caja-arena",
+      "text": "Empezó a ver los diferentes perros, y las aventuras que podría vivir con ellos.",
+      "next": "c4-01",
+      "cast": {
+        "sara": "smile"
       }
     },
     "c4-01": {

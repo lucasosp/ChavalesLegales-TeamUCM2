@@ -1,0 +1,107 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+}
+
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  overflow: hidden;
+  background: linear-gradient(180deg, #3fa9e8 0%, #7cc8f2 55%, #b8e3fb 100%);
+  opacity: 0;
+  transition: opacity 0.9s ease 0.35s;
+}
+
+.skyOn {
+  opacity: 1;
+  transition: opacity 0.7s ease;
+}
+
+.skyFast {
+  transition-delay: 0.25s;
+}
+
+.cloud {
+  position: absolute;
+  transition: transform 1.15s cubic-bezier(0.22, 0.9, 0.28, 1);
+  will-change: transform;
+  filter: drop-shadow(0 18px 24px rgba(30, 80, 130, 0.25));
+}
+
+.bob {
+  animation: bob 6s ease-in-out infinite;
+}
+
+.thought {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: min(82vw, 760px);
+  transform: translate(-50%, -50%) scale(0.6);
+  opacity: 0;
+  padding: clamp(28px, 5vh, 54px) clamp(30px, 5vw, 70px);
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 50% / 46%;
+  box-shadow: 0 24px 60px rgba(20, 70, 120, 0.3), inset 0 -10px 0 rgba(170, 200, 230, 0.35);
+  transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.35), opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.thoughtOn {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  transition-delay: 0.9s;
+}
+
+.text {
+  margin: 0;
+  text-align: center;
+  font-family: 'Fredoka', 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(20px, 3.2vw, 36px);
+  font-weight: 600;
+  line-height: 1.3;
+  color: #0f3b5c;
+}
+
+.tail1,
+.tail2,
+.tail3 {
+  position: absolute;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(20, 70, 120, 0.25);
+}
+
+.tail1 {
+  width: 54px;
+  height: 40px;
+  left: 18%;
+  bottom: -46px;
+}
+
+.tail2 {
+  width: 34px;
+  height: 26px;
+  left: 12%;
+  bottom: -88px;
+}
+
+.tail3 {
+  width: 20px;
+  height: 16px;
+  left: 8%;
+  bottom: -118px;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(1.2vw, -1vh); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cloud, .thought, .sky { transition-duration: 0.01s; }
+  .bob { animation: none; }
+}

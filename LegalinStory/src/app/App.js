@@ -59,6 +59,11 @@ export class App {
         present: (node) => this.bus.emit("minigame", { ...node, stage: structuredClone(this.engine.stage), flags: { ...this.engine.flags } }),
         next: (node) => node.next,
       },
+      // Minijuego alojado por la plataforma: la novela espera a que el contenedor avise de que ha terminado
+      external: {
+        present: (node) => this.#runExternal(node),
+        next: (node) => node.next,
+      },
       quiz: {
         present: (node) => this.bus.emit("quiz", { ...node, stage: structuredClone(this.engine.stage), flags: { ...this.engine.flags } }),
         next: (node) => node.next,
@@ -115,7 +120,31 @@ export class App {
     this.view.destroy();
   }
 
+  #runExternal(node) {
+    this.paused = true;
+    const resume = () => {
+      window.removeEventListener("message", onMessage);
+      this.paused = false;
+      if (this.engine.currentNode === node) this.engine.advance();
+    };
+    const onMessage = (event) => {
+      if (event.origin === location.origin && event.data?.type === "legalinstory:minigame-done" && event.data.game === node.game) resume();
+    };
+    if (window.parent === window) {
+      setTimeout(resume, 0);
+      return;
+    }
+    window.addEventListener("message", onMessage);
+    window.parent.postMessage({ type: "legalinstory:minigame", game: node.game, text: node.text }, location.origin);
+  }
+
   #wireEvents() {
+    // Progreso para el informe del caso: la plataforma mide ritmo de lectura y relecturas
+    this.bus.on("state", ({ nodeId }) => {
+      if (window.parent === window) return;
+      const node = this.engine.story[nodeId];
+      window.parent.postMessage({ type: "legalinstory:progress", node_id: nodeId, chapter: node?.chapter ?? null, node_type: node?.type ?? null }, location.origin);
+    });
     this.bus.on("dialogue", (payload) => this.view.showDialogue(payload));
     this.bus.on("choice", (payload) => this.view.showChoices(payload));
     this.bus.on("ending", (payload) => this.view.showEnding(payload));

@@ -7,9 +7,11 @@ import SalaEsperaAlumnos from '../../components/SalaEsperaAlumnos'
 import PanelEducador from '../../components/PanelEducador'
 import { crearSala } from '../../lib/api'
 import { getWsBaseUrl, createGameSocket } from '../../lib/socket'
+import { useT } from '../../lib/i18n'
 
 export default function ApartadoProfesores({ initialPin = null }) {
   const router = useRouter()
+  const t = useT()
   const [pin, setPin] = useState(initialPin)
   const [token, setToken] = useState('')
   const [roomState, setRoomState] = useState(null)
@@ -57,7 +59,7 @@ export default function ApartadoProfesores({ initialPin = null }) {
         }
       },
       onError: () => {
-        setError('Error en la conexión con la sala en tiempo real.')
+        setError(t('profesores.errorConexion'))
       },
       onClose: () => {
         // createGameSocket gestiona reconexión
@@ -86,7 +88,7 @@ export default function ApartadoProfesores({ initialPin = null }) {
       setToken(res.host_token)
       setPin(cleanPin)
     } catch (err) {
-      setError(err.message || 'No se pudo generar el código de clase.')
+      setError(err.message || t('profesores.errorGenerarCodigo'))
     } finally {
       setCargando(false)
     }
@@ -127,9 +129,9 @@ export default function ApartadoProfesores({ initialPin = null }) {
           className="btn-sala-iniciar"
           style={{ background: '#3B82F6', color: '#FFFFFF' }}
           onClick={() => handleLaunchGame('/novela', 'novela')}
-          title="Lanzar la aventura interactiva de Sara a los alumnos conectados"
+          title={t('profesores.lanzarSaraTitle')}
         >
-          Lanzar «Sara» {playersCount > 0 ? `(${playersCount})` : ''}
+          {t('profesores.lanzarSara')} {playersCount > 0 ? `(${playersCount})` : ''}
         </button>
       </div>
     )
@@ -170,7 +172,7 @@ export default function ApartadoProfesores({ initialPin = null }) {
           boxShadow: '0 16px 32px rgba(0,0,0,0.3)',
         }}>
           <h2 style={{ fontSize: 22, fontWeight: 900, color: '#4A1A1C', margin: '0 0 12px' }}>
-            Iniciando Aula Virtual...
+            {t('profesores.iniciandoAula')}
           </h2>
           <button
             type="button"
@@ -186,7 +188,7 @@ export default function ApartadoProfesores({ initialPin = null }) {
               cursor: 'pointer',
             }}
           >
-            Cancelar
+            {t('profesores.cancelar')}
           </button>
         </div>
       </div>
@@ -205,12 +207,12 @@ export default function ApartadoProfesores({ initialPin = null }) {
       </div>
 
       <header className="kahoot-topbar" style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 20 }}>
-        <Link href="/" className="btn-back-home" aria-label="Volver al inicio">
+        <Link href="/" className="btn-back-home" aria-label={t('profesores.volverInicio')}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <line x1="19" y1="12" x2="5" y2="12" />
             <polyline points="12 19 5 12 12 5" />
           </svg>
-          <span>Inicio</span>
+          <span>{t('profesores.inicio')}</span>
         </Link>
       </header>
 
