@@ -28,9 +28,9 @@ function Nota({ titulo = 'Qué se mide y por qué', children }) {
 
 function Seccion({ numero, titulo, sub, children }) {
   return (
-    <section className={styles.seccion}>
+    <section className={styles.seccionCard}>
       <header className={styles.seccionHead}>
-        <span className={styles.num}>{numero}</span>
+        <span className={styles.seccionNum}>{numero}</span>
         <div>
           <h2>{titulo}</h2>
           {sub && <p>{sub}</p>}
@@ -71,14 +71,16 @@ function Mesa({ report }) {
         datos={report.summary.characterSummary.map((c) => ({ etiqueta: c.name, valor: c.meanEuclidean, color: colores[c.characterId] }))}
         formato={(v) => Math.round(v)}
       />
-      <table className={styles.tabla}>
-        <thead><tr><th>Persona</th><th>Distancia media</th><th>Veces la más cercana</th><th>Veces la más lejana</th></tr></thead>
-        <tbody>
-          {report.summary.characterSummary.map((c) => (
-            <tr key={c.characterId}><td>{c.name}</td><td>{Math.round(c.meanEuclidean)}</td><td>{c.closestCount}</td><td>{c.furthestCount}</td></tr>
-          ))}
-        </tbody>
-      </table>
+      <div className={styles.tablaWrap}>
+        <table className={styles.tabla}>
+          <thead><tr><th>Persona</th><th>Distancia media</th><th>Veces la más cercana</th><th>Veces la más lejana</th></tr></thead>
+          <tbody>
+            {report.summary.characterSummary.map((c) => (
+              <tr key={c.characterId}><td><strong>{c.name}</strong></td><td>{Math.round(c.meanEuclidean)}</td><td>{c.closestCount}</td><td>{c.furthestCount}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <h3 className={styles.h3}>Tiempo de elección por ronda</h3>
       <Barras datos={report.rounds.map((r, i) => ({ etiqueta: `Ronda ${i + 1}`, titulo: r.title, valor: r.reactionTimeMs / 1000 }))} unidad=" s" formato={(v) => v.toFixed(1)} alto={180} />
     </>
@@ -115,7 +117,7 @@ function Mundo({ report }) {
       <div className={styles.dos}>
         <div>
           <h3 className={styles.h3}>Perros por ecosistema</h3>
-          <BarrasH ancho={360} datos={Object.entries(report.summary.zoneCounts).map(([z, n]) => ({ etiqueta: cap(ZONA[z] ?? z), valor: n, color: z === w?.zone ? '#c2410c' : undefined }))} />
+          <BarrasH ancho={360} datos={Object.entries(report.summary.zoneCounts).map(([z, n]) => ({ etiqueta: cap(ZONA[z] ?? z), valor: n, color: z === w?.zone ? '#dc2626' : undefined }))} />
           {w && <p className={styles.leyenda}><span className={styles.swatch} /> Ecosistema afectado por el evento meteorológico</p>}
         </div>
         <div>
@@ -155,21 +157,23 @@ function Mundo({ report }) {
         eventos={w ? [{ t: w.atMs, etiqueta: cap(w.type) }] : []}
       />
 
-      <table className={styles.tabla}>
-        <thead><tr><th>Perro</th><th>Ecosistema final</th><th>Movimientos</th><th>Giros</th><th>Perro más cercano</th><th>Dist. al centro</th></tr></thead>
-        <tbody>
-          {report.dogs.map((d) => (
-            <tr key={d.id}>
-              <td>{d.name} <small>({d.trait})</small></td>
-              <td>{d.placed ? cap(ZONA[d.zone] ?? d.zone) : 'no colocado'}</td>
-              <td>{d.moves}</td>
-              <td>{d.turns}</td>
-              <td>{d.nearestDogId ? `${nombre(d.nearestDogId)} (${Math.round(d.nearestDogDistance)})` : '—'}</td>
-              <td>{d.distanceToCenter != null ? Math.round(d.distanceToCenter) : '—'}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className={styles.tablaWrap}>
+        <table className={styles.tabla}>
+          <thead><tr><th>Perro</th><th>Ecosistema final</th><th>Movimientos</th><th>Giros</th><th>Perro más cercano</th><th>Dist. al centro</th></tr></thead>
+          <tbody>
+            {report.dogs.map((d) => (
+              <tr key={d.id}>
+                <td><strong>{d.name}</strong> <small>({d.trait})</small></td>
+                <td>{d.placed ? cap(ZONA[d.zone] ?? d.zone) : 'no colocado'}</td>
+                <td>{d.moves}</td>
+                <td>{d.turns}</td>
+                <td>{d.nearestDogId ? `${nombre(d.nearestDogId)} (${Math.round(d.nearestDogDistance)})` : '—'}</td>
+                <td>{d.distanceToCenter != null ? Math.round(d.distanceToCenter) : '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <p className={styles.leyenda}>Distancia media entre perros: {report.summary.meanPairDistance ?? '—'} (unidades del lienzo 1600×900).</p>
 
       {report.story && (
@@ -214,14 +218,16 @@ function Dibujo({ dibujo }) {
         ))}
       </div>
       {metricas.length > 0 ? (
-        <table className={styles.tabla}>
-          <thead><tr><th>Indicador grafomotor</th>{fases.filter(([k]) => dibujo[`${k}Metrics`]).map(([k, t]) => <th key={k}>{t}</th>)}</tr></thead>
-          <tbody>
-            {filas.map(([nombre, f]) => (
-              <tr key={nombre}><td>{nombre}</td>{metricas.map((m, i) => <td key={i}>{f(m) ?? '—'}</td>)}</tr>
-            ))}
-          </tbody>
-        </table>
+        <div className={styles.tablaWrap}>
+          <table className={styles.tabla}>
+            <thead><tr><th>Indicador grafomotor</th>{fases.filter(([k]) => dibujo[`${k}Metrics`]).map(([k, t]) => <th key={k}>{t}</th>)}</tr></thead>
+            <tbody>
+              {filas.map(([nombre, f]) => (
+                <tr key={nombre}><td><strong>{nombre}</strong></td>{metricas.map((m, i) => <td key={i}>{f(m) ?? '—'}</td>)}</tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : <Pendiente texto="El módulo de dibujo no ha registrado métricas grafomotoras en esta sesión." />}
     </>
   )
@@ -253,51 +259,173 @@ export default function InformeCaso({ params }) {
   const arena = a.minijuegos['caja-arena']?.report
   const enCurso = a.ultimo && Date.now() - a.ultimo < 90000 && !a.terminado
 
-  if (!caso) return <div className={styles.page}><p className={styles.cargando}>Cargando informe…</p></div>
+  if (!caso) {
+    return (
+      <div className={styles.page}>
+        <header className={styles.topbar}>
+          <div className={styles.brand}>
+            <div className={styles.brandIcon}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <div className={styles.brandTitles}>
+              <div className={styles.brandBadgeRow}>
+                <span className={styles.badge}>Servicios Sociales</span>
+                <span className={styles.brandSub}>Chavales Legales</span>
+              </div>
+              <h1 className={styles.brandTitle}>Informe de caso {id}</h1>
+            </div>
+          </div>
+        </header>
+        <p className={styles.cargando}>Cargando informe…</p>
+      </div>
+    )
+  }
 
   return (
     <div className={styles.page}>
-      <div className={styles.toolbar}>
-        <Link href="/informe" className={styles.btnGhost}>← Casos</Link>
-        <span className={styles.vivo}>{enCurso ? '● Sesión en curso · ' : ''}Actualizado {actualizado?.toLocaleTimeString('es-ES')}</span>
-        <div className={styles.acciones}>
-          <button type="button" className={styles.btnGhost} onClick={() => downloadJson({ caso, analisis: { ...a, eventos: undefined } }, `informe-${id}`)}>Exportar datos (JSON)</button>
-          <button type="button" className={styles.btn} onClick={() => window.print()}>Imprimir / PDF</button>
-        </div>
-      </div>
-
-      <article className={styles.doc}>
-        <header className={styles.portada}>
-          <div>
-            <span className={styles.kicker}>Chavales Legales · Informe descriptivo de sesión</span>
-            <h1>Caso {id}</h1>
-            <p className={styles.subtitulo}>{meta.nombreJoven ?? 'Participante sin identificar'}{meta.tipoRiesgo ? ` · ${meta.tipoRiesgo}` : ''}</p>
+      {/* Barra superior estilo Asistentes Sociales */}
+      <header className={styles.topbar}>
+        <div className={styles.brand}>
+          <div className={styles.brandIcon}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
           </div>
-          <dl className={styles.ficha}>
-            <dt>Inicio</dt><dd>{fmtFecha(a.inicio)}</dd>
-            <dt>Última actividad</dt><dd>{fmtFecha(a.ultimo)}</dd>
-            <dt>Estado</dt><dd>{a.terminado ? 'Historia completada' : enCurso ? 'En curso' : a.inicio ? 'Incompleta' : 'Sin actividad'}</dd>
-            <dt>Origen de datos</dt><dd>{caso.fuente === 'servidor' ? 'Servidor de la plataforma' : 'Este navegador'}</dd>
+          <div className={styles.brandTitles}>
+            <div className={styles.brandBadgeRow}>
+              <span className={styles.badge}>Servicios Sociales</span>
+              <span className={styles.brandSub}>Chavales Legales</span>
+            </div>
+            <h1 className={styles.brandTitle}>Informe de caso · {id}</h1>
+          </div>
+        </div>
+
+        <div className={styles.topActions}>
+          <span className={styles.vivoBadge}>
+            <span className={styles.vivoDot}>●</span>
+            {enCurso ? 'En curso · ' : ''}Actualizado {actualizado?.toLocaleTimeString('es-ES')}
+          </span>
+
+          <button
+            type="button"
+            className={styles.btnTopExport}
+            onClick={() => downloadJson({ caso, analisis: { ...a, eventos: undefined } }, `informe-${id}`)}
+            title="Exportar datos completos en formato JSON"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            <span>Exportar JSON</span>
+          </button>
+
+          <button type="button" className={styles.btnTop} onClick={() => window.print()}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="6 9 6 2 18 2 18 9" />
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+              <rect x="6" y="14" width="12" height="8" />
+            </svg>
+            <span>Imprimir / PDF</span>
+          </button>
+
+          <Link href="/informe" className={styles.btnTopBack}>
+            ← Casos
+          </Link>
+        </div>
+      </header>
+
+      {/* Contenedor principal con estética Asistentes Sociales */}
+      <main className={styles.mainContainer}>
+        {/* Tarjeta encabezado del caso */}
+        <section className={styles.headerCard}>
+          <div className={styles.headerLeft}>
+            <span className={styles.kicker}>Informe descriptivo pericial</span>
+            <h1>Caso {id}</h1>
+            <p className={styles.subtitulo}>
+              {meta.nombreJoven ?? 'Participante sin identificar'}
+              {meta.tipoRiesgo ? ` · Situación: ${meta.tipoRiesgo}` : ''}
+            </p>
+          </div>
+
+          <dl className={styles.fichaGrid}>
+            <div className={styles.fichaItem}>
+              <dt>Inicio</dt>
+              <dd>{fmtFecha(a.inicio)}</dd>
+            </div>
+            <div className={styles.fichaItem}>
+              <dt>Última actividad</dt>
+              <dd>{fmtFecha(a.ultimo)}</dd>
+            </div>
+            <div className={styles.fichaItem}>
+              <dt>Estado de la sesión</dt>
+              <dd>{a.terminado ? 'Historia completada' : enCurso ? 'En curso' : a.inicio ? 'Incompleta' : 'Sin actividad'}</dd>
+            </div>
+            <div className={styles.fichaItem}>
+              <dt>Origen de datos</dt>
+              <dd>{caso.fuente === 'servidor' ? 'Servidor de la plataforma' : 'Este navegador'}</dd>
+            </div>
           </dl>
-        </header>
+        </section>
 
-        <div className={styles.aviso}>
-          <strong>Documento descriptivo, sin valoración.</strong> Este informe recoge datos objetivos de la interacción del menor con la plataforma
-          (tiempos, elecciones y producciones). No constituye diagnóstico, evaluación psicológica ni veredicto, y las adaptaciones digitales de las
-          pruebas no están baremadas. Su interpretación corresponde a profesionales cualificados, en contexto y contrastada con otras fuentes (entrevista,
-          observación, informes previos). Las referencias a “valores destacados” se calculan respecto a la propia línea base del menor, no respecto a
-          normas poblacionales.
-        </div>
-        {meta.contexto && <p className={styles.contexto}><strong>Contexto aportado por el profesional:</strong> {meta.contexto}</p>}
-
-        <div className={styles.kpis}>
-          <Kpi etiqueta="Duración de la sesión" valor={fmtDuracion(a.duracionMs)} nota={a.sesiones > 1 ? `${a.sesiones} accesos` : undefined} />
-          <Kpi etiqueta="Decisiones tomadas" valor={a.decisiones.length} />
-          <Kpi etiqueta="Mediana de decisión" valor={fmtSeg(a.latencia.mediana)} nota={a.latencia.mediana ? `rango ${fmtSeg(a.latencia.min)} – ${fmtSeg(a.latencia.max)}` : undefined} />
-          <Kpi etiqueta="Pantallas leídas" valor={a.pantallasVistas} nota={`${a.relecturas} relecturas · ${a.pausasLargas} pausas > 1 min`} />
-          <Kpi etiqueta="Actividades completadas" valor={`${Object.keys(a.minijuegos).length + (a.dibujo?.phase1 ? 1 : 0)} / 3`} nota="dibujo, mesa y caja de arena" />
+        {/* Aviso de confidencialidad y metodología */}
+        <div className={styles.avisoCard}>
+          <strong>Documento descriptivo de apoyo técnico, sin valoración automatizada:</strong> Este informe recoge
+          datos objetivos de la interacción del menor con la plataforma (tiempos de reacción, elecciones tomadas y
+          producciones gráficas y espaciales). No constituye diagnóstico clínico, evaluación pericial cerrada ni veredicto.
+          Su análisis e interpretación corresponden exclusivamente a profesionales de servicios sociales y psicología en el
+          marco de la intervención global.
         </div>
 
+        {meta.contexto && (
+          <p className={styles.contextoCard}>
+            <strong>Contexto aportado por el profesional:</strong> {meta.contexto}
+          </p>
+        )}
+
+        {/* Tarjetas de métricas generales (KPIs estilo /asistentes-sociales) */}
+        <section className={styles.kpisSection} aria-label="Métricas clave de la sesión">
+          <Kpi
+            etiqueta="Duración de sesión"
+            valor={fmtDuracion(a.duracionMs)}
+            nota={a.sesiones > 1 ? `${a.sesiones} accesos registrados` : 'Sesión única continuada'}
+            icon="⏱️"
+          />
+          <Kpi
+            etiqueta="Decisiones tomadas"
+            valor={a.decisiones.length}
+            nota="Opciones valoradas en la historia"
+            icon="🧒"
+          />
+          <Kpi
+            etiqueta="Mediana de decisión"
+            valor={fmtSeg(a.latencia.mediana)}
+            nota={a.latencia.mediana ? `Rango: ${fmtSeg(a.latencia.min)} – ${fmtSeg(a.latencia.max)}` : 'Sin latencias registradas'}
+            icon="⚡"
+          />
+          <Kpi
+            etiqueta="Pantallas leídas"
+            valor={a.pantallasVistas}
+            nota={`${a.relecturas} relecturas · ${a.pausasLargas} pausas > 1 min`}
+            icon="📖"
+          />
+          <Kpi
+            etiqueta="Actividades completadas"
+            valor={`${Object.keys(a.minijuegos).length + (a.dibujo?.phase1 ? 1 : 0)} / 3`}
+            nota="Dibujo avatar, mesa CID y mundo de arena"
+            icon="🎨"
+          />
+        </section>
+
+        {/* Sección 1: Decisiones */}
         <Seccion numero="1" titulo="Decisiones en la historia" sub="Elección realizada en cada momento de decisión y tiempo empleado.">
           {a.decisiones.length ? (
             <>
@@ -308,29 +436,32 @@ export default function InformeCaso({ params }) {
                 referencia={{ valor: a.latencia.mediana / 1000, etiqueta: `Mediana del menor: ${fmtSeg(a.latencia.mediana)}` }}
               />
               <p className={styles.leyenda}><span className={styles.swatch} /> Tiempo superior a 1,75 veces la mediana del propio menor (dato a contrastar, no indicador clínico).</p>
-              <table className={styles.tabla}>
-                <thead><tr><th>#</th><th>Cap.</th><th>Situación planteada</th><th>Opción elegida</th><th>Alternativas</th><th>Tiempo</th></tr></thead>
-                <tbody>
-                  {a.decisiones.map((d, i) => (
-                    <tr key={i} className={d.destacada ? styles.filaDestacada : undefined}>
-                      <td>D{i + 1}</td>
-                      <td>{d.chapter}</td>
-                      <td>{d.prompt}</td>
-                      <td><strong>{d.option_label}</strong></td>
-                      <td className={styles.alt}>{(d.all_options ?? []).filter((o) => o.id !== d.option_id).map((o) => o.label).join(' · ')}</td>
-                      <td>{fmtSeg(d.time_ms)}{d.relativa ? <small> ({d.relativa.toFixed(1)}×)</small> : null}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <div className={styles.tablaWrap}>
+                <table className={styles.tabla}>
+                  <thead><tr><th>#</th><th>Cap.</th><th>Situación planteada</th><th>Opción elegida</th><th>Alternativas</th><th>Tiempo</th></tr></thead>
+                  <tbody>
+                    {a.decisiones.map((d, i) => (
+                      <tr key={i} className={d.destacada ? styles.filaDestacada : undefined}>
+                        <td><strong>D{i + 1}</strong></td>
+                        <td>{d.chapter}</td>
+                        <td>{d.prompt}</td>
+                        <td><strong>{d.option_label}</strong></td>
+                        <td className={styles.alt}>{(d.all_options ?? []).filter((o) => o.id !== d.option_id).map((o) => o.label).join(' · ')}</td>
+                        <td><strong>{fmtSeg(d.time_ms)}</strong>{d.relativa ? <small> ({d.relativa.toFixed(1)}×)</small> : null}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </>
           ) : <Pendiente texto="Todavía no hay decisiones registradas." />}
           <Nota>
-            <p><strong>Latencia de decisión:</strong> tiempo entre la aparición de las opciones y la elección. La cronometría mental relaciona la latencia con el grado de deliberación, el conflicto entre alternativas y la carga emocional del contenido (paradigmas de tiempo de reacción como el Stroop emocional). Por eso se compara cada decisión con la mediana del propio menor: un tiempo destacado señala un tema que puede merecer conversación, nunca una conclusión.</p>
+            <p><strong>Latencia de decisión:</strong> tiempo entre la aparición de las opciones y la elección. La cronometría mental relaciona la latencia con el grado de deliberación, el conflicto entre alternativas y la carga emocional del contenido. Por eso se compara cada decisión con la mediana del propio menor: un tiempo destacado señala un tema que puede merecer conversación, nunca una conclusión.</p>
             <p><strong>Elección:</strong> se registran literalmente la opción tomada y las descartadas para poder comentarlas con el menor. Las elecciones dentro de una ficción no equivalen a conductas reales.</p>
           </Nota>
         </Seccion>
 
+        {/* Sección 2: Ritmo de lectura */}
         <Seccion numero="2" titulo="Ritmo de lectura" sub="Tiempo de lectura acumulado por capítulo, relecturas (retrocesos) y pausas.">
           {a.capitulos.length ? (
             <>
@@ -338,14 +469,16 @@ export default function InformeCaso({ params }) {
                 const enMin = Math.max(...a.capitulos.map((c) => c.lecturaMs)) >= 120000
                 return <Barras datos={a.capitulos.map((c) => ({ etiqueta: `Cap. ${c.capitulo}`, valor: c.lecturaMs / (enMin ? 60000 : 1000) }))} unidad={enMin ? ' min' : ' s'} formato={(v) => (enMin ? v.toFixed(1) : Math.round(v))} alto={190} />
               })()}
-              <table className={styles.tabla}>
-                <thead><tr><th>Capítulo</th><th>Pantallas</th><th>Tiempo de lectura</th><th>Seg. por pantalla</th><th>Relecturas</th><th>Decisiones</th></tr></thead>
-                <tbody>
-                  {a.capitulos.map((c) => (
-                    <tr key={c.capitulo}><td>{c.capitulo}</td><td>{c.pantallas}</td><td>{fmtDuracion(c.lecturaMs)}</td><td>{fmtSeg(c.lecturaMs / Math.max(c.pantallas, 1))}</td><td>{c.relecturas}</td><td>{c.decisiones}</td></tr>
-                  ))}
-                </tbody>
-              </table>
+              <div className={styles.tablaWrap}>
+                <table className={styles.tabla}>
+                  <thead><tr><th>Capítulo</th><th>Pantallas</th><th>Tiempo de lectura</th><th>Seg. por pantalla</th><th>Relecturas</th><th>Decisiones</th></tr></thead>
+                  <tbody>
+                    {a.capitulos.map((c) => (
+                      <tr key={c.capitulo}><td><strong>Capítulo {c.capitulo}</strong></td><td>{c.pantallas}</td><td>{fmtDuracion(c.lecturaMs)}</td><td>{fmtSeg(c.lecturaMs / Math.max(c.pantallas, 1))}</td><td>{c.relecturas}</td><td>{c.decisiones}</td></tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </>
           ) : <Pendiente texto="Todavía no hay progreso de lectura registrado." />}
           <Nota>
@@ -353,6 +486,7 @@ export default function InformeCaso({ params }) {
           </Nota>
         </Seccion>
 
+        {/* Sección 3: La mesa de la familia */}
         <Seccion numero="3" titulo="La mesa de la familia" sub="Adaptación de la Comfortable Interpersonal Distance Scale (Duke y Nowicki, 1972). El menor elige dónde sentarse en tres situaciones.">
           {cid ? <Mesa report={cid} /> : <Pendiente texto="El menor aún no ha llegado a este minijuego." />}
           <Nota>
@@ -360,6 +494,7 @@ export default function InformeCaso({ params }) {
           </Nota>
         </Seccion>
 
+        {/* Sección 4: Mi mundo con perros */}
         <Seccion numero="4" titulo="Mi mundo con perros" sub="Adaptación digital de la Técnica del Mundo (Margaret Lowenfeld) con un evento meteorológico inesperado.">
           {arena ? <Mundo report={arena} /> : <Pendiente texto="El menor aún no ha llegado a este minijuego." />}
           <Nota>
@@ -367,6 +502,7 @@ export default function InformeCaso({ params }) {
           </Nota>
         </Seccion>
 
+        {/* Sección 5: Dibujo del avatar */}
         <Seccion numero="5" titulo="Dibujo del avatar" sub="Producciones gráficas realizadas al inicio de la historia e indicadores grafomotores.">
           {a.dibujo?.phase1 ? <Dibujo dibujo={a.dibujo} /> : <Pendiente texto="No hay dibujos registrados en esta sesión." />}
           <Nota>
@@ -374,7 +510,8 @@ export default function InformeCaso({ params }) {
           </Nota>
         </Seccion>
 
-        <Seccion numero="6" titulo="Marco normativo y uso de los datos">
+        {/* Sección 6: Marco normativo */}
+        <Seccion numero="6" titulo="Marco normativo y uso de los datos" sub="Garantías legales e interés superior del menor.">
           <ul className={styles.normas}>
             <li><strong>Convención sobre los Derechos del Niño (ONU, 1989)</strong>, art. 3 (interés superior del menor) y art. 12 (derecho a expresar su opinión y a ser escuchado).</li>
             <li><strong>Ley Orgánica 1/1996, de Protección Jurídica del Menor</strong>, art. 2 (interés superior) y art. 9 (derecho a ser oído y escuchado), en la redacción de la LO 8/2015.</li>
@@ -384,29 +521,34 @@ export default function InformeCaso({ params }) {
           <p className={styles.leyenda}>Los datos se recogen para apoyar la escucha del menor y la intervención profesional. No deben utilizarse como prueba única ni para decisiones automatizadas (art. 22 RGPD).</p>
         </Seccion>
 
+        {/* Registro cronológico */}
         <details className={styles.registro}>
-          <summary>Registro cronológico completo ({a.eventos.length} eventos)</summary>
-          <table className={styles.tabla}>
-            <thead><tr><th>Hora</th><th>Tipo</th><th>Detalle</th></tr></thead>
-            <tbody>
-              {a.eventos.map((e, i) => (
-                <tr key={i}>
-                  <td>{new Date(e.t).toLocaleTimeString('es-ES')}</td>
-                  <td>{e.kind}</td>
-                  <td className={styles.alt}>
-                    {e.kind === 'decision' ? `${e.data.prompt} → ${e.data.option_label} (${fmtSeg(e.data.time_ms)})`
-                      : e.kind === 'progreso' ? `${e.data.node_id} · cap. ${e.data.chapter ?? '—'}`
-                        : e.kind.startsWith('minijuego') ? e.data.game
-                          : ''}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <summary>Registro cronológico completo ({a.eventos.length} eventos registrados)</summary>
+          <div className={styles.tablaWrap} style={{ marginTop: 12 }}>
+            <table className={styles.tabla}>
+              <thead><tr><th>Hora</th><th>Tipo de evento</th><th>Detalle de la acción</th></tr></thead>
+              <tbody>
+                {a.eventos.map((e, i) => (
+                  <tr key={i}>
+                    <td><strong>{new Date(e.t).toLocaleTimeString('es-ES')}</strong></td>
+                    <td>{e.kind}</td>
+                    <td className={styles.alt}>
+                      {e.kind === 'decision' ? `${e.data.prompt} → ${e.data.option_label} (${fmtSeg(e.data.time_ms)})`
+                        : e.kind === 'progreso' ? `${e.data.node_id} · cap. ${e.data.chapter ?? '—'}`
+                          : e.kind.startsWith('minijuego') ? e.data.game
+                            : ''}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </details>
-        <footer className={styles.pie}>Informe generado automáticamente por Chavales Legales el {new Date().toLocaleDateString('es-ES', { dateStyle: 'long' })}. Uso profesional y confidencial.</footer>
-      </article>
+
+        <footer className={styles.pie}>
+          Informe generado automáticamente por Chavales Legales el {new Date().toLocaleDateString('es-ES', { dateStyle: 'long' })}. Uso profesional y confidencial.
+        </footer>
+      </main>
     </div>
   )
 }
-

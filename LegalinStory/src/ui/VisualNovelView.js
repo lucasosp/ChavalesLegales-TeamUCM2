@@ -165,6 +165,7 @@ export class VisualNovelView {
   }
 
   destroy() {
+    this.#backgroundRequest += 1;
     document.removeEventListener("keydown", this.#onKeyDown);
     clearTimeout(this.#choiceReadyTimer);
     clearInterval(this.#chatTimer);
@@ -209,12 +210,18 @@ export class VisualNovelView {
     this.refs.panel.classList.toggle("is-narration", tone === "narration");
     this.refs.panel.classList.toggle("is-thought", tone === "thought");
     this.refs.panel.classList.toggle("is-poem", tone === "poem");
-    this.refs.advance.hidden = true;
+    this.refs.text.scrollTop = 0;
+    this.refs.advance.hidden = false;
+    this.refs.advance.textContent = "Ver frase completa";
 
     this.typewriter.play(text, () => {
       if (this.#awaitingChoice) return;
       this.refs.advance.hidden = false;
+      this.refs.advance.textContent = "Seguir →";
     });
+    if (this.autoFocusStory && !this.root.querySelector('[data-sara-overlay]:not([hidden])')) {
+      this.refs.advance.focus({ preventScroll: true });
+    }
   }
 
   showChoices({ speaker, remote, prompt, tone, options, stage }) {
@@ -222,7 +229,7 @@ export class VisualNovelView {
     this.#leaveEnding();
     this.#awaitingChoice = false;
     this.#applyStage(stage);
-    const voice = speaker ?? "Decisión";
+    const voice = speaker ?? "Ahora eliges tú";
     this.#setSpeaker(voice, remote);
     this.refs.announcement.textContent = `${voice}: ${prompt}`;
     this.#clearChoices();
@@ -233,6 +240,7 @@ export class VisualNovelView {
     this.refs.advance.hidden = true;
 
     this.typewriter.play(prompt, () => {
+      this.refs.text.scrollTop = 0;
       this.#awaitingChoice = true;
       this.#renderChoices(options);
     });
@@ -910,7 +918,8 @@ export class VisualNovelView {
     });
     this.refs.chatSkip.addEventListener("click", () => this.#skipChat());
     this.refs.scene.addEventListener("click", (event) => {
-      if (event.target.closest("button")) return;
+      if (event.target.closest("button, a, input, select, textarea")) return;
+      if (globalThis.getSelection?.()?.toString()) return;
       if (!this.refs.welcome.hidden) return;
       if (this.#interactionLocked || this.#rightsVisible) return;
       if (this.#awaitingChoice || this.#endingVisible) return;
@@ -992,7 +1001,7 @@ export class VisualNovelView {
     }
 
     if (event.key !== " " && event.key !== "Enter") return;
-    if (event.target instanceof Element && event.target.closest("button")) return;
+    if (event.target instanceof Element && event.target.closest("button, a, input, select, textarea, [contenteditable='true']")) return;
     if (this.#interactionLocked || this.#rightsVisible) return;
 
     event.preventDefault();
@@ -1031,7 +1040,7 @@ export class VisualNovelView {
       "companera",
       "companero",
     ]);
-    this.refs.speaker.classList.toggle("is-voice", remote || !onStage.has(normalized));
+    this.refs.speaker.classList.toggle("is-voice", remote || (!this.root.classList.contains("sara-mode") && !onStage.has(normalized)));
   }
 
   #applyStage(stage) {
@@ -1147,6 +1156,7 @@ export class VisualNovelView {
       const button = document.createElement("button");
       button.type = "button";
       button.className = "choice";
+      button.disabled = this.autoFocusStory === true;
       button.style.setProperty("--i", String(index));
 
       const number = document.createElement("span");
@@ -1177,6 +1187,10 @@ export class VisualNovelView {
     clearTimeout(this.#choiceReadyTimer);
     this.#choiceReadyTimer = setTimeout(() => {
       this.refs.choices.classList.add("is-ready");
+      this.refs.choices.querySelectorAll("button").forEach(button => { button.disabled = false; });
+      if (this.autoFocusStory && !this.root.querySelector('[data-sara-overlay]:not([hidden]), .sara-drawing-overlay')) {
+        this.refs.choices.querySelector("button")?.focus({ preventScroll: true });
+      }
     }, 200);
   }
 

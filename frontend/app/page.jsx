@@ -6,9 +6,12 @@ import { useRouter } from 'next/navigation'
 import { getInfoSala, unirseASala } from '../lib/api'
 import { getWsBaseUrl, createGameSocket } from '../lib/socket'
 import SalaEsperaAlumnos from '../components/SalaEsperaAlumnos'
+import SelectorIdioma from '../components/SelectorIdioma'
+import { useT } from '../lib/i18n'
 
 export default function Home() {
   const router = useRouter()
+  const t = useT()
   const [step, setStep] = useState('PIN') // 'PIN' | 'NICKNAME' | 'GAME'
   const [pin, setPin] = useState('')
   const [nickname, setNickname] = useState('')
@@ -50,7 +53,7 @@ export default function Home() {
       if (typeof window !== 'undefined') {
         sessionStorage.setItem('chavales_asistente_social_auth', 'true')
       }
-      router.push('/asistentes-sociales')
+      router.push('/informe')
       return
     }
 
@@ -109,7 +112,7 @@ export default function Home() {
         }
       },
       onError: () => {
-        setErrorMsg('Error en la conexión en directo con la sala.')
+        setErrorMsg(t('inicio.errorConexionSala'))
       },
     })
 
@@ -181,23 +184,23 @@ export default function Home() {
         <Link
           href="/profesores"
           className="btn-pro-opt1"
-          aria-label="Acceso a educadores sociales"
+          aria-label={t('inicio.accesoEducadores')}
         >
           <span className="pro-icon-chip" aria-hidden="true">
             <svg viewBox="0 0 24 24">
               <path d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18C5 19.94 8.13 22 12 22C15.87 22 19 19.94 19 17.18V13.18L12 17L5 13.18Z" />
             </svg>
           </span>
-          <span className="pro-label">Acceso a educadores sociales</span>
+          <span className="pro-label">{t('inicio.accesoEducadores')}</span>
           <span className="pro-arrow" aria-hidden="true">→</span>
         </Link>
 
-        {/* Acceso exclusivo a la vista de Asistentes Sociales */}
+        {/* Acceso exclusivo a la vista de Asistentes Sociales / Informes de Casos */}
         <Link
-          href="/asistentes-sociales"
+          href="/informe"
           className="btn-pro-opt1 btn-social-opt"
-          aria-label="Vista de Asistentes Sociales"
-          title="Panel exclusivo para Asistentes y Trabajadores Sociales"
+          aria-label={t('inicio.vistaAsistentesAria')}
+          title={t('inicio.vistaAsistentesTitle')}
           style={{
             background: 'rgba(16, 185, 129, 0.16)',
             borderColor: 'rgba(52, 211, 153, 0.45)',
@@ -210,9 +213,11 @@ export default function Home() {
               <path d="M12 16h.01" />
             </svg>
           </span>
-          <span className="pro-label" style={{ color: '#E6FFFA' }}>Asistentes Sociales</span>
+          <span className="pro-label" style={{ color: '#E6FFFA' }}>{t('inicio.asistentesSociales')}</span>
           <span className="pro-arrow" style={{ color: '#34D399' }} aria-hidden="true">→</span>
         </Link>
+
+        <SelectorIdioma className="selector-idioma-topbar" />
       </header>
 
       {/* Contenido principal */}
@@ -262,9 +267,9 @@ export default function Home() {
         <div className="kahoot-sections-stack">
           {/* PASO 1: INTRODUCE PIN */}
           {step === 'PIN' && (
-            <section className="pin-section-card" aria-label="Acceso por PIN a sesión individual">
+            <section className="pin-section-card" aria-label={t('inicio.accesoPinAria')}>
               <div className="pin-card-header">
-                <span className="pin-badge-title">PIN DE LA SESIÓN INDIVIDUAL</span>
+                <span className="pin-badge-title">{t('inicio.pinTitulo')}</span>
               </div>
 
               <form className="pin-form" onSubmit={handlePinSubmit}>
@@ -272,7 +277,7 @@ export default function Home() {
                   <input
                     type="text"
                     maxLength={20}
-                    placeholder="Introduce el PIN o clave"
+                    placeholder={t('inicio.pinPlaceholder')}
                     className="pin-input"
                     value={pin}
                     onChange={(e) => setPin(e.target.value)}
@@ -287,7 +292,7 @@ export default function Home() {
                   className="btn-pin-submit"
                   disabled={cargando || !pin.trim()}
                 >
-                  <span>{cargando ? 'Buscando...' : 'Entrar'}</span>
+                  <span>{cargando ? t('inicio.buscando') : t('inicio.entrar')}</span>
                 </button>
               </form>
 
@@ -301,9 +306,9 @@ export default function Home() {
 
           {/* PASO 2: INTRODUCE APODO / NOMBRE */}
           {step === 'NICKNAME' && (
-            <section className="pin-section-card" aria-label="Elegir apodo de la sesión individual">
+            <section className="pin-section-card" aria-label={t('inicio.apodoAria')}>
               <div className="pin-card-header">
-                <span className="pin-badge-title">SESIÓN {pin} · TU NOMBRE</span>
+                <span className="pin-badge-title">{t('inicio.apodoTitulo', { pin })}</span>
               </div>
 
               <form className="pin-form" onSubmit={handleNicknameSubmit}>
@@ -311,7 +316,7 @@ export default function Home() {
                   <input
                     type="text"
                     maxLength={18}
-                    placeholder="¿Cómo te llamas?"
+                    placeholder={t('inicio.apodoPlaceholder')}
                     className="pin-input"
                     value={nickname}
                     onChange={(e) => setNickname(e.target.value)}
@@ -327,7 +332,7 @@ export default function Home() {
                   className="btn-pin-submit"
                   disabled={cargando || !nickname.trim()}
                 >
-                  <span>{cargando ? 'Entrando...' : '¡Listo! Entrar'}</span>
+                  <span>{cargando ? t('inicio.entrando') : t('inicio.listoEntrar')}</span>
                 </button>
 
                 <button
@@ -344,7 +349,7 @@ export default function Home() {
                     textDecoration: 'underline',
                   }}
                 >
-                  Cambiar PIN
+                  {t('inicio.cambiarPin')}
                 </button>
               </form>
 
@@ -357,19 +362,19 @@ export default function Home() {
           )}
 
           {/* SECCIÓN INFERIOR: JUGAR SIN PIN (SELECTOR DE JUEGOS MODO HISTORIETA Y MODO JUICIO) */}
-          <section className="solo-section-card" aria-label="Jugar sin PIN">
+          <section className="solo-section-card" aria-label={t('inicio.jugarSinPinAria')}>
             <div style={{ textAlign: 'center', marginBottom: 2 }}>
               <h2 className="solo-title" style={{ margin: 0, fontSize: 16 }}>
-                Jugar sin PIN · Sesión individual
+                {t('inicio.jugarSinPinTitulo')}
               </h2>
             </div>
 
             <div className="solo-games-grid">
               {[
-                { href: '/novela', tag: 'Historia', title: 'Sara · Mi historia sigue', bg: '#FEF08A', color: '#854D0E', icon: <><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></> },
-                { href: '/experiments/cid-table', tag: 'Familia', title: 'La mesa de la familia', bg: '#D1FAE5', color: '#047857', icon: <><ellipse cx="12" cy="12" rx="7" ry="4.5"/><circle cx="12" cy="4" r="1.6"/><circle cx="12" cy="20" r="1.6"/><circle cx="3" cy="12" r="1.6"/><circle cx="21" cy="12" r="1.6"/></> },
-                { href: '/experiments/caja-arena', tag: 'Caja de arena', title: 'Mi mundo con perros', bg: '#FFEDD5', color: '#C2410C', icon: <><path d="M4 7c0-1.5 1-2.5 2.5-2.5L9 7h3.5c2.5 0 4.5 2 4.5 4.5V13l3 1v3h-3l-1 3H8l-1-3H5.5L4 13z"/><circle cx="7.5" cy="8.5" r=".7" fill="currentColor"/></> },
-                { href: '/avatar', tag: 'Avatar', title: 'Haz tu avatar', bg: '#EDE9FE', color: '#6D28D9', icon: <><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></> },
+                { href: '/novela', tag: t('inicio.juegoHistoriaTag'), title: t('inicio.juegoHistoriaTitulo'), bg: '#FEF08A', color: '#854D0E', icon: <><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></> },
+                { href: '/experiments/cid-table', tag: t('inicio.juegoFamiliaTag'), title: t('inicio.juegoFamiliaTitulo'), bg: '#D1FAE5', color: '#047857', icon: <><ellipse cx="12" cy="12" rx="7" ry="4.5"/><circle cx="12" cy="4" r="1.6"/><circle cx="12" cy="20" r="1.6"/><circle cx="3" cy="12" r="1.6"/><circle cx="21" cy="12" r="1.6"/></> },
+                { href: '/experiments/caja-arena', tag: t('inicio.juegoArenaTag'), title: t('inicio.juegoArenaTitulo'), bg: '#FFEDD5', color: '#C2410C', icon: <><path d="M4 7c0-1.5 1-2.5 2.5-2.5L9 7h3.5c2.5 0 4.5 2 4.5 4.5V13l3 1v3h-3l-1 3H8l-1-3H5.5L4 13z"/><circle cx="7.5" cy="8.5" r=".7" fill="currentColor"/></> },
+                { href: '/avatar', tag: t('inicio.juegoAvatarTag'), title: t('inicio.juegoAvatarTitulo'), bg: '#EDE9FE', color: '#6D28D9', icon: <><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></> },
               ].map((g) => (
                 <Link key={g.href} href={g.href} className="solo-game-tile">
                   <span className="solo-game-icon" style={{ background: g.bg, color: g.color }}>
@@ -392,7 +397,7 @@ export default function Home() {
             <span>•</span>
             <a href="https://dataforumjusticia.es/datathon-2026/" target="_blank" rel="noopener noreferrer" className="footer-link">Datathon Justicia</a>
             <span>•</span>
-            <a href="https://www.administraciondejusticia.gob.es/" target="_blank" rel="noopener noreferrer" className="footer-link">Administración de Justicia</a>
+            <a href="https://www.administraciondejusticia.gob.es/" target="_blank" rel="noopener noreferrer" className="footer-link">{t('inicio.pieAdminJusticia')}</a>
           </div>
         </div>
       </footer>

@@ -1,0 +1,940 @@
+{
+  "story": {
+    "nodes": {
+      "start": {
+        "kicker": "SARA · 1. KAPITULUA (6TIK)",
+        "title": "Zerbait ez doa ondo",
+        "text": "Astelehena. Ateratzen ez den sake bat."
+      },
+      "c1-01": {
+        "text": "Sarak hamabost urte ditu, boleibolean jokatzen du eta izarrak marrazten ditu apunteen ertzetan. Bat amaitzeko falta zaio DBHko laugarren mailako txirrinak jotzen duenean."
+      },
+      "c1-02": {
+        "text": "Gaur arratsaldean sakea landuko dugu. Nirea pistara baino atera aldera gehiago doa."
+      },
+      "c1-03": {
+        "text": "Nirea ere korridoreko ordezkari izateko aurkez liteke. Baina gaur… uste dut ez noala."
+      },
+      "c1-04": {
+        "text": "Etxean, Javierrek, bere aitak, haren mezuak begiratzen ditu eta nor ikus dezakeen erabakitzen du. Zerbait gustatzen ez zaionean iraintzen du. Batzuetan bultza edo jo egin du. Eszena horiek ez ditugu erakusten."
+      },
+      "c1-05": {
+        "text": "Atzo mugikorra kendu zidan berriro. Dani beste gelan zegoen. Hamar urte besterik ez ditu. Ez dakit zenbat entzun zuen."
+      },
+      "c1-06": {
+        "text": "Ados. Iritziz aldatzen baduzu, lekua gordeko dizut. Eta zerbait kontatu nahi badidazu, baita ere."
+      },
+      "c1-07": {
+        "text": "Gauzak jasotzean, Sarari estutxea erortzen zaio. Laura, bere irakaslea, makurtu egiten da laguntzeko. Konturatu da hutsegiteak dituela eta azkenaldian erraz larritzen dela."
+      },
+      "c1-08": {
+        "text": "Egun hauetan isilago ikusten zaitut. Ez dakit zer gertatzen zaizun eta ez dut asmatu nahi. Ondo etorriko litzaizuke une batez leku lasai batean hitz egitea?"
+      },
+      "c1-choice": {
+        "prompt": "Sarari kosta egiten zaio hastea. Zer esan behar du lehenik?",
+        "options": [
+          {
+            "id": "partial",
+            "label": "«Etxean beldurra ematen didaten gauzak gertatzen dira».",
+            "next": "c1-partial",
+            "flags": {
+              "opening": "partial"
+            }
+          },
+          {
+            "id": "time",
+            "label": "«Denbora pixka bat behar dut».",
+            "next": "c1-time",
+            "flags": {
+              "opening": "time"
+            }
+          },
+          {
+            "id": "what",
+            "label": "«Zerbait kontatzen badizut, zer gertatuko da?».",
+            "next": "c1-what",
+            "flags": {
+              "opening": "what"
+            }
+          }
+        ]
+      },
+      "c1-partial": {
+        "text": "Eskerrik asko esateagatik. Ez duzu orain dena azaldu beharrik. Min ematen dizunak arreta merezi du, oraindik nola deitu ez badakizu ere."
+      },
+      "c1-time": {
+        "text": "Poliki joan gaitezke. Hemen geratuko naiz zurekin. Gaur hitz egitea kostatzen bazaizu ere, nire ardura da kezkatzen nauten seinaleei erantzutea eta laguntza bilatzea."
+      },
+      "c1-what": {
+        "text": "Urratsak azalduz joango natzaizu. Arriskuan egon zaitezkeela uste badut, laguntza eskatu behar diet zu babes zaitzaketenei. Galdetu diezadakezu zer jakinaraziko dudan."
+      },
+      "c1-close": {
+        "text": "Sara eseri egiten da. Laurak azterketak alde batera uzten ditu hura entzuteko. Goiz horretan lehen aldiz, inork ez dirudi elkarrizketa amaitzeko presarik duenik."
+      },
+      "c1-choice2": {
+        "prompt": "Jarraitu aurretik, zerk lagunduko lioke Sarari?",
+        "options": [
+          {
+            "id": "door",
+            "label": "Hitz egiten duen bitartean ikaskiderik ez sartzeko eskatzea.",
+            "next": "c1-door",
+            "flags": {
+              "schoolPrivacy": true
+            }
+          },
+          {
+            "id": "company",
+            "label": "Paulak kanpoan itxaron dezakeen galdetzea.",
+            "next": "c1-company",
+            "flags": {
+              "paulaWaiting": true
+            }
+          }
+        ]
+      },
+      "c1-door": {
+        "text": "Intimitatez hitz egiteko moduko leku bat bilatuko dugu. Norbaitek zutaz galdetzen badu, ez du zure istorioa jakin beharrik."
+      },
+      "c1-company": {
+        "text": "Lagunduta zaudela eta amaitzen dugunean aterako zarela esango diogu. Zuk erabaki dezakezu gero zer kontatu nahi diozun."
+      },
+      "c2-card": {
+        "kicker": "SARA · 2. KAPITULUA (6TIK)",
+        "title": "Norbaitek entzuten du",
+        "text": "Institutuan. Elkarrizketa bat, urratsez urrats."
+      },
+      "c2-01": {
+        "text": "Batzuetan pentsatzen dut beste modu batera erantzun izan banio… Baina atzo ez nuen ezer egin. Eta hala ere haserretu egin zen."
+      },
+      "c2-02": {
+        "text": "Esaten duzun ezerk ez du justifikatzen inork zuri min egitea. Ez duzu esaldi perfektua aurkitu beharrik guk lagun zaitzagun."
+      },
+      "c2-03": {
+        "text": "Sarak gertatutakoaren zati bat kontatzen du. Laurak entzun egiten du, xehetasunak errepikatzeko eskatu gabe. Institututik ateratzean seguru dagoen galdetzen dio."
+      },
+      "c2-04": {
+        "text": "Ez dut etxera itzuli nahi eta hark bat-batean jakin dezan. Beldur naiz gerta daitekeenaz."
+      },
+      "c2-05": {
+        "text": "Kontuan hartuko dugu inorekin harremanetan jarri aurretik. Ongizate-koordinazioarekin hitz egingo dut eta egoera jakinaraziko diet esku hartu behar duten zerbitzuei."
+      },
+      "c2-protection": {
+        "text": "Niri dagokit laguntza eskatzea eta ikastetxeko protokoloa aktibatzea. Zuk ez duzu bakarrik salaketa jarri behar zu babesten has gaitezen. Egiten duguna azalduko dizugu."
+      },
+      "c2-choice": {
+        "prompt": "Zer galdetzen du Sarak Laurak laguntza antolatzen duen bitartean?",
+        "options": [
+          {
+            "id": "privacy",
+            "label": "«Irakasle guztiei kontatuko diezu?».",
+            "next": "c2-privacy",
+            "flags": {
+              "concernPrivacy": true
+            }
+          },
+          {
+            "id": "dad",
+            "label": "«Oraintxe bertan deituko diozue nire aitari?».",
+            "next": "c2-dad",
+            "flags": {
+              "concernDad": true
+            }
+          },
+          {
+            "id": "alone",
+            "label": "«Nik joan behar dut salaketa jartzera?».",
+            "next": "c2-alone",
+            "flags": {
+              "concernAlone": true
+            }
+          }
+        ]
+      },
+      "c2-privacy": {
+        "text": "Ezin dizut agindu hau gure artean geratuko denik. Azalduko dizut nork esku hartu behar duen eta zertarako. Partekatzen duguna zu babesteko izan beharko da."
+      },
+      "c2-dad": {
+        "text": "Ez dugu deirik inprobisatuko zure beldurra kontuan hartu gabe. Profesionalek koordinatuko dute modu seguruan nola jardun. Dakiguna azalduko dizut."
+      },
+      "c2-alone": {
+        "text": "Ez duzu zuk bakarrik antolatu beharrik. Hemen laguntza eskatzeak dagoeneko ahalbidetzen du arduradunek jardutea. Lagundu egingo zaituzte eta dagozkion jarduketak azalduko dizkizute."
+      },
+      "c2-06": {
+        "text": "Ikastetxeak babes-zerbitzuekin koordinatzen du arreta. Segurtasuna hasieratik zaintzen da. Istorio honek hainbat topaketa biltzen ditu; ez du nahitaezko egutegirik adierazten."
+      },
+      "c2-07": {
+        "text": "Kaixo, Sara. Irene naiz, gizarte-hezitzailea. Taldearekin batera lagunduko zaitut. Nire lana zerikusia du, halaber, klasean, zure lagunekin eta egunerokoan nola zauden."
+      },
+      "c2-08": {
+        "text": "Berriro osorik kontatu beharko dut? Ez dakit lehen nondik hasi naizen ere."
+      },
+      "c2-09": {
+        "text": "Koordinatzen saiatuko gara, behar ez bada errepikatu behar ez dezazun. Zerbait galdetu aurretik, zertarako behar dugun azal diezazuket."
+      },
+      "c2-choice2": {
+        "prompt": "Irenek aulki bat hurbiltzen du. Nola nahiago du Sarak hastea?",
+        "options": [
+          {
+            "id": "short",
+            "label": "Gauza bat aldi bakoitzean, azalpen laburrekin.",
+            "next": "c2-short",
+            "flags": {
+              "shortExplanations": true
+            }
+          },
+          {
+            "id": "overview",
+            "label": "Lehenik ibilbide orokorra ikustea.",
+            "next": "c2-overview",
+            "flags": {
+              "overviewFirst": true
+            }
+          }
+        ]
+      },
+      "c2-short": {
+        "text": "Ados. Lehenengo: zure segurtasuna zaintzea. Gero hurrengo urratsak ikusiz joango gara. Luzeegi hitz egiten badut, esan diezadakezu."
+      },
+      "c2-overview": {
+        "text": "Zure familia-egoera aztertuko dugu, laguntzak antolatuko ditugu eta hasten diren jarduketak azalduko dizkizugu. Mapa ireki dezakezu kokatu behar duzunean."
+      },
+      "c3-card": {
+        "kicker": "SARA · 3. KAPITULUA (6TIK)",
+        "title": "Zer gertatuko da nirekin?",
+        "text": "Gizarte Zerbitzuak. Kezkei izena jartzea."
+      },
+      "c3-01": {
+        "text": "Nire egoera baloratzeak esan nahi du nota bat jarriko didazuela? Azkenaldian ez baitut oso nota onik ateratzen."
+      },
+      "c3-02": {
+        "text": "Notarik ez. Zer gertatzen ari den, zer arrisku dauden eta zer laguntza behar duzuen jakin nahi dugu. Zure ama ere entzungo dugu eta Dani nola dagoen baloratuko dugu."
+      },
+      "c3-social": {
+        "text": "Baloratzeak esan nahi du zer behar duzuen eta seguru zauden jakitea. Hori da babes-zerbitzuen lana. Delitu posible bat ikertzen bada, beste prozesu bat da, beste profesional batzuekin."
+      },
+      "c3-choice": {
+        "prompt": "Sarak galdera asko ditu. Zein egiten du lehenik?",
+        "options": [
+          {
+            "id": "dani",
+            "label": "«Zer gertatuko da Danirekin?».",
+            "next": "c3-dani",
+            "flags": {
+              "concernDani": true
+            }
+          },
+          {
+            "id": "privacy",
+            "label": "«Nork jakingo du nire istorioa?».",
+            "next": "c3-privacy",
+            "flags": {
+              "concernPrivacy": true
+            }
+          },
+          {
+            "id": "home",
+            "label": "«Nire etxetik joan beharko dut?».",
+            "next": "c3-home",
+            "flags": {
+              "concernHome": true
+            }
+          }
+        ]
+      },
+      "c3-dani": {
+        "text": "Dani ere entzungo dute eta taldeak baloratuko du zer behar duen. Ez dagokizu zuri dena ondo ateratzen den zaintzea. Hori gu, helduoi, dagokigu."
+      },
+      "c3-privacy": {
+        "text": "Ezin dizut agindu hau gure artean geratuko denik. Azalduko dizut nork esku hartu behar duen eta zertarako. Partekatzen duguna zu babesteko izan beharko da."
+      },
+      "c3-home": {
+        "text": "Laguntza eskatzeak ez du esan nahi automatikoki etxetik joan behar duzunik. Zuen segurtasuna eta har daitezkeen neurriak baloratu behar dira. Zure iritziak garrantzia du eta entzun egin behar zaituzte."
+      },
+      "c3-03": {
+        "text": "Nire amak gauza batzuk badaki, baina ez guztiak. Batzuetan esaten dit ez eztabaidatzen saiatzeko. Ez dakit zer egitea espero duen."
+      },
+      "c3-04": {
+        "text": "Zu ez zara Javierren jokabidea kontrolatzeko arduraduna. Zure amak ere laguntza behar du. Bakoitzaren segurtasuna bereiz eta guztiena batera baloratzen da."
+      },
+      "c3-05": {
+        "text": "Kasu fikziozko honetan, egonaldi seguru bat antolatzen da amarekin eta Danirekin, izeba baten etxean, profesionalek neurriak baloratzen dituzten bitartean. Sarak bere institutuarekiko harremana mantentzen du."
+      },
+      "c3-06": {
+        "text": "Boleiboleko zapatilak motxilan sartu ditut. Ez dakit erabiliko ditudan, baina ez nituen utzi nahi."
+      },
+      "c3-07": {
+        "text": "Garrantzitsua iruditzen zait ekarri izana. Aste honetan behar duzunaz hitz egin dezakegu, hitzorduez gain."
+      },
+      "c3-choice2": {
+        "prompt": "Zer adostu nahiko luke Sarak datozen egunetarako?",
+        "options": [
+          {
+            "id": "contact",
+            "label": "Zerbait aldatzen bada edo beldurra sentitzen badu, nori abisatu jakitea.",
+            "next": "c3-contact",
+            "flags": {
+              "wantsContact": true
+            }
+          },
+          {
+            "id": "school",
+            "label": "Institutuko hutsegiteak eta lanak antolatzea.",
+            "next": "c3-school",
+            "flags": {
+              "wantsSchoolPlan": true
+            }
+          }
+        ]
+      },
+      "c3-contact": {
+        "text": "Taldearen kontaktuak argi utziko ditugu, baita egoera aldatzen bada zer egin ere. Berehalako arriskua badago, larrialdi-laguntza eskatzen da. Ez duzu zuk bakarrik baloratu behar dena ondo dagoen."
+      },
+      "c3-school": {
+        "text": "Laurarekin koordinatuko dugu. Egokitzapen zehatzak eskatuko ditugu, hala nola lanen entregak antolatzea eta apunteak berreskuratzea, zure istorioa klase osoari azaldu gabe."
+      },
+      "c3-end": {
+        "text": "Gau hartan, Danik herensuge baten marrazkia begiratzeko eskatzen dio. Sarak izar bat aurkitzen du izkinan eta beste bat marrazten du ondoan. Oraindik badago lekua gauza txikientzat."
+      },
+      "c3-mesa": {
+        "text": "Eta pentsatzen geratu zen non eseriko zen, bazkaltzera etortzen den jendearen arabera."
+      },
+      "c4-card": {
+        "kicker": "SARA · 4. KAPITULUA (6TIK)",
+        "title": "Nire bizitzak aurrera jarraitzen du",
+        "text": "Egun batzuk geroago. Elkarrizketetatik kanpo."
+      },
+      "c4-perros": {
+        "text": "Txakur desberdinak ikusten hasi zen, eta haiekin bizi zitzakeen abenturak."
+      },
+      "c4-01": {
+        "text": "Zure apunteak gorde ditut. Baita nire sakerik txarrenaren bideo bat ere, baina horrek isiltasun-ituna eskatzen du."
+      },
+      "c4-02": {
+        "text": "Apunteak bai. Bideoa… pentsatuko dut. Ondo datorkit beste gauza batzuez hitz egitea."
+      },
+      "c4-choice": {
+        "prompt": "Irenek galdetzen dio bere bizitzako zein zati berreskuratu nahi duen lehenik. Sarak aukeratzen du…",
+        "options": [
+          {
+            "id": "volleyball",
+            "label": "Boleibolean berriro entrenatzea.",
+            "next": "c4-volley",
+            "flags": {
+              "everyday": "volleyball"
+            }
+          },
+          {
+            "id": "school",
+            "label": "Klaseetako erritmoa berreskuratzea.",
+            "next": "c4-school",
+            "flags": {
+              "everyday": "school"
+            }
+          },
+          {
+            "id": "friends",
+            "label": "Paularekin geratzea, beti prozesuaz hitz egin gabe.",
+            "next": "c4-friends",
+            "flags": {
+              "everyday": "friends"
+            }
+          }
+        ]
+      },
+      "c4-volley": {
+        "text": "Entrenamendu batekin has gaitezke, lehen bezala jokatzeko eskatu gabe. Xehetasun praktikoak zu zaintzen zaituzten pertsonekin adostuko ditugu."
+      },
+      "c4-volley2": {
+        "text": "Baloia lurraren kontra berriro entzun eta non kokatu pentsatu besterik ez dut nahi. Sake guztiak huts egiten baditut ere."
+      },
+      "c4-school": {
+        "text": "Aste honetarako bi lan aukeratuko ditugu. Dena batera berreskuratzea gehiegi litzateke. Egun batean kontzentratu ezin izateak ez du esan nahi jakiteari utzi diozunik."
+      },
+      "c4-school2": {
+        "text": "Matematika lehenengo. Orrialde bat ulertzeari uzten badiot, hurrengoa beste hizkuntza batean idatzita dagoela dirudi."
+      },
+      "c4-friends": {
+        "text": "Paseatu dezakegu, musikaz hitz egin edo ezer askorik ez esan. Ez da beharrezkoa geratzen garen bakoitzean dena kontatzea."
+      },
+      "c4-friends2": {
+        "text": "Orduan, gaur zurekin eztabaidatu nahi dut playlist horri buruz. Horretarako bai, prest sentitzen naiz."
+      },
+      "c4-dani": {
+        "text": "Azken aldian asko kezkatzen zintuen Danik. Taldea ere entzuten ari da berak zer behar duen. Gaur zure planaz arduratu zaitezke, hari huts egiten ari zatzaiola sentitu gabe."
+      },
+      "c4-general": {
+        "text": "Zu, Dani eta zure ama nola zaudeten berrikusten jarraitzen dugu. Ez da beharrezkoa pertsona bakar bat familia osoaren kezkez arduratzea."
+      },
+      "c4-info": {
+        "text": "Hitzorduez arduratu gaitezke, baita zure entrenamenduez, ikasketez eta lagunez ere. Ez duzu garrantzitsua zaizun guztia alde batera utzi behar laguntza jasotzeko."
+      },
+      "c4-choice2": {
+        "prompt": "Institutuan norbaitek bere hutsegiteez galdetzen du. Zer nahi du Sarak?",
+        "options": [
+          {
+            "id": "boundary",
+            "label": "Paularekin erantzun labur bat prestatzea.",
+            "next": "c4-boundary",
+            "flags": {
+              "boundaryWithPaula": true
+            }
+          },
+          {
+            "id": "laura",
+            "label": "Laurari bere pribatutasuna zaintzen laguntzeko eskatzea.",
+            "next": "c4-laura",
+            "flags": {
+              "schoolPrivacy": true
+            }
+          }
+        ]
+      },
+      "c4-boundary": {
+        "text": "Esan dezakezu: «Gauza batzuk konpontzen ari naiz laguntzarekin eta ez dut horretaz hitz egin nahi». Nahi baduzu, gero gaiz aldatuko dut. Ez duzu azalpenik eman beharrik gurekin egoteko."
+      },
+      "c4-laura": {
+        "text": "Adostu dezakegu irakasleek zer jakin behar duten eta nola zaindu zure intimitatea. Zure lagunekin ere mugak jar diezazkiokezu kontatu nahi duzunari."
+      },
+      "c4-end": {
+        "text": "Badira egun lasaiak eta gehiago kostatzen diren beste batzuk. Hitzorduek jarraitzen dute, baina Sarak badu agendan elkarrizketa ez den zerbait: berak aukeratutako plan bat."
+      },
+      "c5-card": {
+        "kicker": "SARA · 5. KAPITULUA (6TIK)",
+        "title": "Epaitegia",
+        "text": "Denbora geroago. Non nagoen jakitea."
+      },
+      "c5-01": {
+        "text": "Ikerketa penal bat ireki da gertatutakoaz. Abokatuak zitazio bat azaltzen die Sarari eta harekin doazenei. Eszena honek hainbat jarduketa laburtzen ditu, epeak finkatu gabe."
+      },
+      "c5-02": {
+        "text": "Gutuna dena nola dabilen badakien norbaitentzat idatzita zegoela zirudien. Nik ez dakit non eseri ere."
+      },
+      "c5-03": {
+        "text": "Elkarrekin irakurriko dugu. Zitazio batek adierazten du jarduketa batera joan behar duzula: zertarako, non eta zer laguntzarekin den egiaztatu behar da. Zerbait ulertzen ez bada, aurretik galdetuko dugu."
+      },
+      "c5-justice": {
+        "text": "Hemen gertatutakoa eta zure aitaren balizko erantzukizuna ikertzen dira. Laguntzak eta babesak beren bidea jarraitzen dute. Zu adingabea izateak ez du Javierren aurkako auzia adingabeen justizia penal bihurtzen."
+      },
+      "c5-choice": {
+        "prompt": "Jarduketaren aurretik, zer jakin nahi du Sarak?",
+        "options": [
+          {
+            "id": "people",
+            "label": "Nor egongo den eta profesional bakoitzak zer egiten duen.",
+            "next": "c5-people",
+            "flags": {
+              "askedProfessionals": true
+            }
+          },
+          {
+            "id": "room",
+            "label": "Nolakoa den lekua eta bere aita ikusi beharko duen.",
+            "next": "c5-room",
+            "flags": {
+              "askedRoom": true
+            }
+          },
+          {
+            "id": "rights",
+            "label": "Zer laguntza eska ditzakeen eta nori esan behar dizkion.",
+            "next": "c5-rights",
+            "flags": {
+              "askedSupports": true
+            }
+          }
+        ]
+      },
+      "c5-people": {
+        "text": "Epaileak zuzentzen du jarduketa. Fiskaltzak esku hartzen du justiziaren ekintza sustatzeko. Abokatuek ordezkatzen dituztenen interesak defendatzen dituzte. Nik azalduko dizut nor dagoen eta zergatik."
+      },
+      "c5-people2": {
+        "text": "Nire eginkizuna arlo sozioedukatiboan laguntzea eta laguntzak koordinatzea da. Nik ez dut epaia erabakitzen. Profesionalen fitxak ireki ditzakezu izenak nahasten zaizkizunean."
+      },
+      "c5-room": {
+        "text": "Joan aurretik egiaztatuko dugu non itxarongo duzun eta nolakoa izango den jarduketa. Zure aitarekin topo egiteaz kezkatzen zaituena azalduko dugu, neurri egokiak balora daitezen."
+      },
+      "c5-rights": {
+        "text": "Zer behar duzun azal diezadakezu, nor egongo den galdetu eta seguru sentiarazten ez zaituena abisatu. Jakinarazi egingo dugu, jarduketaren aurretik balora dadin."
+      },
+      "c5-supports": {
+        "text": "Deklaratu aurretik baloratuko da zer laguntza behar dituzun eta nola saihestu beldur gehiago pasatzea. Lekua eta neurriak kasuaren arabera aldatzen dira; hamabost urte izateak ez du gela jakin bat zehazten."
+      },
+      "c5-privacy": {
+        "text": "Kezkatzen zintuen nork jakingo zuen zure istorioa. Horregatik berrikusten dugu gaur nor egon daitekeen jarduketa honetan. Intimitatea lekua eta informazioa antolatzean ere zaintzen da."
+      },
+      "c5-short": {
+        "text": "Eskatu zenidan bezala, gauza bat aldi bakoitzean: lehenik, nork hartuko zaituen ikusiko dugu. Gero, zer gertatuko den. Eta gelditu gaitezke gauza batetik bestera galdetzeko."
+      },
+      "c5-overview": {
+        "text": "Lehenik harrera egingo dizute eta jarduketa azalduko dizute; gero esku hartu ahal izango duzu adostutako laguntzekin. Amaitzean, ondoren zer datorren berrikusiko dugu."
+      },
+      "c5-simulation": {
+        "text": "Jarduketaren aurretik, behar bat nola adierazi praktikatzen dute. Ez dute entseatzen Sarak zer kontatuko duen, eta ez dute indarkeriari buruzko galderarik egiten. Ariketa txiki honetan ez dago puntu gehiago ematen dituen erantzunik."
+      },
+      "c5-choice2": {
+        "prompt": "Zer esaldi gogoratu nahi du Sarak jarduketan zer behar duen adierazteko?",
+        "options": [
+          {
+            "id": "repeat",
+            "label": "«Ez dut ulertu. Errepikatuko duzu?».",
+            "next": "c5-repeat",
+            "flags": {
+              "communication": "repeat"
+            }
+          },
+          {
+            "id": "memory",
+            "label": "«Datu hori ez dut zehazki gogoratzen».",
+            "next": "c5-memory",
+            "flags": {
+              "communication": "memory"
+            }
+          },
+          {
+            "id": "pause",
+            "label": "«Atsedenaldi bat behar dut».",
+            "next": "c5-pause",
+            "flags": {
+              "communication": "pause"
+            }
+          }
+        ]
+      },
+      "c5-repeat": {
+        "text": "Esan dezakezu ez duzula ulertzen eta beste azalpen bat eskatu. Jarduketa ulertzeko prestatuko zaitugu. Gertaerei buruz kontatzen duzuna zuk gogoratzen duzunetik atera beharko da."
+      },
+      "c5-memory": {
+        "text": "Zerbait zehazki gogoratzen ez baduzu, horrela esan dezakezu. Ez da beharrezkoa ordu bat edo xehetasun bat asmatzea erantzun bat osatzeko."
+      },
+      "c5-pause": {
+        "text": "Gelditu behar duzula esan dezakezu. Jarduketa zuzentzen duenari jakinaraziko diogu, nola erantzun baloratu dezan. Eskatzeak aukera ematen du zer behar duzun jakiteko."
+      },
+      "c5-04": {
+        "text": "Uste nuen zuri geratzen banintz dena hondatuko nuela. Laguntzen dit jakiteak zerbait ulertzen ez dudala esan dezakedala."
+      },
+      "c5-05": {
+        "text": "Eguna iristen da. Kasu honetan, antolaketa bat adostu da Sarak Javierrekin topo egin ez dezan itxarotean eta bere esku-hartzean. Langileek azaltzen diote non egongo den pertsona bakoitza."
+      },
+      "c5-06": {
+        "text": "Hasi aurretik, egiaztatuko dugu ulertzen duzula zertarako gauden hemen. Zerbait ulertzen ez baduzu, esan dezakezu."
+      },
+      "c5-07": {
+        "text": "Sarak jarduketan parte hartzen du adostutako neurriekin. Istorioak kanpoan uzten ditu gertatutakoari buruzko galderak. Amaitzean, Irene zain dago laguntzeko."
+      },
+      "c5-08": {
+        "text": "Nekatuta nago. Egon gaitezke denbora batez honetaz hitz egin gabe?"
+      },
+      "c5-09": {
+        "text": "Bai. Gero Elenarekin berrikusiko dugu behar duzun informazioa. Orain une batez eser gaitezke."
+      },
+      "c6-card": {
+        "kicker": "SARA · 6. KAPITULUA (6TIK)",
+        "title": "Azkenean",
+        "text": "Itxaronaldia ere bidearen parte da."
+      },
+      "c6-01": {
+        "text": "Prozedurak bere bidea jarraitzen du. Berririk gabeko egunak daude. Beharrezko jarduketak egiten diren bitartean, laguntza-hitzorduek eta familiaren segurtasunaren zaintzak jarraitzen dute."
+      },
+      "c6-02": {
+        "text": "Denek esaten dute «abisatuko dizugu». Batzuetan mugikorrari begiratzen diot eta ez dakit mezu bat nahi dudan edo bat ere ez egotea."
+      },
+      "c6-choice": {
+        "prompt": "Gaur, zer jarri nahi du Sarak mahai gainean?",
+        "options": [
+          {
+            "id": "news",
+            "label": "Prozedura zein puntutan dagoen nola jakin dezakeen galdetzea.",
+            "next": "c6-news",
+            "flags": {
+              "waiting": "news"
+            }
+          },
+          {
+            "id": "dad",
+            "label": "Batzuetan bere aita faltan botatzen duela esatea.",
+            "next": "c6-dad",
+            "flags": {
+              "waiting": "mixed"
+            }
+          },
+          {
+            "id": "privacy",
+            "label": "Institutuan egiten dizkioten galderekin laguntza eskatzea.",
+            "next": "c6-school",
+            "flags": {
+              "waiting": "privacy"
+            }
+          }
+        ]
+      },
+      "c6-news": {
+        "text": "Elenarekin kontsulta dezakegu zer informazio jasotzea dagokizun eta nola eskatu. Ezin dizut data zehatz bat eman; bai, ordea, argitu zalantzak dituzunean norekin hitz egin."
+      },
+      "c6-dad": {
+        "text": "Une onak faltan bota ditzakezu eta, aldi berean, babestuta egon beharra izan. Ez duzu zure aitarengatik gauza bakar bat sentitu beharrik. Horretaz hitz egiteak ez du aldatzen egin zizuna gaizki egon zela."
+      },
+      "c6-school": {
+        "text": "Adostu dezakegu irakasleek zer jakin behar duten eta nola zaindu zure intimitatea. Zure lagunekin ere mugak jar diezazkiokezu kontatu nahi duzunari."
+      },
+      "c6-03": {
+        "text": "Denbora geroago, jarduketen eta epaiketaren ondoren, Elena Sararekin biltzen da epai simulatu bat azaltzeko. Demo honen emaitza jokatu aurretik finkatuta dago: aukera emozional batek ere ez du ebazpena erabakitzen."
+      },
+      "c6-conviction": {
+        "text": "Kasu fikziozko honetan, auzitegiak indarkeria-egitateak frogatutzat jo ditu eta Javierren aurkako epai kondenatzailea eman du. Azalduko dizugu zer irismen duen, zer neurri hartu diren eta errekurtsoa jar daitekeen."
+      },
+      "c6-no-conviction": {
+        "text": "Aldaera fikziozko honetan, auzitegiak epai absolbitzailea eman du: frogek ez dute ahalbidetu beharrezko bermeekin kondenatzea. Ebazpena eta dagozkion errekurtso-aukerak azalduko dizkizut."
+      },
+      "c6-human": {
+        "text": "Ez dakit oso ondo zer sentitzen dudan. Uste nuen ebazpen bat irakurtzean dena bat-batean bere tokian jarriko zela."
+      },
+      "c6-04": {
+        "text": "Ez duzu modu jakin batean sentitu beharrik. Nola zauden eta zer laguntza behar duzun berrikusiko dugu. Babesa eta elkarbizitza zuen segurtasunagatik baloratzen dira, ez berria nola hartzen duzunagatik."
+      },
+      "c6-dani": {
+        "text": "Eta Daniz galdetu zenuena berriro helduko diogu: taldea haren zain dago oraindik. Haren arreba izan zaitezke, dena konpontzen duen heldu bihurtu beharrik gabe."
+      },
+      "c6-home": {
+        "text": "Hasieran galdetzen zenuen non biziko zineten. Elkarbizitzako edozein aldaketa zurekin eta talde arduradunarekin berrikusiko da. Epaiak ez du balorazio hori ordezkatzen."
+      },
+      "c6-choice2": {
+        "prompt": "Irtetean, Sarak bere zerbaitentzat lekua gorde nahi du. Zer proposatzen du?",
+        "options": [
+          {
+            "id": "play",
+            "label": "Paularekin geratzea eta baloia eramatea.",
+            "next": "c6-play",
+            "flags": {
+              "nextPlan": "play"
+            }
+          },
+          {
+            "id": "quiet",
+            "label": "Danirekin marraztera joatea eta mugikorra pixka batean uztea.",
+            "next": "c6-quiet",
+            "flags": {
+              "nextPlan": "quiet"
+            }
+          }
+        ]
+      },
+      "c6-play": {
+        "text": "Sakea landu dut. Orain ia inoiz ez da atetik ateratzen. Baina gaur harmailan esertzea besterik ez baduzu nahiago, hori ere ondo dago niretzat."
+      },
+      "c6-quiet": {
+        "text": "Danik herensugearen marrazkia ateratzen du. Sarak arkatz urdin bat eskatzen dio. Denbora batez, premiazkoena da erabakitzea herensugeek zapatilak eraman ditzaketen ala ez."
+      },
+      "epilogue-volley": {
+        "text": "Gogoratzen duzu berriro entrenatu nahi nuela esan nuenean? Gaur sakea sartu da. Eta bihar sartzen ez bada, oraindik badut lekua taldean."
+      },
+      "epilogue-school": {
+        "text": "Matematikako orrialde hura amaitu dut. Txorakeria dirudi, baina erdizka utzitako zerbait berriro ulertzeak ere balio du."
+      },
+      "epilogue-friends": {
+        "text": "Gaur Paularekin egon naiz eta ez dugu denbora guztian gauza berari buruz hitz egin. Ondo sentatu zait haren laguna izaten jarraitzea, horrek esan nahi dituen gauza guztiekin."
+      },
+      "epilogue": {
+        "kicker": "SARA · NIRE ISTORIOAK JARRAITZEN DU",
+        "title": "Oraindik baditut planak",
+        "text": "Sara arreba, laguna, ikaslea eta boleibol-jokalaria da oraindik. Egun desberdinak izango dira eta laguntzak jarraitu dezake. Ez ditu bakarrik igaro behar."
+      }
+    }
+  },
+  "guide": {
+    "chapters": [
+      {
+        "id": 1,
+        "title": "Zerbait ez doa ondo"
+      },
+      {
+        "id": 2,
+        "title": "Norbaitek entzuten du"
+      },
+      {
+        "id": 3,
+        "title": "Zer gertatuko da nirekin?"
+      },
+      {
+        "id": 4,
+        "title": "Nire bizitzak aurrera jarraitzen du"
+      },
+      {
+        "id": 5,
+        "title": "Epaitegia"
+      },
+      {
+        "id": 6,
+        "title": "Azkenean"
+      }
+    ],
+    "steps": [
+      {
+        "chapter": 1,
+        "title": "Seinale bat",
+        "text": "Ikastetxeak indarkeria-zantzuak entzun eta haiei erantzuten die."
+      },
+      {
+        "chapter": 2,
+        "title": "Laguntza eskatzea",
+        "text": "Langileek jakinarazpena eta laguntzak koordinatzen dituzte babesteko."
+      },
+      {
+        "chapter": 3,
+        "title": "Baloratu eta babestu",
+        "text": "Gizarte Zerbitzuek eta adingabeen babeserako zerbitzuek beharrak eta segurtasuna baloratzen dituzte."
+      },
+      {
+        "chapter": 4,
+        "title": "Bizitzen jarraitzea",
+        "text": "Laguntza sozioedukatiboa: klaseak, loturak eta jarduerak."
+      },
+      {
+        "chapter": 5,
+        "title": "Zitazioa ulertzea",
+        "text": "Jarduketa zertarako den eta nork esku hartzen duen azaltzen da."
+      },
+      {
+        "chapter": 5,
+        "title": "Laguntzekin parte hartzea",
+        "text": "Deklaraziorako neurriak baloratzen dira. Demoak ez ditu indarkeriari buruzko galderak jasotzen."
+      },
+      {
+        "chapter": 6,
+        "title": "Informazioaren zain",
+        "text": "Prozedurak aurrera jarraitzen du. Epeak eta jarduketak aldatu egiten dira."
+      },
+      {
+        "chapter": 6,
+        "title": "Ebazpena eta jarraipena",
+        "text": "Ebazpena azaltzen da. Laguntzak beharren arabera berrikusten dira."
+      }
+    ],
+    "people": [
+      {
+        "name": "Sara",
+        "role": "15 urte · DBHko 4. maila",
+        "initial": "S",
+        "color": "peach",
+        "text": "Boleibola gustatzen zaio, ertzetan marrazten du eta Paula izeneko lagun bat du. Bere bizitza prozedura baino zabalagoa da.",
+        "sprite": "assets/characters/sara/smile.svg"
+      },
+      {
+        "name": "Paula",
+        "role": "Bere lagunik onena",
+        "initial": "P",
+        "color": "pink",
+        "text": "Konpainia eskaintzen du eta partekatutako planak gordetzen ditu. Ez du egoera ikertu edo konpondu beharrik."
+      },
+      {
+        "name": "Laura",
+        "role": "Irakaslea",
+        "initial": "L",
+        "color": "green",
+        "text": "Entzun egiten du, seinaleei erantzuten die eta jakinarazpena koordinatzen du ikastetxeko protokoloaren bidez. Ez ditu delituak ikertzen."
+      },
+      {
+        "name": "Irene",
+        "role": "Gizarte-hezitzailea",
+        "initial": "I",
+        "color": "purple",
+        "text": "Eguneroko bizitzan laguntzen du eta laguntzak koordinatzen ditu taldearekin. Ez du neurri judizialik ezartzen, ezta epairik ematen ere."
+      },
+      {
+        "name": "Elena",
+        "role": "Abokatua",
+        "initial": "E",
+        "color": "blue",
+        "text": "Sarari aholkuak ematen dizkio, jarduketak azaltzen dizkio eta haren interesak defendatzen ditu. Javierren defentsa beste profesional bati dagokio."
+      },
+      {
+        "name": "Epailea",
+        "role": "Agintari judiziala",
+        "initial": "J",
+        "color": "purple",
+        "text": "Dagozkion jarduketak zuzentzen ditu eta erabakiak hartzen ditu prozeduraren bermeekin."
+      },
+      {
+        "name": "Fiskaltza",
+        "role": "Ministerio Fiskala",
+        "initial": "F",
+        "color": "green",
+        "text": "Justiziaren ekintza sustatzen du eta legezkotasuna eta eskubideak zaintzen ditu. Sara adingabea izateak ez du bere aitaren aurkako auzia adingabeen justizia penal bihurtzen."
+      },
+      {
+        "name": "Laguntza-taldea",
+        "role": "Gizarte Zerbitzuak eta biktimen arreta",
+        "initial": "+",
+        "color": "blue",
+        "text": "Haien eginkizunak desberdinak dira: adingabeen babesak familiaren segurtasuna baloratzen du; biktimen laguntzak informazioa eta laguntzak eskaintzen ditu prozesuan."
+      },
+      {
+        "name": "Bere familia",
+        "role": "Dani, bere ama eta Javier",
+        "initial": "D",
+        "color": "peach",
+        "text": "Danik hamar urte ditu. Bere amak ere laguntza jasotzen du. Javier, aita, bere jokabidearen erantzule da; Sarak ez du hori aldatu behar babesa merezi izateko."
+      }
+    ]
+  },
+  "legal": {
+    "review": "Lehen mailako iturriak egiaztatuta; adingabe errealekin saioak egin aurretik, profesionalen berrikuspen juridiko eta pedagogikoa egiteko dago.",
+    "sources": {
+      "lopivi": {
+        "title": "8/2021 LO · 15., 16., 34. eta 35. artikuluak",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-9347"
+      },
+      "proteccion": {
+        "title": "1/1996 LO · 2., 9., 12. eta 16.–18. artikuluak",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1996-1069"
+      },
+      "victima": {
+        "title": "Biktimaren estatutua · 4., 5., 19.–26. eta 28. artikuluak",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-4606"
+      },
+      "lecrim": {
+        "title": "Prozedura Kriminalaren Legea (LECrim) · 448., 449 bis, 449 ter, 544 ter eta 707. artikuluak",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1882-6036"
+      }
+    },
+    "notes": {
+      "protection": {
+        "title": "Babesa hemen has daiteke",
+        "text": "Hezkuntzako langileek indarkeria-zantzuak jakinarazi eta protokoloa aktibatu behar dute. Sarak ez du bakarrik salaketarik jarri behar laguntza jasotzeko.",
+        "dialogue": "Niri dagokit laguntza eskatzea eta ikastetxeko protokoloa aktibatzea. Zuk ez duzu bakarrik salaketa jarri behar zu babesten has gaitezen. Egiten duguna azalduko dizugu.",
+        "sources": [
+          "lopivi"
+        ]
+      },
+      "privacy": {
+        "title": "Nork jakin behar du",
+        "text": "Laurak ezin du erabateko isilpekotasuna agindu. Azalduko du zer profesionalek esku hartu behar duten Sara babesteko, eta horretarako beharrezko informazioa partekatuko du.",
+        "dialogue": "Ezin dizut agindu hau gure artean geratuko denik. Azalduko dizut nork esku hartu behar duen eta zertarako. Partekatzen duguna zu babesteko izan beharko da.",
+        "sources": [
+          "lopivi",
+          "proteccion"
+        ]
+      },
+      "social": {
+        "title": "Baloratzea laguntzeko ezagutzea da",
+        "text": "Gizarte Zerbitzuek eta adingabeen babeserako zerbitzuek familiaren segurtasuna eta beharrak baloratzen dituzte. Esku-hartze sozialak eta ikerketa penalak eginkizun desberdinak dituzte.",
+        "dialogue": "Baloratzeak esan nahi du zer behar duzuen eta seguru zauden jakitea. Hori da babes-zerbitzuen lana. Delitu posible bat ikertzen bada, beste prozesu bat da, beste profesional batzuekin.",
+        "sources": [
+          "proteccion",
+          "lopivi"
+        ]
+      },
+      "brother": {
+        "title": "Dani ere kontuan hartzen da",
+        "text": "Profesionalek Daniren beharrak ezagutu eta haren babesa baloratu behar dute. Ardura hori helduei dagokie, ez Sarari.",
+        "dialogue": "Dani ere entzungo dute eta taldeak baloratuko du zer behar duen. Ez dagokizu zuri dena ondo ateratzen den zaintzea. Hori gu, helduoi, dagokigu.",
+        "sources": [
+          "proteccion"
+        ]
+      },
+      "housing": {
+        "title": "Elkarbizitza kasu bakoitzean baloratzen da",
+        "text": "Laguntza eskatzeak ez dakar automatikoki etxetik ateratzea. Agintari eskudunek neurriak baloratzen dituzte adingabe bakoitzaren segurtasunaren arabera. Sarak entzuna izateko eskubidea du.",
+        "dialogue": "Laguntza eskatzeak ez du esan nahi automatikoki etxetik joan behar duzunik. Zuen segurtasuna eta har daitezkeen neurriak baloratu behar dira. Zure iritziak garrantzia du eta entzun egin behar zaituzte.",
+        "sources": [
+          "proteccion"
+        ]
+      },
+      "everyday": {
+        "title": "Eguneroko bizitzak ere garrantzia du",
+        "text": "Laguntzak ikasketetan, lagunartean eta jardueretan lagun dezake. Babesak Sararen ongizatea eta beharrak hartzen ditu kontuan, jarduketa judizialez gain.",
+        "dialogue": "Hitzorduez arduratu gaitezke, baita zure entrenamenduez, ikasketez eta lagunez ere. Ez duzu garrantzitsua zaizun guztia alde batera utzi behar laguntza jasotzeko.",
+        "sources": [
+          "proteccion"
+        ]
+      },
+      "justice": {
+        "title": "Batera aurrera egin dezaketen bi lan",
+        "text": "Babesak segurtasuna zaintzen du. Prozedura penalak egitateak eta erantzukizunak ikertzen ditu. Javier heldua denez, bere kasua ez dagokio adingabeen justizia penalari Sararen adinagatik.",
+        "dialogue": "Hemen gertatutakoa eta zure aitaren balizko erantzukizuna ikertzen dira. Laguntzak eta babesak beren bidea jarraitzen dute. Zu adingabea izateak ez du Javierren aurkako auzia adingabeen justizia penal bihurtzen.",
+        "sources": [
+          "lecrim",
+          "proteccion"
+        ]
+      },
+      "supports": {
+        "title": "Laguntzekin egindako deklarazioa",
+        "text": "Neurriak banaka baloratzen dira. Begi-kontaktua saihestu eta lekua egokitu dezakete. 15 urte izateak, berez, ez du nahitaezko bihurtzen Gesell gela bat edo aldez aurretik eratutako froga bat.",
+        "dialogue": "Deklaratu aurretik baloratuko da zer laguntza behar dituzun eta nola saihestu beldur gehiago pasatzea. Lekua eta neurriak kasuaren arabera aldatzen dira; hamabost urte izateak ez du gela jakin bat zehazten.",
+        "sources": [
+          "victima",
+          "lecrim"
+        ]
+      },
+      "repeat": {
+        "title": "Beste azalpen bat eskatzea",
+        "text": "Sarak esan dezake ez duela ulertzen eta hitz errazagoak eskatu. Prestatzeak jarduketa ulertzeko balio du, gertaeren bertsio bat entseatu gabe.",
+        "dialogue": "Esan dezakezu ez duzula ulertzen eta beste azalpen bat eskatu. Jarduketa ulertzeko prestatuko zaitugu. Gertaerei buruz kontatzen duzuna zuk gogoratzen duzunetik atera beharko da.",
+        "sources": [
+          "victima"
+        ]
+      },
+      "memory": {
+        "title": "Ez dago hutsuneak bete beharrik",
+        "text": "Gogoratzen duena eta zehazki ez dakiena adieraz dezake. Ez du daturik asmatu beharrik. Simulazioak ez ditu egitate bortitzei buruzko galderak erreproduzitzen.",
+        "dialogue": "Zerbait zehazki gogoratzen ez baduzu, horrela esan dezakezu. Ez da beharrezkoa ordu bat edo xehetasun bat asmatzea erantzun bat osatzeko.",
+        "sources": [
+          "victima",
+          "lecrim"
+        ]
+      },
+      "pause": {
+        "title": "Atsedenaldi bat eska dezaket",
+        "text": "Sarak jakinaraz dezake gelditu behar duela. Taldeak eta jarduketa zuzentzen duen agintariak baloratzen dute behar horri nola erantzun.",
+        "dialogue": "Gelditu behar duzula esan dezakezu. Jarduketa zuzentzen duenari jakinaraziko diogu, nola erantzun baloratu dezan. Eskatzeak aukera ematen du zer behar duzun jakiteko.",
+        "sources": [
+          "victima"
+        ]
+      },
+      "waiting": {
+        "title": "Ondoren zer datorren jakitea",
+        "text": "Eragiten dioten jarduketei eta ebazpenei buruzko informazio ulergarria eska dezake. Epeak aldatu egiten dira; Irenek eta bere abokatuak bide egokietatik kontsultatzen lagun diezaiokete.",
+        "dialogue": "Elenarekin kontsulta dezakegu zer informazio jasotzea dagokizun eta nola eskatu. Ezin dizut data zehatz bat eman; bai, ordea, argitu zalantzak dituzunean norekin hitz egin.",
+        "sources": [
+          "victima"
+        ]
+      },
+      "school": {
+        "title": "Ikaskideei zer kontatu erabakitzea",
+        "text": "Ikastetxeak intimitatea zaindu behar du. Sarak Laurarekin adostu dezake irakasleek zer informazio praktiko behar duten, eta adieraz dezake zer nahiago duen bere lagunekin partekatu.",
+        "dialogue": "Adostu dezakegu irakasleek zer jakin behar duten eta nola zaindu zure intimitatea. Zure lagunekin ere mugak jar diezazkiokezu kontatu nahi duzunari.",
+        "sources": [
+          "lopivi",
+          "proteccion"
+        ]
+      },
+      "resolution": {
+        "title": "Epai batek ez du nire bizitza osoa kontatzen",
+        "text": "Emaitza frogaren eta prozesuaren bermeen araberakoa da. Kondenarik gabeko ebazpen batek ez du erabakitzen Sarak nola sentitu behar duen. Laguntzak eta babesa haren beharren arabera baloratzen dira, jokoko puntuen edo aukeren mende egon gabe.",
+        "sources": [
+          "lecrim",
+          "victima",
+          "proteccion"
+        ]
+      }
+    },
+    "help": [
+      {
+        "title": "Berehalako arriskua · 112",
+        "text": "Espainian 112ra dei dezakezu berehalako arriskua badago. Larrialdietako zenbakia da.",
+        "phone": "112",
+        "url": "https://administracion.gob.es/tu-espacio-europeo/derechos-obligaciones/ciudadanos/asistencia-sanitaria/numeros-urgencia"
+      },
+      {
+        "title": "ANAR · 900 20 20 10",
+        "text": "Doako laguntza Espainia osoko haur eta nerabeentzat. ANARen txata ere kontsulta dezakezu.",
+        "phone": "900202010",
+        "url": "https://www.anar.org/que-hacemos/telefono-chat-anar/"
+      },
+      {
+        "title": "Konfiantzako pertsona heldu bat",
+        "text": "Ikastetxeko irakasleengana, orientaziora edo ongizate-koordinaziora jo dezakezu. Laguntza publikorako, kontsultatu zure udaleko Gizarte Zerbitzuak edo zure autonomia-erkidegoko adingabeak babesteko zerbitzua."
+      }
+    ]
+  },
+  "scene": {}
+}
