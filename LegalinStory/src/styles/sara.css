@@ -78,24 +78,15 @@
 .sara-demo-options label { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; }
 .sara-demo-options select { min-height: 44px; padding: 6px; background: white; color: var(--sara-ink); border: 1px solid #9f8bb1; border-radius: 8px; }
 .sara-overlay.is-landing { background: #ece4d7; padding: 18px; }
-.is-landing .sara-dialog { max-width: 1200px; padding: clamp(24px, 4vw, 44px); background: var(--sara-paper); }
-.is-landing h1 { margin: 18px 0 0; font-weight: 950; letter-spacing: -.08em; font-size: clamp(3.8rem, 10vw, 7.3rem); color: var(--sara-purple); line-height: .9; }
-.sara-landing-grid { display: grid; grid-template-columns: 1fr .8fr; gap: 56px; }
-.sara-tagline { font-size: clamp(1.7rem, 4vw, 2.8rem); line-height: 1.1 !important; letter-spacing: -.04em; margin: 8px 0 24px; font-weight: 800; }
-.sara-lead { font-size: 1rem; color: #615767; max-width: 42ch; }
-.sara-tags { display: flex; gap: 8px; flex-wrap: wrap; margin: 20px 0; }
-.sara-tags span { padding: 6px 12px; border: 1px solid #d3c3dd; border-radius: 99px; font-size: .7rem; color: #5d4776; background: #f2eaf9; font-weight: 700; }
-.sara-content-note { font-size: .85rem; max-width: 49ch; color: #615767; }
-.sara-hero { position: relative; align-self: center; min-height: 460px; border: 2px solid var(--sara-ink); border-radius: 160px 160px 28px 28px; background: var(--sara-peach); display: flex; align-items: flex-end; justify-content: center; overflow: hidden; }
-.sara-hero > img { width: 100%; height: 460px; object-fit: contain; object-position: bottom; position: relative; z-index: 1; }
+.is-landing .sara-dialog { max-width: 860px; padding: clamp(28px, 4vw, 48px); background: var(--sara-paper); }
+.is-landing h1 { margin: 12px 0 0; font-weight: 950; letter-spacing: -.08em; font-size: clamp(3.2rem, 8vw, 5.5rem); color: var(--sara-purple); line-height: .95; }
+.sara-landing-grid { display: grid; grid-template-columns: 1fr .85fr; gap: 40px; align-items: center; }
+.sara-landing-copy { display: flex; flex-direction: column; justify-content: center; }
+.sara-tagline { font-size: clamp(1.5rem, 3.5vw, 2.2rem); line-height: 1.15 !important; letter-spacing: -.04em; margin: 8px 0 28px; font-weight: 800; }
+.sara-hero { position: relative; align-self: center; min-height: 400px; border: 2px solid var(--sara-ink); border-radius: 160px 160px 28px 28px; background: var(--sara-peach); display: flex; align-items: flex-end; justify-content: center; overflow: hidden; }
+.sara-hero > img { width: 100%; height: 400px; object-fit: contain; object-position: bottom; position: relative; z-index: 1; }
 .sara-hero-orbit { position: absolute; top: 20px; right: 20px; width: 230px; height: 230px; color: #fffbef; font-size: 13rem; line-height: 1; }
-.sara-hero-note { position: absolute; z-index: 2; bottom: 30px; left: 15px; padding: 14px 18px; background: #fffbef; color: var(--sara-ink); transform: rotate(-5deg); border: 2px solid var(--sara-ink); border-radius: 14px; font-weight: 700; font-size: .95rem; box-shadow: 3px 4px 0 #30273d33; }
 .sara-hero-stamp { display: none; }
-.sara-landing-links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 20px; }
-.sara-landing-links button { background: none; color: #5b4773; border: 0; border-bottom: 1px solid #bba9ca; padding: 4px 0; font-size: .75rem; min-height: 36px; cursor: pointer; }
-.sara-path-preview { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; padding-top: 24px; margin-top: 30px; border-top: 1px solid #d6cbdc; }
-.sara-path-preview > span { font-size: .7rem; line-height: 1.5; color: #6b606f; }
-.sara-path-preview b { display: block; color: var(--sara-purple); font-size: 1rem; margin-bottom: 4px; }
 .sara-map { list-style: none; padding: 0; margin: 24px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .sara-map-step { background: white; border: 1px solid #d8cbdf; border-radius: 16px; padding: 14px; }
 .sara-map-step summary { display: grid; grid-template-columns: 32px 1fr; align-items: center; gap: 4px 10px; cursor: pointer; }
@@ -146,14 +137,14 @@
   .sara-overlay { padding: 10px; }
   .sara-dialog { max-height: calc(100dvh - 20px); border-radius: 22px; padding: 22px; }
   .sara-overlay.is-landing { padding: 8px; }
-  .is-landing .sara-dialog { padding: 26px 22px; position: relative; }
-  .sara-landing-grid { grid-template-columns: 1fr; gap: 24px; }
-  .sara-hero { position: absolute; right: 24px; top: 52px; width: 80px; min-height: 0; height: 93px; border-radius: 45px 45px 18px 18px; }
-  .sara-hero > img { width: 80px; height: 118px; object-fit: cover; object-position: top; align-self: flex-start; }
+  .is-landing .sara-dialog { padding: 26px 22px; text-align: center; }
+  .sara-landing-grid { grid-template-columns: 1fr; gap: 20px; }
+  .sara-landing-copy { align-items: center; }
+  .sara-hero { position: relative; width: 200px; height: 230px; min-height: 0; margin: 0 auto; border-radius: 100px 100px 22px 22px; }
+  .sara-hero > img { width: 100%; height: 230px; object-fit: contain; object-position: bottom; }
   .sara-hero-note, .sara-hero-orbit { display: none; }
-  .is-landing h1 { font-size: 4.7rem; }
-  .sara-tagline { font-size: 2rem; margin: 6px 0 16px; }
-  .sara-path-preview { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .is-landing h1 { font-size: 3.8rem; margin: 6px 0 0; }
+  .sara-tagline { font-size: 1.6rem; margin: 4px 0 20px; }
   .sara-people-grid, .sara-map { grid-template-columns: 1fr; }
   .sara-panel-intro { font-size: .9rem; }
   .sara-mode .interstitial-card { padding: 30px 24px; }

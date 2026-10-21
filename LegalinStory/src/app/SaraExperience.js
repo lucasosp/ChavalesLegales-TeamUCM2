@@ -95,29 +95,29 @@ export class SaraExperience {
       <div class="sara-landing-grid">
         <div class="sara-landing-copy">
           <p class="sara-tagline">Mi historia sigue.</p>
-          <p class="sara-lead">Un entrenamiento pendiente. Una amiga que espera. Un camino que no tengo que recorrer sola.</p>
-          <div class="sara-tags"><span>6 capítulos</span><span>10–15 min</span><span>12–17 años</span></div>
-          <p class="sara-content-note">Ficción sobre violencia en casa, sin imágenes explícitas. Acompañas a Sara, de 15 años. Puedes pausar o salir en cualquier momento.</p>
-          <button type="button" class="sara-primary" data-sara-start>${saved ? "Empezar un nuevo recorrido" : "Acompañar a Sara"} <span aria-hidden="true">↗</span></button>
-          ${saved ? '<button type="button" class="sara-secondary" data-sara-resume>Continuar mi recorrido guardado</button>' : ""}
-          <label class="sara-save-label"><input type="checkbox" data-sara-save ${saved ? "checked" : ""}> Guardar el progreso solo en este dispositivo</label>
-          <p class="sara-fineprint">Tus elecciones pertenecen a la ficción. No te pedimos experiencias personales. Puedes borrar el progreso desde Pausa.</p>
-          <details class="sara-demo-options"><summary>Opciones de la demostración</summary><label>Resolución simulada <select data-sara-resolution><option value="conviction">Con condena</option><option value="no-conviction">Sin condena</option></select></label><p>La variante se fija antes de jugar. Tus decisiones no deciden la sentencia ni la protección.</p></details>
-          <div class="sara-landing-links"><button type="button" data-sara-action="help">Ayuda fuera de la historia</button><button type="button" data-sara-exit>Volver a Chavales Legales</button></div>
+          <button type="button" class="sara-primary" data-sara-start>Acceder a la historia <span aria-hidden="true">→</span></button>
+          ${saved ? '<button type="button" class="sara-secondary" data-sara-resume>Continuar partida guardada</button>' : ""}
+          <div hidden>
+            <button type="button" data-sara-action="help">Ayuda fuera de la historia</button>
+            <input type="checkbox" data-sara-save checked>
+            <select data-sara-resolution><option value="conviction" selected>Con condena</option><option value="no-conviction">Sin condena</option></select>
+          </div>
         </div>
-        <div class="sara-hero"><div class="sara-hero-orbit" aria-hidden="true">✦</div><img src="assets/characters/sara/smile.svg" alt="Sara, protagonista de la historia"/><div class="sara-hero-note">«También quiero volver<br>a pensar en mis cosas.»</div><span class="sara-hero-stamp">Una historia de<br>CHAVALES LEGALES</span></div>
-      </div>
-      <div class="sara-path-preview" aria-label="Los seis capítulos">${this.guide.chapters.map((c) => `<span><b>${String(c.id).padStart(2, "0")}</b>${escape(c.title)}</span>`).join("")}</div>`;
+        <div class="sara-hero">
+          <div class="sara-hero-orbit" aria-hidden="true">✦</div>
+          <img src="assets/characters/sara/smile.svg" alt="Sara, protagonista de la historia"/>
+        </div>
+      </div>`;
     this.body.querySelector("[data-sara-start]").addEventListener("click", () => this.begin(false));
     this.body.querySelector("[data-sara-resume]")?.addEventListener("click", () => this.begin(true));
-    this.body.querySelector("[data-sara-exit]").addEventListener("click", () => this.onExit?.());
+    this.body.querySelector("[data-sara-exit]")?.addEventListener("click", () => this.onExit?.());
     this.body.querySelector("[data-sara-start]").focus({ preventScroll: true });
   }
 
   begin(resume) {
-    const save = this.body.querySelector("[data-sara-save]").checked;
+    const save = this.body.querySelector("[data-sara-save]")?.checked ?? true;
     this.engine.saveStore = save ? this.localStore : new MemorySaveStore();
-    this.engine.initialFlags = { resolution: this.body.querySelector("[data-sara-resolution]").value };
+    this.engine.initialFlags = { resolution: this.body.querySelector("[data-sara-resolution]")?.value ?? "conviction" };
     if (!resume || !save) this.localStore.clear();
     this.closePanel(true);
     this.engine.start({ resume });
