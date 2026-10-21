@@ -195,28 +195,6 @@ export default function Home() {
           <span className="pro-arrow" aria-hidden="true">→</span>
         </Link>
 
-        {/* Acceso exclusivo a la vista de Asistentes Sociales */}
-        <Link
-          href="/asistentes-sociales"
-          className="btn-pro-opt1 btn-social-opt"
-          aria-label={t('inicio.vistaAsistentesAria')}
-          title={t('inicio.vistaAsistentesTitle')}
-          style={{
-            background: 'rgba(16, 185, 129, 0.16)',
-            borderColor: 'rgba(52, 211, 153, 0.45)',
-          }}
-        >
-          <span className="pro-icon-chip" style={{ background: '#059669' }} aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.2">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-              <path d="M12 8v4" />
-              <path d="M12 16h.01" />
-            </svg>
-          </span>
-          <span className="pro-label" style={{ color: '#E6FFFA' }}>{t('inicio.asistentesSociales')}</span>
-          <span className="pro-arrow" style={{ color: '#34D399' }} aria-hidden="true">→</span>
-        </Link>
-
         <SelectorIdioma className="selector-idioma-topbar" />
       </header>
 
@@ -398,6 +376,8 @@ export default function Home() {
             <a href="https://dataforumjusticia.es/datathon-2026/" target="_blank" rel="noopener noreferrer" className="footer-link">Datathon Justicia</a>
             <span>•</span>
             <a href="https://www.administraciondejusticia.gob.es/" target="_blank" rel="noopener noreferrer" className="footer-link">{t('inicio.pieAdminJusticia')}</a>
+            <span>•</span>
+            <Link href="/asistentes-sociales" className="footer-link">Pide ayuda</Link>
           </div>
         </div>
       </footer>

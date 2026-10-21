@@ -1,5 +1,71 @@
 [
   {
+    "id": "draw_1792622953119_822",
+    "phase": "phase1",
+    "student_nickname": "Alumno",
+    "session_pin": null,
+    "timestamp": "2026-10-21T22:49:13.064Z",
+    "metrics": {
+      "phase": "phase1",
+      "captured_at": "2026-10-21T22:49:13.063Z",
+      "duration_total_ms": 5413,
+      "initial_latency_ms": 5413,
+      "active_drawing_time_ms": 0,
+      "air_hesitation_time_ms": 5413,
+      "air_time_ratio": 1,
+      "hesitation_pauses_count": 0,
+      "max_pause_duration_ms": 0,
+      "strokes_count": 0,
+      "total_path_length_px": 0,
+      "pressure": {
+        "mean": 0.5,
+        "max": 0.5,
+        "std_dev": 0,
+        "high_pressure_ratio": 0,
+        "low_pressure_ratio": 0
+      },
+      "velocity_px_per_ms": {
+        "mean": 0,
+        "max": 0
+      },
+      "tremor": {
+        "jitter_index": 0,
+        "inflections_count": 0
+      },
+      "spatial": {
+        "occupancy_ratio": 0,
+        "bounding_box": {
+          "x_min": 0,
+          "y_min": 0,
+          "x_max": 0,
+          "y_max": 0,
+          "width": 0,
+          "height": 0
+        },
+        "centroid": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "predominant_quadrant": "center"
+      },
+      "chromatic": {
+        "colors_used": [],
+        "color_switches": 0,
+        "distribution": {},
+        "is_monochrome": true
+      },
+      "corrections": {
+        "eraser_strokes": 0,
+        "eraser_time_ms": 0,
+        "undo_count": 0,
+        "clear_count": 0
+      }
+    },
+    "delta": null,
+    "alerts": null,
+    "preview": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAMgCAYAAADbcAZoAAAQAElEQVR4Aezb2XIbO9IuUMf//u98jqfelmGKKhYx5LB22DJRLACZK3XzRUf/3//zHwECBAgQIECAAAEC..."
+  },
+  {
     "id": "draw_1792619774590_507",
     "phase": "phase1",
     "student_nickname": "Alumno",
