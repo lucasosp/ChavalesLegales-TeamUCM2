@@ -77,16 +77,16 @@ export class DrawingCanvasModal {
 
   #renderCanvasPhase(overlay, phase, onConfirm) {
     const isPhase1 = phase === "phase1";
-    const titleText = isPhase1 ? "Tu historia empieza con un dibujo" : "Una pausa para dibujar";
+    const titleText = isPhase1 ? t("drawing.phase1Title") : t("drawing.phase2Title");
     const introText = isPhase1
-      ? "¿Cómo te imaginas a Sara? Dibújala a tu manera. Puedes usar el dedo, el ratón o un lápiz digital."
-      : "Sara ha dado un paso importante. Si te apetece, dibújala otra vez como te la imaginas ahora. Tómate el tiempo que necesites.";
-    const confirmLabel = isPhase1 ? "Guardar y empezar →" : "Guardar y seguir →";
+      ? t("drawing.phase1Intro")
+      : t("drawing.phase2Intro");
+    const confirmLabel = isPhase1 ? t("drawing.phase1Confirm") : t("drawing.phase2Confirm");
 
     overlay.innerHTML = `
       <div class="sara-drawing-card">
         <header class="sara-drawing-header">
-          <span class="sara-eyebrow">UN MOMENTO PARA CREAR</span>
+          <span class="sara-eyebrow">${t("drawing.eyebrow")}</span>
           <h2 id="sara-drawing-title" class="sara-drawing-title">${titleText}</h2>
           <p class="sara-drawing-instruction">${introText}</p>
         </header>
@@ -94,7 +94,7 @@ export class DrawingCanvasModal {
         <div class="sara-drawing-workspace">
           <div class="sara-canvas-container">
             <canvas class="sara-drawing-canvas" width="400" height="400"></canvas>
-            <div class="sara-canvas-hint" data-canvas-hint>Tu dibujo empieza aquí</div>
+            <div class="sara-canvas-hint" data-canvas-hint>${t("drawing.hint")}</div>
           </div>
 
           <aside class="sara-drawing-controls" aria-label="${t("drawing.toolsAria")}">
@@ -111,13 +111,13 @@ export class DrawingCanvasModal {
             </div>
 
             <div class="sara-control-group">
-              <span class="sara-control-label">Tamaño del lápiz</span>
+              <span class="sara-control-label">${t("drawing.strokeWidth")}</span>
               <div class="sara-size-grid">
                 <button type="button" class="sara-size-btn" data-size="3" aria-label="${t("drawing.thin")}"><span style="width:4px;height:4px;"></span></button>
                 <button type="button" class="sara-size-btn is-active" data-size="6" aria-label="${t("drawing.medium")}"><span style="width:8px;height:8px;"></span></button>
                 <button type="button" class="sara-size-btn" data-size="14" aria-label="${t("drawing.thick")}"><span style="width:14px;height:14px;"></span></button>
               </div>
-              <small class="sara-pressure-note">Prueba el tamaño que más te guste</small>
+              <small class="sara-pressure-note">${t("drawing.pressureNote")}</small>
             </div>
 
             <div class="sara-control-group sara-action-buttons">
@@ -129,7 +129,7 @@ export class DrawingCanvasModal {
 
         <footer class="sara-drawing-footer">
           <p class="sara-lock-warning" aria-live="polite">
-            No tiene que quedar perfecto. Este dibujo es tuyo.
+            ${t("drawing.lockWarning")}
           </p>
           <button type="button" class="sara-primary sara-confirm-draw" data-action="confirm">${confirmLabel}</button>
         </footer>
@@ -196,38 +196,38 @@ export class DrawingCanvasModal {
     overlay.innerHTML = `
       <div class="sara-drawing-card sara-phase3-card">
         <header class="sara-drawing-header">
-          <span class="sara-eyebrow">UN RECUERDO DE TU HISTORIA</span>
-          <h2 id="sara-drawing-title" class="sara-drawing-title">¿Cuál de los dos dibujos prefieres?</h2>
+          <span class="sara-eyebrow">${t("drawing.phase3Eyebrow")}</span>
+          <h2 id="sara-drawing-title" class="sara-drawing-title">${t("drawing.phase3Title")}</h2>
           <p class="sara-drawing-instruction">
-            Has acompañado a Sara hasta aquí. Mira tus dibujos y elige el que quieres guardar como recuerdo.
+            ${t("drawing.phase3Intro")}
           </p>
         </header>
 
         <div class="sara-comparison-grid">
           <div class="sara-choice-option" data-choice="phase1" tabindex="0" role="button" aria-pressed="false">
             <div class="sara-choice-preview">
-              ${avatar1 ? `<img src="${avatar1}" alt="Tu primer dibujo">` : '<div class="sara-empty-avatar">Sin dibujo</div>'}
+              ${avatar1 ? `<img src="${avatar1}" alt="${t("drawing.avatar1Alt")}">` : `<div class="sara-empty-avatar">${t("drawing.noDrawing")}</div>`}
             </div>
-            <strong class="sara-choice-title">Mi primer dibujo</strong>
-            <p class="sara-choice-desc">Así imaginabas a Sara al empezar.</p>
-            <span class="sara-choice-tag">Seleccionar</span>
+            <strong class="sara-choice-title">${t("drawing.drawing1Title")}</strong>
+            <p class="sara-choice-desc">${t("drawing.drawing1Desc")}</p>
+            <span class="sara-choice-tag">${t("drawing.select")}</span>
           </div>
 
           <div class="sara-choice-option is-selected" data-choice="phase2" tabindex="0" role="button" aria-pressed="true">
             <div class="sara-choice-preview">
-              ${avatar2 ? `<img src="${avatar2}" alt="Tu segundo dibujo">` : '<div class="sara-empty-avatar">Sin dibujo</div>'}
+              ${avatar2 ? `<img src="${avatar2}" alt="${t("drawing.avatar2Alt")}">` : `<div class="sara-empty-avatar">${t("drawing.noDrawing")}</div>`}
             </div>
-            <strong class="sara-choice-title">Mi segundo dibujo</strong>
-            <p class="sara-choice-desc">Así imaginabas a Sara más adelante.</p>
-            <span class="sara-choice-tag">Seleccionar</span>
+            <strong class="sara-choice-title">${t("drawing.drawing2Title")}</strong>
+            <p class="sara-choice-desc">${t("drawing.drawing2Desc")}</p>
+            <span class="sara-choice-tag">${t("drawing.select")}</span>
           </div>
         </div>
 
         <footer class="sara-drawing-footer">
           <p class="sara-lock-warning">
-            Elige el que más te guste. Los dos forman parte de tu historia.
+            ${t("drawing.phase3Warning")}
           </p>
-          <button type="button" class="sara-primary sara-confirm-choice" data-action="confirm-choice">Guardar mi recuerdo →</button>
+          <button type="button" class="sara-primary sara-confirm-choice" data-action="confirm-choice">${t("drawing.keepSelected")}</button>
         </footer>
       </div>
     `;

@@ -213,12 +213,12 @@ export class VisualNovelView {
     this.refs.panel.classList.toggle("is-poem", tone === "poem");
     this.refs.text.scrollTop = 0;
     this.refs.advance.hidden = false;
-    this.refs.advance.textContent = "Ver frase completa";
+    this.refs.advance.textContent = t("novel.seeFullLine");
 
     this.typewriter.play(text, () => {
       if (this.#awaitingChoice) return;
       this.refs.advance.hidden = false;
-      this.refs.advance.textContent = "Seguir →";
+      this.refs.advance.textContent = t("novel.nextLine");
     });
     if (this.autoFocusStory && !this.root.querySelector('[data-sara-overlay]:not([hidden])')) {
       this.refs.advance.focus({ preventScroll: true });
@@ -230,8 +230,8 @@ export class VisualNovelView {
     this.#leaveEnding();
     this.#awaitingChoice = false;
     this.#applyStage(stage);
-    const voice = speaker ?? "Ahora eliges tú";
-    this.#setSpeaker(voice, remote);
+    const voice = speaker ?? t("novel.yourTurn");
+    this.#setSpeaker(voice, remote, speaker ? speakerKey : null);
     this.refs.announcement.textContent = `${voice}: ${prompt}`;
     this.#clearChoices();
 
@@ -1025,7 +1025,9 @@ export class VisualNovelView {
 
     this.refs.speaker.hidden = false;
     this.refs.speaker.textContent = name;
-    this.refs.speaker.dataset.speaker = name.toLowerCase();
+    // El estilo depende de un identificador estable, no del texto traducido
+    const styleKey = key ?? (name === t("novel.narration") ? "narración" : name === t("novel.yourTurn") ? "decisión" : name);
+    this.refs.speaker.dataset.speaker = styleKey.toLowerCase();
     const normalized = (key ?? name)
       .toLowerCase()
       .normalize("NFD")
