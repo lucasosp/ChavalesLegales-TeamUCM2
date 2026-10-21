@@ -1,6 +1,6 @@
 import { App } from "./App.js";
 import { LocalStorageSaveStore, MemorySaveStore } from "../services/saveStores.js";
-import { personImage, speakerSprite, imageUrl, hasCharacterImages } from "../content/characterImages.js";
+import { personImage, personPortrait, illustrations } from "../content/characterImages.js";
 import { DrawingCanvasModal } from "../ui/DrawingCanvasModal.js";
 import { avatarStore } from "../services/avatarStore.js";
 
@@ -29,6 +29,11 @@ export class SaraExperience {
     this.phase3Triggered = false;
     root.classList.add("sara-mode");
     this.novel = root.querySelector(".novel");
+    this.cast = element("div", "sara-cast");
+    this.cast.setAttribute("aria-hidden", "true");
+    this.cast.hidden = true;
+    root.querySelector("[data-scene]").append(this.cast);
+    root.classList.add("sara-has-cast");
     root.insertAdjacentHTML("beforeend", `
       <header class="sara-top" data-sara-chrome hidden>
         <button class="sara-wordmark" type="button" data-sara-action="pause" aria-label="Sara: abrir menú de pausa">SARA<span>mi historia sigue</span></button>
@@ -115,7 +120,7 @@ export class SaraExperience {
         </div>
         <div class="sara-hero">
           <div class="sara-hero-orbit" aria-hidden="true">✦</div>
-          <img src="${hasCharacterImages() ? imageUrl("sara_feliz.png") : "assets/characters/sara/smile.svg"}" alt="Sara, protagonista de la historia"/>
+          <img src="${illustrations.saraHappy.src}" alt="Sara, protagonista de la historia"/>
         </div>
       </div>`;
     this.body.querySelector("[data-sara-start]").addEventListener("click", () => this.begin(false));
@@ -314,6 +319,20 @@ export class SaraExperience {
       grid.append(details);
     }
     this.body.append(grid);
+    const gallery = element("details", "sara-art-gallery");
+    gallery.append(element("summary", "", "Ver todas las ilustraciones y expresiones"));
+    const images = element("div", "sara-art-grid");
+    for (const art of Object.values(illustrations)) {
+      const figure = element("figure");
+      const image = element("img");
+      image.src = art.src;
+      image.alt = art.label;
+      image.loading = "lazy";
+      figure.append(image, element("figcaption", "", art.label));
+      images.append(figure);
+    }
+    gallery.append(images);
+    this.body.append(gallery);
   }
 
   learned() {
@@ -410,49 +429,49 @@ export class SaraExperience {
     const location = this.root.querySelector("[data-sara-location]");
     location.hidden = node.type === "interstitial" || node.type === "ending";
     location.textContent = this.engine.stage.background === "quiet-room" ? "Entorno judicial · ilustración provisional" : node.chapter === 3 ? "Atención social · escenario reutilizado" : node.chapter === 4 || node.chapter === 6 ? "La vida de Sara continúa" : "Instituto · un lugar para hablar";
-    const portrait = this.root.querySelector("[data-sara-portrait]");
-    const speaker = node.type === "dialogue" ? node.speaker : null;
-    const name = speaker?.split(" · ")[0];
-    const source = name ? speakerSprite(name) : null;
-    if (source && name !== "Sara") this.app.view.showSpeakerSprite(source, name);
+    this.root.querySelector("[data-sara-portrait]").hidden = true;
+    this.renderCast(node);
+  }
 
-    if (name === "Sara") {
-      const activeAvatar = avatarStore.getActiveAvatar();
-      if (activeAvatar) {
-        portrait.hidden = false;
-        portrait.className = "sara-speaker-card is-sara";
-        const avatar = element("span", "sara-monogram");
-        avatar.textContent = "";
-        const image = document.createElement("img");
-        image.src = activeAvatar;
-        image.alt = "Tu avatar";
-        avatar.append(image);
-        portrait.replaceChildren(
-          avatar,
-          element("strong", "", "Sara"),
-          element("span", "", avatarStore.isPhase2Completed() ? "Foto de perfil (Post-trauma)" : "Tu avatar (Fase 1)"),
-          element("small", "", "Dibujo del usuario")
-        );
-      } else {
-        portrait.hidden = true;
-      }
-    } else {
-      portrait.hidden = !speaker || Boolean(source);
-      if (!portrait.hidden) {
-        const person = this.guide.people.find((p) => p.name === name);
-        portrait.className = `sara-speaker-card ${person?.color ?? "green"}`;
-        const portraitSource = personImage(name);
-        const avatar = element("span", "sara-monogram", person?.initial ?? name[0]);
-        if (portraitSource) {
-          avatar.textContent = "";
-          const image = document.createElement("img");
-          image.src = portraitSource;
-          image.alt = "";
-          avatar.append(image);
-        }
-        portrait.replaceChildren(avatar, element("strong", "", name), element("span", "", person?.role ?? "Profesional de apoyo"));
-        if (!portraitSource) portrait.append(element("small", "", "Retrato provisional"));
-      }
+  renderCast(node) {
+    this.cast.hidden = !["dialogue", "choice"].includes(node.type);
+    if (this.cast.hidden) return;
+    const speaker = node.speaker?.split(" · ")[0];
+    let partner = speaker && speaker !== "Sara" ? speaker : null;
+    let expression = this.engine.stage.character?.expression;
+    for (const snapshot of [...this.engine.history].reverse()) {
+      const previous = this.engine.story[snapshot.nodeId];
+      if (previous.chapter !== node.chapter || previous.type === "interstitial" || snapshot.stage?.background !== this.engine.stage.background) break;
+      const name = previous.speaker?.split(" · ")[0];
+      if (!partner && name && name !== "Sara" && personPortrait(name)) partner = name;
+      if (!expression && snapshot.stage?.character?.id === "sara") expression = snapshot.stage.character.expression;
+      if (partner && expression) break;
+    }
+    if (node.type === "dialogue" && (!speaker || node.tone === "thought")) partner = null;
+    const names = partner ? ["Sara", partner] : ["Sara"];
+    this.cast.dataset.count = String(names.length);
+    const activeAvatar = avatarStore.getActiveAvatar();
+    const signature = JSON.stringify([names, expression, this.engine.nodeId, speaker, activeAvatar]);
+    if (signature === this.cast.dataset.signature) return;
+    this.cast.dataset.signature = signature;
+    this.cast.replaceChildren();
+    for (const name of names) {
+      const art = personPortrait(name, { expression, nodeId: this.engine.nodeId });
+      if (!art && !(name === "Sara" && activeAvatar)) continue;
+      const frame = element("div", "sara-cast-person");
+      frame.dataset.person = name;
+      frame.classList.toggle("is-speaking", name === speaker);
+      frame.style.setProperty("--portrait-zoom", art?.zoom ?? 1);
+      const image = element("img");
+      image.src = (name === "Sara" && activeAvatar) ? activeAvatar : art.src;
+      image.alt = "";
+      image.draggable = false;
+      image.addEventListener("error", () => {
+        image.hidden = true;
+        frame.append(element("span", "sara-cast-fallback", name));
+      }, { once: true });
+      frame.append(image);
+      this.cast.append(frame);
     }
   }
 
@@ -473,6 +492,6 @@ export class SaraExperience {
     document.removeEventListener("keydown", this.onKey, true);
     this.root.removeEventListener("click", this.onRootClick);
     this.app.destroy();
-    this.root.classList.remove("sara-mode", "sara-large-text");
+    this.root.classList.remove("sara-mode", "sara-large-text", "sara-has-cast");
   }
 }

@@ -607,3 +607,28 @@
   color: #554865;
 }
 
+
+/* A shared waist-up frame keeps full-body and portrait illustrations comparable. */
+.sara-has-cast .character { visibility: hidden; }
+.sara-cast { position: absolute; z-index: 4; inset-inline: max(4vw, calc((100vw - 1100px) / 2)); bottom: calc(88px + clamp(220px, 29dvh, 300px) - 48px); height: min(55dvh, 530px); display: flex; align-items: stretch; justify-content: space-between; pointer-events: none; }
+.sara-cast[hidden] { display: none; }
+.sara-cast[data-count="1"] { justify-content: center; }
+.sara-cast-person { position: relative; height: 100%; width: min(44%, 380px); overflow: hidden; border-radius: 24px 24px 0 0; filter: brightness(.82) saturate(.85); transition: filter 180ms ease; }
+.sara-cast-person.is-speaking, .sara-cast[data-count="1"] .sara-cast-person { filter: none; }
+.sara-cast-person img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; transform: scale(var(--portrait-zoom, 1)); transform-origin: center top; }
+.sara-cast-fallback { display: grid; place-items: center; height: 100%; border: 2px solid var(--sara-ink); border-radius: 24px; background: var(--sara-paper); color: var(--sara-ink); font-size: 1.5rem; }
+.sara-art-gallery { margin-top: 24px; }
+.sara-art-gallery summary { cursor: pointer; padding: 14px 0; font-weight: 700; }
+.sara-art-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 16px; }
+.sara-art-grid figure { margin: 0; padding: 10px; border-radius: 16px; background: #eee6f6; }
+.sara-art-grid img { width: 100%; height: 190px; object-fit: contain; object-position: center top; }
+.sara-art-grid figcaption { font-size: .75rem; text-align: center; padding-top: 8px; }
+@media (max-width: 700px) {
+  .sara-cast { inset-inline: 0; height: min(45dvh, 390px); bottom: calc(80px + clamp(235px, 34dvh, 300px) - 28px); }
+  .sara-cast-person { width: 49%; border-radius: 16px 16px 0 0; }
+  .sara-cast[data-count="1"] .sara-cast-person { width: 66%; }
+}
+@media (max-height: 550px) {
+  .sara-cast { inset-inline: 2%; bottom: 65px; height: calc(100dvh - 140px); }
+  .sara-cast-person { width: 24%; }
+}

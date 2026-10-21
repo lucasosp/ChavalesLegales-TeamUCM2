@@ -381,83 +381,20 @@ export default function Home() {
               </h2>
             </div>
 
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 10,
-                width: '100%',
-              }}
-            >
-              {/* Opción 1: Modo Historieta / Novela visual */}
-              <Link
-                href="/novela"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 12,
-                  padding: '12px 14px',
-                  borderRadius: 16,
-                  border: '3px solid #18181B',
-                  background: '#FFFFFF',
-                  boxShadow: '0 4px 0 #18181B',
-                  cursor: 'pointer',
-                  textAlign: 'left',
-                  textDecoration: 'none',
-                  transition: 'all 0.15s ease',
-                  width: '100%',
-                  boxSizing: 'border-box',
-                }}
-              >
-                <div
-                  style={{
-                    width: 44,
-                    height: 44,
-                    borderRadius: 12,
-                    background: '#FEF08A',
-                    border: '2px solid #18181B',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                  }}
-                >
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#854D0E" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                  </svg>
-                </div>
-                <div style={{ flex: 1 }}>
-                  <span
-                    style={{
-                      display: 'block',
-                      fontSize: 11,
-                      fontWeight: 800,
-                      color: '#B45309',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.04em',
-                    }}
-                  >
-                    Narrativa & Novela Visual
+            <div className="solo-games-grid">
+              {[
+                { href: '/novela', tag: 'Historia', title: 'Sara · Mi historia sigue', bg: '#FEF08A', color: '#854D0E', icon: <><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></> },
+                { href: '/experiments/cid-table', tag: 'Familia', title: 'La mesa de la familia', bg: '#D1FAE5', color: '#047857', icon: <><ellipse cx="12" cy="12" rx="7" ry="4.5"/><circle cx="12" cy="4" r="1.6"/><circle cx="12" cy="20" r="1.6"/><circle cx="3" cy="12" r="1.6"/><circle cx="21" cy="12" r="1.6"/></> },
+                { href: '/experiments/caja-arena', tag: 'Caja de arena', title: 'Mi mundo con perros', bg: '#FFEDD5', color: '#C2410C', icon: <><path d="M4 7c0-1.5 1-2.5 2.5-2.5L9 7h3.5c2.5 0 4.5 2 4.5 4.5V13l3 1v3h-3l-1 3H8l-1-3H5.5L4 13z"/><circle cx="7.5" cy="8.5" r=".7" fill="currentColor"/></> },
+              ].map((g) => (
+                <Link key={g.href} href={g.href} className="solo-game-tile">
+                  <span className="solo-game-icon" style={{ background: g.bg, color: g.color }}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{g.icon}</svg>
                   </span>
-                  <strong style={{ fontSize: 15, fontWeight: 900, color: '#18181B' }}>
-                    Sara · Mi historia sigue
-                  </strong>
-                </div>
-                <span
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 800,
-                    color: '#64748B',
-                    background: '#F1F5F9',
-                    padding: '4px 8px',
-                    borderRadius: 999,
-                    border: '1px solid #CBD5E1',
-                  }}
-                >
-                  Jugar →
-                </span>
-              </Link>
+                  <span className="solo-game-tag" style={{ color: g.color }}>{g.tag}</span>
+                  <strong className="solo-game-title">{g.title}</strong>
+                </Link>
+              ))}
             </div>
           </section>
         </div>
