@@ -1243,3 +1243,60 @@ html, body {
   background: var(--naranja);
   color: #ffffff;
 }
+
+/* Selector compacto de juegos individuales (cabe en una pantalla sin scroll) */
+.solo-games-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+.solo-game-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px 12px;
+  border-radius: 16px;
+  border: 3px solid #18181b;
+  background: #fff;
+  box-shadow: 0 4px 0 #18181b;
+  text-decoration: none;
+  text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.solo-game-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #18181b;
+}
+
+.solo-game-tile:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #18181b;
+}
+
+.solo-game-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 2px solid #18181b;
+  display: grid;
+  place-items: center;
+  margin-bottom: 2px;
+}
+
+.solo-game-tag {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.solo-game-title {
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.2;
+  color: #18181b;
+}
