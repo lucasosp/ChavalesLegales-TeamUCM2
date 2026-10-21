@@ -3,11 +3,17 @@
 import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { getResumenTelemetria, getDecisionesTelemetria, resetTelemetria, getResumenDibujosTelemetria } from '../../lib/api'
+import { useI18n } from '../../lib/i18n'
+
+// Locale de fechas según el idioma activo
+const DATE_LOCALES = { es: 'es-ES', ca: 'ca-ES', va: 'ca-ES', gl: 'gl-ES', eu: 'eu-ES', oc: 'oc' }
 
 // Clave de acceso institucional para asistentes sociales
 const DEFAULT_ACCESS_CODE = 'SOCIAL2026'
 
 export default function DashboardAsistentesSociales() {
+  const { t, lang } = useI18n()
+  const dateLocale = DATE_LOCALES[lang] || 'es-ES'
   // Estado de autenticación para garantizar que solo se ve desde la vista de asistentes sociales
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [inputCode, setInputCode] = useState('')
@@ -90,7 +96,7 @@ export default function DashboardAsistentesSociales() {
         sessionStorage.setItem('chavales_asistente_social_auth', 'true')
       }
     } else {
-      setAuthError('Código de acceso no válido. Puedes usar SOCIAL2026 o pulsar en el botón de acceso rápido.')
+      setAuthError(t('asistentes.authError'))
     }
   }
 
@@ -103,10 +109,10 @@ export default function DashboardAsistentesSociales() {
   }
 
   const handleResetData = async () => {
-    if (confirm('¿Deseas restablecer los datos de muestra de telemetría para las preguntas de la novela?')) {
+    if (confirm(t('asistentes.confirmReset'))) {
       try {
         await resetTelemetria()
-        setStatusMessage('Datos de muestra restablecidos correctamente.')
+        setStatusMessage(t('asistentes.resetOk'))
         setRefreshKey((k) => k + 1)
         setTimeout(() => setStatusMessage(''), 4000)
       } catch (err) {
@@ -117,7 +123,7 @@ export default function DashboardAsistentesSociales() {
 
   const handleExportCSV = () => {
     if (!decisionsList.length) {
-      alert('No hay datos disponibles para exportar.')
+      alert(t('asistentes.noDataExport'))
       return
     }
 
@@ -177,12 +183,12 @@ export default function DashboardAsistentesSociales() {
     return (
       <div className="kahoot-page" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <header className="kahoot-topbar">
-          <Link href="/" className="btn-back-home" aria-label="Volver al portal principal">
+          <Link href="/" className="btn-back-home" aria-label={t('asistentes.backPortalAria')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="19" y1="12" x2="5" y2="12" />
               <polyline points="12 19 5 12 12 5" />
             </svg>
-            <span>Volver a Inicio</span>
+            <span>{t('asistentes.backHome')}</span>
           </Link>
         </header>
 
@@ -241,26 +247,26 @@ export default function DashboardAsistentesSociales() {
               letterSpacing: '0.05em',
               marginBottom: 10,
             }}>
-              Área Reservada Profesional
+              {t('asistentes.reservedArea')}
             </span>
 
             <h1 style={{ fontSize: 26, fontWeight: 900, color: '#064E3B', margin: '0 0 8px' }}>
-              Vista de Asistentes Sociales
+              {t('asistentes.loginTitle')}
             </h1>
 
             <p style={{ color: '#4B5563', fontSize: 14, lineHeight: 1.5, margin: '0 0 26px' }}>
-              Portal exclusivo para Trabajadores y Asistentes Sociales de Atención a la Infancia. Consulta la telemetría y tiempos de respuesta de los niños en la novela interactiva.
+              {t('asistentes.loginIntro')}
             </p>
 
             <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               <div style={{ textAlign: 'left' }}>
                 <label htmlFor="access-code" style={{ display: 'block', fontSize: 13, fontWeight: 800, color: '#1F2937', marginBottom: 6 }}>
-                  Código de Identificación / Clave de Acceso:
+                  {t('asistentes.codeLabel')}
                 </label>
                 <input
                   id="access-code"
                   type="text"
-                  placeholder="Introduce SOCIAL2026"
+                  placeholder={t('asistentes.codePlaceholder')}
                   value={inputCode}
                   onChange={(e) => setInputCode(e.target.value)}
                   style={{
@@ -280,7 +286,7 @@ export default function DashboardAsistentesSociales() {
                 />
                 <div style={{ marginTop: 8, display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'center' }}>
                   <span style={{ fontSize: 12, color: '#4B5563' }}>
-                    Código oficial: <strong style={{ color: '#047857', letterSpacing: '0.04em' }}>SOCIAL2026</strong>
+                    {t('asistentes.officialCode')} <strong style={{ color: '#047857', letterSpacing: '0.04em' }}>SOCIAL2026</strong>
                   </span>
                   <button
                     type="button"
@@ -302,7 +308,7 @@ export default function DashboardAsistentesSociales() {
                       cursor: 'pointer',
                     }}
                   >
-                    ⚡ Acceso rápido con 1 clic (SOCIAL2026)
+                    {t('asistentes.quickAccess')}
                   </button>
                 </div>
               </div>
@@ -340,14 +346,14 @@ export default function DashboardAsistentesSociales() {
                   marginTop: 6,
                 }}
               >
-                <span>Acceder al Dashboard</span>
+                <span>{t('asistentes.loginSubmit')}</span>
                 <span>→</span>
               </button>
             </form>
 
             <div style={{ marginTop: 24, borderTop: '1px solid #E5E7EB', paddingTop: 16 }}>
               <p style={{ fontSize: 12, color: '#9CA3AF', margin: 0 }}>
-                Protección de Datos conforme a la LOPIVI (Ley Orgánica 8/2021). Los datos de telemetría son anonimizados y de uso exclusivo socioeducativo.
+                {t('asistentes.privacyNote')}
               </p>
             </div>
           </div>
@@ -398,12 +404,12 @@ export default function DashboardAsistentesSociales() {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <span style={{ fontSize: 11, fontWeight: 800, background: '#047857', border: '1px solid #34D399', borderRadius: 6, padding: '2px 8px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                Vista Asistentes Sociales
+                {t('asistentes.viewBadge')}
               </span>
               <span style={{ fontSize: 11, color: '#A7F3D0' }}>Chavales Legales</span>
             </div>
             <h1 style={{ fontSize: 18, fontWeight: 900, margin: '2px 0 0', color: '#FFFFFF' }}>
-              Dashboard de Tiempos y Decisiones en la Novela
+              {t('asistentes.dashTitle')}
             </h1>
           </div>
         </div>
@@ -425,13 +431,13 @@ export default function DashboardAsistentesSociales() {
               alignItems: 'center',
               gap: 6,
             }}
-            title="Recargar datos en vivo"
+            title={t('asistentes.refreshTitle')}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="23 4 23 10 17 10" />
               <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
             </svg>
-            <span>Actualizar</span>
+            <span>{t('asistentes.refresh')}</span>
           </button>
 
           <button
@@ -451,14 +457,14 @@ export default function DashboardAsistentesSociales() {
               alignItems: 'center',
               gap: 6,
             }}
-            title="Exportar a CSV para informe técnico"
+            title={t('asistentes.exportTitle')}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
               <polyline points="7 10 12 15 17 10" />
               <line x1="12" y1="15" x2="12" y2="3" />
             </svg>
-            <span>Exportar CSV</span>
+            <span>{t('asistentes.exportCsv')}</span>
           </button>
 
           <button
@@ -474,9 +480,9 @@ export default function DashboardAsistentesSociales() {
               fontWeight: 800,
               cursor: 'pointer',
             }}
-            title="Cerrar sesión de Asistente Social"
+            title={t('asistentes.logoutTitle')}
           >
-            Salir de la vista
+            {t('asistentes.logout')}
           </button>
 
           <Link
@@ -492,7 +498,7 @@ export default function DashboardAsistentesSociales() {
               border: '2px solid #18181B',
             }}
           >
-            Inicio Web
+            {t('asistentes.homeWeb')}
           </Link>
         </div>
       </header>
@@ -541,7 +547,7 @@ export default function DashboardAsistentesSociales() {
                 boxShadow: activeTab === 'dashboard' ? '0 3px 0 #18181B' : 'none',
               }}
             >
-              📊 Tiempos por Pregunta y Opción
+              {t('asistentes.tabDashboard')}
             </button>
             <button
               type="button"
@@ -558,7 +564,7 @@ export default function DashboardAsistentesSociales() {
                 boxShadow: activeTab === 'tabla' ? '0 3px 0 #18181B' : 'none',
               }}
             >
-              📋 Registro Detallado ({decisionsList.length})
+              {t('asistentes.tabTable', { n: decisionsList.length })}
             </button>
             <button
               type="button"
@@ -575,7 +581,7 @@ export default function DashboardAsistentesSociales() {
                 boxShadow: activeTab === 'guia' ? '0 3px 0 #18181B' : 'none',
               }}
             >
-              💡 Guía de Interpretación Social
+              {t('asistentes.tabGuide')}
             </button>
             <button
               type="button"
@@ -592,7 +598,7 @@ export default function DashboardAsistentesSociales() {
                 boxShadow: activeTab === 'dibujos' ? '0 3px 0 #18181B' : 'none',
               }}
             >
-              🎨 Evaluación Proyectiva Gráfica ({drawingsSummary?.recent_cases?.length || 0})
+              {t('asistentes.tabDrawings', { n: drawingsSummary?.recent_cases?.length || 0 })}
             </button>
           </div>
 
@@ -609,14 +615,14 @@ export default function DashboardAsistentesSociales() {
               color: '#475569',
               cursor: 'pointer',
             }}
-            title="Recargar el dataset de prueba enriquecido"
+            title={t('asistentes.resetTitle')}
           >
-            Restablecer datos de prueba
+            {t('asistentes.resetBtn')}
           </button>
         </div>
 
         {/* 1. TARJETAS DE MÉTRICAS GENERALES (KPIS) */}
-        <section aria-label="Resumen ejecutivo de telemetría" style={{
+        <section aria-label={t('asistentes.kpiAria')} style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
           gap: 16,
@@ -632,15 +638,15 @@ export default function DashboardAsistentesSociales() {
           }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
               <span style={{ fontSize: 12, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>
-                Tiempo Medio Global
+                {t('asistentes.kpiAvgTitle')}
               </span>
               <span style={{ fontSize: 20 }}>⏱️</span>
             </div>
             <div style={{ fontSize: 32, fontWeight: 900, color: '#064E3B' }}>
-              {summaryData?.overall_avg_time ?? '0.0'} <span style={{ fontSize: 18, fontWeight: 700, color: '#64748B' }}>seg</span>
+              {summaryData?.overall_avg_time ?? '0.0'} <span style={{ fontSize: 18, fontWeight: 700, color: '#64748B' }}>{t('asistentes.secUnit')}</span>
             </div>
             <p style={{ margin: '6px 0 0', fontSize: 12, color: '#64748B', lineHeight: 1.4 }}>
-              Mediana de {summaryData?.overall_median_time ?? '0.0'}s. Tiempo promedio que se toma un niño en responder a cualquier dilema.
+              {t('asistentes.kpiAvgDesc', { median: summaryData?.overall_median_time ?? '0.0' })}
             </p>
           </div>
 
@@ -654,7 +660,7 @@ export default function DashboardAsistentesSociales() {
           }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
               <span style={{ fontSize: 12, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>
-                Decisiones Analizadas
+                {t('asistentes.kpiDecisionsTitle')}
               </span>
               <span style={{ fontSize: 20 }}>🧒</span>
             </div>
@@ -662,7 +668,7 @@ export default function DashboardAsistentesSociales() {
               {summaryData?.total_decisions ?? 0}
             </div>
             <p style={{ margin: '6px 0 0', fontSize: 12, color: '#64748B', lineHeight: 1.4 }}>
-              Respuestas registradas en las preguntas de la novela interactiva.
+              {t('asistentes.kpiDecisionsDesc')}
             </p>
           </div>
 
@@ -676,7 +682,7 @@ export default function DashboardAsistentesSociales() {
           }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
               <span style={{ fontSize: 12, fontWeight: 800, color: '#B45309', textTransform: 'uppercase' }}>
-                Mayor Tensión Emocional
+                {t('asistentes.kpiTensionTitle')}
               </span>
               <span style={{ fontSize: 20 }}>⚠️</span>
             </div>
@@ -684,7 +690,7 @@ export default function DashboardAsistentesSociales() {
               {summaryData?.most_hesitated_question?.avg_time ? `${summaryData.most_hesitated_question.avg_time}s` : '—'}
             </div>
             <p style={{ margin: '6px 0 0', fontSize: 12, color: '#92400E', lineHeight: 1.3, fontWeight: 700 }} title={summaryData?.most_hesitated_question?.prompt}>
-              {summaryData?.most_hesitated_question ? `«${summaryData.most_hesitated_question.prompt.slice(0, 48)}...»` : 'Esperando datos'}
+              {summaryData?.most_hesitated_question ? `«${summaryData.most_hesitated_question.prompt.slice(0, 48)}...»` : t('asistentes.waitingData')}
             </p>
           </div>
 
@@ -698,15 +704,15 @@ export default function DashboardAsistentesSociales() {
           }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
               <span style={{ fontSize: 12, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>
-                Rango Min / Max
+                {t('asistentes.kpiRangeTitle')}
               </span>
               <span style={{ fontSize: 20 }}>⚡</span>
             </div>
             <div style={{ fontSize: 24, fontWeight: 900, color: '#0F172A' }}>
-              {summaryData?.fastest_decision_time ?? 0}s <span style={{ fontSize: 16, fontWeight: 600, color: '#94A3B8' }}>a</span> {summaryData?.slowest_decision_time ?? 0}s
+              {summaryData?.fastest_decision_time ?? 0}s <span style={{ fontSize: 16, fontWeight: 600, color: '#94A3B8' }}>{t('asistentes.rangeTo')}</span> {summaryData?.slowest_decision_time ?? 0}s
             </div>
             <p style={{ margin: '6px 0 0', fontSize: 12, color: '#64748B', lineHeight: 1.4 }}>
-              Desde pulsaciones instintivas hasta reflexiones muy prolongadas.
+              {t('asistentes.kpiRangeDesc')}
             </p>
           </div>
         </section>
@@ -732,13 +738,13 @@ export default function DashboardAsistentesSociales() {
             }}>
               {/* Filtro por historia */}
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-                <span style={{ fontSize: 13, fontWeight: 900, color: '#1E293B' }}>Historia:</span>
+                <span style={{ fontSize: 13, fontWeight: 900, color: '#1E293B' }}>{t('asistentes.storyLabel')}</span>
                 {[
-                  { id: 'all', label: 'Todas' },
-                  { id: 'sara', label: 'Sara · Mi historia sigue' },
-                  { id: 'dos-voces', label: 'Dos voces' },
-                  { id: 'no-lo-reenvies', label: 'No lo reenvíes' },
-                  { id: 'no-soy-yo', label: 'No soy yo' },
+                  { id: 'all', label: t('asistentes.storyAll') },
+                  { id: 'sara', label: t('asistentes.storySara') },
+                  { id: 'dos-voces', label: t('asistentes.storyDosVoces') },
+                  { id: 'no-lo-reenvies', label: t('asistentes.storyNoLoReenvies') },
+                  { id: 'no-soy-yo', label: t('asistentes.storyNoSoyYo') },
                 ].map((s) => (
                   <button
                     key={s.id}
@@ -776,15 +782,15 @@ export default function DashboardAsistentesSociales() {
                     cursor: 'pointer',
                   }}
                 >
-                  <option value="all">Todos los tiempos</option>
-                  <option value="high">⚠️ Alta indecisión (&gt; 16s)</option>
-                  <option value="medium">⏱️ Reflexión moderada (8s - 16s)</option>
-                  <option value="fast">⚡ Decisión rápida (&lt; 8s)</option>
+                  <option value="all">{t('asistentes.filterAll')}</option>
+                  <option value="high">{t('asistentes.filterHigh')}</option>
+                  <option value="medium">{t('asistentes.filterMedium')}</option>
+                  <option value="fast">{t('asistentes.filterFast')}</option>
                 </select>
 
                 <input
                   type="text"
-                  placeholder="Buscar dilema u opción..."
+                  placeholder={t('asistentes.searchPlaceholder')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   style={{
@@ -804,13 +810,13 @@ export default function DashboardAsistentesSociales() {
             {loading ? (
               <div style={{ textAlign: 'center', padding: '60px 20px', background: '#FFFFFF', borderRadius: 20, border: '2px solid #18181B' }}>
                 <div style={{ fontSize: 24, marginBottom: 8 }}>⏳</div>
-                <h3 style={{ fontSize: 18, fontWeight: 800, color: '#1E293B' }}>Cargando telemetría de decisiones...</h3>
+                <h3 style={{ fontSize: 18, fontWeight: 800, color: '#1E293B' }}>{t('asistentes.loadingDecisions')}</h3>
               </div>
             ) : filteredQuestions.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '60px 20px', background: '#FFFFFF', borderRadius: 20, border: '2px solid #18181B' }}>
                 <div style={{ fontSize: 24, marginBottom: 8 }}>🔍</div>
-                <h3 style={{ fontSize: 18, fontWeight: 800, color: '#1E293B' }}>No se encontraron preguntas con los filtros seleccionados</h3>
-                <p style={{ color: '#64748B', fontSize: 14 }}>Prueba a seleccionar «Todas» en las historias o cambiar el término de búsqueda.</p>
+                <h3 style={{ fontSize: 18, fontWeight: 800, color: '#1E293B' }}>{t('asistentes.noQuestions')}</h3>
+                <p style={{ color: '#64748B', fontSize: 14 }}>{t('asistentes.noQuestionsHint')}</p>
               </div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -842,7 +848,7 @@ export default function DashboardAsistentesSociales() {
                               padding: '2px 8px',
                               border: '1px solid #A7F3D0',
                             }}>
-                              {q.story_title} · Cap. {q.chapter}
+                              {t('asistentes.questionChapter', { story: q.story_title, chapter: q.chapter })}
                             </span>
                             <span style={{ fontSize: 12, color: '#94A3B8', fontFamily: 'monospace' }}>
                               ID: {q.node_id}
@@ -860,7 +866,7 @@ export default function DashboardAsistentesSociales() {
                                 alignItems: 'center',
                                 gap: 4,
                               }}>
-                                ⚠️ Alta indecisión de los niños
+                                {t('asistentes.highHesitationBadge')}
                               </span>
                             )}
                           </div>
@@ -879,13 +885,13 @@ export default function DashboardAsistentesSociales() {
                           minWidth: 140,
                         }}>
                           <span style={{ display: 'block', fontSize: 11, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>
-                            Tiempo Promedio
+                            {t('asistentes.avgTime')}
                           </span>
                           <span style={{ fontSize: 22, fontWeight: 900, color: isHighHesitation ? '#B45309' : '#0F172A' }}>
                             {q.avg_time}s
                           </span>
                           <span style={{ display: 'block', fontSize: 11, color: '#64748B' }}>
-                            {q.total_responses} {q.total_responses === 1 ? 'niño' : 'niños'}
+                            {t(q.total_responses === 1 ? 'asistentes.childOne' : 'asistentes.childMany', { n: q.total_responses })}
                           </span>
                         </div>
                       </div>
@@ -902,8 +908,8 @@ export default function DashboardAsistentesSociales() {
                           textTransform: 'uppercase',
                           letterSpacing: '0.04em',
                         }}>
-                          <span>Desglose por opción elegida:</span>
-                          <span>Tiempo medio que tardan los niños</span>
+                          <span>{t('asistentes.breakdown')}</span>
+                          <span>{t('asistentes.breakdownTime')}</span>
                         </div>
 
                         {/* Lista de opciones con barra comparativa de tiempo */}
@@ -974,7 +980,7 @@ export default function DashboardAsistentesSociales() {
                                         {opt.interpretation_label}
                                       </span>
                                       <span style={{ fontSize: 12, color: '#64748B', fontWeight: 700 }}>
-                                        {opt.count} {opt.count === 1 ? 'elección' : 'elecciones'} ({opt.percentage}%)
+                                        {t(opt.count === 1 ? 'asistentes.choiceOne' : 'asistentes.choiceMany', { n: opt.count, pct: opt.percentage })}
                                       </span>
                                     </div>
                                     <strong style={{ fontSize: 15, fontWeight: 800, color: '#1E293B', display: 'block' }}>
@@ -988,7 +994,7 @@ export default function DashboardAsistentesSociales() {
                                       {opt.avg_time}s
                                     </span>
                                     <span style={{ display: 'block', fontSize: 11, color: '#94A3B8' }}>
-                                      mín: {opt.min_time}s · máx: {opt.max_time}s
+                                      {t('asistentes.minMax', { min: opt.min_time, max: opt.max_time })}
                                     </span>
                                   </div>
                                 </div>
@@ -1037,10 +1043,10 @@ export default function DashboardAsistentesSociales() {
             <div style={{ padding: '18px 22px', borderBottom: '2px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
               <div>
                 <h3 style={{ fontSize: 18, fontWeight: 900, color: '#0F172A', margin: 0 }}>
-                  Registro Individual de Decisiones
+                  {t('asistentes.tableTitle')}
                 </h3>
                 <p style={{ margin: '2px 0 0', fontSize: 13, color: '#64748B' }}>
-                  Auditoría detallada con la marca temporal y el tiempo exacto que cada menor tardó en responder.
+                  {t('asistentes.tableDesc')}
                 </p>
               </div>
               <button
@@ -1058,7 +1064,7 @@ export default function DashboardAsistentesSociales() {
                   boxShadow: '0 2px 0 #18181B',
                 }}
               >
-                Descargar informe CSV
+                {t('asistentes.downloadCsv')}
               </button>
             </div>
 
@@ -1066,38 +1072,38 @@ export default function DashboardAsistentesSociales() {
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>
                 <thead>
                   <tr style={{ background: '#F8FAFC', borderBottom: '2px solid #E2E8F0', color: '#475569', fontWeight: 800 }}>
-                    <th style={{ padding: '12px 16px' }}>Alumno / Sala</th>
-                    <th style={{ padding: '12px 16px' }}>Historia</th>
-                    <th style={{ padding: '12px 16px' }}>Pregunta</th>
-                    <th style={{ padding: '12px 16px' }}>Opción Elegida</th>
-                    <th style={{ padding: '12px 16px', textAlign: 'right' }}>Tiempo</th>
-                    <th style={{ padding: '12px 16px' }}>Nivel de Duda</th>
-                    <th style={{ padding: '12px 16px' }}>Fecha</th>
+                    <th style={{ padding: '12px 16px' }}>{t('asistentes.thStudent')}</th>
+                    <th style={{ padding: '12px 16px' }}>{t('asistentes.thStory')}</th>
+                    <th style={{ padding: '12px 16px' }}>{t('asistentes.thQuestion')}</th>
+                    <th style={{ padding: '12px 16px' }}>{t('asistentes.thOption')}</th>
+                    <th style={{ padding: '12px 16px', textAlign: 'right' }}>{t('asistentes.thTime')}</th>
+                    <th style={{ padding: '12px 16px' }}>{t('asistentes.thDoubt')}</th>
+                    <th style={{ padding: '12px 16px' }}>{t('asistentes.thDate')}</th>
                   </tr>
                 </thead>
                 <tbody>
                   {decisionsList.length === 0 ? (
                     <tr>
                       <td colSpan={7} style={{ padding: 32, textAlign: 'center', color: '#64748B' }}>
-                        No hay registros individuales disponibles todavía.
+                        {t('asistentes.noRecords')}
                       </td>
                     </tr>
                   ) : (
                     decisionsList.map((row, idx) => {
-                      const t = row.time_seconds || 0
-                      let tagText = 'Habitual'
+                      const secs = row.time_seconds || 0
+                      let tagText = t('asistentes.tagUsual')
                       let tagBg = '#ECFDF5'
                       let tagColor = '#065F46'
-                      if (t < 6) {
-                        tagText = 'Rápida'
+                      if (secs < 6) {
+                        tagText = t('asistentes.tagFast')
                         tagBg = '#EFF6FF'
                         tagColor = '#1E40AF'
-                      } else if (t > 20) {
-                        tagText = 'Alta Indecisión'
+                      } else if (secs > 20) {
+                        tagText = t('asistentes.tagHigh')
                         tagBg = '#FEF2F2'
                         tagColor = '#991B1B'
-                      } else if (t > 14) {
-                        tagText = 'Reflexiva'
+                      } else if (secs > 14) {
+                        tagText = t('asistentes.tagReflective')
                         tagBg = '#FEF3C7'
                         tagColor = '#92400E'
                       }
@@ -1111,10 +1117,10 @@ export default function DashboardAsistentesSociales() {
                           }}
                         >
                           <td style={{ padding: '12px 16px', fontWeight: 700, color: '#1E293B' }}>
-                            {row.student_nickname || 'Alumno'}
+                            {row.student_nickname || t('asistentes.studentDefault')}
                             {row.session_pin && (
                               <span style={{ display: 'block', fontSize: 11, color: '#94A3B8' }}>
-                                Sala: {row.session_pin}
+                                {t('asistentes.room', { pin: row.session_pin })}
                               </span>
                             )}
                           </td>
@@ -1132,7 +1138,7 @@ export default function DashboardAsistentesSociales() {
                             </div>
                           </td>
                           <td style={{ padding: '12px 16px', textAlign: 'right', fontWeight: 900, color: '#0F172A' }}>
-                            {t}s
+                            {secs}s
                           </td>
                           <td style={{ padding: '12px 16px' }}>
                             <span style={{
@@ -1147,7 +1153,7 @@ export default function DashboardAsistentesSociales() {
                             </span>
                           </td>
                           <td style={{ padding: '12px 16px', color: '#64748B', fontSize: 12 }}>
-                            {row.timestamp ? new Date(row.timestamp * 1000).toLocaleDateString('es-ES', { hour: '2-digit', minute: '2-digit' }) : '—'}
+                            {row.timestamp ? new Date(row.timestamp * 1000).toLocaleDateString(dateLocale, { hour: '2-digit', minute: '2-digit' }) : '—'}
                           </td>
                         </tr>
                       )
@@ -1182,13 +1188,13 @@ export default function DashboardAsistentesSociales() {
                 fontWeight: 800,
                 marginBottom: 10,
               }}>
-                Manual de Apoyo para Servicios Sociales y Equipos Psicosociales
+                {t('asistentes.guideBadge')}
               </span>
               <h2 style={{ fontSize: 24, fontWeight: 900, color: '#064E3B', margin: '0 0 12px' }}>
-                ¿Cómo interpretar los tiempos de respuesta de los niños?
+                {t('asistentes.guideTitle')}
               </h2>
               <p style={{ color: '#475569', fontSize: 15, lineHeight: 1.6, margin: '0 0 20px' }}>
-                En las novelas interactivas de <em>Chavales Legales</em>, los menores se enfrentan a situaciones simuladas de violencia intrafamiliar, revelación de secretos, acoso digital y contacto con la justicia. El tiempo que un niño tarda en tomar una decisión proporciona pistas esenciales sobre su estado afectivo y posibles vivencias reales.
+                {t('asistentes.guideIntroBefore')} <em>Chavales Legales</em>{t('asistentes.guideIntroAfter')}
               </p>
 
               <div style={{
@@ -1198,26 +1204,26 @@ export default function DashboardAsistentesSociales() {
                 marginTop: 20,
               }}>
                 <div style={{ background: '#EFF6FF', border: '1.5px solid #93C5FD', borderRadius: 16, padding: '18px 20px' }}>
-                  <div style={{ fontSize: 20, marginBottom: 6 }}>⚡ Decisión Muy Rápida (&lt; 6 segundos)</div>
-                  <h3 style={{ fontSize: 16, fontWeight: 800, color: '#1E40AF', margin: '0 0 6px' }}>Impulso o Evasión</h3>
+                  <div style={{ fontSize: 20, marginBottom: 6 }}>{t('asistentes.guideFastHead')}</div>
+                  <h3 style={{ fontSize: 16, fontWeight: 800, color: '#1E40AF', margin: '0 0 6px' }}>{t('asistentes.guideFastTitle')}</h3>
                   <p style={{ fontSize: 13, color: '#1E3A8A', lineHeight: 1.45, margin: 0 }}>
-                    Si se eligen opciones de riesgo (ej: borrar pruebas o responder con insultos), denota reacción impulsiva defensiva. Si se eligen opciones de huida, puede reflejar el deseo de pasar página rápido para evitar el malestar.
+                    {t('asistentes.guideFastText')}
                   </p>
                 </div>
 
                 <div style={{ background: '#ECFDF5', border: '1.5px solid #A7F3D0', borderRadius: 16, padding: '18px 20px' }}>
-                  <div style={{ fontSize: 20, marginBottom: 6 }}>⏱️ Tiempo Habitual (6 a 15 segundos)</div>
-                  <h3 style={{ fontSize: 16, fontWeight: 800, color: '#065F46', margin: '0 0 6px' }}>Procesamiento Saludable</h3>
+                  <div style={{ fontSize: 20, marginBottom: 6 }}>{t('asistentes.guideNormalHead')}</div>
+                  <h3 style={{ fontSize: 16, fontWeight: 800, color: '#065F46', margin: '0 0 6px' }}>{t('asistentes.guideNormalTitle')}</h3>
                   <p style={{ fontSize: 13, color: '#064E3B', lineHeight: 1.45, margin: 0 }}>
-                    Lectura comprensiva de las opciones, evaluación de alternativas y elección consciente. Refleja un entorno de seguridad donde el menor siente que puede pensar con calma.
+                    {t('asistentes.guideNormalText')}
                   </p>
                 </div>
 
                 <div style={{ background: '#FEF3C7', border: '1.5px solid #FCD34D', borderRadius: 16, padding: '18px 20px' }}>
-                  <div style={{ fontSize: 20, marginBottom: 6 }}>⚠️ Alta Indecisión (&gt; 18 segundos)</div>
-                  <h3 style={{ fontSize: 16, fontWeight: 800, color: '#92400E', margin: '0 0 6px' }}>Conflicto Emocional / Miedo</h3>
+                  <div style={{ fontSize: 20, marginBottom: 6 }}>{t('asistentes.guideHighHead')}</div>
+                  <h3 style={{ fontSize: 16, fontWeight: 800, color: '#92400E', margin: '0 0 6px' }}>{t('asistentes.guideHighTitle')}</h3>
                   <p style={{ fontSize: 13, color: '#78350F', lineHeight: 1.45, margin: 0 }}>
-                    Tiempos prolongados en preguntas como «¿Qué necesita decir Sara primero?» o «¿Vais a llamar a mi padre?» revelan temor a represalias, lealtad dividida hacia familiares o desconfianza en el sistema de protección.
+                    {t('asistentes.guideHighText')}
                   </p>
                 </div>
               </div>
@@ -1232,12 +1238,12 @@ export default function DashboardAsistentesSociales() {
               padding: '24px 28px',
             }}>
               <h3 style={{ fontSize: 18, fontWeight: 900, color: '#0F172A', margin: '0 0 10px' }}>
-                Pautas recomendadas para la entrevista posterior:
+                {t('asistentes.guidelinesTitle')}
               </h3>
               <ul style={{ paddingLeft: 20, margin: 0, color: '#334155', fontSize: 14, lineHeight: 1.7 }}>
-                <li><strong>No juzgar:</strong> Validar que todas las emociones sentidas durante la historia son legítimas y comprensibles.</li>
-                <li><strong>Explorar dilemas lentos:</strong> Retomar en grupo o en entrevista individual aquellas preguntas donde el grupo o alumno tardó más tiempo: <em>«En esta pregunta muchos pensasteis bastante antes de responder, ¿qué fue lo más difícil de decidir?»</em>.</li>
-                <li><strong>Garantizar confidencialidad:</strong> Recordar siempre los canales de ayuda seguros y anónimos (116 111, 017 y Servicios Sociales locales).</li>
+                <li><strong>{t('asistentes.tip1Strong')}</strong> {t('asistentes.tip1Text')}</li>
+                <li><strong>{t('asistentes.tip2Strong')}</strong> {t('asistentes.tip2Text')} <em>{t('asistentes.tip2Quote')}</em>.</li>
+                <li><strong>{t('asistentes.tip3Strong')}</strong> {t('asistentes.tip3Text')}</li>
               </ul>
             </div>
           </div>
@@ -1262,13 +1268,13 @@ export default function DashboardAsistentesSociales() {
                 letterSpacing: 1,
                 marginBottom: 6,
               }}>
-                Psicología Jurídica y Forense · Técnica Proyectiva Digital
+                {t('asistentes.drawBadge')}
               </span>
               <h2 style={{ fontSize: 24, fontWeight: 900, color: '#0F172A', margin: '0 0 10px' }}>
-                Evaluación Grafométrica y Psicomotora del Dibujo Infantil (3 Fases)
+                {t('asistentes.drawTitle')}
               </h2>
               <p style={{ margin: 0, color: '#475569', fontSize: 15, lineHeight: 1.6, maxWidth: 900 }}>
-                Esta herramienta analiza de manera no intrusiva las variables cinemáticas del trazo (temblor/microvacilaciones, presión continua, latencia inicial, pausas aéreas, ocupación espacial y uso del color) antes y después del momento traumático en la novela, ayudando a detectar signos somáticos y defensivos de estrés agudo.
+                {t('asistentes.drawIntro')}
               </p>
             </div>
 
@@ -1279,35 +1285,35 @@ export default function DashboardAsistentesSociales() {
               gap: 16,
             }}>
               <div style={{ background: '#FFFFFF', padding: '18px 20px', borderRadius: 18, border: '2px solid #18181B', boxShadow: '0 3px 0 #18181B' }}>
-                <span style={{ fontSize: 12, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>Casos Evaluados</span>
+                <span style={{ fontSize: 12, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>{t('asistentes.kpiCases')}</span>
                 <div style={{ fontSize: 28, fontWeight: 900, color: '#0F172A', marginTop: 4 }}>
                   {drawingsSummary?.total_evaluations || 0}
                 </div>
-                <span style={{ fontSize: 12, color: '#64748B' }}>Fases 1 y 2 completadas</span>
+                <span style={{ fontSize: 12, color: '#64748B' }}>{t('asistentes.kpiCasesDesc')}</span>
               </div>
 
               <div style={{ background: '#FFFFFF', padding: '18px 20px', borderRadius: 18, border: '2px solid #18181B', boxShadow: '0 3px 0 #18181B' }}>
-                <span style={{ fontSize: 12, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>Δ Temblor Promedio</span>
+                <span style={{ fontSize: 12, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>{t('asistentes.kpiTremor')}</span>
                 <div style={{ fontSize: 28, fontWeight: 900, color: (drawingsSummary?.average_tremor_delta || 0) > 0 ? '#DC2626' : '#10B981', marginTop: 4 }}>
                   {(drawingsSummary?.average_tremor_delta || 0) > 0 ? `+${drawingsSummary?.average_tremor_delta}` : drawingsSummary?.average_tremor_delta || 0}
                 </div>
-                <span style={{ fontSize: 12, color: '#64748B' }}>Micro-oscilaciones post-trauma</span>
+                <span style={{ fontSize: 12, color: '#64748B' }}>{t('asistentes.kpiTremorDesc')}</span>
               </div>
 
               <div style={{ background: '#FFFFFF', padding: '18px 20px', borderRadius: 18, border: '2px solid #18181B', boxShadow: '0 3px 0 #18181B' }}>
-                <span style={{ fontSize: 12, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>Δ Ocupación del Lienzo</span>
+                <span style={{ fontSize: 12, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>{t('asistentes.kpiOccupancy')}</span>
                 <div style={{ fontSize: 28, fontWeight: 900, color: (drawingsSummary?.average_occupancy_delta || 0) < 0 ? '#D97706' : '#0F172A', marginTop: 4 }}>
                   {((drawingsSummary?.average_occupancy_delta || 0) * 100).toFixed(1)}%
                 </div>
-                <span style={{ fontSize: 12, color: '#64748B' }}>Retracción espacial relativa</span>
+                <span style={{ fontSize: 12, color: '#64748B' }}>{t('asistentes.kpiOccupancyDesc')}</span>
               </div>
 
               <div style={{ background: '#FFFFFF', padding: '18px 20px', borderRadius: 18, border: '2px solid #18181B', boxShadow: '0 3px 0 #18181B' }}>
-                <span style={{ fontSize: 12, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>Alertas Activas</span>
+                <span style={{ fontSize: 12, fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>{t('asistentes.kpiAlerts')}</span>
                 <div style={{ fontSize: 28, fontWeight: 900, color: (drawingsSummary?.active_alerts_count || 0) > 0 ? '#E11D48' : '#10B981', marginTop: 4 }}>
                   {drawingsSummary?.active_alerts_count || 0}
                 </div>
-                <span style={{ fontSize: 12, color: '#64748B' }}>Indicadores para entrevista</span>
+                <span style={{ fontSize: 12, color: '#64748B' }}>{t('asistentes.kpiAlertsDesc')}</span>
               </div>
             </div>
 
@@ -1316,7 +1322,7 @@ export default function DashboardAsistentesSociales() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                 {/* Selector de alumnos */}
                 <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
-                  <span style={{ fontSize: 13, fontWeight: 800, color: '#475569' }}>Seleccionar Expediente:</span>
+                  <span style={{ fontSize: 13, fontWeight: 800, color: '#475569' }}>{t('asistentes.selectCase')}</span>
                   {drawingsSummary.recent_cases.map((c, idx) => (
                     <button
                       key={c.id || idx}
@@ -1334,7 +1340,7 @@ export default function DashboardAsistentesSociales() {
                         boxShadow: selectedDrawingIndex === idx ? '0 3px 0 #18181B' : 'none',
                       }}
                     >
-                      {c.student_nickname || `Alumno ${idx + 1}`} ({c.session_pin || 'PIN'})
+                      {c.student_nickname || t('asistentes.studentN', { n: idx + 1 })} ({c.session_pin || 'PIN'})
                     </button>
                   ))}
                 </div>
@@ -1359,12 +1365,12 @@ export default function DashboardAsistentesSociales() {
                     }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, borderBottom: '2px solid #E2E8F0', paddingBottom: 16 }}>
                         <div>
-                          <span style={{ fontSize: 12, fontWeight: 800, color: '#4F46E5', textTransform: 'uppercase' }}>Ficha Grafométrica del Menor</span>
+                          <span style={{ fontSize: 12, fontWeight: 800, color: '#4F46E5', textTransform: 'uppercase' }}>{t('asistentes.caseSheet')}</span>
                           <h3 style={{ fontSize: 22, fontWeight: 900, color: '#0F172A', margin: '4px 0' }}>
-                            {currentCase.student_nickname || 'Alumno evaluado'}
+                            {currentCase.student_nickname || t('asistentes.evaluatedStudent')}
                           </h3>
                           <span style={{ fontSize: 13, color: '#64748B' }}>
-                            Fecha de captura: {currentCase.timestamp ? new Date(currentCase.timestamp).toLocaleString('es-ES') : 'Reciente'} · Sesión PIN: {currentCase.session_pin || 'N/A'}
+                            {t('asistentes.captureDate', { date: currentCase.timestamp ? new Date(currentCase.timestamp).toLocaleString(dateLocale) : t('asistentes.recent'), pin: currentCase.session_pin || 'N/A' })}
                           </span>
                         </div>
 
@@ -1387,7 +1393,7 @@ export default function DashboardAsistentesSociales() {
                             cursor: 'pointer',
                           }}
                         >
-                          ⬇ Exportar Informe JSON
+                          {t('asistentes.exportJson')}
                         </button>
                       </div>
 
@@ -1395,57 +1401,57 @@ export default function DashboardAsistentesSociales() {
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 18 }}>
                         {/* 1. Temblor / Inestabilidad */}
                         <div style={{ padding: 18, borderRadius: 16, border: '1.5px solid #E2E8F0', background: '#F8FAFC' }}>
-                          <span style={{ fontSize: 12, fontWeight: 800, color: '#475569', textTransform: 'uppercase' }}>1. Temblor y Tensión Motora</span>
+                          <span style={{ fontSize: 12, fontWeight: 800, color: '#475569', textTransform: 'uppercase' }}>{t('asistentes.m1Title')}</span>
                           <div style={{ fontSize: 24, fontWeight: 900, color: '#0F172A', margin: '6px 0' }}>
                             {m.tremor?.jitter_index || 0} <span style={{ fontSize: 13, color: '#64748B', fontWeight: 600 }}>/ 100</span>
                           </div>
                           <div style={{ fontSize: 13, color: (d.delta_tremor_index || 0) > 0 ? '#DC2626' : '#10B981', fontWeight: 700, marginBottom: 8 }}>
-                            Variación post-trauma: {(d.delta_tremor_index || 0) > 0 ? `+${d.delta_tremor_index}` : d.delta_tremor_index || 0} ({d.tremor_change_percent || 0}%)
+                            {t('asistentes.postVariation', { value: (d.delta_tremor_index || 0) > 0 ? `+${d.delta_tremor_index}` : d.delta_tremor_index || 0, pct: d.tremor_change_percent || 0 })}
                           </div>
                           <p style={{ margin: 0, fontSize: 12, color: '#475569', lineHeight: 1.5 }}>
-                            Evalúa micro-inflexiones angulares bruscas (&gt;60°) en distancias cortas. Picos elevados indican ansiedad somatizada o miedo agudo.
+                            {t('asistentes.m1Text')}
                           </p>
                         </div>
 
                         {/* 2. Presión y Fuerza */}
                         <div style={{ padding: 18, borderRadius: 16, border: '1.5px solid #E2E8F0', background: '#F8FAFC' }}>
-                          <span style={{ fontSize: 12, fontWeight: 800, color: '#475569', textTransform: 'uppercase' }}>2. Presión Continua del Trazo</span>
+                          <span style={{ fontSize: 12, fontWeight: 800, color: '#475569', textTransform: 'uppercase' }}>{t('asistentes.m2Title')}</span>
                           <div style={{ fontSize: 24, fontWeight: 900, color: '#0F172A', margin: '6px 0' }}>
-                            {m.pressure?.mean || 0.5} <span style={{ fontSize: 13, color: '#64748B', fontWeight: 600 }}>media (máx: {m.pressure?.max || 0.5})</span>
+                            {m.pressure?.mean || 0.5} <span style={{ fontSize: 13, color: '#64748B', fontWeight: 600 }}>{t('asistentes.pressureMean', { max: m.pressure?.max || 0.5 })}</span>
                           </div>
                           <div style={{ fontSize: 13, color: (d.delta_pressure_mean || 0) < 0 ? '#D97706' : '#0F172A', fontWeight: 700, marginBottom: 8 }}>
-                            Variación post-trauma: {d.delta_pressure_mean > 0 ? `+${d.delta_pressure_mean}` : d.delta_pressure_mean || 0} ({d.pressure_change_percent || 0}%)
+                            {t('asistentes.postVariation', { value: d.delta_pressure_mean > 0 ? `+${d.delta_pressure_mean}` : d.delta_pressure_mean || 0, pct: d.pressure_change_percent || 0 })}
                           </div>
                           <p style={{ margin: 0, fontSize: 12, color: '#475569', lineHeight: 1.5 }}>
-                            {m.pressure?.mean < 0.3 ? 'Presión hipotónica (posible inhibición/desesperanza).' : m.pressure?.mean > 0.7 ? 'Presión hipertónica (tensión/descarga agresiva contenida).' : 'Tono neuromuscular dentro del rango esperado.'}
+                            {m.pressure?.mean < 0.3 ? t('asistentes.pressureLow') : m.pressure?.mean > 0.7 ? t('asistentes.pressureHigh') : t('asistentes.pressureNormal')}
                           </p>
                         </div>
 
                         {/* 3. Ocupación Espacial (Micrografismo) */}
                         <div style={{ padding: 18, borderRadius: 16, border: '1.5px solid #E2E8F0', background: '#F8FAFC' }}>
-                          <span style={{ fontSize: 12, fontWeight: 800, color: '#475569', textTransform: 'uppercase' }}>3. Emplazamiento y Tamaño</span>
+                          <span style={{ fontSize: 12, fontWeight: 800, color: '#475569', textTransform: 'uppercase' }}>{t('asistentes.m3Title')}</span>
                           <div style={{ fontSize: 24, fontWeight: 900, color: '#0F172A', margin: '6px 0' }}>
-                            {((m.spatial?.occupancy_ratio || 0) * 100).toFixed(0)}% <span style={{ fontSize: 13, color: '#64748B', fontWeight: 600 }}>del lienzo</span>
+                            {((m.spatial?.occupancy_ratio || 0) * 100).toFixed(0)}% <span style={{ fontSize: 13, color: '#64748B', fontWeight: 600 }}>{t('asistentes.ofCanvas')}</span>
                           </div>
                           <div style={{ fontSize: 13, color: (d.delta_occupancy_ratio || 0) < 0 ? '#DC2626' : '#10B981', fontWeight: 700, marginBottom: 8 }}>
-                            Retracción post-trauma: {((d.delta_occupancy_ratio || 0) * 100).toFixed(1)}% ({d.occupancy_change_percent || 0}%)
+                            {t('asistentes.retraction', { value: ((d.delta_occupancy_ratio || 0) * 100).toFixed(1), pct: d.occupancy_change_percent || 0 })}
                           </div>
                           <p style={{ margin: 0, fontSize: 12, color: '#475569', lineHeight: 1.5 }}>
-                            Cuadrante predominante: <strong>{m.spatial?.predominant_quadrant || 'centro'}</strong>. Una contracción gráfica intensa post-trauma sugiere repliegue defensivo.
+                            {t('asistentes.quadrant')} <strong>{m.spatial?.predominant_quadrant || t('asistentes.quadrantCenter')}</strong>{t('asistentes.quadrantText')}
                           </p>
                         </div>
 
                         {/* 4. Latencias y Pausas */}
                         <div style={{ padding: 18, borderRadius: 16, border: '1.5px solid #E2E8F0', background: '#F8FAFC' }}>
-                          <span style={{ fontSize: 12, fontWeight: 800, color: '#475569', textTransform: 'uppercase' }}>4. Tiempo de Reacción y Pausas</span>
+                          <span style={{ fontSize: 12, fontWeight: 800, color: '#475569', textTransform: 'uppercase' }}>{t('asistentes.m4Title')}</span>
                           <div style={{ fontSize: 24, fontWeight: 900, color: '#0F172A', margin: '6px 0' }}>
-                            {((m.initial_latency_ms || 0) / 1000).toFixed(1)}s <span style={{ fontSize: 13, color: '#64748B', fontWeight: 600 }}>latencia inicial</span>
+                            {((m.initial_latency_ms || 0) / 1000).toFixed(1)}s <span style={{ fontSize: 13, color: '#64748B', fontWeight: 600 }}>{t('asistentes.initialLatency')}</span>
                           </div>
                           <div style={{ fontSize: 13, color: (d.delta_initial_latency_ms || 0) > 2000 ? '#DC2626' : '#475569', fontWeight: 700, marginBottom: 8 }}>
-                            Retardo post-trauma: {d.delta_initial_latency_ms > 0 ? `+${(d.delta_initial_latency_ms / 1000).toFixed(1)}s` : `${((d.delta_initial_latency_ms || 0) / 1000).toFixed(1)}s`}
+                            {t('asistentes.delay', { value: d.delta_initial_latency_ms > 0 ? `+${(d.delta_initial_latency_ms / 1000).toFixed(1)}s` : `${((d.delta_initial_latency_ms || 0) / 1000).toFixed(1)}s` })}
                           </div>
                           <p style={{ margin: 0, fontSize: 12, color: '#475569', lineHeight: 1.5 }}>
-                            Pausas de suspensión aérea &gt;2s: {m.hesitation_pauses_count || 0}. El retardo prolongado mide choque o resistencia al iniciar la representación.
+                            {t('asistentes.pausesText', { n: m.hesitation_pauses_count || 0 })}
                           </p>
                         </div>
                       </div>
@@ -1453,7 +1459,7 @@ export default function DashboardAsistentesSociales() {
                       {/* Alertas periciales orientativas */}
                       <div>
                         <h4 style={{ fontSize: 16, fontWeight: 900, color: '#0F172A', margin: '0 0 12px' }}>
-                          Indicadores Psicológicos y Alertas para la Entrevista:
+                          {t('asistentes.alertsTitle')}
                         </h4>
                         {alerts.length > 0 ? (
                           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -1481,7 +1487,7 @@ export default function DashboardAsistentesSociales() {
                           </div>
                         ) : (
                           <div style={{ padding: 14, borderRadius: 12, background: '#F0FDF4', border: '1.5px solid #86EFAC', color: '#166534', fontSize: 13 }}>
-                            ✔ No se han detectado variaciones psicomotoras extremas en la comparativa de este expediente.
+                            {t('asistentes.noAlerts')}
                           </div>
                         )}
                       </div>
@@ -1491,7 +1497,7 @@ export default function DashboardAsistentesSociales() {
               </div>
             ) : (
               <div style={{ background: '#FFFFFF', padding: 30, borderRadius: 18, border: '2px solid #18181B', textAlign: 'center', color: '#64748B' }}>
-                No hay sesiones de dibujo registradas todavía. Los datos aparecerán automáticamente en cuanto un menor juegue a la novela visual.
+                {t('asistentes.noDrawings')}
               </div>
             )}
           </div>
