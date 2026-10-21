@@ -101,72 +101,13 @@ export default function PanelEducador({ onCerrarSesion = null }) {
         />
 
         {/* Cabecera del panel */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'flex-start',
-            justifyContent: 'space-between',
-            gap: 16,
-            marginBottom: 24,
-            flexWrap: 'wrap',
-          }}
-        >
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-              <span
-                style={{
-                  fontSize: 11,
-                  fontWeight: 900,
-                  color: '#065F46',
-                  background: '#D1FAE5',
-                  border: '1.5px solid #059669',
-                  borderRadius: 999,
-                  padding: '3px 10px',
-                  letterSpacing: '0.04em',
-                  textTransform: 'uppercase',
-                }}
-              >
-                Intervención 1 a 1 · Enlace Único
-              </span>
-              <span
-                style={{
-                  fontSize: 11,
-                  fontWeight: 800,
-                  color: '#475569',
-                  background: '#F1F5F9',
-                  borderRadius: 999,
-                  padding: '3px 10px',
-                }}
-              >
-                Educación Social
-              </span>
-            </div>
-            <h1 style={{ fontSize: 26, fontWeight: 900, color: '#4A1A1C', margin: '0 0 6px' }}>
-              Panel de Generación de Casos
-            </h1>
-            <p style={{ color: '#475569', fontSize: 14, margin: 0, lineHeight: 1.4 }}>
-              Configura un escenario individualizado. Cada joven recibe un enlace único para su sesión.
-            </p>
-          </div>
-
-          {onCerrarSesion && (
-            <button
-              type="button"
-              onClick={onCerrarSesion}
-              style={{
-                background: '#F1F5F9',
-                color: '#475569',
-                border: '1.5px solid #CBD5E1',
-                borderRadius: 12,
-                padding: '6px 12px',
-                fontSize: 12,
-                fontWeight: 800,
-                cursor: 'pointer',
-              }}
-            >
-              Cerrar sesión
-            </button>
-          )}
+        <div style={{ marginBottom: 24 }}>
+          <h1 style={{ fontSize: 26, fontWeight: 900, color: '#4A1A1C', margin: '0 0 6px' }}>
+            Panel de Generación de Casos
+          </h1>
+          <p style={{ color: '#475569', fontSize: 14, margin: 0, lineHeight: 1.4 }}>
+            Configura un escenario individualizado. Cada joven recibe un enlace único para su sesión.
+          </p>
         </div>
 
         {/* ===================================================================
