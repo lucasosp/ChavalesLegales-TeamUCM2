@@ -1,4 +1,5 @@
 import { resolveStoryCover } from "../content/contentLoader.js";
+import { t } from "../i18n.js";
 
 /**
  * Library screen. Lists every story from the content index and starts the
@@ -22,18 +23,17 @@ export class StorySelector {
         <div class="library-shell">
           <header class="library-header">
             <p class="library-kicker">LegalinStory</p>
-            <h1 class="library-title">Story Library</h1>
+            <h1 class="library-title">${t("library.title")}</h1>
             <p class="library-intro">
-              Choose a story. Every scene, sprite, and line is loaded from JSON
-              content and checked before the app starts.
+              ${t("library.intro")}
             </p>
           </header>
 
-          <section class="story-grid" data-stories aria-label="Available stories"></section>
+          <section class="story-grid" data-stories aria-label="${t("library.storiesAria")}"></section>
 
           <footer class="library-footer">
             <span data-story-count></span>
-            <span>Progress is saved locally, per story.</span>
+            <span>${t("library.savedLocally")}</span>
           </footer>
         </div>
       </main>
@@ -45,7 +45,7 @@ export class StorySelector {
     }
 
     root.querySelector("[data-story-count]").textContent =
-      `${stories.length} ${stories.length === 1 ? "story" : "stories"} available`;
+      t(stories.length === 1 ? "library.countOne" : "library.countMany", { count: stories.length });
   }
 
   #createCard(story) {
@@ -64,7 +64,7 @@ export class StorySelector {
 
     const meta = document.createElement("span");
     meta.className = "story-meta";
-    meta.textContent = this.#hasSave(story.id) ? "Continue" : "New story";
+    meta.textContent = this.#hasSave(story.id) ? t("library.continue") : t("library.newStory");
 
     const title = document.createElement("span");
     title.className = "story-title";
@@ -79,7 +79,7 @@ export class StorySelector {
     if (this.#hasSave(story.id)) {
       const progress = document.createElement("span");
       progress.className = "story-progress";
-      progress.textContent = "Saved progress";
+      progress.textContent = t("library.savedProgress");
       body.append(progress);
     }
 

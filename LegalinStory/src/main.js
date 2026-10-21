@@ -3,21 +3,28 @@ import { SaraExperience } from "./app/SaraExperience.js";
 import {
   loadStory,
   loadStoryIndex,
+  localizeDocument,
+  localizeGuide,
   resolveCharacterAsset,
 } from "./content/contentLoader.js";
+import { getLang, hasKey, t } from "./i18n.js";
 import { LocalStorageSaveStore } from "./services/saveStores.js";
 import "./styles/main.css";
 import "./styles/sara.css";
 import "./styles/stage.css";
 
 const root = document.querySelector("#app");
+document.documentElement.lang = getLang();
 
 let index = null;
 let app = null;
 let session = 0;
 
+// Story names from the index are Spanish; show the localized name when known.
+const storyTitle = (entry) => (getLang() !== "es" && hasKey(`storyTitles.${entry.id}`) ? t(`storyTitles.${entry.id}`) : entry.title);
+
 async function init() {
-  showLoading("Sara · Mi historia sigue");
+  showLoading(t("storyTitles.sara"));
 
   try {
     index = await loadStoryIndex();
@@ -61,21 +68,25 @@ async function startStory(entry) {
   url.searchParams.set("story", entry.id);
   history.replaceState({}, "", url);
 
-  showLoading(entry.title);
+  showLoading(storyTitle(entry));
 
   try {
     const content = await loadStory(entry);
     if (token !== session) return;
+    if (getLang() !== "es" && !content.overlay?.title) content.title = storyTitle(entry);
 
     document.title = `${content.title} — LegalinStory`;
     preloadCharacterArt(content.assets);
 
     if (entry.id === "sara") {
-      const [guide, legal] = await Promise.all(["guide", "legal"].map(async (name) => {
+      const [rawGuide, rawLegal] = await Promise.all(["guide", "legal"].map(async (name) => {
         const response = await fetch(new URL(`content/stories/sara/${name}.json`, document.baseURI));
-        if (!response.ok) throw new Error(`No se pudo cargar la información de Sara (${name})`);
+        if (!response.ok) throw new Error(t("load.saraInfoError", { name }));
         return response.json();
       }));
+      // Translated guide/legal come from the same optional overlay as the story.
+      const guide = localizeGuide(rawGuide, content.overlay?.guide);
+      const legal = localizeDocument(rawLegal, content.overlay?.legal);
       if (token !== session) return;
       app = new SaraExperience({ root, content, guide, legal, onExit: showLibrary });
       return;
@@ -114,18 +125,18 @@ function showLoading(title) {
       <span class="load-pulse" aria-hidden="true"></span>
     </main>
   `;
-  document.title = `Abriendo ${title} — Chavales Legales`;
+  document.title = t("load.opening", { title });
   root.querySelector("[data-load-title]").textContent = title;
 }
 
 function showError(error, { retry }) {
   console.error(error);
-  document.title = "Error al cargar — Chavales Legales";
+  document.title = t("load.errorDocTitle");
 
   root.innerHTML = `
     <main class="load-screen">
-      <p class="library-kicker">No se ha podido cargar</p>
-      <h1 class="load-title">No hemos podido abrir la historia.</h1>
+      <p class="library-kicker">${t("load.errorKicker")}</p>
+      <h1 class="load-title">${t("load.errorTitle")}</h1>
       <p class="load-message" data-error></p>
       <button class="load-button" type="button" data-retry></button>
     </main>
@@ -135,7 +146,7 @@ function showError(error, { retry }) {
     error instanceof Error ? error.message : String(error);
 
   const button = root.querySelector("[data-retry]");
-  button.textContent = "Volver a intentar";
+  button.textContent = t("load.retry");
   button.addEventListener("click", () => init());
 }
 

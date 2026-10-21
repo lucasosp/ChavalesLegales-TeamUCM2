@@ -77,6 +77,7 @@ function compileNode(id, node, context) {
   if (node.remote !== undefined) compiled.remote = node.remote;
   if (node.tone !== undefined) compiled.tone = node.tone;
   if (node.speaker !== undefined) compiled.speaker = node.speaker;
+  if (node.speakerKey !== undefined) compiled.speakerKey = node.speakerKey;
   if (node.kicker !== undefined) compiled.kicker = node.kicker;
   if (node.title !== undefined) compiled.title = node.title;
   if (node.text !== undefined) compiled.text = node.text;
@@ -108,6 +109,7 @@ function compileNode(id, node, context) {
   if (node.type === "chat") {
     compiled.chatTitle = node.chatTitle;
     compiled.self = node.self;
+    if (node.selfKey !== undefined) compiled.selfKey = node.selfKey;
     compiled.messages = (node.messages ?? []).map((message) => ({ ...message }));
   }
 

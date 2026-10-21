@@ -1,6 +1,7 @@
 import { compileStory } from "./compileStory.js";
 import { characterImage } from "./characterImages.js";
 import { photoBackground } from "./backgroundImages.js";
+import { applyOverlay, fetchOverlay, getLang } from "../i18n.js";
 
 const CONTENT_BASE = new URL("content/", document.baseURI);
 
@@ -23,12 +24,25 @@ export async function loadStory(entry) {
     ? fetchJson(new URL(content.rights, manifestUrl), `rights for "${entry.id}"`)
     : Promise.resolve(null);
 
-  const [storyDoc, scenes, assets, rights] = await Promise.all([
+  const lang = getLang();
+  const overlayPromise = lang !== "es"
+    ? fetchOverlay(new URL(`i18n/${lang}.json`, manifestUrl))
+    : Promise.resolve(null);
+
+  const [rawStoryDoc, rawScenes, rawAssets, rawRights, overlay] = await Promise.all([
     fetchJson(new URL(content.story, manifestUrl), `story for "${entry.id}"`),
     fetchJson(new URL(content.scenes, manifestUrl), `scenes for "${entry.id}"`),
     fetchJson(new URL(content.assets, manifestUrl), `assets for "${entry.id}"`),
     rightsPromise,
+    overlayPromise,
   ]);
+
+  // Translations are merged into the raw JSON before compiling. Fields used
+  // as identifiers (speaker names, chat authors) keep their original value.
+  const storyDoc = overlay?.story ? applyOverlay(keepStoryKeys(rawStoryDoc), overlay.story) : rawStoryDoc;
+  const scenes = overlay?.scene ? applyOverlay(rawScenes, overlay.scene) : rawScenes;
+  const assets = overlay?.assets ? applyOverlay(rawAssets, overlay.assets) : rawAssets;
+  const rights = overlay?.rights && rawRights ? applyOverlay(rawRights, overlay.rights) : rawRights;
 
   const startId = manifest.start?.node ?? storyDoc.start;
   const compiled = compileStory({
@@ -43,7 +57,8 @@ export async function loadStory(entry) {
     story: compiled.nodes,
     startId: compiled.startId,
     initialFlags: compiled.initialFlags,
-    title: manifest.title ?? entry.title,
+    title: overlay?.title ?? manifest.title ?? entry.title,
+    overlay,
     manifest,
     scenes,
     assets,
@@ -54,6 +69,31 @@ export async function loadStory(entry) {
     resolveBackground: (sceneId) => resolveBackgroundAsset(scenes, assets, sceneId),
     resolveSceneLabel: (sceneId) => scenes?.scenes?.[sceneId]?.label ?? sceneId,
   };
+}
+
+/** Merge a story's optional guide/legal translations, keeping person names as keys. */
+export function localizeGuide(guide, overlay) {
+  if (!overlay) return guide;
+  const base = structuredClone(guide);
+  for (const person of base.people ?? []) person.key ??= person.name;
+  return applyOverlay(base, overlay);
+}
+
+export function localizeDocument(doc, overlay) {
+  return overlay ? applyOverlay(doc, overlay) : doc;
+}
+
+function keepStoryKeys(storyDoc) {
+  const copy = structuredClone(storyDoc);
+  for (const node of Object.values(copy.nodes ?? {})) {
+    if (!node || typeof node !== "object") continue;
+    if (typeof node.speaker === "string") node.speakerKey ??= node.speaker;
+    if (typeof node.self === "string") node.selfKey ??= node.self;
+    for (const message of Array.isArray(node.messages) ? node.messages : []) {
+      if (message && typeof message.from === "string") message.fromKey ??= message.from;
+    }
+  }
+  return copy;
 }
 
 export function resolveCharacterAsset(assets, character) {

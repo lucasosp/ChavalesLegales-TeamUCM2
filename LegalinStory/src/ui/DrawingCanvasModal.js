@@ -1,5 +1,6 @@
 import { avatarStore } from "../services/avatarStore.js";
 import { DrawingMetricsCollector } from "../services/DrawingMetricsCollector.js";
+import { t } from "../i18n.js";
 
 /**
  * Interactive projective drawing modal supporting 3 sequential phases:
@@ -55,16 +56,16 @@ export class DrawingCanvasModal {
 
   #renderCanvasPhase(overlay, phase, onConfirm) {
     const isPhase1 = phase === "phase1";
-    const titleText = isPhase1 ? "Fase 1 · Dibuja tu avatar (Antes)" : "Fase 2 · Tu foto de perfil (Post-trauma)";
+    const titleText = isPhase1 ? t("drawing.phase1Title") : t("drawing.phase2Title");
     const introText = isPhase1
-      ? "Antes de comenzar la historia, dibuja en el lienzo tu avatar o cómo te imaginas al personaje protagonista. Puedes usar lápiz digital o el ratón."
-      : "Ha ocurrido el momento más difícil. Tómate un momento y vuelve a dibujar el avatar de tu personaje ahora. Este nuevo dibujo pasará a ser tu foto de perfil activa en la historia.";
-    const confirmLabel = isPhase1 ? "Guardar avatar y empezar historia →" : "Actualizar foto de perfil y continuar →";
+      ? t("drawing.phase1Intro")
+      : t("drawing.phase2Intro");
+    const confirmLabel = isPhase1 ? t("drawing.phase1Confirm") : t("drawing.phase2Confirm");
 
     overlay.innerHTML = `
       <div class="sara-drawing-card">
         <header class="sara-drawing-header">
-          <span class="sara-eyebrow">CHAVALES LEGALES · EXPRESIÓN PROYECTIVA</span>
+          <span class="sara-eyebrow">${t("drawing.eyebrow")}</span>
           <h2 id="sara-drawing-title" class="sara-drawing-title">${titleText}</h2>
           <p class="sara-drawing-instruction">${introText}</p>
         </header>
@@ -72,42 +73,42 @@ export class DrawingCanvasModal {
         <div class="sara-drawing-workspace">
           <div class="sara-canvas-container">
             <canvas class="sara-drawing-canvas" width="400" height="400"></canvas>
-            <div class="sara-canvas-hint" data-canvas-hint>Dibuja aquí con el lápiz o el cursor</div>
+            <div class="sara-canvas-hint" data-canvas-hint>${t("drawing.hint")}</div>
           </div>
 
-          <aside class="sara-drawing-controls" aria-label="Herramientas de dibujo">
+          <aside class="sara-drawing-controls" aria-label="${t("drawing.toolsAria")}">
             <div class="sara-control-group">
-              <span class="sara-control-label">Color</span>
+              <span class="sara-control-label">${t("drawing.color")}</span>
               <div class="sara-palette-grid">
-                <button type="button" class="sara-color-btn is-active" data-color="#1e1b26" style="background:#1e1b26" aria-label="Negro grafito"></button>
-                <button type="button" class="sara-color-btn" data-color="#2b4c7e" style="background:#2b4c7e" aria-label="Azul pizarra"></button>
-                <button type="button" class="sara-color-btn" data-color="#b93b3b" style="background:#b93b3b" aria-label="Rojo terracota"></button>
-                <button type="button" class="sara-color-btn" data-color="#d9822b" style="background:#d9822b" aria-label="Ocre cálido"></button>
-                <button type="button" class="sara-color-btn" data-color="#2d6a4f" style="background:#2d6a4f" aria-label="Verde bosque"></button>
-                <button type="button" class="sara-color-btn sara-eraser-btn" data-action="eraser" aria-label="Goma de borrar">⌫</button>
+                <button type="button" class="sara-color-btn is-active" data-color="#1e1b26" style="background:#1e1b26" aria-label="${t("drawing.black")}"></button>
+                <button type="button" class="sara-color-btn" data-color="#2b4c7e" style="background:#2b4c7e" aria-label="${t("drawing.blue")}"></button>
+                <button type="button" class="sara-color-btn" data-color="#b93b3b" style="background:#b93b3b" aria-label="${t("drawing.red")}"></button>
+                <button type="button" class="sara-color-btn" data-color="#d9822b" style="background:#d9822b" aria-label="${t("drawing.ochre")}"></button>
+                <button type="button" class="sara-color-btn" data-color="#2d6a4f" style="background:#2d6a4f" aria-label="${t("drawing.green")}"></button>
+                <button type="button" class="sara-color-btn sara-eraser-btn" data-action="eraser" aria-label="${t("drawing.eraser")}">⌫</button>
               </div>
             </div>
 
             <div class="sara-control-group">
-              <span class="sara-control-label">Grosor de trazo</span>
+              <span class="sara-control-label">${t("drawing.strokeWidth")}</span>
               <div class="sara-size-grid">
-                <button type="button" class="sara-size-btn" data-size="3" aria-label="Fino"><span style="width:4px;height:4px;"></span></button>
-                <button type="button" class="sara-size-btn is-active" data-size="6" aria-label="Medio"><span style="width:8px;height:8px;"></span></button>
-                <button type="button" class="sara-size-btn" data-size="14" aria-label="Grueso"><span style="width:14px;height:14px;"></span></button>
+                <button type="button" class="sara-size-btn" data-size="3" aria-label="${t("drawing.thin")}"><span style="width:4px;height:4px;"></span></button>
+                <button type="button" class="sara-size-btn is-active" data-size="6" aria-label="${t("drawing.medium")}"><span style="width:8px;height:8px;"></span></button>
+                <button type="button" class="sara-size-btn" data-size="14" aria-label="${t("drawing.thick")}"><span style="width:14px;height:14px;"></span></button>
               </div>
-              <small class="sara-pressure-note">Sensible a la presión si usas lápiz táctil</small>
+              <small class="sara-pressure-note">${t("drawing.pressureNote")}</small>
             </div>
 
             <div class="sara-control-group sara-action-buttons">
-              <button type="button" class="sara-tool-btn" data-action="undo" aria-label="Deshacer último trazo">↺ Deshacer</button>
-              <button type="button" class="sara-tool-btn" data-action="clear" aria-label="Limpiar lienzo">🗑 Limpiar</button>
+              <button type="button" class="sara-tool-btn" data-action="undo" aria-label="${t("drawing.undoAria")}">${t("drawing.undo")}</button>
+              <button type="button" class="sara-tool-btn" data-action="clear" aria-label="${t("drawing.clearAria")}">${t("drawing.clear")}</button>
             </div>
           </aside>
         </div>
 
         <footer class="sara-drawing-footer">
           <p class="sara-lock-warning" aria-live="polite">
-            🔒 <em>Una vez confirmado, no podrás retroceder para preservar la validez del dibujo.</em>
+            🔒 <em>${t("drawing.lockWarning")}</em>
           </p>
           <button type="button" class="sara-primary sara-confirm-draw" data-action="confirm">${confirmLabel}</button>
         </footer>
@@ -174,38 +175,38 @@ export class DrawingCanvasModal {
     overlay.innerHTML = `
       <div class="sara-drawing-card sara-phase3-card">
         <header class="sara-drawing-header">
-          <span class="sara-eyebrow">CHAVALES LEGALES · FASE 3 (INTEGRACIÓN)</span>
-          <h2 id="sara-drawing-title" class="sara-drawing-title">¿Cuál de los dos dibujos prefieres?</h2>
+          <span class="sara-eyebrow">${t("drawing.phase3Eyebrow")}</span>
+          <h2 id="sara-drawing-title" class="sara-drawing-title">${t("drawing.phase3Title")}</h2>
           <p class="sara-drawing-instruction">
-            Has llegado al final de tu recorrido. A lo largo de la historia has representado a tu personaje en dos momentos muy distintos. Elige con cuál de los dos te quedas para tu avatar definitivo.
+            ${t("drawing.phase3Intro")}
           </p>
         </header>
 
         <div class="sara-comparison-grid">
           <div class="sara-choice-option" data-choice="phase1" tabindex="0" role="button" aria-pressed="false">
             <div class="sara-choice-preview">
-              ${avatar1 ? `<img src="${avatar1}" alt="Avatar dibujado en Fase 1 (Antes del evento)">` : '<div class="sara-empty-avatar">Sin dibujo</div>'}
+              ${avatar1 ? `<img src="${avatar1}" alt="${t("drawing.avatar1Alt")}">` : `<div class="sara-empty-avatar">${t("drawing.noDrawing")}</div>`}
             </div>
-            <strong class="sara-choice-title">Dibujo 1: Antes</strong>
-            <p class="sara-choice-desc">Tu avatar al inicio de la historia, antes de los acontecimientos.</p>
-            <span class="sara-choice-tag">Seleccionar</span>
+            <strong class="sara-choice-title">${t("drawing.drawing1Title")}</strong>
+            <p class="sara-choice-desc">${t("drawing.drawing1Desc")}</p>
+            <span class="sara-choice-tag">${t("drawing.select")}</span>
           </div>
 
           <div class="sara-choice-option is-selected" data-choice="phase2" tabindex="0" role="button" aria-pressed="true">
             <div class="sara-choice-preview">
-              ${avatar2 ? `<img src="${avatar2}" alt="Avatar dibujado en Fase 2 (Post-trauma)">` : '<div class="sara-empty-avatar">Sin dibujo</div>'}
+              ${avatar2 ? `<img src="${avatar2}" alt="${t("drawing.avatar2Alt")}">` : `<div class="sara-empty-avatar">${t("drawing.noDrawing")}</div>`}
             </div>
-            <strong class="sara-choice-title">Dibujo 2: Post-trauma</strong>
-            <p class="sara-choice-desc">Tu avatar tras el momento difícil y la foto de perfil en tu camino.</p>
-            <span class="sara-choice-tag">Seleccionar</span>
+            <strong class="sara-choice-title">${t("drawing.drawing2Title")}</strong>
+            <p class="sara-choice-desc">${t("drawing.drawing2Desc")}</p>
+            <span class="sara-choice-tag">${t("drawing.select")}</span>
           </div>
         </div>
 
         <footer class="sara-drawing-footer">
           <p class="sara-lock-warning">
-            🔒 <em>Esta elección cerrará la historia y se conservará en tu despedida y cuaderno.</em>
+            🔒 <em>${t("drawing.phase3Warning")}</em>
           </p>
-          <button type="button" class="sara-primary sara-confirm-choice" data-action="confirm-choice">Conservar dibujo seleccionado →</button>
+          <button type="button" class="sara-primary sara-confirm-choice" data-action="confirm-choice">${t("drawing.keepSelected")}</button>
         </footer>
       </div>
     `;
