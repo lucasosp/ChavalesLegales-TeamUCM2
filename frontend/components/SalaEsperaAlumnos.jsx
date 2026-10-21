@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import AvatarGeometrico from './AvatarGeometrico'
+import { useT } from '../lib/i18n'
 
 const TOTAL_SEATS = 12
 
@@ -21,21 +22,21 @@ const NOMBRES_MOCK = [
 ]
 
 const OPCIONES_PELO = [
-  { label: 'Castaño', hex: '#4A2810' },
-  { label: 'Rubio', hex: '#FACC15' },
-  { label: 'Oscuro', hex: '#18181B' },
-  { label: 'Pelirrojo', hex: '#B03921' },
-  { label: 'Verde', hex: '#86EFAC' },
-  { label: 'Rosa', hex: '#F472B6' },
+  { id: 'castano', label: 'Castaño', hex: '#4A2810' },
+  { id: 'rubio', label: 'Rubio', hex: '#FACC15' },
+  { id: 'oscuro', label: 'Oscuro', hex: '#18181B' },
+  { id: 'pelirrojo', label: 'Pelirrojo', hex: '#B03921' },
+  { id: 'verde', label: 'Verde', hex: '#86EFAC' },
+  { id: 'rosa', label: 'Rosa', hex: '#F472B6' },
 ]
 
 const OPCIONES_ROPA = [
-  { label: 'Granate', hex: '#4A1A1C' },
-  { label: 'Verde bosque', hex: '#3D4A27' },
-  { label: 'Amarillo', hex: '#FACC15' },
-  { label: 'Verde claro', hex: '#86EFAC' },
-  { label: 'Naranja', hex: '#B03921' },
-  { label: 'Azul', hex: '#1E3A8A' },
+  { id: 'granate', label: 'Granate', hex: '#4A1A1C' },
+  { id: 'verdeBosque', label: 'Verde bosque', hex: '#3D4A27' },
+  { id: 'amarillo', label: 'Amarillo', hex: '#FACC15' },
+  { id: 'verdeClaro', label: 'Verde claro', hex: '#86EFAC' },
+  { id: 'naranja', label: 'Naranja', hex: '#B03921' },
+  { id: 'azul', label: 'Azul', hex: '#1E3A8A' },
 ]
 
 const BASES_DISPONIBLES = [1, 3, 4, 5, 6]
@@ -117,6 +118,7 @@ export default function SalaEsperaAlumnos({
   modoInfinito: externalModoInfinito = null,
   onCapacidadChange,
 }) {
+  const t = useT()
   const isLive = Array.isArray(externalStudents)
   const cleanPin = rawCleanPin || (pin ? String(pin).replace(/\s+/g, '') : '')
 
@@ -276,7 +278,7 @@ export default function SalaEsperaAlumnos({
         // Generar alumno ficticio con avatar paramétrico aleatorio
         const nuevo = {
           id: `bot-${siguienteAsiento + 1}`,
-          nombre: NOMBRES_MOCK[siguienteAsiento % NOMBRES_MOCK.length] || `Alumno ${siguienteAsiento + 1}`,
+          nombre: NOMBRES_MOCK[siguienteAsiento % NOMBRES_MOCK.length] || t('sala.alumnoN', { n: siguienteAsiento + 1 }),
           seatIndex: siguienteAsiento,
           baseType: BASES_DISPONIBLES[siguienteAsiento % BASES_DISPONIBLES.length],
           colorPelo: OPCIONES_PELO[siguienteAsiento % OPCIONES_PELO.length].hex,
@@ -316,7 +318,7 @@ export default function SalaEsperaAlumnos({
       }
       return {
         id: `bot-${idx + 1}`,
-        nombre: NOMBRES_MOCK[idx % NOMBRES_MOCK.length] || `Alumno ${idx + 1}`,
+        nombre: NOMBRES_MOCK[idx % NOMBRES_MOCK.length] || t('sala.alumnoN', { n: idx + 1 }),
         seatIndex: idx,
         baseType: BASES_DISPONIBLES[idx % BASES_DISPONIBLES.length],
         colorPelo: OPCIONES_PELO[idx % OPCIONES_PELO.length].hex,
@@ -998,14 +1000,14 @@ export default function SalaEsperaAlumnos({
           <div className="avatar-modal-card" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <div>
-                <h2 className="modal-title">Personaliza tu Personaje</h2>
-                <p className="modal-subtitle">Modifica tu estilo o genera otro aleatorio</p>
+                <h2 className="modal-title">{t('sala.modalTitle')}</h2>
+                <p className="modal-subtitle">{t('sala.modalSubtitle')}</p>
               </div>
               <button
                 type="button"
                 className="btn-modal-close"
                 onClick={cancelarPersonalizacion}
-                title="Cerrar sin guardar"
+                title={t('sala.cerrarSinGuardar')}
               >
                 ✕
               </button>
@@ -1026,15 +1028,15 @@ export default function SalaEsperaAlumnos({
                   type="button"
                   className="btn-randomize-pill"
                   onClick={aleatorizarMiAvatar}
-                  title="Generar otro avatar al azar estilo Kahoot"
+                  title={t('sala.generarAleatorioTitle')}
                 >
-                  Generar aleatorio
+                  {t('sala.generarAleatorio')}
                 </button>
               </div>
 
               {/* Selector de tipo de base con galería visual de las 5 caras */}
               <div className="selector-section">
-                <span className="selector-label">1. Elige tu base de personaje</span>
+                <span className="selector-label">{t('sala.eligeBase')}</span>
                 <div className="base-faces-gallery">
                   {BASES_CATALOGO.map((b) => (
                     <button
@@ -1042,8 +1044,8 @@ export default function SalaEsperaAlumnos({
                       type="button"
                       className={`btn-face-card ${miAvatar.baseType === b.id ? 'active' : ''}`}
                       onClick={() => setMiAvatar((prev) => ({ ...prev, baseType: b.id }))}
-                      title={b.label}
-                      aria-label={b.label}
+                      title={t(`sala.base_${b.id}`)}
+                      aria-label={t(`sala.base_${b.id}`)}
                     >
                       <AvatarGeometrico
                         standalone
@@ -1061,7 +1063,7 @@ export default function SalaEsperaAlumnos({
               <div className="selector-section">
                 <div>
                   <span className="selector-label" style={{ display: 'block', marginBottom: '8px' }}>
-                    2. Color de sudadera/ropa
+                    {t('sala.colorRopa')}
                   </span>
                   <div className="swatches-row">
                     {OPCIONES_ROPA.map((ropa) => (
@@ -1070,7 +1072,7 @@ export default function SalaEsperaAlumnos({
                         type="button"
                         className={`btn-swatch ${miAvatar.colorRopa === ropa.hex ? 'active' : ''}`}
                         style={{ background: ropa.hex }}
-                        title={ropa.label}
+                        title={t(`sala.ropa_${ropa.id}`)}
                         onClick={() => setMiAvatar((prev) => ({ ...prev, colorRopa: ropa.hex }))}
                       >
                         {miAvatar.colorRopa === ropa.hex && (
@@ -1083,7 +1085,7 @@ export default function SalaEsperaAlumnos({
 
                 <div>
                   <span className="selector-label" style={{ display: 'block', marginBottom: '8px' }}>
-                    3. Color de pelo
+                    {t('sala.colorPelo')}
                   </span>
                   <div className="swatches-row">
                     {OPCIONES_PELO.map((pelo) => (
@@ -1092,7 +1094,7 @@ export default function SalaEsperaAlumnos({
                         type="button"
                         className={`btn-swatch ${miAvatar.colorPelo === pelo.hex ? 'active' : ''}`}
                         style={{ background: pelo.hex }}
-                        title={pelo.label}
+                        title={t(`sala.pelo_${pelo.id}`)}
                         onClick={() => setMiAvatar((prev) => ({ ...prev, colorPelo: pelo.hex }))}
                       >
                         {miAvatar.colorPelo === pelo.hex && (
@@ -1110,7 +1112,7 @@ export default function SalaEsperaAlumnos({
                 className="btn-confirm-avatar"
                 onClick={confirmarMiAvatar}
               >
-                Guardar cambios
+                {t('sala.guardarCambios')}
               </button>
             </div>
           </div>
@@ -1124,16 +1126,16 @@ export default function SalaEsperaAlumnos({
           <div>
             <div className="sala-badge-live">
               <span className="sala-dot-pulse" />
-              <span>{isHost ? 'SALA DE AULA ACTIVA' : 'SALA DE ESPERA'}</span>
+              <span>{isHost ? t('sala.salaAulaActiva') : t('sala.salaEspera')}</span>
             </div>
             <h1 className="sala-title-main" style={{ fontSize: 22, margin: '6px 0 0' }}>
-              Aula Virtual · Chavales Legales
+              {t('sala.aulaVirtual')}
             </h1>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
             <div className="sala-pin-pill">
-              <span className="sala-pin-label">CÓDIGO PIN</span>
+              <span className="sala-pin-label">{t('sala.codigoPin')}</span>
               <span className="sala-pin-value">{pin || cleanPin}</span>
             </div>
           </div>
@@ -1143,7 +1145,7 @@ export default function SalaEsperaAlumnos({
         <div className="sala-subbar">
           <div className="sala-counter-wrap">
             <span className="sala-counter-text">
-              Alumnos en el aula: <b>{students.length}</b> / {capacidadAula}
+              {t('sala.alumnosEnAula')} <b>{students.length}</b> / {capacidadAula}
             </span>
             <div className="sala-progress-track">
               <div
@@ -1155,13 +1157,13 @@ export default function SalaEsperaAlumnos({
             {/* Controles de gestión de aforo para el profesor */}
             {(isHost || !isLive) && (
               <div className="sala-aforo-controls">
-                <span className="sala-aforo-label">Aforo:</span>
+                <span className="sala-aforo-label">{t('sala.aforo')}</span>
                 <button
                   type="button"
                   className="btn-aforo-stepper"
                   onClick={disminuirCapacidad}
                   disabled={capacidadAula <= Math.max(4, students.length)}
-                  title="Reducir pupitres (-4)"
+                  title={t('sala.reducirPupitres')}
                 >
                   -
                 </button>
@@ -1170,7 +1172,7 @@ export default function SalaEsperaAlumnos({
                   type="button"
                   className="btn-aforo-stepper"
                   onClick={aumentarCapacidad}
-                  title="Añadir pupitres (+4)"
+                  title={t('sala.anadirPupitres')}
                 >
                   +
                 </button>
@@ -1178,9 +1180,9 @@ export default function SalaEsperaAlumnos({
                   type="button"
                   className={`btn-aforo-infinito ${modoInfinito ? 'active' : ''}`}
                   onClick={toggleModoInfinito}
-                  title={modoInfinito ? 'Modo Infinito activo (añade filas automáticamente)' : 'Activar Modo Infinito (∞)'}
+                  title={modoInfinito ? t('sala.modoInfinitoActivo') : t('sala.activarModoInfinito')}
                 >
-                  ∞ Modo Infinito
+                  ∞ {t('sala.modoInfinito')}
                 </button>
               </div>
             )}
@@ -1201,7 +1203,7 @@ export default function SalaEsperaAlumnos({
                   gap: 4,
                 }}
               >
-                Tu pupitre: #{currentSeat + 1}
+                {t('sala.tuPupitre', { n: currentSeat + 1 })}
               </span>
             )}
 
@@ -1210,9 +1212,9 @@ export default function SalaEsperaAlumnos({
                 type="button"
                 className="btn-avatar-edit"
                 onClick={abrirPersonalizador}
-                title="Personalizar mi personaje"
+                title={t('sala.personalizarMiPersonaje')}
               >
-                Personalizar avatar
+                {t('sala.personalizarAvatar')}
               </button>
             )}
           </div>
@@ -1224,17 +1226,17 @@ export default function SalaEsperaAlumnos({
                   type="button"
                   className="btn-sala-pill"
                   onClick={reiniciarAula}
-                  title="Vaciar las sillas para volver a ver la animación"
+                  title={t('sala.reiniciarTitle')}
                 >
-                  Reiniciar
+                  {t('sala.reiniciar')}
                 </button>
                 <button
                   type="button"
                   className="btn-sala-pill"
                   onClick={llenarAula}
-                  title="Llenar todos los pupitres de inmediato"
+                  title={t('sala.llenarAulaTitle')}
                 >
-                  Llenar aula
+                  {t('sala.llenarAula')}
                 </button>
                 {onVolver && (
                   <button
@@ -1242,7 +1244,7 @@ export default function SalaEsperaAlumnos({
                     className="btn-sala-volver"
                     onClick={onVolver}
                   >
-                    Volver
+                    {t('sala.volver')}
                   </button>
                 )}
               </>
@@ -1253,14 +1255,14 @@ export default function SalaEsperaAlumnos({
                 type="button"
                 className="btn-sala-iniciar"
                 onClick={onIniciar}
-                title="Iniciar la actividad"
+                title={t('sala.iniciarActividad')}
               >
-                Iniciar partida ({students.length})
+                {t('sala.iniciarPartida', { n: students.length })}
               </button>
             ) : !isHost ? (
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <span style={{ fontSize: 13, color: '#64748B', fontWeight: 600 }}>
-                  Esperando a que el profesor lance un juego a la clase...
+                  {t('sala.esperandoProfesorJuego')}
                 </span>
                 {onVolver && (
                   <button
@@ -1269,7 +1271,7 @@ export default function SalaEsperaAlumnos({
                     style={{ background: '#EF4444', borderColor: '#DC2626' }}
                     onClick={onVolver}
                   >
-                    Salir
+                    {t('sala.salir')}
                   </button>
                 )}
               </div>
@@ -1281,7 +1283,7 @@ export default function SalaEsperaAlumnos({
                 className="btn-sala-volver"
                 onClick={onVolver}
               >
-                Cerrar sala
+                {t('sala.cerrarSala')}
               </button>
             )}
           </div>
@@ -1358,7 +1360,7 @@ export default function SalaEsperaAlumnos({
                   letterSpacing="0.3"
                   fontFamily="'Plus Jakarta Sans', system-ui, sans-serif"
                 >
-                  Esperando a que el profesor inicie la partida...
+                  {t('sala.esperandoProfesorPartida')}
                 </text>
               </g>
             </g>
@@ -1556,7 +1558,7 @@ export default function SalaEsperaAlumnos({
                         letterSpacing="0.03em"
                         fontFamily="'Plus Jakarta Sans', system-ui, sans-serif"
                       >
-                        Pupitre {seat.id + 1}
+                        {t('sala.pupitreN', { n: seat.id + 1 })}
                       </text>
                     </g>
                   ) : (
@@ -1600,7 +1602,7 @@ export default function SalaEsperaAlumnos({
                         fill="#18181B"
                         letterSpacing="0.02em"
                       >
-                        {isMe ? `${student.nombre || 'Tú'} (Tú)` : student.nombre}
+                        {isMe ? `${!student.nombre || student.nombre === 'Tú' ? t('sala.tu') : student.nombre} (${t('sala.tu')})` : student.nombre}
                       </text>
                     </g>
                   )}
@@ -1613,11 +1615,11 @@ export default function SalaEsperaAlumnos({
         {/* Pie informativo de la sala */}
         <div className="sala-footer-legal">
           <div className="sala-tip-badge">
-            <span><b>Consejo Legalín:</b> Nadie puede obligarte a compartir fotos privadas ni contraseñas. ¡Juega limpio y seguro!</span>
+            <span><b>{t('sala.consejoTitulo')}</b> {t('sala.consejoTexto')}</span>
           </div>
 
           <div>
-            <span>Ayuda ante dudas o acoso: <b>017</b> (INCIBE · Gratuito)</span>
+            <span>{t('sala.ayuda')} <b>017</b> {t('sala.ayudaInfo')}</span>
           </div>
         </div>
       </div>
