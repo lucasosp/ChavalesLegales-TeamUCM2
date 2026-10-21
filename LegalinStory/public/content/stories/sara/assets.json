@@ -115,6 +115,177 @@
         "sad": "characters/marina/sad.svg",
         "surprised": "characters/marina/surprised.svg"
       }
+    },
+    "maya": {
+      "displayName": "Maya",
+      "size": {
+        "width": 840,
+        "height": 1240
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "defaultExpression": "neutral",
+      "expressions": {
+        "neutral": "characters/maya/neutral.svg",
+        "smile": "characters/maya/smile.svg",
+        "happy": "characters/maya/happy.svg",
+        "sad": "characters/maya/sad.svg",
+        "surprised": "characters/maya/surprised.svg"
+      }
+    },
+    "sofi": {
+      "displayName": "Sofi",
+      "size": {
+        "width": 840,
+        "height": 1240
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "defaultExpression": "neutral",
+      "expressions": {
+        "neutral": "characters/sofi/neutral.svg",
+        "smile": "characters/sofi/smile.svg",
+        "happy": "characters/sofi/happy.svg",
+        "sad": "characters/sofi/sad.svg",
+        "surprised": "characters/sofi/surprised.svg"
+      }
+    },
+    "elena": {
+      "displayName": "Elena",
+      "size": {
+        "width": 840,
+        "height": 1240
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "defaultExpression": "neutral",
+      "expressions": {
+        "neutral": "characters/elena/neutral.svg",
+        "smile": "characters/elena/smile.svg",
+        "happy": "characters/elena/happy.svg",
+        "sad": "characters/elena/sad.svg",
+        "surprised": "characters/elena/surprised.svg"
+      }
+    },
+    "lucia": {
+      "displayName": "Lucía",
+      "size": {
+        "width": 840,
+        "height": 1240
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "defaultExpression": "neutral",
+      "expressions": {
+        "neutral": "characters/lucia/neutral.svg",
+        "smile": "characters/lucia/smile.svg",
+        "happy": "characters/lucia/happy.svg",
+        "sad": "characters/lucia/sad.svg",
+        "surprised": "characters/lucia/surprised.svg"
+      }
+    },
+    "madre": {
+      "displayName": "Mamá",
+      "size": {
+        "width": 840,
+        "height": 1240
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "defaultExpression": "neutral",
+      "expressions": {
+        "neutral": "characters/madre/neutral.svg",
+        "smile": "characters/madre/smile.svg",
+        "happy": "characters/madre/happy.svg",
+        "sad": "characters/madre/sad.svg",
+        "surprised": "characters/madre/surprised.svg"
+      }
+    },
+    "padre": {
+      "displayName": "Papá",
+      "size": {
+        "width": 840,
+        "height": 1240
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "defaultExpression": "neutral",
+      "expressions": {
+        "neutral": "characters/padre/neutral.svg",
+        "smile": "characters/padre/smile.svg",
+        "happy": "characters/padre/happy.svg",
+        "sad": "characters/padre/sad.svg",
+        "surprised": "characters/padre/surprised.svg"
+      }
+    },
+    "profesor": {
+      "displayName": "Profesor",
+      "size": {
+        "width": 840,
+        "height": 1240
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "defaultExpression": "neutral",
+      "expressions": {
+        "neutral": "characters/profesor/neutral.svg",
+        "smile": "characters/profesor/smile.svg",
+        "happy": "characters/profesor/happy.svg",
+        "sad": "characters/profesor/sad.svg",
+        "surprised": "characters/profesor/surprised.svg"
+      }
+    },
+    "companera": {
+      "displayName": "Compañera",
+      "size": {
+        "width": 840,
+        "height": 1240
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "defaultExpression": "neutral",
+      "expressions": {
+        "neutral": "characters/companera/neutral.svg",
+        "smile": "characters/companera/smile.svg",
+        "happy": "characters/companera/happy.svg",
+        "sad": "characters/companera/sad.svg",
+        "surprised": "characters/companera/surprised.svg"
+      }
+    },
+    "companero": {
+      "displayName": "Compañero",
+      "size": {
+        "width": 840,
+        "height": 1240
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      },
+      "defaultExpression": "neutral",
+      "expressions": {
+        "neutral": "characters/companero/neutral.svg",
+        "smile": "characters/companero/smile.svg",
+        "happy": "characters/companero/happy.svg",
+        "sad": "characters/companero/sad.svg",
+        "surprised": "characters/companero/surprised.svg"
+      }
     }
   },
   "backgrounds": {
@@ -180,6 +351,34 @@
         "height": 1080
       },
       "src": "backgrounds/quiet-room.svg"
+    },
+    "home-living-cold": {
+      "size": {
+        "width": 1920,
+        "height": 1080
+      },
+      "src": "backgrounds/home-living-cold.svg"
+    },
+    "home-kitchen-cold": {
+      "size": {
+        "width": 1920,
+        "height": 1080
+      },
+      "src": "backgrounds/home-kitchen-cold.svg"
+    },
+    "court-friendly": {
+      "size": {
+        "width": 1920,
+        "height": 1080
+      },
+      "src": "backgrounds/court-friendly.svg"
+    },
+    "shelter-room": {
+      "size": {
+        "width": 1920,
+        "height": 1080
+      },
+      "src": "backgrounds/shelter-room.svg"
     }
   }
 }
