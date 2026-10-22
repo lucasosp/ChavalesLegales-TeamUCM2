@@ -88,11 +88,22 @@ html, body {
   transition: background 0.4s ease;
 }
 
-@media (min-height: 800px) {
+/* Sin scroll: la página se ajusta a la altura de la pantalla (compactando el contenido) */
+@media (min-height: 560px) {
   .kahoot-page {
     height: 100vh;
+    height: 100dvh;
     overflow-y: hidden;
   }
+}
+
+@media (min-height: 560px) and (max-height: 799px) {
+  .kahoot-title-wrapper { margin-bottom: 0.5rem; }
+  .kahoot-sections-stack { gap: 0.55rem; }
+  .pin-section-card { padding: 0.9rem 1.1rem 0.85rem; }
+  .solo-game-icon { width: 34px; height: 34px; }
+  .solo-game-tile { padding: 6px 4px; }
+  .teacher-game-btn { padding-block: 0.7rem; }
 }
 
 /* Capa de fondo orgánico curvado estilo Kahoot */
@@ -1503,8 +1514,10 @@ html, body {
 
 .selector-idioma-flag {
   flex: none;
-  border-radius: 3px;
-  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.25);
+  width: 26px;
+  height: 18px;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.2), 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 
 .selector-idioma-opt .opt-name {
