@@ -19,21 +19,23 @@
 | 1b · Home landing + `/alumno` | ✅ hecho | `page.jsx` 385→185, `/alumno` nueva (132) |
 | 2 · Telemetría (D2-a) | ✅ hecho | `telemetry.py` borrado; todo pasa por `casos` |
 | 3a · `lib/casos.js` sin offline (D11) | ✅ hecho | 85→72, cero `catch {}` mudos |
-| 3 · Locking de `CasosStore` | ⏳ pendiente | ver §Etapa 3 |
+| 3 · Locking de `CasosStore` | ✅ hecho | 4 operaciones bajo lock + copias defensivas + 8 tests |
 | 2b · Enseñar `deltaMetrics`/`alerts` | ✅ hecho | Δ + alertas + duración de minijuego + export de eventos |
 | 4 · Routers | ✅ absorbida | ya no hay nada que partir: 5 rutas |
 | 5 · Destrackear `public/novela` | ⛔ bloqueada | D4 sin responder (se deja como está) |
 | 3b · Archivo por caso | 🅿️ aplazada | ticket aparte, no es refactor |
-| 6 · Partir `PanelEducador` | ⏳ pendiente | ahora es el mayor del front (474) |
+| 6 · Partir `PanelEducador` | ✅ hecho | 474 → 4 archivos, el mayor 190 |
 
-**Bug preexistente detectado (no arreglado):** `informe.module.css` y las dos páginas de
+**Bug preexistente detectado y arreglado:** `informe.module.css` y las dos páginas de
 `/informe` usan **nombres de clase distintos**. La hoja define `topbar`, `mainContainer`,
 `headerCard`, `seccionCard`, `kpisSection`, `btnTop`, `btnTopGhost`… y las páginas piden
 `toolbar`, `doc`, `portada`, `seccion`, `kpis`, `btn`, `btnGhost`… Resultado: `styles.toolbar`
 es `undefined`, React omite el atributo y esos contenedores salen **sin clase**. En el HTML de
 `/informe` se ve `<div>` y `<article>` pelados. Faltan 5 de 10 clases en la lista y 13 de 43 en el
 detalle. El informe se pinta casi sin estilos (solo funcionan `tabla`, `leyenda`, `page`…).
-Es un cambio visual: va en su propio commit, con un mapa de renombrado, no dentro del refactor.
+Se arregló en su propio commit con un mapa de renombrado; ahora los 3 archivos que importan la
+hoja tienen 0 clases sin definir, y el HTML sale con `informe_topbar`, `informe_mainContainer`,
+`informe_headerCard`… en vez de `<div>` pelados.
 
 **Trabajo extra no previsto:** `sara-smoke.mjs` **ya fallaba en HEAD** (los nodos `external` de
 `sara` no estaban registrados en el test y el bucle no cedía el event loop). Arreglado en 2 líneas;
@@ -692,8 +694,8 @@ la de build espera **D4**, y `PanelEducador` es la **etapa 6**, la única que qu
 para minijuegos distintos de `cid-table`/`caja-arena`, y arreglar la columna `detalle` del registro
 (una fila `dibujo` sale vacía). Es aditivo, ~60 líneas, sin backend.
 
-**Si hay dos:** + **etapa 3** (locking de `CasosStore`, que hoy muta con `setdefault` fuera del
-`threading.Lock`) y **etapa 6** (partir `PanelEducador`, 474 líneas).
+**Si hay dos:** ✅ ambas hechas. Queda la etapa 3b (archivo por caso) y el bug de estilos del
+informe, también resuelto.
 
 **Cuando se confirme D4:** destrackear `frontend/public/novela` (190 archivos).
 
