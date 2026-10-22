@@ -94,9 +94,12 @@ export class DrawingCanvasModal {
         </header>
 
         <div class="sara-drawing-workspace">
-          <div class="sara-canvas-container">
-            <canvas class="sara-drawing-canvas" width="400" height="400"></canvas>
-            <div class="sara-canvas-hint" data-canvas-hint>${t("drawing.hint")}</div>
+          <div class="sara-canvas-column">
+            <div class="sara-canvas-container">
+              <canvas class="sara-drawing-canvas" width="400" height="400"></canvas>
+              <div class="sara-canvas-hint" data-canvas-hint>${t("drawing.hint")}</div>
+            </div>
+            <p class="sara-canvas-note" aria-live="polite">${t("drawing.lockWarning")}</p>
           </div>
 
           <aside class="sara-drawing-controls" aria-label="${t("drawing.toolsAria")}">
@@ -126,15 +129,10 @@ export class DrawingCanvasModal {
               <button type="button" class="sara-tool-btn" data-action="undo" aria-label="${t("drawing.undoAria")}">${t("drawing.undo")}</button>
               <button type="button" class="sara-tool-btn" data-action="clear" aria-label="${t("drawing.clearAria")}">${t("drawing.clear")}</button>
             </div>
+
+            <button type="button" class="sara-primary sara-confirm-draw" data-action="confirm">${confirmLabel}</button>
           </aside>
         </div>
-
-        <footer class="sara-drawing-footer">
-          <p class="sara-lock-warning" aria-live="polite">
-            ${t("drawing.lockWarning")}
-          </p>
-          <button type="button" class="sara-primary sara-confirm-draw" data-action="confirm">${confirmLabel}</button>
-        </footer>
       </div>
     `;
 
@@ -275,14 +273,20 @@ export class DrawingCanvasModal {
     this.undoStack = [];
     this.hasDrawn = false;
 
-    // High DPI scaling
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // Escala del lienzo: se dibuja siempre en un espacio lógico de 400×400
+    // (las métricas del informe dependen de él), pero el backbuffer se ajusta
+    // al tamaño real en pantalla para que el trazo no salga pixelado ahora
+    // que el cuadro es más grande. El tope de 2 mantiene la memoria del
+    // historial de deshacer como antes.
     const width = 400;
     const height = 400;
+    const dpr = window.devicePixelRatio || 1;
+    const cssEdge = this.canvas.getBoundingClientRect().width || width;
+    const scale = Math.min(2, Math.max(1, (cssEdge / width) * dpr));
 
-    this.canvas.width = width * dpr;
-    this.canvas.height = height * dpr;
-    this.ctx.scale(dpr, dpr);
+    this.canvas.width = Math.round(width * scale);
+    this.canvas.height = Math.round(height * scale);
+    this.ctx.scale(scale, scale);
 
     // Initial white paper background
     this.ctx.fillStyle = "#ffffff";

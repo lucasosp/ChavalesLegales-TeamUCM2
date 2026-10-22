@@ -549,9 +549,12 @@
 }
 
 .sara-drawing-card {
-  max-width: 780px; width: 100%;
+  max-width: 980px; width: 100%;
   max-height: calc(100dvh - 32px); overflow-y: auto;
-  padding: clamp(14px, 2.5dvh, 26px) 28px;
+  /* Más aire a la derecha: es el lado de la columna de herramientas, que ahora
+     ocupa todo su ancho. */
+  padding-block: clamp(14px, 2.5dvh, 26px);
+  padding-inline: 28px 40px;
   display: flex; flex-direction: column; gap: clamp(8px, 1.8dvh, 18px);
   border: 3px solid var(--tinta);
   border-radius: var(--radio-pegatina-grande);
@@ -577,13 +580,20 @@
 .sara-drawing-instruction { font-size: .95rem; color: var(--texto-medio); margin: 0; line-height: 1.5; }
 
 .sara-drawing-workspace {
-  display: flex; gap: 24px; align-items: center; justify-content: center;
-  flex-wrap: wrap; padding: 0;
+  display: flex; gap: 28px; align-items: center; justify-content: center;
+  flex-wrap: nowrap; padding: 0;
+}
+
+/* El lienzo manda: columna propia para que el aviso quede centrado justo
+   debajo del cuadro, sin una franja de pie que se coma el alto útil. */
+.sara-canvas-column {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  flex: 0 1 auto; min-width: 0;
 }
 
 .sara-canvas-container {
   position: relative;
-  width: min(380px, 100%, max(160px, calc(100dvh - 400px)));
+  width: min(560px, 100%, max(180px, calc(100dvh - 240px)));
   height: auto; aspect-ratio: 1; flex-shrink: 0;
   overflow: hidden;
   border: 3px solid var(--tinta);
@@ -593,20 +603,25 @@
   touch-action: none;
 }
 
+.sara-canvas-note {
+  margin: 0; max-width: 100%; text-align: center;
+  font-size: .84rem; color: var(--texto-medio); line-height: 1.4;
+}
+
 .sara-drawing-canvas { width: 100%; height: 100%; touch-action: none; cursor: crosshair; display: block; }
 
 .sara-canvas-hint {
   position: absolute; inset: 0;
-  display: grid; place-items: center; padding: 20px;
+  display: grid; place-items: center; padding: 24px;
   color: var(--texto-suave);
-  font-size: .92rem; font-weight: 700;
+  font-size: 1rem; font-weight: 700;
   text-align: center;
   pointer-events: none; user-select: none;
 }
 
 .sara-drawing-controls {
-  display: flex; flex-direction: column; gap: 16px;
-  min-width: 0; width: min(294px, 100%);
+  display: flex; flex-direction: column; gap: 18px; justify-content: center;
+  min-width: 0; width: 260px; flex: 0 0 auto;
 }
 
 .sara-control-group { display: flex; flex-direction: column; gap: 8px; }
@@ -617,10 +632,12 @@
   color: var(--verde-800);
 }
 
-.sara-palette-grid { display: grid; grid-template-columns: repeat(auto-fit, 44px); gap: 8px; }
+/* Paleta 3×2 que rellena el ancho de la columna: la goma no se queda sola en
+   una fila suelta ni los colores dejan un hueco muerto a la derecha. */
+.sara-palette-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 
 .sara-color-btn {
-  width: 44px; height: 44px; padding: 0;
+  width: 100%; height: 44px; min-width: 0; padding: 0;
   display: grid; place-items: center;
   border: 3px solid var(--tinta);
   border-radius: 12px 9px 11px 10px / 10px 12px 9px 11px;
@@ -675,7 +692,32 @@
 
 .sara-lock-warning { margin: 0; font-size: .84rem; color: var(--texto-medio); display: flex; align-items: center; gap: 6px; }
 
-.sara-confirm-draw, .sara-confirm-choice { align-self: flex-end; min-height: 48px; width: auto; padding: 10px 24px; font-size: .98rem; }
+/* Guardar vive en la columna de herramientas: ocupa el mismo ancho que la
+   fila Deshacer/Limpiar y va justo debajo. */
+.sara-confirm-draw {
+  align-self: stretch; width: 100%; margin: 0;
+  min-height: 48px; padding: 12px 16px;
+  font-size: .95rem; text-align: center;
+}
+
+.sara-confirm-choice { align-self: flex-end; min-height: 48px; width: auto; padding: 10px 24px; font-size: .98rem; }
+
+@media (max-height: 620px) {
+  .sara-drawing-card { padding: 14px 28px 14px 18px; gap: 10px; }
+  .sara-drawing-title { font-size: 1.24rem; }
+  .sara-drawing-instruction { font-size: .88rem; }
+  .sara-canvas-container { width: min(560px, 100%, max(150px, calc(100dvh - 190px))); }
+}
+
+/* Sin sitio para la columna lateral: el lienzo arriba, las herramientas
+   debajo, ocupando el ancho completo de la tarjeta (la paleta pasa a 6×1 y
+   también se reparte el ancho). */
+@media (max-width: 720px) {
+  .sara-drawing-workspace { flex-wrap: wrap; justify-content: center; }
+  .sara-canvas-column { flex: 1 1 100%; }
+  .sara-drawing-controls { width: 100%; }
+  .sara-palette-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
 
 /* Fase 3: comparación sin placa, porque va dentro de la tarjeta. */
 .sara-phase3-card { max-width: 840px; }
@@ -760,26 +802,6 @@
   background: var(--superficie);
 }
 .sara-speaker-card.is-sara .sara-monogram img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-@media (max-height: 620px) {
-  .sara-drawing-card { padding: 14px 18px; gap: 10px; }
-  .sara-drawing-title { font-size: 1.24rem; }
-  .sara-drawing-instruction { font-size: .88rem; }
-  .sara-canvas-container { width: min(300px, 100%, max(140px, calc(100dvh - 330px))); }
-}
-
-/* Taller de dibujo: lienzo más grande y herramientas en una columna compacta
-   (la paleta en 3×2 para que la goma no se quede sola en otra fila). */
-.sara-drawing-card { max-width: 860px; }
-.sara-drawing-workspace { flex-wrap: nowrap; align-items: stretch; gap: 28px; }
-.sara-canvas-container { width: min(440px, 100%, max(180px, calc(100dvh - 300px))); }
-.sara-drawing-controls { width: 260px; justify-content: center; gap: 18px; }
-.sara-palette-grid { grid-template-columns: repeat(3, 44px); }
-@media (max-width: 720px) {
-  .sara-drawing-workspace { flex-wrap: wrap; justify-content: center; }
-  .sara-drawing-controls { width: 100%; }
-  .sara-palette-grid { grid-template-columns: repeat(6, 44px); }
-}
 
 /* Transición de nubes del taller de dibujo (misma idea que MinijuegoNubes) */
 .sara-clouds { position: fixed; inset: 0; z-index: 140; overflow: hidden; pointer-events: none; }
