@@ -2127,6 +2127,63 @@ body { background: var(--verde-950); }
   box-shadow: 3px 3px 0 var(--verde-700);
 }
 
+/* Placa identificativa del cargo jurídico destacado */
+.legal-badge {
+  position: absolute;
+  top: 0;
+  right: clamp(18px, 3vw, 34px);
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  padding: .32rem .95rem .36rem;
+  border: 2px solid var(--tinta);
+  border-radius: var(--radio-pegatina);
+  background: var(--marca-ambar);
+  box-shadow: 3px 4px 0 var(--marca-ambar-sombra);
+  color: var(--tinta);
+  font-family: var(--brand-font);
+  font-size: .82rem;
+  font-weight: 800;
+  letter-spacing: .03em;
+  line-height: 1.25;
+  white-space: nowrap;
+  transform: translateY(-78%) rotate(0.6deg);
+  transform-origin: right center;
+  pointer-events: none;
+  animation: legalBadgePopIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.legal-badge.is-hiding {
+  opacity: 0;
+  transform: translateY(-90%) scale(0.92) rotate(0.6deg);
+}
+
+.legal-badge-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--verde-950);
+}
+
+.legal-badge-label {
+  font-weight: 800;
+  text-transform: none;
+}
+
+@keyframes legalBadgePopIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-40%) scale(0.85) rotate(-1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-78%) scale(1) rotate(0.6deg);
+  }
+}
+
 .dialogue-text {
   padding-right: 0;
   padding-bottom: 0;

@@ -12,8 +12,6 @@ import { EDAD_MAX, EDAD_MIN, edadValida, soloDigitos } from './edad'
  */
 export default function FormularioCaso({
   t,
-  nombreJoven,
-  setNombreJoven,
   edad,
   setEdad,
   tipoRiesgo,
@@ -40,49 +38,28 @@ export default function FormularioCaso({
 
   return (
     <form onSubmit={onSubmit}>
-      {/* Nombre y edad en la misma fila: el nombre se queda el 85 % y el 15 % derecho es
-          para la edad, que rellena todo su hueco. */}
-      <div className={styles.filaNombreEdad}>
-        {/* Nombre del joven */}
-        <div className={styles.campo}>
-          <label htmlFor="input-nombre-joven" className={styles.etiqueta}>
-            {t('profesores.nombreJovenLabel')} <span className={styles.obligatorio}>*</span>
-          </label>
-          <input
-            id="input-nombre-joven"
-            type="text"
-            required
-            placeholder={t('profesores.nombreJovenPlaceholder')}
-            value={nombreJoven}
-            onChange={(e) => setNombreJoven(e.target.value)}
-            disabled={cargando}
-            className={styles.control}
-          />
-        </div>
-
-        {/* Edad del menor: solo dígitos y dentro de 5–18 */}
-        <div className={styles.campo}>
-          <label htmlFor="input-edad" className={styles.etiqueta}>
-            {t('profesores.edadLabel')} <span className={styles.obligatorio}>*</span>
-          </label>
-          <input
-            id="input-edad"
-            type="text"
-            inputMode="numeric"
-            autoComplete="off"
-            required
-            pattern="[0-9]*"
-            maxLength={2}
-            placeholder={t('profesores.edadPlaceholder')}
-            value={edad}
-            onChange={(e) => setEdad(soloDigitos(e.target.value))}
-            onBlur={() => setEdadVisitada(true)}
-            disabled={cargando}
-            aria-invalid={edadMal}
-            aria-describedby={edadMal ? 'error-formulario' : undefined}
-            className={`${styles.control} ${styles.controlEdad} ${edadMal ? styles.controlMal : ''}`}
-          />
-        </div>
+      {/* Edad del menor: solo dígitos y dentro de 5–18 */}
+      <div className={styles.campo}>
+        <label htmlFor="input-edad" className={styles.etiqueta}>
+          {t('profesores.edadLabel')} <span className={styles.obligatorio}>*</span>
+        </label>
+        <input
+          id="input-edad"
+          type="text"
+          inputMode="numeric"
+          autoComplete="off"
+          required
+          pattern="[0-9]*"
+          maxLength={2}
+          placeholder={t('profesores.edadPlaceholder')}
+          value={edad}
+          onChange={(e) => setEdad(soloDigitos(e.target.value))}
+          onBlur={() => setEdadVisitada(true)}
+          disabled={cargando}
+          aria-invalid={edadMal}
+          aria-describedby={edadMal ? 'error-formulario' : undefined}
+          className={`${styles.control} ${styles.controlEdad} ${edadMal ? styles.controlMal : ''}`}
+        />
       </div>
 
       {/* Tipo de riesgo */}
@@ -139,7 +116,7 @@ export default function FormularioCaso({
       ) : (
         <button
           type="submit"
-          disabled={!nombreJoven.trim() || !edadOk}
+          disabled={!edadOk}
           className={`${styles.accion} ${entrando ? styles.accionEntra : ''}`}
         >
           <span>{t('profesores.generarCaso')}</span>

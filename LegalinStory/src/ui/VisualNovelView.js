@@ -44,6 +44,7 @@ export class VisualNovelView {
   #quizTitle = "";
   #noticeTimer = null;
   #interactionLockBeforeNotice = false;
+  #badgeTimer = null;
 
   /**
    * @param {HTMLElement} root
@@ -93,6 +94,8 @@ export class VisualNovelView {
     this.onJumpToChapter = onJumpToChapter;
     this.root = root;
     this.#onKeyDown = (event) => this.#handleKeyDown(event);
+    this.seenLegalRoles = new Set();
+    this.#badgeTimer = null;
 
     root.innerHTML = appTemplate();
 
@@ -113,6 +116,8 @@ export class VisualNovelView {
       noticeClose: root.querySelector("[data-notice-close]"),
       panel: root.querySelector("[data-panel]"),
       speaker: root.querySelector("[data-speaker-name]"),
+      legalBadge: root.querySelector("[data-legal-badge]"),
+      legalBadgeText: root.querySelector("[data-legal-badge-text]"),
       text: root.querySelector("[data-text]"),
       announcement: root.querySelector("[data-announcement]"),
       advance: root.querySelector("[data-advance]"),
@@ -179,8 +184,10 @@ export class VisualNovelView {
     document.removeEventListener("keydown", this.#onKeyDown);
     clearTimeout(this.#choiceReadyTimer);
     clearInterval(this.#chatTimer);
+    clearTimeout(this.#badgeTimer);
     this.#choiceReadyTimer = null;
     this.#chatTimer = null;
+    this.#badgeTimer = null;
     this.#hideNotice();
     this.typewriter.stop();
   }
@@ -1097,6 +1104,70 @@ export class VisualNovelView {
       "companero",
     ]);
     this.refs.speaker.classList.toggle("is-voice", remote || (!this.root.classList.contains("sara-mode") && !onStage.has(normalized)));
+    this.#checkLegalBadge(name, key);
+  }
+
+  #checkLegalBadge(name, key) {
+    if (!this.refs.legalBadge || !this.refs.legalBadgeText) return;
+
+    const raw = (key ?? name ?? "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    if (!raw) return;
+
+    let roleKey = null;
+    let fallbackText = null;
+
+    if (raw.includes("juez") || raw.includes("jutgess") || raw.includes("epaile") || raw.includes("xuiz")) {
+      roleKey = raw.includes("jueza") || raw.includes("jutgess") || raw.includes("xuiz") ? "jueza" : "juez";
+      fallbackText = "Juez o jueza";
+    } else if (raw.includes("fiscal")) {
+      roleKey = "fiscal";
+      fallbackText = "Ministerio Fiscal";
+    } else if (raw.includes("letrad") || raw.includes("laj")) {
+      roleKey = "letrada";
+      fallbackText = "Letrada de la Administración de Justicia";
+    } else if (raw.includes("abogad") || raw.includes("advocat") || raw.includes("abokat") || raw.includes("avogad")) {
+      roleKey = raw.includes("abogado") || raw.includes("advocat") || raw.includes("avogado") ? "abogado" : "abogada";
+      fallbackText = "Abogada";
+    } else if (raw.includes("trabajadora social") || raw.includes("treballadora social") || raw.includes("gizarte-langile") || raw.includes("traballadora social")) {
+      roleKey = "trabajadoraSocial";
+      fallbackText = "Trabajadora social";
+    } else if (raw.includes("psicolog") || raw.includes("psicolog") || raw.includes("auzitegi-psikolog")) {
+      roleKey = "psicologa";
+      fallbackText = "Psicóloga forense";
+    } else if (raw.includes("acogida") || raw.includes("acollida") || raw.includes("babes")) {
+      roleKey = "equipoAcogida";
+      fallbackText = "Equipo de acogida y protección";
+    } else if (raw.includes("profesional")) {
+      roleKey = "profesional";
+      fallbackText = "Profesional especializado";
+    }
+
+    if (!roleKey) return;
+
+    // Solo mostrarlo la primera vez que aparece el cargo en la historia
+    if (this.seenLegalRoles.has(roleKey)) return;
+    this.seenLegalRoles.add(roleKey);
+
+    const roleTitle = t(`novel.roles.${roleKey}`) || fallbackText;
+    this.refs.legalBadgeText.textContent = roleTitle;
+    this.refs.legalBadge.hidden = false;
+    this.refs.legalBadge.classList.remove("is-hiding");
+
+    // Pequeño aria-label o announcement para accesibilidad
+    const currentAnnounce = this.refs.announcement.textContent;
+    this.refs.announcement.textContent = `[Cargo: ${roleTitle}] ${currentAnnounce}`;
+
+    if (this.#badgeTimer) clearTimeout(this.#badgeTimer);
+    this.#badgeTimer = setTimeout(() => {
+      if (!this.refs.legalBadge) return;
+      this.refs.legalBadge.classList.add("is-hiding");
+      setTimeout(() => {
+        if (this.refs.legalBadge) {
+          this.refs.legalBadge.hidden = true;
+          this.refs.legalBadge.classList.remove("is-hiding");
+        }
+      }, 350);
+    }, 4500);
   }
 
   #applyStage(stage) {

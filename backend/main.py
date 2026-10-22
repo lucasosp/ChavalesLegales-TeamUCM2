@@ -70,6 +70,8 @@ def obtener_caso(caso_id: str):
 @app.post("/api/casos/{caso_id}/meta")
 def guardar_meta_caso(caso_id: str, meta: Dict[str, Any] = Body(...)):
     """Crea o actualiza el caso. El trabajador social no reparte un código hasta que esto responde."""
+    # Por privacidad y protección del menor, nunca se almacena el nombre de pila ni identificadores directos
+    meta.pop("nombreJoven", None)
     if "edad" in meta:
         edad = meta["edad"]
         # bool es subclase de int en Python: True no es una edad válida

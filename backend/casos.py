@@ -182,9 +182,11 @@ class CasoStore:
 
     def set_meta(self, caso_id: str, meta: Dict[str, Any]) -> Dict[str, Any]:
         self._ruta(caso_id)  # valida el id antes de tocar nada
+        # Filtrar datos de carácter personal directo del menor (nombre de pila)
+        datos_meta = {k: v for k, v in meta.items() if k != "nombreJoven"}
         with self._lock:
             caso = self._caso(caso_id)
-            caso["meta"] = {**caso["meta"], **meta}
+            caso["meta"] = {**caso["meta"], **datos_meta}
             caso["schemaVersion"] = ESQUEMA_VERSION
             self._escribir(caso_id, caso)
             return copy.deepcopy(caso)

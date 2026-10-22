@@ -48,6 +48,18 @@
     "chapterSelectTitle": "Saltar a capítulo",
     "thoughtOf": "Pensamento de {speaker}",
     "thought": "Pensamento",
+    "roles": {
+      "jueza": "Xuíza",
+      "juez": "Xuíz ou maxistrado",
+      "abogada": "Avogada",
+      "abogado": "Avogado",
+      "fiscal": "Ministerio Fiscal",
+      "letrada": "Letrada da Administración de Xustiza",
+      "trabajadoraSocial": "Traballadora social",
+      "psicologa": "Psicóloga forense",
+      "equipoAcogida": "Equipo de acollida e protección",
+      "profesional": "Profesional de atención especializada"
+    },
     "narration": "Narración",
     "messages": "Mensaxes",
     "fromPhoneOf": "Desde o móbil de {name}",

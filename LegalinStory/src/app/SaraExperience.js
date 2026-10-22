@@ -53,9 +53,6 @@ export class SaraExperience {
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11"/></svg>
           </button>
           <div class="sara-chapter"><span class="sara-eyebrow" data-sara-chapter-number></span><span data-sara-chapter></span></div>
-          <select class="sara-chapter-select" data-sara-chapter-select aria-label="${t("novel.chapterSelectTitle")}">
-            <option value="" disabled selected>${t("novel.chapterSelect")}</option>
-          </select>
         </div>
         <button type="button" class="sara-menu-button" data-sara-action="pause" aria-label="${t("sara.menuAria")}">${t("sara.menu")}</button>
       </header>
@@ -72,23 +69,6 @@ export class SaraExperience {
     this.title = root.querySelector("#sara-dialog-title");
     this.close = root.querySelector("[data-sara-close]");
     this.close.addEventListener("click", () => this.closePanel());
-
-    this.chapterSelect = root.querySelector("[data-sara-chapter-select]");
-    if (this.chapterSelect && this.guide?.chapters) {
-      for (const ch of this.guide.chapters) {
-        const option = document.createElement("option");
-        option.value = ch.id;
-        option.textContent = t("sara.chapterOf", { n: ch.id, total: this.guide.chapters.length }) + (ch.title ? `: ${ch.title}` : "");
-        this.chapterSelect.append(option);
-      }
-      this.chapterSelect.addEventListener("change", (e) => {
-        const chId = Number(e.target.value);
-        if (chId) {
-          this.jumpToChapter(chId);
-          this.chapterSelect.blur();
-        }
-      });
-    }
 
     this.onRootClick = (event) => {
       const button = event.target.closest("[data-sara-action]");
@@ -321,6 +301,68 @@ export class SaraExperience {
     });
     instant.setAttribute("aria-pressed", String(Boolean(this.app.view.typewriter.instant)));
     this.button(t("sara.needHelp"), () => this.openPanel("help"));
+
+    if (this.guide?.chapters?.length) {
+      const container = element("div", "sara-pause-dropdown");
+      const currentChapter = this.engine.currentNode?.chapter;
+      const initialCh = this.guide.chapters.find((c) => c.id === currentChapter) ?? this.guide.chapters[0];
+      const initialLabel = initialCh
+        ? `${t("sara.chapterOf", { n: initialCh.id, total: this.guide.chapters.length })}: ${initialCh.title ?? ""}`
+        : t("novel.chapterSelect");
+
+      const trigger = element("button", "sara-pause-dropdown-trigger");
+      trigger.type = "button";
+      trigger.setAttribute("aria-haspopup", "listbox");
+      trigger.setAttribute("aria-expanded", "false");
+      trigger.setAttribute("aria-label", t("novel.chapterSelectTitle"));
+
+      const valueSpan = element("span", "sara-pause-dropdown-value", initialLabel);
+      const arrowSpan = element("span", "sara-pause-dropdown-arrow", "▾");
+      arrowSpan.setAttribute("aria-hidden", "true");
+      trigger.append(valueSpan, arrowSpan);
+
+      const list = element("ul", "sara-pause-dropdown-list");
+      list.setAttribute("role", "listbox");
+      list.setAttribute("aria-label", t("novel.chapterSelectTitle"));
+      list.hidden = true;
+
+      const toggleList = (open) => {
+        const isOpen = open !== undefined ? open : list.hidden;
+        list.hidden = !isOpen;
+        trigger.setAttribute("aria-expanded", String(isOpen));
+        container.classList.toggle("is-open", isOpen);
+      };
+
+      trigger.addEventListener("click", () => toggleList());
+
+      for (const ch of this.guide.chapters) {
+        const item = element("li", "sara-pause-dropdown-item");
+        item.setAttribute("role", "option");
+        const isSelected = ch.id === currentChapter;
+        item.setAttribute("aria-selected", String(isSelected));
+        if (isSelected) item.classList.add("is-selected");
+
+        const itemLabel = `${t("sara.chapterOf", { n: ch.id, total: this.guide.chapters.length })}: ${ch.title ?? ""}`;
+        item.textContent = itemLabel;
+
+        item.addEventListener("click", () => {
+          toggleList(false);
+          this.jumpToChapter(ch.id);
+        });
+        list.append(item);
+      }
+
+      const outsideClickListener = (event) => {
+        if (!container.contains(event.target)) {
+          toggleList(false);
+        }
+      };
+      document.addEventListener("pointerdown", outsideClickListener);
+
+      container.append(trigger, list);
+      this.body.append(container);
+    }
+
     this.button(t("sara.restartStory"), () => this.openPanel("restart"));
     this.button(t("sara.exitStory"), () => this.onExit?.());
 
@@ -408,9 +450,6 @@ export class SaraExperience {
     const chapter = this.guide.chapters.find((c) => c.id === node.chapter);
     this.root.querySelector("[data-sara-chapter-number]").textContent = t("sara.chapterOf", { n: node.chapter, total: this.guide.chapters.length });
     this.root.querySelector("[data-sara-chapter]").textContent = chapter?.title ?? t("sara.defaultChapter");
-    if (this.chapterSelect && node.chapter) {
-      this.chapterSelect.value = String(node.chapter);
-    }
     this.renderCast(node);
     const backBtn = this.root.querySelector("[data-sara-action='back']");
     if (backBtn) backBtn.disabled = this.engine.history.length === 0 || this.engine.isFinished;

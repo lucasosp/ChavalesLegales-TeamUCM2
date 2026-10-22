@@ -37,7 +37,6 @@ function nuevoCodigoCaso() {
 
 export default function PanelTrabajadorSocial() {
   const { t, lang } = useI18n()
-  const [nombreJoven, setNombreJoven] = useState('')
   const [edad, setEdad] = useState('')
   const [tipoRiesgo, setTipoRiesgo] = useState('ciberacoso')
   const [contexto, setContexto] = useState('')
@@ -166,7 +165,6 @@ export default function PanelTrabajadorSocial() {
 
     try {
       await guardarMetaCaso(casoId, {
-        nombreJoven: nombreJoven.trim() || t('profesores.jovenParticipante'),
         edad: Number(edad),
         // Se guarda el id del riesgo, no su texto: el informe lo traduce en la
         // lengua del lector con t(`profesores.riesgo_${id}`).
@@ -182,7 +180,6 @@ export default function PanelTrabajadorSocial() {
       setCasoGenerado({
         id: casoId,
         enlace: `${baseOrigin}/novela?caso=${casoId}`,
-        nombreJoven: nombreJoven.trim() || t('profesores.jovenParticipante'),
         edad: Number(edad),
         tipoRiesgo: t(`profesores.riesgo_${tipoRiesgo}`),
         tipoRiesgoId: tipoRiesgo,
@@ -239,7 +236,6 @@ export default function PanelTrabajadorSocial() {
     setCasoGenerado(null)
     setCopiado(false)
     setError(null)
-    setNombreJoven('')
     setEdad('')
     setContexto('')
   }
@@ -262,8 +258,6 @@ export default function PanelTrabajadorSocial() {
         ) : (
           <FormularioCaso
             t={t}
-            nombreJoven={nombreJoven}
-            setNombreJoven={setNombreJoven}
             edad={edad}
             setEdad={setEdad}
             tipoRiesgo={tipoRiesgo}

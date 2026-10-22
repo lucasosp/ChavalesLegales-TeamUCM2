@@ -70,32 +70,115 @@
 }
 .sara-eyebrow { font-size: .68rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--naranja-800); white-space: nowrap; }
 
-.sara-chapter-select {
-  display: inline-flex; align-items: center;
-  min-height: 44px; padding: 6px 12px;
+.sara-pause-dropdown {
+  position: relative;
+  width: 100%;
+  margin: 12px 0;
+}
+
+.sara-pause-dropdown-trigger {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  width: 100%; min-height: 48px; padding: 12px 16px;
   border: 3px solid var(--tinta);
-  border-radius: 12px 10px 11px 9px / 9px 12px 10px 11px;
-  background-color: var(--superficie);
-  color: var(--verde-950);
-  font-family: inherit; font-size: .8rem; font-weight: 800;
-  box-shadow: 3px 3px 0 var(--neutro-400);
-  cursor: pointer; pointer-events: auto;
-  max-width: min(180px, 30vw);
-  text-overflow: ellipsis;
+  border-radius: var(--radio-pegatina);
+  background: var(--superficie); color: var(--verde-950);
+  font-family: inherit; font-size: 1rem; font-weight: 800;
+  box-shadow: 3px 3px 0 var(--tinta);
+  cursor: pointer; line-height: 1.45; text-align: left;
   outline: none;
-  transform: rotate(-.4deg);
+  transform: rotate(-.3deg);
   transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease;
 }
-.sara-chapter-select:hover,
-.sara-chapter-select:focus-visible {
-  background-color: var(--naranja-100);
+
+.sara-pause-dropdown-trigger:hover,
+.sara-pause-dropdown-trigger:focus-visible,
+.sara-pause-dropdown.is-open .sara-pause-dropdown-trigger {
+  background: var(--verde-50);
   transform: translate(-1px, -2px) rotate(0deg);
   box-shadow: 4px 5px 0 var(--tinta);
 }
-.sara-chapter-select option {
-  font-size: .9rem;
+
+.sara-pause-dropdown-value {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sara-pause-dropdown-arrow {
+  flex: none;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--verde-800);
+  transition: transform .15s ease;
+}
+
+.sara-pause-dropdown.is-open .sara-pause-dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.sara-pause-dropdown-list {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 80;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
   background: var(--superficie);
+  border: 3px solid var(--tinta);
+  border-radius: 14px 11px 13px 12px / 12px 14px 11px 13px;
+  box-shadow: 4px 4px 0 var(--verde-700);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-height: 240px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  animation: dropdownFadeIn 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes dropdownFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.sara-pause-dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 9px;
+  font-size: 0.92rem;
+  font-weight: 700;
   color: var(--verde-950);
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+  line-height: 1.4;
+}
+
+.sara-pause-dropdown-item:hover {
+  background-color: var(--verde-100);
+}
+
+.sara-pause-dropdown-item.is-selected {
+  background-color: var(--marca-ambar);
+  color: var(--verde-950);
+  font-weight: 800;
+}
+
+.sara-pause-dropdown-item.is-selected:hover {
+  background-color: var(--marca-ambar-claro);
 }
 
 .sara-menu-button {
@@ -128,6 +211,7 @@
 /* La caja, el nombre y el botón de avanzar son la pegatina de main.css. */
 .sara-mode .dialogue { cursor: pointer; }
 .sara-mode .nameplate { font-size: .82rem; }
+.sara-mode .legal-badge { font-size: .84rem; }
 .sara-mode .nameplate.is-voice::after { display: none; }
 .sara-mode .dialogue-text { scrollbar-color: var(--neutro-300) transparent; }
 

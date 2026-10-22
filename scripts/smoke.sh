@@ -24,7 +24,7 @@ CODE=$(curl -s -o /dev/null -w '%{http_code}' "$B/api/telemetria/resumen")
 # --- 3. ciclo completo de un caso ------------------------------------------
 curl -fsS -X POST "$B/api/casos/$CID/meta" \
   -H 'content-type: application/json' \
-  -d '{"nombreJoven":"Smoke","edad":12,"tipoRiesgo":"ciberacoso","creadoEn":"2026-01-01T00:00:00Z"}' \
+  -d '{"edad":12,"tipoRiesgo":"ciberacoso","creadoEn":"2026-01-01T00:00:00Z"}' \
   >/dev/null || fail "POST meta"
 
 # --- 3b. la edad solo admite el rango 5–18 --------------------------------

@@ -11,10 +11,7 @@ import { textoRiesgo } from './riesgo'
 
 /* ---------------------------------------------------------------------------
    Búsqueda
-   Dos maneras de encontrar un caso, mezclables:
-   - por el número: prefijo de los dígitos del id (`123`, `CL-123`, `CL-12345`)
-   - por el nombre del joven: coincidencia difusa (sin tildes, por principio de
-     palabra y con un margen de una o dos letras mal puestas)
+   Búsqueda por el número de caso: prefijo de los dígitos del id (`123`, `CL-123`, `CL-12345`)
    --------------------------------------------------------------------------- */
 
 const sinTildes = (s) =>
@@ -24,76 +21,21 @@ const sinTildes = (s) =>
     .toLowerCase()
     .trim()
 
-// Qué parte de lo tecleado es número y qué parte es nombre. Se quita el prefijo
-// "CL" (a secas o con guion) porque forma parte del código, no del nombre:
-// escribir "cl" o "CL-" no debe filtrar nada mientras se termina el número.
 function analizarConsulta(texto) {
   const q = sinTildes(texto)
   const digitos = q.replace(/\D/g, '')
-  const letras = q.replace(/^cl-?/, '').replace(/[\d\s-]+/g, '')
-  return { digitos, letras, vacia: !digitos && !letras }
-}
-
-// Levenshtein acotada: sale en cuanto la distancia supera `max`.
-function distancia(a, b, max) {
-  if (Math.abs(a.length - b.length) > max) return max + 1
-  let previa = Array.from({ length: b.length + 1 }, (_, i) => i)
-  for (let i = 1; i <= a.length; i += 1) {
-    const fila = [i]
-    let mejor = i
-    for (let j = 1; j <= b.length; j += 1) {
-      const coste = a[i - 1] === b[j - 1] ? 0 : 1
-      fila[j] = Math.min(previa[j] + 1, fila[j - 1] + 1, previa[j - 1] + coste)
-      if (fila[j] < mejor) mejor = fila[j]
-    }
-    if (mejor > max) return max + 1
-    previa = fila
-  }
-  return previa[b.length]
-}
-
-// "lcia" contiene las letras de "lucia" en orden, aunque falten vocales
-function esSubsecuencia(aguja, pajar) {
-  let i = 0
-  for (const c of pajar) {
-    if (c === aguja[i]) i += 1
-    if (i === aguja.length) return true
-  }
-  return false
-}
-
-// 0 = no coincide; cuanto más alto, mejor.
-function puntuarNombre(nombre, q) {
-  const n = sinTildes(nombre)
-  if (!n || !q) return 0
-  if (n === q) return 100
-  if (n.startsWith(q)) return 90
-  if (n.includes(q)) return 80
-
-  const margen = q.length >= 6 ? 2 : 1
-  for (const palabra of n.split(/[^a-z0-9]+/)) {
-    if (!palabra) continue
-    if (palabra.startsWith(q)) return 70
-    if (q.length >= 3 && Math.abs(palabra.length - q.length) <= margen && distancia(palabra, q, margen) <= margen) {
-      return 60
-    }
-  }
-  if (q.length >= 3 && esSubsecuencia(q, n)) return 40
-  return 0
+  return { digitos, vacia: !digitos }
 }
 
 function puntuarCaso(caso, q) {
   if (q.vacia) return 1
-  // El número se compara por prefijo; el nombre, por parecido.
   if (q.digitos && !caso.id.replace(/\D/g, '').startsWith(q.digitos)) return 0
-  if (q.letras) return puntuarNombre(caso.meta?.nombreJoven, q.letras)
   return 1
 }
 
 /* Ordenación por columnas */
 const COMPARADORES = {
   caso: (a, b) => a.id.localeCompare(b.id, 'es', { numeric: true }),
-  joven: (a, b) => sinTildes(a.meta?.nombreJoven).localeCompare(sinTildes(b.meta?.nombreJoven), 'es'),
   creado: (a, b) => (a.meta?.creadoEn ?? '').localeCompare(b.meta?.creadoEn ?? ''),
   eventos: (a, b) => (a.eventos ?? 0) - (b.eventos ?? 0),
 }
@@ -243,7 +185,6 @@ export default function ListaServicios() {
                   <thead>
                     <tr>
                       <Th campo="caso">{t('informe.colCaso')}</Th>
-                      <Th campo="joven">{t('informe.colJoven')}</Th>
                       <Th campo="situacion">{t('informe.colSituacion')}</Th>
                       <Th campo="creado">{t('informe.colCreado')}</Th>
                       <Th campo="eventos">{t('informe.colEventos')}</Th>
@@ -254,7 +195,6 @@ export default function ListaServicios() {
                     {filas.map((c) => (
                       <tr key={c.id}>
                         <td><span className={styles.chipCaso}>{c.id}</span></td>
-                        <td>{c.meta?.nombreJoven ?? '—'}</td>
                         <td>{c.meta?.tipoRiesgo ? textoRiesgo(t, c.meta) : '—'}</td>
                         <td className={styles.celdaFecha}>
                           {c.meta?.creadoEn

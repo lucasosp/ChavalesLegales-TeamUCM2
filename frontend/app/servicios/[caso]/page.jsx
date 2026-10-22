@@ -178,10 +178,6 @@ export default function InformeCaso({ params }) {
 
           {/* ---------- Datos de la sesión ---------- */}
           <dl className={`${styles.fichaGrid} ${styles.bloque}`}>
-            <div className={styles.fichaItem}>
-              <dt>{t('informe.colJoven')}</dt>
-              <dd>{meta.nombreJoven ?? t('informe.sinIdentificar')}</dd>
-            </div>
             <div className={`${styles.fichaItem} ${styles.fichaEdad}`}>
               <dt>{t('informe.dtEdad')}</dt>
               <dd>{meta.edad ? t('profesores.edadValor', { edad: meta.edad }) : '—'}</dd>

@@ -48,6 +48,18 @@
     "chapterSelectTitle": "Joan kapitulura",
     "thoughtOf": "Pentsamendua · {speaker}",
     "thought": "Pentsamendua",
+    "roles": {
+      "jueza": "Epailea",
+      "juez": "Epailea edo magistratua",
+      "abogada": "Abokatua",
+      "abogado": "Abokatua",
+      "fiscal": "Fiskaltza",
+      "letrada": "Justizia Administrazioko letradua",
+      "trabajadoraSocial": "Gizarte-langilea",
+      "psicologa": "Auzitegi-psikologoa",
+      "equipoAcogida": "Harrera eta babes taldea",
+      "profesional": "Arreta bereziko profesionala"
+    },
     "narration": "Narrazioa",
     "messages": "Mezuak",
     "fromPhoneOf": "Mugikorra: {name}",

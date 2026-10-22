@@ -32,12 +32,12 @@ class CasoStoreTest(unittest.TestCase):
     # -- comportamiento general ---------------------------------------------
 
     def test_meta_hace_merge_y_persiste(self):
-        self.store.set_meta("CL-1", {"nombreJoven": "Ana"})
+        self.store.set_meta("CL-1", {"contexto": "Prueba"})
         self.store.set_meta("CL-1", {"tipoRiesgo": "grooming"})
 
         self.assertEqual(
             self.store.get("CL-1")["meta"],
-            {"nombreJoven": "Ana", "tipoRiesgo": "grooming"},
+            {"contexto": "Prueba", "tipoRiesgo": "grooming"},
         )
 
         otro = CasoStore(data_dir=self.datos, legacy_file=self.legacy)
@@ -72,28 +72,28 @@ class CasoStoreTest(unittest.TestCase):
 
         caso = self.store.get("CL-1")
         caso["eventos"].append({"kind": "falso"})
-        caso["meta"]["nombreJoven"] = "mutado"
+        caso["meta"]["contexto"] = "mutado"
 
         self.assertEqual(len(self.store.get("CL-1")["eventos"]), 1)
         self.assertEqual(self.store.get("CL-1")["meta"], {})
 
     def test_set_meta_devuelve_copia(self):
-        devuelto = self.store.set_meta("CL-1", {"nombreJoven": "Ana"})
-        devuelto["meta"]["nombreJoven"] = "mutado"
-        self.assertEqual(self.store.get("CL-1")["meta"]["nombreJoven"], "Ana")
+        devuelto = self.store.set_meta("CL-1", {"contexto": "Obs"})
+        devuelto["meta"]["contexto"] = "mutado"
+        self.assertEqual(self.store.get("CL-1")["meta"]["contexto"], "Obs")
 
     def test_caso_inexistente(self):
         self.assertIsNone(self.store.get("NO-EXISTE"))
         self.assertEqual(self.store.listar(), [])
 
     def test_listar_resume_sin_devolver_eventos(self):
-        self.store.set_meta("CL-1", {"nombreJoven": "Ana"})
+        self.store.set_meta("CL-1", {"contexto": "Obs"})
         self.store.add_evento("CL-1", {"kind": "progreso", "t": 1, "data": {}})
         self.store.add_evento("CL-1", {"kind": "progreso", "t": 2, "data": {}})
 
         self.assertEqual(
             self.store.listar(),
-            [{"id": "CL-1", "meta": {"nombreJoven": "Ana"}, "eventos": 2}],
+            [{"id": "CL-1", "meta": {"contexto": "Obs"}, "eventos": 2}],
         )
 
     # -- esquema del evento (version 2) -------------------------------------
@@ -141,7 +141,7 @@ class CasoStoreTest(unittest.TestCase):
     # -- resumen ligero ------------------------------------------------------
 
     def test_resumen_no_devuelve_eventos(self):
-        self.store.set_meta("CL-1", {"nombreJoven": "Ana"})
+        self.store.set_meta("CL-1", {"contexto": "Obs"})
         self.store.add_evento("CL-1", {"kind": "inicio", "t": 10, "data": {}})
         self.store.add_evento("CL-1", {"kind": "progreso", "t": 20, "data": {}})
 
@@ -180,9 +180,15 @@ class CasoStoreTest(unittest.TestCase):
 
     # -- 3b: un archivo por caso --------------------------------------------
 
+    def test_set_meta_ignora_nombre_joven(self):
+        caso = self.store.set_meta("CL-1", {"nombreJoven": "Ana", "edad": 10})
+        self.assertNotIn("nombreJoven", caso["meta"])
+        self.assertEqual(caso["meta"]["edad"], 10)
+        self.assertNotIn("nombreJoven", self.store.get("CL-1")["meta"])
+
     def test_escribe_un_archivo_por_caso(self):
-        self.store.set_meta("CL-1", {"nombreJoven": "Ana"})
-        self.store.set_meta("CL-2", {"nombreJoven": "Luis"})
+        self.store.set_meta("CL-1", {"contexto": "Obs 1"})
+        self.store.set_meta("CL-2", {"contexto": "Obs 2"})
         self.store.add_evento("CL-1", {"kind": "progreso", "t": 1, "data": {}})
 
         self.assertEqual(sorted(os.listdir(self.datos)), ["CL-1.json", "CL-2.json"])
@@ -192,8 +198,8 @@ class CasoStoreTest(unittest.TestCase):
             self.assertEqual(json.load(f)["id"], "CL-1")
 
     def test_reescribir_un_caso_no_toca_los_demas(self):
-        self.store.set_meta("CL-1", {"nombreJoven": "Ana"})
-        self.store.set_meta("CL-2", {"nombreJoven": "Luis"})
+        self.store.set_meta("CL-1", {"contexto": "Obs 1"})
+        self.store.set_meta("CL-2", {"contexto": "Obs 2"})
         ruta2 = os.path.join(self.datos, "CL-2.json")
         antes = os.stat(ruta2).st_mtime_ns
 
@@ -252,12 +258,12 @@ class CasoStoreTest(unittest.TestCase):
         self.assertTrue(os.path.exists(self.legacy + ".migrado"))
 
     def test_la_migracion_no_pisa_un_caso_mas_nuevo(self):
-        self.store.set_meta("CL-11111", {"nombreJoven": "Nuevo"})
+        self.store.set_meta("CL-11111", {"contexto": "Nuevo"})
         with open(self.legacy, "w", encoding="utf-8") as f:
-            json.dump({"CL-11111": {"id": "CL-11111", "meta": {"nombreJoven": "Viejo"}, "eventos": []}}, f)
+            json.dump({"CL-11111": {"id": "CL-11111", "meta": {"contexto": "Viejo"}, "eventos": []}}, f)
 
         store = CasoStore(data_dir=self.datos, legacy_file=self.legacy)
-        self.assertEqual(store.get("CL-11111")["meta"]["nombreJoven"], "Nuevo")
+        self.assertEqual(store.get("CL-11111")["meta"]["contexto"], "Nuevo")
 
     def test_sin_archivo_antiguo_arranca_vacio(self):
         self.assertEqual(self.store.listar(), [])

@@ -48,6 +48,18 @@
     "chapterSelectTitle": "Sautar a capítol",
     "thoughtOf": "Pensament de {speaker}",
     "thought": "Pensament",
+    "roles": {
+      "jueza": "Jutgessa",
+      "juez": "Jutge o magistrat",
+      "abogada": "Avocata",
+      "abogado": "Avocat",
+      "fiscal": "Ministèri Fiscal",
+      "letrada": "Letrada de l'Administracion de Justícia",
+      "trabajadoraSocial": "Trabalhaira sociala",
+      "psicologa": "Psicològa forensa",
+      "equipoAcogida": "Equipa d'acuèlh e proteccion",
+      "profesional": "Professional d'atencion especializada"
+    },
     "narration": "Narracion",
     "messages": "Messatges",
     "fromPhoneOf": "Dès eth mobil de {name}",

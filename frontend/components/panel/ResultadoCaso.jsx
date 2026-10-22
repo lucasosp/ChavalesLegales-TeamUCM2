@@ -22,10 +22,6 @@ export default function ResultadoCaso({ t, caso, copiado, onCopiar, onCrearOtro 
       <div className={styles.ficha}>
         <div className={styles.fichaGrid}>
           <div>
-            <span className={styles.fichaEtiqueta}>{t('profesores.joven')}</span>
-            <span className={styles.fichaValor}>{caso.nombreJoven}</span>
-          </div>
-          <div>
             <span className={styles.fichaEtiqueta}>{t('profesores.edadLabel')}</span>
             <span className={styles.fichaValor}>
               {caso.edad ? t('profesores.edadValor', { edad: caso.edad }) : '—'}

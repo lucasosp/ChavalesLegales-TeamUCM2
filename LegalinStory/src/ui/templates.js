@@ -62,6 +62,12 @@ export function appTemplate() {
         <p class="sr-only" data-announcement role="status"></p>
         <section class="dialogue" data-panel>
           <div class="nameplate" data-speaker-name hidden></div>
+          <div class="legal-badge" data-legal-badge hidden aria-live="polite">
+            <span class="legal-badge-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8Zm-1-13h2v6h-2Zm0 8h2v2h-2Z"/></svg>
+            </span>
+            <span class="legal-badge-label" data-legal-badge-text></span>
+          </div>
           <p class="dialogue-text" data-text aria-hidden="true"></p>
           <button class="advance" type="button" data-advance hidden>${t("novel.continueArrow")}</button>
         </section>
