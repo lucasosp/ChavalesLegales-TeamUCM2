@@ -1,20 +1,8 @@
 {
-  "errorConexionSala": "Error en la conexión en directo con la sala.",
   "accesoEducadores": "Acceso a educadores sociales",
   "vistaAsistentesAria": "Vista de Asistentes Sociales",
   "vistaAsistentesTitle": "Panel exclusivo para Asistentes y Trabajadores Sociales",
   "asistentesSociales": "Asistentes Sociales",
-  "accesoPinAria": "Acceso por PIN a sesión individual",
-  "pinTitulo": "PIN DE LA SESIÓN INDIVIDUAL",
-  "pinPlaceholder": "Introduce el PIN o clave",
-  "buscando": "Buscando...",
-  "entrar": "Entrar",
-  "apodoAria": "Elegir apodo de la sesión individual",
-  "apodoTitulo": "SESIÓN {pin} · TU NOMBRE",
-  "apodoPlaceholder": "¿Cómo te llamas?",
-  "entrando": "Entrando...",
-  "listoEntrar": "¡Listo! Entrar",
-  "cambiarPin": "Cambiar PIN",
   "jugarSinPinAria": "Jugar sin PIN",
   "jugarSinPinTitulo": "Jugar sin PIN · Sesión individual",
   "juegoHistoriaTag": "Historia",
@@ -25,5 +13,10 @@
   "juegoArenaTitulo": "Mi mundo con perros",
   "juegoAvatarTag": "Avatar",
   "juegoAvatarTitulo": "Haz tu avatar",
-  "pieAdminJusticia": "Administración de Justicia"
+  "pieAdminJusticia": "Administración de Justicia",
+  "entradaAlumnoAria": "Entrada del alumno con el código de su sesión",
+  "entradaAlumnoTitulo": "¿TIENES UN CÓDIGO?",
+  "entradaAlumnoTexto": "Tu educador te dará un código de 5 dígitos para entrar en tu sesión.",
+  "entradaAlumnoBoton": "Entrar con mi código",
+  "pideAyuda": "Pide ayuda"
 }

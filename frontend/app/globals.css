@@ -454,6 +454,15 @@ html, body {
   text-align: center;
 }
 
+/* Texto de apoyo dentro de las tarjetas de acceso (home y /alumno) */
+.pin-card-texto {
+  margin: 0 0 0.9rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #4b5563;
+  text-align: center;
+}
+
 .pin-badge-title {
   display: inline-block;
   font-family: var(--font-display);

@@ -1,150 +1,44 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { getInfoSala, unirseASala } from '../lib/api'
-import { getWsBaseUrl, createGameSocket } from '../lib/socket'
-import SalaEsperaAlumnos from '../components/SalaEsperaAlumnos'
 import SelectorIdioma from '../components/SelectorIdioma'
 import { useT } from '../lib/i18n'
+
+// El profesor genera un caso y comparte su código; el alumno lo teclea en /alumno.
+// Un enlace directo con ?caso= o ?pin= (que es el código del caso) entra sin pasar por ahí.
+function codigoDesdeUrl(searchParams) {
+  const caso = searchParams.get('caso')
+  if (caso) return caso.startsWith('CL-') ? caso : `CL-${caso.replace(/\D/g, '')}`
+
+  const pin = searchParams.get('pin')
+  if (pin) {
+    const digitos = String(pin).replace(/\D/g, '').slice(0, 5)
+    return digitos ? `CL-${digitos}` : null
+  }
+
+  if (searchParams.get('sesion')) return 'DEMO'
+  return null
+}
 
 export default function Home() {
   const router = useRouter()
   const t = useT()
-  const [step, setStep] = useState('PIN') // 'PIN' | 'NICKNAME' | 'GAME'
-  const [pin, setPin] = useState('')
-  const [nickname, setNickname] = useState('')
-  const [cargando, setCargando] = useState(false)
-  const [errorMsg, setErrorMsg] = useState(null)
 
-  const [playerData, setPlayerData] = useState(null)
-  const [gameState, setGameState] = useState(null)
-  const [selectedOption, setSelectedOption] = useState(null)
-  const [selectedSoloGame, setSelectedSoloGame] = useState(null)
-  const socketRef = useRef(null)
-
-  // Enrutado directo si se accede con enlace que incluye PIN/caso/sesion
   useEffect(() => {
     if (typeof window === 'undefined') return
-    const searchParams = new URLSearchParams(window.location.search)
-    const directPin = searchParams.get('pin') || searchParams.get('caso') || searchParams.get('sesion')
-    if (directPin) {
-      router.push('/novela')
-    }
+    const destino = codigoDesdeUrl(new URLSearchParams(window.location.search))
+    if (destino) router.push(`/novela?caso=${encodeURIComponent(destino)}`)
   }, [router])
 
-  const handleSoloGameSelect = (gameKey) => {
-    // De momento no navega; listo para enlazar próximamente (ej. /historia o /juicio)
-    setSelectedSoloGame((prev) => (prev === gameKey ? null : gameKey))
-  }
+  const juegosLibres = [
+    { href: '/novela', tag: t('inicio.juegoHistoriaTag'), title: t('inicio.juegoHistoriaTitulo'), bg: '#FEF08A', color: '#854D0E', icon: <><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></> },
+    { href: '/experiments/cid-table', tag: t('inicio.juegoFamiliaTag'), title: t('inicio.juegoFamiliaTitulo'), bg: '#D1FAE5', color: '#047857', icon: <><ellipse cx="12" cy="12" rx="7" ry="4.5"/><circle cx="12" cy="4" r="1.6"/><circle cx="12" cy="20" r="1.6"/><circle cx="3" cy="12" r="1.6"/><circle cx="21" cy="12" r="1.6"/></> },
+    { href: '/experiments/caja-arena', tag: t('inicio.juegoArenaTag'), title: t('inicio.juegoArenaTitulo'), bg: '#FFEDD5', color: '#C2410C', icon: <><path d="M4 7c0-1.5 1-2.5 2.5-2.5L9 7h3.5c2.5 0 4.5 2 4.5 4.5V13l3 1v3h-3l-1 3H8l-1-3H5.5L4 13z"/><circle cx="7.5" cy="8.5" r=".7" fill="currentColor"/></> },
+    { href: '/novela?avatar=1', tag: t('inicio.juegoAvatarTag'), title: t('inicio.juegoAvatarTitulo'), bg: '#EDE9FE', color: '#6D28D9', icon: <><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></> },
+  ]
 
-  // =========================================================================
-  // PASO 1: VALIDAR PIN CON EL BACKEND
-  // =========================================================================
-  const handlePinSubmit = async (e) => {
-    e.preventDefault()
-    const rawInput = pin.trim()
-    if (!rawInput) return
-
-    // Acceso inteligente: si se introduce el codigo de Asistentes Sociales en la casilla principal
-    const upper = rawInput.toUpperCase().replace(/\s+/g, '')
-    if (upper.includes('SOCIAL') || upper.startsWith('SOC') || upper.includes('ASISTENT') || upper === '2026') {
-      if (typeof window !== 'undefined') {
-        sessionStorage.setItem('chavales_asistente_social_auth', 'true')
-      }
-      router.push('/informe')
-      return
-    }
-
-    const cleanPin = rawInput.replace(/\s+/g, '')
-
-    router.push('/novela')
-  }
-
-  // =========================================================================
-  // PASO 2: INTRODUCIR APODO Y UNIRSE EN EL BACKEND
-  // =========================================================================
-  const handleNicknameSubmit = async (e) => {
-    e.preventDefault()
-    const cleanNick = nickname.trim()
-    if (!cleanNick) return
-
-    router.push('/novela')
-  }
-
-  // =========================================================================
-  // PASO 3: CONEXIÓN WEBSOCKET DEL ALUMNO DURANTE LA PARTIDA
-  // =========================================================================
-  useEffect(() => {
-    if (step !== 'GAME' || !playerData || !pin) return
-
-    const wsBase = getWsBaseUrl()
-    const wsUrl = `${wsBase}/ws/player/${pin}?player_id=${playerData.player_id}`
-
-    const socket = createGameSocket({
-      url: wsUrl,
-      onOpen: () => {
-        try {
-          const guardado = localStorage.getItem('chavales_mi_avatar')
-          if (guardado) {
-            const avatar = JSON.parse(guardado)
-            socket.send('UPDATE_AVATAR', {
-              baseType: avatar.baseType,
-              colorPelo: avatar.colorPelo,
-              colorRopa: avatar.colorRopa,
-              tieneGorro: avatar.tieneGorro,
-            })
-          }
-        } catch {}
-      },
-      onMessage: (data) => {
-        if (data.event === 'LAUNCH_GAME' && data.url) {
-          router.push(data.url)
-          return
-        }
-        if (data.event === 'ROOM_STATE') {
-          if (data.active_game?.url) {
-            router.push(data.active_game.url)
-            return
-          }
-          setGameState(data)
-        }
-      },
-      onError: () => {
-        setErrorMsg(t('inicio.errorConexionSala'))
-      },
-    })
-
-    socketRef.current = socket
-
-    return () => {
-      socket.close()
-    }
-  }, [step, playerData, pin, router])
-
-  const handleSalirPartida = () => {
-    socketRef.current?.close()
-    setStep('PIN')
-    setPin('')
-    setNickname('')
-    setPlayerData(null)
-    setGameState(null)
-    setSelectedOption(null)
-    setErrorMsg(null)
-  }
-
-  // =========================================================================
-  // VISTA DEL ALUMNO EN LA SALA DE ESPERA (ESPERANDO A QUE EL PROFESOR LANCE EL JUEGO)
-  // =========================================================================
-  if (step === 'GAME') {
-    router.push('/novela')
-    return null
-  }
-
-  // =========================================================================
-  // VISTA INICIAL: INTRODUCIR PIN O APODO
-  // =========================================================================
   return (
     <div className="kahoot-page">
       {/* Fondo orgánico curvado estilo Kahoot */}
@@ -179,13 +73,11 @@ export default function Home() {
         </svg>
       </div>
 
-      {/* Accesos profesionales en la barra superior */}
-      <header className="kahoot-topbar" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Link
-          href="/profesores"
-          className="btn-pro-opt1"
-          aria-label={t('inicio.accesoEducadores')}
-        >
+      <header
+        className="kahoot-topbar"
+        style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}
+      >
+        <Link href="/profesores" className="btn-pro-opt1" aria-label={t('inicio.accesoEducadores')}>
           <span className="pro-icon-chip" aria-hidden="true">
             <svg viewBox="0 0 24 24">
               <path d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18C5 19.94 8.13 22 12 22C15.87 22 19 19.94 19 17.18V13.18L12 17L5 13.18Z" />
@@ -197,7 +89,6 @@ export default function Home() {
         <SelectorIdioma className="selector-idioma-topbar" />
       </header>
 
-      {/* Contenido principal */}
       <main className="kahoot-main-content">
         <div className="kahoot-title-wrapper">
           <Link href="/" className="brand-title-link" style={{ textDecoration: 'none' }}>
@@ -242,103 +133,18 @@ export default function Home() {
         </div>
 
         <div className="kahoot-sections-stack">
-          {/* PASO 1: INTRODUCE PIN */}
-          {step === 'PIN' && (
-            <section className="pin-section-card" aria-label={t('inicio.accesoPinAria')}>
-              <div className="pin-card-header">
-                <span className="pin-badge-title">{t('inicio.pinTitulo')}</span>
-              </div>
+          {/* ENTRADA DEL ALUMNO: el código del caso se teclea en /alumno */}
+          <section className="pin-section-card" aria-label={t('inicio.entradaAlumnoAria')}>
+            <div className="pin-card-header">
+              <span className="pin-badge-title">{t('inicio.entradaAlumnoTitulo')}</span>
+            </div>
+            <p className="pin-card-texto">{t('inicio.entradaAlumnoTexto')}</p>
+            <Link href="/alumno" className="btn-pin-submit" style={{ display: 'block', textAlign: 'center', textDecoration: 'none' }}>
+              <span>{t('inicio.entradaAlumnoBoton')}</span>
+            </Link>
+          </section>
 
-              <form className="pin-form" onSubmit={handlePinSubmit}>
-                <div className="pin-input-container">
-                  <input
-                    type="text"
-                    maxLength={20}
-                    placeholder={t('inicio.pinPlaceholder')}
-                    className="pin-input"
-                    value={pin}
-                    onChange={(e) => setPin(e.target.value)}
-                    autoComplete="off"
-                    spellCheck="false"
-                    disabled={cargando}
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="btn-pin-submit"
-                  disabled={cargando || !pin.trim()}
-                >
-                  <span>{cargando ? t('inicio.buscando') : t('inicio.entrar')}</span>
-                </button>
-              </form>
-
-              {errorMsg && (
-                <div style={{ marginTop: 12, color: '#DC2626', fontWeight: 700, fontSize: 13, textAlign: 'center' }}>
-                  {errorMsg}
-                </div>
-              )}
-            </section>
-          )}
-
-          {/* PASO 2: INTRODUCE APODO / NOMBRE */}
-          {step === 'NICKNAME' && (
-            <section className="pin-section-card" aria-label={t('inicio.apodoAria')}>
-              <div className="pin-card-header">
-                <span className="pin-badge-title">{t('inicio.apodoTitulo', { pin })}</span>
-              </div>
-
-              <form className="pin-form" onSubmit={handleNicknameSubmit}>
-                <div className="pin-input-container">
-                  <input
-                    type="text"
-                    maxLength={18}
-                    placeholder={t('inicio.apodoPlaceholder')}
-                    className="pin-input"
-                    value={nickname}
-                    onChange={(e) => setNickname(e.target.value)}
-                    autoComplete="off"
-                    spellCheck="false"
-                    autoFocus
-                    disabled={cargando}
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="btn-pin-submit"
-                  disabled={cargando || !nickname.trim()}
-                >
-                  <span>{cargando ? t('inicio.entrando') : t('inicio.listoEntrar')}</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => { setStep('PIN'); setErrorMsg(null); }}
-                  style={{
-                    background: 'transparent',
-                    border: 'none',
-                    color: '#4B5563',
-                    fontSize: 12,
-                    fontWeight: 700,
-                    marginTop: 8,
-                    cursor: 'pointer',
-                    textDecoration: 'underline',
-                  }}
-                >
-                  {t('inicio.cambiarPin')}
-                </button>
-              </form>
-
-              {errorMsg && (
-                <div style={{ marginTop: 12, color: '#DC2626', fontWeight: 700, fontSize: 13, textAlign: 'center' }}>
-                  {errorMsg}
-                </div>
-              )}
-            </section>
-          )}
-
-          {/* SECCIÓN INFERIOR: JUGAR SIN PIN (SELECTOR DE JUEGOS MODO HISTORIETA Y MODO JUICIO) */}
+          {/* JUEGOS SIN CÓDIGO */}
           <section className="solo-section-card" aria-label={t('inicio.jugarSinPinAria')}>
             <div style={{ textAlign: 'center', marginBottom: 2 }}>
               <h2 className="solo-title" style={{ margin: 0, fontSize: 16 }}>
@@ -347,12 +153,7 @@ export default function Home() {
             </div>
 
             <div className="solo-games-grid">
-              {[
-                { href: '/novela', tag: t('inicio.juegoHistoriaTag'), title: t('inicio.juegoHistoriaTitulo'), bg: '#FEF08A', color: '#854D0E', icon: <><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></> },
-                { href: '/experiments/cid-table', tag: t('inicio.juegoFamiliaTag'), title: t('inicio.juegoFamiliaTitulo'), bg: '#D1FAE5', color: '#047857', icon: <><ellipse cx="12" cy="12" rx="7" ry="4.5"/><circle cx="12" cy="4" r="1.6"/><circle cx="12" cy="20" r="1.6"/><circle cx="3" cy="12" r="1.6"/><circle cx="21" cy="12" r="1.6"/></> },
-                { href: '/experiments/caja-arena', tag: t('inicio.juegoArenaTag'), title: t('inicio.juegoArenaTitulo'), bg: '#FFEDD5', color: '#C2410C', icon: <><path d="M4 7c0-1.5 1-2.5 2.5-2.5L9 7h3.5c2.5 0 4.5 2 4.5 4.5V13l3 1v3h-3l-1 3H8l-1-3H5.5L4 13z"/><circle cx="7.5" cy="8.5" r=".7" fill="currentColor"/></> },
-                { href: '/novela?avatar=1', tag: t('inicio.juegoAvatarTag'), title: t('inicio.juegoAvatarTitulo'), bg: '#EDE9FE', color: '#6D28D9', icon: <><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></> },
-              ].map((g) => (
+              {juegosLibres.map((g) => (
                 <Link key={g.href} href={g.href} className="solo-game-tile">
                   <span className="solo-game-icon" style={{ background: g.bg, color: g.color }}>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{g.icon}</svg>
@@ -366,7 +167,6 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Pie de página */}
       <footer className="kahoot-footer">
         <div className="footer-inner">
           <div className="footer-links-row">
@@ -376,7 +176,7 @@ export default function Home() {
             <span>•</span>
             <a href="https://www.administraciondejusticia.gob.es/" target="_blank" rel="noopener noreferrer" className="footer-link">{t('inicio.pieAdminJusticia')}</a>
             <span>•</span>
-            <Link href="/informe" className="footer-link">Pide ayuda</Link>
+            <Link href="/informe" className="footer-link">{t('inicio.pideAyuda')}</Link>
           </div>
         </div>
       </footer>

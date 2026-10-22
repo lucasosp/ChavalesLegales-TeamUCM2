@@ -1,0 +1,11 @@
+{
+  "volver": "Volver al inicio",
+  "titulo": "ENTRAR EN TU SESIÓN",
+  "subtitulo": "Teclea el código de 5 dígitos que te ha dado tu educador.",
+  "placeholder": "Código de la sesión",
+  "entrar": "Entrar",
+  "buscando": "Buscando...",
+  "codigoNoEncontrado": "Ese código no existe. Pídele a tu educador que lo revise.",
+  "errorConexion": "No se puede conectar. Comprueba tu conexión e inténtalo otra vez.",
+  "ayuda": "El código aparece en el panel del educador después de generar el caso."
+}

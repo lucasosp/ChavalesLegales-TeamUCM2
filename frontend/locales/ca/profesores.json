@@ -1,10 +1,4 @@
 {
-  "errorConexion": "Error en la connexió amb la sala en temps real.",
-  "errorGenerarCodigo": "No s'ha pogut generar el codi de classe.",
-  "lanzarSaraTitle": "Llança l'aventura interactiva de la Sara als alumnes connectats",
-  "lanzarSara": "Llança «Sara»",
-  "iniciandoAula": "S'està iniciant l'Aula Virtual...",
-  "cancelar": "Cancel·la",
   "volverInicio": "Torna a l'inici",
   "inicio": "Inici",
   "jovenParticipante": "Jove participant",

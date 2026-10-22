@@ -1,10 +1,4 @@
 {
-  "errorConexion": "Error en la conexión con la sala en tiempo real.",
-  "errorGenerarCodigo": "No se pudo generar el código de clase.",
-  "lanzarSaraTitle": "Lanzar la aventura interactiva de Sara a los alumnos conectados",
-  "lanzarSara": "Lanzar «Sara»",
-  "iniciandoAula": "Iniciando Aula Virtual...",
-  "cancelar": "Cancelar",
   "volverInicio": "Volver al inicio",
   "inicio": "Inicio",
   "jovenParticipante": "Joven participante",
@@ -33,5 +27,7 @@
   "copiarEnlace": "Copiar enlace",
   "previsualizarCaso": "Previsualizar caso",
   "verInforme": "Ver informe del caso",
-  "crearOtroCaso": "Crear otro caso"
+  "crearOtroCaso": "Crear otro caso",
+  "verInformes": "Ver informes",
+  "errorCrearCaso": "No se pudo crear el caso. Comprueba la conexión e inténtalo otra vez: sin caso no hay código que dar al alumno."
 }
