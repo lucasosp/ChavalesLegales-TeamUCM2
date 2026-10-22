@@ -79,7 +79,10 @@
 
 /* Chat: un personaje a cada lado del móvil. En gris hasta que escribe: entonces
    se colorea y se ilumina; al acabar la conversación quedan los dos en color. */
-#app .scene > .sara-cast.is-chat { justify-content: space-between; padding-inline: 1vw; --sprite-width: 40cqw; }
+#app .scene > .sara-cast.is-chat { justify-content: space-between; padding-inline: 1vw; --sprite-width: 36cqw; }
+/* Cada uno se aparta hacia su lado para dejar aire alrededor del móvil */
+#app .sara-cast.is-chat .sara-cast-person:first-child { translate: -30% 0; }
+#app .sara-cast.is-chat .sara-cast-person:last-child { translate: 30% 0; }
 #app .sara-cast.is-chat .sara-cast-person {
   filter: grayscale(1) brightness(.92);
   opacity: .85;
