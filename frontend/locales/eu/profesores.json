@@ -18,6 +18,7 @@
   "riesgo_grooming": "Grooming / Helduekiko harreman susmagarria",
   "riesgo_control_pareja": "Kontrol digitala bikote gazteetan",
   "riesgo_privacidad": "Gehiegizko esposizioa eta pribatutasun-galera",
+  "notaPrivacidad": "Deskribapenean idazten dituzun datuak ez dira gordetzen: sistemak prozesatu bezain laster ezabatzen dira, adingabeen identitatea babesteko.",
   "contextoLabel": "Gizarte-langilearen testuingurua eta oharrak",
   "contextoPlaceholder": "Adierazi kalteberatasun-faktoreak, familia-dinamika edo aurreko gertakariak narrazioa bideratzeko...",
   "creandoCasoPct": "Kasua sortzen… {pct} %",

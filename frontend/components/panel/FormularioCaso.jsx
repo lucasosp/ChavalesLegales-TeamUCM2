@@ -135,6 +135,10 @@ export default function FormularioCaso({
       >
         {mensajeError || ''}
       </p>
+
+      {/* Nota fija bajo el botón: qué pasa con lo que se escribe en la descripción.
+          Va fuera del hueco del aviso para que el error nunca la tape. */}
+      <p className={styles.notaPrivacidad}>{t('profesores.notaPrivacidad')}</p>
     </form>
   )
 }

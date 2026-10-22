@@ -120,6 +120,17 @@
   line-height: 1.2;
 }
 
+/* Nota de privacidad bajo el botón: letra pequeña, gris, sin competir con el error
+   (que va justo encima en rojo). */
+.notaPrivacidad {
+  margin: 14px 0 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--texto-suave);
+  text-wrap: pretty;
+}
+
 .area {
   min-height: 84px;
   font-weight: 500;

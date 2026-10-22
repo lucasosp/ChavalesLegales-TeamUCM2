@@ -18,6 +18,7 @@
   "riesgo_grooming": "Grooming / Contacto sospeitoso con adultos",
   "riesgo_control_pareja": "Control dixital en parellas novas",
   "riesgo_privacidad": "Sobreexposición e perda de privacidade",
+  "notaPrivacidad": "Os datos que escribas na descrición non se almacenan: bórranse en canto o sistema os procesa, para protexer a identidade dos menores.",
   "contextoLabel": "Contexto e observacións do traballador social",
   "contextoPlaceholder": "Indica factores de vulnerabilidade, dinámica familiar ou incidentes previos para orientar a narrativa...",
   "creandoCasoPct": "Creando caso… {pct} %",
