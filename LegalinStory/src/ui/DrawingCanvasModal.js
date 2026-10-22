@@ -55,6 +55,8 @@ export class DrawingCanvasModal {
     this.blockedElements = [...this.container.children].map(element => ({ element, inert: element.inert }));
     this.blockedElements.forEach(({ element }) => { element.inert = true; });
     this.container.append(overlay);
+    // Igual que los minijuegos: el dibujo aparece al abrirse un cielo de nubes.
+    overlay.append(cloudLayer("is-opening"));
     this.onModalKey = event => {
       if (!this.modal) return;
       if (event.key !== "Tab") return;
@@ -183,6 +185,7 @@ export class DrawingCanvasModal {
         avatarStore.savePhase2(dataUrl, metrics);
       }
       this.destroy();
+      this.container.append(cloudLayer("is-closing"));
       onConfirm?.(dataUrl, metrics);
       this.onComplete?.(phase, dataUrl, metrics);
     });
@@ -258,6 +261,7 @@ export class DrawingCanvasModal {
       avatarStore.saveFinalChoice(selected);
       const chosenData = selected === "phase1" ? avatar1 : avatar2;
       this.destroy();
+      this.container.append(cloudLayer("is-closing"));
       onConfirm?.(selected, chosenData);
       this.onComplete?.("phase3", chosenData);
     });
@@ -405,3 +409,28 @@ export class DrawingCanvasModal {
     if (returnFocus?.isConnected) returnFocus.focus({ preventScroll: true });
   }
 }
+
+// Capa de nubes (la misma forma que MinijuegoNubes de la plataforma). Al abrir
+// cubren la pantalla y se apartan; al cerrar entran, cubren y se retiran.
+// Es decorativa: no bloquea el lienzo y se borra sola al terminar.
+const CLOUDS = [
+  [-12, -14, 52], [26, -20, 50], [62, -16, 54], [-20, 22, 50], [72, 18, 52],
+  [-14, 58, 54], [22, 66, 52], [58, 62, 54], [84, 52, 46], [34, 24, 44], [8, 34, 40], [52, 36, 42],
+];
+const CLOUD_SVG = `<svg viewBox="0 0 200 110" aria-hidden="true"><g fill="#fff"><circle cx="52" cy="62" r="34"/><circle cx="92" cy="42" r="40"/><circle cx="138" cy="52" r="34"/><circle cx="166" cy="72" r="24"/><circle cx="30" cy="80" r="22"/><rect x="28" y="66" width="150" height="38" rx="19"/></g></svg>`;
+
+function cloudLayer(mode) {
+  const layer = document.createElement("div");
+  layer.className = `sara-clouds ${mode}`;
+  layer.setAttribute("aria-hidden", "true");
+  CLOUDS.forEach(([x, y, size], i) => {
+    const cloud = document.createElement("div");
+    cloud.className = "sara-cloud";
+    cloud.style.cssText = `left:${x}vw;top:${y}vh;width:${size}vmax;--dx:${(x + size / 2 < 50 ? -1 : 1) * 90}vw;--dy:${(y + size / 4 < 45 ? -1 : 1) * 70}vh;animation-delay:${i * 40}ms`;
+    cloud.innerHTML = CLOUD_SVG;
+    layer.append(cloud);
+  });
+  layer.addEventListener("animationend", event => { if (event.target === layer) layer.remove(); });
+  return layer;
+}
+
