@@ -339,6 +339,10 @@ export class SaraExperience {
     const status = element("p", "sara-fineprint", input.checked ? t("sara.localSaveOn") : t("sara.visitOnly"));
     status.setAttribute("role", "status");
     this.body.append(status);
+    // El selector de capítulo va justo antes de "Letra más grande": es la opción que
+    // más se usa dentro del menú y empuja un escalón hacia abajo al resto.
+    const chapterSelector = this.chapterSelector();
+    if (chapterSelector) this.body.append(chapterSelector);
     const largeText = this.button(t("sara.largeText"), () => {
       const enabled = this.root.classList.toggle("sara-large-text");
       largeText.setAttribute("aria-pressed", String(enabled));
@@ -350,71 +354,71 @@ export class SaraExperience {
     });
     instant.setAttribute("aria-pressed", String(Boolean(this.app.view.typewriter.instant)));
     this.button(t("sara.needHelp"), () => this.openPanel("help"));
-
-    if (this.guide?.chapters?.length) {
-      const container = element("div", "sara-pause-dropdown");
-      const currentChapter = this.engine.currentNode?.chapter;
-      const initialCh = this.guide.chapters.find((c) => c.id === currentChapter) ?? this.guide.chapters[0];
-      const initialLabel = initialCh
-        ? `${t("sara.chapterOf", { n: initialCh.id, total: this.guide.chapters.length })}: ${initialCh.title ?? ""}`
-        : t("novel.chapterSelect");
-
-      const trigger = element("button", "sara-pause-dropdown-trigger");
-      trigger.type = "button";
-      trigger.setAttribute("aria-haspopup", "listbox");
-      trigger.setAttribute("aria-expanded", "false");
-      trigger.setAttribute("aria-label", t("novel.chapterSelectTitle"));
-
-      const valueSpan = element("span", "sara-pause-dropdown-value", initialLabel);
-      const arrowSpan = element("span", "sara-pause-dropdown-arrow", "▾");
-      arrowSpan.setAttribute("aria-hidden", "true");
-      trigger.append(valueSpan, arrowSpan);
-
-      const list = element("ul", "sara-pause-dropdown-list");
-      list.setAttribute("role", "listbox");
-      list.setAttribute("aria-label", t("novel.chapterSelectTitle"));
-      list.hidden = true;
-
-      const toggleList = (open) => {
-        const isOpen = open !== undefined ? open : list.hidden;
-        list.hidden = !isOpen;
-        trigger.setAttribute("aria-expanded", String(isOpen));
-        container.classList.toggle("is-open", isOpen);
-      };
-
-      trigger.addEventListener("click", () => toggleList());
-
-      for (const ch of this.guide.chapters) {
-        const item = element("li", "sara-pause-dropdown-item");
-        item.setAttribute("role", "option");
-        const isSelected = ch.id === currentChapter;
-        item.setAttribute("aria-selected", String(isSelected));
-        if (isSelected) item.classList.add("is-selected");
-
-        const itemLabel = `${t("sara.chapterOf", { n: ch.id, total: this.guide.chapters.length })}: ${ch.title ?? ""}`;
-        item.textContent = itemLabel;
-
-        item.addEventListener("click", () => {
-          toggleList(false);
-          this.jumpToChapter(ch.id);
-        });
-        list.append(item);
-      }
-
-      const outsideClickListener = (event) => {
-        if (!container.contains(event.target)) {
-          toggleList(false);
-        }
-      };
-      document.addEventListener("pointerdown", outsideClickListener);
-
-      container.append(trigger, list);
-      this.body.append(container);
-    }
-
     this.button(t("sara.restartStory"), () => this.openPanel("restart"));
     this.button(t("sara.exitStory"), () => this.onExit?.());
+  }
 
+  /** Selector de capítulo del menú de pausa. Null si la guía no trae capítulos. */
+  chapterSelector() {
+    if (!this.guide?.chapters?.length) return null;
+    const container = element("div", "sara-pause-dropdown");
+    const currentChapter = this.engine.currentNode?.chapter;
+    const initialCh = this.guide.chapters.find((c) => c.id === currentChapter) ?? this.guide.chapters[0];
+    const initialLabel = initialCh
+      ? `${t("sara.chapterOf", { n: initialCh.id, total: this.guide.chapters.length })}: ${initialCh.title ?? ""}`
+      : t("novel.chapterSelect");
+
+    const trigger = element("button", "sara-pause-dropdown-trigger");
+    trigger.type = "button";
+    trigger.setAttribute("aria-haspopup", "listbox");
+    trigger.setAttribute("aria-expanded", "false");
+    trigger.setAttribute("aria-label", t("novel.chapterSelectTitle"));
+
+    const valueSpan = element("span", "sara-pause-dropdown-value", initialLabel);
+    const arrowSpan = element("span", "sara-pause-dropdown-arrow", "▾");
+    arrowSpan.setAttribute("aria-hidden", "true");
+    trigger.append(valueSpan, arrowSpan);
+
+    const list = element("ul", "sara-pause-dropdown-list");
+    list.setAttribute("role", "listbox");
+    list.setAttribute("aria-label", t("novel.chapterSelectTitle"));
+    list.hidden = true;
+
+    const toggleList = (open) => {
+      const isOpen = open !== undefined ? open : list.hidden;
+      list.hidden = !isOpen;
+      trigger.setAttribute("aria-expanded", String(isOpen));
+      container.classList.toggle("is-open", isOpen);
+    };
+
+    trigger.addEventListener("click", () => toggleList());
+
+    for (const ch of this.guide.chapters) {
+      const item = element("li", "sara-pause-dropdown-item");
+      item.setAttribute("role", "option");
+      const isSelected = ch.id === currentChapter;
+      item.setAttribute("aria-selected", String(isSelected));
+      if (isSelected) item.classList.add("is-selected");
+
+      const itemLabel = `${t("sara.chapterOf", { n: ch.id, total: this.guide.chapters.length })}: ${ch.title ?? ""}`;
+      item.textContent = itemLabel;
+
+      item.addEventListener("click", () => {
+        toggleList(false);
+        this.jumpToChapter(ch.id);
+      });
+      list.append(item);
+    }
+
+    const outsideClickListener = (event) => {
+      if (!container.contains(event.target)) {
+        toggleList(false);
+      }
+    };
+    document.addEventListener("pointerdown", outsideClickListener);
+
+    container.append(trigger, list);
+    return container;
   }
 
   link(title, href) {
