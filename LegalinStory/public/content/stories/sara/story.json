@@ -177,7 +177,7 @@
     "c1-choice2": {
       "chapter": 1,
       "type": "choice",
-      "prompt": "Antes de seguir, ¿qué le ayudaría a Sara?",
+      "prompt": "Antes de seguir, ¿qué ayudaría a Sara?",
       "options": [
         {
           "id": "door",
@@ -531,7 +531,7 @@
       "chapter": 3,
       "type": "dialogue",
       "speaker": "Elena",
-      "text": "A Dani también le van a escuchar y vamos a ver qué necesita. Tú no tienes que vigilar que todo salga bien. Eso nos toca a las personas adultas.",
+      "text": "A Dani también lo van a escuchar y vamos a ver qué necesita. Tú no tienes que vigilar que todo salga bien. Eso nos toca a las personas adultas.",
       "next": "c3-03",
       "cast": {
         "sara": null
@@ -982,7 +982,7 @@
       "chapter": 4,
       "type": "dialogue",
       "speaker": "Elena",
-      "text": "La otra vez te preocupaba mucho Dani. Hay personas que le están escuchando y cuidando. Hoy puedes pensar en ti, y eso no es fallarle.",
+      "text": "La otra vez te preocupaba mucho Dani. Hay personas que lo están escuchando y cuidando. Hoy puedes pensar en ti, y eso no es fallarle.",
       "next": "c4-info",
       "cast": {
         "sara": null
@@ -1710,7 +1710,7 @@
       "chapter": 6,
       "type": "dialogue",
       "speaker": "Elena",
-      "text": "Puedes echar de menos los momentos buenos y, a la vez, necesitar estar protegida. No tienes que sentir una sola cosa. Lo que te hizo estuvo mal, aunque le quieras.",
+      "text": "Puedes echar de menos los momentos buenos y, a la vez, necesitar estar protegida. No tienes que sentir una sola cosa. Lo que te hizo estuvo mal, aunque lo quieras.",
       "next": "c6-03",
       "cast": {
         "sara": null
@@ -1795,7 +1795,7 @@
       "chapter": 6,
       "type": "dialogue",
       "speaker": "Sara",
-      "text": "Entonces, la otra vez era para investigar. Ahora van a decidir si hay pruebas para condenarle. ¿Y tengo que volver a hablar?",
+      "text": "Entonces, la otra vez era para investigar. Ahora van a decidir si hay pruebas para condenarlo. ¿Y tengo que volver a hablar?",
       "next": "c6-trial-supports",
       "cast": {
         "sara": "neutral"

@@ -248,7 +248,7 @@ thought(
 choice("decision-2", "¿Qué hace Sara?", [
   option(
     "investigate",
-    "Pedir a Julia que le ayude a identificar dónde circula, sin reenviarla.",
+    "Pedir a Julia que la ayude a identificar dónde circula, sin reenviarla.",
     "d2-investigate",
     { flags: { investigated: true } },
   ),

@@ -378,7 +378,7 @@
       "options": [
         {
           "id": "investigate",
-          "label": "Pedir a Julia que le ayude a identificar dónde circula, sin reenviarla.",
+          "label": "Pedir a Julia que la ayude a identificar dónde circula, sin reenviarla.",
           "next": "d2-investigate",
           "flags": {
             "investigated": true

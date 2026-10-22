@@ -40,7 +40,7 @@ say("c1-partial", "Laura", "Gracias por contármelo. No tienes que explicarlo to
 say("c1-time", "Laura", "Podemos ir despacio. Me quedo aquí contigo. Aunque hoy te cueste hablar, mi trabajo es cuidarte y buscar ayuda si algo me preocupa.", "c1-close");
 say("c1-what", "Laura", "Te iré contando cada paso. Si creo que estás en peligro, tengo que avisar a las personas que pueden protegerte. Siempre puedes preguntarme a quién se lo digo.", "c1-close");
 narration("c1-close", "Sara se sienta. Laura aparta los cuadernos que estaba corrigiendo para escucharla. Por primera vez en toda la mañana, nadie tiene prisa.", "c1-choice2", { scene: "orientation-office" });
-choice("c1-choice2", "Antes de seguir, ¿qué le ayudaría a Sara?", [
+choice("c1-choice2", "Antes de seguir, ¿qué ayudaría a Sara?", [
   option("door", "Pedir que no entre nadie de clase mientras habla.", "c1-door", { schoolPrivacy: true }),
   option("company", "Preguntar si Paula puede esperarla fuera.", "c1-company", { paulaWaiting: true }),
 ]);
@@ -137,7 +137,7 @@ say("c4-school2", "Sara", "Primero las mates. Si me pierdo en una página, luego
 say("c4-friends", "Paula", "Podemos jugar, escuchar música o no decir nada. No tienes que contarme cómo va todo cada vez que quedemos.", "c4-friends2");
 say("c4-friends2", "Sara", "Pues hoy quiero que me enseñes la canción nueva que te gusta.", "c4-dani-route", { cast: { sara: "happy" } });
 branch("c4-dani-route", { flag: "concernDani" }, "c4-dani", "c4-general");
-say("c4-dani", "Elena", "La otra vez te preocupaba mucho Dani. Hay personas que le están escuchando y cuidando. Hoy puedes pensar en ti, y eso no es fallarle.", "c4-info", { learn: ["brother"] });
+say("c4-dani", "Elena", "La otra vez te preocupaba mucho Dani. Hay personas que lo están escuchando y cuidando. Hoy puedes pensar en ti, y eso no es fallarle.", "c4-info", { learn: ["brother"] });
 say("c4-general", "Elena", "Seguimos pendientes de cómo estáis tú, Dani y tu madre. No hace falta que una sola persona cargue con todo.", "c4-info");
 explain("c4-info", "Elena", "everyday", "c4-choice2");
 choice("c4-choice2", "En clase, un compañero le pregunta por qué ha faltado. ¿Qué quiere hacer Sara?", [
@@ -213,7 +213,7 @@ choice("c6-choice", "Hoy, ¿de qué quiere hablar Sara con Elena?", [
   option("privacy", "Las preguntas que le hacen en clase.", "c6-school", { waiting: "privacy" }),
 ]);
 explain("c6-news", "Elena", "waiting", "c6-03");
-say("c6-dad", "Elena", "Puedes echar de menos los momentos buenos y, a la vez, necesitar estar protegida. No tienes que sentir una sola cosa. Lo que te hizo estuvo mal, aunque le quieras.", "c6-03");
+say("c6-dad", "Elena", "Puedes echar de menos los momentos buenos y, a la vez, necesitar estar protegida. No tienes que sentir una sola cosa. Lo que te hizo estuvo mal, aunque lo quieras.", "c6-03");
 explain("c6-school", "Laura", "school", "c6-03");
 chat("c6-msg", "Irene · abogada", [
   ["Irene", "Hola, Sara. Ya ha salido la sentencia.", "17:30"],
@@ -224,7 +224,7 @@ chat("c6-msg", "Irene · abogada", [
 narration("c6-03", "Meses después termina la investigación. Irene se reúne con Sara antes de la siguiente cita.", "c6-investigation-end");
 explain("c6-investigation-end", ABOGADA, "investigationEnd", "c6-trial-notice");
 say("c6-trial-notice", ABOGADA, "En tu caso, el fiscal y nosotras hemos presentado una acusación contra Javier. Ahora habrá un juicio: otro juez o tribunal escuchará las pruebas antes de decidir.", "c6-trial-question");
-say("c6-trial-question", "Sara", "Entonces, la otra vez era para investigar. Ahora van a decidir si hay pruebas para condenarle. ¿Y tengo que volver a hablar?", "c6-trial-supports");
+say("c6-trial-question", "Sara", "Entonces, la otra vez era para investigar. Ahora van a decidir si hay pruebas para condenarlo. ¿Y tengo que volver a hablar?", "c6-trial-supports");
 say("c6-trial-supports", ABOGADA, "Sí, te han citado para declarar en el juicio. Hemos vuelto a organizar los apoyos: otra sala, videoconferencia y una psicóloga contigo.", "c6-trial");
 narration("c6-trial", "El día del juicio, Sara declara con esos apoyos. La decisión no depende solo de lo que diga Sara.", "c6-after-trial", { scene: "court-friendly" });
 say("c6-after-trial", ABOGADA, "Ahora el tribunal decidirá y lo explicará por escrito. Ese documento es la sentencia. Puede condenar o absolver. Absolver quiere decir que no impone una condena.", "c6-sentence-arrives");
