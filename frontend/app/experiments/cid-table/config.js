@@ -1,5 +1,5 @@
 export const DEFAULT_CONFIG = {
-  childAvatar: { id: 'child', label: 'Tú', color: '#FF6B6B' },
+  childAvatar: { id: 'child', label: 'Tú', color: '#FF6B6B', baseType: 4 },
   characters: [
     { id: 'mother', name: 'Madre', color: '#4ECDC4', seatDefault: 0 },
     { id: 'father', name: 'Padre', color: '#45B7D1', seatDefault: 2 },

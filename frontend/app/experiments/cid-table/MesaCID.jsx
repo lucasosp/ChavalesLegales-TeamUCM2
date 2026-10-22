@@ -16,7 +16,7 @@ const LOOKS = {
   grandfather: { baseType: 3, hairColor: '#E5E7EB', colorRopa: '#96CEB4' },
   random: { baseType: 5, hairColor: '#3F3F46', colorRopa: '#D4A5A5' },
   brother: { baseType: 1, hairColor: '#B03921', colorRopa: '#FFE66D' },
-  child: { baseType: 1, hairColor: '#4A2810', colorRopa: '#FF6B6B' },
+  child: { baseType: 4, hairColor: '#4A2810', colorRopa: '#FF6B6B' },
 }
 const FALLBACK_LOOKS = Object.values(LOOKS)
 
@@ -39,7 +39,7 @@ function Persona({ x, y, color, label, look, isChild, appear }) {
         <AvatarGeometrico
           x={0}
           y={0}
-          baseType={look?.baseType ?? 1}
+          baseType={isChild ? 4 : (look?.baseType ?? 1)}
           colorPelo={look?.hairColor ?? '#4A2810'}
           colorRopa={color || look?.colorRopa || '#4A1A1C'}
           tieneGorro={false}
@@ -65,9 +65,9 @@ function Silla({ x, y, angle }) {
   return (
     <g transform={`translate(${x} ${y}) rotate(${angle + 90})`}>
       <rect x="-26" y="-22" width="52" height="46" rx="10" fill="#18181B" opacity="0.08" />
-      <rect x="-24" y="-20" width="48" height="42" rx="9" fill="#FFFDF9" stroke="#18181B" strokeWidth="2" />
-      <rect x="-18" y="-14" width="36" height="30" rx="7" fill="#E8DFD0" stroke="#18181B" strokeWidth="1.5" />
-      <rect x="-14" y="-18" width="28" height="4" rx="2" fill="#E2E8F0" />
+      <rect x="-24" y="-20" width="48" height="42" rx="9" fill="#8D5524" stroke="#18181B" strokeWidth="2.2" />
+      <rect x="-18" y="-14" width="36" height="30" rx="7" fill="#FDF8F0" stroke="#18181B" strokeWidth="1.8" />
+      <rect x="-14" y="-18" width="28" height="4" rx="2" fill="#6B3F19" />
     </g>
   )
 }
@@ -75,13 +75,14 @@ function Silla({ x, y, angle }) {
 function Plato({ x, y, angle }) {
   return (
     <g transform={`translate(${x} ${y}) rotate(${angle + 90})`}>
-      <ellipse rx="18" ry="16" fill="#18181B" opacity="0.06" transform="translate(1 2)" />
-      <ellipse rx="18" ry="16" fill="#FFFFFF" stroke="#18181B" strokeWidth="1.8" />
-      <ellipse rx="11" ry="9.5" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1.2" />
-      <rect x="-24" y="-10" width="2.4" height="20" rx="1.2" fill="#94A3B8" />
-      <rect x="22" y="-10" width="2.4" height="20" rx="1.2" fill="#94A3B8" />
-      <circle cx="20" cy="-18" r="5" fill="#E0F2FE" stroke="#38BDF8" strokeWidth="1.2" />
-      <ellipse cx="20" cy="-18" rx="3.5" ry="2" fill="#BAE6FD" />
+      <ellipse rx="19" ry="17" fill="#18181B" opacity="0.08" transform="translate(1 2)" />
+      <ellipse rx="19" ry="17" fill="#FFFDF9" stroke="#18181B" strokeWidth="2.2" />
+      <ellipse rx="12.5" ry="11" fill="#F5EFE6" stroke="#E5DACD" strokeWidth="1.5" />
+      <rect x="-25" y="-10" width="3" height="20" rx="1.5" fill="#94A3B8" />
+      <rect x="22" y="-10" width="3" height="20" rx="1.5" fill="#94A3B8" />
+      <circle cx="21" cy="-18" r="5.5" fill="#0284C7" />
+      <circle cx="21" cy="-18" r="4.5" fill="#38BDF8" />
+      <ellipse cx="21" cy="-18" rx="2.8" ry="1.4" fill="#BAE6FD" />
     </g>
   )
 }
@@ -94,14 +95,14 @@ function Centro({ theme }) {
         {[[-90, -40, '#F43F5E'], [80, -50, '#3B82F6'], [-60, 55, '#FACC15'], [100, 40, '#10B981'], [-130, 10, '#8B5CF6'], [140, -5, '#F97316']].map(([dx, dy, c], i) => (
           <rect key={i} x={dx} y={dy} width="7" height="4" rx="1.5" fill={c} transform={`rotate(${i * 37} ${dx} ${dy})`} />
         ))}
-        <ellipse cy="22" rx="54" ry="14" fill="#18181B" opacity="0.08" />
-        <ellipse cy="18" rx="52" ry="13" fill="#FFFFFF" stroke="#18181B" strokeWidth="2" />
-        <rect x="-42" y="-6" width="84" height="22" rx="8" fill="#F472B6" stroke="#18181B" strokeWidth="2" />
-        <rect x="-42" y="-10" width="84" height="10" rx="5" fill="#FFF1F2" stroke="#18181B" strokeWidth="1.5" />
+        <ellipse cy="22" rx="54" ry="14" fill="#18181B" opacity="0.1" />
+        <ellipse cy="18" rx="52" ry="13" fill="#FFFFFF" stroke="#18181B" strokeWidth="2.2" />
+        <rect x="-42" y="-6" width="84" height="22" rx="8" fill="#F472B6" stroke="#18181B" strokeWidth="2.2" />
+        <rect x="-42" y="-10" width="84" height="10" rx="5" fill="#FFF1F2" stroke="#18181B" strokeWidth="2" />
         <ellipse cy="-6" rx="42" ry="7" fill="#FFF1F2" />
         {[-20, 0, 20].map((dx, i) => (
           <g key={dx} transform={`translate(${dx} -8)`}>
-            <rect x="-2.5" y="-18" width="5" height="18" rx="2" fill={i === 1 ? '#38BDF8' : '#FACC15'} stroke="#18181B" strokeWidth="1.2" />
+            <rect x="-2.5" y="-18" width="5" height="18" rx="2" fill={i === 1 ? '#38BDF8' : '#FACC15'} stroke="#18181B" strokeWidth="1.8" />
             <circle className={styles.flame} cx="0" cy="-24" r="4.5" fill="#F97316" />
             <circle cx="0" cy="-24" r="2.5" fill="#FEF08A" />
           </g>
@@ -112,42 +113,54 @@ function Centro({ theme }) {
   if (theme === 'closing') {
     return (
       <g transform={`translate(${cx} ${cy})`}>
-        <ellipse cy="16" rx="48" ry="12" fill="#18181B" opacity="0.08" />
-        <path d="M-44 0 Q0 38 44 0 Z" fill="#FACC15" stroke="#18181B" strokeWidth="2" />
+        <ellipse cy="16" rx="48" ry="12" fill="#18181B" opacity="0.1" />
+        <path d="M-44 0 Q0 38 44 0 Z" fill="#FACC15" stroke="#18181B" strokeWidth="2.2" />
         <ellipse cy="0" rx="44" ry="10" fill="#EAB308" />
-        <circle cx="-18" cy="-8" r="12" fill="#EF4444" stroke="#18181B" strokeWidth="1.6" />
+        <circle cx="-18" cy="-8" r="12" fill="#EF4444" stroke="#18181B" strokeWidth="2" />
         <ellipse cx="-18" cy="-21" rx="2.5" ry="4.5" fill="#22C55E" />
-        <circle cx="5" cy="-11" r="13" fill="#F97316" stroke="#18181B" strokeWidth="1.6" />
-        <circle cx="25" cy="-7" r="11" fill="#84CC16" stroke="#18181B" strokeWidth="1.6" />
-        <g transform="translate(-108 -8)">
-          <rect x="-7" y="-10" width="14" height="22" rx="5" fill="#BBF7D0" stroke="#18181B" strokeWidth="1.6" />
-          <line x1="0" y1="-10" x2="0" y2="-18" stroke="#15803D" strokeWidth="2" strokeLinecap="round" />
-          <circle cx="0" cy="-22" r="6" fill="#F43F5E" />
-          <circle cx="0" cy="-22" r="2.5" fill="#FEF08A" />
+        <circle cx="5" cy="-11" r="13" fill="#F97316" stroke="#18181B" strokeWidth="2" />
+        <circle cx="25" cy="-7" r="11" fill="#84CC16" stroke="#18181B" strokeWidth="2" />
+        <g transform="translate(-100 -6)">
+          <rect x="-8" y="-12" width="16" height="24" rx="6" fill="#BBF7D0" stroke="#18181B" strokeWidth="2.2" />
+          <line x1="0" y1="-12" x2="0" y2="-20" stroke="#15803D" strokeWidth="2.5" strokeLinecap="round" />
+          <circle cx="0" cy="-24" r="6.5" fill="#F43F5E" />
+          <circle cx="0" cy="-24" r="2.8" fill="#FEF08A" />
         </g>
       </g>
     )
   }
   return (
     <g transform={`translate(${cx} ${cy})`}>
-      <ellipse cy="20" rx="46" ry="12" fill="#18181B" opacity="0.08" />
-      <rect x="-38" y="-2" width="76" height="22" rx="9" fill="#B03921" stroke="#18181B" strokeWidth="2" />
-      <rect x="-46" y="3" width="9" height="5" rx="2.5" fill="#18181B" />
-      <rect x="37" y="3" width="9" height="5" rx="2.5" fill="#18181B" />
-      <ellipse cy="-2" rx="38" ry="9" fill="#991B1B" stroke="#18181B" strokeWidth="1.5" />
-      <ellipse cy="-2" rx="33" ry="7" fill="#F59E0B" />
-      <g className={styles.steam} fill="none" stroke="#CBD5E1" strokeWidth="2.5" strokeLinecap="round">
-        <path d="M-10 -9 Q-6 -17 -10 -25" />
-        <path d="M8 -7 Q12 -15 8 -23" />
+      <ellipse cy="20" rx="46" ry="12" fill="#18181B" opacity="0.1" />
+      <ellipse cy="16" rx="44" ry="11" fill="#D97706" stroke="#18181B" strokeWidth="2.2" />
+      <rect x="-36" y="-3" width="72" height="23" rx="10" fill="#E11D48" stroke="#18181B" strokeWidth="2.2" />
+      <rect x="-34" y="9" width="68" height="8" rx="4" fill="#BE123C" />
+      <rect x="-44" y="2" width="10" height="6" rx="3" fill="#E11D48" stroke="#18181B" strokeWidth="2" />
+      <rect x="34" y="2" width="10" height="6" rx="3" fill="#E11D48" stroke="#18181B" strokeWidth="2" />
+      <ellipse cy="-3" rx="36" ry="11" fill="#BE123C" stroke="#18181B" strokeWidth="2.2" />
+      <ellipse cy="-3" rx="32" ry="9" fill="#F59E0B" />
+      <circle cx="-14" cy="-3" r="3" fill="#22C55E" />
+      <circle cx="-2" cy="-5" r="3.2" fill="#EA580C" />
+      <circle cx="10" cy="-2" r="3" fill="#22C55E" />
+      <circle cx="18" cy="-4" r="2.8" fill="#EA580C" />
+      <circle cx="-6" cy="0" r="2.5" fill="#EF4444" />
+      <g className={styles.steam}>
+        <circle cx="-8" cy="-17" r="4.5" fill="#FFFFFF" opacity="0.75" />
+        <circle cx="-10" cy="-24" r="3.5" fill="#FFFFFF" opacity="0.6" />
+        <circle cx="8" cy="-15" r="4" fill="#FFFFFF" opacity="0.75" />
+        <circle cx="10" cy="-22" r="3" fill="#FFFFFF" opacity="0.6" />
       </g>
-      <g transform="translate(106 6)">
-        <ellipse rx="26" ry="14" fill="#D97706" stroke="#18181B" strokeWidth="1.8" />
-        <ellipse cx="-6" cy="-2" rx="11" ry="6" fill="#FDE68A" stroke="#18181B" strokeWidth="1.2" transform="rotate(-15 -6 -2)" />
-        <ellipse cx="8" cy="1" rx="10" ry="6" fill="#FCD34D" stroke="#18181B" strokeWidth="1.2" transform="rotate(15 8 1)" />
+      <g transform="translate(100 4)">
+        <ellipse rx="26" ry="14" fill="#B45309" stroke="#18181B" strokeWidth="2.2" />
+        <ellipse cy="-2" rx="24" ry="11" fill="#D97706" />
+        <ellipse cx="-8" cy="-4" rx="10" ry="6" fill="#FDE68A" stroke="#18181B" strokeWidth="1.8" transform="rotate(-15 -8 -4)" />
+        <ellipse cx="8" cy="-3" rx="10" ry="6" fill="#FDE68A" stroke="#18181B" strokeWidth="1.8" transform="rotate(15 8 -3)" />
       </g>
-      <g transform="translate(-108 2)">
-        <rect x="-7" y="-20" width="14" height="28" rx="5" fill="#BAE6FD" stroke="#0284C7" strokeWidth="1.8" />
-        <rect x="-5" y="-8" width="10" height="14" rx="3" fill="#38BDF8" opacity="0.5" />
+      <g transform="translate(-100 2)">
+        <rect x="-9" y="-22" width="18" height="30" rx="7" fill="#E0F2FE" stroke="#18181B" strokeWidth="2.2" />
+        <rect x="-7" y="-7" width="14" height="13" rx="4" fill="#38BDF8" />
+        <rect x="-4" y="-27" width="8" height="6" rx="2" fill="#0284C7" stroke="#18181B" strokeWidth="2" />
+        <ellipse cx="-3" cy="-14" rx="2" ry="5" fill="#FFFFFF" opacity="0.6" />
       </g>
     </g>
   )
@@ -165,13 +178,13 @@ export default function MesaCID({ totalSeats, seating, childSeat, childAvatar, t
   return (
     <svg className={styles.svg} viewBox={`0 0 ${width} ${height}`} role="group" aria-label={t('juegos.cidMesaAria')}>
       {/* Fondo plano cálido (estilo Aula Virtual / Duolingo) */}
-      <rect width={width} height={height} rx="22" fill="#F8F4EC" stroke="#E2D5C3" strokeWidth="2.5" />
-      <rect width={width} height="46" rx="22" fill="#FAF6EE" />
-      <rect y="22" width={width} height="24" fill="#FAF6EE" />
-      <line x1="0" y1="46" x2={width} y2="46" stroke="#4A1A1C" strokeWidth="2.5" />
+      <rect width={width} height={height} rx="22" fill="#F7F1E8" stroke="#D8C8B5" strokeWidth="2.5" />
+      <rect width={width} height="46" rx="22" fill="#EFE4D6" />
+      <rect y="22" width={width} height="24" fill="#EFE4D6" />
+      <line x1="0" y1="46" x2={width} y2="46" stroke="#3E2723" strokeWidth="2.5" />
 
       {/* Alfombra plana suave bajo la mesa */}
-      <ellipse cx={cx} cy={cy + 14} rx="380" ry="240" fill={theme === 'celebration' ? '#FCE7F3' : '#E8F5E9'} stroke={theme === 'celebration' ? '#F472B6' : '#86EFAC'} strokeWidth="2.5" strokeDasharray="6 8" />
+      <ellipse cx={cx} cy={cy + 14} rx="380" ry="240" fill={theme === 'celebration' ? '#FCE7F3' : '#F1E3D3'} stroke={theme === 'celebration' ? '#F472B6' : '#D4A373'} strokeWidth="2.5" strokeDasharray="6 8" />
 
       {/* Guirnalda festiva en modo celebración */}
       {theme === 'celebration' && (
@@ -189,11 +202,11 @@ export default function MesaCID({ totalSeats, seating, childSeat, childAvatar, t
 
       {byDepth.filter((s) => s.y < cy).map((s) => <Silla key={`chair-${s.i}`} x={s.x} y={s.y} angle={s.angle} />)}
 
-      {/* Mesa central: sombra 2.5D, borde de madera cálida y mantel flat */}
-      <ellipse cx={cx} cy={cy + 18} rx={TABLE_RX + 12} ry={TABLE_RY + 12} fill="#18181B" opacity="0.06" />
-      <ellipse cx={cx} cy={cy + 8} rx={TABLE_RX + 10} ry={TABLE_RY + 10} fill="#E5DAC9" stroke="#18181B" strokeWidth="2.5" />
-      <ellipse cx={cx} cy={cy} rx={TABLE_RX + 10} ry={TABLE_RY + 10} fill={theme === 'celebration' ? '#FFF1F2' : '#FFFFFF'} stroke="#18181B" strokeWidth="2.5" />
-      <ellipse cx={cx} cy={cy} rx={TABLE_RX - 8} ry={TABLE_RY - 8} fill="none" stroke={theme === 'celebration' ? '#FDA4AF' : '#E2E8F0'} strokeWidth="2" strokeDasharray="6 6" />
+      {/* Mesa central: sombra 2.5D, borde de madera cálida y superficie de roble acogedora */}
+      <ellipse cx={cx} cy={cy + 18} rx={TABLE_RX + 12} ry={TABLE_RY + 12} fill="#18181B" opacity="0.10" />
+      <ellipse cx={cx} cy={cy + 8} rx={TABLE_RX + 10} ry={TABLE_RY + 10} fill="#8D5524" stroke="#18181B" strokeWidth="2.5" />
+      <ellipse cx={cx} cy={cy} rx={TABLE_RX + 10} ry={TABLE_RY + 10} fill="#C0834B" stroke="#18181B" strokeWidth="2.5" />
+      <ellipse cx={cx} cy={cy} rx={TABLE_RX - 12} ry={TABLE_RY - 12} fill="none" stroke="#A76834" strokeWidth="2.5" strokeDasharray="8 6" />
 
       {seats.map((s) => (
         <Plato key={`plate-${s.i}`} x={cx + (s.x - cx) * 0.6} y={cy + (s.y - cy) * 0.6} angle={s.angle} />
@@ -210,8 +223,8 @@ export default function MesaCID({ totalSeats, seating, childSeat, childAvatar, t
           return <Persona key={`p-${i}`} x={x} y={y} color={person.color} label={characterName(t, person)} look={lookOf(person, idx)} />
         }
         if (childSeat === i) {
-          const childLook = childAvatar?.baseType ? { baseType: childAvatar.baseType, hairColor: childAvatar.colorPelo || '#4A2810' } : LOOKS.child
-          return <Persona key={`p-${i}`} x={x} y={y} color={childAvatar.color} label={childLabel(t, childAvatar)} look={childLook} isChild appear />
+          const childLook = { baseType: 4, hairColor: childAvatar?.colorPelo || '#4A2810' }
+          return <Persona key={`p-${i}`} x={x} y={y} color={childAvatar?.color || '#FF6B6B'} label={childLabel(t, childAvatar)} look={childLook} isChild appear />
         }
         if (locked) return null
         return (
