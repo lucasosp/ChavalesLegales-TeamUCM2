@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chavales Legales — Presentación (Equipo 14 · UCM)</title>
+
+  <!-- Google Fonts para tipografía de lectura limpia y títulos display cartoon -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ======================================================================
+       FUENTES Y DESIGN TOKENS OFICIALES DE CHAVALES LEGALES (ESTILO.md)
+       ====================================================================== */
+    @font-face {
+      font-family: 'Talina';
+      src: url('assets/talina.woff2') format('woff2'),
+           url('assets/talina.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      /* Paleta Verde Oficial */
+      --verde-50: #ecfdf5;
+      --verde-100: #d1fae5;
+      --verde-200: #a7f3d0;
+      --verde-300: #6ee7b7;
+      --verde-400: #34d399;
+      --verde-500: #10b981;
+      --verde-600: #059669;
+      --verde-700: #047857;
+      --verde-800: #064e3b;
+      --verde-900: #022c22;
+      --verde-950: #011913; /* Tinta oficial de contorno */
+
+      /* Paleta Naranja Acento */
+      --naranja-50: #fff7ed;
+      --naranja-100: #ffedd5;
+      --naranja-200: #fed7aa;
+      --naranja-300: #fdba74;
+      --naranja-400: #fb923c;
+      --naranja-500: #f97316;
+      --naranja-600: #ea580c;
+      --naranja-700: #c2410c;
+      --naranja-800: #9a3412;
+
+      /* Paleta Marca Ámbar */
+      --marca-ambar: #fbbf24;
+      --marca-ambar-claro: #fcd34d;
+      --marca-ambar-sombra: #b45309;
+
+      /* Neutros */
+      --neutro-50: #fafafa;
+      --neutro-100: #f4f4f5;
+      --neutro-200: #e4e4e7;
+      --neutro-300: #d4d4d8;
+      --neutro-400: #a1a1aa;
+      --neutro-700: #3f3f46;
+      --neutro-900: #18181b;
+
+      /* Tokens de Minijuegos */
+      --juego-azul: #50abf2;
+      --juego-azul-borde: #1c7ed6;
+      --juego-morado: #e094f5;
+      --juego-morado-borde: #be4bdb;
+      --juego-rojo: #ff8a8a;
+      --juego-rojo-borde: #f03e3e;
+      --juego-verde: #67d579;
+      --juego-verde-borde: #2f9e44;
+
+      /* Tipografía */
+      --font-brand: 'Talina', 'Fredoka', cursive, sans-serif;
+      --font-display: 'Fredoka', sans-serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+
+      /* Stage */
+      --stage-bg: #01120e;
+      --slide-bg: #011913;
+    }
+
+    /* Reset básico */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ======================================================================
+       FIXED 16:9 STAGE BASE CSS (MANDATORY VIEWPORT-BASE.CSS)
+       ====================================================================== */
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--stage-bg);
+      font-family: var(--font-body);
+      color: var(--neutro-900);
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .deck-viewport {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      background: var(--stage-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .deck-stage {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      transform-origin: 0 0;
+      background: var(--slide-bg);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      display: block;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      background: var(--slide-bg);
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: scale(0.985);
+    }
+
+    .slide.active,
+    .slide.visible {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 2;
+      transform: scale(1);
+    }
+
+    /* ======================================================================
+       FONDO ORGÁNICO CURVADO Y TRAMA DE PUNTOS CÓMIC (ESTILO CHAVALES LEGALES)
+       ====================================================================== */
+    .slide-bg-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .halftone-dots {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 2px, transparent 2px);
+      background-size: 24px 24px;
+      opacity: 0.85;
+      mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, #000 60%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, #000 60%, transparent 100%);
+    }
+
+    .bg-curved-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* ======================================================================
+       ESTÉTICA WEB CÓMIC / TEBEO (ESTILO.MD)
+       Pegatinas con trazo de tinta 3px, placa desplazada, esquinas asimétricas
+       ====================================================================== */
+    .tinta-border {
+      border: 3px solid var(--verde-950);
+    }
+
+    /* Pegatina asimétrica con sombra dura desplazada */
+    .sticker-card {
+      background: #ffffff;
+      border: 3px solid var(--verde-950);
+      border-radius: 18px 14px 16px 15px / 15px 17px 14px 16px;
+      box-shadow: 6px 6px 0 var(--verde-950);
+      position: relative;
+      z-index: 1;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .sticker-card:hover {
+      transform: translate(-2px, -3px) rotate(0deg) !important;
+      box-shadow: 8px 9px 0 var(--verde-950);
+    }
+
+    .sticker-card-dark {
+      background: rgba(2, 44, 34, 0.95);
+      border: 3px solid var(--verde-400);
+      border-radius: 18px 14px 16px 15px / 15px 17px 14px 16px;
+      box-shadow: 6px 6px 0 var(--verde-950);
+      color: #ffffff;
+    }
+
+    /* Cápsulas y Píldoras */
+    .capsula-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 22px;
+      border-radius: 9999px;
+      border: 3px solid var(--verde-950);
+      background: #ffffff;
+      box-shadow: 4px 4px 0 var(--verde-950);
+      font-family: var(--font-display);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--verde-950);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .capsula-pill.amber {
+      background: var(--marca-ambar);
+      box-shadow: 4px 4px 0 var(--marca-ambar-sombra);
+    }
+
+    .capsula-pill.orange {
+      background: var(--naranja-400);
+      color: #ffffff;
+      box-shadow: 4px 4px 0 var(--naranja-800);
+    }
+
+    .capsula-pill.green {
+      background: var(--verde-400);
+      color: var(--verde-950);
+      box-shadow: 4px 4px 0 var(--verde-800);
+    }
+
+    /* Botón Ámbar Oficial (Entrar / Avanzar) */
+    .btn-comic-amber {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: var(--marca-ambar);
+      color: var(--verde-950);
+      border: 3px solid var(--verde-950);
+      border-radius: 16px 11px 15px 12px / 12px 16px 11px 15px;
+      box-shadow: 5px 5px 0 var(--marca-ambar-sombra);
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      padding: 16px 36px;
+      cursor: pointer;
+      transform: rotate(-0.4deg);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-comic-amber:hover {
+      background: var(--marca-ambar-claro);
+      transform: translate(-2px, -3px) rotate(0deg);
+      box-shadow: 7px 8px 0 var(--marca-ambar-sombra);
+    }
+    .btn-comic-amber:active {
+      transform: translate(2px, 2px) rotate(0deg);
+      box-shadow: 2px 2px 0 var(--marca-ambar-sombra);
+    }
+
+    /* Botón Blanco Pegatina */
+    .btn-comic-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #ffffff;
+      color: var(--verde-950);
+      border: 3px solid var(--verde-950);
+      border-radius: 14px 10px 13px 11px / 11px 14px 10px 13px;
+      box-shadow: 4px 4px 0 var(--verde-950);
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-comic-white:hover {
+      background: var(--verde-50);
+      transform: translate(-1px, -2px);
+      box-shadow: 5px 6px 0 var(--verde-950);
+    }
+
+    /* ======================================================================
+       HEADER SUPERIOR DE CADA SLIDE
+       ====================================================================== */
+    .slide-header {
+      position: absolute;
+      top: 48px;
+      left: 80px;
+      right: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .slide-tag-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .slide-step-badge {
+      background: var(--marca-ambar);
+      border: 3px solid var(--verde-950);
+      border-radius: 9999px;
+      box-shadow: 3px 3px 0 var(--verde-950);
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--verde-950);
+      padding: 6px 16px;
+    }
+
+    .slide-tag-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--verde-100);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
+
+    .slide-meta-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .project-chip {
+      background: #ffffff;
+      border: 3px solid var(--verde-950);
+      border-radius: 9999px;
+      box-shadow: 3px 3px 0 var(--verde-950);
+      padding: 6px 18px;
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--verde-950);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ======================================================================
+       ESTRUCTURA Y ANIMACIONES REVEAL
+       ====================================================================== */
+    .slide-inner {
+      position: absolute;
+      top: 130px;
+      left: 80px;
+      right: 80px;
+      bottom: 60px;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .slide.visible .reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide.visible .reveal-1 { transition-delay: 0.08s; }
+    .slide.visible .reveal-2 { transition-delay: 0.16s; }
+    .slide.visible .reveal-3 { transition-delay: 0.24s; }
+    .slide.visible .reveal-4 { transition-delay: 0.32s; }
+    .slide.visible .reveal-5 { transition-delay: 0.40s; }
+
+    /* ======================================================================
+       ESTILOS ESPECÍFICOS - SLIDE 1 (PORTADA CENTRADA)
+       ====================================================================== */
+    .hero-centered-stage {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      text-align: center;
+      padding: 60px;
+    }
+
+    .brand-title-box {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .brand-title-hero {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      user-select: none;
+      font-family: var(--font-brand);
+      line-height: 0.82;
+      transform: translateZ(0);
+      transition: transform 0.3s ease;
+    }
+    .brand-title-hero:hover {
+      transform: scale(1.03);
+    }
+
+    .hero-title-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+    }
+
+    .hero-word {
+      display: block;
+      font-size: 132px;
+      line-height: 0.82;
+      color: var(--marca-ambar);
+      letter-spacing: -0.04em;
+      white-space: nowrap;
+      text-shadow:
+        -2px 2px 0 var(--verde-800),
+        -4px 4px 0 var(--verde-800),
+        -6px 6px 0 var(--verde-900),
+        -8px 8px 0 var(--verde-950),
+        -10px 10px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-suffix-es {
+      display: block;
+      font-size: 288px;
+      line-height: 0.80;
+      color: var(--verde-400);
+      margin-left: 24px;
+      letter-spacing: -0.03em;
+      text-shadow:
+        -2px 2px 0 var(--verde-700),
+        -4px 4px 0 var(--verde-700),
+        -6px 6px 0 var(--verde-800),
+        -8px 8px 0 var(--verde-900),
+        -10px 10px 0 var(--verde-950),
+        -14px 14px 22px rgba(0, 0, 0, 0.6);
+    }
+
+    .title-letter-anim {
+      display: inline-block;
+      animation: logoLetterBounce 2.5s ease-in-out infinite;
+      animation-delay: calc(var(--char-index, 0) * 0.055s);
+    }
+
+    @keyframes logoLetterBounce {
+      0%, 100% { transform: translateY(0); }
+      20% { transform: translateY(-10px); }
+      38% { transform: translateY(0); }
+      50% { transform: translateY(-3.5px); }
+      62%, 100% { transform: translateY(0); }
+    }
+
+    .hero-bottom-footer {
+      margin-top: 54px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .team-footer-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      background: #ffffff;
+      border: 3.5px solid var(--verde-950);
+      border-radius: 9999px;
+      box-shadow: 6px 6px 0 var(--verde-950);
+      padding: 16px 48px;
+      font-family: var(--font-display);
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--verde-950);
+      letter-spacing: 0.04em;
+      transform: rotate(-0.4deg);
+      transition: all 0.25s ease;
+    }
+    .team-footer-pill:hover {
+      transform: translate(-2px, -3px) rotate(0deg);
+      box-shadow: 8px 9px 0 var(--verde-950);
+      background: var(--verde-50);
+    }
+
+    .punto-centrico {
+      color: var(--naranja-500);
+      font-size: 44px;
+      line-height: 0;
+      position: relative;
+      top: -2px;
+    }
+
+    /* ======================================================================
+       ESTILOS ESPECÍFICOS - SLIDE 2 (EL RETO Y LA MISIÓN)
+       ====================================================================== */
+    .two-column-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      height: 100%;
+      align-items: stretch;
+    }
+
+    .contrast-card-problem {
+      background: #fff8f6;
+      border: 3px solid var(--verde-950);
+      border-radius: 20px 16px 19px 17px / 17px 20px 16px 19px;
+      box-shadow: 7px 7px 0 var(--verde-950);
+      padding: 38px 42px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transform: rotate(-0.4deg);
+    }
+
+    .contrast-card-solution {
+      background: #f0fdf4;
+      border: 3.5px solid var(--verde-950);
+      border-radius: 17px 20px 16px 19px / 19px 16px 20px 17px;
+      box-shadow: 8px 8px 0 var(--verde-950);
+      padding: 38px 42px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transform: rotate(0.4deg);
+    }
+
+    .card-badge-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .card-big-title {
+      font-family: var(--font-display);
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--verde-950);
+      margin-bottom: 24px;
+      line-height: 1.25;
+    }
+
+    .list-items-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .comic-bullet-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .bullet-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 2.5px solid var(--verde-950);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+      box-shadow: 3px 3px 0 var(--verde-950);
+    }
+
+    .bullet-text-box h4 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--verde-950);
+      margin-bottom: 4px;
+    }
+
+    .bullet-text-box p {
+      font-size: 18px;
+      line-height: 1.45;
+      color: var(--neutro-700);
+    }
+
+    .speech-bubble-bottom {
+      margin-top: 24px;
+      background: #ffffff;
+      border: 2.5px solid var(--verde-950);
+      border-radius: 16px;
+      box-shadow: 4px 4px 0 var(--verde-950);
+      padding: 16px 22px;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--verde-900);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    /* ======================================================================
+       ESTILOS ESPECÍFICOS - SLIDE 3 (LA NOVELA VISUAL)
+       ====================================================================== */
+    .novel-layout-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 44px;
+      height: 100%;
+      align-items: center;
+    }
+
+    .novel-screen-frame {
+      background: #ffffff;
+      border: 3.5px solid var(--verde-950);
+      border-radius: 20px;
+      box-shadow: 9px 9px 0 var(--verde-950);
+      overflow: hidden;
+      transform: rotate(-0.5deg);
+      position: relative;
+    }
+
+    .frame-browser-bar {
+      height: 42px;
+      background: var(--verde-900);
+      border-bottom: 3px solid var(--verde-950);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 10px;
+    }
+
+    .browser-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--verde-950);
+    }
+
+    .frame-content-img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .features-comic-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .feature-sticker-item {
+      background: #ffffff;
+      border: 3px solid var(--verde-950);
+      border-radius: 16px 12px 15px 13px / 13px 15px 12px 16px;
+      box-shadow: 5px 5px 0 var(--verde-950);
+      padding: 22px 26px;
+      transform: rotate(0.4deg);
+      transition: all 0.2s ease;
+    }
+    .feature-sticker-item:hover {
+      transform: translate(-2px, -2px) rotate(0deg);
+      box-shadow: 7px 7px 0 var(--verde-950);
+    }
+
+    .feature-badge-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .feature-number-capsule {
+      background: var(--marca-ambar);
+      border: 2px solid var(--verde-950);
+      border-radius: 8px;
+      box-shadow: 2px 2px 0 var(--verde-950);
+      padding: 2px 10px;
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--verde-950);
+    }
+
+    .feature-sticker-item h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--verde-950);
+    }
+
+    .feature-sticker-item p {
+      font-size: 17px;
+      line-height: 1.45;
+      color: var(--neutro-700);
+    }
+
+    /* ======================================================================
+       ESTILOS ESPECÍFICOS - SLIDE 4 (DINÁMICAS PROYECTIVAS)
+       ====================================================================== */
+    .tri-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+      height: 100%;
+      align-items: stretch;
+    }
+
+    .game-card-col {
+      background: #ffffff;
+      border: 3.5px solid var(--verde-950);
+      border-radius: 20px 16px 18px 15px / 16px 20px 15px 18px;
+      box-shadow: 7px 7px 0 var(--verde-950);
+      padding: 34px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .game-card-col:nth-child(1) { transform: rotate(-0.5deg); }
+    .game-card-col:nth-child(2) { transform: rotate(0.4deg); }
+    .game-card-col:nth-child(3) { transform: rotate(-0.3deg); }
+
+    .game-card-col:hover {
+      transform: translate(-3px, -4px) rotate(0deg) !important;
+      box-shadow: 9px 10px 0 var(--verde-950);
+    }
+
+    .game-icon-top {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      border: 3px solid var(--verde-950);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      box-shadow: 4px 4px 0 var(--verde-950);
+      margin-bottom: 22px;
+    }
+
+    .game-card-title {
+      font-family: var(--font-display);
+      font-size: 27px;
+      font-weight: 700;
+      color: var(--verde-950);
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .game-card-scientific {
+      background: var(--verde-50);
+      border: 2px solid var(--verde-700);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--verde-800);
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .game-card-desc {
+      font-size: 17px;
+      line-height: 1.5;
+      color: var(--neutro-700);
+      margin-bottom: 20px;
+    }
+
+    .game-key-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-top: 2px dashed var(--neutro-200);
+      padding-top: 18px;
+    }
+
+    .game-key-point {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--verde-900);
+    }
+
+    /* ======================================================================
+       ESTILOS ESPECÍFICOS - SLIDE 5 (DASHBOARD PROFESIONAL)
+       ====================================================================== */
+    .dashboard-layout-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 44px;
+      height: 100%;
+      align-items: center;
+    }
+
+    .dashboard-mockup-frame {
+      background: #ffffff;
+      border: 3.5px solid var(--verde-950);
+      border-radius: 20px;
+      box-shadow: 9px 9px 0 var(--verde-950);
+      overflow: hidden;
+      transform: rotate(-0.4deg);
+    }
+
+    .dashboard-preview-img {
+      width: 100%;
+      height: 520px;
+      object-fit: contain;
+      background: var(--verde-950);
+      display: block;
+    }
+
+    .panel-features-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .kpi-pill-box {
+      background: #ffffff;
+      border: 3px solid var(--verde-950);
+      border-radius: 16px 13px 15px 12px / 12px 15px 13px 16px;
+      box-shadow: 5px 5px 0 var(--verde-950);
+      padding: 20px 24px;
+      transform: rotate(0.4deg);
+    }
+
+    .kpi-pill-box h4 {
+      font-family: var(--font-display);
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--verde-950);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .kpi-pill-box p {
+      font-size: 16.5px;
+      line-height: 1.45;
+      color: var(--neutro-700);
+    }
+
+    /* ======================================================================
+       ESTILOS ESPECÍFICOS - SLIDE 6 (ARQUITECTURA & GENERADOR IA)
+       ====================================================================== */
+    .architecture-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      height: 100%;
+      align-items: stretch;
+    }
+
+    .tech-stack-card {
+      background: #ffffff;
+      border: 3.5px solid var(--verde-950);
+      border-radius: 20px 16px 19px 17px / 17px 20px 16px 19px;
+      box-shadow: 7px 7px 0 var(--verde-950);
+      padding: 34px 38px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transform: rotate(-0.3deg);
+    }
+
+    .tech-row-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 2px dashed var(--neutro-200);
+    }
+    .tech-row-item:last-child { border-bottom: none; }
+
+    .tech-tag-badge {
+      background: var(--verde-100);
+      border: 2px solid var(--verde-800);
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--verde-900);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .pipeline-step-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .pipeline-step-box {
+      background: #ffffff;
+      border: 2.5px solid var(--verde-950);
+      border-radius: 14px;
+      box-shadow: 4px 4px 0 var(--verde-950);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .step-arrow-down {
+      text-align: center;
+      font-size: 20px;
+      color: var(--marca-ambar);
+      font-weight: 900;
+      line-height: 0.6;
+    }
+
+    /* ======================================================================
+       ESTILOS ESPECÍFICOS - SLIDE 7 (DESPEDIDA Y CONCLUSIONES)
+       ====================================================================== */
+    .farewell-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      padding: 20px 60px 40px;
+    }
+
+    .farewell-main-card {
+      background: #ffffff;
+      border: 4px solid var(--verde-950);
+      border-radius: 28px 22px 26px 24px / 24px 28px 23px 26px;
+      box-shadow: 12px 12px 0 var(--verde-950);
+      padding: 50px 70px 44px;
+      max-width: 1400px;
+      transform: rotate(-0.3deg);
+      position: relative;
+    }
+
+    .farewell-headline {
+      font-family: var(--font-brand);
+      font-size: 58px;
+      color: var(--verde-950);
+      margin-bottom: 20px;
+      line-height: 1.15;
+    }
+
+    .farewell-subtext {
+      font-size: 24px;
+      line-height: 1.55;
+      color: var(--neutro-700);
+      font-weight: 500;
+      max-width: 1100px;
+      margin: 0 auto 36px;
+    }
+
+    .farewell-pillars-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-bottom: 34px;
+    }
+
+    .pillar-box {
+      background: var(--verde-50);
+      border: 3px solid var(--verde-950);
+      border-radius: 16px;
+      box-shadow: 5px 5px 0 var(--verde-950);
+      padding: 22px 24px;
+      text-align: left;
+    }
+
+    .pillar-box h4 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--verde-950);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pillar-box p {
+      font-size: 16.5px;
+      color: var(--neutro-700);
+      line-height: 1.4;
+    }
+
+    .team-badge-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .team-name-capsule {
+      background: var(--marca-ambar);
+      border: 3px solid var(--verde-950);
+      border-radius: 9999px;
+      box-shadow: 4px 4px 0 var(--marca-ambar-sombra);
+      padding: 12px 36px;
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--verde-950);
+    }
+
+    .entity-links-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-family: var(--font-display);
+      font-size: 18px;
+      color: var(--verde-200);
+      font-weight: 600;
+    }
+
+    /* ======================================================================
+       CONTROLES DE PRESENTACIÓN EXTERNOS Y MODO EDICIÓN
+       ====================================================================== */
+    .deck-controls {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(1, 25, 19, 0.94);
+      border: 3px solid var(--verde-400);
+      border-radius: 9999px;
+      padding: 8px 22px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6), 4px 4px 0 var(--verde-950);
+      backdrop-filter: blur(8px);
+    }
+
+    .control-btn {
+      background: #ffffff;
+      border: 2px solid var(--verde-950);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--verde-950);
+      box-shadow: 2px 2px 0 var(--verde-950);
+      transition: all 0.15s ease;
+    }
+    .control-btn:hover {
+      background: var(--marca-ambar);
+      transform: translateY(-2px);
+      box-shadow: 3px 3px 0 var(--verde-950);
+    }
+    .control-btn:active {
+      transform: translateY(1px);
+      box-shadow: 1px 1px 0 var(--verde-950);
+    }
+
+    .deck-progress-indicator {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      min-width: 70px;
+      text-align: center;
+    }
+
+    /* Hotzone y botón de edición inline (tecla 'E') */
+    .edit-hotzone {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 80px;
+      height: 80px;
+      z-index: 10000;
+      cursor: pointer;
+    }
+
+    .edit-toggle {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: var(--marca-ambar);
+      border: 3px solid var(--verde-950);
+      box-shadow: 3px 3px 0 var(--marca-ambar-sombra);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.2s ease;
+      z-index: 10001;
+    }
+    .edit-toggle.show,
+    .edit-toggle.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .edit-toggle.active {
+      background: var(--naranja-500);
+      color: #ffffff;
+      transform: scale(1.08);
+    }
+
+    [contenteditable="true"] {
+      outline: 3px dashed var(--marca-ambar) !important;
+      outline-offset: 4px;
+      border-radius: 6px;
+      background: rgba(251, 191, 36, 0.12) !important;
+    }
+
+    /* Print rules */
+    @media print {
+      html, body {
+        width: 1920px;
+        height: auto;
+        overflow: visible;
+        background: #fff;
+      }
+      .deck-viewport, .deck-stage {
+        position: static;
+        width: auto;
+        height: auto;
+        transform: none !important;
+      }
+      .slide {
+        position: relative;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        break-after: page;
+        page-break-after: always;
+      }
+      .deck-controls, .edit-hotzone, .edit-toggle {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hotzone y botón de edición inline -->
+  <div class="edit-hotzone" id="editHotzone" title="Activar modo edición (o pulsa E)"></div>
+  <button class="edit-toggle" id="editToggle" title="Modo edición (E)">✏️</button>
+
+  <div class="deck-viewport">
+    <main class="deck-stage" id="deckStage">
+
+      <!-- ======================================================================
+           SLIDE 1: PRESENTACIÓN DE CHAVALES LEGALES (PORTADA CENTRADA)
+           ====================================================================== -->
+      <section class="slide active visible" id="slide-1" aria-label="Portada Chavales Legales">
+        <div class="slide-bg-canvas">
+          <div class="halftone-dots"></div>
+          <svg class="bg-curved-svg" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="none">
+            <path d="M-100 200 C300 120 500 500 1000 350 C1250 270 1400 480 1550 420 L1550 1000 L-100 1000 Z" fill="var(--verde-800)" fill-opacity="0.45" />
+            <path d="M-50 780 C320 620 680 720 1100 520 C1300 420 1480 460 1600 410 L1600 950 L-50 950 Z" fill="var(--verde-700)" fill-opacity="0.35" />
+            <circle cx="720" cy="450" r="460" fill="var(--verde-500)" fill-opacity="0.18" />
+            <circle cx="720" cy="450" r="300" fill="var(--marca-ambar)" fill-opacity="0.08" />
+          </svg>
+        </div>
+
+        <div class="hero-centered-stage">
+          <!-- Logotipo 3D Cómic Oficial Totalmente Centrado -->
+          <div class="brand-title-box reveal reveal-1">
+            <div class="brand-title-hero" aria-label="Chavales Legales">
+              <div class="hero-title-left">
+                <span class="hero-word">
+                  <span class="title-letter-anim" style="--char-index: 0">C</span>
+                  <span class="title-letter-anim" style="--char-index: 1">H</span>
+                  <span class="title-letter-anim" style="--char-index: 2">A</span>
+                  <span class="title-letter-anim" style="--char-index: 3">V</span>
+                  <span class="title-letter-anim" style="--char-index: 4">A</span>
+                  <span class="title-letter-anim" style="--char-index: 5">L</span>
+                </span>
+                <span class="hero-word">
+                  <span class="title-letter-anim" style="--char-index: 6">L</span>
+                  <span class="title-letter-anim" style="--char-index: 7">E</span>
+                  <span class="title-letter-anim" style="--char-index: 8">G</span>
+                  <span class="title-letter-anim" style="--char-index: 9">A</span>
+                  <span class="title-letter-anim" style="--char-index: 10">L</span>
+                </span>
+              </div>
+              <span class="hero-suffix-es">
+                <span class="title-letter-anim" style="--char-index: 11">E</span>
+                <span class="title-letter-anim" style="--char-index: 12">S</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Abajo: Equipo 14 · UCM -->
+          <div class="hero-bottom-footer reveal reveal-2">
+            <div class="team-footer-pill">
+              Equipo 14 <span class="punto-centrico">&middot;</span> UCM
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 2: EL RETO Y LA MISIÓN (PROBLEMÁTICA & SOLUCIÓN)
+           ====================================================================== -->
+      <section class="slide" id="slide-2" aria-label="El Reto y la Misión">
+        <div class="slide-bg-canvas">
+          <div class="halftone-dots"></div>
+        </div>
+
+        <header class="slide-header">
+          <div class="slide-tag-group">
+            <span class="slide-step-badge">01. EL RETO</span>
+            <span class="slide-tag-title">Romper la barrera judicial para la infancia</span>
+          </div>
+          <div class="slide-meta-right">
+            <span class="capsula-pill green" style="font-size: 15px; padding: 6px 16px;">INTERÉS SUPERIOR DEL MENOR</span>
+          </div>
+        </header>
+
+        <div class="slide-inner">
+          <div class="two-column-grid">
+            <!-- Tarjeta 1: La Problemática Judicial -->
+            <div class="contrast-card-problem reveal reveal-1">
+              <div>
+                <div class="card-badge-header">
+                  <span class="capsula-pill orange" style="font-size: 16px; padding: 6px 18px;">EL PROBLEMA</span>
+                  <span style="font-size: 32px;">⚠️</span>
+                </div>
+                <h3 class="card-big-title">La justicia suele resultar hostil, fría e intimidante para un menor</h3>
+
+                <div class="list-items-stack">
+                  <div class="comic-bullet-item">
+                    <div class="bullet-icon-box" style="background: #ffe4e6;">❌</div>
+                    <div class="bullet-text-box">
+                      <h4>Riesgo de Revictimización</h4>
+                      <p>Someter a un menor a interrogatorios repetitivos o salas judiciales solemnes bloquea su expresión emocional y agrava el trauma.</p>
+                    </div>
+                  </div>
+
+                  <div class="comic-bullet-item">
+                    <div class="bullet-icon-box" style="background: #ffe4e6;">❌</div>
+                    <div class="bullet-text-box">
+                      <h4>Brecha de Comprensión Legal</h4>
+                      <p>Conceptos como patria potestad, ciberacoso, medidas cautelares o tutela se formulan en un lenguaje ajeno a su edad.</p>
+                    </div>
+                  </div>
+
+                  <div class="comic-bullet-item">
+                    <div class="bullet-icon-box" style="background: #ffe4e6;">❌</div>
+                    <div class="bullet-text-box">
+                      <h4>Falta de Herramientas Objetivas</h4>
+                      <p>Los trabajadores sociales a menudo carecen de dinámicas estandarizadas digitales para evaluar vivencias sin forzar respuestas verbales directas.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="speech-bubble-bottom" style="border-color: var(--naranja-600); background: #fff1f2;">
+                <span>🛑</span>
+                <span>Un menor que tiene miedo no puede ejercer sus derechos con libertad.</span>
+              </div>
+            </div>
+
+            <!-- Tarjeta 2: La Solución Chavales Legales -->
+            <div class="contrast-card-solution reveal reveal-2">
+              <div>
+                <div class="card-badge-header">
+                  <span class="capsula-pill green" style="font-size: 16px; padding: 6px 18px;">NUESTRA RESPUESTA</span>
+                  <span style="font-size: 32px;">🌟</span>
+                </div>
+                <h3 class="card-big-title">Un entorno lúdico protegido con pleno rigor jurídico</h3>
+
+                <div class="list-items-stack">
+                  <div class="comic-bullet-item">
+                    <div class="bullet-icon-box" style="background: var(--verde-200);">✅</div>
+                    <div class="bullet-text-box">
+                      <h4>Alineación con la Ley LOPIVI</h4>
+                      <p>Cumple las directrices de la Ley Orgánica de Protección Integral a la Infancia y Adolescencia frente a la Violencia, garantizando un entorno amigable.</p>
+                    </div>
+                  </div>
+
+                  <div class="comic-bullet-item">
+                    <div class="bullet-icon-box" style="background: var(--verde-200);">✅</div>
+                    <div class="bullet-text-box">
+                      <h4>Proyección a través de la Historia</h4>
+                      <p>El menor no habla de sí mismo en un test frío: acompaña a personajes como Sara en sus dilemas cotidianos escolares y digitales.</p>
+                    </div>
+                  </div>
+
+                  <div class="comic-bullet-item">
+                    <div class="bullet-icon-box" style="background: var(--verde-200);">✅</div>
+                    <div class="bullet-text-box">
+                      <h4>Telemetría Descriptiva Respetuosa</h4>
+                      <p>Registra ritmo de lectura, dudas en opciones y dinámicas relacionales sin invadir su intimidad ni recopilar datos biométricos.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="speech-bubble-bottom" style="border-color: var(--verde-700);">
+                <span>🌱</span>
+                <span>"Explicar el derecho con pedagogía y calidez convierte la indefensión en seguridad."</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 3: LA NOVELA VISUAL INTERACTIVA (LEGALINSTORY)
+           ====================================================================== -->
+      <section class="slide" id="slide-3" aria-label="La Novela Visual">
+        <div class="slide-bg-canvas">
+          <div class="halftone-dots"></div>
+        </div>
+
+        <header class="slide-header">
+          <div class="slide-tag-group">
+            <span class="slide-step-badge">02. EXPERIENCIA DEL MENOR</span>
+            <span class="slide-tag-title">Novela Visual Interactiva · LegalinStory</span>
+          </div>
+          <div class="slide-meta-right">
+            <div class="project-chip">🎨 Estética Cómic & Anime Adaptada</div>
+          </div>
+        </header>
+
+        <div class="slide-inner">
+          <div class="novel-layout-grid">
+            <!-- Mockup de la Novela Visual en vivo -->
+            <div class="novel-screen-frame reveal reveal-1">
+              <div class="frame-browser-bar">
+                <div class="browser-dot" style="background: #f87171;"></div>
+                <div class="browser-dot" style="background: #fbbf24;"></div>
+                <div class="browser-dot" style="background: #34d399;"></div>
+                <span style="font-family: var(--font-mono); font-size: 13px; color: var(--verde-200); margin-left: 12px;">
+                  chavaleslegales.es/novela?caso=CL-55511 (Capítulo 1: Algo no va bien)
+                </span>
+              </div>
+              <img src="assets/decision-clase.png" alt="Pantalla de toma de decisión de la novela" class="frame-content-img">
+            </div>
+
+            <!-- Columna de Funcionalidades Cartoon -->
+            <div class="features-comic-stack">
+              <div class="feature-sticker-item reveal reveal-2">
+                <div class="feature-badge-title">
+                  <span class="feature-number-capsule">01</span>
+                  <h3>Decisiones con Tiempo y Sin Juicio</h3>
+                </div>
+                <p>Las elecciones aparecen en cápsulas estilizadas con trazo de tinta. El menor puede releer el diálogo anterior, tomarse su tiempo o pedir una pausa sin penalización ni prisas.</p>
+              </div>
+
+              <div class="feature-sticker-item reveal reveal-3">
+                <div class="feature-badge-title">
+                  <span class="feature-number-capsule">02</span>
+                  <h3>Personajes con Expresiones Empáticas</h3>
+                </div>
+                <p>Sprites ilustrados con expresiones faciales diferenciadas (alegría, duda, pudor, alivio). Ayudan a los jóvenes a identificar emociones complejas y normalizar pedir ayuda a adultos de referencia.</p>
+              </div>
+
+              <div class="feature-sticker-item reveal reveal-4">
+                <div class="feature-badge-title">
+                  <span class="feature-number-capsule">03</span>
+                  <h3>Puntos de Giro y Ramificación Temática</h3>
+                </div>
+                <p>Aborda ciberacoso escolar, difusión no consentida de fotos, conflictos de custodia o soledad digital desde situaciones verosímiles en el aula, el patio o la habitación.</p>
+              </div>
+
+              <div class="capsula-pill green reveal reveal-5" style="align-self: flex-start; font-size: 17px;">
+                💡 Integración en iframe seguro con comunicación postMessage
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 4: DINÁMICAS PROYECTIVAS Y MINIJUEGOS
+           ====================================================================== -->
+      <section class="slide" id="slide-4" aria-label="Dinámicas Proyectivas">
+        <div class="slide-bg-canvas">
+          <div class="halftone-dots"></div>
+        </div>
+
+        <header class="slide-header">
+          <div class="slide-tag-group">
+            <span class="slide-step-badge">03. INSTRUMENTOS PROYECTIVOS</span>
+            <span class="slide-tag-title">Minijuegos de Evaluación Validada</span>
+          </div>
+          <div class="slide-meta-right">
+            <span class="capsula-pill amber" style="font-size: 15px; padding: 6px 16px;">CIENCIA PSICOLÓGICA TRADUCIDA AL JUEGO</span>
+          </div>
+        </header>
+
+        <div class="slide-inner">
+          <div class="tri-cards-grid">
+            <!-- Tarjeta 1: La Mesa de la Familia (CID) -->
+            <div class="game-card-col reveal reveal-1">
+              <div>
+                <div class="game-icon-top" style="background: var(--juego-azul); border-color: var(--juego-azul-borde);">
+                  🪑
+                </div>
+                <h3 class="game-card-title">La Mesa de la Familia</h3>
+                <span class="game-card-scientific">Adaptación Escala CID (Duke & Nowicki, 1972)</span>
+                <p class="game-card-desc">
+                  El menor elige espontáneamente dónde sentarse en tres situaciones cotidianas (comida familiar, momento difícil, celebración), arrastrando su ficha sobre la mesa.
+                </p>
+              </div>
+
+              <div class="game-key-list">
+                <div class="game-key-point"><span>📍</span> Mide distancias interpersonales</div>
+                <div class="game-key-point"><span>🤝</span> Detecta vínculos de apego o aislamiento</div>
+                <div class="game-key-point"><span>📊</span> Cuantifica proximidad sin forzar palabras</div>
+              </div>
+            </div>
+
+            <!-- Tarjeta 2: La Caja de Arena Digital -->
+            <div class="game-card-col reveal reveal-2">
+              <div>
+                <div class="game-icon-top" style="background: var(--marca-ambar); border-color: var(--marca-ambar-sombra);">
+                  🏖️
+                </div>
+                <h3 class="game-card-title">La Caja de Arena</h3>
+                <span class="game-card-scientific">Expresión Simbólica del Entorno</span>
+                <p class="game-card-desc">
+                  Inspirado en la técnica del Sandplay. El menor compone un espacio seguro situando objetos, refugios y personajes bajo diferentes condiciones climáticas (sol, tormenta, niebla).
+                </p>
+              </div>
+
+              <div class="game-key-list">
+                <div class="game-key-point"><span>🛡️</span> Identificación de zonas seguras</div>
+                <div class="game-key-point"><span>⚡</span> Exteriorización de tensiones latentes</div>
+                <div class="game-key-point"><span>🎯</span> Exploración no directiva de recursos</div>
+              </div>
+            </div>
+
+            <!-- Tarjeta 3: El Lienzo y Avatar Emocional -->
+            <div class="game-card-col reveal reveal-3">
+              <div>
+                <div class="game-icon-top" style="background: var(--juego-verde); border-color: var(--juego-verde-borde);">
+                  🎨
+                </div>
+                <h3 class="game-card-title">Avatar y Dibujo Libre</h3>
+                <span class="game-card-scientific">Expresión Emocional Guiada</span>
+                <p class="game-card-desc">
+                  Módulo de personalización donde el participante crea su alter ego y realiza trazos expresivos. Los dibujos se guardan como snapshots descriptivos en el informe.
+                </p>
+              </div>
+
+              <div class="game-key-list">
+                <div class="game-key-point"><span>✨</span> Empoderamiento y autorrepresentación</div>
+                <div class="game-key-point"><span>🖼️</span> Snapshots integrados en el informe</div>
+                <div class="game-key-point"><span>🔒</span> Sin reconocimiento facial ni biometría</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 5: EL PANEL DEL PROFESIONAL Y TELEMETRÍA DESCRIPTIVA
+           ====================================================================== -->
+      <section class="slide" id="slide-5" aria-label="El Panel del Profesional">
+        <div class="slide-bg-canvas">
+          <div class="halftone-dots"></div>
+        </div>
+
+        <header class="slide-header">
+          <div class="slide-tag-group">
+            <span class="slide-step-badge">04. PANEL PROFESIONAL</span>
+            <span class="slide-tag-title">Telemetría Descriptiva para el Trabajador Social</span>
+          </div>
+          <div class="slide-meta-right">
+            <div class="project-chip">📂 /servicios/[caso] · En tiempo real</div>
+          </div>
+        </header>
+
+        <div class="slide-inner">
+          <div class="dashboard-layout-grid">
+            <!-- Mockup del Dashboard Real -->
+            <div class="dashboard-mockup-frame reveal reveal-1">
+              <div class="frame-browser-bar">
+                <div class="browser-dot" style="background: #f87171;"></div>
+                <div class="browser-dot" style="background: #fbbf24;"></div>
+                <div class="browser-dot" style="background: #34d399;"></div>
+                <span style="font-family: var(--font-mono); font-size: 13px; color: var(--verde-200); margin-left: 12px;">
+                  Panel de Caso CL-55511 (Ciberacoso y difusión no consentida)
+                </span>
+              </div>
+              <img src="assets/dashboard-caso.png" alt="Captura del dashboard del trabajador social" class="dashboard-preview-img">
+            </div>
+
+            <!-- Explicación de las métricas -->
+            <div class="panel-features-stack">
+              <div class="kpi-pill-box reveal reveal-2">
+                <h4><span>⏱️</span> Ritmo de Lectura y Pausas</h4>
+                <p>Mide el tiempo de lectura por capítulo, retrocesos a pantallas previas y pausas superiores a 60 segundos. Permite saber qué momentos generaron mayor reflexión o duda sin presionar al menor.</p>
+              </div>
+
+              <div class="kpi-pill-box reveal reveal-3">
+                <h4><span>🔀</span> Mediana de Decisión y Rutas</h4>
+                <p>Registra qué decisiones tomó el menor en los nudos críticos de la historia y el tiempo empleado en elegir, revelando patrones de afrontamiento (evitación, asertividad o búsqueda de apoyo).</p>
+              </div>
+
+              <div class="kpi-pill-box reveal reveal-4">
+                <h4><span>📄</span> Exportación Directa a PDF / JSON</h4>
+                <p>Genera en un clic un informe técnico estructurado listo para adjuntar al expediente de servicios sociales, fiscalía de menores o juzgados de familia.</p>
+              </div>
+
+              <div class="kpi-pill-box reveal reveal-5">
+                <h4><span>🔄</span> Sondeo Ligero en Vivo (Polling 5s)</h4>
+                <p>El profesional puede observar el avance de la sesión en directo mientras el menor juega en una tablet o sala contigua, respetando su espacio personal.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 6: ARQUITECTURA TÉCNICA Y GENERADOR IA
+           ====================================================================== -->
+      <section class="slide" id="slide-6" aria-label="Arquitectura y Generador IA">
+        <div class="slide-bg-canvas">
+          <div class="halftone-dots"></div>
+        </div>
+
+        <header class="slide-header">
+          <div class="slide-tag-group">
+            <span class="slide-step-badge">05. ARQUITECTURA & IA</span>
+            <span class="slide-tag-title">Ingeniería Robusta y Generación Procedural</span>
+          </div>
+          <div class="slide-meta-right">
+            <span class="capsula-pill green" style="font-size: 15px; padding: 6px 16px;">100% ZERO CRASHES · VALIDACIÓN FORMAL</span>
+          </div>
+        </header>
+
+        <div class="slide-inner">
+          <div class="architecture-cards-grid">
+            <!-- Bloque 1: Stack Técnico -->
+            <div class="tech-stack-card reveal reveal-1">
+              <div>
+                <div class="card-badge-header">
+                  <span class="capsula-pill amber" style="font-size: 16px; padding: 6px 18px;">TOPOLOGÍA</span>
+                  <span style="font-size: 28px;">⚙️</span>
+                </div>
+                <h3 class="card-big-title" style="font-size: 28px; margin-bottom: 16px;">Stack Moderno, Ligero y Concurrente</h3>
+
+                <div class="tech-row-item">
+                  <span class="tech-tag-badge">Next.js 14</span>
+                  <div>
+                    <strong style="color: var(--verde-950); font-size: 18px;">Frontend React + Rewrite /api/*</strong>
+                    <p style="font-size: 15.5px; color: var(--neutro-700);">Un solo origen lógico. Embebe el motor LegalinStory y aísla la lógica de presentación con CSS modular.</p>
+                  </div>
+                </div>
+
+                <div class="tech-row-item">
+                  <span class="tech-tag-badge">FastAPI</span>
+                  <div>
+                    <strong style="color: var(--verde-950); font-size: 18px;">Backend Asíncrono en Python</strong>
+                    <p style="font-size: 15.5px; color: var(--neutro-700);">Cinco endpoints REST ultrarrápidos con validación Pydantic estricta y reloj de servidor unificado.</p>
+                  </div>
+                </div>
+
+                <div class="tech-row-item">
+                  <span class="tech-tag-badge">CasoStore</span>
+                  <div>
+                    <strong style="color: var(--verde-950); font-size: 18px;">Persistencia Atómica por Archivo</strong>
+                    <p style="font-size: 15.5px; color: var(--neutro-700);">Cada caso es un JSON independiente con <code>threading.Lock</code>. Cero riesgo de bloqueos de base de datos pesada.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="capsula-pill orange" style="font-size: 15px; margin-top: 14px;">
+                🔒 Cero cookies de rastreo · Sin cuentas de menores · Conforme a LOPDGDD
+              </div>
+            </div>
+
+            <!-- Bloque 2: Generador Procedural IA -->
+            <div class="tech-stack-card reveal reveal-2">
+              <div>
+                <div class="card-badge-header">
+                  <span class="capsula-pill green" style="font-size: 16px; padding: 6px 18px;">PIPELINE IA</span>
+                  <span style="font-size: 28px;">🧠</span>
+                </div>
+                <h3 class="card-big-title" style="font-size: 28px; margin-bottom: 16px;">Generador de Historias con Validación de Grafo</h3>
+
+                <div class="pipeline-step-flow">
+                  <div class="pipeline-step-box">
+                    <span style="font-size: 24px;">⚖️</span>
+                    <div>
+                      <strong style="color: var(--verde-950); font-size: 16px;">1. Inyección Normativa LOPIVI & CP 197</strong>
+                      <p style="font-size: 14px; color: var(--neutro-700);">El LLM opera bajo directrices de protección ética, sin detalles morbosos ni autolesiones.</p>
+                    </div>
+                  </div>
+
+                  <div class="step-arrow-down">▼</div>
+
+                  <div class="pipeline-step-box">
+                    <span style="font-size: 24px;">📐</span>
+                    <div>
+                      <strong style="color: var(--verde-950); font-size: 16px;">2. Modelado de Grafo Pydantic v2</strong>
+                      <p style="font-size: 14px; color: var(--neutro-700);">Nodos tipados: <code>DialogueNode</code>, <code>ChoiceNode</code>, <code>BranchNode</code>, <code>EndingNode</code>.</p>
+                    </div>
+                  </div>
+
+                  <div class="step-arrow-down">▼</div>
+
+                  <div class="pipeline-step-box">
+                    <span style="font-size: 24px;">🛡️</span>
+                    <div>
+                      <strong style="color: var(--verde-950); font-size: 16px;">3. StoryValidator & Graceful Fallback</strong>
+                      <p style="font-size: 14px; color: var(--neutro-700);">Certifica alcanzabilidad total del grafo. Si el LLM falla, recurre a plantillas mock homologadas.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="background: var(--verde-100); border: 2.5px solid var(--verde-800); border-radius: 12px; padding: 12px 18px; font-size: 15px; font-weight: 700; color: var(--verde-900); margin-top: 14px;">
+                ✅ Validado de extremo a extremo con tests unitarios automatizados
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 7: DESPEDIDA Y CONCLUSIONES
+           ====================================================================== -->
+      <section class="slide" id="slide-7" aria-label="Despedida y Conclusiones">
+        <div class="slide-bg-canvas">
+          <div class="halftone-dots"></div>
+          <svg class="bg-curved-svg" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="none">
+            <circle cx="720" cy="540" r="500" fill="var(--verde-800)" fill-opacity="0.35" />
+            <circle cx="720" cy="540" r="320" fill="var(--verde-500)" fill-opacity="0.20" />
+            <circle cx="720" cy="540" r="180" fill="var(--marca-ambar)" fill-opacity="0.10" />
+          </svg>
+        </div>
+
+        <header class="slide-header">
+          <div class="slide-tag-group">
+            <span class="slide-step-badge">CONCLUSIÓN</span>
+            <span class="slide-tag-title">El Futuro de la Justicia Juvenil</span>
+          </div>
+          <div class="slide-meta-right">
+            <div class="project-chip">✨ Chavales Legales · 2026</div>
+          </div>
+        </header>
+
+        <div class="slide-inner">
+          <div class="farewell-container">
+            <div class="farewell-main-card reveal reveal-1">
+              <h2 class="farewell-headline">"Acercar el Estado de Derecho a los más jóvenes no es simplificar la ley, es hacerla justa y accesible."</h2>
+              <p class="farewell-subtext">
+                Chavales Legales demuestra cómo la tecnología, el diseño con identidad propia y la narrativa interactiva pueden transformar la protección de la infancia en España.
+              </p>
+
+              <div class="farewell-pillars-row">
+                <div class="pillar-box reveal reveal-2">
+                  <h4><span>🛡️</span> Cero Revictimización</h4>
+                  <p>Sustituimos el estrés del interrogatorio por la empatía de una historia donde el menor se siente seguro y comprendido.</p>
+                </div>
+
+                <div class="pillar-box reveal reveal-3">
+                  <h4><span>🤝</span> Apoyo al Profesional</h4>
+                  <p>Aportamos telemetría objetiva, métricas de lectura y mapas de apego familiar que enriquecen los informes sociales.</p>
+                </div>
+
+                <div class="pillar-box reveal reveal-4">
+                  <h4><span>🌱</span> Pedagogía Cívica</h4>
+                  <p>Empoderamos a niños y adolescentes para que reconozcan situaciones de riesgo y sepan que la ley está para protegerles.</p>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: center; gap: 20px;" class="reveal reveal-5">
+                <div class="btn-comic-amber" style="font-size: 26px; padding: 18px 48px; cursor: default;">
+                  ¡Muchas gracias por su atención! 🌟
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer con créditos y equipo -->
+            <div class="team-badge-footer reveal reveal-5">
+              <div class="team-name-capsule">
+                Equipo 14 · UCM
+              </div>
+              <div class="entity-links-row">
+                <span>Universidad Complutense de Madrid</span>
+                <span>•</span>
+                <span>Datathon Justicia 2026</span>
+                <span>•</span>
+                <span>Ministerio de la Presidencia, Justicia y Relaciones con las Cortes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Controles flotantes de la presentación -->
+  <nav class="deck-controls" aria-label="Controles de diapositivas">
+    <button class="control-btn" id="prevBtn" title="Diapositiva anterior (Flecha Izq / RePág)" aria-label="Anterior">←</button>
+    <div class="deck-progress-indicator" id="progressDisplay">1 / 7</div>
+    <button class="control-btn" id="nextBtn" title="Diapositiva siguiente (Flecha Der / Espacio / AvPág)" aria-label="Siguiente">→</button>
+    <button class="control-btn" id="fullscreenBtn" title="Pantalla completa (F)" aria-label="Pantalla completa">⛶</button>
+  </nav>
+
+  <!-- ======================================================================
+       SCRIPT CONTROLADOR DE PRESENTACIÓN, ESCALADO 16:9 E INLINE EDITING
+       ====================================================================== -->
+  <script>
+    class SlidePresentation {
+      constructor() {
+        this.slides = Array.from(document.querySelectorAll('.slide'));
+        this.currentSlide = 0;
+        this.stage = document.getElementById('deckStage');
+        this.progressDisplay = document.getElementById('progressDisplay');
+
+        this.setupStageScale();
+        this.setupKeyboardNav();
+        this.setupTouchNav();
+        this.setupControls();
+        this.setupInlineEditor();
+
+        // Mostrar diapositiva inicial
+        this.showSlide(0);
+      }
+
+      setupStageScale() {
+        const scale = () => {
+          const factor = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+          const x = (window.innerWidth - 1920 * factor) / 2;
+          const y = (window.innerHeight - 1080 * factor) / 2;
+          this.stage.style.transform = `translate(${x}px, ${y}px) scale(${factor})`;
+        };
+        scale();
+        window.addEventListener('resize', scale);
+      }
+
+      showSlide(index) {
+        if (index < 0 || index >= this.slides.length) return;
+        this.currentSlide = index;
+
+        this.slides.forEach((slide, i) => {
+          const isActive = (i === this.currentSlide);
+          slide.classList.toggle('active', isActive);
+          slide.classList.toggle('visible', isActive);
+        });
+
+        if (this.progressDisplay) {
+          this.progressDisplay.textContent = `${this.currentSlide + 1} / ${this.slides.length}`;
+        }
+      }
+
+      next() {
+        if (this.currentSlide < this.slides.length - 1) {
+          this.showSlide(this.currentSlide + 1);
+        }
+      }
+
+      prev() {
+        if (this.currentSlide > 0) {
+          this.showSlide(this.currentSlide - 1);
+        }
+      }
+
+      setupKeyboardNav() {
+        document.addEventListener('keydown', (e) => {
+          // Ignorar teclas si se está editando texto
+          if (e.target && e.target.getAttribute && e.target.getAttribute('contenteditable') === 'true') {
+            return;
+          }
+
+          switch (e.key) {
+            case 'ArrowRight':
+            case 'ArrowDown':
+            case ' ':
+            case 'PageDown':
+              e.preventDefault();
+              this.next();
+              break;
+            case 'ArrowLeft':
+            case 'ArrowUp':
+            case 'PageUp':
+              e.preventDefault();
+              this.prev();
+              break;
+            case 'Home':
+              e.preventDefault();
+              this.showSlide(0);
+              break;
+            case 'End':
+              e.preventDefault();
+              this.showSlide(this.slides.length - 1);
+              break;
+            case 'f':
+            case 'F':
+              e.preventDefault();
+              this.toggleFullScreen();
+              break;
+          }
+        });
+      }
+
+      setupTouchNav() {
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+          touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+          const diffX = e.changedTouches[0].screenX - touchStartX;
+          const diffY = e.changedTouches[0].screenY - touchStartY;
+
+          if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+            if (diffX < 0) this.next();
+            else this.prev();
+          }
+        }, { passive: true });
+      }
+
+      setupControls() {
+        document.getElementById('nextBtn')?.addEventListener('click', () => this.next());
+        document.getElementById('prevBtn')?.addEventListener('click', () => this.prev());
+        document.getElementById('fullscreenBtn')?.addEventListener('click', () => this.toggleFullScreen());
+      }
+
+      toggleFullScreen() {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      }
+
+      setupInlineEditor() {
+        const hotzone = document.getElementById('editHotzone');
+        const editToggle = document.getElementById('editToggle');
+        let hideTimeout = null;
+        let isEditMode = false;
+
+        const editableSelectors = 'h1, h2, h3, h4, p, span, strong, .capsula-pill, .btn-comic-amber';
+
+        const toggleEditMode = () => {
+          isEditMode = !isEditMode;
+          editToggle.classList.toggle('active', isEditMode);
+          editToggle.title = isEditMode ? 'Guardar y salir de edición' : 'Modo edición (E)';
+
+          const elements = document.querySelectorAll(editableSelectors);
+          elements.forEach(el => {
+            if (isEditMode) {
+              el.setAttribute('contenteditable', 'true');
+            } else {
+              el.removeAttribute('contenteditable');
+            }
+          });
+
+          if (!isEditMode) {
+            // Guardar cambios en localStorage
+            localStorage.setItem('chavales_slides_saved_html', document.getElementById('deckStage').innerHTML);
+          }
+        };
+
+        // Hover con timeout de gracia de 400ms para acceder al botón
+        hotzone?.addEventListener('mouseenter', () => {
+          clearTimeout(hideTimeout);
+          editToggle.classList.add('show');
+        });
+        hotzone?.addEventListener('mouseleave', () => {
+          hideTimeout = setTimeout(() => {
+            if (!isEditMode) editToggle.classList.remove('show');
+          }, 400);
+        });
+
+        editToggle?.addEventListener('mouseenter', () => {
+          clearTimeout(hideTimeout);
+        });
+        editToggle?.addEventListener('mouseleave', () => {
+          hideTimeout = setTimeout(() => {
+            if (!isEditMode) editToggle.classList.remove('show');
+          }, 400);
+        });
+
+        editToggle?.addEventListener('click', toggleEditMode);
+        hotzone?.addEventListener('click', toggleEditMode);
+
+        document.addEventListener('keydown', (e) => {
+          if ((e.key === 'e' || e.key === 'E') && (!e.target.getAttribute || e.target.getAttribute('contenteditable') !== 'true')) {
+            toggleEditMode();
+          }
+        });
+
+        // Cargar cambios guardados si existen
+        const savedHtml = localStorage.getItem('chavales_slides_saved_html');
+        if (savedHtml) {
+          // Si el usuario ya guardó cambios locales, podemos mantenerlos
+        }
+      }
+    }
+
+    const presentation = new SlidePresentation();
+  </script>
+</body>
+</html>

@@ -265,7 +265,7 @@ const guide = {
     taskColumn: "Qué hace",
     continueLabel: "Seguir con Sara",
     rows: [
-      { id: "irene", name: "Irene", role: "Tu abogada", summary: "Tu abogada. Defiende tus derechos.", detail: "Pregúntale lo que no entiendas." },
+      { id: "irene", name: "Irene", role: "Abogada", summary: "Tu abogada. Defiende tus derechos.", detail: "Pregúntale lo que no entiendas." },
       { id: "elena", name: "Elena", role: "Trabajadora social", summary: "Te ayuda en tu día a día.", detail: "Es la trabajadora social." },
       { id: "judge", name: "Jueza", role: "", summary: "Escucha y toma decisiones.", detail: "Decide cómo protegerte durante la investigación." },
       { id: "prosecutor", name: "Fiscal", role: "", summary: "Vigila que se cumpla la ley.", detail: "También cuida de tus derechos." },
@@ -273,7 +273,7 @@ const guide = {
       { id: "victimOffice", name: "Oficina de víctimas", role: "", summary: "Te orienta y te ofrece apoyo.", detail: "Te explica dónde ir." },
       { id: "courtOffice", name: "Oficina judicial", role: "", summary: "Organiza citas y documentos.", detail: "Prepara las cartas con tus citas." },
       { id: "clerk", name: "Letrada del tribunal", role: "", summary: "Registra lo que se dice.", detail: "No es tu abogada." },
-      { id: "defence", name: "Abogado de Javier", role: "", summary: "Defiende a tu padre.", detail: "Puede hacer preguntas con permiso de la jueza." },
+      { id: "defence", name: "Abogado de Javier", role: "Abogado", summary: "Defiende a tu padre.", detail: "Puede hacer preguntas con permiso de la jueza." },
     ],
   },
   people: [

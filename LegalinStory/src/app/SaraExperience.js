@@ -70,9 +70,41 @@ export class SaraExperience {
     this.title = root.querySelector("#sara-dialog-title");
     this.close = root.querySelector("[data-sara-close]");
     this.close.addEventListener("click", () => this.closePanel());
-    const personIds = { Irene: "irene", Elena: "elena", Jueza: "judge", Juez: "judge", Fiscal: "prosecutor", "Psicóloga": "psychologist", "Oficina de víctimas": "victimOffice", "Oficina judicial": "courtOffice", "Letrada": "clerk", "Letrada (LAJ)": "clerk", "Abogado de Javier": "defence" };
+    const personIds = {
+      Irene: "irene",
+      "Irene · abogada": "irene",
+      "Irene · advocada": "irene",
+      "Irene · avogada": "irene",
+      "Irene · abokatua": "irene",
+      Abogada: "irene",
+      Advocada: "irene",
+      Avogada: "irene",
+      Abokatua: "irene",
+      Abogado: "defence",
+      Advocat: "defence",
+      Avogado: "defence",
+      "Abogado de Javier": "defence",
+      Elena: "elena",
+      "Elena · trabajadora social": "elena",
+      "Trabajadora social": "elena",
+      Jueza: "judge",
+      Juez: "judge",
+      Fiscal: "prosecutor",
+      "Psicóloga": "psychologist",
+      "Oficina de víctimas": "victimOffice",
+      "Oficina judicial": "courtOffice",
+      Letrada: "clerk",
+      "Letrada (LAJ)": "clerk",
+    };
     this.app.view.setLegalPersonReference(
-      (speaker) => this.guide.peopleTable?.rows.find((person) => person.id === personIds[speaker] || person.name === speaker),
+      (speaker) => {
+        if (!speaker) return null;
+        const clean = speaker.split(" · ")[0].trim();
+        const id = personIds[speaker] || personIds[clean] || (clean.toLowerCase().includes("irene") ? "irene" : null);
+        return this.guide.peopleTable?.rows.find(
+          (person) => (id && person.id === id) || person.id === speaker || person.id === clean || person.name === speaker || person.name === clean
+        );
+      },
       (personId) => this.openPerson(personId),
     );
 
@@ -256,7 +288,13 @@ export class SaraExperience {
     else if (mode === "help") this.renderHelp();
     else if (mode === "restart") {
       this.body.append(element("p", "sara-panel-intro", t("sara.restartIntro")));
-      this.button(t("sara.restartConfirm"), () => { this.localStore.clear(); this.engine.saveStore?.clear(); avatarStore.clear(); this.showLanding(); }, "sara-primary");
+      this.button(t("sara.restartConfirm"), () => {
+        this.localStore.clear();
+        this.engine.saveStore?.clear();
+        avatarStore.clear();
+        this.app.view.seenLegalRoles.clear();
+        this.showLanding();
+      }, "sara-primary");
     } else this.renderPause();
   }
 
@@ -312,9 +350,6 @@ export class SaraExperience {
     });
     instant.setAttribute("aria-pressed", String(Boolean(this.app.view.typewriter.instant)));
     this.button(t("sara.needHelp"), () => this.openPanel("help"));
-    if (this.engine.currentNode?.chapter >= 5 && this.guide.peopleTable) {
-      this.button(this.guide.peopleTable.title, () => this.openPanel("people"));
-    }
 
     if (this.guide?.chapters?.length) {
       const container = element("div", "sara-pause-dropdown");

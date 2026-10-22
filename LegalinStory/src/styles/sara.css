@@ -209,11 +209,43 @@
 /* La caja, el nombre y el botón de avanzar son la pegatina de main.css. */
 .sara-mode .dialogue { cursor: pointer; }
 .sara-mode .nameplate { font-size: .82rem; }
-.sara-mode .legal-badge { font-size: .84rem; }
-.sara-mode button.legal-badge { pointer-events: auto; cursor: pointer; min-height: 44px; background: var(--verde-50); box-shadow: 3px 4px 0 var(--verde-700); max-width: calc(100% - 90px); white-space: normal; text-align: left; }
-.sara-mode button.legal-badge:hover { background: #fff; }
+.sara-mode .legal-badge {
+  top: calc(env(safe-area-inset-top, 0px) + 78px);
+  right: max(20px, calc((100vw - 1100px) / 2));
+  font-size: .86rem;
+}
+.sara-mode button.legal-badge {
+  pointer-events: auto;
+  cursor: pointer;
+  min-height: 44px;
+  background: var(--superficie);
+  box-shadow: 3px 4px 0 var(--verde-700);
+  max-width: min(340px, calc(100vw - 40px));
+  white-space: normal;
+  text-align: left;
+}
+.sara-mode button.legal-badge:hover {
+  background: var(--verde-50);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 4px 5px 0 var(--verde-800);
+}
 .sara-mode button.legal-badge:focus-visible { outline: 3px solid var(--marca-ambar); outline-offset: 4px; }
-.sara-mode button.legal-badge::after { content: "›"; font-size: 1.3em; }
+.sara-mode button.legal-badge::after {
+  content: "›";
+  font-size: 1.3em;
+  margin-left: 4px;
+  color: var(--verde-800);
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .sara-mode .legal-badge,
+  .legal-badge {
+    top: calc(env(safe-area-inset-top, 0px) + 54px);
+    left: max(16px, 2vw);
+    right: auto;
+    max-width: min(280px, 45vw);
+  }
+}
 .sara-mode .nameplate.is-voice::after { display: none; }
 .sara-mode .dialogue-text { scrollbar-color: var(--neutro-300) transparent; }
 

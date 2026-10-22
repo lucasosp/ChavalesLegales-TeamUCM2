@@ -193,6 +193,8 @@ export class VisualNovelView {
   }
 
   showWelcome(onStart) {
+    this.seenLegalRoles.clear();
+    this.#hideLegalBadge(true);
     this.refs.welcome.hidden = false;
     this.refs.welcome.setAttribute("aria-hidden", "false");
     this.refs.welcomeStart.addEventListener("click", () => {
@@ -224,6 +226,7 @@ export class VisualNovelView {
     badge.append(...this.refs.legalBadge.childNodes);
     this.refs.legalBadge.replaceWith(badge);
     this.refs.legalBadge = badge;
+    this.refs.legalBadgeText = badge.querySelector("[data-legal-badge-text]");
     badge.addEventListener("click", (event) => {
       event.stopPropagation();
       if (badge.dataset.personId) onOpen(badge.dataset.personId);
@@ -932,7 +935,6 @@ export class VisualNovelView {
   }
 
   #resetTransientOverlays() {
-    if (this.resolveLegalPerson) this.refs.legalBadge.hidden = true;
     this.refs.announcement.textContent = "";
     this.typewriter.stop();
     this.#clearChoices();
@@ -1144,7 +1146,7 @@ export class VisualNovelView {
 
   #setSpeaker(name, remote = false, key = null) {
     if (!name) {
-      if (this.resolveLegalPerson) this.refs.legalBadge.hidden = true;
+      this.#hideLegalBadge(true);
       this.refs.speaker.hidden = true;
       this.refs.speaker.textContent = "";
       this.refs.speaker.classList.remove("is-voice");
@@ -1181,56 +1183,84 @@ export class VisualNovelView {
   #checkLegalBadge(name, key) {
     if (!this.refs.legalBadge || !this.refs.legalBadgeText) return;
 
+    let roleTitle = null;
+    let badgeKey = null;
+    let personId = null;
+
     if (this.resolveLegalPerson) {
       const person = this.resolveLegalPerson(key ?? name);
-      this.refs.legalBadge.hidden = !person;
-      delete this.refs.legalBadge.dataset.personId;
       if (person) {
-        this.refs.legalBadge.dataset.personId = person.id;
-        this.refs.legalBadgeText.textContent = person.role || person.name;
+        personId = person.id;
+        badgeKey = person.id;
+        roleTitle = person.role || person.name;
+        if (person.id === "irene") {
+          roleTitle = person.role || t("novel.roles.abogada") || "Abogada";
+        }
       }
+    }
+
+    if (!roleTitle || !badgeKey) {
+      const raw = (key ?? name ?? "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      if (!raw) {
+        this.#hideLegalBadge();
+        return;
+      }
+
+      let roleKey = null;
+      let fallbackText = null;
+
+      if (raw.includes("juez") || raw.includes("jutgess") || raw.includes("epaile") || raw.includes("xuiz")) {
+        roleKey = raw.includes("jueza") || raw.includes("jutgess") || raw.includes("xuiz") ? "jueza" : "juez";
+        fallbackText = "Juez o jueza";
+      } else if (raw.includes("fiscal")) {
+        roleKey = "fiscal";
+        fallbackText = "Ministerio Fiscal";
+      } else if (raw.includes("letrad") || raw.includes("laj")) {
+        roleKey = "letrada";
+        fallbackText = "Letrada de la Administración de Justicia";
+      } else if (raw.includes("abogad") || raw.includes("advocat") || raw.includes("abokat") || raw.includes("avogad") || raw.includes("irene")) {
+        roleKey = raw.includes("abogado") || raw.includes("advocat") || raw.includes("avogado") ? "abogado" : "abogada";
+        fallbackText = "Abogada";
+      } else if (raw.includes("trabajadora social") || raw.includes("treballadora social") || raw.includes("gizarte-langile") || raw.includes("traballadora social")) {
+        roleKey = "trabajadoraSocial";
+        fallbackText = "Trabajadora social";
+      } else if (raw.includes("psicolog") || raw.includes("auzitegi-psikolog")) {
+        roleKey = "psicologa";
+        fallbackText = "Psicóloga forense";
+      } else if (raw.includes("acogida") || raw.includes("acollida") || raw.includes("babes")) {
+        roleKey = "equipoAcogida";
+        fallbackText = "Equipo de acogida y protección";
+      } else if (raw.includes("profesional")) {
+        roleKey = "profesional";
+        fallbackText = "Profesional especializado";
+      }
+
+      if (roleKey) {
+        badgeKey = roleKey;
+        roleTitle = t(`novel.roles.${roleKey}`) || fallbackText;
+      }
+    }
+
+    if (!roleTitle || !badgeKey) {
+      this.#hideLegalBadge();
       return;
     }
 
-    const raw = (key ?? name ?? "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    if (!raw) return;
-
-    let roleKey = null;
-    let fallbackText = null;
-
-    if (raw.includes("juez") || raw.includes("jutgess") || raw.includes("epaile") || raw.includes("xuiz")) {
-      roleKey = raw.includes("jueza") || raw.includes("jutgess") || raw.includes("xuiz") ? "jueza" : "juez";
-      fallbackText = "Juez o jueza";
-    } else if (raw.includes("fiscal")) {
-      roleKey = "fiscal";
-      fallbackText = "Ministerio Fiscal";
-    } else if (raw.includes("letrad") || raw.includes("laj")) {
-      roleKey = "letrada";
-      fallbackText = "Letrada de la Administración de Justicia";
-    } else if (raw.includes("abogad") || raw.includes("advocat") || raw.includes("abokat") || raw.includes("avogad")) {
-      roleKey = raw.includes("abogado") || raw.includes("advocat") || raw.includes("avogado") ? "abogado" : "abogada";
-      fallbackText = "Abogada";
-    } else if (raw.includes("trabajadora social") || raw.includes("treballadora social") || raw.includes("gizarte-langile") || raw.includes("traballadora social")) {
-      roleKey = "trabajadoraSocial";
-      fallbackText = "Trabajadora social";
-    } else if (raw.includes("psicolog") || raw.includes("psicolog") || raw.includes("auzitegi-psikolog")) {
-      roleKey = "psicologa";
-      fallbackText = "Psicóloga forense";
-    } else if (raw.includes("acogida") || raw.includes("acollida") || raw.includes("babes")) {
-      roleKey = "equipoAcogida";
-      fallbackText = "Equipo de acogida y protección";
-    } else if (raw.includes("profesional")) {
-      roleKey = "profesional";
-      fallbackText = "Profesional especializado";
-    }
-
-    if (!roleKey) return;
-
     // Solo mostrarlo la primera vez que aparece el cargo en la historia
-    if (this.seenLegalRoles.has(roleKey)) return;
-    this.seenLegalRoles.add(roleKey);
+    if (this.seenLegalRoles.has(badgeKey)) {
+      if (this.refs.legalBadge.dataset.badgeKey && this.refs.legalBadge.dataset.badgeKey !== badgeKey) {
+        this.#hideLegalBadge();
+      }
+      return;
+    }
+    this.seenLegalRoles.add(badgeKey);
 
-    const roleTitle = t(`novel.roles.${roleKey}`) || fallbackText;
+    delete this.refs.legalBadge.dataset.personId;
+    if (personId) {
+      this.refs.legalBadge.dataset.personId = personId;
+    }
+    this.refs.legalBadge.dataset.badgeKey = badgeKey;
+
     this.refs.legalBadgeText.textContent = roleTitle;
     this.refs.legalBadge.hidden = false;
     this.refs.legalBadge.classList.remove("is-hiding");
@@ -1241,15 +1271,30 @@ export class VisualNovelView {
 
     if (this.#badgeTimer) clearTimeout(this.#badgeTimer);
     this.#badgeTimer = setTimeout(() => {
-      if (!this.refs.legalBadge) return;
-      this.refs.legalBadge.classList.add("is-hiding");
-      setTimeout(() => {
-        if (this.refs.legalBadge) {
-          this.refs.legalBadge.hidden = true;
-          this.refs.legalBadge.classList.remove("is-hiding");
-        }
-      }, 350);
+      this.#hideLegalBadge();
     }, 4500);
+  }
+
+  #hideLegalBadge(immediate = false) {
+    if (!this.refs.legalBadge) return;
+    if (this.#badgeTimer) {
+      clearTimeout(this.#badgeTimer);
+      this.#badgeTimer = null;
+    }
+    if (immediate) {
+      this.refs.legalBadge.hidden = true;
+      this.refs.legalBadge.classList.remove("is-hiding");
+      delete this.refs.legalBadge.dataset.badgeKey;
+      return;
+    }
+    this.refs.legalBadge.classList.add("is-hiding");
+    setTimeout(() => {
+      if (this.refs.legalBadge) {
+        this.refs.legalBadge.hidden = true;
+        this.refs.legalBadge.classList.remove("is-hiding");
+        delete this.refs.legalBadge.dataset.badgeKey;
+      }
+    }, 350);
   }
 
   #applyStage(stage) {

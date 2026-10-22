@@ -88,7 +88,7 @@
       {
         "id": "irene",
         "name": "Irene",
-        "role": "Tu abogada",
+        "role": "Abogada",
         "summary": "Tu abogada. Defiende tus derechos.",
         "detail": "Pregúntale lo que no entiendas."
       },
@@ -144,7 +144,7 @@
       {
         "id": "defence",
         "name": "Abogado de Javier",
-        "role": "",
+        "role": "Abogado",
         "summary": "Defiende a tu padre.",
         "detail": "Puede hacer preguntas con permiso de la jueza."
       }
