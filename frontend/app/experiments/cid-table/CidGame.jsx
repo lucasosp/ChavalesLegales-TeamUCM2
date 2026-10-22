@@ -18,8 +18,10 @@ export default function CidGame({ embedded = false, onFinish }) {
   const [roundIndex, setRoundIndex] = useState(0)
   const [childSeat, setChildSeat] = useState(null)
   const [results, setResults] = useState([])
+  const [finished, setFinished] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   const startRef = useRef(0)
+  const selectedTimeRef = useRef(null)
   const hoverRef = useRef({ sequence: [], firstMs: null })
   // El panel se abre con un clic (y también manteniendo pulsado, para que siga
   // funcionando el gesto de siempre: nunca hay un toque accidental del niño
@@ -28,7 +30,6 @@ export default function CidGame({ embedded = false, onFinish }) {
   const settingsPress = useLongPress(openSettings)
 
   const round = ROUNDS[roundIndex]
-  const finished = results.length === ROUNDS.length
   const seating = useMemo(
     () => seatingForRound(config.characters, round, config.totalSeats),
     [config, round],
@@ -42,6 +43,7 @@ export default function CidGame({ embedded = false, onFinish }) {
   useEffect(() => {
     if (!started) return
     hoverRef.current = { sequence: [], firstMs: null }
+    selectedTimeRef.current = null
     const id = requestAnimationFrame(() => {
       startRef.current = performance.now()
     })
@@ -55,29 +57,49 @@ export default function CidGame({ embedded = false, onFinish }) {
   }
 
   const handleSelect = (seat) => {
-    if (childSeat !== null) return
+    if (finished) return
+    // Si pulsa su propio asiento, se levanta para volver a elegir libremente
+    if (seat === childSeat) {
+      setChildSeat(null)
+      selectedTimeRef.current = null
+      return
+    }
+    const h = hoverRef.current
+    if (h.firstMs === null) h.firstMs = performance.now() - startRef.current
+    if (h.sequence[h.sequence.length - 1] !== seat) h.sequence.push(seat)
+    selectedTimeRef.current = performance.now() - startRef.current
+    setChildSeat(seat)
+  }
+
+  const handleDeselect = () => {
+    setChildSeat(null)
+    selectedTimeRef.current = null
+  }
+
+  const handleConfirmRound = () => {
+    if (childSeat === null) return
     const metrics = computeRoundMetrics({
       round,
       roundIndex,
-      childSeat: seat,
+      childSeat,
       seating,
       totalSeats: config.totalSeats,
-      reactionTimeMs: performance.now() - startRef.current,
+      reactionTimeMs: selectedTimeRef.current ?? (performance.now() - startRef.current),
       hoverSequence: hoverRef.current.sequence,
       firstHoverMs: hoverRef.current.firstMs,
     })
     const next = [...results, metrics]
-    setChildSeat(seat)
     setResults(next)
-    if (next.length === ROUNDS.length) {
+
+    if (roundIndex + 1 >= ROUNDS.length) {
       const sessions = readStorage(STORAGE_KEYS.sessions, [])
       writeStorage(STORAGE_KEYS.sessions, [...sessions, buildReport(config, next)])
+      setFinished(true)
+    } else {
+      setChildSeat(null)
+      selectedTimeRef.current = null
+      setRoundIndex((i) => i + 1)
     }
-  }
-
-  const handleNextRound = () => {
-    setChildSeat(null)
-    setRoundIndex((i) => i + 1)
   }
 
   const handleRestart = (newConfig = config) => {
@@ -85,6 +107,8 @@ export default function CidGame({ embedded = false, onFinish }) {
     setRoundIndex(0)
     setChildSeat(null)
     setResults([])
+    setFinished(false)
+    selectedTimeRef.current = null
   }
 
   return (
@@ -116,7 +140,10 @@ export default function CidGame({ embedded = false, onFinish }) {
           {childSeat === null ? roundNarrative(t, round) : t('juegos.cidYaEnMesa')}
         </p>
         {childSeat !== null && !finished && (
-          <button type="button" className={styles.btnPrimary} onClick={handleNextRound}>{t('juegos.cidContinuar')}</button>
+          <div className={styles.bannerActions}>
+            <button type="button" className={styles.btnGhost} onClick={handleDeselect}>{t('juegos.cidCambiarAsiento')}</button>
+            <button type="button" className={styles.btnPrimary} onClick={handleConfirmRound}>{t('juegos.cidContinuar')}</button>
+          </div>
         )}
       </div>
 
@@ -130,7 +157,7 @@ export default function CidGame({ embedded = false, onFinish }) {
             theme={round.theme}
             onSelect={handleSelect}
             onHover={handleHover}
-            locked={!started || childSeat !== null}
+            locked={!started || finished}
           />
         </div>
       </main>

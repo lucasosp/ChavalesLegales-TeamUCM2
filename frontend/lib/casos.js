@@ -59,6 +59,22 @@ export async function resumenCaso(id) {
   return null
 }
 
+/**
+ * Comprueba que un código existe sin bajarse el caso entero (con sus dibujos en base64).
+ * Devuelve 'servidor' (existe), 'inexistente' (404) o 'error' (red o servidor caído).
+ */
+export async function existeCaso(id) {
+  try {
+    const res = await fetch(`/api/casos/${encodeURIComponent(id)}/resumen`, { cache: 'no-store' })
+    if (res.ok) return 'servidor'
+    if (res.status === 404) return 'inexistente'
+    console.warn(`[casos] error ${res.status} al comprobar el caso`, id)
+  } catch (err) {
+    console.warn('[casos] no se pudo comprobar el caso', id, err)
+  }
+  return 'error'
+}
+
 /** Carga un caso para el informe. Devuelve un caso vacío marcado si falla. */
 export async function cargarCaso(id) {
   try {

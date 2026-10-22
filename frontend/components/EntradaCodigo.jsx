@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { cargarCaso } from '../lib/casos'
+import { existeCaso } from '../lib/casos'
 import { useT } from '../lib/i18n'
 
 /**
@@ -29,15 +29,15 @@ export default function EntradaCodigo() {
     setCargando(true)
     setError(null)
 
-    const caso = await cargarCaso(casoId)
-    if (caso.fuente === 'servidor') {
+    const fuente = await existeCaso(casoId)
+    if (fuente === 'servidor') {
       router.push(`/novela?caso=${encodeURIComponent(casoId)}`)
       return
     }
 
     setCargando(false)
     setError(
-      caso.fuente === 'inexistente'
+      fuente === 'inexistente'
         ? t('inicio.entradaAlumnoNoExiste')
         : t('inicio.entradaAlumnoSinConexion'),
     )

@@ -128,7 +128,7 @@ try {
   handleInterstitial("No lo reenvíes");
 
   assert.equal(pump(), "choice");
-  assert.match(el("[data-sprite]").src, /sara_normal\.png/);
+  assert.match(el("[data-sprite]").src, /sara_normal\.webp/);
   choose("Intervenir");
 
   assert.equal(pump(), "interstitial");

@@ -13,26 +13,26 @@ TARGET_FILE = os.path.join(BASE_DIR, "LegalinStory", "src", "content", "characte
 
 CALIBRATION_CONFIG = {
   # Adolescentes (~13-14 años, estatura ~1.50m): marco ~1180px, coronilla a ~75px del tope
-  'saraNormal': {'src': 'sara_normal.png', 'top': -160, 'bottom': 1020, 'center': 525, 'label': 'Sara · neutral'},
-  'saraHappy': {'src': 'sara_feliz.png', 'top': -160, 'bottom': 1020, 'center': 535, 'label': 'Sara · alegre'},
-  'saraSad': {'src': 'sara_triste.png', 'top': -160, 'bottom': 1020, 'center': 540, 'label': 'Sara · triste'},
-  'saraCrying': {'src': 'sara_llorando.png', 'top': -160, 'bottom': 1020, 'center': 535, 'label': 'Sara · llorando'},
-  'saraShy': {'src': 'sara_verguenza.png', 'top': -160, 'bottom': 1020, 'center': 520, 'label': 'Sara · tímida'},
-  'saraShyAlt': {'src': 'Shy Blushing Anime Girl Sticker.png', 'top': -160, 'bottom': 1020, 'center': 520, 'label': 'Sara · tímida, variante'},
-  'saraShyAlt2': {'src': 'Shy Blushing Anime Girl Sticker(1).png', 'top': -160, 'bottom': 1020, 'center': 520, 'label': 'Sara · tímida, variante 2'},
-  'paula': {'src': 'Freckled Ginger Varsity Girl.png', 'top': -175, 'bottom': 1005, 'center': 540, 'label': 'Paula · neutral'},
-  'paulaHappy': {'src': 'Cheerful Auburn Varsity Girl.png', 'top': -175, 'bottom': 1005, 'center': 550, 'label': 'Paula · alegre'},
-  'julia': {'src': 'Curly-Haired Girl in Lilac Hoodie.png', 'top': -165, 'bottom': 1015, 'center': 580, 'label': 'Julia · neutral'},
-  'juliaHappy': {'src': 'Cheerful Julia in Lavender Hoodie.png', 'top': -165, 'bottom': 1015, 'center': 530, 'label': 'Julia · alegre'},
+  'saraNormal': {'src': 'sara_normal.webp', 'top': -160, 'bottom': 1020, 'center': 525, 'label': 'Sara · neutral'},
+  'saraHappy': {'src': 'sara_feliz.webp', 'top': -160, 'bottom': 1020, 'center': 535, 'label': 'Sara · alegre'},
+  'saraSad': {'src': 'sara_triste.webp', 'top': -160, 'bottom': 1020, 'center': 540, 'label': 'Sara · triste'},
+  'saraCrying': {'src': 'sara_llorando.webp', 'top': -160, 'bottom': 1020, 'center': 535, 'label': 'Sara · llorando'},
+  'saraShy': {'src': 'sara_verguenza.webp', 'top': -160, 'bottom': 1020, 'center': 520, 'label': 'Sara · tímida'},
+  'saraShyAlt': {'src': 'Shy Blushing Anime Girl Sticker.webp', 'top': -160, 'bottom': 1020, 'center': 520, 'label': 'Sara · tímida, variante'},
+  'saraShyAlt2': {'src': 'Shy Blushing Anime Girl Sticker(1).webp', 'top': -160, 'bottom': 1020, 'center': 520, 'label': 'Sara · tímida, variante 2'},
+  'paula': {'src': 'Freckled Ginger Varsity Girl.webp', 'top': -175, 'bottom': 1005, 'center': 540, 'label': 'Paula · neutral'},
+  'paulaHappy': {'src': 'Cheerful Auburn Varsity Girl.webp', 'top': -175, 'bottom': 1005, 'center': 550, 'label': 'Paula · alegre'},
+  'julia': {'src': 'Curly-Haired Girl in Lilac Hoodie.webp', 'top': -165, 'bottom': 1015, 'center': 580, 'label': 'Julia · neutral'},
+  'juliaHappy': {'src': 'Cheerful Julia in Lavender Hoodie.webp', 'top': -165, 'bottom': 1015, 'center': 530, 'label': 'Julia · alegre'},
   
   # Niños (~10 años, estatura ~1.35m): marco ~1300px, coronilla a ~115px del tope
-  'dani': {'src': 'Casual Boy in Mustard Tee.png', 'top': -240, 'bottom': 1060, 'center': 515, 'label': 'Dani'},
+  'dani': {'src': 'Casual Boy in Mustard Tee.webp', 'top': -240, 'bottom': 1060, 'center': 515, 'label': 'Dani'},
   
   # Adultos (~1.68m, porte mayor): marco ~1000px, coronilla a ~20px del tope
-  'laura': {'src': 'Warm Studio Portrait of a Woman.png', 'top': -25, 'bottom': 975, 'center': 535, 'label': 'Laura'},
-  'irene': {'src': 'Elegant Office Professional Portrait.png', 'top': -25, 'bottom': 975, 'center': 500, 'label': 'Irene'},
-  'elena': {'src': 'Elegant Office Professional Portrait(1).png', 'top': -25, 'bottom': 975, 'center': 500, 'label': 'Elena'},
-  'judge': {'src': 'jueza-transparente.png', 'top': -40, 'bottom': 1140, 'center': 505, 'label': 'Jueza'},
+  'laura': {'src': 'Warm Studio Portrait of a Woman.webp', 'top': -25, 'bottom': 975, 'center': 535, 'label': 'Laura'},
+  'irene': {'src': 'Elegant Office Professional Portrait.webp', 'top': -25, 'bottom': 975, 'center': 500, 'label': 'Irene'},
+  'elena': {'src': 'Elegant Office Professional Portrait(1).webp', 'top': -25, 'bottom': 975, 'center': 500, 'label': 'Elena'},
+  'judge': {'src': 'jueza-transparente.webp', 'top': -40, 'bottom': 1140, 'center': 505, 'label': 'Jueza'},
 }
 
 def generate_js():

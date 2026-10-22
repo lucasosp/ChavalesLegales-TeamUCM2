@@ -1,14 +1,14 @@
 // Static imports publish the supplied artwork in standalone and embedded builds.
 export const backgroundImages = {
-  living: new URL("../../../fotoss/Gemini_Generated_Image_3mjvj13mjvj13mjv.jpg", import.meta.url).href,
-  exterior: new URL("../../../fotoss/Gemini_Generated_Image_7szllf7szllf7szl.jpg", import.meta.url).href,
-  classroom: new URL("../../../fotoss/Gemini_Generated_Image_agpumragpumragpu.jpg", import.meta.url).href,
-  library: new URL("../../../fotoss/Gemini_Generated_Image_atty71atty71atty.jpg", import.meta.url).href,
-  bedroom: new URL("../../../fotoss/Gemini_Generated_Image_e7py6me7py6me7py.jpg", import.meta.url).href,
-  courtyard: new URL("../../../fotoss/Gemini_Generated_Image_otcqneotcqneotcq.jpg", import.meta.url).href,
-  office: new URL("../../../fotoss/Gemini_Generated_Image_r2y2bgr2y2bgr2y2.jpg", import.meta.url).href,
-  hallway: new URL("../../../fotoss/Gemini_Generated_Image_wxqhqiwxqhqiwxqh.jpg", import.meta.url).href,
-  courtroom: new URL("../../../fotoss/Sunlit Empty Courtroom Interior.png", import.meta.url).href,
+  living: new URL("../../../fotoss/Gemini_Generated_Image_3mjvj13mjvj13mjv.webp", import.meta.url).href,
+  exterior: new URL("../../../fotoss/Gemini_Generated_Image_7szllf7szllf7szl.webp", import.meta.url).href,
+  classroom: new URL("../../../fotoss/Gemini_Generated_Image_agpumragpumragpu.webp", import.meta.url).href,
+  library: new URL("../../../fotoss/Gemini_Generated_Image_atty71atty71atty.webp", import.meta.url).href,
+  bedroom: new URL("../../../fotoss/Gemini_Generated_Image_e7py6me7py6me7py.webp", import.meta.url).href,
+  courtyard: new URL("../../../fotoss/Gemini_Generated_Image_otcqneotcqneotcq.webp", import.meta.url).href,
+  office: new URL("../../../fotoss/Gemini_Generated_Image_r2y2bgr2y2bgr2y2.webp", import.meta.url).href,
+  hallway: new URL("../../../fotoss/Gemini_Generated_Image_wxqhqiwxqhqiwxqh.webp", import.meta.url).href,
+  courtroom: new URL("../../../fotoss/Sunlit Empty Courtroom Interior.webp", import.meta.url).href,
 };
 
 const scenePhotos = {

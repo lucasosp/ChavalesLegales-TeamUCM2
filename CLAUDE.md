@@ -264,6 +264,9 @@ duplicar imágenes. Un caso con dibujos pesa ~50 KB (base64).
   `[caso]`. Recuerda que `CasoStore` tiene un caso especial para `dibujo`.
 * **Nueva cadena de UI** → las 6 lenguas en `frontend/locales/*/<ns>.json`. Añádela a `es` siempre;
   el resto puede caer al fallback, pero entonces queda sin traducir.
+* **Nueva ilustración (personaje o fondo)** → déjala en `images/` o `fotoss/`, ejecuta
+  `python scripts/optimizar-imagenes.py` y referencia el `.webp` (no el PNG/JPG: pesan 10-20 veces
+  más). Los retratos conservan sus dimensiones porque `characterImages.js` encuadra en píxeles.
 * **Nueva story o beat** → `LegalinStory/public/content/stories/<id>/` + `content/index.json`,
   luego `npm run validate`. Si el story es generado, edita su `scripts/build-*.mjs`.
 * **Minijuego nuevo** → regístralo en `GAMES` de `app/novela/MinijuegoNubes.jsx` y usa un nodo
