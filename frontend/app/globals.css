@@ -1290,3 +1290,10 @@ html, body {
   background: var(--verde-950);
   color: var(--marca-ambar);
 }
+
+/* Con un solo juego la ficha ocupa todo el ancho de la tarjeta, en grande. */
+.solo-games-grid { grid-template-columns: minmax(0, 1fr); }
+.solo-games-grid .solo-game-tile { padding: 18px 20px; gap: 16px; }
+.solo-games-grid .solo-game-icon { width: 60px; height: 60px; }
+.solo-games-grid .solo-game-title { font-size: 20px; }
+.solo-games-grid .solo-game-tag { font-size: 13px; }
