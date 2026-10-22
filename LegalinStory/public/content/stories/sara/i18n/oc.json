@@ -7,7 +7,7 @@
         "text": "Deluns. Un servici que non entre."
       },
       "c1-01": {
-        "text": "Sara a quinze ans, jògue a volei e dessenhe esteles enes marges des sòns apunts. Ne li manque ua per acabar quan sone eth timbre de quatau d'ESO."
+        "text": "Sara a catorze ans e va tà tresau d'ESO. Li agrade fòrça eth voleibòl e dessenhe esteles enes marges des quasèrns. Sone eth timbre e encara li manque ua estela per acabar."
       },
       "c1-02": {
         "text": "Aguesta tarde practicam eth servici. Eth mèn se'n va mès de cap ara pòrta que de cap ara pista."
@@ -116,10 +116,10 @@
         "text": "Non vòi tornar a casa e qu'eth ac sàpie de còp. Me hè pòur çò que pogue passar."
       },
       "c2-05": {
-        "text": "Ac tieram en compde abans de contactar damb arrés. Vau parlar damb era coordinacion de benèster e comunicar era situacion as servicis que an d'intervier."
+        "text": "Avisarè ara era persona que s'ocupe deth benèster en institut, es Servicis Sociaus e era Policia. Tanben les explicarè qu'as pòur de tornar tà casa."
       },
       "c2-protection": {
-        "text": "Me tòque demanar ajuda e activar eth protocòl deth centre. Tu non as d'anar a denonciar soleta entà que comencem a protegir-te. T'explicaram çò que hèsquem."
+        "text": "Non demoram que presentes tu era denóncia. Damb çò que m'as explicat ja me cau demanar ajuda e comunicar çò que s'a passat. T'explicarè çò que hèm entà protegir-te."
       },
       "c2-choice": {
         "prompt": "Qué pregunte Sara mentre Laura organize era ajuda?",
@@ -151,7 +151,7 @@
         ]
       },
       "c2-privacy": {
-        "text": "Non te pòdi prométer qu'aquerò se demore entre nosates. T'explicarè qui a besonh d'intervier e entà qué. Çò que compartiscam aurà de servir entà protegir-te."
+        "text": "Non te pogui prométer que demore sonque entre nosates. Te dirè a quini professionaus ac expliqui e entà qué. Se i a un procès judiciau, tanben ac calerà saber as persones que i intervien. Era tua classa non ac a de saber."
       },
       "c2-dad": {
         "text": "Non improvisaram ua trucada shens tier en compde era tua pòur. Es professionaus coordinaràn cossí actuar de manèra segura. T'explicarè çò que sapiam."
@@ -160,10 +160,10 @@
         "text": "Non ac as d'organizar tu soleta. Demanar ajuda ací ja permet que es persones responsables actuen. T'acompanharàn e t'explicaràn es actuacions que corresponguen."
       },
       "c2-06": {
-        "text": "Eth centre coordine era atencion damb es servicis de proteccion. Era seguretat s'atén dès eth començament. Aguesta istòria arremasse diuèrsi encontres; non represente un calendari obligatòri."
+        "text": "Laura hè es avisi sense deishar sola a Sara. Aquera tarde, es professionaus organizen damb sa mair que Sara e Dani siguen en casa de sa tia. Uns dies dempús, coneish ua persona naua."
       },
       "c2-07": {
-        "text": "Ola, Sara. Sò Irene, trabalhadora sociau. T'acompanharè amassa damb er equip. Eth mèn trabalh tanben a a veir damb cossí estàs en classa, damb es tues amigues e en tòn dia a dia."
+        "text": "Ola, Sara. Sò Elena, trabalhadora sociau. T'acompanharè amassa damb er equip. Eth mèn trabalh tanben a a veir damb cossí estàs en classa, damb es tues amigues e en tòn dia a dia."
       },
       "c2-08": {
         "text": "Aurè de tornar a condar-ac tot sancèr? Non sai ne per a on è començat abans."
@@ -172,7 +172,7 @@
         "text": "Ensajaram de coordinar-mos entà que non ac ages de repetir shens besonh. Abans de preguntar-te quauquarren, te pòdi explicar entà qué mos ac cau."
       },
       "c2-choice2": {
-        "prompt": "Irene apròpe ua cadièra. Cossí s'estime mès Sara que comencen?",
+        "prompt": "Elena apròpe ua cadièra. Cossí s'estime mès Sara que comencen?",
         "options": [
           {
             "id": "short",
@@ -245,7 +245,7 @@
         "text": "Dani tanben serà escotat e er equip valorarà qué li cau. Non te tòque a tu vigilar que tot vage ben. Aquerò mos tòque as persones adultes."
       },
       "c3-privacy": {
-        "text": "Non te pòdi prométer qu'aquerò se demore entre nosates. T'explicarè qui a besonh d'intervier e entà qué. Çò que compartiscam aurà de servir entà protegir-te."
+        "text": "Non te pogui prométer que demore sonque entre nosates. Te dirè a quini professionaus ac expliqui e entà qué. Se i a un procès judiciau, tanben ac calerà saber as persones que i intervien. Era tua classa non ac a de saber."
       },
       "c3-home": {
         "text": "Demanar ajuda non vò díder que t'ages d'anar de casa automaticament. Cau valorar era vòsta seguretat e es mesures possibles. Era tua opinion compde e t'an d'escotar."
@@ -254,10 +254,10 @@
         "text": "Era mia mair sap quauques causes, mès non totes. Bèth còp me ditz qu'ensage de non discutir. Non sai qué espère que hèsqui."
       },
       "c3-04": {
-        "text": "Tu non ès responsabla de controlar eth comportament de Javier. Era tua mair tanben a besonh de supòrt. Era seguretat de cadun se valore per separat e en conjunt."
+        "text": "Tu non as d'aconseguir qu'eth tòn pair se pòrte ben. Açò non ei eth tòn trabalh. Era tua mair tanben receberà ajuda. Parlaram damb tu a soles entà escotar çò qu'as de besonh e çò que te preocupe."
       },
       "c3-05": {
-        "text": "En aguest cas fictici s'organize ua estada segura damb era sua mair e Dani, en casa d'ua tia, mentre es professionaus valoren es mesures. Sara conserve eth contacte damb eth sòn institut."
+        "text": "Sara, sa mair e Dani contunhen en casa de sa tia. Er equip a escotat es dus frairs e revise coma protegir-les. Sa mair recep ajuda entà poder cuidar-les sense Javier."
       },
       "c3-06": {
         "text": "È botat es sabatilhes de volei ena motxilla. Non sai s'es utilizarè, mès non les volia deishar."
@@ -287,7 +287,7 @@
         ]
       },
       "c3-contact": {
-        "text": "Deisharam clars es contactes der equip e qué hèr se cambie era situacion. Se i a perilh immediat, se demane ajuda d'emergéncia. Non as de valorar tu soleta se tot va ben."
+        "text": "Te darè es telefòns der equip e t'explicarè çò que cau hèr se bèra causa càmbie. Se i a un perilh immediat, truca ath 112. Pòdes demanar ajuda encara que non sàpies guaire perilh i a."
       },
       "c3-school": {
         "text": "Ac coordinaram damb Laura. Demanaram ajustaments concrets, coma organizar es liuraments e recuperar apunts, shens explicar era tua istòria a tota era classa."
@@ -313,7 +313,7 @@
         "text": "Es apunts òc. Eth vidèo… m'ac pensi. Me va ben que me parles d'autes causes."
       },
       "c4-choice": {
-        "prompt": "Irene li pregunte quina part dera sua vida vò recuperar prumèr. Sara chausís…",
+        "prompt": "Elena li pregunte quina part dera sua vida vò recuperar prumèr. Sara chausís…",
         "options": [
           {
             "id": "volleyball",
@@ -404,7 +404,7 @@
         "text": "Temps dempús. Saber a on sò."
       },
       "c5-01": {
-        "text": "S'a dubèrt ua investigacion penau sus çò que s'a passat. Era advocada li explique ua citacion a Sara e as que l'acompanhen. Aguesta escèna resumís diferentes actuacions, shens fixar es sòns terminis."
+        "text": "Dempús der avís der institut e des prumères mesures de proteccion, eth jutjat contunhe d'investigar çò que s'a passat. Arribe ua carta entà que Sara declare. Irene la lieg damb era e damb sa mair."
       },
       "c5-02": {
         "text": "Era carta semblaue escrita entà quauquarrés que ja sap cossí fonciona tot. Jo non sai ne a on me sèir."
@@ -413,7 +413,7 @@
         "text": "La liegeram amassa. Ua citacion indique que t'as de presentar a ua actuacion: cau verificar entà qué, a on e damb quini supòrts. Se quauquarren non s'enten, ac preguntam abans."
       },
       "c5-justice": {
-        "text": "Ací s'investigue çò que s'a passat e era possibla responsabilitat deth tòn pair. Eth supòrt e era proteccion seguissen eth sòn pròpri camin. Que tu sigues menor non convertís era causa contra Javier en justícia penau de menors."
+        "text": "Eth jutjat investigue çò que s'a passat e s'eth tòn pair ei responsable d'un delicte. Mentretant, contunham de cuidar dera tua seguretat. Non cau demorar ua senténcia entà protegir-te."
       },
       "c5-choice": {
         "prompt": "Abans dera actuacion, qué vò conéisher Sara?",
@@ -445,19 +445,19 @@
         ]
       },
       "c5-people": {
-        "text": "Era jutgessa dirigís era actuacion. Era Fiscalia intervie entà promòir era accion dera justícia. Es advocades e advocats defenen es interèssi des sòns representats. Jo t'explicarè qui i ei e per qué."
+        "text": "Era jutgessa dirigís era declaracion e eth fiscau cuide tanben des tòns drets. Jo participi coma era tua advocada. Era defensa deth tòn pair tanben pòt hèr preguntes, damb eth contròle dera jutgessa. Abans t'explicarè coma."
       },
       "c5-people2": {
-        "text": "Era mia foncion ei acompanhar-te en çò de socioeducatiu e coordinar supòrts. Non decidisqui era sentença. Pòs daurir es fiches des professionaus quan se te mesclen es nòms."
+        "text": "Jo non decidisqui arren en jutjat. Te pogui acompanhar se tu ac vòs, exceptat que s'explique ua rason entà que non entre. Tanben podem acordar que te demore dehòra."
       },
       "c5-room": {
-        "text": "Abans d'anar-i verificaram a on demoraràs e cossí serà era actuacion. Plantejaram çò que t'amoïne de trobar-te damb eth tòn pair entà que se valoren es mesures adequades."
+        "text": "An d'organizar era demora entà que non vos trobatz. Anaram abans a veir per a on entres e a on demores. Ja auem parlat damb er ofici de victimes."
       },
       "c5-rights": {
         "text": "Me pòs explicar qué te cau, preguntar qui i serà e avisar de çò que te hè sentir insegura. Ac comunicaram entà que se valore abans dera actuacion."
       },
       "c5-supports": {
-        "text": "Abans de declarar se valorarà quini supòrts te cau e cossí evitar que passes mès pòur. Er espaci e es mesures cambien segons eth cas; auer quinze ans non determine ua sala concrèta."
+        "text": "An d'organizar es causes entà que non te tròbes damb eth tòn pair. Ath delà, demanaram ua auta sala, videoconferéncia e supòrt d'ua psicològa. Era jutgessa decidirà coma organizar aguesti supòrts segontes çò qu'as de besonh."
       },
       "c5-privacy": {
         "text": "T'amoïnaue qui anaue a conéisher era tua istòria. Per aquerò uei repassam qui pòt èster en aguesta actuacion. Era intimitat tanben se suenhe en organizar er espaci e era informacion."
@@ -516,16 +516,16 @@
         "text": "Arribe eth dia. En aguest cas, s'a acordat ua organizacion entà evitar que Sara se trobe damb Javier pendent era demora e pendent era sua intervencion. Eth personau li explique a on serà cada persona."
       },
       "c5-06": {
-        "text": "Abans de començar, verificaram que comprenes entà qué èm ací. Se non comprenes quauquarren, ac pòs díder."
+        "text": "Òla, Sara. Aué t'escotaram entà investigar çò que s'a passat. Irene ja t'a explicat per qué te cau declarar en aguest cas. Se bèra causa non ei clara, ne parlam abans de començar."
       },
       "c5-07": {
-        "text": "Sara participe ena actuacion damb es mesures acordades. Era istòria dèishe dehòra es preguntes sus çò que s'a passat. En acabar, Irene la demore entà acompanhar-la."
+        "text": "S'an acordat es supòrts entà Sara. Declare per videoconferéncia des d'ua auta sala, sense veir a Javier, damb ua psicològa ath costat. Era declaracion demore enregistrada. Sara a preferit qu'Elena la demore dehòra."
       },
       "c5-08": {
         "text": "Sò cansada. Podem estar un moment shens parlar d'aquerò?"
       },
       "c5-09": {
-        "text": "Òc. Dempús revisaram damb Elena era informacion que te calgue. Ara podem sèir-mos un moment."
+        "text": "Òc. Dempús revisaram damb Irene era informacion que te calgue. Ara podem sèir-mos un moment."
       },
       "c6-card": {
         "kicker": "SARA · CAPÍTOL 6 DE 6",
@@ -568,7 +568,7 @@
         ]
       },
       "c6-news": {
-        "text": "Podem consultar damb Elena quina informacion te correspon recéber e cossí demanar-la. Non te sai dar ua data exacta; òc que podem aclarir damb qui parlar quan ages dubtes."
+        "text": "Podem consultar damb Irene quina informacion te correspon recéber e cossí demanar-la. Non te sai dar ua data exacta; òc que podem aclarir damb qui parlar quan ages dubtes."
       },
       "c6-dad": {
         "text": "Pòs trobar a mancar es bons moments e, ath còp, auer besonh d'èster protegida. Non as de sentir ua soleta causa peth tòn pair. Parlar-ne non cambie que çò que te hec siguec mau hèt."
@@ -577,13 +577,13 @@
         "text": "Podem acordar qué a de saber eth professorat e cossí suenhar era tua intimitat. Damb es tues amigues tanben pòs méter limits a çò que vulgues condar."
       },
       "c6-03": {
-        "text": "Temps dempús, après es actuacions e eth judici, Elena se reunís damb Sara entà explicar-li ua sentença simulada. Eth resultat d'aguesta demo ei fixat abans de jogar: cap de causida emocionau decidís era resolucion."
+        "text": "Mesi dempús acabe era investigacion. Irene s'amasse damb Sara abans dera cita següenta."
       },
       "c6-conviction": {
-        "text": "En aguest cas fictici, eth tribunau a considerat provadi hèts de violéncia e a dictat ua sentença condemnatòria contra Javier. T'explicaram eth sòn abast, es mesures acordades e se i a possibilitat de recors."
+        "text": "Eth tribunau a condemnat a Javier. T'explicarè per qué, quina pena li impause e quines mesures de proteccion a decidit. Non te cau compréner-ac tot aué."
       },
       "c6-no-conviction": {
-        "text": "En aguesta variant fictícia, eth tribunau a dictat ua sentença absolutòria: era pròva non a permetut ua condemna damb es garanties necessàries. T'explicarè era resolucion e es possibilitats de recors que corresponguen."
+        "text": "Eth tribunau a absolt a Javier pr'amor que non a trobat pròves sufisentes entà condemnar-lo. Açò non vò díder qu'ages mentit ne que demanar ajuda siguesse mau. Liegeram es motius damb calma."
       },
       "c6-human": {
         "text": "Non sai guaire ben qué senti. Pensaua qu'en liéger ua resolucion tot encaisharie de còp."
@@ -637,6 +637,111 @@
         "kicker": "SARA · ERA MIA ISTÒRIA CONTUNHE",
         "title": "Encara è plans",
         "text": "Sara seguís estant sòr, amiga, estudianta e jogadora de volei. I aurà dies diferents e eth supòrt pòt contunhar. Non les a de víuer soleta."
+      },
+      "c3-safety-question": {
+        "text": "E se papà me ven a cercar en institut?"
+      },
+      "c3-measures": {
+        "text": "En vòste cas, era jutgessa ja a proïbit que Javier s'apròpe a tu e a Dani o se comunique damb vosati. Tanben a suspenut es sues visites per ara. Son mesures entà protegir-vos mentre s'investigue."
+      },
+      "c3-safety-plan": {
+        "text": "Er institut coneish aqueres mesures e auem acordat qui vos ven a cercar. S'eth tòn pair sage d'apropar-se o d'escriuer-vos, avisa ua persona adulta der equip. Se i a un perilh immediat, truca ath 112."
+      },
+      "c3-safety-followup": {
+        "text": "Te darè es telefòns der equip. Contunharam de veir s'ètz segurs: anar tà casa dera tua tia ei sonque ua part deth plan. Tu non as de susvelhar eth tòn pair ne hèr que complisque es mesures."
+      },
+      "c3-lawyer-intro": {
+        "text": "Er equip presente a Irene, ua advocada que defenerà es interèssi de Sara. Irene parle damb era e damb sa mair, tanben per separat."
+      },
+      "c3-representation": {
+        "text": "Eth tòn pair non te pòt representar en aguest cas. Auem comprovat qu'era tua mair pòt cuidar des tòns interèssi e era te represente. Jo sò era tua advocada. Tanben parlarè damb tu: era tua opinion compde."
+      },
+      "c3-defender": {
+        "text": "S'era tua mair tanpòc te podesse representar ben, se demanarie ara jutgessa ua auta persona entà hè'c: un defensor judiciau. Non ei çò de madeish qu'auer advocada. Non ac auràs de resòlver tu sola."
+      },
+      "c3-party": {
+        "text": "Podem participar en cas coma acusacion particulara, damb era tua pròpria advocada. Atau pogui demanar pròves e mesures entà tu e deféner es tòns interèssi. Non ès tu qui decidís eth castig."
+      },
+      "c5-investigation": {
+        "text": "Aguesta part se ditz investigacion o instruccion. S'escoten es persones e se cerquen autes pròves entà saber çò que s'a passat. Era tua declaracion n'ei ua part. Aué encara non se decidís se i a condemna."
+      },
+      "c5-attend-question": {
+        "text": "Me cau parlar encara que sigue eth mèn pair?"
+      },
+      "c5-family-rule": {
+        "text": "A viatges era lei permet de non declarar contra un familhar. Se ditz dispensa. Mès a excepcions. Anar-i quan te citen e auer de declarar non son çò de madeish: prumèr cau veir era tua situacion."
+      },
+      "c5-family-case": {
+        "text": "En tòn cas, coma que ja participes coma acusacion particulara, aquera dispensa non s'aplique e te cau declarar. Non ei pr'amor qu'ages complit catorze ans. T'acompanharè e t'explicarè çò que non comprenes."
+      },
+      "c5-juez": {
+        "text": "Era jutgessa dirigís era investigacion e decidís es mesures qu'an de besonh ua decision judiciau. S'eth cas passe a judici, ac decidirà un aute jutge o tribunau. Toti an de respectar es tòns drets e es des autes persones."
+      },
+      "c5-laj": {
+        "text": "Era letrada dera Administracion de Justícia s'ocupe que çò que passe demore documentat damb garanties. Ei ua auta professionau; non ei era tua advocada. Non a tostemp d'èster ena sala."
+      },
+      "c5-company": {
+        "text": "Ath delà dera tua advocada, te pòt acompanhar ua persona que tu trigues, coma Elena. Se se decidís que non entre entà qu'era declaracion se hèsque ben, an d'explicar eth motiu. Podem parlar de qui t'ajudarie mès."
+      },
+      "c5-recording-question": {
+        "text": "Me van a enregistrar? Atau non me cau tornar?"
+      },
+      "c5-recording": {
+        "text": "Òc, s'enregistre pr'amor qu'ès menora. Entà usar-la en judici sense que tornes a declarar calen garanties especiaus: tanben i a de participar era defensa deth tòn pair. Açò se ditz pròva preconstituïda. Enregistrar, per se solet, non ei pro."
+      },
+      "c5-age-rule": {
+        "text": "Entà cèrti delictes, aquera declaracion damb garanties especiaus ei obligatòria s'encara non as complit catorze ans. Tu ja les as: non ei automatica pera tua edat. Contunhes d'auer dret a proteccion e supòrts coma menora."
+      },
+      "c5-recording-case": {
+        "text": "En tòn cas, aguesta declaracion servís entara investigacion. L'enregistraràn, mès açò non remplace per se solet declarar en judici. Se te cau tornar, t'avisaran e preparam es supòrts un aute viatge."
+      },
+      "c5-communication": {
+        "text": "Bremba: pòdes demanar que t'expliquen ua pregunta, díder que non brembes bèra causa e demanar ua pausa. Non inventes çò que non sabes. Çò que compde ei explicar çò que brembes damb es tues paraules."
+      },
+      "c6-investigation-end": {
+        "text": "Non totes es investigacions arriben a judici. A viatges s'arquiven pr'amor que non se pòt contunhar, per exemple se non i a pro donades entà contunhar. Arquivar ei barrar eth cas, provisionaument o definitivament segontes eth motiu. T'explicaria çò que signifique e se se pòt recórrer."
+      },
+      "c6-trial-notice": {
+        "text": "En tòn cas, eth fiscau e nosates auem presentat ua acusacion contra Javier. Eth sòn advocat l'a podut deféner. Ara i aurà un judici: un aute jutge o tribunau escotarà es pròves abans de decidir."
+      },
+      "c6-trial-question": {
+        "text": "Alavetz, er aute viatge ère entà investigar. Ara decidiràn se i a pròves entà condemnar-lo. E me cau tornar a parlar?"
+      },
+      "c6-trial-supports": {
+        "text": "Òc, t'an citat entà declarar en judici. Auem tornat a organizar es supòrts: ua auta sala, videoconferéncia e ua psicològa damb tu. Tanben an preparat era demora entà que non te tròbes damb eth tòn pair."
+      },
+      "c6-trial": {
+        "text": "Eth dia deth judici, Sara declare damb aguesti supòrts. Eth tribunau escote tanben es autes pròves e es parts. Quan acabe, Elena l'acompanhe a gésser. Era decision non depen sonque de çò que digue Sara."
+      },
+      "c6-after-trial": {
+        "text": "Ara eth tribunau decidirà e ac explicarà per escrit. Aguest document ei era senténcia. Pòt condemnar o absòlver. Absòlver vò díder que non impause ua condemna. Quan arribe, la liegeram amassa."
+      },
+      "c6-sentence-arrives": {
+        "text": "Un temps dempús deth judici, eth mobil de Sara vibre."
+      },
+      "c6-appeal": {
+        "text": "Recórrer ei demanar a un aute tribunau que revise era decision. Javier e era nòsta part ac podem hèr s'era lei ac permet e laguens d'un termini. T'explicarè es opcions. Quan ja non se pòt recórrer, era senténcia ei fèrma."
+      },
+      "c6-protection-after": {
+        "text": "Revisaram quines mesures contunhen, quines càmbien e quina proteccion as de besonh ara. Era ajuda d'Elena e der equip s'organize segontes coma estigues. Non as de deishar de demanar ajuda pr'amor qu'age arribat ua senténcia."
+      },
+      "c5-oficina": {
+        "text": "Er ofici judiciau deth Tribunau d'Instància organize es papèrs e es passi deth cas. Segontes eth tipe d'ahèr, se n'encargue ua seccion o ua auta."
+      },
+      "c5-fiscal": {
+        "text": "Eth fiscau defen era legalitat. Pòt acusar qui a hèt mau e tanben velhe pes tòns drets. Era tua advocada defen es tòns interèssi."
+      },
+      "c5-psicosocial": {
+        "text": "A viatges eth jutjat demane ajuda ath sòn equip psicosociau: professionaus dera psicologia e deth trabalh sociau. Pòden ajudar a escotar-te e dar ua opinion coma especialistes."
+      },
+      "c5-oavd": {
+        "text": "En Ofici d'Assisténcia as Victimes t'expliquen coma va eth procès e t'ajuden se te tròbes mau o as dubtes. Non jutgen eth cas."
+      },
+      "c3-party-warning": {
+        "text": "En participar atau, non pòdes usar era dispensa: era possibilitat qu'a viatges permet de non declarar contra un familhar. Abans de hè'c, ne parlaram damb calma. Recéber proteccion non depen de participar d'aguesta forma."
+      },
+      "c3-party-confirmed": {
+        "text": "Irene respon as dubtes de Sara e de sa mair. Dempús d'escotar a Sara e de parlar des opcions, sa mair formalize era participacion coma acusacion particulara, damb era ajuda d'Irene."
       }
     }
   },
@@ -672,48 +777,58 @@
       {
         "chapter": 1,
         "title": "Un senhau",
-        "text": "Eth centre escote e se'n ocupe des indicis de violéncia."
+        "text": "En institut se’n dan compde que bèra causa va mau e escoten."
       },
       {
         "chapter": 2,
-        "title": "Demanar ajuda",
-        "text": "Eth personau coordine era comunicacion e es supòrts entà protegir."
+        "title": "Avisar e protegir",
+        "text": "Era tutora avise de seguida es Servicis Sociaus e era Policia. S’organize un lòc segur."
       },
       {
         "chapter": 3,
-        "title": "Valorar e protegir",
-        "text": "Es Servicis Sociaus e era proteccion de menors valoren es besonhs e era seguretat."
+        "title": "Un plan de seguretat",
+        "text": "S’escote a Sara e a Dani. Era jutgessa acòrde mesures e er equip revise coma son."
+      },
+      {
+        "chapter": 3,
+        "title": "Qui defen a Sara",
+        "text": "Sa mair la represente en aguest cas. Irene ei era sua advocada e actue coma acusacion particulara."
       },
       {
         "chapter": 4,
-        "title": "Seguir viuent",
-        "text": "Acompanhament socioeducatiu: classes, ligams e activitats."
+        "title": "Contunhar de víuer",
+        "text": "Es classes, es amigues e eth voleibòl tanben compden."
       },
       {
         "chapter": 5,
-        "title": "Compréner era citacion",
-        "text": "S'explique entà qué ei era actuacion e qui i intervie."
+        "title": "Investigar çò que s’a passat",
+        "text": "Irene explique era citacion, qui participe e per qué Sara a de declarar en aguest cas."
       },
       {
         "chapter": 5,
-        "title": "Participar damb supòrts",
-        "text": "Se valoren mesures entara declaracion. Era demo omet es preguntes sus era violéncia."
+        "title": "Declarar damb supòrts",
+        "text": "S’evite era trobada damb Javier. Era declaracion s’enregistre; açò solet non remplace parlar en judici."
       },
       {
         "chapter": 6,
-        "title": "Demorar informacion",
-        "text": "Eth procediment contunhe. Es tempsi e es actuacions varien."
+        "title": "Acabar era investigacion",
+        "text": "I pòt auer un archiu o ua acusacion. En aguesta istòria, eth cas passe a judici."
       },
       {
         "chapter": 6,
-        "title": "Resolucion e continuïtat",
-        "text": "S'explique era resolucion. Es supòrts se revisen segons es besonhs."
+        "title": "Eth judici",
+        "text": "Un aute jutge o tribunau escote es pròves. Sara torne a declarar damb supòrts."
+      },
+      {
+        "chapter": 6,
+        "title": "Era senténcia e dempús",
+        "text": "Irene explique eth resultat, es possibles recorsi e quines mesures contunhen. Eth supòrt seguís segontes es besonhs."
       }
     ],
     "people": [
       {
         "name": "Sara",
-        "role": "15 ans · 4au d'ESO",
+        "role": "14 ans · 3au d'ESO",
         "initial": "S",
         "color": "peach",
         "text": "Li agrade eth volei, dessenhe enes marges e a ua amiga que se ditz Paula. Era sua vida ei mès ampla qu'eth procediment.",
@@ -734,39 +849,60 @@
         "text": "Escote, ei atenta as senhaus e coordine era comunicacion damb eth protocòl deth centre. Non investigue delictes."
       },
       {
-        "name": "Irene",
+        "name": "Elena",
         "role": "Trabalhadora sociau",
-        "initial": "I",
+        "initial": "E",
         "color": "purple",
         "text": "Acompanhe era vida de cada dia e coordine supòrts damb er equip. Non dicte mesures judiciaus ne sentences."
       },
       {
-        "name": "Elena",
+        "name": "Irene",
         "role": "Advocada",
-        "initial": "E",
+        "initial": "I",
         "color": "blue",
         "text": "Conselhe a Sara, li explique es actuacions e defen es sòns interèssi. Era defensa de Javier correspon a un aute professionau."
+      },
+      {
+        "name": "Ofici judiciau",
+        "role": "Tribunal de Instancia",
+        "initial": "O",
+        "color": "green",
+        "text": "Er ofici judiciau deth Tribunau d'Instància organize es papèrs e es passi deth cas. Segontes eth tipe d'ahèr, se n'encargue ua seccion o ua auta."
       },
       {
         "name": "Jutgessa",
         "role": "Autoritat judiciau",
         "initial": "J",
         "color": "purple",
-        "text": "Dirigís es actuacions que li corresponen e pren decisions damb es garanties deth procediment."
+        "text": "Era jutgessa dirigís era investigacion e decidís es mesures qu'an de besonh ua decision judiciau. S'eth cas passe a judici, ac decidirà un aute jutge o tribunau. Toti an de respectar es tòns drets e es des autes persones."
+      },
+      {
+        "name": "Letrada (LAJ)",
+        "role": "Letrada (LAJ)",
+        "initial": "L",
+        "color": "blue",
+        "text": "Era letrada dera Administracion de Justícia s'ocupe que çò que passe demore documentat damb garanties. Ei ua auta professionau; non ei era tua advocada. Non a tostemp d'èster ena sala."
       },
       {
         "name": "Fiscalia",
         "role": "Ministèri Fiscau",
         "initial": "F",
         "color": "green",
-        "text": "Promòu era accion dera justícia e vetle pera legalitat e es drets. Que Sara sigue menor non convertís era causa contra eth sòn pair en justícia penau de menors."
+        "text": "Eth fiscau defen era legalitat. Pòt acusar qui a hèt mau e tanben velhe pes tòns drets. Era tua advocada defen es tòns interèssi."
       },
       {
-        "name": "Equip de supòrt",
-        "role": "Servicis Sociaus e atencion a victimes",
+        "name": "Equip psicosociau",
+        "role": "Psicologia e trabalh sociau deth jutjat",
         "initial": "+",
-        "color": "blue",
-        "text": "An foncions diferentes: era proteccion de menors valore era seguretat familiara; era assisténcia a victimes informe e ofrís supòrts en procès."
+        "color": "peach",
+        "text": "A viatges eth jutjat demane ajuda ath sòn equip psicosociau: professionaus dera psicologia e deth trabalh sociau. Pòden ajudar a escotar-te e dar ua opinion coma especialistes."
+      },
+      {
+        "name": "OAVD",
+        "role": "Ofici d'Assisténcia as Victimes deth Delicte",
+        "initial": "V",
+        "color": "pink",
+        "text": "En Ofici d'Assisténcia as Victimes t'expliquen coma va eth procès e t'ajuden se te tròbes mau o as dubtes. Non jutgen eth cas."
       },
       {
         "name": "Era sua familha",
@@ -790,19 +926,31 @@
         "title": "Estatut dera victima · arts. 4, 5, 19–26 y 28"
       },
       "lecrim": {
-        "title": "LECrim · arts. 448, 449 bis, 449 ter, 544 ter y 707"
+        "title": "LECrim · arts. 109 bis, 416, 449 bis, 449 ter, 544 ter, 544 quinquies, 637, 641, 703 bis, 707, 730.2, 780–785 y 790",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1882-6036"
+      },
+      "civil": {
+        "title": "Código Civil · arts. 158, 162 y 163",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1889-4763"
       }
     },
     "notes": {
       "protection": {
         "title": "Era proteccion pòt començar ací",
-        "text": "Eth personau educatiu a de comunicar es indicis de violéncia e activar eth protocòl. Sara non a de presentar soleta ua denóncia entà recéber ajuda.",
-        "dialogue": "Me tòque demanar ajuda e activar eth protocòl deth centre. Tu non as d'anar a denonciar soleta entà que comencem a protegir-te. T'explicaram çò que hèsquem."
+        "text": "Non demoram que presentes tu era denóncia. Damb çò que m'as explicat ja me cau demanar ajuda e comunicar çò que s'a passat. T'explicarè çò que hèm entà protegir-te.",
+        "dialogue": "Non demoram que presentes tu era denóncia. Damb çò que m'as explicat ja me cau demanar ajuda e comunicar çò que s'a passat. T'explicarè çò que hèm entà protegir-te.",
+        "sources": [
+          "lopivi"
+        ]
       },
       "privacy": {
         "title": "Qui a besonh de saber-ac",
-        "text": "Laura non pòt prométer un secret absolut. Explicarà quini professionaus an d'intervier entà protegir a Sara e compartirà era informacion necessària entà aquerò.",
-        "dialogue": "Non te pòdi prométer qu'aquerò se demore entre nosates. T'explicarè qui a besonh d'intervier e entà qué. Çò que compartiscam aurà de servir entà protegir-te."
+        "text": "Non te pogui prométer que demore sonque entre nosates. Te dirè a quini professionaus ac expliqui e entà qué. Se i a un procès judiciau, tanben ac calerà saber as persones que i intervien. Era tua classa non ac a de saber.",
+        "dialogue": "Non te pogui prométer que demore sonque entre nosates. Te dirè a quini professionaus ac expliqui e entà qué. Se i a un procès judiciau, tanben ac calerà saber as persones que i intervien. Era tua classa non ac a de saber.",
+        "sources": [
+          "lopivi",
+          "proteccion"
+        ]
       },
       "social": {
         "title": "Valorar ei conéisher entà ajudar",
@@ -826,13 +974,21 @@
       },
       "justice": {
         "title": "Dus trabalhs que pòden auançar ath còp",
-        "text": "Era proteccion se'n ocupe dera seguretat. Eth procediment penau investigue hèts e responsabilitats. Coma Javier ei adult, eth sòn cas non correspon ara justícia penau de menors pera edat de Sara.",
-        "dialogue": "Ací s'investigue çò que s'a passat e era possibla responsabilitat deth tòn pair. Eth supòrt e era proteccion seguissen eth sòn pròpri camin. Que tu sigues menor non convertís era causa contra Javier en justícia penau de menors."
+        "text": "Eth jutjat investigue çò que s'a passat e s'eth tòn pair ei responsable d'un delicte. Mentretant, contunham de cuidar dera tua seguretat. Non cau demorar ua senténcia entà protegir-te.",
+        "dialogue": "Eth jutjat investigue çò que s'a passat e s'eth tòn pair ei responsable d'un delicte. Mentretant, contunham de cuidar dera tua seguretat. Non cau demorar ua senténcia entà protegir-te.",
+        "sources": [
+          "lecrim",
+          "proteccion"
+        ]
       },
       "supports": {
         "title": "Ua declaracion damb supòrts",
-        "text": "Es mesures se valoren individualament. Pòden evitar eth contacte visuau e adaptar er espaci. Auer 15 ans non hè obligatòria per si solet ua Sala Gesell o ua pròva preconstituïda.",
-        "dialogue": "Abans de declarar se valorarà quini supòrts te cau e cossí evitar que passes mès pòur. Er espaci e es mesures cambien segons eth cas; auer quinze ans non determine ua sala concrèta."
+        "text": "An d'organizar es causes entà que non te tròbes damb eth tòn pair. Ath delà, demanaram ua auta sala, videoconferéncia e supòrt d'ua psicològa. Era jutgessa decidirà coma organizar aguesti supòrts segontes çò qu'as de besonh.",
+        "dialogue": "An d'organizar es causes entà que non te tròbes damb eth tòn pair. Ath delà, demanaram ua auta sala, videoconferéncia e supòrt d'ua psicològa. Era jutgessa decidirà coma organizar aguesti supòrts segontes çò qu'as de besonh.",
+        "sources": [
+          "victima",
+          "lecrim"
+        ]
       },
       "repeat": {
         "title": "Demanar ua auta explicacion",
@@ -851,8 +1007,8 @@
       },
       "waiting": {
         "title": "Saber qué vie dempús",
-        "text": "Pòt demanar informacion comprensibla sus es actuacions e resolucions que l'afècten. Es tempsi varien; Irene e era sua advocada la pòden ajudar a consultar pes canaus adequats.",
-        "dialogue": "Podem consultar damb Elena quina informacion te correspon recéber e cossí demanar-la. Non te sai dar ua data exacta; òc que podem aclarir damb qui parlar quan ages dubtes."
+        "text": "Podem consultar damb Irene quina informacion te correspon recéber e cossí demanar-la. Non te sai dar ua data exacta; òc que podem aclarir damb qui parlar quan ages dubtes.",
+        "dialogue": "Podem consultar damb Irene quina informacion te correspon recéber e cossí demanar-la. Non te sai dar ua data exacta; òc que podem aclarir damb qui parlar quan ages dubtes."
       },
       "school": {
         "title": "Decidir qué condar as mèns companhs",
@@ -861,7 +1017,183 @@
       },
       "resolution": {
         "title": "Ua sentença non conde tota era mia vida",
-        "text": "Eth resultat depen dera pròva e des garanties deth procès. Ua resolucion shens condemna non decidís cossí s'a de sentir Sara. Es supòrts e era proteccion se valoren segons es sòns besonhs, shens depéner de punts o causides deth jòc."
+        "text": "Ara eth tribunau decidirà e ac explicarà per escrit. Aguest document ei era senténcia. Pòt condemnar o absòlver. Absòlver vò díder que non impause ua condemna. Quan arribe, la liegeram amassa. Revisaram quines mesures contunhen, quines càmbien e quina proteccion as de besonh ara. Era ajuda d'Elena e der equip s'organize segontes coma estigues. Non as de deishar de demanar ajuda pr'amor qu'age arribat ua senténcia.",
+        "sources": [
+          "lecrim",
+          "victima",
+          "proteccion"
+        ]
+      },
+      "juez": {
+        "dialogue": "Era jutgessa dirigís era investigacion e decidís es mesures qu'an de besonh ua decision judiciau. S'eth cas passe a judici, ac decidirà un aute jutge o tribunau. Toti an de respectar es tòns drets e es des autes persones.",
+        "text": "Era jutgessa dirigís era investigacion e decidís es mesures qu'an de besonh ua decision judiciau. S'eth cas passe a judici, ac decidirà un aute jutge o tribunau. Toti an de respectar es tòns drets e es des autes persones.",
+        "sources": [
+          "lopj",
+          "lecrim"
+        ]
+      },
+      "laj": {
+        "dialogue": "Era letrada dera Administracion de Justícia s'ocupe que çò que passe demore documentat damb garanties. Ei ua auta professionau; non ei era tua advocada. Non a tostemp d'èster ena sala.",
+        "text": "Era letrada dera Administracion de Justícia s'ocupe que çò que passe demore documentat damb garanties. Ei ua auta professionau; non ei era tua advocada. Non a tostemp d'èster ena sala.",
+        "sources": [
+          "lopj",
+          "lecrim"
+        ]
+      },
+      "safety": {
+        "dialogue": "En vòste cas, era jutgessa ja a proïbit que Javier s'apròpe a tu e a Dani o se comunique damb vosati. Tanben a suspenut es sues visites per ara. Son mesures entà protegir-vos mentre s'investigue.",
+        "text": "En vòste cas, era jutgessa ja a proïbit que Javier s'apròpe a tu e a Dani o se comunique damb vosati. Tanben a suspenut es sues visites per ara. Son mesures entà protegir-vos mentre s'investigue.",
+        "sources": [
+          "civil",
+          "lecrim",
+          "proteccion"
+        ],
+        "title": "Era seguretat a de besonh un plan"
+      },
+      "representation": {
+        "dialogue": "Eth tòn pair non te pòt representar en aguest cas. Auem comprovat qu'era tua mair pòt cuidar des tòns interèssi e era te represente. Jo sò era tua advocada. Tanben parlarè damb tu: era tua opinion compde.",
+        "text": "Eth tòn pair non te pòt representar en aguest cas. Auem comprovat qu'era tua mair pòt cuidar des tòns interèssi e era te represente. Jo sò era tua advocada. Tanben parlarè damb tu: era tua opinion compde.",
+        "sources": [
+          "civil",
+          "victima",
+          "proteccion"
+        ],
+        "title": "Qui me pòt representar"
+      },
+      "defender": {
+        "dialogue": "S'era tua mair tanpòc te podesse representar ben, se demanarie ara jutgessa ua auta persona entà hè'c: un defensor judiciau. Non ei çò de madeish qu'auer advocada. Non ac auràs de resòlver tu sola.",
+        "text": "S'era tua mair tanpòc te podesse representar ben, se demanarie ara jutgessa ua auta persona entà hè'c: un defensor judiciau. Non ei çò de madeish qu'auer advocada. Non ac auràs de resòlver tu sola.",
+        "sources": [
+          "civil",
+          "victima"
+        ],
+        "title": "Se me cau ua auta persona que me represente"
+      },
+      "party": {
+        "dialogue": "Podem participar en cas coma acusacion particulara, damb era tua pròpria advocada. Atau pogui demanar pròves e mesures entà tu e deféner es tòns interèssi. Non ès tu qui decidís eth castig.",
+        "text": "Podem participar en cas coma acusacion particulara, damb era tua pròpria advocada. Atau pogui demanar pròves e mesures entà tu e deféner es tòns interèssi. Non ès tu qui decidís eth castig. Irene respon as dubtes de Sara e de sa mair. Dempús d'escotar a Sara e de parlar des opcions, sa mair formalize era participacion coma acusacion particulara, damb era ajuda d'Irene.",
+        "sources": [
+          "lecrim",
+          "lopivi",
+          "proteccion"
+        ],
+        "title": "Auer votz en procediment"
+      },
+      "investigation": {
+        "dialogue": "Aguesta part se ditz investigacion o instruccion. S'escoten es persones e se cerquen autes pròves entà saber çò que s'a passat. Era tua declaracion n'ei ua part. Aué encara non se decidís se i a condemna.",
+        "text": "Aguesta part se ditz investigacion o instruccion. S'escoten es persones e se cerquen autes pròves entà saber çò que s'a passat. Era tua declaracion n'ei ua part. Aué encara non se decidís se i a condemna.",
+        "sources": [
+          "lecrim"
+        ],
+        "title": "Investigar non ei jutjar"
+      },
+      "familyRule": {
+        "dialogue": "A viatges era lei permet de non declarar contra un familhar. Se ditz dispensa. Mès a excepcions. Anar-i quan te citen e auer de declarar non son çò de madeish: prumèr cau veir era tua situacion.",
+        "text": "A viatges era lei permet de non declarar contra un familhar. Se ditz dispensa. Mès a excepcions. Anar-i quan te citen e auer de declarar non son çò de madeish: prumèr cau veir era tua situacion.",
+        "sources": [
+          "lecrim"
+        ],
+        "title": "Declarar quan er investigat ei familhar"
+      },
+      "familyCase": {
+        "dialogue": "En tòn cas, coma que ja participes coma acusacion particulara, aquera dispensa non s'aplique e te cau declarar. Non ei pr'amor qu'ages complit catorze ans. T'acompanharè e t'explicarè çò que non comprenes.",
+        "text": "En tòn cas, coma que ja participes coma acusacion particulara, aquera dispensa non s'aplique e te cau declarar. Non ei pr'amor qu'ages complit catorze ans. T'acompanharè e t'explicarè çò que non comprenes.",
+        "sources": [
+          "lecrim",
+          "victima"
+        ],
+        "title": "Çò que passe en cas de Sara"
+      },
+      "company": {
+        "dialogue": "Ath delà dera tua advocada, te pòt acompanhar ua persona que tu trigues, coma Elena. Se se decidís que non entre entà qu'era declaracion se hèsque ben, an d'explicar eth motiu. Podem parlar de qui t'ajudarie mès.",
+        "text": "Ath delà dera tua advocada, te pòt acompanhar ua persona que tu trigues, coma Elena. Se se decidís que non entre entà qu'era declaracion se hèsque ben, an d'explicar eth motiu. Podem parlar de qui t'ajudarie mès.",
+        "sources": [
+          "victima"
+        ],
+        "title": "Trigar qui m’acompanhe"
+      },
+      "recording": {
+        "dialogue": "Òc, s'enregistre pr'amor qu'ès menora. Entà usar-la en judici sense que tornes a declarar calen garanties especiaus: tanben i a de participar era defensa deth tòn pair. Açò se ditz pròva preconstituïda. Enregistrar, per se solet, non ei pro.",
+        "text": "Òc, s'enregistre pr'amor qu'ès menora. Entà usar-la en judici sense que tornes a declarar calen garanties especiaus: tanben i a de participar era defensa deth tòn pair. Açò se ditz pròva preconstituïda. Enregistrar, per se solet, non ei pro.",
+        "sources": [
+          "victima",
+          "lecrim"
+        ],
+        "title": "Enregistrar non vò díder evitar ua auta declaracion"
+      },
+      "ageRule": {
+        "dialogue": "Entà cèrti delictes, aquera declaracion damb garanties especiaus ei obligatòria s'encara non as complit catorze ans. Tu ja les as: non ei automatica pera tua edat. Contunhes d'auer dret a proteccion e supòrts coma menora.",
+        "text": "Entà cèrti delictes, aquera declaracion damb garanties especiaus ei obligatòria s'encara non as complit catorze ans. Tu ja les as: non ei automatica pera tua edat. Contunhes d'auer dret a proteccion e supòrts coma menora.",
+        "sources": [
+          "lecrim",
+          "victima"
+        ],
+        "title": "Çò que càmbie as catorze ans"
+      },
+      "communication": {
+        "dialogue": "Bremba: pòdes demanar que t'expliquen ua pregunta, díder que non brembes bèra causa e demanar ua pausa. Non inventes çò que non sabes. Çò que compde ei explicar çò que brembes damb es tues paraules.",
+        "text": "Bremba: pòdes demanar que t'expliquen ua pregunta, díder que non brembes bèra causa e demanar ua pausa. Non inventes çò que non sabes. Çò que compde ei explicar çò que brembes damb es tues paraules.",
+        "sources": [
+          "victima",
+          "proteccion",
+          "lecrim"
+        ],
+        "title": "Díder çò que me cau quan declari"
+      },
+      "investigationEnd": {
+        "dialogue": "Non totes es investigacions arriben a judici. A viatges s'arquiven pr'amor que non se pòt contunhar, per exemple se non i a pro donades entà contunhar. Arquivar ei barrar eth cas, provisionaument o definitivament segontes eth motiu. T'explicaria çò que signifique e se se pòt recórrer.",
+        "text": "Non totes es investigacions arriben a judici. A viatges s'arquiven pr'amor que non se pòt contunhar, per exemple se non i a pro donades entà contunhar. Arquivar ei barrar eth cas, provisionaument o definitivament segontes eth motiu. T'explicaria çò que signifique e se se pòt recórrer.",
+        "sources": [
+          "lecrim"
+        ],
+        "title": "Çò que pòt passar quan acabe era investigacion"
+      },
+      "appeal": {
+        "dialogue": "Recórrer ei demanar a un aute tribunau que revise era decision. Javier e era nòsta part ac podem hèr s'era lei ac permet e laguens d'un termini. T'explicarè es opcions. Quan ja non se pòt recórrer, era senténcia ei fèrma.",
+        "text": "Recórrer ei demanar a un aute tribunau que revise era decision. Javier e era nòsta part ac podem hèr s'era lei ac permet e laguens d'un termini. T'explicarè es opcions. Quan ja non se pòt recórrer, era senténcia ei fèrma.",
+        "sources": [
+          "lecrim",
+          "victima"
+        ],
+        "title": "Era senténcia se pòt revisar"
+      },
+      "protectionAfter": {
+        "dialogue": "Revisaram quines mesures contunhen, quines càmbien e quina proteccion as de besonh ara. Era ajuda d'Elena e der equip s'organize segontes coma estigues. Non as de deishar de demanar ajuda pr'amor qu'age arribat ua senténcia.",
+        "text": "Revisaram quines mesures contunhen, quines càmbien e quina proteccion as de besonh ara. Era ajuda d'Elena e der equip s'organize segontes coma estigues. Non as de deishar de demanar ajuda pr'amor qu'age arribat ua senténcia.",
+        "sources": [
+          "lecrim",
+          "civil",
+          "victima",
+          "proteccion"
+        ],
+        "title": "Quines ajudes e mesures contunhen dempús"
+      },
+      "oficina": {
+        "text": "Er ofici judiciau deth Tribunau d'Instància organize es papèrs e es passi deth cas. Segontes eth tipe d'ahèr, se n'encargue ua seccion o ua auta.",
+        "dialogue": "Er ofici judiciau deth Tribunau d'Instància organize es papèrs e es passi deth cas. Segontes eth tipe d'ahèr, se n'encargue ua seccion o ua auta."
+      },
+      "fiscal": {
+        "text": "Eth fiscau defen era legalitat. Pòt acusar qui a hèt mau e tanben velhe pes tòns drets. Era tua advocada defen es tòns interèssi.",
+        "dialogue": "Eth fiscau defen era legalitat. Pòt acusar qui a hèt mau e tanben velhe pes tòns drets. Era tua advocada defen es tòns interèssi."
+      },
+      "psicosocial": {
+        "text": "A viatges eth jutjat demane ajuda ath sòn equip psicosociau: professionaus dera psicologia e deth trabalh sociau. Pòden ajudar a escotar-te e dar ua opinion coma especialistes.",
+        "dialogue": "A viatges eth jutjat demane ajuda ath sòn equip psicosociau: professionaus dera psicologia e deth trabalh sociau. Pòden ajudar a escotar-te e dar ua opinion coma especialistes."
+      },
+      "oavd": {
+        "text": "En Ofici d'Assisténcia as Victimes t'expliquen coma va eth procès e t'ajuden se te tròbes mau o as dubtes. Non jutgen eth cas.",
+        "dialogue": "En Ofici d'Assisténcia as Victimes t'expliquen coma va eth procès e t'ajuden se te tròbes mau o as dubtes. Non jutgen eth cas."
+      },
+      "partyChoice": {
+        "title": "Compréner abans de participar",
+        "text": "En participar atau, non pòdes usar era dispensa: era possibilitat qu'a viatges permet de non declarar contra un familhar. Abans de hè'c, ne parlaram damb calma. Recéber proteccion non depen de participar d'aguesta forma.",
+        "dialogue": "En participar atau, non pòdes usar era dispensa: era possibilitat qu'a viatges permet de non declarar contra un familhar. Abans de hè'c, ne parlaram damb calma. Recéber proteccion non depen de participar d'aguesta forma.",
+        "sources": [
+          "lecrim",
+          "lopivi",
+          "victima",
+          "proteccion"
+        ]
       }
     },
     "help": [
@@ -881,7 +1213,8 @@
         "title": "Ua persona adulta de confiança",
         "text": "Pòs anar a veir eth professorat, era orientacion o era coordinacion de benèster deth centre. Entà un supòrt public, consulta es Servicis Sociaus dera tua municipalitat o eth servici de proteccion de menors dera tua comunautat autonòma."
       }
-    ]
+    ],
+    "checkedAt": "2026-10-22"
   },
   "scene": {}
 }

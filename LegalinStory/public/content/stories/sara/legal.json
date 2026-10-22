@@ -16,7 +16,7 @@
       "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-4606"
     },
     "lecrim": {
-      "title": "LECrim · arts. 448, 449 bis, 449 ter, 544 ter y 707",
+      "title": "LECrim · arts. 109 bis, 416, 449 bis, 449 ter, 544 ter, 544 quinquies, 637, 641, 703 bis, 707, 730.2, 780–785 y 790",
       "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1882-6036"
     },
     "lopj": {
@@ -26,13 +26,17 @@
     "eficiencia": {
       "title": "LO 1/2025 · Tribunales de Instancia",
       "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2025-76"
+    },
+    "civil": {
+      "title": "Código Civil · arts. 158, 162 y 163",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1889-4763"
     }
   },
   "notes": {
     "protection": {
       "title": "La protección puede empezar aquí",
-      "text": "El personal educativo debe comunicar los indicios de violencia y activar el protocolo. Sara no tiene que presentar sola una denuncia para recibir ayuda.",
-      "dialogue": "Mi trabajo es pedir ayuda cuando alguien de tu edad lo está pasando mal. Tú no tienes que ir a denunciar sola para que empecemos a protegerte. Te iré contando lo que hagamos.",
+      "text": "El centro debe avisar inmediatamente a Servicios Sociales. Si la salud o seguridad está amenazada, también a Policía y/o Fiscalía; los posibles delitos deben comunicarse a Policía, Fiscalía o autoridad judicial. No debe esperar a que Sara denuncie ni reunir pruebas por su cuenta.",
+      "dialogue": "No vamos a esperar a que denuncies tú. Con lo que me has contado ya tengo que pedir ayuda y comunicar lo ocurrido. Te explicaré qué hacemos para protegerte.",
       "sources": [
         "lopivi"
       ]
@@ -40,7 +44,7 @@
     "privacy": {
       "title": "Quién necesita saberlo",
       "text": "Laura no puede prometer secreto absoluto. Explicará qué profesionales deben intervenir para proteger a Sara y compartirá la información necesaria para ello.",
-      "dialogue": "No te puedo prometer que esto quede solo entre nosotras. Pero te diré a quién se lo cuento y para qué. Solo lo sabrán las personas que te pueden ayudar.",
+      "dialogue": "No te puedo prometer que quede solo entre nosotras. Te diré a qué profesionales se lo cuento y para qué. Si hay un proceso judicial, también tendrán que conocerlo quienes intervengan en él. Tu clase no necesita saberlo.",
       "sources": [
         "lopivi",
         "proteccion"
@@ -82,7 +86,7 @@
     "justice": {
       "title": "Dos trabajos que pueden avanzar a la vez",
       "text": "La protección cuida de la seguridad de Sara. El juzgado investiga lo que pasó y quién es responsable. Como Javier es adulto, su caso lo lleva un juzgado de adultos, aunque Sara sea menor.",
-      "dialogue": "Ahora un juzgado va a investigar lo que hizo tu padre. Eso es una cosa. Que tú estés protegida es otra, y sigue igual. Las dos pueden ir a la vez.",
+      "dialogue": "El juzgado investiga lo ocurrido y si tu padre es responsable de un delito. Mientras, seguimos cuidando de tu seguridad. No hay que esperar a una sentencia para protegerte.",
       "sources": [
         "lecrim",
         "proteccion"
@@ -90,8 +94,8 @@
     },
     "supports": {
       "title": "Una declaración con apoyos",
-      "text": "Las medidas se deciden en cada caso. Con 14 años, la grabación previa de la declaración (prueba preconstituida) ya no es la regla general, pero se puede pedir una sala aparte, la videoconferencia, evitar el contacto visual con el acusado y el apoyo de profesionales.",
-      "dialogue": "Con catorce años puede que te toque declarar. Pero vamos a pedir que lo hagas desde otra sala, sin ver a tu padre, y con alguien que te acompañe. Todo eso lo decide la jueza según lo que necesites.",
+      "text": "Debe evitarse el contacto directo en las dependencias judiciales. Las necesidades de Sara se valoran individualmente, teniendo en cuenta sus 14 años, el vínculo con el investigado y el riesgo. La sala aparte, videoconferencia y ayuda especializada son medidas concretas que la autoridad acuerda según esas necesidades.",
+      "dialogue": "Tienen que organizar las cosas para que no te encuentres con tu padre. Además, vamos a pedir otra sala, videoconferencia y apoyo de una psicóloga. La jueza decidirá cómo organizar esos apoyos según lo que necesites.",
       "sources": [
         "victima",
         "lecrim"
@@ -124,7 +128,7 @@
     },
     "waiting": {
       "title": "Saber qué viene después",
-      "text": "Puede pedir información comprensible sobre las actuaciones y resoluciones que le afecten. Los tiempos varían; Irene y su abogada pueden ayudar a consultar por los canales adecuados.",
+      "text": "Puede pedir información comprensible sobre las actuaciones y resoluciones que le afecten. Los tiempos varían; Elena y su abogada Irene pueden ayudar a consultar por los canales adecuados.",
       "dialogue": "Puedes preguntarme cómo va todo y te lo explicaré. No te puedo dar una fecha exacta, pero sí puedo decirte con quién hablar cuando tengas dudas.",
       "sources": [
         "victima"
@@ -141,7 +145,7 @@
     },
     "resolution": {
       "title": "Una sentencia no cuenta toda mi vida",
-      "text": "El resultado depende de las pruebas y de las garantías del juicio. Una sentencia sin condena no dice que Sara mintiera, ni decide cómo debe sentirse. La ayuda y la protección siguen según lo que necesite.",
+      "text": "La condena requiere prueba suficiente con las garantías del juicio. En la rama alternativa de esta ficción, la absolución se debe a insuficiencia de prueba; no se presenta como motivo de toda absolución. El resultado no determina cómo debe sentirse Sara. El apoyo continúa según sus necesidades y las medidas judiciales se revisan conforme a la resolución.",
       "sources": [
         "lecrim",
         "victima",
@@ -160,7 +164,7 @@
     "juez": {
       "title": "El juez o la jueza",
       "text": "Dirige las actuaciones judiciales, protege los derechos de todas las partes y decide lo que necesita una resolución judicial.",
-      "dialogue": "Luego está la jueza. Ella dirige todo lo que pasa en el juzgado, cuida de que se respeten los derechos de todos y decide lo que hay que decidir.",
+      "dialogue": "La jueza dirige la investigación y decide las medidas que necesitan una decisión judicial. Si el caso pasa a juicio, lo decidirá otro juez o tribunal. Todos tienen que respetar tus derechos y los de las demás personas.",
       "sources": [
         "lopj",
         "lecrim"
@@ -169,7 +173,7 @@
     "laj": {
       "title": "El letrado o la letrada (LAJ)",
       "text": "El Letrado de la Administración de Justicia es un funcionario público con funciones procesales, de documentación y de fe pública judicial, entre otras. Cuando la ley lo exige, puede autorizar el acta de una declaración y comprobar la grabación.",
-      "dialogue": "También habrá una letrada de la Administración de Justicia. Es una funcionaria que da fe de lo que pasa: escribe el acta de lo que digas y comprueba que la grabación ha salido bien.",
+      "dialogue": "La letrada de la Administración de Justicia se ocupa de que lo que pasa quede documentado con garantías. Es otra profesional; no es tu abogada. No siempre tiene que estar sentada en la sala.",
       "sources": [
         "lopj",
         "lecrim"
@@ -191,6 +195,145 @@
       "sources": [
         "lecrim",
         "victima"
+      ]
+    },
+    "safety": {
+      "title": "La seguridad necesita un plan",
+      "text": "Alojarse con una familiar no impone por sí solo restricciones al padre. En esta ficción se ha comunicado el riesgo al juzgado y se han acordado prohibiciones de aproximación y comunicación con Sara y Dani, y suspensión cautelar de visitas. Son decisiones judiciales revisables, no consecuencias automáticas de pedir ayuda.",
+      "dialogue": "En vuestro caso, la jueza ya ha prohibido que Javier se acerque a ti y a Dani o se comunique con vosotros. También ha suspendido sus visitas por ahora. Son medidas para protegeros mientras se investiga.",
+      "sources": [
+        "civil",
+        "lecrim",
+        "proteccion"
+      ]
+    },
+    "representation": {
+      "title": "Quién puede representarme",
+      "text": "El padre investigado no puede representar a Sara en un asunto con intereses contrapuestos. La madre puede hacerlo si está en condiciones de defender adecuadamente sus intereses. En esta ficción se ha valorado esa capacidad y escuchado a Sara; su madre ejerce la representación legal e Irene la defensa letrada.",
+      "dialogue": "Tu padre no puede representarte en este caso. Hemos comprobado que tu madre puede cuidar de tus intereses y ella te representa. Yo soy tu abogada. También hablaré contigo: tu opinión cuenta.",
+      "sources": [
+        "civil",
+        "victima",
+        "proteccion"
+      ]
+    },
+    "defender": {
+      "title": "Si necesito otra persona que me represente",
+      "text": "Si tampoco el otro progenitor puede representar y asistir adecuadamente a la víctima, Fiscalía debe solicitar al juez un defensor judicial. La representación legal, la defensa por abogada y la representación procesal tienen funciones distintas.",
+      "dialogue": "Si tu madre tampoco pudiera representarte bien, se pediría a la jueza otra persona para hacerlo: un defensor judicial. No es lo mismo que tener abogada. No tendrías que resolverlo tú sola.",
+      "sources": [
+        "civil",
+        "victima"
+      ]
+    },
+    "party": {
+      "title": "Tener voz en el procedimiento",
+      "text": "Tras informar y escuchar a Sara, en esta ficción su madre ha formalizado con asistencia letrada su personación como acusación particular. Permite intervenir, proponer pruebas, solicitar protección y recurrir conforme a la ley. No es condición para recibir protección ni hace depender la persecución penal de la menor.",
+      "dialogue": "Podemos participar en el caso como acusación particular, con tu propia abogada. Así puedo pedir pruebas y medidas para ti y defender tus intereses. No eres tú quien decide el castigo.",
+      "sources": [
+        "lecrim",
+        "lopivi",
+        "proteccion"
+      ]
+    },
+    "partyChoice": {
+      "title": "Entender antes de participar",
+      "text": "La personación no es condición para protección ni para que se investigue. Antes de formalizarla se explican sus consecuencias, incluida la excepción a la dispensa del art. 416.1.4.º, se escucha a Sara y se responde a sus dudas y a las de su representante. La decisión formal se muestra después de esta explicación.",
+      "dialogue": "Al participar así, no puedes usar la dispensa: la posibilidad que a veces permite no declarar contra un familiar. Antes de hacerlo, vamos a hablarlo con calma. Recibir protección no depende de que participes de esta forma.",
+      "sources": [
+        "lecrim",
+        "lopivi",
+        "victima",
+        "proteccion"
+      ]
+    },
+    "investigation": {
+      "title": "Investigar no es juzgar",
+      "text": "La citación del capítulo 5 corresponde a una declaración durante la instrucción. El órgano instructor busca indicios y recoge declaraciones y otras diligencias. Esa declaración no es por sí sola el juicio ni determina el resultado.",
+      "dialogue": "Esta parte se llama investigación o instrucción. Se escucha a las personas y se buscan otras pruebas para saber qué ha pasado. Tu declaración es una parte. Hoy todavía no se decide si hay condena.",
+      "sources": [
+        "lecrim"
+      ]
+    },
+    "familyRule": {
+      "title": "Declarar cuando el investigado es familiar",
+      "text": "Comparecer tras una citación y estar obligada a declarar son cuestiones distintas. La dispensa por parentesco del art. 416 tiene excepciones: representación o guarda de la víctima menor, determinados delitos graves con testigo adulto, imposibilidad de comprender la dispensa, personación como acusación particular o aceptación previa de declarar tras información adecuada. La edad de 14 años no resuelve por sí sola la cuestión.",
+      "dialogue": "A veces la ley permite no declarar contra un familiar. Se llama dispensa. Pero tiene excepciones. Ir cuando te citan y tener que declarar no son lo mismo: hay que mirar tu situación antes.",
+      "sources": [
+        "lecrim"
+      ]
+    },
+    "familyCase": {
+      "title": "Qué ocurre en el caso de Sara",
+      "text": "En la historia, Sara ya está personada como acusación particular con representación adecuada. Se aplica la excepción del art. 416.1.4.º: no tiene dispensa por parentesco. Esto no limita sus apoyos ni su derecho a comprender las preguntas y pedir pausas.",
+      "dialogue": "En tu caso, como ya participas como acusación particular, esa dispensa no se aplica y tienes que declarar. No es porque hayas cumplido catorce años. Yo te acompañaré y explicaré lo que no entiendas.",
+      "sources": [
+        "lecrim",
+        "victima"
+      ]
+    },
+    "company": {
+      "title": "Elegir quién me acompaña",
+      "text": "Durante las diligencias de investigación, Sara puede estar acompañada por una persona de su elección, además de su representación, salvo decisión motivada en contrario para garantizar el correcto desarrollo. La evaluación de apoyos y protección debe repetirse cuando cambien sus necesidades o la fase procesal.",
+      "dialogue": "Además de tu abogada, puede acompañarte una persona que tú elijas, como Elena. Si se decide que no entre para que la declaración se haga bien, tienen que explicar el motivo. Podemos hablar de quién te ayudaría más.",
+      "sources": [
+        "victima"
+      ]
+    },
+    "recording": {
+      "title": "Grabar no significa evitar otra declaración",
+      "text": "El art. 26.1.a del Estatuto prevé grabación audiovisual de las declaraciones de víctimas menores en la investigación. Para que una grabación sustituya la declaración en juicio como prueba preconstituida debe practicarse con los requisitos legales, incluida la contradicción y participación de la defensa. Una grabación ordinaria no tiene ese efecto automático.",
+      "dialogue": "Sí, se graba porque eres menor. Para usarla en el juicio sin que vuelvas a declarar hacen falta garantías especiales: también debe participar la defensa de tu padre. Eso se llama prueba preconstituida. Grabar, por sí solo, no basta.",
+      "sources": [
+        "victima",
+        "lecrim"
+      ]
+    },
+    "communication": {
+      "title": "Decir lo que necesito al declarar",
+      "text": "Sara recibe explicaciones adaptadas, puede comunicar que no entiende o necesita una pausa y puede expresar que no recuerda un dato. La preparación explica el procedimiento y las herramientas para comunicar sus necesidades, sin ensayar un relato ni sugerir respuestas sobre los hechos.",
+      "dialogue": "Recuerda: puedes pedir que te expliquen una pregunta, decir que no recuerdas algo y pedir una pausa. No inventes lo que no sabes. Lo importante es contar lo que recuerdas con tus palabras.",
+      "sources": [
+        "victima",
+        "proteccion",
+        "lecrim"
+      ]
+    },
+    "ageRule": {
+      "title": "Qué cambia a los catorce años",
+      "text": "El art. 449 ter obliga a preconstituir la declaración de menores de 14 años en los delitos enumerados, y de personas con discapacidad necesitadas de especial protección. Con 14 cumplidos la edad sola no activa esa obligación. La prueba preconstituida en otros casos necesita fundamento y resolución conforme a la LECrim; no basta pedirla por preferencia. Se mantienen las garantías de protección como menor de 18 años.",
+      "dialogue": "Para ciertos delitos, esa declaración con garantías especiales es obligatoria si aún no has cumplido catorce años. Tú ya los tienes: no es automática por tu edad. Sigues teniendo derecho a protección y apoyos como menor.",
+      "sources": [
+        "lecrim",
+        "victima"
+      ]
+    },
+    "investigationEnd": {
+      "title": "Qué puede pasar al terminar de investigar",
+      "text": "Al terminar la instrucción puede acordarse el archivo por la causa legal correspondiente o continuar hacia la acusación y el juicio. No toda investigación acaba en juicio. En la historia se formula acusación y se celebra juicio ante un órgano distinto del instructor, con nueva declaración protegida de Sara.",
+      "dialogue": "No todas las investigaciones llegan a juicio. A veces se archivan porque no se puede continuar, por ejemplo si no hay datos suficientes para seguir. Archivar es cerrar el caso, de forma provisional o definitiva según el motivo. Yo te explicaría qué significa y si se puede recurrir.",
+      "sources": [
+        "lecrim"
+      ]
+    },
+    "appeal": {
+      "title": "La sentencia puede revisarse",
+      "text": "Las partes pueden recurrir las resoluciones en los casos y plazos legales. Una sentencia es firme cuando ya no cabe el recurso correspondiente. La abogada explica a Sara la notificación, las opciones de recurso y las consecuencias sin responsabilizarla del resultado.",
+      "dialogue": "Recurrir es pedir a otro tribunal que revise la decisión. Javier y nuestra parte podemos hacerlo si la ley lo permite y dentro de un plazo. Te explicaré las opciones. Cuando ya no se puede recurrir, la sentencia es firme.",
+      "sources": [
+        "lecrim",
+        "victima"
+      ]
+    },
+    "protectionAfter": {
+      "title": "Qué ayudas y medidas siguen después",
+      "text": "El apoyo social y asistencial atiende las necesidades de Sara. Las medidas cautelares y las impuestas en sentencia tienen fundamentos y duración propios; no debe prometerse que todas continúan tras una absolución o que terminan todas al dictarse sentencia. Se explican los cambios y se valora protección por las vías pertinentes.",
+      "dialogue": "Revisaremos qué medidas siguen, cuáles cambian y qué protección necesitas ahora. La ayuda de Elena y del equipo se organiza según cómo estés. No tienes que dejar de pedir ayuda porque haya llegado una sentencia.",
+      "sources": [
+        "lecrim",
+        "civil",
+        "victima",
+        "proteccion"
       ]
     },
     "oavd": {

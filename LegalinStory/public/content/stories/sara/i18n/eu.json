@@ -7,7 +7,7 @@
         "text": "Astelehena. Ateratzen ez den sake bat."
       },
       "c1-01": {
-        "text": "Sarak hamabost urte ditu, boleibolean jokatzen du eta izarrak marrazten ditu apunteen ertzetan. Bat amaitzeko falta zaio DBHko laugarren mailako txirrinak jotzen duenean."
+        "text": "Sarak hamalau urte ditu eta DBHko hirugarren mailan dago. Boleibola maite du eta koadernoen ertzetan izarrak marrazten ditu. Txirrinak jo du eta oraindik izar bat amaitzea falta zaio."
       },
       "c1-02": {
         "text": "Gaur arratsaldean sakea landuko dugu. Nirea pistara baino atera aldera gehiago doa."
@@ -116,10 +116,10 @@
         "text": "Ez dut etxera itzuli nahi eta hark bat-batean jakin dezan. Beldur naiz gerta daitekeenaz."
       },
       "c2-05": {
-        "text": "Kontuan hartuko dugu inorekin harremanetan jarri aurretik. Ongizate-koordinazioarekin hitz egingo dut eta egoera jakinaraziko diet esku hartu behar duten zerbitzuei."
+        "text": "Orain institutuko ongizatearen arduradunari, Gizarte Zerbitzuei eta Poliziari abisatuko diet. Etxera itzultzeko beldurra duzula ere esango diet."
       },
       "c2-protection": {
-        "text": "Niri dagokit laguntza eskatzea eta ikastetxeko protokoloa aktibatzea. Zuk ez duzu bakarrik salaketa jarri behar zu babesten has gaitezen. Egiten duguna azalduko dizugu."
+        "text": "Ez dugu zuk salaketa jarri arte itxarongo. Kontatu didazunarekin, laguntza eskatu eta gertatutakoa jakinarazi behar dut. Zu babesteko zer egiten dugun azalduko dizut."
       },
       "c2-choice": {
         "prompt": "Zer galdetzen du Sarak Laurak laguntza antolatzen duen bitartean?",
@@ -151,7 +151,7 @@
         ]
       },
       "c2-privacy": {
-        "text": "Ezin dizut agindu hau gure artean geratuko denik. Azalduko dizut nork esku hartu behar duen eta zertarako. Partekatzen duguna zu babesteko izan beharko da."
+        "text": "Ezin dizut agindu gure artean bakarrik geratuko denik. Zein profesionali kontatuko diodan eta zertarako esango dizut. Prozesu judizial bat badago, bertan parte hartzen dutenek ere jakin beharko dute. Zure gelakideek ez dute jakin behar."
       },
       "c2-dad": {
         "text": "Ez dugu deirik inprobisatuko zure beldurra kontuan hartu gabe. Profesionalek koordinatuko dute modu seguruan nola jardun. Dakiguna azalduko dizut."
@@ -160,10 +160,10 @@
         "text": "Ez duzu zuk bakarrik antolatu beharrik. Hemen laguntza eskatzeak dagoeneko ahalbidetzen du arduradunek jardutea. Lagundu egingo zaituzte eta dagozkion jarduketak azalduko dizkizute."
       },
       "c2-06": {
-        "text": "Ikastetxeak babes-zerbitzuekin koordinatzen du arreta. Segurtasuna hasieratik zaintzen da. Istorio honek hainbat topaketa biltzen ditu; ez du nahitaezko egutegirik adierazten."
+        "text": "Laurak abisuak ematen ditu Sara bakarrik utzi gabe. Arratsalde horretan, profesionalek amarekin antolatzen dute Sara eta Dani izebaren etxean egotea. Egun batzuk geroago, beste pertsona bat ezagutzen du."
       },
       "c2-07": {
-        "text": "Kaixo, Sara. Irene naiz, gizarte-langilea. Taldearekin batera lagunduko zaitut. Nire lana zerikusia du, halaber, klasean, zure lagunekin eta egunerokoan nola zauden."
+        "text": "Kaixo, Sara. Elena naiz, gizarte-langilea. Taldearekin batera lagunduko zaitut. Nire lanak zerikusia du, halaber, klasean, zure lagunekin eta egunerokoan nola zauden."
       },
       "c2-08": {
         "text": "Berriro osorik kontatu beharko dut? Ez dakit lehen nondik hasi naizen ere."
@@ -172,7 +172,7 @@
         "text": "Koordinatzen saiatuko gara, behar ez bada errepikatu behar ez dezazun. Zerbait galdetu aurretik, zertarako behar dugun azal diezazuket."
       },
       "c2-choice2": {
-        "prompt": "Irenek aulki bat hurbiltzen du. Nola nahiago du Sarak hastea?",
+        "prompt": "Elenak aulki bat hurbiltzen du. Nola nahiago du Sarak hastea?",
         "options": [
           {
             "id": "short",
@@ -245,7 +245,7 @@
         "text": "Dani ere entzungo dute eta taldeak baloratuko du zer behar duen. Ez dagokizu zuri dena ondo ateratzen den zaintzea. Hori gu, helduoi, dagokigu."
       },
       "c3-privacy": {
-        "text": "Ezin dizut agindu hau gure artean geratuko denik. Azalduko dizut nork esku hartu behar duen eta zertarako. Partekatzen duguna zu babesteko izan beharko da."
+        "text": "Ezin dizut agindu gure artean bakarrik geratuko denik. Zein profesionali kontatuko diodan eta zertarako esango dizut. Prozesu judizial bat badago, bertan parte hartzen dutenek ere jakin beharko dute. Zure gelakideek ez dute jakin behar."
       },
       "c3-home": {
         "text": "Laguntza eskatzeak ez du esan nahi automatikoki etxetik joan behar duzunik. Zuen segurtasuna eta har daitezkeen neurriak baloratu behar dira. Zure iritziak garrantzia du eta entzun egin behar zaituzte."
@@ -254,10 +254,10 @@
         "text": "Nire amak gauza batzuk badaki, baina ez guztiak. Batzuetan esaten dit ez eztabaidatzen saiatzeko. Ez dakit zer egitea espero duen."
       },
       "c3-04": {
-        "text": "Zu ez zara Javierren jokabidea kontrolatzeko arduraduna. Zure amak ere laguntza behar du. Bakoitzaren segurtasuna bereiz eta guztiena batera baloratzen da."
+        "text": "Zuk ez duzu lortu behar aitak ondo jokatzea. Hori ez da zure lana. Zure amak ere laguntza jasoko du. Zurekin bakarka hitz egingo dugu, zer behar duzun eta zerk kezkatzen zaituen entzuteko."
       },
       "c3-05": {
-        "text": "Kasu fikziozko honetan, egonaldi seguru bat antolatzen da amarekin eta Danirekin, izeba baten etxean, profesionalek neurriak baloratzen dituzten bitartean. Sarak bere institutuarekiko harremana mantentzen du."
+        "text": "Sara, ama eta Dani izebaren etxean daude oraindik. Taldeak bi anai-arrebak entzun ditu eta nola babestu aztertzen du. Ama laguntza jasotzen ari da, Javier gabe haiek zaindu ahal izateko."
       },
       "c3-06": {
         "text": "Boleiboleko zapatilak motxilan sartu ditut. Ez dakit erabiliko ditudan, baina ez nituen utzi nahi."
@@ -287,7 +287,7 @@
         ]
       },
       "c3-contact": {
-        "text": "Taldearen kontaktuak argi utziko ditugu, baita egoera aldatzen bada zer egin ere. Berehalako arriskua badago, larrialdi-laguntza eskatzen da. Ez duzu zuk bakarrik baloratu behar dena ondo dagoen."
+        "text": "Taldearen telefonoak emango dizkizut eta zerbait aldatzen bada zer egin azalduko dizut. Berehalako arriskua badago, deitu 112ra. Laguntza eska dezakezu zenbateko arriskua dagoen jakin ez arren."
       },
       "c3-school": {
         "text": "Laurarekin koordinatuko dugu. Egokitzapen zehatzak eskatuko ditugu, hala nola lanen entregak antolatzea eta apunteak berreskuratzea, zure istorioa klase osoari azaldu gabe."
@@ -313,7 +313,7 @@
         "text": "Apunteak bai. Bideoa… pentsatuko dut. Ondo datorkit beste gauza batzuez hitz egitea."
       },
       "c4-choice": {
-        "prompt": "Irenek galdetzen dio bere bizitzako zein zati berreskuratu nahi duen lehenik. Sarak aukeratzen du…",
+        "prompt": "Elenak galdetzen dio bere bizitzako zein zati berreskuratu nahi duen lehenik. Sarak aukeratzen du…",
         "options": [
           {
             "id": "volleyball",
@@ -404,7 +404,7 @@
         "text": "Denbora geroago. Non nagoen jakitea."
       },
       "c5-01": {
-        "text": "Ikerketa penal bat ireki da gertatutakoaz. Abokatuak zitazio bat azaltzen die Sarari eta harekin doazenei. Eszena honek hainbat jarduketa laburtzen ditu, epeak finkatu gabe."
+        "text": "Institutuko abisuaren eta lehen babes-neurrien ondoren, epaitegiak gertatutakoa ikertzen jarraitzen du. Gutun bat iristen da Sarak deklaratzeko. Irenek berarekin eta amarekin irakurtzen du."
       },
       "c5-02": {
         "text": "Gutuna dena nola dabilen badakien norbaitentzat idatzita zegoela zirudien. Nik ez dakit non eseri ere."
@@ -413,7 +413,7 @@
         "text": "Elkarrekin irakurriko dugu. Zitazio batek adierazten du jarduketa batera joan behar duzula: zertarako, non eta zer laguntzarekin den egiaztatu behar da. Zerbait ulertzen ez bada, aurretik galdetuko dugu."
       },
       "c5-justice": {
-        "text": "Hemen gertatutakoa eta zure aitaren balizko erantzukizuna ikertzen dira. Laguntzak eta babesak beren bidea jarraitzen dute. Zu adingabea izateak ez du Javierren aurkako auzia adingabeen justizia penal bihurtzen."
+        "text": "Epaitegiak gertatutakoa ikertzen du, eta zure aita delitu baten erantzulea den. Bitartean, zure segurtasuna zaintzen jarraitzen dugu. Ez da epai baten zain egon behar zu babesteko."
       },
       "c5-choice": {
         "prompt": "Jarduketaren aurretik, zer jakin nahi du Sarak?",
@@ -445,19 +445,19 @@
         ]
       },
       "c5-people": {
-        "text": "Epaileak zuzentzen du jarduketa. Fiskaltzak esku hartzen du justiziaren ekintza sustatzeko. Abokatuek ordezkatzen dituztenen interesak defendatzen dituzte. Nik azalduko dizut nor dagoen eta zergatik."
+        "text": "Epaileak deklarazioa zuzentzen du eta fiskalak zure eskubideak ere zaintzen ditu. Nik zure abokatu gisa parte hartzen dut. Zure aitaren defentsak ere galderak egin ditzake, epailearen kontrolpean. Aurretik nola azalduko dizut."
       },
       "c5-people2": {
-        "text": "Nire eginkizuna arlo sozioedukatiboan laguntzea eta laguntzak koordinatzea da. Nik ez dut epaia erabakitzen. Profesionalen fitxak ireki ditzakezu izenak nahasten zaizkizunean."
+        "text": "Nik ez dut ezer erabakitzen epaitegian. Nahi baduzu lagun zaitzaket, sartzerik ez izateko arrazoiren bat azaltzen ez bada. Kanpoan itxarotea ere adostu dezakegu."
       },
       "c5-room": {
-        "text": "Joan aurretik egiaztatuko dugu non itxarongo duzun eta nolakoa izango den jarduketa. Zure aitarekin topo egiteaz kezkatzen zaituena azalduko dugu, neurri egokiak balora daitezen."
+        "text": "Itxaronaldia antolatu behar dute, elkarrekin topo egin ez dezazuen. Aurretik joango gara nondik sartuko zaren eta non itxarongo duzun ikustera. Biktimen bulegoarekin hitz egin dugu dagoeneko."
       },
       "c5-rights": {
         "text": "Zer behar duzun azal diezadakezu, nor egongo den galdetu eta seguru sentiarazten ez zaituena abisatu. Jakinarazi egingo dugu, jarduketaren aurretik balora dadin."
       },
       "c5-supports": {
-        "text": "Deklaratu aurretik baloratuko da zer laguntza behar dituzun eta nola saihestu beldur gehiago pasatzea. Lekua eta neurriak kasuaren arabera aldatzen dira; hamabost urte izateak ez du gela jakin bat zehazten."
+        "text": "Gauzak antolatu behar dituzte aitarekin topo egin ez dezazun. Gainera, beste areto bat, bideokonferentzia eta psikologo baten laguntza eskatuko ditugu. Epaileak erabakiko du laguntza horiek nola antolatu, zure beharren arabera."
       },
       "c5-privacy": {
         "text": "Kezkatzen zintuen nork jakingo zuen zure istorioa. Horregatik berrikusten dugu gaur nor egon daitekeen jarduketa honetan. Intimitatea lekua eta informazioa antolatzean ere zaintzen da."
@@ -516,16 +516,16 @@
         "text": "Eguna iristen da. Kasu honetan, antolaketa bat adostu da Sarak Javierrekin topo egin ez dezan itxarotean eta bere esku-hartzean. Langileek azaltzen diote non egongo den pertsona bakoitza."
       },
       "c5-06": {
-        "text": "Hasi aurretik, egiaztatuko dugu ulertzen duzula zertarako gauden hemen. Zerbait ulertzen ez baduzu, esan dezakezu."
+        "text": "Kaixo, Sara. Gaur entzun egingo dizugu gertatutakoa ikertzeko. Irenek azaldu dizu zergatik deklaratu behar duzun kasu honetan. Zerbait argi ez badago, hasi aurretik hitz egingo dugu."
       },
       "c5-07": {
-        "text": "Sarak jarduketan parte hartzen du adostutako neurriekin. Istorioak kanpoan uzten ditu gertatutakoari buruzko galderak. Amaitzean, Irene zain dago laguntzeko."
+        "text": "Sararentzako laguntzak adostu dira. Beste areto batetik deklaratzen du bideokonferentziaz, Javier ikusi gabe, psikologo bat ondoan duela. Deklarazioa grabatuta geratzen da. Sarak nahiago izan du Elenak kanpoan itxarotea."
       },
       "c5-08": {
         "text": "Nekatuta nago. Egon gaitezke denbora batez honetaz hitz egin gabe?"
       },
       "c5-09": {
-        "text": "Bai. Gero Elenarekin berrikusiko dugu behar duzun informazioa. Orain une batez eser gaitezke."
+        "text": "Bai. Gero Irenerekin berrikusiko dugu behar duzun informazioa. Orain une batez eser gaitezke."
       },
       "c6-card": {
         "kicker": "SARA · 6. KAPITULUA (6TIK)",
@@ -568,7 +568,7 @@
         ]
       },
       "c6-news": {
-        "text": "Elenarekin kontsulta dezakegu zer informazio jasotzea dagokizun eta nola eskatu. Ezin dizut data zehatz bat eman; bai, ordea, argitu zalantzak dituzunean norekin hitz egin."
+        "text": "Irenerekin kontsulta dezakegu zer informazio jasotzea dagokizun eta nola eskatu. Ezin dizut data zehatz bat eman; bai, ordea, argitu zalantzak dituzunean norekin hitz egin."
       },
       "c6-dad": {
         "text": "Une onak faltan bota ditzakezu eta, aldi berean, babestuta egon beharra izan. Ez duzu zure aitarengatik gauza bakar bat sentitu beharrik. Horretaz hitz egiteak ez du aldatzen egin zizuna gaizki egon zela."
@@ -577,13 +577,13 @@
         "text": "Adostu dezakegu irakasleek zer jakin behar duten eta nola zaindu zure intimitatea. Zure lagunekin ere mugak jar diezazkiokezu kontatu nahi duzunari."
       },
       "c6-03": {
-        "text": "Denbora geroago, jarduketen eta epaiketaren ondoren, Elena Sararekin biltzen da epai simulatu bat azaltzeko. Demo honen emaitza jokatu aurretik finkatuta dago: aukera emozional batek ere ez du ebazpena erabakitzen."
+        "text": "Hilabete batzuk geroago ikerketa amaitzen da. Irene Sararekin biltzen da hurrengo hitzorduaren aurretik."
       },
       "c6-conviction": {
-        "text": "Kasu fikziozko honetan, auzitegiak indarkeria-egitateak frogatutzat jo ditu eta Javierren aurkako epai kondenatzailea eman du. Azalduko dizugu zer irismen duen, zer neurri hartu diren eta errekurtsoa jar daitekeen."
+        "text": "Auzitegiak Javier kondenatu du. Zergatik, zer zigor ezartzen dion eta zer babes-neurri erabaki dituen azalduko dizut. Ez duzu dena gaur ulertu behar."
       },
       "c6-no-conviction": {
-        "text": "Aldaera fikziozko honetan, auzitegiak epai absolbitzailea eman du: frogek ez dute ahalbidetu beharrezko bermeekin kondenatzea. Ebazpena eta dagozkion errekurtso-aukerak azalduko dizkizut."
+        "text": "Auzitegiak Javier absolbitu du, kondenatzeko nahikoa froga aurkitu ez duelako. Horrek ez du esan nahi gezurra esan duzunik edo laguntza eskatzea gaizki zegoenik. Arrazoiak lasai irakurriko ditugu."
       },
       "c6-human": {
         "text": "Ez dakit oso ondo zer sentitzen dudan. Uste nuen ebazpen bat irakurtzean dena bat-batean bere tokian jarriko zela."
@@ -637,6 +637,111 @@
         "kicker": "SARA · NIRE ISTORIOAK JARRAITZEN DU",
         "title": "Oraindik baditut planak",
         "text": "Sara arreba, laguna, ikaslea eta boleibol-jokalaria da oraindik. Egun desberdinak izango dira eta laguntzak jarraitu dezake. Ez ditu bakarrik igaro behar."
+      },
+      "c3-safety-question": {
+        "text": "Eta aita institutura nire bila etortzen bada?"
+      },
+      "c3-measures": {
+        "text": "Zuen kasuan, epaileak dagoeneko debekatu dio Javierri zugana eta Danirengana hurbiltzea edo zuekin komunikatzea. Oraingoz haren bisitak ere eten ditu. Ikerketak dirauen bitartean zuok babesteko neurriak dira."
+      },
+      "c3-safety-plan": {
+        "text": "Institutuak neurri horiek ezagutzen ditu eta nork jasoko zaituzten adostu dugu. Aita hurbiltzen edo idazten saiatzen bada, abisatu taldeko pertsona heldu bati. Berehalako arriskua badago, deitu 112ra."
+      },
+      "c3-safety-followup": {
+        "text": "Taldearen telefonoak emango dizkizut. Seguru zaudeten aztertzen jarraituko dugu: izebaren etxera joatea planaren zati bat baino ez da. Zuk ez duzu aita zaindu behar, ezta neurriak betearazi ere."
+      },
+      "c3-lawyer-intro": {
+        "text": "Taldeak Irene aurkezten du, Sararen interesak defendatuko dituen abokatua. Irenek Sararekin eta amarekin hitz egiten du, baita bakoitzarekin bere aldetik ere."
+      },
+      "c3-representation": {
+        "text": "Zure aitak ezin zaitu ordezkatu kasu honetan. Zure amak zure interesak zaindu ditzakeela egiaztatu dugu eta berak ordezkatzen zaitu. Ni zure abokatua naiz. Zurekin ere hitz egingo dut: zure iritziak balio du."
+      },
+      "c3-defender": {
+        "text": "Zure amak ere ezin bazintu behar bezala ordezkatu, epaileari beste pertsona bat eskatuko litzaioke: defendatzaile judizial bat. Ez da abokatua izatea bezalakoa. Ez zenuke zuk bakarrik konpondu beharko."
+      },
+      "c3-party": {
+        "text": "Akusazio partikular gisa parte har dezakegu auzian, zure abokatuarekin. Horrela, zuretzako frogak eta neurriak eska ditzaket eta zure interesak defendatu. Zigorra ez duzu zuk erabakitzen."
+      },
+      "c5-investigation": {
+        "text": "Zati honi ikerketa edo instrukzioa esaten zaio. Pertsonei entzuten zaie eta beste froga batzuk bilatzen dira gertatutakoa jakiteko. Zure deklarazioa zati bat da. Gaur oraindik ez da erabakitzen kondenarik dagoen."
+      },
+      "c5-attend-question": {
+        "text": "Hitz egin behar al dut nire aita izan arren?"
+      },
+      "c5-family-rule": {
+        "text": "Batzuetan legeak senide baten aurka ez deklaratzea baimentzen du. Salbuespen edo dispentsa esaten zaio. Baina ez da beti aplikatzen. Deitzen dizutenean joatea eta deklaratu behar izatea ez dira gauza bera: lehenik zure egoera aztertu behar da."
+      },
+      "c5-family-case": {
+        "text": "Zure kasuan, dagoeneko akusazio partikular gisa parte hartzen duzunez, dispentsa hori ez da aplikatzen eta deklaratu behar duzu. Ez da hamalau urte bete dituzulako. Lagunduko dizut eta ulertzen ez duzuna azalduko dizut."
+      },
+      "c5-juez": {
+        "text": "Epaileak ikerketa zuzentzen du eta erabaki judiziala behar duten neurriak erabakitzen ditu. Kasua epaiketara iristen bada, beste epaile edo auzitegi batek erabakiko du. Guztiek errespetatu behar dituzte zure eskubideak eta gainerakoenak."
+      },
+      "c5-laj": {
+        "text": "Justizia Administrazioaren letraduak gertatutakoa bermeekin dokumentatuta geratzeaz arduratzen da. Beste profesional bat da; ez da zure abokatua. Ez du beti aretoan egon behar."
+      },
+      "c5-company": {
+        "text": "Zure abokatuaz gain, zuk aukeratutako pertsona batek lagun zaitzake, Elenak adibidez. Deklarazioa behar bezala egiteko sartzen ez uztea erabakitzen bada, arrazoia azaldu behar dute. Nork lagunduko lizukeen gehien hitz egin dezakegu."
+      },
+      "c5-recording-question": {
+        "text": "Grabatu egingo naute? Horrela ez dut itzuli behar?"
+      },
+      "c5-recording": {
+        "text": "Bai, adingabea zarelako grabatzen da. Epaiketan zuk berriro deklaratu gabe erabili ahal izateko berme bereziak behar dira: zure aitaren defentsak ere parte hartu behar du. Horri aurrez eratutako froga esaten zaio. Grabatzea bakarrik ez da nahikoa."
+      },
+      "c5-age-rule": {
+        "text": "Delitu jakin batzuetan, berme berezi horiek dituen deklarazioa nahitaezkoa da oraindik hamalau urte bete ez badituzu. Zuk badituzu: ez da automatikoa zure adinagatik. Adingabe gisa babesa eta laguntza jasotzeko eskubidea duzu oraindik."
+      },
+      "c5-recording-case": {
+        "text": "Zure kasuan, deklarazio hau ikerketarako da. Grabatuko dute, baina horrek ez du berez ordezkatzen epaiketan deklaratzea. Itzuli behar baduzu, abisatuko dizut eta laguntzak berriro prestatuko ditugu."
+      },
+      "c5-communication": {
+        "text": "Gogoratu: galdera bat azaltzeko eska dezakezu, zerbait gogoratzen ez duzula esan eta atseden bat eskatu. Ez asmatu ez dakizuna. Garrantzitsuena gogoratzen duzuna zure hitzekin kontatzea da."
+      },
+      "c6-investigation-end": {
+        "text": "Ikerketa guztiak ez dira epaiketara iristen. Batzuetan artxibatzen dira ezin delako jarraitu, adibidez aurrera egiteko datu nahikorik ez badago. Artxibatzea kasua ixtea da, behin-behinean edo behin betiko, arrazoiaren arabera. Zer esan nahi duen eta errekurritu daitekeen azalduko nizuke."
+      },
+      "c6-trial-notice": {
+        "text": "Zure kasuan, fiskalak eta guk Javierren aurkako akusazioa aurkeztu dugu. Haren abokatuak defendatu ahal izan du. Orain epaiketa izango da: beste epaile edo auzitegi batek frogak entzungo ditu erabaki aurretik."
+      },
+      "c6-trial-question": {
+        "text": "Beraz, aurrekoan ikertzeko zen. Orain kondenatzeko frogarik dagoen erabakiko dute. Eta berriro hitz egin behar dut?"
+      },
+      "c6-trial-supports": {
+        "text": "Bai, epaiketan deklaratzeko deitu dizute. Laguntzak berriro antolatu ditugu: beste areto bat, bideokonferentzia eta psikologo bat zurekin. Itxaronaldia ere prestatu dute aitarekin topo egin ez dezazun."
+      },
+      "c6-trial": {
+        "text": "Epaiketaren egunean, Sarak laguntza horiekin deklaratzen du. Auzitegiak gainerako frogak eta alderdiak ere entzuten ditu. Amaitzean, Elenak irteerara laguntzen dio. Erabakia ez dago Sarak esaten duenaren menpe bakarrik."
+      },
+      "c6-after-trial": {
+        "text": "Orain auzitegiak erabaki eta idatziz azalduko du. Dokumentu hori epaia da. Kondenatu edo absolbitu dezake. Absolbitzeak kondenarik ez jartzea esan nahi du. Iristen denean, elkarrekin irakurriko dugu."
+      },
+      "c6-sentence-arrives": {
+        "text": "Epaiketa baino denbora bat geroago, Sararen mugikorrak dar-dar egiten du."
+      },
+      "c6-appeal": {
+        "text": "Errekurritzea beste auzitegi bati erabakia berrikusteko eskatzea da. Javierrek eta gure alderdiak egin dezakegu, legeak baimentzen badu eta epe baten barruan. Aukerak azalduko dizkizut. Jada errekurritu ezin denean, epaia irmoa da."
+      },
+      "c6-protection-after": {
+        "text": "Zein neurrik jarraitzen duten, zein aldatzen diren eta orain zer babes behar duzun berrikusiko dugu. Elenaren eta taldearen laguntza zure beharren arabera antolatzen da. Epai bat iritsi delako ez diozu laguntza eskatzeari utzi behar."
+      },
+      "c5-oficina": {
+        "text": "Auzialdiko Auzitegiko bulego judizialak kasuaren agiriak eta urratsak antolatzen ditu. Gaiaren arabera, atal bat edo beste arduratzen da."
+      },
+      "c5-fiscal": {
+        "text": "Fiskalak legea betetzea defendatzen du. Min egin duenaren aurka akusazioa aurkez dezake eta zure eskubideak ere zaintzen ditu. Zure abokatuak zure interesak defendatzen ditu."
+      },
+      "c5-psicosocial": {
+        "text": "Batzuetan epaitegiak talde psikosozialari eskatzen dio laguntza: psikologiako eta gizarte-laneko profesionalei. Zuri entzuten lagun dezakete eta aditu gisa iritzia eman."
+      },
+      "c5-oavd": {
+        "text": "Biktimei Laguntzeko Bulegoan prozesua nola doan azaltzen dizute eta gaizki bazaude edo zalantzak badituzu laguntzen dizute. Ez dute kasua epaitzen."
+      },
+      "c3-party-warning": {
+        "text": "Horrela parte hartuz gero, ezin duzu dispentsa erabili: batzuetan senide baten aurka ez deklaratzeko aukera ematen duena. Egin aurretik, lasai hitz egingo dugu. Babesa jasotzea ez dago horrela parte hartzearen menpe."
+      },
+      "c3-party-confirmed": {
+        "text": "Irenek Sararen eta amaren zalantzak argitzen ditu. Sarari entzun eta aukerez hitz egin ondoren, amak akusazio partikular gisa parte hartzea formalizatzen du, Ireneren laguntzarekin."
       }
     }
   },
@@ -671,48 +776,58 @@
       {
         "chapter": 1,
         "title": "Seinale bat",
-        "text": "Ikastetxeak indarkeria-zantzuak entzun eta haiei erantzuten die."
+        "text": "Institutuan zerbait gaizki doala ohartzen dira eta entzun egiten dute."
       },
       {
         "chapter": 2,
-        "title": "Laguntza eskatzea",
-        "text": "Langileek jakinarazpena eta laguntzak koordinatzen dituzte babesteko."
+        "title": "Abisatu eta babestu",
+        "text": "Tutoreak berehala abisatzen die Gizarte Zerbitzuei eta Poliziari. Leku seguru bat antolatzen da."
       },
       {
         "chapter": 3,
-        "title": "Baloratu eta babestu",
-        "text": "Gizarte Zerbitzuek eta adingabeen babeserako zerbitzuek beharrak eta segurtasuna baloratzen dituzte."
+        "title": "Segurtasun-plan bat",
+        "text": "Sara eta Dani entzuten dituzte. Epaileak neurriak erabakitzen ditu eta taldeak nola dauden aztertzen du."
+      },
+      {
+        "chapter": 3,
+        "title": "Nork defendatzen du Sara",
+        "text": "Kasu honetan amak ordezkatzen du. Irene bere abokatua da eta akusazio partikular gisa jarduten du."
       },
       {
         "chapter": 4,
-        "title": "Bizitzen jarraitzea",
-        "text": "Laguntza sozioedukatiboa: klaseak, loturak eta jarduerak."
+        "title": "Bizitzen jarraitu",
+        "text": "Eskolek, lagunek eta boleibolak ere garrantzia dute."
       },
       {
         "chapter": 5,
-        "title": "Zitazioa ulertzea",
-        "text": "Jarduketa zertarako den eta nork esku hartzen duen azaltzen da."
+        "title": "Gertatutakoa ikertu",
+        "text": "Irenek zitazioa azaltzen du: nork parte hartzen duen eta zergatik deklaratu behar duen Sarak kasu honetan."
       },
       {
         "chapter": 5,
-        "title": "Laguntzekin parte hartzea",
-        "text": "Deklaraziorako neurriak baloratzen dira. Demoak ez ditu indarkeriari buruzko galderak jasotzen."
+        "title": "Laguntzarekin deklaratu",
+        "text": "Javierrekin topo egitea saihesten da. Deklarazioa grabatzen da; horrek bakarrik ez du epaiketan hitz egitea ordezkatzen."
       },
       {
         "chapter": 6,
-        "title": "Informazioaren zain",
-        "text": "Prozedurak aurrera jarraitzen du. Epeak eta jarduketak aldatu egiten dira."
+        "title": "Ikerketa amaitu",
+        "text": "Artxibatu edo akusazioa aurkez daiteke. Istorio honetan, kasua epaiketara doa."
       },
       {
         "chapter": 6,
-        "title": "Ebazpena eta jarraipena",
-        "text": "Ebazpena azaltzen da. Laguntzak beharren arabera berrikusten dira."
+        "title": "Epaiketa",
+        "text": "Beste epaile edo auzitegi batek frogak entzuten ditu. Sarak berriro deklaratzen du laguntzarekin."
+      },
+      {
+        "chapter": 6,
+        "title": "Epaia eta ondorengoa",
+        "text": "Irenek emaitza, errekurtsoak eta jarraitzen duten neurriak azaltzen ditu. Laguntzak beharren arabera jarraitzen du."
       }
     ],
     "people": [
       {
         "name": "Sara",
-        "role": "15 urte · DBHko 4. maila",
+        "role": "14 urte · DBHko 3. maila",
         "initial": "S",
         "color": "peach",
         "text": "Boleibola gustatzen zaio, ertzetan marrazten du eta Paula izeneko lagun bat du. Bere bizitza prozedura baino zabalagoa da.",
@@ -733,39 +848,60 @@
         "text": "Entzun egiten du, seinaleei erantzuten die eta jakinarazpena koordinatzen du ikastetxeko protokoloaren bidez. Ez ditu delituak ikertzen."
       },
       {
-        "name": "Irene",
+        "name": "Elena",
         "role": "Gizarte-langilea",
-        "initial": "I",
+        "initial": "E",
         "color": "purple",
         "text": "Eguneroko bizitzan laguntzen du eta laguntzak koordinatzen ditu taldearekin. Ez du neurri judizialik ezartzen, ezta epairik ematen ere."
       },
       {
-        "name": "Elena",
+        "name": "Irene",
         "role": "Abokatua",
-        "initial": "E",
+        "initial": "I",
         "color": "blue",
         "text": "Sarari aholkuak ematen dizkio, jarduketak azaltzen dizkio eta haren interesak defendatzen ditu. Javierren defentsa beste profesional bati dagokio."
+      },
+      {
+        "name": "Bulego judiziala",
+        "role": "Tribunal de Instancia",
+        "initial": "O",
+        "color": "green",
+        "text": "Auzialdiko Auzitegiko bulego judizialak kasuaren agiriak eta urratsak antolatzen ditu. Gaiaren arabera, atal bat edo beste arduratzen da."
       },
       {
         "name": "Epailea",
         "role": "Agintari judiziala",
         "initial": "J",
         "color": "purple",
-        "text": "Dagozkion jarduketak zuzentzen ditu eta erabakiak hartzen ditu prozeduraren bermeekin."
+        "text": "Epaileak ikerketa zuzentzen du eta erabaki judiziala behar duten neurriak erabakitzen ditu. Kasua epaiketara iristen bada, beste epaile edo auzitegi batek erabakiko du. Guztiek errespetatu behar dituzte zure eskubideak eta gainerakoenak."
+      },
+      {
+        "name": "Justizia Administrazioaren letradua (LAJ)",
+        "role": "Justizia Administrazioaren letradua (LAJ)",
+        "initial": "L",
+        "color": "blue",
+        "text": "Justizia Administrazioaren letraduak gertatutakoa bermeekin dokumentatuta geratzeaz arduratzen da. Beste profesional bat da; ez da zure abokatua. Ez du beti aretoan egon behar."
       },
       {
         "name": "Fiskaltza",
         "role": "Ministerio Fiskala",
         "initial": "F",
         "color": "green",
-        "text": "Justiziaren ekintza sustatzen du eta legezkotasuna eta eskubideak zaintzen ditu. Sara adingabea izateak ez du bere aitaren aurkako auzia adingabeen justizia penal bihurtzen."
+        "text": "Fiskalak legea betetzea defendatzen du. Min egin duenaren aurka akusazioa aurkez dezake eta zure eskubideak ere zaintzen ditu. Zure abokatuak zure interesak defendatzen ditu."
       },
       {
-        "name": "Laguntza-taldea",
-        "role": "Gizarte Zerbitzuak eta biktimen arreta",
+        "name": "Talde psikosoziala",
+        "role": "Epaitegiko psikologia eta gizarte-lana",
         "initial": "+",
-        "color": "blue",
-        "text": "Haien eginkizunak desberdinak dira: adingabeen babesak familiaren segurtasuna baloratzen du; biktimen laguntzak informazioa eta laguntzak eskaintzen ditu prozesuan."
+        "color": "peach",
+        "text": "Batzuetan epaitegiak talde psikosozialari eskatzen dio laguntza: psikologiako eta gizarte-laneko profesionalei. Zuri entzuten lagun dezakete eta aditu gisa iritzia eman."
+      },
+      {
+        "name": "OAVD",
+        "role": "Delituen Biktimei Laguntzeko Bulegoa",
+        "initial": "V",
+        "color": "pink",
+        "text": "Biktimei Laguntzeko Bulegoan prozesua nola doan azaltzen dizute eta gaizki bazaude edo zalantzak badituzu laguntzen dizute. Ez dute kasua epaitzen."
       },
       {
         "name": "Bere familia",
@@ -792,23 +928,27 @@
         "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-4606"
       },
       "lecrim": {
-        "title": "Prozedura Kriminalaren Legea (LECrim) · 448., 449 bis, 449 ter, 544 ter eta 707. artikuluak",
+        "title": "LECrim · arts. 109 bis, 416, 449 bis, 449 ter, 544 ter, 544 quinquies, 637, 641, 703 bis, 707, 730.2, 780–785 y 790",
         "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1882-6036"
+      },
+      "civil": {
+        "title": "Código Civil · arts. 158, 162 y 163",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1889-4763"
       }
     },
     "notes": {
       "protection": {
         "title": "Babesa hemen has daiteke",
-        "text": "Hezkuntzako langileek indarkeria-zantzuak jakinarazi eta protokoloa aktibatu behar dute. Sarak ez du bakarrik salaketarik jarri behar laguntza jasotzeko.",
-        "dialogue": "Niri dagokit laguntza eskatzea eta ikastetxeko protokoloa aktibatzea. Zuk ez duzu bakarrik salaketa jarri behar zu babesten has gaitezen. Egiten duguna azalduko dizugu.",
+        "text": "Ez dugu zuk salaketa jarri arte itxarongo. Kontatu didazunarekin, laguntza eskatu eta gertatutakoa jakinarazi behar dut. Zu babesteko zer egiten dugun azalduko dizut.",
+        "dialogue": "Ez dugu zuk salaketa jarri arte itxarongo. Kontatu didazunarekin, laguntza eskatu eta gertatutakoa jakinarazi behar dut. Zu babesteko zer egiten dugun azalduko dizut.",
         "sources": [
           "lopivi"
         ]
       },
       "privacy": {
         "title": "Nork jakin behar du",
-        "text": "Laurak ezin du erabateko isilpekotasuna agindu. Azalduko du zer profesionalek esku hartu behar duten Sara babesteko, eta horretarako beharrezko informazioa partekatuko du.",
-        "dialogue": "Ezin dizut agindu hau gure artean geratuko denik. Azalduko dizut nork esku hartu behar duen eta zertarako. Partekatzen duguna zu babesteko izan beharko da.",
+        "text": "Ezin dizut agindu gure artean bakarrik geratuko denik. Zein profesionali kontatuko diodan eta zertarako esango dizut. Prozesu judizial bat badago, bertan parte hartzen dutenek ere jakin beharko dute. Zure gelakideek ez dute jakin behar.",
+        "dialogue": "Ezin dizut agindu gure artean bakarrik geratuko denik. Zein profesionali kontatuko diodan eta zertarako esango dizut. Prozesu judizial bat badago, bertan parte hartzen dutenek ere jakin beharko dute. Zure gelakideek ez dute jakin behar.",
         "sources": [
           "lopivi",
           "proteccion"
@@ -849,8 +989,8 @@
       },
       "justice": {
         "title": "Batera aurrera egin dezaketen bi lan",
-        "text": "Babesak segurtasuna zaintzen du. Prozedura penalak egitateak eta erantzukizunak ikertzen ditu. Javier heldua denez, bere kasua ez dagokio adingabeen justizia penalari Sararen adinagatik.",
-        "dialogue": "Hemen gertatutakoa eta zure aitaren balizko erantzukizuna ikertzen dira. Laguntzak eta babesak beren bidea jarraitzen dute. Zu adingabea izateak ez du Javierren aurkako auzia adingabeen justizia penal bihurtzen.",
+        "text": "Epaitegiak gertatutakoa ikertzen du, eta zure aita delitu baten erantzulea den. Bitartean, zure segurtasuna zaintzen jarraitzen dugu. Ez da epai baten zain egon behar zu babesteko.",
+        "dialogue": "Epaitegiak gertatutakoa ikertzen du, eta zure aita delitu baten erantzulea den. Bitartean, zure segurtasuna zaintzen jarraitzen dugu. Ez da epai baten zain egon behar zu babesteko.",
         "sources": [
           "lecrim",
           "proteccion"
@@ -858,8 +998,8 @@
       },
       "supports": {
         "title": "Laguntzekin egindako deklarazioa",
-        "text": "Neurriak banaka baloratzen dira. Begi-kontaktua saihestu eta lekua egokitu dezakete. 15 urte izateak, berez, ez du nahitaezko bihurtzen Gesell gela bat edo aldez aurretik eratutako froga bat.",
-        "dialogue": "Deklaratu aurretik baloratuko da zer laguntza behar dituzun eta nola saihestu beldur gehiago pasatzea. Lekua eta neurriak kasuaren arabera aldatzen dira; hamabost urte izateak ez du gela jakin bat zehazten.",
+        "text": "Gauzak antolatu behar dituzte aitarekin topo egin ez dezazun. Gainera, beste areto bat, bideokonferentzia eta psikologo baten laguntza eskatuko ditugu. Epaileak erabakiko du laguntza horiek nola antolatu, zure beharren arabera.",
+        "dialogue": "Gauzak antolatu behar dituzte aitarekin topo egin ez dezazun. Gainera, beste areto bat, bideokonferentzia eta psikologo baten laguntza eskatuko ditugu. Epaileak erabakiko du laguntza horiek nola antolatu, zure beharren arabera.",
         "sources": [
           "victima",
           "lecrim"
@@ -892,8 +1032,8 @@
       },
       "waiting": {
         "title": "Ondoren zer datorren jakitea",
-        "text": "Eragiten dioten jarduketei eta ebazpenei buruzko informazio ulergarria eska dezake. Epeak aldatu egiten dira; Irenek eta bere abokatuak bide egokietatik kontsultatzen lagun diezaiokete.",
-        "dialogue": "Elenarekin kontsulta dezakegu zer informazio jasotzea dagokizun eta nola eskatu. Ezin dizut data zehatz bat eman; bai, ordea, argitu zalantzak dituzunean norekin hitz egin.",
+        "text": "Irenerekin kontsulta dezakegu zer informazio jasotzea dagokizun eta nola eskatu. Ezin dizut data zehatz bat eman; bai, ordea, argitu zalantzak dituzunean norekin hitz egin.",
+        "dialogue": "Irenerekin kontsulta dezakegu zer informazio jasotzea dagokizun eta nola eskatu. Ezin dizut data zehatz bat eman; bai, ordea, argitu zalantzak dituzunean norekin hitz egin.",
         "sources": [
           "victima"
         ]
@@ -909,9 +1049,180 @@
       },
       "resolution": {
         "title": "Epai batek ez du nire bizitza osoa kontatzen",
-        "text": "Emaitza frogaren eta prozesuaren bermeen araberakoa da. Kondenarik gabeko ebazpen batek ez du erabakitzen Sarak nola sentitu behar duen. Laguntzak eta babesa haren beharren arabera baloratzen dira, jokoko puntuen edo aukeren mende egon gabe.",
+        "text": "Orain auzitegiak erabaki eta idatziz azalduko du. Dokumentu hori epaia da. Kondenatu edo absolbitu dezake. Absolbitzeak kondenarik ez jartzea esan nahi du. Iristen denean, elkarrekin irakurriko dugu. Zein neurrik jarraitzen duten, zein aldatzen diren eta orain zer babes behar duzun berrikusiko dugu. Elenaren eta taldearen laguntza zure beharren arabera antolatzen da. Epai bat iritsi delako ez diozu laguntza eskatzeari utzi behar.",
         "sources": [
           "lecrim",
+          "victima",
+          "proteccion"
+        ]
+      },
+      "juez": {
+        "dialogue": "Epaileak ikerketa zuzentzen du eta erabaki judiziala behar duten neurriak erabakitzen ditu. Kasua epaiketara iristen bada, beste epaile edo auzitegi batek erabakiko du. Guztiek errespetatu behar dituzte zure eskubideak eta gainerakoenak.",
+        "text": "Epaileak ikerketa zuzentzen du eta erabaki judiziala behar duten neurriak erabakitzen ditu. Kasua epaiketara iristen bada, beste epaile edo auzitegi batek erabakiko du. Guztiek errespetatu behar dituzte zure eskubideak eta gainerakoenak.",
+        "sources": [
+          "lopj",
+          "lecrim"
+        ]
+      },
+      "laj": {
+        "dialogue": "Justizia Administrazioaren letraduak gertatutakoa bermeekin dokumentatuta geratzeaz arduratzen da. Beste profesional bat da; ez da zure abokatua. Ez du beti aretoan egon behar.",
+        "text": "Justizia Administrazioaren letraduak gertatutakoa bermeekin dokumentatuta geratzeaz arduratzen da. Beste profesional bat da; ez da zure abokatua. Ez du beti aretoan egon behar.",
+        "sources": [
+          "lopj",
+          "lecrim"
+        ]
+      },
+      "safety": {
+        "dialogue": "Zuen kasuan, epaileak dagoeneko debekatu dio Javierri zugana eta Danirengana hurbiltzea edo zuekin komunikatzea. Oraingoz haren bisitak ere eten ditu. Ikerketak dirauen bitartean zuok babesteko neurriak dira.",
+        "text": "Zuen kasuan, epaileak dagoeneko debekatu dio Javierri zugana eta Danirengana hurbiltzea edo zuekin komunikatzea. Oraingoz haren bisitak ere eten ditu. Ikerketak dirauen bitartean zuok babesteko neurriak dira.",
+        "sources": [
+          "civil",
+          "lecrim",
+          "proteccion"
+        ],
+        "title": "Segurtasunak plan bat behar du"
+      },
+      "representation": {
+        "dialogue": "Zure aitak ezin zaitu ordezkatu kasu honetan. Zure amak zure interesak zaindu ditzakeela egiaztatu dugu eta berak ordezkatzen zaitu. Ni zure abokatua naiz. Zurekin ere hitz egingo dut: zure iritziak balio du.",
+        "text": "Zure aitak ezin zaitu ordezkatu kasu honetan. Zure amak zure interesak zaindu ditzakeela egiaztatu dugu eta berak ordezkatzen zaitu. Ni zure abokatua naiz. Zurekin ere hitz egingo dut: zure iritziak balio du.",
+        "sources": [
+          "civil",
+          "victima",
+          "proteccion"
+        ],
+        "title": "Nork ordezka nazake"
+      },
+      "defender": {
+        "dialogue": "Zure amak ere ezin bazintu behar bezala ordezkatu, epaileari beste pertsona bat eskatuko litzaioke: defendatzaile judizial bat. Ez da abokatua izatea bezalakoa. Ez zenuke zuk bakarrik konpondu beharko.",
+        "text": "Zure amak ere ezin bazintu behar bezala ordezkatu, epaileari beste pertsona bat eskatuko litzaioke: defendatzaile judizial bat. Ez da abokatua izatea bezalakoa. Ez zenuke zuk bakarrik konpondu beharko.",
+        "sources": [
+          "civil",
+          "victima"
+        ],
+        "title": "Beste ordezkari bat behar badut"
+      },
+      "party": {
+        "dialogue": "Akusazio partikular gisa parte har dezakegu auzian, zure abokatuarekin. Horrela, zuretzako frogak eta neurriak eska ditzaket eta zure interesak defendatu. Zigorra ez duzu zuk erabakitzen.",
+        "text": "Akusazio partikular gisa parte har dezakegu auzian, zure abokatuarekin. Horrela, zuretzako frogak eta neurriak eska ditzaket eta zure interesak defendatu. Zigorra ez duzu zuk erabakitzen. Irenek Sararen eta amaren zalantzak argitzen ditu. Sarari entzun eta aukerez hitz egin ondoren, amak akusazio partikular gisa parte hartzea formalizatzen du, Ireneren laguntzarekin.",
+        "sources": [
+          "lecrim",
+          "lopivi",
+          "proteccion"
+        ],
+        "title": "Prozeduran ahotsa izatea"
+      },
+      "investigation": {
+        "dialogue": "Zati honi ikerketa edo instrukzioa esaten zaio. Pertsonei entzuten zaie eta beste froga batzuk bilatzen dira gertatutakoa jakiteko. Zure deklarazioa zati bat da. Gaur oraindik ez da erabakitzen kondenarik dagoen.",
+        "text": "Zati honi ikerketa edo instrukzioa esaten zaio. Pertsonei entzuten zaie eta beste froga batzuk bilatzen dira gertatutakoa jakiteko. Zure deklarazioa zati bat da. Gaur oraindik ez da erabakitzen kondenarik dagoen.",
+        "sources": [
+          "lecrim"
+        ],
+        "title": "Ikertzea ez da epaitzea"
+      },
+      "familyRule": {
+        "dialogue": "Batzuetan legeak senide baten aurka ez deklaratzea baimentzen du. Salbuespen edo dispentsa esaten zaio. Baina ez da beti aplikatzen. Deitzen dizutenean joatea eta deklaratu behar izatea ez dira gauza bera: lehenik zure egoera aztertu behar da.",
+        "text": "Batzuetan legeak senide baten aurka ez deklaratzea baimentzen du. Salbuespen edo dispentsa esaten zaio. Baina ez da beti aplikatzen. Deitzen dizutenean joatea eta deklaratu behar izatea ez dira gauza bera: lehenik zure egoera aztertu behar da.",
+        "sources": [
+          "lecrim"
+        ],
+        "title": "Ikertua senidea denean deklaratzea"
+      },
+      "familyCase": {
+        "dialogue": "Zure kasuan, dagoeneko akusazio partikular gisa parte hartzen duzunez, dispentsa hori ez da aplikatzen eta deklaratu behar duzu. Ez da hamalau urte bete dituzulako. Lagunduko dizut eta ulertzen ez duzuna azalduko dizut.",
+        "text": "Zure kasuan, dagoeneko akusazio partikular gisa parte hartzen duzunez, dispentsa hori ez da aplikatzen eta deklaratu behar duzu. Ez da hamalau urte bete dituzulako. Lagunduko dizut eta ulertzen ez duzuna azalduko dizut.",
+        "sources": [
+          "lecrim",
+          "victima"
+        ],
+        "title": "Zer gertatzen da Sararen kasuan"
+      },
+      "company": {
+        "dialogue": "Zure abokatuaz gain, zuk aukeratutako pertsona batek lagun zaitzake, Elenak adibidez. Deklarazioa behar bezala egiteko sartzen ez uztea erabakitzen bada, arrazoia azaldu behar dute. Nork lagunduko lizukeen gehien hitz egin dezakegu.",
+        "text": "Zure abokatuaz gain, zuk aukeratutako pertsona batek lagun zaitzake, Elenak adibidez. Deklarazioa behar bezala egiteko sartzen ez uztea erabakitzen bada, arrazoia azaldu behar dute. Nork lagunduko lizukeen gehien hitz egin dezakegu.",
+        "sources": [
+          "victima"
+        ],
+        "title": "Nork laguntzen didan aukeratzea"
+      },
+      "recording": {
+        "dialogue": "Bai, adingabea zarelako grabatzen da. Epaiketan zuk berriro deklaratu gabe erabili ahal izateko berme bereziak behar dira: zure aitaren defentsak ere parte hartu behar du. Horri aurrez eratutako froga esaten zaio. Grabatzea bakarrik ez da nahikoa.",
+        "text": "Bai, adingabea zarelako grabatzen da. Epaiketan zuk berriro deklaratu gabe erabili ahal izateko berme bereziak behar dira: zure aitaren defentsak ere parte hartu behar du. Horri aurrez eratutako froga esaten zaio. Grabatzea bakarrik ez da nahikoa.",
+        "sources": [
+          "victima",
+          "lecrim"
+        ],
+        "title": "Grabatzeak ez du beste deklarazio bat saihesten"
+      },
+      "ageRule": {
+        "dialogue": "Delitu jakin batzuetan, berme berezi horiek dituen deklarazioa nahitaezkoa da oraindik hamalau urte bete ez badituzu. Zuk badituzu: ez da automatikoa zure adinagatik. Adingabe gisa babesa eta laguntza jasotzeko eskubidea duzu oraindik.",
+        "text": "Delitu jakin batzuetan, berme berezi horiek dituen deklarazioa nahitaezkoa da oraindik hamalau urte bete ez badituzu. Zuk badituzu: ez da automatikoa zure adinagatik. Adingabe gisa babesa eta laguntza jasotzeko eskubidea duzu oraindik.",
+        "sources": [
+          "lecrim",
+          "victima"
+        ],
+        "title": "Zer aldatzen da hamalau urterekin"
+      },
+      "communication": {
+        "dialogue": "Gogoratu: galdera bat azaltzeko eska dezakezu, zerbait gogoratzen ez duzula esan eta atseden bat eskatu. Ez asmatu ez dakizuna. Garrantzitsuena gogoratzen duzuna zure hitzekin kontatzea da.",
+        "text": "Gogoratu: galdera bat azaltzeko eska dezakezu, zerbait gogoratzen ez duzula esan eta atseden bat eskatu. Ez asmatu ez dakizuna. Garrantzitsuena gogoratzen duzuna zure hitzekin kontatzea da.",
+        "sources": [
+          "victima",
+          "proteccion",
+          "lecrim"
+        ],
+        "title": "Deklaratzean behar dudana esatea"
+      },
+      "investigationEnd": {
+        "dialogue": "Ikerketa guztiak ez dira epaiketara iristen. Batzuetan artxibatzen dira ezin delako jarraitu, adibidez aurrera egiteko datu nahikorik ez badago. Artxibatzea kasua ixtea da, behin-behinean edo behin betiko, arrazoiaren arabera. Zer esan nahi duen eta errekurritu daitekeen azalduko nizuke.",
+        "text": "Ikerketa guztiak ez dira epaiketara iristen. Batzuetan artxibatzen dira ezin delako jarraitu, adibidez aurrera egiteko datu nahikorik ez badago. Artxibatzea kasua ixtea da, behin-behinean edo behin betiko, arrazoiaren arabera. Zer esan nahi duen eta errekurritu daitekeen azalduko nizuke.",
+        "sources": [
+          "lecrim"
+        ],
+        "title": "Zer gerta daiteke ikerketa amaitzean"
+      },
+      "appeal": {
+        "dialogue": "Errekurritzea beste auzitegi bati erabakia berrikusteko eskatzea da. Javierrek eta gure alderdiak egin dezakegu, legeak baimentzen badu eta epe baten barruan. Aukerak azalduko dizkizut. Jada errekurritu ezin denean, epaia irmoa da.",
+        "text": "Errekurritzea beste auzitegi bati erabakia berrikusteko eskatzea da. Javierrek eta gure alderdiak egin dezakegu, legeak baimentzen badu eta epe baten barruan. Aukerak azalduko dizkizut. Jada errekurritu ezin denean, epaia irmoa da.",
+        "sources": [
+          "lecrim",
+          "victima"
+        ],
+        "title": "Epaia berrikus daiteke"
+      },
+      "protectionAfter": {
+        "dialogue": "Zein neurrik jarraitzen duten, zein aldatzen diren eta orain zer babes behar duzun berrikusiko dugu. Elenaren eta taldearen laguntza zure beharren arabera antolatzen da. Epai bat iritsi delako ez diozu laguntza eskatzeari utzi behar.",
+        "text": "Zein neurrik jarraitzen duten, zein aldatzen diren eta orain zer babes behar duzun berrikusiko dugu. Elenaren eta taldearen laguntza zure beharren arabera antolatzen da. Epai bat iritsi delako ez diozu laguntza eskatzeari utzi behar.",
+        "sources": [
+          "lecrim",
+          "civil",
+          "victima",
+          "proteccion"
+        ],
+        "title": "Zer laguntza eta neurrik jarraitzen duten"
+      },
+      "oficina": {
+        "text": "Auzialdiko Auzitegiko bulego judizialak kasuaren agiriak eta urratsak antolatzen ditu. Gaiaren arabera, atal bat edo beste arduratzen da.",
+        "dialogue": "Auzialdiko Auzitegiko bulego judizialak kasuaren agiriak eta urratsak antolatzen ditu. Gaiaren arabera, atal bat edo beste arduratzen da."
+      },
+      "fiscal": {
+        "text": "Fiskalak legea betetzea defendatzen du. Min egin duenaren aurka akusazioa aurkez dezake eta zure eskubideak ere zaintzen ditu. Zure abokatuak zure interesak defendatzen ditu.",
+        "dialogue": "Fiskalak legea betetzea defendatzen du. Min egin duenaren aurka akusazioa aurkez dezake eta zure eskubideak ere zaintzen ditu. Zure abokatuak zure interesak defendatzen ditu."
+      },
+      "psicosocial": {
+        "text": "Batzuetan epaitegiak talde psikosozialari eskatzen dio laguntza: psikologiako eta gizarte-laneko profesionalei. Zuri entzuten lagun dezakete eta aditu gisa iritzia eman.",
+        "dialogue": "Batzuetan epaitegiak talde psikosozialari eskatzen dio laguntza: psikologiako eta gizarte-laneko profesionalei. Zuri entzuten lagun dezakete eta aditu gisa iritzia eman."
+      },
+      "oavd": {
+        "text": "Biktimei Laguntzeko Bulegoan prozesua nola doan azaltzen dizute eta gaizki bazaude edo zalantzak badituzu laguntzen dizute. Ez dute kasua epaitzen.",
+        "dialogue": "Biktimei Laguntzeko Bulegoan prozesua nola doan azaltzen dizute eta gaizki bazaude edo zalantzak badituzu laguntzen dizute. Ez dute kasua epaitzen."
+      },
+      "partyChoice": {
+        "title": "Parte hartu aurretik ulertzea",
+        "text": "Horrela parte hartuz gero, ezin duzu dispentsa erabili: batzuetan senide baten aurka ez deklaratzeko aukera ematen duena. Egin aurretik, lasai hitz egingo dugu. Babesa jasotzea ez dago horrela parte hartzearen menpe.",
+        "dialogue": "Horrela parte hartuz gero, ezin duzu dispentsa erabili: batzuetan senide baten aurka ez deklaratzeko aukera ematen duena. Egin aurretik, lasai hitz egingo dugu. Babesa jasotzea ez dago horrela parte hartzearen menpe.",
+        "sources": [
+          "lecrim",
+          "lopivi",
           "victima",
           "proteccion"
         ]
@@ -934,7 +1245,8 @@
         "title": "Konfiantzako pertsona heldu bat",
         "text": "Ikastetxeko irakasleengana, orientaziora edo ongizate-koordinaziora jo dezakezu. Laguntza publikorako, kontsultatu zure udaleko Gizarte Zerbitzuak edo zure autonomia-erkidegoko adingabeak babesteko zerbitzua."
       }
-    ]
+    ],
+    "checkedAt": "2026-10-22"
   },
   "scene": {}
 }

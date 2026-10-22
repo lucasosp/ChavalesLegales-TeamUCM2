@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { JSDOM } from "jsdom";
 import { VisualNovelEngine } from "../src/core/VisualNovelEngine.js";
 import { MemorySaveStore } from "../src/services/saveStores.js";
 import { compileStory } from "../src/content/compileStory.js";
+import { applyOverlay } from "../src/i18n.js";
 
 const read = async (name) => JSON.parse(await readFile(new URL(`../public/content/stories/sara/${name}.json`, import.meta.url), "utf8"));
 const [storyDoc, scenes, assets, legal, guide] = await Promise.all(["story", "scene", "assets", "legal", "guide"].map(read));
@@ -31,6 +32,77 @@ function visit(id) {
 }
 visit(compiled.startId);
 assert.equal(finished.size, Object.keys(story).length, "Every authored node must be reachable");
+
+// Protection and procedural explanations must survive every choice, in every locale.
+// Reachability without a required beat detects a branch that accidentally bypasses it.
+const requiredBeats = {
+  "c2-05": "immediate notification to social services and police",
+  "c3-measures": "judicial safety measures, separate from staying with an aunt",
+  "c3-safety-plan": "school collection, reporting contact and emergencies",
+  "c3-representation": "a suitable legal representative distinct from the lawyer",
+  "c3-defender": "a judicial defender if parental representation is inadequate",
+  "c3-party": "participation as private prosecution without deciding punishment",
+  "c3-party-warning": "understanding the consequences before joining the prosecution",
+  "c3-party-confirmed": "formal participation after explaining options and hearing Sara",
+  "c5-investigation": "the purpose of the investigation",
+  "c5-family-rule": "attendance versus testimony and the family exemption",
+  "c5-family-case": "the reason Sara must testify in this particular case",
+  "c5-supports": "avoiding contact and individually assessed supports",
+  "c5-company": "chosen accompaniment and a reasoned exception",
+  "c5-recording": "recording versus preconstituted evidence",
+  "c5-age-rule": "the under-14 threshold without losing protection at 14",
+  "c5-recording-case": "what this investigation recording does in Sara's case",
+  "c5-communication": "clarification, memory gaps and requesting a pause",
+  "c6-investigation-end": "possible closure instead of a trial",
+  "c6-trial-notice": "an accusation, a defence and a separate trial court",
+  "c6-trial-supports": "advance notice and supports for a further declaration",
+  "c6-trial": "the trial before the verdict",
+  "c6-after-trial": "what a judgment and acquittal mean",
+  "c6-appeal": "appeals and a final judgment",
+  "c6-protection-after": "reviewing judicial measures and continuing needs-based support",
+};
+const targetsOf = (node) => node.type === "choice" ? node.options.map((option) => option.next)
+  : node.type === "branch" ? [node.then, node.else] : node.next ? [node.next] : [];
+function reaches(doc, target, blocked) {
+  const pending = [doc.start], seen = new Set();
+  while (pending.length) {
+    const id = pending.pop();
+    if (id === blocked || seen.has(id)) continue;
+    if (id === target) return true;
+    seen.add(id);
+    assert.ok(doc.nodes[id], `Missing localized node ${id}`);
+    pending.push(...targetsOf(doc.nodes[id]));
+  }
+  return false;
+}
+const localeDir = new URL("../public/content/stories/sara/i18n/", import.meta.url);
+const overlays = await Promise.all((await readdir(localeDir)).filter((file) => file.endsWith(".json")).map(async (file) => [file, JSON.parse(await readFile(new URL(file, localeDir), "utf8"))]));
+for (const [locale, overlay] of [["es", null], ...overlays]) {
+  const doc = overlay ? applyOverlay(storyDoc, overlay.story) : storyDoc;
+  for (const [id, explanation] of Object.entries(requiredBeats)) {
+    assert.ok(doc.nodes[id]?.text, `${locale}: missing ${explanation}`);
+    assert.equal(reaches(doc, "epilogue", id), false, `${locale}: a route bypasses ${explanation}`);
+    if (overlay) assert.ok(overlay.story.nodes[id]?.text, `${locale}: untranslated ${explanation}`);
+  }
+  // Explicit phase ordering prevents an investigation declaration from becoming a verdict.
+  for (const [before, after] of [["c3-party-warning", "c3-party-confirmed"], ["c3-party-confirmed", "c5-family-case"], ["c5-recording-case", "c5-07"], ["c5-07", "c6-trial"], ["c6-trial", "c6-msg"]]) {
+    assert.equal(reaches(doc, after, before), false, `${locale}: ${after} precedes ${before}`);
+  }
+  const localizedGuide = overlay ? applyOverlay(guide, overlay.guide) : guide;
+  assert.equal(localizedGuide.steps.length, guide.steps.length, `${locale}: outdated process map`);
+  assert.deepEqual(localizedGuide.steps.map((step) => step.chapter), guide.steps.map((step) => step.chapter));
+  assert.equal(localizedGuide.people.length, guide.people.length, `${locale}: outdated professional profiles`);
+  assert.match(localizedGuide.people[0].role, /^14\b/, `${locale}: Sara must be 14`);
+  assert.equal(localizedGuide.people[3].name, "Elena", `${locale}: Elena is the social worker`);
+  assert.equal(localizedGuide.people[4].name, "Irene", `${locale}: Irene is the lawyer`);
+  const localizedLegal = overlay ? applyOverlay(legal, overlay.legal) : legal;
+  for (const node of Object.values(doc.nodes)) {
+    for (const key of node.learn ?? []) {
+      assert.ok(localizedLegal.notes[key], `${locale}: missing legal note ${key}`);
+      for (const source of localizedLegal.notes[key].sources) assert.ok(localizedLegal.sources[source]?.url, `${locale}: missing legal source ${source}`);
+    }
+  }
+}
 const futureFlags = ["resolution", "concernDani", "concernPrivacy", "concernHome", "shortExplanations", "everyday"];
 const seenStates = new Set(), reached = new Set(), choices = new Set();
 const queue = ["conviction", "no-conviction"].map((resolution) => ({ nodeId: "start", flags: { resolution }, seen: [], stage: { background: null, character: null } }));
