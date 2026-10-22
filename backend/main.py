@@ -101,11 +101,13 @@ def ejecutar_despliegue():
         "git remote set-url origin https://github.com/lucasosp/ChavalesLegales-TeamUCM2.git && "
         "git fetch origin main && "
         "git reset --hard origin/main && "
-        "cd frontend && npm install && npm run build && "
+        "rm -rf frontend/public/novela && "
+        "cd LegalinStory && npm install && "
+        "cd ../frontend && npm install && npm run build && "
         "cd ../backend && if [ -d venv ]; then source venv/bin/activate; pip install -r requirements.txt; deactivate; fi && "
         "cd .. && pm2 restart ecosystem.config.js || pm2 start ecosystem.config.js"
     )
-    subprocess.run(["/bin/bash", "-c", cmd], capture_output=True, text=True)
+    subprocess.run(["/bin/bash", "-c", cmd + " > /tmp/deploy.log 2>&1"], capture_output=True, text=True)
 
 
 @app.post("/api/deploy")

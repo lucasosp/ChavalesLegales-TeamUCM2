@@ -13,7 +13,7 @@ const destino = fileURLToPath(new URL("../public/novela", import.meta.url));
 const marca = join(destino, "index.html");
 
 // Todo lo que puede cambiar el resultado del build, sin recorrer node_modules ni dist.
-const VIGILAR = ["src", "public/content", "index.html", "package.json", "vite.config.js", "vite.config.mjs", "vite.config.ts"];
+const VIGILAR = ["src", "public/content", "index.html", "package.json", "vite.config.js", "vite.config.mjs", "vite.config.ts", "../images", "../fotoss"];
 
 function masReciente(ruta) {
   if (!existsSync(ruta)) return 0;
