@@ -43,6 +43,8 @@
     "knowRights": "Coneix els teus drets",
     "backToPlatform": "Torna a Chavales Legales",
     "back": "Torna",
+    "chapterSelect": "Capítols (Debug)",
+    "chapterSelectTitle": "Salta a capítol",
     "thoughtOf": "Pensament de {speaker}",
     "thought": "Pensament",
     "narration": "Narració",

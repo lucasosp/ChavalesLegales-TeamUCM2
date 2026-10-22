@@ -583,6 +583,37 @@ a { color: inherit; }
     background 180ms ease;
 }
 
+.chapter-debug-select {
+  cursor: pointer;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid rgb(255 222 231 / 22%);
+  border-radius: 4px;
+  background: rgb(10 8 16 / 75%);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  pointer-events: auto;
+  backdrop-filter: blur(8px);
+  outline: none;
+  max-width: min(220px, 40vw);
+  text-overflow: ellipsis;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.chapter-debug-select:hover,
+.chapter-debug-select:focus-visible {
+  border-color: var(--marca-ambar, #fbbf24);
+  background: rgb(10 8 16 / 90%);
+}
+
+.chapter-debug-select option {
+  background: #18181b;
+  color: #fafafa;
+  font-size: 0.85rem;
+}
+
 .library {
   border-color: rgb(255 222 231 / 28%);
 }

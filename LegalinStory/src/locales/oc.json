@@ -43,6 +43,8 @@
     "knowRights": "Coneish es tòns drets",
     "backToPlatform": "Tornar a Chavales Legales",
     "back": "Tornar",
+    "chapterSelect": "Capítols (Debug)",
+    "chapterSelectTitle": "Sautar a capítol",
     "thoughtOf": "Pensament de {speaker}",
     "thought": "Pensament",
     "narration": "Narracion",

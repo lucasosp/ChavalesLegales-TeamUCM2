@@ -43,6 +43,9 @@ export class SaraExperience {
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11"/></svg>
           </button>
           <div class="sara-chapter"><span class="sara-eyebrow" data-sara-chapter-number></span><span data-sara-chapter></span></div>
+          <select class="sara-chapter-select" data-sara-chapter-select aria-label="${t("novel.chapterSelectTitle")}">
+            <option value="" disabled selected>${t("novel.chapterSelect")}</option>
+          </select>
         </div>
         <button type="button" class="sara-menu-button" data-sara-action="pause" aria-label="${t("sara.menuAria")}">${t("sara.menu")}</button>
       </header>
@@ -59,6 +62,24 @@ export class SaraExperience {
     this.title = root.querySelector("#sara-dialog-title");
     this.close = root.querySelector("[data-sara-close]");
     this.close.addEventListener("click", () => this.closePanel());
+
+    this.chapterSelect = root.querySelector("[data-sara-chapter-select]");
+    if (this.chapterSelect && this.guide?.chapters) {
+      for (const ch of this.guide.chapters) {
+        const option = document.createElement("option");
+        option.value = ch.id;
+        option.textContent = t("sara.chapterOf", { n: ch.id, total: this.guide.chapters.length }) + (ch.title ? `: ${ch.title}` : "");
+        this.chapterSelect.append(option);
+      }
+      this.chapterSelect.addEventListener("change", (e) => {
+        const chId = Number(e.target.value);
+        if (chId) {
+          this.jumpToChapter(chId);
+          this.chapterSelect.blur();
+        }
+      });
+    }
+
     this.onRootClick = (event) => {
       const button = event.target.closest("[data-sara-action]");
       if (!button) return;
@@ -185,6 +206,30 @@ export class SaraExperience {
         <span>${label}</span>
       </div>
     `;
+  }
+
+  jumpToChapter(chapterId) {
+    // Find the starting node for the given chapter id
+    let targetNodeId = null;
+    for (const [id, node] of Object.entries(this.engine.story)) {
+      if (node.chapter === chapterId) {
+        targetNodeId = id;
+        break;
+      }
+    }
+    if (!targetNodeId) return;
+
+    // Adjust drawing phases flags based on chapter target so debug jumps won't block
+    if (chapterId >= 3) {
+      this.phase2Triggered = true;
+    } else {
+      this.phase2Triggered = false;
+    }
+
+    this.app.paused = false;
+    this.app.view.resetTransientOverlays();
+    this.closePanel(true);
+    this.engine.jumpTo(targetNodeId);
   }
 
   openShell(mode, title) {
@@ -347,6 +392,9 @@ export class SaraExperience {
     const chapter = this.guide.chapters.find((c) => c.id === node.chapter);
     this.root.querySelector("[data-sara-chapter-number]").textContent = t("sara.chapterOf", { n: node.chapter, total: this.guide.chapters.length });
     this.root.querySelector("[data-sara-chapter]").textContent = chapter?.title ?? t("sara.defaultChapter");
+    if (this.chapterSelect && node.chapter) {
+      this.chapterSelect.value = String(node.chapter);
+    }
     this.renderCast(node);
     const backBtn = this.root.querySelector("[data-sara-action='back']");
     if (backBtn) backBtn.disabled = this.engine.history.length === 0 || this.engine.isFinished;

@@ -68,7 +68,34 @@ export async function loadStory(entry) {
       assets?.characters?.[characterId]?.displayName ?? characterId,
     resolveBackground: (sceneId) => resolveBackgroundAsset(scenes, assets, sceneId),
     resolveSceneLabel: (sceneId) => scenes?.scenes?.[sceneId]?.label ?? sceneId,
+    chapters: extractChapters(compiled.nodes, manifest.start?.node ?? compiled.startId),
   };
+}
+
+/** Extract chapters / jump points from compiled nodes for debug navigation */
+export function extractChapters(nodes, startId) {
+  const chapters = [];
+  const seenChapters = new Set();
+  const entries = Object.entries(nodes ?? {});
+
+  for (const [id, node] of entries) {
+    if (!node || typeof node !== "object") continue;
+
+    if (node.chapter !== undefined) {
+      if (!seenChapters.has(node.chapter)) {
+        seenChapters.add(node.chapter);
+        const title = node.title ? `: ${node.title}` : "";
+        chapters.push({ id, label: `Capítulo ${node.chapter}${title}` });
+      }
+    } else if (node.type === "interstitial") {
+      const isStart = id === startId || id === "start";
+      const kicker = node.kicker && node.kicker !== "Chavales Legales" ? `${node.kicker} - ` : "";
+      const title = node.title || id;
+      const preview = !node.kicker && !node.title && node.text ? ` (${node.text.slice(0, 24)}...)` : "";
+      chapters.push({ id, label: isStart ? `Inicio: ${title}` : `${kicker}${title}${preview}` });
+    }
+  }
+  return chapters;
 }
 
 /** Merge a story's optional guide/legal translations, keeping person names as keys. */

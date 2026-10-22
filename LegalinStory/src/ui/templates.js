@@ -21,6 +21,9 @@ export function appTemplate() {
           <span class="brand" data-brand></span>
           <span class="perspective-badge" data-perspective-badge hidden></span>
           <div class="topbar-actions">
+            <select class="chapter-debug-select" data-chapter-select hidden aria-label="${t("novel.chapterSelectTitle")}">
+              <option value="" disabled selected>${t("novel.chapterSelect")}</option>
+            </select>
             <button class="library" type="button" data-library>${t("novel.exit")}</button>
           </div>
         </header>

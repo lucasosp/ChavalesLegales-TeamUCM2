@@ -24,8 +24,6 @@ let session = 0;
 const storyTitle = (entry) => (getLang() !== "es" && hasKey(`storyTitles.${entry.id}`) ? t(`storyTitles.${entry.id}`) : entry.title);
 
 async function init() {
-  showLoading(t("storyTitles.sara"));
-
   try {
     index = await loadStoryIndex();
 
@@ -68,8 +66,6 @@ async function startStory(entry) {
   url.searchParams.set("story", entry.id);
   history.replaceState({}, "", url);
 
-  showLoading(storyTitle(entry));
-
   try {
     const content = await loadStory(entry);
     if (token !== session) return;
@@ -108,6 +104,7 @@ async function startStory(entry) {
       resolveBackground: content.resolveBackground,
       resolveSceneLabel: content.resolveSceneLabel,
       rights: content.rights,
+      chapters: content.chapters,
       onExit: showLibrary,
     });
     app.start();

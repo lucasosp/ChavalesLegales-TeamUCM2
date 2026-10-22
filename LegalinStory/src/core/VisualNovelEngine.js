@@ -205,6 +205,21 @@ export class VisualNovelEngine {
     return true;
   }
 
+  /**
+   * Jump directly to a node (useful for debugging and chapter selection).
+   * @param {string} targetNodeId
+   * @returns {boolean}
+   */
+  jumpTo(targetNodeId) {
+    if (!this.story[targetNodeId]) return false;
+    this.#remember();
+    this.isRunning = true;
+    this.isFinished = false;
+    this.nodeId = targetNodeId;
+    this.#presentCurrentNode();
+    return true;
+  }
+
   #remember() {
     this.history.push({ nodeId: this.nodeId, flags: { ...this.flags }, stage: this.#stageSnapshot(), seen: [...this.seen] });
     if (this.history.length > 150) this.history.shift();

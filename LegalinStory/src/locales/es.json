@@ -43,6 +43,8 @@
     "knowRights": "Conoce tus derechos",
     "backToPlatform": "Volver a Chavales Legales",
     "back": "Volver",
+    "chapterSelect": "Capítulos (Debug)",
+    "chapterSelectTitle": "Saltar a capítulo",
     "thoughtOf": "Pensamiento de {speaker}",
     "thought": "Pensamiento",
     "narration": "Narración",
