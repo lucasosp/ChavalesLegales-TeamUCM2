@@ -1,32 +1,223 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-21",
+  "checkedAt": "2026-10-22",
   "review": "Fuentes primarias contrastadas; pendiente revisión jurídica y pedagógica profesional antes de sesiones con menores reales.",
   "sources": {
-    "lopivi": {"title": "LO 8/2021 · arts. 15, 16, 34 y 35", "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-9347"},
-    "proteccion": {"title": "LO 1/1996 · arts. 2, 9, 12, 16–18", "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1996-1069"},
-    "victima": {"title": "Estatuto de la víctima · arts. 4, 5, 19–26 y 28", "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-4606"},
-    "lecrim": {"title": "LECrim · arts. 448, 449 bis, 449 ter, 544 ter y 707", "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1882-6036"}
+    "lopivi": {
+      "title": "LO 8/2021 · arts. 15, 16, 34 y 35",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-9347"
+    },
+    "proteccion": {
+      "title": "LO 1/1996 · arts. 2, 9, 12, 16–18",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1996-1069"
+    },
+    "victima": {
+      "title": "Estatuto de la víctima · arts. 4, 5, 19–26 y 28",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-4606"
+    },
+    "lecrim": {
+      "title": "LECrim · arts. 448, 449 bis, 449 ter, 544 ter y 707",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1882-6036"
+    },
+    "lopj": {
+      "title": "LOPJ · arts. 440 y ss. (oficina judicial y LAJ)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1985-12666"
+    },
+    "eficiencia": {
+      "title": "LO 1/2025 · Tribunales de Instancia",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2025-76"
+    }
   },
   "notes": {
-    "protection": {"title": "La protección puede empezar aquí", "text": "El personal educativo debe comunicar los indicios de violencia y activar el protocolo. Sara no tiene que presentar sola una denuncia para recibir ayuda.", "dialogue": "Me toca pedir ayuda y activar el protocolo del centro. Tú no tienes que ir a denunciar sola para que empecemos a protegerte. Vamos a explicarte lo que hagamos.", "sources": ["lopivi"]},
-    "privacy": {"title": "Quién necesita saberlo", "text": "Laura no puede prometer secreto absoluto. Explicará qué profesionales deben intervenir para proteger a Sara y compartirá la información necesaria para ello.", "dialogue": "No puedo prometerte que esto quede entre nosotras. Te explicaré quién necesita intervenir y para qué. Lo que compartamos tendrá que servir para protegerte.", "sources": ["lopivi", "proteccion"]},
-    "social": {"title": "Valorar es conocer para ayudar", "text": "Servicios Sociales y protección de menores valoran la seguridad y las necesidades familiares. La intervención social y la investigación penal tienen funciones distintas.", "dialogue": "Valorar significa conocer qué necesitáis y si estáis seguros. Ese es el trabajo de los servicios de protección. Si se investiga un posible delito, es otro proceso, con otros profesionales.", "sources": ["proteccion", "lopivi"]},
-    "brother": {"title": "Dani también cuenta", "text": "Los profesionales deben conocer las necesidades de Dani y valorar su protección. Esa responsabilidad corresponde a las personas adultas, no a Sara.", "dialogue": "Dani también será escuchado y el equipo valorará qué necesita. No te corresponde vigilar que todo salga bien. Eso nos toca a las personas adultas.", "sources": ["proteccion"]},
-    "housing": {"title": "La convivencia se valora en cada caso", "text": "Pedir ayuda no implica automáticamente salir de casa. Las autoridades competentes valoran medidas según la seguridad de cada menor. Sara tiene derecho a ser escuchada.", "dialogue": "Pedir ayuda no significa que tengas que irte de casa automáticamente. Hay que valorar vuestra seguridad y las medidas posibles. Tu opinión importa y tienen que escucharte.", "sources": ["proteccion"]},
-    "everyday": {"title": "También importa la vida cotidiana", "text": "El acompañamiento puede ayudar con estudios, amistades y actividades. La protección considera el bienestar y las necesidades de Sara, además de las actuaciones judiciales.", "dialogue": "Podemos ocuparnos de las citas y también de tus entrenamientos, tus estudios y tus amigas. No hace falta aparcar todo lo que te importa para recibir apoyo.", "sources": ["proteccion"]},
-    "justice": {"title": "Dos trabajos que pueden avanzar a la vez", "text": "La protección atiende la seguridad. El procedimiento penal investiga hechos y responsabilidades. Como Javier es adulto, su caso no corresponde a la justicia penal de menores por la edad de Sara.", "dialogue": "Aquí se investiga lo que ha pasado y la posible responsabilidad de tu padre. El apoyo y la protección siguen su propio camino. Que tú seas menor no convierte la causa contra Javier en justicia penal de menores.", "sources": ["lecrim", "proteccion"]},
-    "supports": {"title": "Una declaración con apoyos", "text": "Las medidas se valoran individualmente. Pueden evitar el contacto visual y adaptar el espacio. Tener 15 años no hace obligatoria por sí solo una Sala Gesell o una prueba preconstituida.", "dialogue": "Antes de declarar se valorará qué apoyos necesitas y cómo evitar que pases más miedo. El espacio y las medidas cambian según el caso; tener quince años no determina una sala concreta.", "sources": ["victima", "lecrim"]},
-    "repeat": {"title": "Pedir otra explicación", "text": "Sara puede decir que no entiende y pedir palabras más sencillas. Prepararse sirve para comprender la actuación, sin ensayar una versión de los hechos.", "dialogue": "Puedes decir que no entiendes y pedir otra explicación. Vamos a prepararte para comprender la actuación. Lo que cuentes sobre los hechos tendrá que salir de lo que tú recuerdes.", "sources": ["victima"]},
-    "memory": {"title": "No hay que rellenar los huecos", "text": "Puede expresar lo que recuerda y lo que no sabe con exactitud. No necesita inventar un dato. La simulación no reproduce preguntas sobre hechos violentos.", "dialogue": "Si algo no lo recuerdas con exactitud, puedes decirlo así. No hace falta inventar una hora o un detalle para completar una respuesta.", "sources": ["victima", "lecrim"]},
-    "pause": {"title": "Puedo pedir una pausa", "text": "Sara puede comunicar que necesita parar. El equipo y la autoridad que dirige la actuación valoran cómo atender esa necesidad.", "dialogue": "Puedes decir que necesitas parar. Lo comunicaremos a quien dirija la actuación para que valore cómo atenderlo. Pedirlo permite que sepan lo que necesitas.", "sources": ["victima"]},
-    "waiting": {"title": "Saber qué viene después", "text": "Puede pedir información comprensible sobre las actuaciones y resoluciones que le afecten. Los tiempos varían; Irene y su abogada pueden ayudar a consultar por los canales adecuados.", "dialogue": "Podemos consultar con Elena qué información te corresponde recibir y cómo pedirla. No sé darte una fecha exacta; sí podemos aclarar con quién hablar cuando tengas dudas.", "sources": ["victima"]},
-    "school": {"title": "Decidir qué contar a mis compañeros", "text": "El centro debe cuidar la intimidad. Sara puede acordar con Laura qué información práctica necesita el profesorado y expresar qué prefiere compartir con sus amistades.", "dialogue": "Podemos acordar qué necesita saber el profesorado y cómo cuidar tu intimidad. Con tus amigas también puedes poner límites a lo que quieras contar.", "sources": ["lopivi", "proteccion"]},
-    "resolution": {"title": "Una sentencia no cuenta toda mi vida", "text": "El resultado depende de la prueba y las garantías del proceso. Una resolución sin condena no decide cómo debe sentirse Sara. Los apoyos y la protección se valoran por sus necesidades, sin depender de puntos o elecciones del juego.", "sources": ["lecrim", "victima", "proteccion"]}
+    "protection": {
+      "title": "La protección puede empezar aquí",
+      "text": "El personal educativo debe comunicar los indicios de violencia y activar el protocolo. Sara no tiene que presentar sola una denuncia para recibir ayuda.",
+      "dialogue": "Mi trabajo es pedir ayuda cuando un niño o una niña lo está pasando mal. Tú no tienes que ir a denunciar sola para que empecemos a protegerte. Te iré contando lo que hagamos.",
+      "sources": [
+        "lopivi"
+      ]
+    },
+    "privacy": {
+      "title": "Quién necesita saberlo",
+      "text": "Laura no puede prometer secreto absoluto. Explicará qué profesionales deben intervenir para proteger a Sara y compartirá la información necesaria para ello.",
+      "dialogue": "No te puedo prometer que esto quede solo entre nosotras. Pero te diré a quién se lo cuento y para qué. Solo lo sabrán las personas que te pueden ayudar.",
+      "sources": [
+        "lopivi",
+        "proteccion"
+      ]
+    },
+    "social": {
+      "title": "Valorar es conocer para ayudar",
+      "text": "Servicios Sociales y protección de menores valoran la seguridad y las necesidades familiares. La intervención social y la investigación penal tienen funciones distintas.",
+      "dialogue": "Valorar quiere decir conocer qué necesitáis y si estáis seguros. De eso nos encargamos en Servicios Sociales. Si un juzgado investiga lo que ha pasado, eso lo hacen otras personas.",
+      "sources": [
+        "proteccion",
+        "lopivi"
+      ]
+    },
+    "brother": {
+      "title": "Dani también cuenta",
+      "text": "Los profesionales deben conocer las necesidades de Dani y valorar su protección. Esa responsabilidad corresponde a las personas adultas, no a Sara.",
+      "dialogue": "A Dani también le van a escuchar y vamos a ver qué necesita. Tú no tienes que vigilar que todo salga bien. Eso nos toca a las personas adultas.",
+      "sources": [
+        "proteccion"
+      ]
+    },
+    "housing": {
+      "title": "La convivencia se valora en cada caso",
+      "text": "Pedir ayuda no implica automáticamente salir de casa. Las autoridades competentes valoran medidas según la seguridad de cada menor. Sara tiene derecho a ser escuchada.",
+      "dialogue": "Pedir ayuda no quiere decir que tengas que irte de casa sin más. Primero se mira si estáis seguros. Y tu opinión cuenta: te tienen que escuchar.",
+      "sources": [
+        "proteccion"
+      ]
+    },
+    "everyday": {
+      "title": "También importa la vida cotidiana",
+      "text": "El acompañamiento puede ayudar con estudios, amistades y actividades. La protección considera el bienestar y las necesidades de Sara, además de las actuaciones judiciales.",
+      "dialogue": "Además de las citas, podemos ayudarte con el cole, con tus amigas y con el voleibol. No tienes que dejar de lado lo que te gusta.",
+      "sources": [
+        "proteccion"
+      ]
+    },
+    "justice": {
+      "title": "Dos trabajos que pueden avanzar a la vez",
+      "text": "La protección cuida de la seguridad de Sara. El juzgado investiga lo que pasó y quién es responsable. Como Javier es adulto, su caso lo lleva un juzgado de adultos, aunque Sara sea menor.",
+      "dialogue": "Ahora un juzgado va a investigar lo que hizo tu padre. Eso es una cosa. Que tú estés protegida es otra, y sigue igual. Las dos pueden ir a la vez.",
+      "sources": [
+        "lecrim",
+        "proteccion"
+      ]
+    },
+    "supports": {
+      "title": "Una declaración con apoyos",
+      "text": "Las medidas se deciden en cada caso. Para menores de 14 años, en ciertos delitos, la ley prevé grabar su declaración una vez antes del juicio (prueba preconstituida), con ayuda de profesionales, para que no tengan que repetirla ni encontrarse con el acusado.",
+      "dialogue": "Como tienes menos de catorce años, la ley quiere que no tengas que contarlo muchas veces. Normalmente se graba lo que dices una sola vez, en una sala tranquila, para que no tengas que ir al juicio ni ver a tu padre.",
+      "sources": [
+        "victima",
+        "lecrim"
+      ]
+    },
+    "repeat": {
+      "title": "Pedir otra explicación",
+      "text": "Sara puede decir que no entiende y pedir palabras más sencillas. Prepararse sirve para comprender la actuación, sin ensayar una versión de los hechos.",
+      "dialogue": "Si no entiendes algo, puedes decirlo y pedir que te lo expliquen con otras palabras. Prepararte sirve para entender lo que pasa, no para aprenderte lo que tienes que decir.",
+      "sources": [
+        "victima"
+      ]
+    },
+    "memory": {
+      "title": "No hay que rellenar los huecos",
+      "text": "Puede expresar lo que recuerda y lo que no sabe con exactitud. No necesita inventar un dato. La simulación no reproduce preguntas sobre hechos violentos.",
+      "dialogue": "Si algo no lo recuerdas bien, puedes decirlo así. No hace falta que te inventes una hora o un detalle.",
+      "sources": [
+        "victima",
+        "lecrim"
+      ]
+    },
+    "pause": {
+      "title": "Puedo pedir una pausa",
+      "text": "Sara puede comunicar que necesita parar. El equipo y la autoridad que dirige la actuación valoran cómo atender esa necesidad.",
+      "dialogue": "Puedes decir que necesitas parar. La jueza decidirá cómo hacerlo. Pedirlo está bien: así saben lo que necesitas.",
+      "sources": [
+        "victima"
+      ]
+    },
+    "waiting": {
+      "title": "Saber qué viene después",
+      "text": "Puede pedir información comprensible sobre las actuaciones y resoluciones que le afecten. Los tiempos varían; Irene y su abogada pueden ayudar a consultar por los canales adecuados.",
+      "dialogue": "Puedes preguntarme cómo va todo y te lo explicaré. No te puedo dar una fecha exacta, pero sí puedo decirte con quién hablar cuando tengas dudas.",
+      "sources": [
+        "victima"
+      ]
+    },
+    "school": {
+      "title": "Decidir qué contar a mis compañeros",
+      "text": "El centro debe cuidar la intimidad. Sara puede acordar con Laura qué información práctica necesita el profesorado y expresar qué prefiere compartir con sus amistades.",
+      "dialogue": "Podemos decidir juntas qué necesitan saber los profes y qué no. Y a tus amigas les cuentas solo lo que tú quieras.",
+      "sources": [
+        "lopivi",
+        "proteccion"
+      ]
+    },
+    "resolution": {
+      "title": "Una sentencia no cuenta toda mi vida",
+      "text": "El resultado depende de las pruebas y de las garantías del juicio. Una sentencia sin condena no dice que Sara mintiera, ni decide cómo debe sentirse. La ayuda y la protección siguen según lo que necesite.",
+      "sources": [
+        "lecrim",
+        "victima",
+        "proteccion"
+      ]
+    },
+    "oficina": {
+      "title": "La oficina judicial",
+      "text": "Es el equipo de personas que organiza y tramita el caso en el Tribunal de Instancia. Qué sección se encarga depende de cómo esté organizado el tribunal y del tipo de asunto.",
+      "dialogue": "Primero, la oficina judicial del Tribunal de Instancia. Son las personas que organizan los papeles y los pasos del caso. Según el tipo de asunto, lo lleva una sección u otra.",
+      "sources": [
+        "eficiencia",
+        "lopj"
+      ]
+    },
+    "juez": {
+      "title": "El juez o la jueza",
+      "text": "Dirige las actuaciones judiciales, protege los derechos de todas las partes y decide lo que necesita una resolución judicial.",
+      "dialogue": "Luego está la jueza. Ella dirige todo lo que pasa en el juzgado, cuida de que se respeten los derechos de todos y decide lo que hay que decidir.",
+      "sources": [
+        "lopj",
+        "lecrim"
+      ]
+    },
+    "laj": {
+      "title": "El letrado o la letrada (LAJ)",
+      "text": "El Letrado de la Administración de Justicia es un funcionario público con funciones procesales, de documentación y de fe pública judicial, entre otras. Cuando la ley lo exige, puede autorizar el acta de una declaración y comprobar la grabación.",
+      "dialogue": "También habrá una letrada de la Administración de Justicia. Es una funcionaria que da fe de lo que pasa: escribe el acta de lo que digas y comprueba que la grabación ha salido bien.",
+      "sources": [
+        "lopj",
+        "lecrim"
+      ]
+    },
+    "fiscal": {
+      "title": "El Ministerio Fiscal",
+      "text": "El fiscal defiende la legalidad. En un proceso penal puede acusar en nombre de la sociedad y vela por los derechos del menor.",
+      "dialogue": "Después, el fiscal. Su trabajo es que se cumpla la ley. En un caso como este puede acusar a quien hizo daño y además se encarga de cuidar tus derechos.",
+      "sources": [
+        "lecrim",
+        "proteccion"
+      ]
+    },
+    "psicosocial": {
+      "title": "El equipo psicosocial",
+      "text": "Cuando el juzgado lo decide, psicólogos y trabajadores sociales del juzgado pueden ayudar a escuchar al menor y dar su opinión como especialistas.",
+      "dialogue": "A veces el juzgado pide ayuda a su equipo psicosocial: psicólogas y trabajadores sociales que saben hablar con niños y niñas. Si te toca, te ayudarán a contar las cosas con calma.",
+      "sources": [
+        "lecrim",
+        "victima"
+      ]
+    },
+    "oavd": {
+      "title": "La Oficina de Asistencia a las Víctimas",
+      "text": "Ofrece orientación jurídica general, apoyo psicológico y social, información sobre el procedimiento y ayuda personalizada. No es quien juzga el caso.",
+      "dialogue": "Y la Oficina de Asistencia a las Víctimas. Allí te explican cómo va el proceso y te ayudan si estás mal o tienes dudas. Ellos no juzgan el caso: solo te ayudan.",
+      "sources": [
+        "victima"
+      ]
+    }
   },
   "help": [
-    {"title": "Peligro inmediato · 112", "text": "En España puedes llamar al 112 si hay peligro inmediato. Es el número de emergencias.", "phone": "112", "url": "https://administracion.gob.es/tu-espacio-europeo/derechos-obligaciones/ciudadanos/asistencia-sanitaria/numeros-urgencia"},
-    {"title": "ANAR · 900 20 20 10", "text": "Ayuda gratuita para niños, niñas y adolescentes en toda España. También puedes consultar el chat de ANAR.", "phone": "900202010", "url": "https://www.anar.org/que-hacemos/telefono-chat-anar/"},
-    {"title": "Una persona adulta de confianza", "text": "Puedes acudir a profesorado, orientación o coordinación de bienestar del centro. Para apoyo público, consulta los Servicios Sociales de tu ayuntamiento o el servicio de protección de menores de tu comunidad autónoma."}
+    {
+      "title": "Peligro inmediato · 112",
+      "text": "En España puedes llamar al 112 si hay peligro inmediato. Es el número de emergencias.",
+      "phone": "112",
+      "url": "https://administracion.gob.es/tu-espacio-europeo/derechos-obligaciones/ciudadanos/asistencia-sanitaria/numeros-urgencia"
+    },
+    {
+      "title": "ANAR · 900 20 20 10",
+      "text": "Ayuda gratuita para niños, niñas y adolescentes en toda España. También puedes consultar el chat de ANAR.",
+      "phone": "900202010",
+      "url": "https://www.anar.org/que-hacemos/telefono-chat-anar/"
+    },
+    {
+      "title": "Una persona adulta de confianza",
+      "text": "Puedes acudir a profesorado, orientación o coordinación de bienestar del centro. Para apoyo público, consulta los Servicios Sociales de tu ayuntamiento o el servicio de protección de menores de tu comunidad autónoma."
+    }
   ]
 }

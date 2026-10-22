@@ -18,7 +18,7 @@ export const illustrations = {
   judge: { src: new URL("../../../images/jueza-transparente.png", import.meta.url).href, label: "Jueza", frame: { top: -10, bottom: 1190, center: 512 } },
 };
 
-const people = { Sara: "saraNormal", Paula: "paula", Julia: "julia", Dani: "dani", Laura: "laura", Irene: "irene", Elena: "elena", Jueza: "judge", "Su familia": "dani" };
+const people = { Sara: "saraNormal", Paula: "paula", Julia: "julia", Dani: "dani", Laura: "laura", Irene: "elena", Elena: "irene", Jueza: "judge", "Su familia": "dani" };
 const expressions = { neutral: "saraNormal", smile: "saraHappy", happy: "saraHappy", sad: "saraSad", crying: "saraCrying", surprised: "saraShy", shy: "saraShy" };
 
 export function characterImage(character) {
