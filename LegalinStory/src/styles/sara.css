@@ -541,3 +541,16 @@
   .sara-drawing-instruction { font-size: .88rem; }
   .sara-canvas-container { width: min(300px, 100%, max(140px, calc(100dvh - 330px))); }
 }
+
+/* Taller de dibujo: lienzo más grande y herramientas en una columna compacta
+   (la paleta en 3×2 para que la goma no se quede sola en otra fila). */
+.sara-drawing-card { max-width: 860px; }
+.sara-drawing-workspace { flex-wrap: nowrap; align-items: stretch; gap: 28px; }
+.sara-canvas-container { width: min(440px, 100%, max(180px, calc(100dvh - 300px))); }
+.sara-drawing-controls { width: 260px; justify-content: center; gap: 18px; }
+.sara-palette-grid { grid-template-columns: repeat(3, 44px); }
+@media (max-width: 720px) {
+  .sara-drawing-workspace { flex-wrap: wrap; justify-content: center; }
+  .sara-drawing-controls { width: 100%; }
+  .sara-palette-grid { grid-template-columns: repeat(6, 44px); }
+}

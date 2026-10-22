@@ -76,3 +76,9 @@
 @media (prefers-reduced-motion: reduce) {
   #app .sara-cast-person, #app .sara-cast-person img, #app .scene-bg { animation: none; transition: none; }
 }
+
+/* Chat: un personaje a cada lado del móvil, sin color */
+#app .scene > .sara-cast.is-chat { justify-content: space-between; padding-inline: 2vw; --sprite-width: 30cqw; }
+#app .sara-cast.is-chat .sara-cast-person { filter: grayscale(1) contrast(1.05) brightness(1.02); opacity: .92; }
+#app .sara-cast.is-chat::after { display: none; }
+@media (max-width: 760px) { #app .scene > .sara-cast.is-chat { display: none; } }

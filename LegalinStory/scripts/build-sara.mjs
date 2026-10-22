@@ -103,8 +103,7 @@ narration("c3-end", "Esa noche, Dani le enseña un dibujo de un dragón. Sara ve
 add("c3-mesa", { type: "external", game: "cid-table", text: "Y se quedó pensando en dónde se sentaría dependiendo de la gente que vaya a comer.", next: "c4-card", cast: { sara: "smile" } });
 
 chapter = 4;
-card("c4-card", "Mi vida continúa", "Unos días después.", "c4-perros", "patio-day");
-add("c4-perros", { type: "external", game: "caja-arena", text: "Empezó a ver los diferentes perros, y las aventuras que podría vivir con ellos.", next: "c4-chat", cast: { sara: "smile" } });
+card("c4-card", "Mi vida continúa", "Unos días después.", "c4-chat", "patio-day");
 chat("c4-chat", "Paula", [
   ["Paula", "hola sara!! te echo de menos en clase", "19:02"],
   ["Paula", "te he guardado los apuntes de mates y de cono", "19:02"],
@@ -137,7 +136,8 @@ choice("c4-choice2", "En clase, un compañero le pregunta por qué ha faltado. �
 ]);
 say("c4-boundary", "Paula", "Puedes decir: «He tenido unos asuntos de familia y no quiero hablar de eso». Luego yo cambio de tema. No tienes que explicarle nada a nadie.", "c4-end");
 explain("c4-laura", "Laura", "school", "c4-end");
-narration("c4-end", "Hay días tranquilos y días más difíciles. Sigue habiendo citas, pero en la agenda de Sara ya hay algo que ha elegido ella.", "c5-card");
+narration("c4-end", "Hay días tranquilos y días más difíciles. Sigue habiendo citas, pero en la agenda de Sara ya hay algo que ha elegido ella.", "c4-perros");
+add("c4-perros", { type: "external", game: "caja-arena", text: "Empezó a ver los diferentes perros, y las aventuras que podría vivir con ellos.", next: "c5-card", cast: { sara: "smile" } });
 
 chapter = 5;
 card("c5-card", "El juzgado", "Un tiempo después. Saber quién es quién.", "c5-01", "quiet-room");
