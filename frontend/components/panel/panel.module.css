@@ -256,7 +256,7 @@
   /* Punta redonda: el borde de avance es un semicírculo, no un corte recto */
   border-radius: 0 9999px 9999px 0;
   transition:
-    width 0.1s linear,
+    width 0.18s cubic-bezier(0.2, 0.8, 0.25, 1),
     background-color 0.22s ease,
     background-image 0.22s ease;
   animation: rayasAvanzan 0.5s linear infinite;

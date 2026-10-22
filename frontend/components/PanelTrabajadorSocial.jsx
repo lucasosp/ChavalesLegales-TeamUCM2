@@ -8,13 +8,21 @@ import ResultadoCaso from './panel/ResultadoCaso'
 import { edadValida } from './panel/edad'
 import styles from './panel/panel.module.css'
 
-// La barra es artificial y va delante de la petición: el trabajador social ve avanzar la
-// carga y sólo al llegar al 99 % se pide el caso al backend. Ahí se queda
-// clavada hasta que el backend responde (o hasta que se cancela, y entonces la
-// petición no llega a hacerse o se aborta).
-const DURACION_CARGA = 5000
-const PASO_CARGA = 60
-const TOPE_BARRA = 99
+// Definición de las etapas de la generación asistida por IA
+const FASES_CARGA = [
+  { minPct: 0, maxPct: 22, fase: 'faseAnalizando' },
+  { minPct: 22, maxPct: 52, fase: 'faseGenerandoHistoria' },
+  { minPct: 52, maxPct: 84, fase: 'faseGenerandoJuegos' },
+  { minPct: 84, maxPct: 99, fase: 'faseFinalizando' },
+]
+
+function obtenerFase(pct) {
+  for (const f of FASES_CARGA) {
+    if (pct < f.maxPct) return f.fase
+  }
+  return 'faseFinalizando'
+}
+
 // Ventana en la que un envío se considera el mismo gesto que la cancelación
 const REENVIO_BLOQUEADO = 400
 
@@ -38,8 +46,9 @@ export default function PanelTrabajadorSocial() {
   const [copiado, setCopiado] = useState(false)
   const [error, setError] = useState(null)
   const [progreso, setProgreso] = useState(0)
+  const [faseCarga, setFaseCarga] = useState('faseAnalizando')
   const [entrando, setEntrando] = useState(false)
-  const intervalo = useRef(null)
+  const timerPaso = useRef(null)
   const cancelado = useRef(false)
   const abortarPeticion = useRef(null)
   const resolverBarra = useRef(null)
@@ -48,29 +57,75 @@ export default function PanelTrabajadorSocial() {
   const canceladoEn = useRef(0)
 
   const pararProgreso = () => {
-    if (intervalo.current) {
-      clearInterval(intervalo.current)
-      intervalo.current = null
+    if (timerPaso.current) {
+      clearTimeout(timerPaso.current)
+      timerPaso.current = null
     }
   }
 
-  // Lleva la barra de 0 a 99 en DURACION_CARGA ms.
-  // Resuelve true al terminar y false si se cancela por el camino.
+  // Simulación orgánica y menos predecible:
+  // Combina tirones rápidos, avances discretos, estancamientos y micropausas
+  // en puntos aleatorios (ej. 14%, 39%, 67%, 83%, etc.).
   const correrBarra = () =>
     new Promise((resolve) => {
       pararProgreso()
       resolverBarra.current = resolve
       setProgreso(0)
-      const inicio = Date.now()
-      intervalo.current = setInterval(() => {
-        const avanzado = Math.min(TOPE_BARRA, ((Date.now() - inicio) / DURACION_CARGA) * TOPE_BARRA)
-        setProgreso(avanzado)
-        if (avanzado >= TOPE_BARRA) {
-          pararProgreso()
+      setFaseCarga('faseAnalizando')
+
+      let p = 0
+
+      const darPaso = () => {
+        if (cancelado.current) {
+          resolve(false)
+          return
+        }
+
+        if (p >= 99) {
+          setProgreso(99)
+          setFaseCarga('faseFinalizando')
           resolverBarra.current = null
           resolve(true)
+          return
         }
-      }, PASO_CARGA)
+
+        // Decidimos comportamiento para el siguiente paso:
+        const tirada = Math.random()
+        let incremento = 0
+        let espera = 0
+
+        // 1. Micropausa / atasco temporal en la generación (18% de probabilidad)
+        if (tirada < 0.18 && p > 5 && p < 95) {
+          incremento = 0
+          // Pausa notable o micro-atasco entre 350ms y 900ms
+          espera = 350 + Math.random() * 550
+        }
+        // 2. Tirón rápido / ráfaga de avance (22% de probabilidad)
+        else if (tirada < 0.40) {
+          incremento = 4 + Math.random() * 8
+          espera = 80 + Math.random() * 120
+        }
+        // 3. Avance gradual con ritmo irregular (60% de probabilidad)
+        else {
+          incremento = 0.8 + Math.random() * 2.8
+          espera = 120 + Math.random() * 260
+        }
+
+        // Si estamos cerca del 99, ralentizar para no saltárselo bruscamente
+        if (p > 90) {
+          incremento = Math.min(incremento, 1.2)
+          espera = Math.max(espera, 220)
+        }
+
+        p = Math.min(99, p + incremento)
+        setProgreso(p)
+        setFaseCarga(obtenerFase(p))
+
+        timerPaso.current = setTimeout(darPaso, espera)
+      }
+
+      // Arranca tras un breve titubeo inicial realista (100-200ms)
+      timerPaso.current = setTimeout(darPaso, 150)
     })
 
   // Nada de intervalos ni peticiones vivos si se desmonta a mitad
@@ -217,6 +272,7 @@ export default function PanelTrabajadorSocial() {
             setContexto={setContexto}
             cargando={cargando}
             progreso={progreso}
+            faseCarga={faseCarga}
             entrando={entrando}
             onCancelar={handleCancelarCarga}
             error={error}

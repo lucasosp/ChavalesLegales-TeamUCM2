@@ -22,6 +22,7 @@ export default function FormularioCaso({
   setContexto,
   cargando,
   progreso = 0,
+  faseCarga = 'faseAnalizando',
   entrando = false,
   error,
   onSubmit,
@@ -125,11 +126,11 @@ export default function FormularioCaso({
           type="button"
           onClick={onCancelar}
           className={`${styles.accion} ${styles.accionCargando}`}
-          aria-label={`${t('profesores.creandoCasoPct', { pct: Math.round(progreso) })}. ${t('profesores.cancelarGeneracion')}`}
+          aria-label={`${t(`profesores.${faseCarga}`, { pct: Math.round(progreso) })}. ${t('profesores.cancelarGeneracion')}`}
         >
           <span className={styles.accionRelleno} style={{ width: `${progreso}%` }} aria-hidden="true" />
           <span className={styles.cargaNormal}>
-            {t('profesores.creandoCasoPct', { pct: Math.round(progreso) })}
+            {t(`profesores.${faseCarga}`, { pct: Math.round(progreso) })}
           </span>
           <span className={styles.cargaCancelar} aria-hidden="true">
             {t('profesores.cancelarGeneracion')}

@@ -34,7 +34,7 @@ export default function Home() {
 
   // Juegos sueltos: no piden código y no registran informe. Solo queda el de la historia.
   const juegosLibres = [
-    { href: '/novela', tag: t('inicio.juegoHistoriaTag'), title: t('inicio.juegoHistoriaTitulo'), bg: 'var(--juego-azul)', borde: 'var(--juego-azul-borde)', color: 'var(--juego-azul-borde)', icon: <><path d="M12 7.4C10.4 6 8.2 5.3 5.4 5.3H3.6v13.4h1.8c2.8 0 5 .7 6.6 2.1 1.6-1.4 3.8-2.1 6.6-2.1h1.8V5.3h-1.8c-2.8 0-5 .7-6.6 2.1Z"/><path d="M12 7.4v13.4"/></> },
+    { href: '/novela', tag: t('inicio.juegoHistoriaTag'), title: t('inicio.juegoHistoriaTitulo'), bg: 'var(--verde-500)', borde: 'var(--verde-700)', color: 'var(--verde-700)', icon: <><path d="M12 7.4C10.4 6 8.2 5.3 5.4 5.3H3.6v13.4h1.8c2.8 0 5 .7 6.6 2.1 1.6-1.4 3.8-2.1 6.6-2.1h1.8V5.3h-1.8c-2.8 0-5 .7-6.6 2.1Z"/><path d="M12 7.4v13.4"/></> },
   ]
 
   return (
