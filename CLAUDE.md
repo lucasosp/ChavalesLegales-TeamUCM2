@@ -245,8 +245,10 @@ duplicar imágenes. Un caso con dibujos pesa ~50 KB (base64).
    informe están vacíos en cualquier caso que no llegue tan lejos. No es un bug.
 5. **`/experiments/*` no registra nada.** Se puede jugar y no queda rastro: el único camino
    instrumentado es `MinijuegoNubes` dentro de `/novela`.
-6. **`casoDesdeUrl()` devuelve `DEMO` si no hay `?caso=`.** Un `/novela` sin parámetros escribe
-   eventos en el caso `DEMO`, que aparece en `/servicios` sin que nadie lo haya creado.
+6. **`DEMO` es un ejemplo de solo lectura.** El backend responde 403 a cualquier escritura en él
+   (sin distinguir mayúsculas: en Windows `demo.json` es `DEMO.json`). Un `/novela` sin `?caso=`, o
+   con `?caso=DEMO`, juega en un caso nuevo `PRUEBA-<6 dígitos>` que aparece en `/servicios` sin que
+   nadie lo haya creado. El contenido de `DEMO` vive en `backend/casos_data/` (local, no se versiona).
 7. **Ids de caso enumerables** (`CL-` + 5 dígitos) y **sin auth**: quien conozca un id puede leer
    y sobrescribir el caso. Aceptado por decisión de producto; no lo "arregles" sin hablarlo.
 8. **`casos_data.json` y `casos_data/` son estado de runtime**, no fixtures. Están gitignorados.
