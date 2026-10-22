@@ -42,6 +42,21 @@ export async function registrarEvento(id, kind, data = {}) {
   }
 }
 
+/**
+ * Versión ligera para sondear el informe: { id, eventos, ultimo, schemaVersion }.
+ * Devuelve null si no se puede consultar, para que el sondeo no machaque el informe con un error.
+ */
+export async function resumenCaso(id) {
+  try {
+    const res = await fetch(`/api/casos/${encodeURIComponent(id)}/resumen`, { cache: 'no-store' })
+    if (res.ok) return await res.json()
+    if (res.status !== 404) console.warn(`[casos] error ${res.status} al sondear el caso`, id)
+  } catch (err) {
+    console.warn('[casos] no se pudo sondear el caso', id, err)
+  }
+  return null
+}
+
 /** Carga un caso para el informe. Devuelve un caso vacío marcado si falla. */
 export async function cargarCaso(id) {
   try {

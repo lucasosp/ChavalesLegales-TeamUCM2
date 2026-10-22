@@ -3,357 +3,22 @@
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import styles from '../informe.module.css'
-import { Barras, BarrasH, Kpi, LineaTiempo } from '../Graficas'
+import { Barras, Kpi } from '../Graficas'
 import { analizar, fmtDuracion, fmtFecha, fmtSeg, localeDe } from '../analisis'
-import { useI18n, useT } from '../../../lib/i18n'
-import { cargarCaso } from '../../../lib/casos'
+import { useI18n } from '../../../lib/i18n'
+import { cargarCaso, resumenCaso } from '../../../lib/casos'
 import { downloadJson } from '../../experiments/shared'
-import MesaCID from '../../experiments/cid-table/MesaCID'
-import { ROUNDS } from '../../experiments/cid-table/config'
-import Escenario from '../../experiments/caja-arena/Escenario'
-import Clima from '../../experiments/caja-arena/Clima'
-import { DOGS, Perro } from '../../experiments/caja-arena/Perros'
-import { VIEW } from '../../experiments/caja-arena/config'
+import { Nota, Seccion, Pendiente } from '../piezas'
+import { useTr } from '../useTr'
+import { textoRiesgo } from '../riesgo'
+import { detalleEvento } from '../evento'
+import Dibujo from '../Dibujo'
+import { Mesa, Mundo } from '../Minijuegos'
 
-const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1)
-
-// El caso guarda el id del riesgo; el texto se resuelve en la lengua del lector.
-// Los casos antiguos solo tienen el texto, así que se muestra tal cual.
-const textoRiesgo = (t, meta) =>
-  meta?.tipoRiesgoId ? t(`profesores.riesgo_${meta.tipoRiesgoId}`) : meta?.tipoRiesgo
-
-// Traduce una clave del espacio informe; si no existe, devuelve el texto original guardado
-function useTr() {
-  const t = useT()
-  return (clave, respaldo, vars) => {
-    const k = `informe.${clave}`
-    const s = t(k, vars)
-    return s === k ? respaldo : s
-  }
-}
-const CRITERIO = { 'ecosistema con más perros': 'criterio_masPerros', 'aleatorio (sin perros en ecosistemas)': 'criterio_aleatorio' }
-const CUADRANTE = { 'top-left': 'cuadrante_supIzq', 'top-right': 'cuadrante_supDer', 'bottom-left': 'cuadrante_infIzq', 'bottom-right': 'cuadrante_infDer' }
-
-function Nota({ titulo, children }) {
-  const t = useT()
-  return (
-    <details className={styles.nota}>
-      <summary>{titulo ?? t('informe.notaTitulo')}</summary>
-      <div>{children}</div>
-    </details>
-  )
-}
-
-// Detalle de una fila del registro de eventos. Antes las filas 'dibujo' salían con la
-// celda vacía y los minijuegos no mostraban nada aunque analisis.js ya calcula su duración.
-function detalleEvento(e, a, t) {
-  if (e.kind === 'decision') return `${e.data.prompt} → ${e.data.option_label} (${fmtSeg(e.data.time_ms)})`
-  if (e.kind === 'progreso') return `${e.data.node_id} · ${t('informe.capDetalle', { n: e.data.chapter ?? '—' })}`
-  if (e.kind === 'dibujo') {
-    const fases = [e.data?.phase1 && '1', e.data?.phase2 && '2'].filter(Boolean)
-    const elegido = e.data?.finalChoice === 'phase1' ? '1' : e.data?.finalChoice === 'phase2' ? '2' : null
-    return t('informe.dibujoDetalle', {
-      fases: fases.length ? fases.join(' + ') : '—',
-      elegido: elegido ?? '—',
-    })
-  }
-  if (e.kind.startsWith('minijuego')) {
-    const juego = e.data?.game ?? '—'
-    const duracion = a?.minijuegos?.[juego]?.duracionMs
-    return duracion ? `${juego} · ${fmtDuracion(duracion)}` : juego
-  }
-  return ''
-}
-
-function Seccion({ numero, titulo, sub, children }) {
-  return (
-    <section className={styles.seccionCard}>
-      <header className={styles.seccionHead}>
-        <span className={styles.seccionNum}>{numero}</span>
-        <div>
-          <h2>{titulo}</h2>
-          {sub && <p>{sub}</p>}
-        </div>
-      </header>
-      {children}
-    </section>
-  )
-}
-
-function Pendiente({ texto }) {
-  return <p className={styles.pendiente}>{texto}</p>
-}
-
-function Mesa({ report }) {
-  const t = useT()
-  const tr = useTr()
-  const persona = (id, nombre) => tr(`persona_${id}`, nombre)
-  const colores = Object.fromEntries((report.config?.characters ?? []).map((c) => [c.id, c.color]))
-  const nombre = (id) => persona(id, report.rounds[0]?.distances.find((d) => d.characterId === id)?.name ?? id)
-  return (
-    <>
-      <div className={styles.tres}>
-        {report.rounds.map((r) => {
-          const ronda = ROUNDS.find((x) => x.id === r.roundId)
-          const seating = r.distances.map((d) => ({ id: d.characterId, name: d.name, seat: d.seatIndex, color: colores[d.characterId] ?? '#94a3b8' }))
-          return (
-            <figure key={r.roundId} className={styles.figura}>
-              <MesaCID totalSeats={report.config.totalSeats} seating={seating} childSeat={r.childSeat} childAvatar={report.config.childAvatar} theme={ronda?.theme ?? 'daily'} locked onSelect={() => {}} />
-              <figcaption>
-                <strong>{tr(`ronda_${r.roundId}`, r.title)}</strong>
-                <span>{t('informe.mesaRespuesta', { tiempo: fmtSeg(r.reactionTimeMs), sillas: r.seatsConsidered ?? '—' })}</span>
-                <span>{t('informe.mesaCercaLejos', { cerca: nombre(r.closestCharacterId), lejos: nombre(r.furthestCharacterId) })}</span>
-              </figcaption>
-            </figure>
-          )
-        })}
-      </div>
-      <h3 className={styles.h3}>{t('informe.mesaDistanciaTitulo')}</h3>
-      <BarrasH
-        datos={report.summary.characterSummary.map((c) => ({ etiqueta: persona(c.characterId, c.name), valor: c.meanEuclidean, color: colores[c.characterId] }))}
-        formato={(v) => Math.round(v)}
-      />
-      <table className={styles.tabla}>
-        <thead><tr><th>{t('informe.colPersona')}</th><th>{t('informe.colDistanciaMedia')}</th><th>{t('informe.colVecesCercana')}</th><th>{t('informe.colVecesLejana')}</th></tr></thead>
-        <tbody>
-          {report.summary.characterSummary.map((c) => (
-            <tr key={c.characterId}><td>{persona(c.characterId, c.name)}</td><td>{Math.round(c.meanEuclidean)}</td><td>{c.closestCount}</td><td>{c.furthestCount}</td></tr>
-          ))}
-        </tbody>
-      </table>
-      <h3 className={styles.h3}>{t('informe.mesaTiempoTitulo')}</h3>
-      <Barras datos={report.rounds.map((r, i) => ({ etiqueta: t('informe.ronda', { n: i + 1 }), titulo: tr(`ronda_${r.roundId}`, r.title), valor: r.reactionTimeMs / 1000 }))} unidad=" s" formato={(v) => v.toFixed(1)} alto={180} />
-    </>
-  )
-}
-
-function Mundo({ report }) {
-  const t = useT()
-  const tr = useTr()
-  const zona = (z) => tr(`zona_${z}`, z)
-  const rasgo = (d) => tr(`rasgo_${d.id}`, d.trait)
-  const accion = (a) => tr(`accion_${a}`, a)
-  const lista = (xs) => xs.join(', ') || t('informe.ninguno')
-  const placed = report.dogs.filter((d) => d.placed)
-  const dogsById = Object.fromEntries(DOGS.map((d) => [d.id, d]))
-  const nombre = (id) => dogsById[id]?.name ?? id
-  const w = report.weather
-  return (
-    <>
-      <figure className={styles.figura}>
-        <div className={styles.mundo}>
-          <div className={styles.capa}><Escenario /></div>
-          {w && <div className={styles.capa}><Clima weather={w} /></div>}
-          <div className={styles.capa}>
-            <svg viewBox={`0 0 ${VIEW.width} ${VIEW.height}`} preserveAspectRatio="xMidYMid meet">
-              {[...placed].sort((a, b) => a.y - b.y).map((d) => (
-                <g key={d.id} transform={`translate(${d.x} ${d.y})`}>
-                  <Perro dog={dogsById[d.id]} flip={d.facing === 'izquierda'} />
-                </g>
-              ))}
-            </svg>
-          </div>
-        </div>
-        <figcaption>
-          <strong>{t('informe.mundoFinal')}</strong>
-          <span>{t('informe.mundoResumen', { duracion: fmtDuracion(report.durationMs), colocados: report.summary.dogsPlaced, total: report.dogs.length, acciones: report.summary.totalActions })}</span>
-        </figcaption>
-      </figure>
-
-      <div className={styles.dos}>
-        <div>
-          <h3 className={styles.h3}>{t('informe.perrosPorEcosistema')}</h3>
-          <BarrasH ancho={360} datos={Object.entries(report.summary.zoneCounts).map(([z, n]) => ({ etiqueta: cap(zona(z)), valor: n, color: z === w?.zone ? '#c2410c' : undefined }))} />
-          {w && <p className={styles.leyenda}><span className={styles.swatch} /> {t('informe.ecosistemaAfectado')}</p>}
-        </div>
-        <div>
-          <h3 className={styles.h3}>{t('informe.ordenColocacion')}</h3>
-          <ol className={styles.orden}>
-            {report.summary.placementOrder.map((id) => {
-              const d = report.dogs.find((x) => x.id === id)
-              return <li key={id}><strong>{nombre(id)}</strong> {t('informe.ordenItem', { rasgo: rasgo(d), zona: cap(tr(`zona_${d.zone}`, t('informe.retirado'))), tiempo: fmtSeg(d.firstPlacedMs) })}</li>
-            })}
-          </ol>
-          {!!report.dogs.filter((d) => !d.placed).length && (
-            <p className={styles.leyenda}>{t('informe.noColocados', { lista: report.dogs.filter((d) => !d.placed).map((d) => `${d.name} (${rasgo(d)})`).join(', ') })}</p>
-          )}
-        </div>
-      </div>
-
-      {w && (
-        <div className={styles.evento}>
-          <h3 className={styles.h3}>{t('informe.eventoMeteo')}</h3>
-          <dl className={styles.dl}>
-            <dt>{t('informe.dtEvento')}</dt><dd>{cap(tr(`eventoEn_${w.zone}`, `${w.type} · ${w.zone}`, { evento: tr(`clima_${w.type}`, w.type) }))}</dd>
-            <dt>{t('informe.dtMomento')}</dt><dd>{t('informe.ddMomento', { tiempo: fmtSeg(w.atMs), criterio: CRITERIO[w.selectionRule] ? t(`informe.${CRITERIO[w.selectionRule]}`) : w.selectionRule })}</dd>
-            <dt>{t('informe.dtPerrosInicio')}</dt><dd>{lista((w.dogsInZoneAtStart ?? []).map(nombre))}</dd>
-            <dt>{t('informe.dtPrimeraAccion')}</dt><dd>{w.reactionLatencyMs != null ? t('informe.ddDespues', { tiempo: fmtSeg(w.reactionLatencyMs) }) : t('informe.sinAccionesPosteriores')}</dd>
-            <dt>{t('informe.dtAccionesPosteriores')}</dt><dd>{report.summary.actionsAfterWeather}</dd>
-            <dt>{t('informe.dtSacados')}</dt><dd>{lista(report.summary.dogsLeftWeatherZone.map(nombre))}</dd>
-            <dt>{t('informe.dtLlevados')}</dt><dd>{lista(report.summary.dogsEnteredWeatherZone.map(nombre))}</dd>
-            <dt>{t('informe.dtAlTerminar')}</dt><dd>{lista(report.summary.dogsInWeatherZoneAtEnd.map(nombre))}</dd>
-          </dl>
-        </div>
-      )}
-
-      <h3 className={styles.h3}>{t('informe.secuenciaAcciones')}</h3>
-      <LineaTiempo
-        duracion={report.durationMs}
-        marcas={report.events.filter((e) => e.action !== 'soltar_fuera').map((e) => ({ t: e.t, tipo: e.action, etiqueta: `${nombre(e.dogId)}: ${accion(e.action)}` }))}
-        eventos={w ? [{ t: w.atMs, etiqueta: tr(`climaCorto_${w.type}`, cap(w.type)) }] : []}
-      />
-
-      <table className={styles.tabla}>
-        <thead><tr><th>{t('informe.colPerro')}</th><th>{t('informe.colEcosistemaFinal')}</th><th>{t('informe.colMovimientos')}</th><th>{t('informe.colGiros')}</th><th>{t('informe.colPerroCercano')}</th><th>{t('informe.colDistCentro')}</th></tr></thead>
-        <tbody>
-          {report.dogs.map((d) => (
-            <tr key={d.id}>
-              <td>{d.name} <small>({rasgo(d)})</small></td>
-              <td>{d.placed ? cap(zona(d.zone)) : t('informe.noColocado')}</td>
-              <td>{d.moves}</td>
-              <td>{d.turns}</td>
-              <td>{d.nearestDogId ? `${nombre(d.nearestDogId)} (${Math.round(d.nearestDogDistance)})` : '—'}</td>
-              <td>{d.distanceToCenter != null ? Math.round(d.distanceToCenter) : '—'}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <p className={styles.leyenda}>{t('informe.distanciaMediaPerros', { valor: report.summary.meanPairDistance ?? '—' })}</p>
-
-      {report.story && (
-        <blockquote className={styles.cita}>
-          <span>{t('informe.relatoMenor')}</span>
-          “{report.story}”
-        </blockquote>
-      )}
-    </>
-  )
-}
-
-// Δ entre la fase 1 y la fase 2 tal como lo calculó el motor (avatarStore.#computeDelta).
-// El dato ya llegaba al informe dentro del snapshot 'dibujo' y se descartaba: aquí solo
-// se muestra, sin recalcular nada, para que lo que se ve y lo que se guarda sea lo mismo.
-function Delta({ dibujo }) {
-  const t = useT()
-  const d = dibujo?.deltaMetrics
-  if (!d) return <Pendiente texto={t('informe.sinDelta')} />
-
-  const conSigno = (v) => (v == null ? '—' : `${v > 0 ? '+' : ''}${v}`)
-  const pct = (v) => (v == null ? '—' : `${v > 0 ? '+' : ''}${v} %`)
-  const siNo = (v) => (v ? t('informe.si') : t('informe.no'))
-
-  const filas = [
-    [t('informe.deltaTemblor'), conSigno(d.delta_tremor_index), pct(d.tremor_change_percent)],
-    [t('informe.deltaPresion'), conSigno(d.delta_pressure_mean), pct(d.pressure_change_percent)],
-    [t('informe.deltaOcupacion'), conSigno(d.delta_occupancy_ratio), pct(d.occupancy_change_percent)],
-    [t('informe.deltaLatencia'), fmtSeg(d.delta_initial_latency_ms), ''],
-    [t('informe.deltaAire'), conSigno(d.delta_air_time_ratio), ''],
-    [t('informe.deltaVelocidad'), conSigno(d.delta_velocity_mean), ''],
-    [t('informe.deltaBorrados'), conSigno(d.delta_eraser_strokes), ''],
-    [t('informe.deltaMonocromia'), `${siNo(d.m1_monochrome)} → ${siNo(d.m2_monochrome)}`, ''],
-  ]
-
-  return (
-    <>
-      <h4 className={styles.subtituloBloque}>{t('informe.deltaTitulo')}</h4>
-      <table className={styles.tabla}>
-        <thead>
-          <tr>
-            <th>{t('informe.colIndicador')}</th>
-            <th>{t('informe.colDiferencia')}</th>
-            <th>{t('informe.colVariacion')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filas.map(([nombre, valor, variacion]) => (
-            <tr key={nombre}>
-              <td>{nombre}</td>
-              <td>{valor}</td>
-              <td>{variacion}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <p className={styles.leyenda}>{t('informe.deltaLeyenda')}</p>
-    </>
-  )
-}
-
-// Las alertas las genera el motor (avatarStore.#generateAlerts) con título y detalle ya
-// redactados. Se muestran tal cual: traducir el texto clínico no entra en este refactor (D12).
-function Alertas({ alertas }) {
-  const t = useT()
-  const lista = Array.isArray(alertas) ? alertas : []
-
-  return (
-    <>
-      <h4 className={styles.subtituloBloque}>{t('informe.alertasTitulo')}</h4>
-      {lista.length === 0 ? (
-        <p className={styles.leyenda}>{t('informe.sinAlertas')}</p>
-      ) : (
-        <ul className={styles.listaAlertas}>
-          {lista.map((alerta) => (
-            <li
-              key={alerta.type}
-              className={alerta.severity === 'warning' ? styles.alertaGrave : styles.alertaLeve}
-            >
-              <strong>{alerta.title}</strong>
-              <p>{alerta.detail}</p>
-            </li>
-          ))}
-        </ul>
-      )}
-    </>
-  )
-}
-
-function Dibujo({ dibujo }) {
-  const t = useT()
-  const fases = [['phase1', t('informe.primerDibujo')], ['phase2', t('informe.segundoDibujo')]].filter(([k]) => dibujo[k])
-  const filas = [
-    [t('informe.filaLatencia'), (m) => fmtSeg(m.initial_latency_ms)],
-    [t('informe.filaDuracionTotal'), (m) => fmtDuracion(m.duration_total_ms)],
-    [t('informe.filaTiempoActivo'), (m) => fmtDuracion(m.active_drawing_time_ms)],
-    [t('informe.filaPausas'), (m) => m.hesitation_pauses_count],
-    [t('informe.filaPausaMax'), (m) => fmtSeg(m.max_pause_duration_ms)],
-    [t('informe.filaTrazos'), (m) => m.strokes_count],
-    [t('informe.filaPresion'), (m) => m.pressure?.mean],
-    [t('informe.filaTemblor'), (m) => m.tremor?.jitter_index],
-    [t('informe.filaOcupacion'), (m) => (m.spatial?.occupancy_ratio != null ? `${Math.round(m.spatial.occupancy_ratio * 100)} %` : '—')],
-    [t('informe.filaCuadrante'), (m) => (CUADRANTE[m.spatial?.predominant_quadrant] ? t(`informe.${CUADRANTE[m.spatial.predominant_quadrant]}`) : m.spatial?.predominant_quadrant)],
-    [t('informe.filaColores'), (m) => {
-      const cs = Array.isArray(m.chromatic?.colors_used) ? m.chromatic.colors_used : []
-      return cs.length ? <span>{cs.map((c) => <span key={c} title={c} style={{ display: 'inline-block', width: 12, height: 12, borderRadius: 3, background: c, marginRight: 4, verticalAlign: -2, border: '1px solid #cbd5e1' }} />)} {cs.length}</span> : m.chromatic?.colors_used
-    }],
-    [t('informe.filaCambiosColor'), (m) => m.chromatic?.color_switches],
-  ]
-  const metricas = fases.map(([k]) => dibujo[`${k}Metrics`]).filter(Boolean)
-  return (
-    <>
-      <div className={styles.dos}>
-        {fases.map(([k, t]) => (
-          <figure key={k} className={styles.figura}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={dibujo[k]} alt={t} className={styles.dibujo} />
-            <figcaption><strong>{t}</strong>{dibujo.finalChoice === k && <span>{t('informe.elegidoAvatar')}</span>}</figcaption>
-          </figure>
-        ))}
-      </div>
-      {metricas.length > 0 ? (
-        <table className={styles.tabla}>
-          <thead><tr><th>{t('informe.colIndicador')}</th>{fases.filter(([k]) => dibujo[`${k}Metrics`]).map(([k, t]) => <th key={k}>{t}</th>)}</tr></thead>
-          <tbody>
-            {filas.map(([nombre, f]) => (
-              <tr key={nombre}><td>{nombre}</td>{metricas.map((m, i) => <td key={i}>{f(m) ?? '—'}</td>)}</tr>
-            ))}
-          </tbody>
-        </table>
-      ) : <Pendiente texto={t('informe.sinMetricasDibujo')} />}
-      <Delta dibujo={dibujo} />
-      <Alertas alertas={dibujo.alerts} />
-    </>
-  )
-}
+// Cada cuánto se sondea el caso mientras el informe está abierto. Se sondea el resumen ligero
+// (unos bytes) y solo se baja el caso completo cuando cambia: bajarse 50 KB de imágenes cada
+// 5 segundos no tenía sentido.
+const SONDEO_MS = 5000
 
 export default function InformeCaso({ params }) {
   const { t, lang } = useI18n()
@@ -365,16 +30,47 @@ export default function InformeCaso({ params }) {
 
   useEffect(() => {
     let vivo = true
-    const cargar = () => cargarCaso(id).then((c) => {
-      if (!vivo) return
-      setCaso(c)
-      setActualizado(new Date())
-    })
-    cargar()
-    const intervalo = setInterval(cargar, 5000)
+    let sondeo = null
+
+    const cargarCompleto = () =>
+      cargarCaso(id).then((c) => {
+        if (!vivo) return
+        setCaso(c)
+        setActualizado(new Date())
+      })
+
+    // Sondeo ligero: solo se baja el caso entero (con las imágenes del dibujo) si el
+    // contador de eventos o el último sello cambian.
+    let ultimoVisto = null
+    const sondear = async () => {
+      const r = await resumenCaso(id)
+      if (!vivo || !r) return
+      const firma = `${r.eventos}:${r.ultimo ?? ''}`
+      if (ultimoVisto !== null && firma === ultimoVisto) return
+      ultimoVisto = firma
+      cargarCompleto()
+    }
+
+    const arrancar = () => {
+      if (sondeo) return
+      sondear()
+      sondeo = setInterval(sondear, SONDEO_MS)
+    }
+    const parar = () => {
+      clearInterval(sondeo)
+      sondeo = null
+    }
+    // Sin pestaña visible no se sondea: no hay nadie mirando el informe.
+    const alCambiarVisibilidad = () => (document.hidden ? parar() : arrancar())
+
+    cargarCompleto()
+    if (!document.hidden) arrancar()
+    document.addEventListener('visibilitychange', alCambiarVisibilidad)
+
     return () => {
       vivo = false
-      clearInterval(intervalo)
+      parar()
+      document.removeEventListener('visibilitychange', alCambiarVisibilidad)
     }
   }, [id])
 
@@ -385,6 +81,28 @@ export default function InformeCaso({ params }) {
   const enCurso = a.ultimo && Date.now() - a.ultimo < 90000 && !a.terminado
 
   if (!caso) return <div className={styles.page}><p className={styles.cargando}>{t('informe.cargandoInforme')}</p></div>
+
+  // La API puede fallar o el caso no existir. Antes se pintaba un informe vacío con aspecto
+  // normal y atribuido a "este navegador"; ahora se dice lo que pasa.
+  if (caso.fuente === 'error' || caso.fuente === 'inexistente') {
+    const esInexistente = caso.fuente === 'inexistente'
+    return (
+      <div className={styles.page}>
+        <div className={styles.topbar}>
+          <Link href="/informe" className={styles.btnTopBack}>{t('informe.volverCasos')}</Link>
+        </div>
+        <main className={styles.mainContainer}>
+          <section className={styles.seccionCard} role="alert">
+            <h1>{esInexistente ? t('informe.casoInexistenteTitulo') : t('informe.errorCargaTitulo')}</h1>
+            <p>{esInexistente ? t('informe.casoInexistenteTexto', { id }) : t('informe.errorCargaTexto')}</p>
+            {!esInexistente && caso.error != null && (
+              <p className={styles.leyenda}>{t('informe.errorDetalle', { detalle: String(caso.error) })}</p>
+            )}
+          </section>
+        </main>
+      </div>
+    )
+  }
 
   return (
     <div className={styles.page}>
@@ -411,13 +129,22 @@ export default function InformeCaso({ params }) {
             <dt>{t('informe.dtInicio')}</dt><dd>{fmtFecha(a.inicio, lang)}</dd>
             <dt>{t('informe.dtUltima')}</dt><dd>{fmtFecha(a.ultimo, lang)}</dd>
             <dt>{t('informe.dtEstado')}</dt><dd>{t(a.terminado ? 'informe.estadoCompletada' : enCurso ? 'informe.estadoEnCurso' : a.inicio ? 'informe.estadoIncompleta' : 'informe.estadoSinActividad')}</dd>
-            <dt>{t('informe.dtOrigen')}</dt><dd>{t(caso.fuente === 'servidor' ? 'informe.origenServidor' : 'informe.origenNavegador')}</dd>
+            <dt>{t('informe.dtOrigen')}</dt><dd>{t('informe.origenServidor')}</dd>
           </dl>
         </header>
 
         <div className={styles.avisoCard}>
           <strong>{t('informe.avisoTitulo')}</strong> {t('informe.avisoTexto')}
         </div>
+
+        {/* Si el reloj del dispositivo se desvía del servidor, las duraciones medidas en el
+            navegador dejan de ser fiables. Mejor decirlo que publicarlas como exactas. */}
+        {a.desfase?.medido && !a.desfase.fiable && (
+          <div className={styles.avisoDatos} role="status">
+            <strong>{t('informe.desfaseTitulo')}</strong>{' '}
+            {t('informe.desfaseTexto', { max: fmtSeg(a.desfase.maxMs) })}
+          </div>
+        )}
         {meta.contexto && <p className={styles.contextoCard}><strong>{t('informe.contextoProfesional')}</strong> {meta.contexto}</p>}
 
         <div className={styles.kpisSection}>
@@ -548,4 +275,5 @@ export default function InformeCaso({ params }) {
     </div>
   )
 }
+
 

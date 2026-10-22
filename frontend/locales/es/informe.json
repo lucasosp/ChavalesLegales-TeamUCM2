@@ -136,7 +136,6 @@
   "estadoIncompleta": "Incompleta",
   "estadoSinActividad": "Sin actividad",
   "origenServidor": "Servidor de la plataforma",
-  "origenNavegador": "Este navegador",
   "avisoTitulo": "Documento descriptivo, sin valoración.",
   "avisoTexto": "Este informe recoge datos objetivos de la interacción del menor con la plataforma (tiempos, elecciones y producciones). No constituye diagnóstico, evaluación psicológica ni veredicto, y las adaptaciones digitales de las pruebas no están baremadas. Su interpretación corresponde a profesionales cualificados, en contexto y contrastada con otras fuentes (entrevista, observación, informes previos). Las referencias a “valores destacados” se calculan respecto a la propia línea base del menor, no respecto a normas poblacionales.",
   "contextoProfesional": "Contexto aportado por el profesional:",
@@ -228,5 +227,12 @@
   "sinAlertas": "No se han superado los umbrales de alerta.",
   "duracionActividad": "Tiempo dedicado a la actividad: {duracion}",
   "dibujoDetalle": "dibujo · fase {fases} · elegido: {elegido}",
-  "exportarEventos": "Exportar eventos"
+  "exportarEventos": "Exportar eventos",
+  "casoInexistenteTitulo": "Este caso no existe",
+  "casoInexistenteTexto": "No hay ningún caso con el identificador {id}. Comprueba el enlace o vuelve al listado.",
+  "errorCargaTitulo": "No se pudo cargar el informe",
+  "errorCargaTexto": "La plataforma no responde. El informe no está vacío: no se ha podido leer. Vuelve a intentarlo en unos segundos.",
+  "errorDetalle": "Detalle técnico: {detalle}",
+  "desfaseTitulo": "Aviso sobre los tiempos",
+  "desfaseTexto": "El reloj del dispositivo donde se jugó la sesión difiere del del servidor hasta {max}. Las duraciones medidas en el navegador (latencia de decisión, tiempo de dibujo) pueden no ser fiables."
 }

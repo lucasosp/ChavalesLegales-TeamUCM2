@@ -15,13 +15,30 @@ export function desviacion(xs) {
   return xs.length > 1 ? Math.sqrt(xs.reduce((a, x) => a + (x - m) ** 2, 0) / (xs.length - 1)) : 0
 }
 
+// Reloj a usar: el del servidor cuando existe (esquema 2+). El `t` del cliente solo se usa
+// como respaldo en casos antiguos, porque un reloj mal puesto o una pestaña suspendida
+// corrompen todas las duraciones del informe.
+export const tEvento = (e) => (typeof e?.t_servidor === 'number' ? e.t_servidor : e?.t)
+
+// Desfase entre el reloj del cliente y el del servidor. Si es grande, las duraciones medidas
+// en el navegador (latencia de decisión, tiempo de dibujo) no son fiables.
+function desfaseRelojes(eventos, umbralMs = 5000) {
+  const pares = eventos
+    .filter((e) => typeof e?.t === 'number' && typeof e?.t_servidor === 'number')
+    .map((e) => e.t_servidor - e.t)
+  if (!pares.length) return { medianaMs: null, maxMs: null, fiable: true, medido: false }
+  const medianaMs = mediana(pares)
+  const maxMs = Math.max(...pares.map(Math.abs))
+  return { medianaMs, maxMs, fiable: maxMs <= umbralMs, medido: true }
+}
+
 export function analizar(caso) {
-  const eventos = [...(caso?.eventos ?? [])].sort((a, b) => a.t - b.t)
-  const inicio = eventos.find((e) => e.kind === 'inicio')?.t ?? eventos[0]?.t ?? null
-  const ultimo = eventos.at(-1)?.t ?? null
+  const eventos = [...(caso?.eventos ?? [])].sort((a, b) => tEvento(a) - tEvento(b))
+  const inicio = tEvento(eventos.find((e) => e.kind === 'inicio')) ?? tEvento(eventos[0]) ?? null
+  const ultimo = tEvento(eventos.at(-1)) ?? null
 
   // Historia: decisiones y su latencia
-  const decisiones = eventos.filter((e) => e.kind === 'decision').map((e) => ({ ...e.data, t: e.t }))
+  const decisiones = eventos.filter((e) => e.kind === 'decision').map((e) => ({ ...e.data, t: tEvento(e) }))
   const tiempos = decisiones.map((d) => d.time_ms).filter(Number.isFinite)
   const med = mediana(tiempos)
   const sd = desviacion(tiempos)
@@ -46,9 +63,9 @@ export function analizar(caso) {
     }
     vistos.add(id)
     capitulos[cap].pantallas++
-    const siguiente = progreso[i + 1]?.t
+    const siguiente = tEvento(progreso[i + 1])
     if (siguiente && tipo !== 'external') {
-      const dt = siguiente - e.t
+      const dt = siguiente - tEvento(e)
       if (dt > PAUSA_LARGA_MS) pausasLargas++
       capitulos[cap].lecturaMs += Math.min(dt, TOPE_LECTURA_MS)
     }
@@ -58,8 +75,9 @@ export function analizar(caso) {
   // Minijuegos: último informe de cada uno y su duración
   const minijuegos = {}
   eventos.filter((e) => e.kind === 'minijuego').forEach((e) => {
-    const ini = [...eventos].reverse().find((x) => x.kind === 'minijuego-inicio' && x.data.game === e.data.game && x.t <= e.t)
-    minijuegos[e.data.game] = { ...e.data, duracionMs: ini ? e.t - ini.t : null, t: e.t }
+    const t = tEvento(e)
+    const ini = [...eventos].reverse().find((x) => x.kind === 'minijuego-inicio' && x.data.game === e.data.game && tEvento(x) <= t)
+    minijuegos[e.data.game] = { ...e.data, duracionMs: ini ? t - tEvento(ini) : null, t }
   })
 
   const dibujo = [...eventos].reverse().find((e) => e.kind === 'dibujo')?.data ?? null
@@ -70,7 +88,7 @@ export function analizar(caso) {
     ultimo,
     duracionMs: inicio && ultimo ? ultimo - inicio : 0,
     // Accesos separados por más de 5 s (el modo desarrollo monta la página dos veces)
-    sesiones: eventos.filter((e) => e.kind === 'inicio').filter((e, i, xs) => !i || e.t - xs[i - 1].t > 5000).length,
+    sesiones: eventos.filter((e) => e.kind === 'inicio').filter((e, i, xs) => !i || tEvento(e) - tEvento(xs[i - 1]) > 5000).length,
     terminado,
     decisiones,
     latencia: { mediana: med, media: media(tiempos), sd, min: tiempos.length ? Math.min(...tiempos) : null, max: tiempos.length ? Math.max(...tiempos) : null },
@@ -80,6 +98,7 @@ export function analizar(caso) {
     pausasLargas,
     minijuegos,
     dibujo,
+    desfase: desfaseRelojes(eventos),
     eventos,
   }
 }

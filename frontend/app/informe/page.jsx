@@ -6,10 +6,7 @@ import styles from './informe.module.css'
 import { listarCasos } from '../../lib/casos'
 import { useI18n } from '../../lib/i18n'
 import { localeDe } from './analisis'
-
-// El caso guarda el id del riesgo; el texto se resuelve en la lengua del lector.
-const textoRiesgo = (t, meta) =>
-  meta?.tipoRiesgoId ? t(`profesores.riesgo_${meta.tipoRiesgoId}`) : meta?.tipoRiesgo
+import { textoRiesgo } from './riesgo'
 
 export default function ListaInformes() {
   const { t, lang } = useI18n()
