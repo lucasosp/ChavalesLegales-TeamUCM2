@@ -1,0 +1,11 @@
+# Prototipo aislado. Sin versiones fijadas: no se han podido instalar todas aquí (ver README).
+# Para reproducir, instala y congela con `pip freeze`.
+fastapi>=0.110
+uvicorn>=0.29
+pydantic>=2
+httpx>=0.27            # solo para las pruebas de la API (TestClient)
+redis>=5               # opcional: USE_REDIS=1
+chromadb>=0.5          # opcional: USE_CHROMA=1 (descarga un modelo de embeddings la 1.ª vez)
+google-genai>=1        # opcional: USE_GEMINI=1 y GEMINI_API_KEY en el entorno
+# networkx: no hace falta, el DAG usa graphlib (biblioteca estándar).
+# langchain: no se usa, el DAG es propio (dag_swarm/node_swarm.py).
