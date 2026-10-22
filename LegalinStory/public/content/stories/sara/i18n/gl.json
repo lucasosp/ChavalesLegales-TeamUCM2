@@ -111,7 +111,7 @@
         ]
       },
       "c2-privacy": {
-        "text": "Non che podo prometer que quede só entre nós. Direiche a que profesionais llo conto e para que. Se hai un proceso xudicial, tamén terán que coñecelo quen intervén nel. A túa clase non necesita sabelo."
+        "text": "Non che podo prometer que quede só entre nós. Direiche a que profesionais llo conto e para que. A túa clase non necesita sabelo."
       },
       "c2-dad": {
         "text": "Non imos chamar sen pensar no teu medo. As persoas que saben disto decidirán como facelo para que esteas segura. Irei contándoche o que saiba."
@@ -160,7 +160,7 @@
         "text": "Non, non é un exame. Queremos saber que está pasando e que axuda necesitades. Tamén falaremos coa túa nai e veremos como está Dani."
       },
       "c3-social": {
-        "text": "Valorar quere dicir coñecer que necesitades e se estades seguros. Disto ocupámonos en Servizos Sociais. Se o Tribunal de Instancia investiga o que pasou, iso fano outras persoas."
+        "text": "Valorar quere dicir coñecer que necesitades e se estades seguros. Disto ocupámonos en Servizos Sociais."
       },
       "c3-choice": {
         "prompt": "Sara ten moitas preguntas. Cal fai primeiro?",
@@ -180,7 +180,7 @@
         "text": "A Dani tamén o van escoitar e imos ver que necesita. Ti non tes que vixiar que todo saia ben. Iso toca ás persoas adultas."
       },
       "c3-privacy": {
-        "text": "Non che podo prometer que quede só entre nós. Direiche a que profesionais llo conto e para que. Se hai un proceso xudicial, tamén terán que coñecelo quen intervén nel. A túa clase non necesita sabelo."
+        "text": "Non che podo prometer que quede só entre nós. Direiche a que profesionais llo conto e para que. A túa clase non necesita sabelo."
       },
       "c3-home": {
         "text": "Pedir axuda non quere dicir que teñas que marchar da casa sen máis. Primeiro mírase se estades seguros. E a túa opinión conta: teñen que escoitarte."
@@ -189,10 +189,10 @@
         "text": "Miña nai sabe algunhas cousas, pero non todas. Ás veces dime que non lle leve a contraria a papá. Non sei que teño que facer."
       },
       "c3-04": {
-        "text": "Ti non tes que conseguir que o teu pai se porte ben. Iso non é tarefa túa. A túa nai tamén vai recibir axuda. Falaremos contigo a soas para escoitar que necesitas e que che preocupa."
+        "text": "Ti non tes que conseguir que o teu pai se porte ben. Iso non é tarefa túa. A túa nai tamén vai recibir axuda."
       },
       "c3-05": {
-        "text": "Sara, a súa nai e Dani seguen na casa da súa tía. O equipo escoitou os dous irmáns e revisa como protexelos. A súa nai está recibindo axuda para poder coidalos sen Javier."
+        "text": "Sara, a súa nai e Dani seguen na casa da súa tía. O equipo escoitou os dous irmáns e revisa como protexelos."
       },
       "c3-06": {
         "text": "Metín as zapatillas de voleibol na mochila. Non sei se as vou usar, pero non quería deixalas."
@@ -212,7 +212,7 @@
         ]
       },
       "c3-contact": {
-        "text": "Daréiche os teléfonos do equipo e explicareiche que facer se algo cambia. Se hai perigo inmediato, chámase ao 112. Podes pedir axuda aínda que non saibas canto perigo hai."
+        "text": "Daréiche os teléfonos do equipo e explicareiche que facer se algo cambia. Se hai perigo inmediato, chámase ao 112."
       },
       "c3-school": {
         "text": "Falarémolo con Laura. Axudarache a poñerte ao día cos deberes, sen contarlle á clase o que che pasa."
@@ -330,7 +330,7 @@
         "text": "Un tempo despois. Saber quen é quen."
       },
       "c5-01": {
-        "text": "Despois do aviso do instituto e das primeiras medidas de protección, unha praza do Tribunal de Instancia segue investigando o ocorrido. Chega unha carta para que Sara declare. Irene le con ela e coa súa nai."
+        "text": "Chega unha carta para que Sara declare. Irene le con ela e coa súa nai."
       },
       "c5-02": {
         "text": "A carta ten palabras moi raras. Non entendo nada."
@@ -340,11 +340,11 @@
         "speaker": "Irene · avogada"
       },
       "c5-justice": {
-        "text": "O tribunal investiga o ocorrido e se o teu pai é responsable dun delito. Mentres, seguimos coidando da túa seguridade. Non hai que esperar a unha sentenza para protexerte.",
+        "text": "O tribunal investiga o ocorrido e se o teu pai é responsable dun delito. Non hai que esperar a unha sentenza para protexerte.",
         "speaker": "Irene · avogada"
       },
       "c5-team": {
-        "text": "Antes chamábase xulgado; agora é o Tribunal de Instancia. O teu caso lévao unha praza da súa Sección de Violencia contra a Infancia e a Adolescencia. Alí vas ver varias persoas. Cada unha ten un traballo distinto. Presentocho para que non te lies.",
+        "text": "Antes chamábase xulgado; agora é o Tribunal de Instancia. O teu caso lévao unha praza da súa Sección de Violencia contra a Infancia e a Adolescencia. Alí vas ver varias persoas.",
         "speaker": "Irene · avogada"
       },
       "c5-oficina": {
@@ -352,15 +352,15 @@
         "speaker": "Irene · avogada"
       },
       "c5-juez": {
-        "text": "A xuíza dirixe a investigación e decide as medidas que necesitan unha decisión xudicial. Se o caso pasa a xuízo, decidirao outro xuíz ou tribunal. Todos teñen que respectar os teus dereitos e os das demais persoas.",
+        "text": "A xuíza dirixe a investigación e decide as medidas que necesitan unha decisión xudicial. Se o caso pasa a xuízo, decidirao outro xuíz ou tribunal.",
         "speaker": "Irene · avogada"
       },
       "c5-laj": {
-        "text": "A letrada da Administración de Xustiza ocúpase de que o que pasa quede documentado con garantías. É outra profesional; non é a túa avogada. Non sempre ten que estar sentada na sala.",
+        "text": "A letrada da Administración de Xustiza ocúpase de que o que pasa quede documentado con garantías. É outra profesional; non é a túa avogada.",
         "speaker": "Irene · avogada"
       },
       "c5-fiscal": {
-        "text": "O fiscal defende a legalidade. Pode acusar a quen fixo dano e tamén vela polos teus dereitos. A túa avogada defende os teus intereses.",
+        "text": "O fiscal defende a legalidade. A túa avogada defende os teus intereses.",
         "speaker": "Irene · avogada"
       },
       "c5-psicosocial": {
@@ -386,14 +386,14 @@
         ]
       },
       "c5-people": {
-        "text": "A xuíza dirixe a declaración e o fiscal coida tamén dos teus dereitos. Eu participo como a túa avogada. A defensa do teu pai tamén pode facer preguntas, co control da xuíza. Antes explicareiche como.",
+        "text": "A xuíza dirixe a declaración e o fiscal coida tamén dos teus dereitos. Eu participo como a túa avogada. A defensa do teu pai tamén pode facer preguntas, co control da xuíza.",
         "speaker": "Irene · avogada"
       },
       "c5-people2": {
-        "text": "Eu non decido nada no tribunal. Podo acompañarte se ti queres, salvo que se explique unha razón para que non entre. Tamén podemos acordar que te espere fóra."
+        "text": "Eu non decido nada no tribunal. Podo acompañarte se ti queres, salvo que se explique unha razón para que non entre."
       },
       "c5-room": {
-        "text": "Teñen que organizar a espera para que non vos atopedes. Iremos antes ver por onde entras e onde esperas. Xa falamos coa oficina de vítimas.",
+        "text": "Teñen que organizar a espera para que non vos atopedes. Iremos antes ver por onde entras e onde esperas.",
         "speaker": "Irene · avogada"
       },
       "c5-rights": {
@@ -401,14 +401,14 @@
         "speaker": "Irene · avogada"
       },
       "c5-supports": {
-        "text": "Teñen que organizar as cousas para que non te atopes co teu pai. Ademais, imos pedir outra sala, videoconferencia e apoio dunha psicóloga. A xuíza decidirá como organizar eses apoios segundo o que necesites.",
+        "text": "Teñen que organizar as cousas para que non te atopes co teu pai. Ademais, imos pedir outra sala, videoconferencia e apoio dunha psicóloga.",
         "speaker": "Irene · avogada"
       },
       "c5-privacy": {
         "text": "Preocupábate quen se ía enterar. Na sala só estarán as persoas que teñen que estar. O que contes alí non llo dirán á túa clase."
       },
       "c5-short": {
-        "text": "Como me pediches, unha cousa cada vez. Primeiro, quen te recibe. Despois, que vai pasar. Entre unha cousa e outra, podes preguntar."
+        "text": "Como me pediches, unha cousa cada vez. Primeiro, quen te recibe. Despois, que vai pasar."
       },
       "c5-overview": {
         "text": "Recibiranche e explicaranche que vai pasar. Logo falarás coas axudas que se pedisen. Ao rematar, veremos xuntas que vén despois."
@@ -449,11 +449,11 @@
         "text": "Chega o día. Sara entra por outra porta, así non se cruza con Javier. Unha muller da oficina de vítimas acompáñaa a unha sala con butacas e explícalle onde estará cada persoa."
       },
       "c5-06": {
-        "text": "Ola, Sara. Hoxe imos escoitarte para investigar o que pasou. Irene xa che explicou por que tes que declarar neste caso. Se algo non está claro, falámolo antes de comezar.",
+        "text": "Ola, Sara. Hoxe imos escoitarte para investigar o que pasou. Se algo non está claro, falámolo antes de comezar.",
         "speaker": "Xuíza"
       },
       "c5-07": {
-        "text": "Acordáronse os apoios para Sara. Declara por videoconferencia desde outra sala, sen ver a Javier, cunha psicóloga ao seu lado. A declaración queda gravada. Sara preferiu que Elena a espere fóra."
+        "text": "Declara por videoconferencia desde outra sala, sen ver a Javier, cunha psicóloga ao seu lado. A declaración queda gravada."
       },
       "c5-08": {
         "text": "Estou cansa. Podemos estar un anaco sen falar disto?"
@@ -467,7 +467,7 @@
         "text": "Agardar tamén é parte do camiño."
       },
       "c6-01": {
-        "text": "Pasan as semanas. Algúns días non hai novas. Mentres, Sara segue vendo Elena, e as persoas que a axudan seguen pendentes de que a súa familia estea a salvo."
+        "text": "Pasan as semanas. Mentres, Sara segue vendo Elena, e as persoas que a axudan seguen pendentes de que a súa familia estea a salvo."
       },
       "c6-02": {
         "text": "Todos me din «xa te avisaremos». Ás veces miro o móbil e non sei se quero que chegue unha mensaxe ou que non chegue."
@@ -570,13 +570,13 @@
         "text": "E se papá vén buscarme ao instituto?"
       },
       "c3-measures": {
-        "text": "No voso caso, a xuíza xa prohibiu que Javier se achegue a ti e a Dani ou se comunique convosco. Tamén suspendeu as súas visitas por agora. Son medidas para protexervos mentres se investiga."
+        "text": "No voso caso, a xuíza xa prohibiu que Javier se achegue a ti e a Dani ou se comunique convosco. Son medidas para protexervos mentres se investiga."
       },
       "c3-safety-plan": {
-        "text": "O instituto coñece esas medidas e acordamos quen vos recolle. Se o teu pai intenta achegarse ou escribirvos, avisa a unha persoa adulta do equipo. Se hai perigo inmediato, chama ao 112."
+        "text": "Se o teu pai intenta achegarse ou escribirvos, avisa a unha persoa adulta do equipo. Se hai perigo inmediato, chama ao 112."
       },
       "c3-safety-followup": {
-        "text": "Daréiche os teléfonos do equipo. Seguiremos mirando se estades seguros: ir á casa da túa tía é só unha parte do plan. Ti non tes que vixiar o teu pai nin facer que cumpra."
+        "text": "Daréiche os teléfonos do equipo. Ti non tes que vixiar o teu pai nin facer que cumpra."
       },
       "c3-lawyer-intro": {
         "text": "O equipo presenta a Irene, unha avogada que defenderá os intereses de Sara. Irene fala con ela e coa súa nai, tamén por separado."
@@ -586,86 +586,86 @@
         "speaker": "Irene · avogada"
       },
       "c3-defender": {
-        "text": "Se a túa nai tampouco puidese representarte ben, pediríaselle á xuíza outra persoa para facelo: un defensor xudicial. Non é o mesmo que ter avogada. Non terías que resolvelo ti soa.",
+        "text": "Se a túa nai tampouco puidese representarte ben, pediríaselle á xuíza outra persoa para facelo: un defensor xudicial.",
         "speaker": "Irene · avogada"
       },
       "c3-party": {
-        "text": "Podemos participar no caso como acusación particular, coa túa propia avogada. Así podo pedir probas e medidas para ti e defender os teus intereses. Non es ti quen decide o castigo.",
+        "text": "Podemos participar no caso como acusación particular, coa túa propia avogada. Non es ti quen decide o castigo.",
         "speaker": "Irene · avogada"
       },
       "c5-investigation": {
-        "text": "Esta parte chámase investigación ou instrución. Escóitase as persoas e búscanse outras probas para saber que pasou. A túa declaración é unha parte. Hoxe aínda non se decide se hai condena.",
+        "text": "Esta parte chámase investigación ou instrución. Hoxe aínda non se decide se hai condena.",
         "speaker": "Irene · avogada"
       },
       "c5-attend-question": {
         "text": "Teño que falar aínda que sexa o meu pai?"
       },
       "c5-family-rule": {
-        "text": "Ás veces a lei permite non declarar contra un familiar. Chámase dispensa. Pero ten excepcións. Ir cando te citan e ter que declarar non son o mesmo: hai que mirar antes a túa situación.",
+        "text": "Ás veces a lei permite non declarar contra un familiar. Chámase dispensa.",
         "speaker": "Irene · avogada"
       },
       "c5-family-case": {
-        "text": "No teu caso, como xa participas como acusación particular, esa dispensa non se aplica e tes que declarar. Non é porque cumprises catorce anos. Eu acompañareite e explicareiche o que non entendas.",
+        "text": "No teu caso, como xa participas como acusación particular, esa dispensa non se aplica e tes que declarar. Eu acompañareite e explicareiche o que non entendas.",
         "speaker": "Irene · avogada"
       },
       "c5-company": {
-        "text": "Ademais da túa avogada, pode acompañarte unha persoa que ti elixas, como Elena. Se se decide que non entre para que a declaración se faga ben, teñen que explicar o motivo. Podemos falar de quen che axudaría máis.",
+        "text": "Ademais da túa avogada, pode acompañarte unha persoa que ti elixas, como Elena. Podemos falar de quen che axudaría máis.",
         "speaker": "Irene · avogada"
       },
       "c5-recording-question": {
         "text": "Van gravarme? Así non teño que volver?"
       },
       "c5-recording": {
-        "text": "Si, grávase porque es menor. Para usala no xuízo sen que volvas declarar fan falta garantías especiais: tamén debe participar a defensa do teu pai. Iso chámase proba preconstituída. Gravar, por si só, non abonda.",
+        "text": "Si, grávase porque es menor. Para usala no xuízo sen que volvas declarar fan falta garantías especiais: tamén debe participar a defensa do teu pai.",
         "speaker": "Irene · avogada"
       },
       "c5-age-rule": {
-        "text": "Para certos delitos, esa declaración con garantías especiais é obrigatoria se aínda non cumpriches catorce anos. Ti xa os tes: non é automática pola túa idade. Segues tendo dereito a protección e apoios como menor.",
+        "text": "Para certos delitos, esa declaración con garantías especiais é obrigatoria se aínda non cumpriches catorce anos. Ti xa os tes: non é automática pola túa idade.",
         "speaker": "Irene · avogada"
       },
       "c5-recording-case": {
-        "text": "No teu caso, esta declaración serve para a investigación. Gravarana, pero iso non substitúe por si só declarar no xuízo. Se tes que volver, avisareite e prepararemos os apoios outra vez.",
+        "text": "No teu caso, esta declaración serve para a investigación. Gravarana, pero iso non substitúe por si só declarar no xuízo.",
         "speaker": "Irene · avogada"
       },
       "c5-communication": {
-        "text": "Lembra: podes pedir que che expliquen unha pregunta, dicir que non lembras algo e pedir unha pausa. Non inventes o que non sabes. O importante é contar o que lembras coas túas palabras.",
+        "text": "Lembra: podes pedir que che expliquen unha pregunta, dicir que non lembras algo e pedir unha pausa. O importante é contar o que lembras coas túas palabras.",
         "speaker": "Irene · avogada"
       },
       "c6-investigation-end": {
-        "text": "Non todas as investigacións chegan a xuízo. Ás veces arquívanse porque non se pode continuar, por exemplo se non hai datos suficientes para seguir. Arquivar é pechar o caso, de forma provisional ou definitiva segundo o motivo. Eu explicaríache que significa e se se pode recorrer.",
+        "text": "Non todas as investigacións chegan a xuízo. Ás veces arquívanse porque non se pode continuar, por exemplo se non hai datos suficientes para seguir.",
         "speaker": "Irene · avogada"
       },
       "c6-trial-notice": {
-        "text": "No teu caso, o fiscal e nós presentamos unha acusación contra Javier. O seu avogado puido defendelo. Agora haberá un xuízo: outro xuíz ou tribunal escoitará as probas antes de decidir.",
+        "text": "No teu caso, o fiscal e nós presentamos unha acusación contra Javier. Agora haberá un xuízo: outro xuíz ou tribunal escoitará as probas antes de decidir.",
         "speaker": "Irene · avogada"
       },
       "c6-trial-question": {
         "text": "Entón, a outra vez era para investigar. Agora van decidir se hai probas para condenalo. E teño que volver falar?"
       },
       "c6-trial-supports": {
-        "text": "Si, citáronte para declarar no xuízo. Volvemos organizar os apoios: outra sala, videoconferencia e unha psicóloga contigo. Tamén prepararon a espera para que non te cruces co teu pai.",
+        "text": "Si, citáronte para declarar no xuízo. Volvemos organizar os apoios: outra sala, videoconferencia e unha psicóloga contigo.",
         "speaker": "Irene · avogada"
       },
       "c6-trial": {
-        "text": "O día do xuízo, Sara declara con eses apoios. O tribunal escoita tamén as demais probas e as partes. Ao terminar, Elena acompáñaa a saír. A decisión non depende só do que diga Sara."
+        "text": "O día do xuízo, Sara declara con eses apoios. A decisión non depende só do que diga Sara."
       },
       "c6-after-trial": {
-        "text": "Agora o tribunal decidirá e explicarao por escrito. Ese documento é a sentenza. Pode condenar ou absolver. Absolver quere dicir que non impón unha condena. Cando chegue, lerémola xuntas.",
+        "text": "Agora o tribunal decidirá e explicarao por escrito. Ese documento é a sentenza. Pode condenar ou absolver. Absolver quere dicir que non impón unha condena.",
         "speaker": "Irene · avogada"
       },
       "c6-sentence-arrives": {
         "text": "Un tempo despois do xuízo, o móbil de Sara vibra."
       },
       "c6-appeal": {
-        "text": "Recorrer é pedir a outro tribunal que revise a decisión. Javier e a nosa parte podemos facelo se a lei o permite e dentro dun prazo. Explicareiche as opcións. Cando xa non se pode recorrer, a sentenza é firme.",
+        "text": "Recorrer é pedir a outro tribunal que revise a decisión. Cando xa non se pode recorrer, a sentenza é firme.",
         "speaker": "Irene · avogada"
       },
       "c6-protection-after": {
-        "text": "Revisaremos que medidas seguen, cales cambian e que protección necesitas agora. A axuda de Elena e do equipo organízase segundo como esteas. Non tes que deixar de pedir axuda porque chegase unha sentenza.",
+        "text": "Revisaremos que medidas seguen, cales cambian e que protección necesitas agora. Non tes que deixar de pedir axuda porque chegase unha sentenza.",
         "speaker": "Irene · avogada"
       },
       "c3-party-warning": {
-        "text": "Ao participar así, non podes usar a dispensa: a posibilidade que ás veces permite non declarar contra un familiar. Antes de facelo, imos falalo con calma. Recibir protección non depende de que participes desta forma.",
+        "text": "Ao participar así, non podes usar a dispensa: a posibilidade que ás veces permite non declarar contra un familiar. Recibir protección non depende de que participes desta forma.",
         "speaker": "Irene · avogada"
       },
       "c3-party-confirmed": {
@@ -827,18 +827,18 @@
     "notes": {
       "protection": {
         "title": "A protección pode comezar aquí",
-        "text": "O centro debe avisar inmediatamente os Servizos Sociais. Se a saúde ou a seguridade están ameazadas, tamén a Policía e/ou a Fiscalía; os posibles delitos deben comunicarse á Policía, á Fiscalía ou á autoridade xudicial. Non debe esperar a que Sara denuncie nin reunir probas por conta propia.",
+        "text": "O centro debe avisar inmediatamente os Servizos Sociais. Non debe esperar a que Sara denuncie nin reunir probas por conta propia.",
         "dialogue": "Non imos esperar a que denuncies ti. Co que me contaches xa teño que pedir axuda e comunicar o ocorrido. Explicareiche que facemos para protexerte."
       },
       "privacy": {
         "title": "Quen necesita sabelo",
         "text": "Laura non pode prometer segredo absoluto. Explicará que profesionais deben intervir para protexer a Sara e compartirá a información necesaria para iso.",
-        "dialogue": "Non che podo prometer que quede só entre nós. Direiche a que profesionais llo conto e para que. Se hai un proceso xudicial, tamén terán que coñecelo quen intervén nel. A túa clase non necesita sabelo."
+        "dialogue": "Non che podo prometer que quede só entre nós. Direiche a que profesionais llo conto e para que. A túa clase non necesita sabelo."
       },
       "social": {
         "title": "Valorar é coñecer para axudar",
         "text": "Os Servizos Sociais e a protección de menores valoran a seguridade e as necesidades familiares. A intervención social e a investigación penal teñen funcións distintas.",
-        "dialogue": "Valorar quere dicir coñecer que necesitades e se estades seguros. Disto ocupámonos en Servizos Sociais. Se o Tribunal de Instancia investiga o que pasou, iso fano outras persoas."
+        "dialogue": "Valorar quere dicir coñecer que necesitades e se estades seguros. Disto ocupámonos en Servizos Sociais."
       },
       "brother": {
         "title": "Dani tamén conta",
@@ -847,7 +847,7 @@
       },
       "housing": {
         "title": "A convivencia valórase en cada caso",
-        "text": "Pedir axuda non implica automaticamente saír da casa. As autoridades competentes valoran medidas segundo a seguridade de cada menor. Sara ten dereito a ser escoitada.",
+        "text": "Pedir axuda non implica automaticamente saír da casa. As autoridades competentes valoran medidas segundo a seguridade de cada menor.",
         "dialogue": "Pedir axuda non quere dicir que teñas que marchar da casa sen máis. Primeiro mírase se estades seguros. E a túa opinión conta: teñen que escoitarte."
       },
       "everyday": {
@@ -857,13 +857,13 @@
       },
       "justice": {
         "title": "Dous traballos que poden avanzar á vez",
-        "text": "A protección coida da seguridade de Sara. Unha praza do Tribunal de Instancia investiga o que pasou e quen é responsable. Como Javier é adulto, o seu caso lévao a xustiza penal de adultos, aínda que Sara sexa menor.",
-        "dialogue": "O tribunal investiga o ocorrido e se o teu pai é responsable dun delito. Mentres, seguimos coidando da túa seguridade. Non hai que esperar a unha sentenza para protexerte."
+        "text": "A protección coida da seguridade de Sara. Unha praza do Tribunal de Instancia investiga o que pasou e quen é responsable.",
+        "dialogue": "O tribunal investiga o ocorrido e se o teu pai é responsable dun delito. Non hai que esperar a unha sentenza para protexerte."
       },
       "supports": {
         "title": "Unha declaración con apoios",
-        "text": "Debe evitarse o contacto directo nas dependencias xudiciais. As necesidades de Sara valóranse individualmente, tendo en conta os seus 14 anos, o vínculo co investigado e o risco. A sala á parte, a videoconferencia e a axuda especializada son medidas concretas que a autoridade acorda segundo esas necesidades.",
-        "dialogue": "Teñen que organizar as cousas para que non te atopes co teu pai. Ademais, imos pedir outra sala, videoconferencia e apoio dunha psicóloga. A xuíza decidirá como organizar eses apoios segundo o que necesites."
+        "text": "Debe evitarse o contacto directo nas dependencias xudiciais. A sala á parte, a videoconferencia e a axuda especializada son medidas concretas que a autoridade acorda segundo esas necesidades.",
+        "dialogue": "Teñen que organizar as cousas para que non te atopes co teu pai. Ademais, imos pedir outra sala, videoconferencia e apoio dunha psicóloga."
       },
       "repeat": {
         "title": "Pedir outra explicación",
@@ -872,7 +872,7 @@
       },
       "memory": {
         "title": "Non hai que encher os ocos",
-        "text": "Pode expresar o que lembra e o que non sabe con exactitude. Non necesita inventar un dato. A simulación non reproduce preguntas sobre feitos violentos.",
+        "text": "Pode expresar o que lembra e o que non sabe con exactitude. Non necesita inventar un dato.",
         "dialogue": "Se algo non o lembras ben, podes dicilo así. Non fai falta que te inventes unha hora ou un detalle."
       },
       "pause": {
@@ -892,7 +892,7 @@
       },
       "resolution": {
         "title": "Unha sentenza non conta toda a miña vida",
-        "text": "A condena require proba suficiente coas garantías do xuízo. Na rama alternativa desta ficción, a absolución débese a insuficiencia de proba; non se presenta como motivo de toda absolución. O resultado non determina como debe sentirse Sara. O apoio continúa segundo as súas necesidades e as medidas xudiciais revísanse conforme á resolución."
+        "text": "A condena require proba suficiente coas garantías do xuízo. O resultado non determina como debe sentirse Sara. O apoio continúa segundo as súas necesidades e as medidas xudiciais revísanse conforme á resolución."
       },
       "oficina": {
         "title": "A oficina xudicial",
@@ -902,17 +902,17 @@
       "juez": {
         "title": "O xuíz ou a xuíza",
         "text": "Dirixe as actuacións xudiciais, protexe os dereitos de todas as partes e decide o que necesita unha resolución xudicial.",
-        "dialogue": "A xuíza dirixe a investigación e decide as medidas que necesitan unha decisión xudicial. Se o caso pasa a xuízo, decidirao outro xuíz ou tribunal. Todos teñen que respectar os teus dereitos e os das demais persoas."
+        "dialogue": "A xuíza dirixe a investigación e decide as medidas que necesitan unha decisión xudicial. Se o caso pasa a xuízo, decidirao outro xuíz ou tribunal."
       },
       "laj": {
         "title": "O letrado ou a letrada (LAJ)",
         "text": "O Letrado da Administración de Xustiza é un funcionario público con funcións procesuais, de documentación e de fe pública xudicial, entre outras. Cando a lei o esixe, pode autorizar a acta dunha declaración e comprobar a gravación.",
-        "dialogue": "A letrada da Administración de Xustiza ocúpase de que o que pasa quede documentado con garantías. É outra profesional; non é a túa avogada. Non sempre ten que estar sentada na sala."
+        "dialogue": "A letrada da Administración de Xustiza ocúpase de que o que pasa quede documentado con garantías. É outra profesional; non é a túa avogada."
       },
       "fiscal": {
         "title": "O Ministerio Fiscal",
         "text": "O fiscal defende a legalidade. Pode acusar a quen fixo dano e tamén vela polos teus dereitos. A túa avogada defende os teus intereses.",
-        "dialogue": "O fiscal defende a legalidade. Pode acusar a quen fixo dano e tamén vela polos teus dereitos. A túa avogada defende os teus intereses."
+        "dialogue": "O fiscal defende a legalidade. A túa avogada defende os teus intereses."
       },
       "psicosocial": {
         "title": "O equipo psicosocial",
@@ -926,78 +926,78 @@
       },
       "safety": {
         "title": "A seguridade necesita un plan",
-        "text": "Aloxarse cunha familiar non impón por si só restricións ao pai. No caso de Sara comunicouse o risco ao Tribunal de Instancia e acordáronse prohibicións de aproximación e comunicación con Sara e Dani, e suspensión cautelar de visitas. Son decisións xudiciais revisables, non consecuencias automáticas de pedir axuda.",
-        "dialogue": "No voso caso, a xuíza xa prohibiu que Javier se achegue a ti e a Dani ou se comunique convosco. Tamén suspendeu as súas visitas por agora. Son medidas para protexervos mentres se investiga."
+        "text": "No caso de Sara comunicouse o risco ao Tribunal de Instancia e acordáronse prohibicións de aproximación e comunicación con Sara e Dani, e suspensión cautelar de visitas. Son decisións xudiciais revisables, non consecuencias automáticas de pedir axuda.",
+        "dialogue": "No voso caso, a xuíza xa prohibiu que Javier se achegue a ti e a Dani ou se comunique convosco. Son medidas para protexervos mentres se investiga."
       },
       "representation": {
         "title": "Quen pode representarme",
-        "text": "O pai investigado non pode representar a Sara nun asunto con intereses contrapostos. A nai pode facelo se está en condicións de defender adecuadamente os seus intereses. Nesta ficción valorouse esa capacidade e escoitouse a Sara; a súa nai exerce a representación legal e Irene a defensa letrada.",
+        "text": "O pai investigado non pode representar a Sara nun asunto con intereses contrapostos. A nai pode facelo se está en condicións de defender adecuadamente os seus intereses.",
         "dialogue": "O teu pai non pode representarte neste caso. Comprobamos que a túa nai pode coidar dos teus intereses e ela represéntate. Eu son a túa avogada. Tamén falarei contigo: a túa opinión conta."
       },
       "defender": {
         "title": "Se necesito outra persoa que me represente",
         "text": "Se tampouco o outro proxenitor pode representar e asistir adecuadamente a vítima, a Fiscalía debe solicitar ao xuíz un defensor xudicial. A representación legal, a defensa por avogada e a representación procesual teñen funcións distintas.",
-        "dialogue": "Se a túa nai tampouco puidese representarte ben, pediríaselle á xuíza outra persoa para facelo: un defensor xudicial. Non é o mesmo que ter avogada. Non terías que resolvelo ti soa."
+        "dialogue": "Se a túa nai tampouco puidese representarte ben, pediríaselle á xuíza outra persoa para facelo: un defensor xudicial."
       },
       "party": {
         "title": "Ter voz no procedemento",
-        "text": "Tras informar e escoitar a Sara, nesta ficción a súa nai formalizou con asistencia letrada a súa personación como acusación particular. Permite intervir, propoñer probas, solicitar protección e recorrer conforme á lei. Non é condición para recibir protección nin fai depender a persecución penal da menor.",
-        "dialogue": "Podemos participar no caso como acusación particular, coa túa propia avogada. Así podo pedir probas e medidas para ti e defender os teus intereses. Non es ti quen decide o castigo."
+        "text": "Permite intervir, propoñer probas, solicitar protección e recorrer conforme á lei. Non é condición para recibir protección nin fai depender a persecución penal da menor.",
+        "dialogue": "Podemos participar no caso como acusación particular, coa túa propia avogada. Non es ti quen decide o castigo."
       },
       "investigation": {
         "title": "Investigar non é xulgar",
-        "text": "A citación do capítulo 5 corresponde a unha declaración durante a instrución. O órgano instrutor busca indicios e recolle declaracións e outras dilixencias. Esa declaración non é por si soa o xuízo nin determina o resultado.",
-        "dialogue": "Esta parte chámase investigación ou instrución. Escóitase as persoas e búscanse outras probas para saber que pasou. A túa declaración é unha parte. Hoxe aínda non se decide se hai condena."
+        "text": "O órgano instrutor busca indicios e recolle declaracións e outras dilixencias. Esa declaración non é por si soa o xuízo nin determina o resultado.",
+        "dialogue": "Esta parte chámase investigación ou instrución. Hoxe aínda non se decide se hai condena."
       },
       "familyRule": {
         "title": "Declarar cando o investigado é familiar",
-        "text": "Comparecer tras unha citación e estar obrigada a declarar son cuestións distintas. A dispensa por parentesco do art. 416 ten excepcións: representación ou garda da vítima menor, determinados delitos graves con testemuña adulta, imposibilidade de comprender a dispensa, personación como acusación particular ou aceptación previa de declarar tras información adecuada. A idade de 14 anos non resolve por si soa a cuestión.",
-        "dialogue": "Ás veces a lei permite non declarar contra un familiar. Chámase dispensa. Pero ten excepcións. Ir cando te citan e ter que declarar non son o mesmo: hai que mirar antes a túa situación."
+        "text": "Comparecer tras unha citación e estar obrigada a declarar son cuestións distintas. A idade de 14 anos non resolve por si soa a cuestión.",
+        "dialogue": "Ás veces a lei permite non declarar contra un familiar. Chámase dispensa."
       },
       "familyCase": {
         "title": "Que ocorre no caso de Sara",
-        "text": "Na historia, Sara xa está personada como acusación particular con representación adecuada. Aplícase a excepción do art. 416.1.4.º: non ten dispensa por parentesco. Isto non limita os seus apoios nin o seu dereito a comprender as preguntas e pedir pausas.",
-        "dialogue": "No teu caso, como xa participas como acusación particular, esa dispensa non se aplica e tes que declarar. Non é porque cumprises catorce anos. Eu acompañareite e explicareiche o que non entendas."
+        "text": "Aplícase a excepción do art. 416.1.4.º: non ten dispensa por parentesco. Isto non limita os seus apoios nin o seu dereito a comprender as preguntas e pedir pausas.",
+        "dialogue": "No teu caso, como xa participas como acusación particular, esa dispensa non se aplica e tes que declarar. Eu acompañareite e explicareiche o que non entendas."
       },
       "company": {
         "title": "Elixir quen me acompaña",
         "text": "Durante as dilixencias de investigación, Sara pode estar acompañada por unha persoa da súa elección, ademais da súa representación, salvo decisión motivada en contrario para garantir o correcto desenvolvemento. A avaliación de apoios e protección debe repetirse cando cambien as súas necesidades ou a fase procesual.",
-        "dialogue": "Ademais da túa avogada, pode acompañarte unha persoa que ti elixas, como Elena. Se se decide que non entre para que a declaración se faga ben, teñen que explicar o motivo. Podemos falar de quen che axudaría máis."
+        "dialogue": "Ademais da túa avogada, pode acompañarte unha persoa que ti elixas, como Elena. Podemos falar de quen che axudaría máis."
       },
       "recording": {
         "title": "Gravar non significa evitar outra declaración",
-        "text": "O art. 26.1.a do Estatuto prevé gravación audiovisual das declaracións de vítimas menores na investigación. Para que unha gravación substitúa a declaración en xuízo como proba preconstituída debe practicarse cos requisitos legais, incluída a contradición e participación da defensa. Unha gravación ordinaria non ten ese efecto automático.",
-        "dialogue": "Si, grávase porque es menor. Para usala no xuízo sen que volvas declarar fan falta garantías especiais: tamén debe participar a defensa do teu pai. Iso chámase proba preconstituída. Gravar, por si só, non abonda."
+        "text": "O art. 26.1.a do Estatuto prevé gravación audiovisual das declaracións de vítimas menores na investigación. Unha gravación ordinaria non ten ese efecto automático.",
+        "dialogue": "Si, grávase porque es menor. Para usala no xuízo sen que volvas declarar fan falta garantías especiais: tamén debe participar a defensa do teu pai."
       },
       "ageRule": {
         "title": "Que cambia aos catorce anos",
-        "text": "O art. 449 ter obriga a preconstituír a declaración de menores de 14 anos nos delitos enumerados, e de persoas con discapacidade necesitadas de especial protección. Con 14 cumpridos a idade soa non activa esa obriga. A proba preconstituída noutros casos precisa fundamento e resolución conforme á LECrim; non abonda pedila por preferencia. Mantéñense as garantías de protección como menor de 18 anos.",
-        "dialogue": "Para certos delitos, esa declaración con garantías especiais é obrigatoria se aínda non cumpriches catorce anos. Ti xa os tes: non é automática pola túa idade. Segues tendo dereito a protección e apoios como menor."
+        "text": "O art. 449 ter obriga a preconstituír a declaración de menores de 14 anos nos delitos enumerados, e de persoas con discapacidade necesitadas de especial protección. Con 14 cumpridos a idade soa non activa esa obriga.",
+        "dialogue": "Para certos delitos, esa declaración con garantías especiais é obrigatoria se aínda non cumpriches catorce anos. Ti xa os tes: non é automática pola túa idade."
       },
       "communication": {
         "title": "Dicir o que necesito ao declarar",
         "text": "Sara recibe explicacións adaptadas, pode comunicar que non entende ou necesita unha pausa e pode expresar que non lembra un dato. A preparación explica o procedemento e as ferramentas para comunicar as súas necesidades, sen ensaiar un relato nin suxerir respostas sobre os feitos.",
-        "dialogue": "Lembra: podes pedir que che expliquen unha pregunta, dicir que non lembras algo e pedir unha pausa. Non inventes o que non sabes. O importante é contar o que lembras coas túas palabras."
+        "dialogue": "Lembra: podes pedir que che expliquen unha pregunta, dicir que non lembras algo e pedir unha pausa. O importante é contar o que lembras coas túas palabras."
       },
       "investigationEnd": {
         "title": "Que pode pasar ao rematar de investigar",
-        "text": "Ao rematar a instrución pode acordarse o arquivo pola causa legal correspondente ou continuar cara á acusación e o xuízo. Non toda investigación acaba en xuízo. Na historia fórmase acusación e celébrase xuízo ante un órgano distinto do instrutor, con nova declaración protexida de Sara.",
-        "dialogue": "Non todas as investigacións chegan a xuízo. Ás veces arquívanse porque non se pode continuar, por exemplo se non hai datos suficientes para seguir. Arquivar é pechar o caso, de forma provisional ou definitiva segundo o motivo. Eu explicaríache que significa e se se pode recorrer."
+        "text": "Ao rematar a instrución pode acordarse o arquivo pola causa legal correspondente ou continuar cara á acusación e o xuízo. Non toda investigación acaba en xuízo.",
+        "dialogue": "Non todas as investigacións chegan a xuízo. Ás veces arquívanse porque non se pode continuar, por exemplo se non hai datos suficientes para seguir."
       },
       "appeal": {
         "title": "A sentenza pode revisarse",
-        "text": "As partes poden recorrer as resolucións nos casos e prazos legais. Unha sentenza é firme cando xa non cabe o recurso correspondente. A avogada explica a Sara a notificación, as opcións de recurso e as consecuencias sen responsabilizala do resultado.",
-        "dialogue": "Recorrer é pedir a outro tribunal que revise a decisión. Javier e a nosa parte podemos facelo se a lei o permite e dentro dun prazo. Explicareiche as opcións. Cando xa non se pode recorrer, a sentenza é firme."
+        "text": "As partes poden recorrer as resolucións nos casos e prazos legais. Unha sentenza é firme cando xa non cabe o recurso correspondente.",
+        "dialogue": "Recorrer é pedir a outro tribunal que revise a decisión. Cando xa non se pode recorrer, a sentenza é firme."
       },
       "protectionAfter": {
         "title": "Que axudas e medidas seguen despois",
-        "text": "O apoio social e asistencial atende as necesidades de Sara. As medidas cautelares e as impostas na sentenza teñen fundamentos e duración propios; non debe prometerse que todas continúan tras unha absolución ou que rematan todas ao ditarse sentenza. Explícanse os cambios e valórase a protección polas vías pertinentes.",
-        "dialogue": "Revisaremos que medidas seguen, cales cambian e que protección necesitas agora. A axuda de Elena e do equipo organízase segundo como esteas. Non tes que deixar de pedir axuda porque chegase unha sentenza."
+        "text": "O apoio social e asistencial atende as necesidades de Sara. Explícanse os cambios e valórase a protección polas vías pertinentes.",
+        "dialogue": "Revisaremos que medidas seguen, cales cambian e que protección necesitas agora. Non tes que deixar de pedir axuda porque chegase unha sentenza."
       },
       "partyChoice": {
         "title": "Entender antes de participar",
-        "text": "A personación non é condición para a protección nin para que se investigue. Antes de formalizala explícanse as súas consecuencias, incluída a excepción á dispensa do art. 416.1.4.º, escóitase a Sara e respóndese ás súas dúbidas e ás do seu representante. A decisión formal móstrase despois desta explicación.",
-        "dialogue": "Ao participar así, non podes usar a dispensa: a posibilidade que ás veces permite non declarar contra un familiar. Antes de facelo, imos falalo con calma. Recibir protección non depende de que participes desta forma."
+        "text": "A personación non é condición para a protección nin para que se investigue.",
+        "dialogue": "Ao participar así, non podes usar a dispensa: a posibilidade que ás veces permite non declarar contra un familiar. Recibir protección non depende de que participes desta forma."
       }
     },
     "help": [

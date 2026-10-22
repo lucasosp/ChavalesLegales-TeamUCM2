@@ -333,7 +333,7 @@
       "chapter": 2,
       "type": "dialogue",
       "speaker": "Laura",
-      "text": "No te puedo prometer que quede solo entre nosotras. Te diré a qué profesionales se lo cuento y para qué. Si hay un proceso judicial, también tendrán que conocerlo quienes intervengan en él. Tu clase no necesita saberlo.",
+      "text": "No te puedo prometer que quede solo entre nosotras. Te diré a qué profesionales se lo cuento y para qué. Tu clase no necesita saberlo.",
       "next": "c2-06",
       "cast": {
         "sara": null
@@ -484,7 +484,7 @@
       "chapter": 3,
       "type": "dialogue",
       "speaker": "Elena",
-      "text": "Valorar quiere decir conocer qué necesitáis y si estáis seguros. De eso nos encargamos en Servicios Sociales. Si el Tribunal de Instancia investiga lo que ha pasado, eso lo hacen otras personas.",
+      "text": "Valorar quiere decir conocer qué necesitáis y si estáis seguros. De eso nos encargamos en Servicios Sociales.",
       "next": "c3-choice",
       "cast": {
         "sara": null
@@ -544,7 +544,7 @@
       "chapter": 3,
       "type": "dialogue",
       "speaker": "Elena",
-      "text": "No te puedo prometer que quede solo entre nosotras. Te diré a qué profesionales se lo cuento y para qué. Si hay un proceso judicial, también tendrán que conocerlo quienes intervengan en él. Tu clase no necesita saberlo.",
+      "text": "No te puedo prometer que quede solo entre nosotras. Te diré a qué profesionales se lo cuento y para qué. Tu clase no necesita saberlo.",
       "next": "c3-03",
       "cast": {
         "sara": null
@@ -580,7 +580,7 @@
       "chapter": 3,
       "type": "dialogue",
       "speaker": "Elena",
-      "text": "Tú no tienes que conseguir que tu padre se porte bien. Eso no es tarea tuya. Tu madre también va a recibir ayuda. Hablaremos contigo a solas para escuchar qué necesitas y qué te preocupa.",
+      "text": "Tú no tienes que conseguir que tu padre se porte bien. Eso no es tarea tuya. Tu madre también va a recibir ayuda.",
       "next": "c3-05",
       "cast": {
         "sara": null
@@ -590,7 +590,7 @@
       "chapter": 3,
       "type": "dialogue",
       "speaker": null,
-      "text": "Sara, su madre y Dani siguen en casa de su tía. El equipo ha escuchado a los dos hermanos y revisa cómo protegerlos. Su madre está recibiendo ayuda para poder cuidarlos sin Javier.",
+      "text": "Sara, su madre y Dani siguen en casa de su tía. El equipo ha escuchado a los dos hermanos y revisa cómo protegerlos.",
       "next": "c3-safety-question",
       "cast": {
         "sara": "neutral"
@@ -610,7 +610,7 @@
       "chapter": 3,
       "type": "dialogue",
       "speaker": "Elena",
-      "text": "En vuestro caso, la jueza ya ha prohibido que Javier se acerque a ti y a Dani o se comunique con vosotros. También ha suspendido sus visitas por ahora. Son medidas para protegeros mientras se investiga.",
+      "text": "En vuestro caso, la jueza ya ha prohibido que Javier se acerque a ti y a Dani o se comunique con vosotros. Son medidas para protegeros mientras se investiga.",
       "next": "c3-safety-plan",
       "cast": {
         "sara": null
@@ -623,7 +623,7 @@
       "chapter": 3,
       "type": "dialogue",
       "speaker": "Elena",
-      "text": "El instituto conoce esas medidas y hemos acordado quién os recoge. Si tu padre intenta acercarse o escribiros, avisa a una persona adulta del equipo. Si hay peligro inmediato, llama al 112.",
+      "text": "Si tu padre intenta acercarse o escribiros, avisa a una persona adulta del equipo. Si hay peligro inmediato, llama al 112.",
       "next": "c3-safety-followup",
       "cast": {
         "sara": null
@@ -633,7 +633,7 @@
       "chapter": 3,
       "type": "dialogue",
       "speaker": "Elena",
-      "text": "Te daré los teléfonos del equipo. Seguiremos mirando si estáis seguros: ir a casa de tu tía es solo una parte del plan. Tú no tienes que vigilar a tu padre ni hacer que cumpla.",
+      "text": "Te daré los teléfonos del equipo. Tú no tienes que vigilar a tu padre ni hacer que cumpla.",
       "next": "c3-lawyer-intro",
       "cast": {
         "sara": null
@@ -666,7 +666,7 @@
       "chapter": 3,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Si tu madre tampoco pudiera representarte bien, se pediría a la jueza otra persona para hacerlo: un defensor judicial. No es lo mismo que tener abogada. No tendrías que resolverlo tú sola.",
+      "text": "Si tu madre tampoco pudiera representarte bien, se pediría a la jueza otra persona para hacerlo: un defensor judicial.",
       "next": "c3-party",
       "cast": {
         "sara": null
@@ -679,7 +679,7 @@
       "chapter": 3,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Podemos participar en el caso como acusación particular, con tu propia abogada. Así puedo pedir pruebas y medidas para ti y defender tus intereses. No eres tú quien decide el castigo.",
+      "text": "Podemos participar en el caso como acusación particular, con tu propia abogada. No eres tú quien decide el castigo.",
       "next": "c3-party-warning",
       "cast": {
         "sara": null
@@ -692,7 +692,7 @@
       "chapter": 3,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Al participar así, no puedes usar la dispensa: la posibilidad que a veces permite no declarar contra un familiar. Antes de hacerlo, vamos a hablarlo con calma. Recibir protección no depende de que participes de esta forma.",
+      "text": "Al participar así, no puedes usar la dispensa: la posibilidad que a veces permite no declarar contra un familiar. Recibir protección no depende de que participes de esta forma.",
       "next": "c3-party-confirmed",
       "cast": {
         "sara": null
@@ -761,7 +761,7 @@
       "chapter": 3,
       "type": "dialogue",
       "speaker": "Elena",
-      "text": "Te daré los teléfonos del equipo y te explicaré qué hacer si algo cambia. Si hay peligro inmediato, se llama al 112. Puedes pedir ayuda aunque no sepas cuánto peligro hay.",
+      "text": "Te daré los teléfonos del equipo y te explicaré qué hacer si algo cambia. Si hay peligro inmediato, se llama al 112.",
       "next": "c3-end",
       "cast": {
         "sara": null
@@ -1100,7 +1100,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": null,
-      "text": "Después del aviso del instituto y las primeras medidas de protección, una plaza del Tribunal de Instancia sigue investigando lo ocurrido. Llega una carta para que Sara declare. Irene la lee con ella y con su madre.",
+      "text": "Llega una carta para que Sara declare. Irene la lee con ella y con su madre.",
       "next": "c5-02",
       "cast": {
         "sara": "neutral"
@@ -1130,7 +1130,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "El tribunal investiga lo ocurrido y si tu padre es responsable de un delito. Mientras, seguimos cuidando de tu seguridad. No hay que esperar a una sentencia para protegerte.",
+      "text": "El tribunal investiga lo ocurrido y si tu padre es responsable de un delito. No hay que esperar a una sentencia para protegerte.",
       "next": "c5-investigation",
       "cast": {
         "sara": null
@@ -1143,7 +1143,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Esta parte se llama investigación o instrucción. Se escucha a las personas y se buscan otras pruebas para saber qué ha pasado. Tu declaración es una parte. Hoy todavía no se decide si hay condena.",
+      "text": "Esta parte se llama investigación o instrucción. Hoy todavía no se decide si hay condena.",
       "next": "c5-attend-question",
       "cast": {
         "sara": null
@@ -1166,7 +1166,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "A veces la ley permite no declarar contra un familiar. Se llama dispensa. Pero tiene excepciones. Ir cuando te citan y tener que declarar no son lo mismo: hay que mirar tu situación antes.",
+      "text": "A veces la ley permite no declarar contra un familiar. Se llama dispensa.",
       "next": "c5-family-case",
       "cast": {
         "sara": null
@@ -1179,7 +1179,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "En tu caso, como ya participas como acusación particular, esa dispensa no se aplica y tienes que declarar. No es porque hayas cumplido catorce años. Yo te acompañaré y explicaré lo que no entiendas.",
+      "text": "En tu caso, como ya participas como acusación particular, esa dispensa no se aplica y tienes que declarar. Yo te acompañaré y explicaré lo que no entiendas.",
       "next": "c5-team",
       "cast": {
         "sara": null
@@ -1192,7 +1192,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Antes se llamaba juzgado; ahora es el Tribunal de Instancia. Tu caso lo lleva una plaza de su Sección de Violencia contra la Infancia y la Adolescencia. Allí vas a ver a varias personas. Cada una tiene un trabajo distinto. Te las presento para que no te líes.",
+      "text": "Antes se llamaba juzgado; ahora es el Tribunal de Instancia. Tu caso lo lleva una plaza de su Sección de Violencia contra la Infancia y la Adolescencia. Allí vas a ver a varias personas.",
       "next": "c5-oficina",
       "cast": {
         "sara": null
@@ -1202,7 +1202,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Primero, la oficina judicial del Tribunal de Instancia. Son las personas que organizan los papeles y los pasos del caso. Según el tipo de asunto, lo lleva una sección u otra.",
+      "text": "Primero, la oficina judicial del Tribunal de Instancia. Son las personas que organizan los papeles y los pasos del caso.",
       "next": "c5-juez",
       "cast": {
         "sara": null
@@ -1215,7 +1215,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "La jueza dirige la investigación y decide las medidas que necesitan una decisión judicial. Si el caso pasa a juicio, lo decidirá otro juez o tribunal. Todos tienen que respetar tus derechos y los de las demás personas.",
+      "text": "La jueza dirige la investigación y decide las medidas que necesitan una decisión judicial. Si el caso pasa a juicio, lo decidirá otro juez o tribunal.",
       "next": "c5-laj",
       "cast": {
         "sara": null
@@ -1228,7 +1228,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "La letrada de la Administración de Justicia se ocupa de que lo que pasa quede documentado con garantías. Es otra profesional; no es tu abogada. No siempre tiene que estar sentada en la sala.",
+      "text": "La letrada de la Administración de Justicia se ocupa de que lo que pasa quede documentado con garantías. Es otra profesional; no es tu abogada.",
       "next": "c5-fiscal",
       "cast": {
         "sara": null
@@ -1241,7 +1241,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Después, el fiscal. Su trabajo es que se cumpla la ley. En un caso como este puede acusar a quien hizo daño y además se encarga de cuidar tus derechos.",
+      "text": "Después, el fiscal. En un caso como este puede acusar a quien hizo daño y además se encarga de cuidar tus derechos.",
       "next": "c5-psicosocial",
       "cast": {
         "sara": null
@@ -1267,7 +1267,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Y la Oficina de Asistencia a las Víctimas. Allí te explican cómo va el proceso y te ayudan si estás mal o tienes dudas. Ellos no juzgan el caso: solo te ayudan.",
+      "text": "Y la Oficina de Asistencia a las Víctimas. Allí te explican cómo va el proceso y te ayudan si estás mal o tienes dudas.",
       "next": "c5-choice",
       "cast": {
         "sara": null
@@ -1314,7 +1314,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "La jueza dirige la declaración y el fiscal cuida también de tus derechos. Yo participo como tu abogada. La defensa de tu padre también puede hacer preguntas, con el control de la jueza. Antes te explicaré cómo.",
+      "text": "La jueza dirige la declaración y el fiscal cuida también de tus derechos. Yo participo como tu abogada. La defensa de tu padre también puede hacer preguntas, con el control de la jueza.",
       "next": "c5-people2",
       "cast": {
         "sara": null
@@ -1324,7 +1324,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Elena",
-      "text": "Yo no decido nada en el tribunal. Puedo acompañarte si tú quieres, salvo que se explique una razón para que no entre. También podemos acordar que te espere fuera.",
+      "text": "Yo no decido nada en el tribunal. Puedo acompañarte si tú quieres, salvo que se explique una razón para que no entre.",
       "next": "c5-supports",
       "cast": {
         "sara": null
@@ -1334,7 +1334,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Tienen que organizar la espera para que no os encontréis. Iremos antes a ver por dónde entras y dónde esperas. Ya hemos hablado con la oficina de víctimas.",
+      "text": "Tienen que organizar la espera para que no os encontréis. Iremos antes a ver por dónde entras y dónde esperas.",
       "next": "c5-supports",
       "cast": {
         "sara": null
@@ -1354,7 +1354,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Tienen que organizar las cosas para que no te encuentres con tu padre. Además, vamos a pedir otra sala, videoconferencia y apoyo de una psicóloga. La jueza decidirá cómo organizar esos apoyos según lo que necesites.",
+      "text": "Tienen que organizar las cosas para que no te encuentres con tu padre. Además, vamos a pedir otra sala, videoconferencia y apoyo de una psicóloga.",
       "next": "c5-company",
       "cast": {
         "sara": null
@@ -1367,7 +1367,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Además de tu abogada, puede acompañarte una persona que tú elijas, como Elena. Si se decide que no entre para que la declaración se haga bien, tienen que explicar el motivo. Podemos hablar de quién te ayudaría más.",
+      "text": "Además de tu abogada, puede acompañarte una persona que tú elijas, como Elena. Podemos hablar de quién te ayudaría más.",
       "next": "c5-recording-question",
       "cast": {
         "sara": null
@@ -1390,7 +1390,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Sí, se graba porque eres menor. Para usarla en el juicio sin que vuelvas a declarar hacen falta garantías especiales: también debe participar la defensa de tu padre. Eso se llama prueba preconstituida. Grabar, por sí solo, no basta.",
+      "text": "Sí, se graba porque eres menor. Para usarla en el juicio sin que vuelvas a declarar hacen falta garantías especiales: también debe participar la defensa de tu padre.",
       "next": "c5-age-rule",
       "cast": {
         "sara": null
@@ -1403,7 +1403,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Para ciertos delitos, esa declaración con garantías especiales es obligatoria si aún no has cumplido catorce años. Tú ya los tienes: no es automática por tu edad. Sigues teniendo derecho a protección y apoyos como menor.",
+      "text": "Para ciertos delitos, esa declaración con garantías especiales es obligatoria si aún no has cumplido catorce años. Tú ya los tienes: no es automática por tu edad.",
       "next": "c5-recording-case",
       "cast": {
         "sara": null
@@ -1416,7 +1416,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "En tu caso, esta declaración sirve para la investigación. La grabarán, pero eso no sustituye por sí solo declarar en el juicio. Si tienes que volver, te avisaré y prepararemos los apoyos otra vez.",
+      "text": "En tu caso, esta declaración sirve para la investigación. La grabarán, pero eso no sustituye por sí solo declarar en el juicio.",
       "next": "c5-privacy-route",
       "cast": {
         "sara": null
@@ -1454,7 +1454,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Elena",
-      "text": "Como me pediste, una cosa cada vez. Primero, quién te recibe. Después, qué va a pasar. Entre una cosa y otra, puedes preguntar.",
+      "text": "Como me pediste, una cosa cada vez. Primero, quién te recibe. Después, qué va a pasar.",
       "next": "c5-simulation",
       "cast": {
         "sara": null
@@ -1567,7 +1567,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Recuerda: puedes pedir que te expliquen una pregunta, decir que no recuerdas algo y pedir una pausa. No inventes lo que no sabes. Lo importante es contar lo que recuerdas con tus palabras.",
+      "text": "Recuerda: puedes pedir que te expliquen una pregunta, decir que no recuerdas algo y pedir una pausa. Lo importante es contar lo que recuerdas con tus palabras.",
       "next": "c5-05",
       "cast": {
         "sara": null
@@ -1590,7 +1590,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Jueza",
-      "text": "Hola, Sara. Hoy vamos a escucharte para investigar lo que ha pasado. Irene ya te ha explicado por qué tienes que declarar en este caso. Si algo no está claro, lo hablamos antes de empezar.",
+      "text": "Hola, Sara. Hoy vamos a escucharte para investigar lo que ha pasado. Si algo no está claro, lo hablamos antes de empezar.",
       "next": "c5-07",
       "cast": {
         "sara": null
@@ -1601,7 +1601,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": null,
-      "text": "Se han acordado los apoyos para Sara. Declara por videoconferencia desde otra sala, sin ver a Javier, con una psicóloga a su lado. La declaración queda grabada. Sara ha preferido que Elena la espere fuera.",
+      "text": "Declara por videoconferencia desde otra sala, sin ver a Javier, con una psicóloga a su lado. La declaración queda grabada.",
       "next": "c5-08",
       "cast": {
         "sara": "neutral"
@@ -1643,7 +1643,7 @@
       "chapter": 6,
       "type": "dialogue",
       "speaker": null,
-      "text": "Pasan las semanas. Algunos días no hay noticias. Mientras, Sara sigue viendo a Elena, y las personas que la ayudan siguen pendientes de que su familia esté a salvo.",
+      "text": "Pasan las semanas. Mientras, Sara sigue viendo a Elena, y las personas que la ayudan siguen pendientes de que su familia esté a salvo.",
       "next": "c6-02",
       "cast": {
         "sara": "neutral"
@@ -1772,7 +1772,7 @@
       "chapter": 6,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "No todas las investigaciones llegan a juicio. A veces se archivan porque no se puede continuar, por ejemplo si no hay datos suficientes para seguir. Archivar es cerrar el caso, de forma provisional o definitiva según el motivo. Yo te explicaría qué significa y si se puede recurrir.",
+      "text": "No todas las investigaciones llegan a juicio. A veces se archivan porque no se puede continuar, por ejemplo si no hay datos suficientes para seguir.",
       "next": "c6-trial-notice",
       "cast": {
         "sara": null
@@ -1785,7 +1785,7 @@
       "chapter": 6,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "En tu caso, el fiscal y nosotras hemos presentado una acusación contra Javier. Su abogado ha podido defenderlo. Ahora habrá un juicio: otro juez o tribunal escuchará las pruebas antes de decidir.",
+      "text": "En tu caso, el fiscal y nosotras hemos presentado una acusación contra Javier. Ahora habrá un juicio: otro juez o tribunal escuchará las pruebas antes de decidir.",
       "next": "c6-trial-question",
       "cast": {
         "sara": null
@@ -1805,7 +1805,7 @@
       "chapter": 6,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Sí, te han citado para declarar en el juicio. Hemos vuelto a organizar los apoyos: otra sala, videoconferencia y una psicóloga contigo. También han preparado la espera para que no te cruces con tu padre.",
+      "text": "Sí, te han citado para declarar en el juicio. Hemos vuelto a organizar los apoyos: otra sala, videoconferencia y una psicóloga contigo.",
       "next": "c6-trial",
       "cast": {
         "sara": null
@@ -1815,7 +1815,7 @@
       "chapter": 6,
       "type": "dialogue",
       "speaker": null,
-      "text": "El día del juicio, Sara declara con esos apoyos. El tribunal escucha también las demás pruebas y a las partes. Al terminar, Elena la acompaña a salir. La decisión no depende solo de lo que diga Sara.",
+      "text": "El día del juicio, Sara declara con esos apoyos. La decisión no depende solo de lo que diga Sara.",
       "next": "c6-after-trial",
       "cast": {
         "sara": "neutral"
@@ -1826,7 +1826,7 @@
       "chapter": 6,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Ahora el tribunal decidirá y lo explicará por escrito. Ese documento es la sentencia. Puede condenar o absolver. Absolver quiere decir que no impone una condena. Cuando llegue, la leeremos juntas.",
+      "text": "Ahora el tribunal decidirá y lo explicará por escrito. Ese documento es la sentencia. Puede condenar o absolver. Absolver quiere decir que no impone una condena.",
       "next": "c6-sentence-arrives",
       "cast": {
         "sara": null
@@ -1887,7 +1887,7 @@
       "chapter": 6,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Recurrir es pedir a otro tribunal que revise la decisión. Javier y nuestra parte podemos hacerlo si la ley lo permite y dentro de un plazo. Te explicaré las opciones. Cuando ya no se puede recurrir, la sentencia es firme.",
+      "text": "Recurrir es pedir a otro tribunal que revise la decisión. Cuando ya no se puede recurrir, la sentencia es firme.",
       "next": "c6-protection-after",
       "cast": {
         "sara": null
@@ -1900,7 +1900,7 @@
       "chapter": 6,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Revisaremos qué medidas siguen, cuáles cambian y qué protección necesitas ahora. La ayuda de Elena y del equipo se organiza según cómo estés. No tienes que dejar de pedir ayuda porque haya llegado una sentencia.",
+      "text": "Revisaremos qué medidas siguen, cuáles cambian y qué protección necesitas ahora. No tienes que dejar de pedir ayuda porque haya llegado una sentencia.",
       "next": "c6-human",
       "cast": {
         "sara": null

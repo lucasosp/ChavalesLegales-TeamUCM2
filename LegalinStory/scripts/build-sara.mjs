@@ -88,12 +88,12 @@ explain("c3-dani", "Elena", "brother", "c3-03");
 explain("c3-privacy", "Elena", "privacy", "c3-03");
 explain("c3-home", "Elena", "housing", "c3-03");
 say("c3-03", "Sara", "Mi madre sabe algunas cosas, pero no todas. A veces me dice que no le lleve la contraria a papá. No sé qué tengo que hacer.", "c3-04");
-say("c3-04", "Elena", "Tú no tienes que conseguir que tu padre se porte bien. Eso no es tarea tuya. Tu madre también va a recibir ayuda. Hablaremos contigo a solas para escuchar qué necesitas y qué te preocupa.", "c3-05");
-narration("c3-05", "Sara, su madre y Dani siguen en casa de su tía. El equipo ha escuchado a los dos hermanos y revisa cómo protegerlos. Su madre está recibiendo ayuda para poder cuidarlos sin Javier.", "c3-safety-question");
+say("c3-04", "Elena", "Tú no tienes que conseguir que tu padre se porte bien. Eso no es tarea tuya. Tu madre también va a recibir ayuda.", "c3-05");
+narration("c3-05", "Sara, su madre y Dani siguen en casa de su tía. El equipo ha escuchado a los dos hermanos y revisa cómo protegerlos.", "c3-safety-question");
 say("c3-safety-question", "Sara", "¿Y si papá viene a buscarme al instituto?", "c3-measures");
 explain("c3-measures", "Elena", "safety", "c3-safety-plan");
-say("c3-safety-plan", "Elena", "El instituto conoce esas medidas y hemos acordado quién os recoge. Si tu padre intenta acercarse o escribiros, avisa a una persona adulta del equipo. Si hay peligro inmediato, llama al 112.", "c3-safety-followup");
-say("c3-safety-followup", "Elena", "Te daré los teléfonos del equipo. Seguiremos mirando si estáis seguros: ir a casa de tu tía es solo una parte del plan. Tú no tienes que vigilar a tu padre ni hacer que cumpla.", "c3-lawyer-intro");
+say("c3-safety-plan", "Elena", "Si tu padre intenta acercarse o escribiros, avisa a una persona adulta del equipo. Si hay peligro inmediato, llama al 112.", "c3-safety-followup");
+say("c3-safety-followup", "Elena", "Te daré los teléfonos del equipo. Tú no tienes que vigilar a tu padre ni hacer que cumpla.", "c3-lawyer-intro");
 narration("c3-lawyer-intro", "El equipo presenta a Irene, una abogada que defenderá los intereses de Sara. Irene habla con ella y con su madre, también por separado.", "c3-representation");
 explain("c3-representation", ABOGADA, "representation", "c3-defender");
 explain("c3-defender", ABOGADA, "defender", "c3-party");
@@ -106,7 +106,7 @@ choice("c3-choice2", "¿Qué quiere acordar Sara para los próximos días?", [
   option("contact", "Saber a quién llamar si pasa algo o tiene miedo.", "c3-contact", { wantsContact: true }),
   option("school", "Organizar las clases y los deberes que se ha perdido.", "c3-school", { wantsSchoolPlan: true }),
 ]);
-say("c3-contact", "Elena", "Te daré los teléfonos del equipo y te explicaré qué hacer si algo cambia. Si hay peligro inmediato, se llama al 112. Puedes pedir ayuda aunque no sepas cuánto peligro hay.", "c3-end");
+say("c3-contact", "Elena", "Te daré los teléfonos del equipo y te explicaré qué hacer si algo cambia. Si hay peligro inmediato, se llama al 112.", "c3-end");
 say("c3-school", "Elena", "Lo hablaremos con Laura. Te ayudará a ponerte al día con los deberes, sin contar a la clase lo que te pasa.", "c3-end");
 narration("c3-end", "Esa noche, Dani le enseña un dibujo de un dragón. Sara ve una estrella en una esquina y dibuja otra a su lado.", "c3-mesa", { scene: "bedroom-evening", cast: { sara: "smile" } });
 // Minijuegos externos: la plataforma los muestra dentro de una nube de pensamiento y luego la historia sigue.
@@ -151,7 +151,7 @@ add("c4-perros", { type: "external", game: "caja-arena", text: "Empezó a ver lo
 
 chapter = 5;
 card("c5-card", "El tribunal", "Un tiempo después. Saber quién es quién.", "c5-01", "quiet-room");
-narration("c5-01", "Después del aviso del instituto y las primeras medidas de protección, una plaza del Tribunal de Instancia sigue investigando lo ocurrido. Llega una carta para que Sara declare. Irene la lee con ella y con su madre.", "c5-02");
+narration("c5-01", "Llega una carta para que Sara declare. Irene la lee con ella y con su madre.", "c5-02");
 say("c5-02", "Sara", "La carta tiene palabras muy raras. No entiendo nada.", "c5-03");
 say("c5-03", ABOGADA, "La leemos juntas. Es una citación: dice que tienes que ir al Tribunal de Instancia, qué día y a qué hora. Lo que no entiendas, me lo preguntas.", "c5-justice");
 explain("c5-justice", ABOGADA, "justice", "c5-investigation");
@@ -159,7 +159,7 @@ explain("c5-investigation", ABOGADA, "investigation", "c5-attend-question");
 say("c5-attend-question", "Sara", "¿Tengo que hablar aunque sea mi padre?", "c5-family-rule");
 explain("c5-family-rule", ABOGADA, "familyRule", "c5-family-case");
 explain("c5-family-case", ABOGADA, "familyCase", "c5-team");
-say("c5-team", ABOGADA, "Antes se llamaba juzgado; ahora es el Tribunal de Instancia. Tu caso lo lleva una plaza de su Sección de Violencia contra la Infancia y la Adolescencia. Allí vas a ver a varias personas. Cada una tiene un trabajo distinto. Te las presento para que no te líes.", "c5-oficina");
+say("c5-team", ABOGADA, "Antes se llamaba juzgado; ahora es el Tribunal de Instancia. Tu caso lo lleva una plaza de su Sección de Violencia contra la Infancia y la Adolescencia. Allí vas a ver a varias personas.", "c5-oficina");
 explain("c5-oficina", ABOGADA, "oficina", "c5-juez");
 explain("c5-juez", ABOGADA, "juez", "c5-laj");
 explain("c5-laj", ABOGADA, "laj", "c5-fiscal");
@@ -171,20 +171,20 @@ choice("c5-choice", "Antes de ir, ¿qué quiere saber Sara?", [
   option("room", "Cómo es la sala y si va a ver a su padre.", "c5-room", { askedRoom: true }),
   option("rights", "Qué puede pedir y a quién se lo dice.", "c5-rights", { askedSupports: true }),
 ]);
-say("c5-people", ABOGADA, "La jueza dirige la declaración y el fiscal cuida también de tus derechos. Yo participo como tu abogada. La defensa de tu padre también puede hacer preguntas, con el control de la jueza. Antes te explicaré cómo.", "c5-people2");
-say("c5-people2", "Elena", "Yo no decido nada en el tribunal. Puedo acompañarte si tú quieres, salvo que se explique una razón para que no entre. También podemos acordar que te espere fuera.", "c5-supports");
-say("c5-room", ABOGADA, "Tienen que organizar la espera para que no os encontréis. Iremos antes a ver por dónde entras y dónde esperas. Ya hemos hablado con la oficina de víctimas.", "c5-supports");
+say("c5-people", ABOGADA, "La jueza dirige la declaración y el fiscal cuida también de tus derechos. Yo participo como tu abogada. La defensa de tu padre también puede hacer preguntas, con el control de la jueza.", "c5-people2");
+say("c5-people2", "Elena", "Yo no decido nada en el tribunal. Puedo acompañarte si tú quieres, salvo que se explique una razón para que no entre.", "c5-supports");
+say("c5-room", ABOGADA, "Tienen que organizar la espera para que no os encontréis. Iremos antes a ver por dónde entras y dónde esperas.", "c5-supports");
 say("c5-rights", ABOGADA, "Puedes decirme qué te da miedo, preguntar quién va a estar y pedir lo que necesites. Yo se lo diré al tribunal antes de que empiece.", "c5-supports");
 explain("c5-supports", ABOGADA, "supports", "c5-company");
 explain("c5-company", ABOGADA, "company", "c5-recording-question");
 say("c5-recording-question", "Sara", "¿Van a grabarme? ¿Así no tengo que volver?", "c5-recording");
 explain("c5-recording", ABOGADA, "recording", "c5-age-rule");
 explain("c5-age-rule", ABOGADA, "ageRule", "c5-recording-case");
-say("c5-recording-case", ABOGADA, "En tu caso, esta declaración sirve para la investigación. La grabarán, pero eso no sustituye por sí solo declarar en el juicio. Si tienes que volver, te avisaré y prepararemos los apoyos otra vez.", "c5-privacy-route");
+say("c5-recording-case", ABOGADA, "En tu caso, esta declaración sirve para la investigación. La grabarán, pero eso no sustituye por sí solo declarar en el juicio.", "c5-privacy-route");
 branch("c5-privacy-route", { flag: "concernPrivacy" }, "c5-privacy", "c5-pace-route");
 say("c5-privacy", "Elena", "Te preocupaba quién se iba a enterar. En la sala solo estarán las personas que tienen que estar. Lo que cuentes allí no se lo dirán a tu clase.", "c5-pace-route");
 branch("c5-pace-route", { flag: "shortExplanations" }, "c5-short", "c5-overview");
-say("c5-short", "Elena", "Como me pediste, una cosa cada vez. Primero, quién te recibe. Después, qué va a pasar. Entre una cosa y otra, puedes preguntar.", "c5-simulation");
+say("c5-short", "Elena", "Como me pediste, una cosa cada vez. Primero, quién te recibe. Después, qué va a pasar.", "c5-simulation");
 say("c5-overview", "Elena", "Te recibirán y te explicarán qué va a pasar. Luego hablarás con las ayudas que se hayan pedido. Al terminar, veremos juntas qué viene después.", "c5-simulation");
 narration("c5-simulation", "Unos días antes, Sara e Irene practican cómo pedir lo que necesita. No hablan de lo que pasó en casa. Solo de cómo decir «no entiendo» o «necesito parar».", "c5-choice2");
 choice("c5-choice2", "¿Qué frase quiere recordar Sara para ese día?", [
@@ -198,14 +198,14 @@ explain("c5-pause", ABOGADA, "pause", "c5-04");
 say("c5-04", "Sara", "Pensaba que si me quedaba en blanco lo iba a estropear todo. Me ayuda saber que puedo decir que no entiendo algo.", "c5-communication");
 explain("c5-communication", ABOGADA, "communication", "c5-05");
 narration("c5-05", "Llega el día. Sara entra por otra puerta, así no se cruza con Javier. Una mujer de la oficina de víctimas la acompaña a una sala con sillones y le explica dónde estará cada persona.", "c5-06");
-say("c5-06", "Jueza", "Hola, Sara. Hoy vamos a escucharte para investigar lo que ha pasado. Irene ya te ha explicado por qué tienes que declarar en este caso. Si algo no está claro, lo hablamos antes de empezar.", "c5-07", { scene: "court-friendly" });
-narration("c5-07", "Se han acordado los apoyos para Sara. Declara por videoconferencia desde otra sala, sin ver a Javier, con una psicóloga a su lado. La declaración queda grabada. Sara ha preferido que Elena la espere fuera.", "c5-08");
+say("c5-06", "Jueza", "Hola, Sara. Hoy vamos a escucharte para investigar lo que ha pasado. Si algo no está claro, lo hablamos antes de empezar.", "c5-07", { scene: "court-friendly" });
+narration("c5-07", "Declara por videoconferencia desde otra sala, sin ver a Javier, con una psicóloga a su lado. La declaración queda grabada.", "c5-08");
 say("c5-08", "Sara", "Estoy cansada. ¿Podemos estar un rato sin hablar de esto?", "c5-09");
 say("c5-09", "Elena", "Claro. Otro día Irene te contará lo que quieras saber. Ahora vamos a sentarnos un rato.", "c6-card");
 
 chapter = 6;
 card("c6-card", "Después de todo", "Esperar también es parte del camino.", "c6-01", "patio-day");
-narration("c6-01", "Pasan las semanas. Algunos días no hay noticias. Mientras, Sara sigue viendo a Elena, y las personas que la ayudan siguen pendientes de que su familia esté a salvo.", "c6-02");
+narration("c6-01", "Pasan las semanas. Mientras, Sara sigue viendo a Elena, y las personas que la ayudan siguen pendientes de que su familia esté a salvo.", "c6-02");
 say("c6-02", "Sara", "Todos me dicen «ya te avisaremos». A veces miro el móvil y no sé si quiero que llegue un mensaje o que no llegue.", "c6-choice");
 choice("c6-choice", "Hoy, ¿de qué quiere hablar Sara con Elena?", [
   option("news", "Cómo saber qué está pasando en el tribunal.", "c6-news", { waiting: "news" }),
@@ -223,11 +223,11 @@ chat("c6-msg", "Irene · abogada", [
 ], "resolution-route");
 narration("c6-03", "Meses después termina la investigación. Irene se reúne con Sara antes de la siguiente cita.", "c6-investigation-end");
 explain("c6-investigation-end", ABOGADA, "investigationEnd", "c6-trial-notice");
-say("c6-trial-notice", ABOGADA, "En tu caso, el fiscal y nosotras hemos presentado una acusación contra Javier. Su abogado ha podido defenderlo. Ahora habrá un juicio: otro juez o tribunal escuchará las pruebas antes de decidir.", "c6-trial-question");
+say("c6-trial-notice", ABOGADA, "En tu caso, el fiscal y nosotras hemos presentado una acusación contra Javier. Ahora habrá un juicio: otro juez o tribunal escuchará las pruebas antes de decidir.", "c6-trial-question");
 say("c6-trial-question", "Sara", "Entonces, la otra vez era para investigar. Ahora van a decidir si hay pruebas para condenarle. ¿Y tengo que volver a hablar?", "c6-trial-supports");
-say("c6-trial-supports", ABOGADA, "Sí, te han citado para declarar en el juicio. Hemos vuelto a organizar los apoyos: otra sala, videoconferencia y una psicóloga contigo. También han preparado la espera para que no te cruces con tu padre.", "c6-trial");
-narration("c6-trial", "El día del juicio, Sara declara con esos apoyos. El tribunal escucha también las demás pruebas y a las partes. Al terminar, Elena la acompaña a salir. La decisión no depende solo de lo que diga Sara.", "c6-after-trial", { scene: "court-friendly" });
-say("c6-after-trial", ABOGADA, "Ahora el tribunal decidirá y lo explicará por escrito. Ese documento es la sentencia. Puede condenar o absolver. Absolver quiere decir que no impone una condena. Cuando llegue, la leeremos juntas.", "c6-sentence-arrives");
+say("c6-trial-supports", ABOGADA, "Sí, te han citado para declarar en el juicio. Hemos vuelto a organizar los apoyos: otra sala, videoconferencia y una psicóloga contigo.", "c6-trial");
+narration("c6-trial", "El día del juicio, Sara declara con esos apoyos. La decisión no depende solo de lo que diga Sara.", "c6-after-trial", { scene: "court-friendly" });
+say("c6-after-trial", ABOGADA, "Ahora el tribunal decidirá y lo explicará por escrito. Ese documento es la sentencia. Puede condenar o absolver. Absolver quiere decir que no impone una condena.", "c6-sentence-arrives");
 narration("c6-sentence-arrives", "Un tiempo después del juicio, el móvil de Sara vibra.", "c6-msg", { scene: "patio-day" });
 branch("resolution-route", { eq: [{ flag: "resolution" }, "no-conviction"] }, "c6-no-conviction", "c6-conviction");
 say("c6-conviction", ABOGADA, "El tribunal ha condenado a Javier. Te explicaré por qué, qué pena le impone y qué medidas de protección ha decidido. No tienes que entenderlo todo hoy.", "c6-appeal", { learn: ["resolution"] });
