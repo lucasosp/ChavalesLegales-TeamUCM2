@@ -80,7 +80,7 @@ class PhraseStore:
         for nodo in catalogo():
             for banda, texto in nodo.texto.items():
                 meta = {"kind": "nodo", "age_band": banda, "grupo": str(nodo.grupo), "node_id": nodo.id}
-                self._indice.add(f"{nodo.id}:{banda}", f"{texto} {' '.join(nodo.tags)}", meta)
+                self._indice.add(f"{nodo.id}:{banda}", f"{texto} {' '.join(nodo.tags + nodo.fase_tags)}", meta)
         for banda, intenciones in PHRASING_DB.items():
             for intencion, frases in intenciones.items():
                 for i, frase in enumerate(frases):

@@ -16,6 +16,21 @@ LEGAL_AGE_THRESHOLD = 14      # <14: la ley prevé garantías especiales para de
 EDAD_MIN, EDAD_MAX = 5, 18    # mismos límites que backend/main.py
 MINIGAMES = ("dibujo-avatar", "mesa-familia", "caja-arena")
 
+# --- Etiquetas por fase y franja límite -------------------------------------------------------
+# El LLM elige UNA etiqueta por fase (antes / durante / después del juicio) y da su confianza (0-1).
+# Con confianza >= UMBRAL_CONFIANZA la etiqueta ANULA la elección aleatoria de nodos; por debajo,
+# manda el azar. Es una constante global.
+FASES = ("antes", "durante", "despues")
+UMBRAL_CONFIANZA = float(os.getenv("UMBRAL_CONFIANZA", "0.70"))
+
+# Tipos de riesgo del selector de la aplicación (frontend/components/panel/opcionesRiesgo.js)
+TIPOS_RIESGO = ("ciberacoso", "suplantacion", "grooming", "control_pareja", "privacidad")
+
+# Prototipos de personaje (ids de LegalinStory/public/content/shared/assets.json) para el
+# protagonista. Se elige uno solo si el LLM detecta el sexo con confianza >= UMBRAL_CONFIANZA;
+# si no, no hay prototipo (no se adivina). Todos los dibujos actuales son de adolescentes.
+PROTOTIPOS = {"f": ("sara", "julia", "marina", "maya", "sofi", "hana"), "m": ("sergio", "hugo")}
+
 # --- Servicios ----------------------------------------------------------------------------
 USE_REDIS = os.getenv("USE_REDIS", "0") == "1"
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")

@@ -3,3 +3,4 @@ chroma_db/
 .env.*
 __pycache__/
 *.pyc
+.validacion_tmp/
