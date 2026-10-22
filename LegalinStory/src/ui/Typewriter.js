@@ -15,7 +15,7 @@ export class Typewriter {
    * @param {HTMLElement} element
    * @param {{ charsPerSecond?: number }} [options]
    */
-  constructor(element, { charsPerSecond = 26 } = {}) {
+  constructor(element, { charsPerSecond = 55 } = {}) {
     this.element = element;
     this.charsPerSecond = charsPerSecond;
     this.prefersReducedMotion = globalThis.matchMedia?.(

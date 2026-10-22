@@ -24,6 +24,15 @@
   padding: 18px max(20px, calc((100vw - 1100px) / 2)); pointer-events: none;
 }
 .sara-top[hidden], .sara-overlay[hidden] { display: none; }
+.sara-top-nav { display: flex; align-items: center; gap: 8px; max-width: calc(100% - 100px); min-width: 0; }
+.sara-back-button {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; padding: 0; border: 1px solid #ffffffa8; border-radius: 14px;
+  background: #fffdf7f5; color: var(--sara-purple); box-shadow: 0 4px 18px #302a4310;
+  cursor: pointer; pointer-events: auto; flex-shrink: 0; transition: background 0.2s, transform 0.15s;
+}
+.sara-back-button:hover:not(:disabled) { background: #eee9fa; transform: translateY(-1px); }
+.sara-back-button:disabled { opacity: .35; cursor: default; box-shadow: none; }
 .sara-chapter {
   display: flex; flex-direction: column; gap: 3px; max-width: min(65vw, 460px);
   padding: 10px 16px; border: 1px solid #ffffffa8; border-radius: 16px;
@@ -40,10 +49,17 @@
 .sara-menu-button:hover { background: #eee9fa; }
 .sara-menu-button > span { font-size: 1.1rem; color: var(--sara-purple); }
 .sara-mode .dialogue {
-  background: var(--sara-paper); border: 1px solid #cbc3dd; border-top: 3px solid var(--sara-purple);
+  position: relative;
+  background: var(--sara-paper); border: 1px solid #cbc3dd;
   border-radius: 20px; box-shadow: 0 12px 40px #302a4326; backdrop-filter: none; cursor: pointer;
+  overflow: hidden;
 }
-.sara-mode .dialogue::before { display: none; }
+.sara-mode .dialogue::before {
+  content: ""; display: block; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: var(--sara-purple);
+  border-top-left-radius: 20px; border-top-right-radius: 20px;
+}
 .sara-mode .nameplate {
   margin: 0 0 7px; color: var(--sara-purple); text-shadow: none;
   font-size: .9rem; font-weight: 800; letter-spacing: 0; text-transform: none;
@@ -143,6 +159,7 @@
   .sara-chapter { max-width: calc(100% - 100px); padding: 8px 12px; font-size: .8rem; border-radius: 12px; }
   .sara-chapter .sara-eyebrow { font-size: .6rem; }
   .sara-menu-button { min-height: 46px; padding: 10px 13px; font-size: .85rem !important; border-radius: 12px; }
+  .sara-back-button { width: 38px; height: 38px; border-radius: 12px; }
   .sara-mode .dialogue-text { font-size: 1.12rem; line-height: 1.6; }
   .sara-mode .choice { padding: 10px 14px; }
   .sara-overlay { padding: 12px; }

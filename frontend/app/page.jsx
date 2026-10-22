@@ -192,7 +192,6 @@ export default function Home() {
             </svg>
           </span>
           <span className="pro-label">{t('inicio.accesoEducadores')}</span>
-          <span className="pro-arrow" aria-hidden="true">→</span>
         </Link>
 
         <SelectorIdioma className="selector-idioma-topbar" />

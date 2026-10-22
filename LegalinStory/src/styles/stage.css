@@ -12,7 +12,7 @@
 #app .scene > .dialogue {
   position: relative; inset: auto; grid-area: 2 / 1; justify-self: center;
   width: min(940px, 100%); height: clamp(200px, 25dvh, 240px);
-  min-height: 0; max-height: none; margin: 0; padding: 18px 28px 14px; transform: none;
+  min-height: 0; max-height: none; margin: 0; padding: 18px 28px 14px; transform: none; overflow: hidden;
 }
 #app .scene:has(.choices:not([hidden])) > .dialogue { height: auto; max-height: 25dvh; }
 #app .scene > .choices {

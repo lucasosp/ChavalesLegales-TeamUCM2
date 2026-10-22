@@ -38,8 +38,13 @@ export class SaraExperience {
     root.classList.add("sara-has-cast");
     root.insertAdjacentHTML("beforeend", `
       <header class="sara-top" data-sara-chrome hidden>
-        <div class="sara-chapter"><span class="sara-eyebrow" data-sara-chapter-number></span><span data-sara-chapter></span></div>
-        <button type="button" class="sara-menu-button" data-sara-action="pause" aria-label="${t("sara.menuAria")}"><span aria-hidden="true">Ⅱ</span> ${t("sara.menu")}</button>
+        <div class="sara-top-nav">
+          <button type="button" class="sara-back-button" data-sara-action="back" aria-label="${t("sara.previousLine")}" title="${t("sara.previousLine")}" disabled>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11"/></svg>
+          </button>
+          <div class="sara-chapter"><span class="sara-eyebrow" data-sara-chapter-number></span><span data-sara-chapter></span></div>
+        </div>
+        <button type="button" class="sara-menu-button" data-sara-action="pause" aria-label="${t("sara.menuAria")}">${t("sara.menu")}</button>
       </header>
       <section class="sara-overlay" data-sara-overlay hidden>
         <div class="sara-dialog" role="dialog" aria-modal="true" aria-labelledby="sara-dialog-title" tabindex="-1">
@@ -58,6 +63,7 @@ export class SaraExperience {
       const button = event.target.closest("[data-sara-action]");
       if (!button) return;
       const action = button.dataset.saraAction;
+      if (action === "back") { if (this.engine.back()) this.app.view.skipTyping(); return; }
       if (["pause", "help", "restart"].includes(action)) this.openPanel(action);
     };
     root.addEventListener("click", this.onRootClick);
@@ -342,6 +348,8 @@ export class SaraExperience {
     this.root.querySelector("[data-sara-chapter-number]").textContent = t("sara.chapterOf", { n: node.chapter, total: this.guide.chapters.length });
     this.root.querySelector("[data-sara-chapter]").textContent = chapter?.title ?? t("sara.defaultChapter");
     this.renderCast(node);
+    const backBtn = this.root.querySelector("[data-sara-action='back']");
+    if (backBtn) backBtn.disabled = this.engine.history.length === 0 || this.engine.isFinished;
   }
 
   renderCast(node) {
