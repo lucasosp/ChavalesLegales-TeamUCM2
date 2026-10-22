@@ -150,16 +150,16 @@ narration("c4-end", "Hay días tranquilos y días más difíciles. Sigue habiend
 add("c4-perros", { type: "external", game: "caja-arena", text: "Empezó a ver los diferentes perros, y las aventuras que podría vivir con ellos.", next: "c5-card", cast: { sara: "smile" } });
 
 chapter = 5;
-card("c5-card", "El juzgado", "Un tiempo después. Saber quién es quién.", "c5-01", "quiet-room");
-narration("c5-01", "Después del aviso del instituto y las primeras medidas de protección, el juzgado sigue investigando lo ocurrido. Llega una carta para que Sara declare. Irene la lee con ella y con su madre.", "c5-02");
+card("c5-card", "El tribunal", "Un tiempo después. Saber quién es quién.", "c5-01", "quiet-room");
+narration("c5-01", "Después del aviso del instituto y las primeras medidas de protección, una plaza del Tribunal de Instancia sigue investigando lo ocurrido. Llega una carta para que Sara declare. Irene la lee con ella y con su madre.", "c5-02");
 say("c5-02", "Sara", "La carta tiene palabras muy raras. No entiendo nada.", "c5-03");
-say("c5-03", ABOGADA, "La leemos juntas. Es una citación: dice que tienes que ir al juzgado, qué día y a qué hora. Lo que no entiendas, me lo preguntas.", "c5-justice");
+say("c5-03", ABOGADA, "La leemos juntas. Es una citación: dice que tienes que ir al Tribunal de Instancia, qué día y a qué hora. Lo que no entiendas, me lo preguntas.", "c5-justice");
 explain("c5-justice", ABOGADA, "justice", "c5-investigation");
 explain("c5-investigation", ABOGADA, "investigation", "c5-attend-question");
 say("c5-attend-question", "Sara", "¿Tengo que hablar aunque sea mi padre?", "c5-family-rule");
 explain("c5-family-rule", ABOGADA, "familyRule", "c5-family-case");
 explain("c5-family-case", ABOGADA, "familyCase", "c5-team");
-say("c5-team", ABOGADA, "En el juzgado vas a ver a varias personas. Cada una tiene un trabajo distinto. Te las presento para que no te líes.", "c5-oficina");
+say("c5-team", ABOGADA, "Antes se llamaba juzgado; ahora es el Tribunal de Instancia. Tu caso lo lleva una plaza de su Sección de Violencia contra la Infancia y la Adolescencia. Allí vas a ver a varias personas. Cada una tiene un trabajo distinto. Te las presento para que no te líes.", "c5-oficina");
 explain("c5-oficina", ABOGADA, "oficina", "c5-juez");
 explain("c5-juez", ABOGADA, "juez", "c5-laj");
 explain("c5-laj", ABOGADA, "laj", "c5-fiscal");
@@ -172,9 +172,9 @@ choice("c5-choice", "Antes de ir, ¿qué quiere saber Sara?", [
   option("rights", "Qué puede pedir y a quién se lo dice.", "c5-rights", { askedSupports: true }),
 ]);
 say("c5-people", ABOGADA, "La jueza dirige la declaración y el fiscal cuida también de tus derechos. Yo participo como tu abogada. La defensa de tu padre también puede hacer preguntas, con el control de la jueza. Antes te explicaré cómo.", "c5-people2");
-say("c5-people2", "Elena", "Yo no decido nada en el juzgado. Puedo acompañarte si tú quieres, salvo que se explique una razón para que no entre. También podemos acordar que te espere fuera.", "c5-supports");
+say("c5-people2", "Elena", "Yo no decido nada en el tribunal. Puedo acompañarte si tú quieres, salvo que se explique una razón para que no entre. También podemos acordar que te espere fuera.", "c5-supports");
 say("c5-room", ABOGADA, "Tienen que organizar la espera para que no os encontréis. Iremos antes a ver por dónde entras y dónde esperas. Ya hemos hablado con la oficina de víctimas.", "c5-supports");
-say("c5-rights", ABOGADA, "Puedes decirme qué te da miedo, preguntar quién va a estar y pedir lo que necesites. Yo se lo diré al juzgado antes de que empiece.", "c5-supports");
+say("c5-rights", ABOGADA, "Puedes decirme qué te da miedo, preguntar quién va a estar y pedir lo que necesites. Yo se lo diré al tribunal antes de que empiece.", "c5-supports");
 explain("c5-supports", ABOGADA, "supports", "c5-company");
 explain("c5-company", ABOGADA, "company", "c5-recording-question");
 say("c5-recording-question", "Sara", "¿Van a grabarme? ¿Así no tengo que volver?", "c5-recording");
@@ -208,7 +208,7 @@ card("c6-card", "Después de todo", "Esperar también es parte del camino.", "c6
 narration("c6-01", "Pasan las semanas. Algunos días no hay noticias. Mientras, Sara sigue viendo a Elena, y las personas que la ayudan siguen pendientes de que su familia esté a salvo.", "c6-02");
 say("c6-02", "Sara", "Todos me dicen «ya te avisaremos». A veces miro el móvil y no sé si quiero que llegue un mensaje o que no llegue.", "c6-choice");
 choice("c6-choice", "Hoy, ¿de qué quiere hablar Sara con Elena?", [
-  option("news", "Cómo saber qué está pasando en el juzgado.", "c6-news", { waiting: "news" }),
+  option("news", "Cómo saber qué está pasando en el tribunal.", "c6-news", { waiting: "news" }),
   option("dad", "Que a veces echa de menos a su padre.", "c6-dad", { waiting: "mixed" }),
   option("privacy", "Las preguntas que le hacen en clase.", "c6-school", { waiting: "privacy" }),
 ]);
@@ -253,7 +253,7 @@ say("epilogue-school", "Sara", "He terminado aquella página de mates. Parece po
 say("epilogue-friends", "Sara", "Hoy he estado con Paula y no hemos hablado todo el rato de lo mismo. Me ha gustado seguir siendo solo su amiga.", "epilogue", { cast: { sara: "happy" } });
 add("epilogue", { type: "ending", kicker: "SARA · MI HISTORIA SIGUE", title: "Todavía tengo planes", text: "Sara sigue siendo hermana, amiga, alumna de tercero y jugadora de voleibol. Habrá días buenos y días difíciles, y no tendrá que pasarlos sola.", scene: "patio-day", cast: { sara: "happy" } });
 
-const titles = ["Algo no va bien", "Alguien escucha", "¿Qué va a pasar conmigo?", "Mi vida continúa", "El juzgado", "Después de todo"];
+const titles = ["Algo no va bien", "Alguien escucha", "¿Qué va a pasar conmigo?", "Mi vida continúa", "El tribunal", "Después de todo"];
 const guide = {
   version: 1,
   chapters: titles.map((title, i) => ({ id: i + 1, title })),
@@ -270,16 +270,16 @@ const guide = {
     [6, "La sentencia y después", "Irene explica el resultado, los posibles recursos y qué medidas siguen. El apoyo continúa según sus necesidades."],
   ].map(([chapter, title, text]) => ({ chapter, title, text })),
   people: [
-    { name: "Sara", role: "14 años · 3.º de ESO", initial: "S", color: "peach", text: "Le gusta el voleibol, dibuja estrellas en sus cuadernos y su mejor amiga es Paula. Su vida es mucho más que lo que pasa en el juzgado.", sprite: "assets/characters/sara/smile.svg" },
+    { name: "Sara", role: "14 años · 3.º de ESO", initial: "S", color: "peach", text: "Le gusta el voleibol, dibuja estrellas en sus cuadernos y su mejor amiga es Paula. Su vida es mucho más que lo que pasa en el tribunal.", sprite: "assets/characters/sara/smile.svg" },
     { name: "Paula", role: "Su mejor amiga", initial: "P", color: "pink", text: "Le hace compañía y le guarda los apuntes. No tiene que investigar ni arreglar nada." },
     { name: "Laura", role: "Tutora", initial: "L", color: "green", text: "Escucha a Sara, se da cuenta de que algo va mal y avisa a quien tiene que avisar." },
-    { name: "Elena", role: "Trabajadora social", initial: "E", color: "purple", text: "Acompaña a Sara en su día a día y organiza las ayudas. No decide nada en el juzgado." },
+    { name: "Elena", role: "Trabajadora social", initial: "E", color: "purple", text: "Acompaña a Sara en su día a día y organiza las ayudas. No decide nada en el tribunal." },
     { name: "Irene", role: "Abogada", initial: "I", color: "blue", text: "Le explica a Sara cada paso y defiende sus intereses. Javier tiene su propio abogado." },
     { name: "Oficina judicial", role: "Tribunal de Instancia", initial: "O", color: "green", text: legal.notes.oficina.text },
     { name: "Jueza", role: "Juez o magistrado", initial: "J", color: "purple", text: legal.notes.juez.text },
     { name: "Letrada (LAJ)", role: "Letrado de la Administración de Justicia", initial: "L", color: "blue", text: legal.notes.laj.text },
     { name: "Fiscal", role: "Ministerio Fiscal", initial: "F", color: "green", text: legal.notes.fiscal.text },
-    { name: "Equipo psicosocial", role: "Psicólogos y trabajadores sociales del juzgado", initial: "+", color: "peach", text: legal.notes.psicosocial.text },
+    { name: "Equipo psicosocial", role: "Psicólogos y trabajadores sociales del Tribunal de Instancia", initial: "+", color: "peach", text: legal.notes.psicosocial.text },
     { name: "OAVD", role: "Oficina de Asistencia a las Víctimas del Delito", initial: "V", color: "pink", text: legal.notes.oavd.text },
     { name: "Su familia", role: "Dani, su madre y Javier", initial: "D", color: "peach", text: "Dani tiene diez años. Su madre también recibe ayuda. Javier, el padre, es responsable de lo que hace; Sara no tiene que cambiarle para merecer protección." },
   ],

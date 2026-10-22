@@ -12,10 +12,10 @@ export const illustrations = {
   julia: { src: new URL("../../../images/Curly-Haired Girl in Lilac Hoodie.png", import.meta.url).href, label: "Julia · neutral", frame: { top: -165, bottom: 1015, center: 580 } },
   juliaHappy: { src: new URL("../../../images/Cheerful Julia in Lavender Hoodie.png", import.meta.url).href, label: "Julia · alegre", frame: { top: -165, bottom: 1015, center: 530 } },
   dani: { src: new URL("../../../images/Casual Boy in Mustard Tee.png", import.meta.url).href, label: "Dani", frame: { top: -240, bottom: 1060, center: 515 } },
-  laura: { src: new URL("../../../images/Warm Studio Portrait of a Woman.png", import.meta.url).href, label: "Laura", frame: { top: -25, bottom: 1055, center: 535 } },
-  irene: { src: new URL("../../../images/Elegant Office Professional Portrait.png", import.meta.url).href, label: "Irene", frame: { top: -25, bottom: 975, center: 500 } },
-  elena: { src: new URL("../../../images/Elegant Office Professional Portrait(1).png", import.meta.url).href, label: "Elena", frame: { top: -25, bottom: 975, center: 500 } },
-  judge: { src: new URL("../../../images/jueza-transparente.png", import.meta.url).href, label: "Jueza", frame: { top: -25, bottom: 975, center: 500 } },
+  laura: { src: new URL("../../../images/Warm Studio Portrait of a Woman.png", import.meta.url).href, label: "Laura", frame: { top: -30, bottom: 820, center: 535 } },
+  irene: { src: new URL("../../../images/Elegant Office Professional Portrait.png", import.meta.url).href, label: "Irene", frame: { top: -30, bottom: 820, center: 500 } },
+  elena: { src: new URL("../../../images/Elegant Office Professional Portrait(1).png", import.meta.url).href, label: "Elena", frame: { top: -30, bottom: 820, center: 500 } },
+  judge: { src: new URL("../../../images/jueza-transparente.png", import.meta.url).href, label: "Jueza", frame: { top: -30, bottom: 820, center: 500 } },
 };
 
 const people = { Sara: "saraNormal", Paula: "paula", Julia: "julia", Dani: "dani", Laura: "laura", Irene: "elena", Elena: "irene", Jueza: "judge", "Su familia": "dani" };

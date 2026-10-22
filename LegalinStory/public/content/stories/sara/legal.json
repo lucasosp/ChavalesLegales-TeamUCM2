@@ -53,7 +53,7 @@
     "social": {
       "title": "Valorar es conocer para ayudar",
       "text": "Servicios Sociales y protección de menores valoran la seguridad y las necesidades familiares. La intervención social y la investigación penal tienen funciones distintas.",
-      "dialogue": "Valorar quiere decir conocer qué necesitáis y si estáis seguros. De eso nos encargamos en Servicios Sociales. Si un juzgado investiga lo que ha pasado, eso lo hacen otras personas.",
+      "dialogue": "Valorar quiere decir conocer qué necesitáis y si estáis seguros. De eso nos encargamos en Servicios Sociales. Si el Tribunal de Instancia investiga lo que ha pasado, eso lo hacen otras personas.",
       "sources": [
         "proteccion",
         "lopivi"
@@ -85,8 +85,8 @@
     },
     "justice": {
       "title": "Dos trabajos que pueden avanzar a la vez",
-      "text": "La protección cuida de la seguridad de Sara. El juzgado investiga lo que pasó y quién es responsable. Como Javier es adulto, su caso lo lleva un juzgado de adultos, aunque Sara sea menor.",
-      "dialogue": "El juzgado investiga lo ocurrido y si tu padre es responsable de un delito. Mientras, seguimos cuidando de tu seguridad. No hay que esperar a una sentencia para protegerte.",
+      "text": "La protección cuida de la seguridad de Sara. Una plaza del Tribunal de Instancia investiga lo que pasó y quién es responsable. Como Javier es adulto, su caso lo lleva la justicia penal de adultos, aunque Sara sea menor.",
+      "dialogue": "El tribunal investiga lo ocurrido y si tu padre es responsable de un delito. Mientras, seguimos cuidando de tu seguridad. No hay que esperar a una sentencia para protegerte.",
       "sources": [
         "lecrim",
         "proteccion"
@@ -190,8 +190,8 @@
     },
     "psicosocial": {
       "title": "El equipo psicosocial",
-      "text": "Cuando el juzgado lo decide, psicólogos y trabajadores sociales del juzgado pueden ayudar a escuchar al menor y dar su opinión como especialistas.",
-      "dialogue": "A veces el juzgado pide ayuda a su equipo psicosocial: psicólogas y trabajadores sociales que saben hablar con chicos y chicas de tu edad. Si te toca, te ayudarán a contar las cosas con calma.",
+      "text": "Cuando la plaza que lleva el caso lo decide, psicólogos y trabajadores sociales del Tribunal de Instancia pueden ayudar a escuchar al menor y dar su opinión como especialistas.",
+      "dialogue": "A veces el tribunal pide ayuda a su equipo psicosocial: psicólogas y trabajadores sociales que saben hablar con chicos y chicas de tu edad. Si te toca, te ayudarán a contar las cosas con calma.",
       "sources": [
         "lecrim",
         "victima"
@@ -199,7 +199,7 @@
     },
     "safety": {
       "title": "La seguridad necesita un plan",
-      "text": "Alojarse con una familiar no impone por sí solo restricciones al padre. En esta ficción se ha comunicado el riesgo al juzgado y se han acordado prohibiciones de aproximación y comunicación con Sara y Dani, y suspensión cautelar de visitas. Son decisiones judiciales revisables, no consecuencias automáticas de pedir ayuda.",
+      "text": "Alojarse con una familiar no impone por sí solo restricciones al padre. En el caso de Sara se ha comunicado el riesgo al Tribunal de Instancia y se han acordado prohibiciones de aproximación y comunicación con Sara y Dani, y suspensión cautelar de visitas. Son decisiones judiciales revisables, no consecuencias automáticas de pedir ayuda.",
       "dialogue": "En vuestro caso, la jueza ya ha prohibido que Javier se acerque a ti y a Dani o se comunique con vosotros. También ha suspendido sus visitas por ahora. Son medidas para protegeros mientras se investiga.",
       "sources": [
         "civil",

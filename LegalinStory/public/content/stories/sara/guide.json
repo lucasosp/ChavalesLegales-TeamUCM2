@@ -19,7 +19,7 @@
     },
     {
       "id": 5,
-      "title": "El juzgado"
+      "title": "El tribunal"
     },
     {
       "id": 6,
@@ -84,7 +84,7 @@
       "role": "14 años · 3.º de ESO",
       "initial": "S",
       "color": "peach",
-      "text": "Le gusta el voleibol, dibuja estrellas en sus cuadernos y su mejor amiga es Paula. Su vida es mucho más que lo que pasa en el juzgado.",
+      "text": "Le gusta el voleibol, dibuja estrellas en sus cuadernos y su mejor amiga es Paula. Su vida es mucho más que lo que pasa en el tribunal.",
       "sprite": "assets/characters/sara/smile.svg"
     },
     {
@@ -106,7 +106,7 @@
       "role": "Trabajadora social",
       "initial": "E",
       "color": "purple",
-      "text": "Acompaña a Sara en su día a día y organiza las ayudas. No decide nada en el juzgado."
+      "text": "Acompaña a Sara en su día a día y organiza las ayudas. No decide nada en el tribunal."
     },
     {
       "name": "Irene",
@@ -145,10 +145,10 @@
     },
     {
       "name": "Equipo psicosocial",
-      "role": "Psicólogos y trabajadores sociales del juzgado",
+      "role": "Psicólogos y trabajadores sociales del Tribunal de Instancia",
       "initial": "+",
       "color": "peach",
-      "text": "Cuando el juzgado lo decide, psicólogos y trabajadores sociales del juzgado pueden ayudar a escuchar al menor y dar su opinión como especialistas."
+      "text": "Cuando la plaza que lleva el caso lo decide, psicólogos y trabajadores sociales del Tribunal de Instancia pueden ayudar a escuchar al menor y dar su opinión como especialistas."
     },
     {
       "name": "OAVD",

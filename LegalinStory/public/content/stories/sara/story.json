@@ -484,7 +484,7 @@
       "chapter": 3,
       "type": "dialogue",
       "speaker": "Elena",
-      "text": "Valorar quiere decir conocer qué necesitáis y si estáis seguros. De eso nos encargamos en Servicios Sociales. Si un juzgado investiga lo que ha pasado, eso lo hacen otras personas.",
+      "text": "Valorar quiere decir conocer qué necesitáis y si estáis seguros. De eso nos encargamos en Servicios Sociales. Si el Tribunal de Instancia investiga lo que ha pasado, eso lo hacen otras personas.",
       "next": "c3-choice",
       "cast": {
         "sara": null
@@ -1088,7 +1088,7 @@
       "chapter": 5,
       "type": "interstitial",
       "kicker": "SARA · CAPÍTULO 5 DE 6",
-      "title": "El juzgado",
+      "title": "El tribunal",
       "text": "Un tiempo después. Saber quién es quién.",
       "next": "c5-01",
       "scene": "quiet-room",
@@ -1100,7 +1100,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": null,
-      "text": "Después del aviso del instituto y las primeras medidas de protección, el juzgado sigue investigando lo ocurrido. Llega una carta para que Sara declare. Irene la lee con ella y con su madre.",
+      "text": "Después del aviso del instituto y las primeras medidas de protección, una plaza del Tribunal de Instancia sigue investigando lo ocurrido. Llega una carta para que Sara declare. Irene la lee con ella y con su madre.",
       "next": "c5-02",
       "cast": {
         "sara": "neutral"
@@ -1120,7 +1120,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "La leemos juntas. Es una citación: dice que tienes que ir al juzgado, qué día y a qué hora. Lo que no entiendas, me lo preguntas.",
+      "text": "La leemos juntas. Es una citación: dice que tienes que ir al Tribunal de Instancia, qué día y a qué hora. Lo que no entiendas, me lo preguntas.",
       "next": "c5-justice",
       "cast": {
         "sara": null
@@ -1130,7 +1130,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "El juzgado investiga lo ocurrido y si tu padre es responsable de un delito. Mientras, seguimos cuidando de tu seguridad. No hay que esperar a una sentencia para protegerte.",
+      "text": "El tribunal investiga lo ocurrido y si tu padre es responsable de un delito. Mientras, seguimos cuidando de tu seguridad. No hay que esperar a una sentencia para protegerte.",
       "next": "c5-investigation",
       "cast": {
         "sara": null
@@ -1192,7 +1192,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "En el juzgado vas a ver a varias personas. Cada una tiene un trabajo distinto. Te las presento para que no te líes.",
+      "text": "Antes se llamaba juzgado; ahora es el Tribunal de Instancia. Tu caso lo lleva una plaza de su Sección de Violencia contra la Infancia y la Adolescencia. Allí vas a ver a varias personas. Cada una tiene un trabajo distinto. Te las presento para que no te líes.",
       "next": "c5-oficina",
       "cast": {
         "sara": null
@@ -1254,7 +1254,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "A veces el juzgado pide ayuda a su equipo psicosocial: psicólogas y trabajadores sociales que saben hablar con chicos y chicas de tu edad. Si te toca, te ayudarán a contar las cosas con calma.",
+      "text": "A veces el tribunal pide ayuda a su equipo psicosocial: psicólogas y trabajadores sociales que saben hablar con chicos y chicas de tu edad. Si te toca, te ayudarán a contar las cosas con calma.",
       "next": "c5-oavd",
       "cast": {
         "sara": null
@@ -1324,7 +1324,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Elena",
-      "text": "Yo no decido nada en el juzgado. Puedo acompañarte si tú quieres, salvo que se explique una razón para que no entre. También podemos acordar que te espere fuera.",
+      "text": "Yo no decido nada en el tribunal. Puedo acompañarte si tú quieres, salvo que se explique una razón para que no entre. También podemos acordar que te espere fuera.",
       "next": "c5-supports",
       "cast": {
         "sara": null
@@ -1344,7 +1344,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Puedes decirme qué te da miedo, preguntar quién va a estar y pedir lo que necesites. Yo se lo diré al juzgado antes de que empiece.",
+      "text": "Puedes decirme qué te da miedo, preguntar quién va a estar y pedir lo que necesites. Yo se lo diré al tribunal antes de que empiece.",
       "next": "c5-supports",
       "cast": {
         "sara": null
@@ -1666,7 +1666,7 @@
       "options": [
         {
           "id": "news",
-          "label": "Cómo saber qué está pasando en el juzgado.",
+          "label": "Cómo saber qué está pasando en el tribunal.",
           "next": "c6-news",
           "flags": {
             "waiting": "news"
