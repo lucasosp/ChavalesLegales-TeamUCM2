@@ -1,6 +1,7 @@
 import { appTemplate } from "./templates.js";
 import { Typewriter } from "./Typewriter.js";
 import { t } from "../i18n.js";
+import { personImage } from "../content/characterImages.js";
 
 /**
  * DOM presentation layer.
@@ -118,6 +119,7 @@ export class VisualNovelView {
       choices: root.querySelector("[data-choices]"),
       chat: root.querySelector("[data-chat]"),
       chatTitle: root.querySelector("[data-chat-title]"),
+      chatAvatar: root.querySelector("[data-chat-avatar]"),
       chatSelf: root.querySelector("[data-chat-self]"),
       chatLog: root.querySelector("[data-chat-log]"),
       chatHint: root.querySelector("[data-chat-hint]"),
@@ -296,6 +298,7 @@ export class VisualNovelView {
     this.refs.panel.hidden = true;
     this.refs.chat.hidden = false;
     this.refs.chatTitle.textContent = chatTitle ?? t("novel.messages");
+    this.refs.chatAvatar.replaceChildren(chatAvatar(chatTitle?.split(" · ")[0] ?? ""));
     this.refs.chatSelf.textContent = self ? t("novel.fromPhoneOf", { name: self }) : "";
     this.refs.chatLog.replaceChildren();
     this.refs.chatHint.hidden = true;
@@ -325,19 +328,31 @@ export class VisualNovelView {
 
     const message = this.#chatMessages[this.#chatIndex];
     this.#chatIndex += 1;
+    this.refs.chatLog.querySelector(".chat-typing")?.remove();
     this.refs.chatLog.append(this.#createChatBubble(message, this.#chatSelf));
-    this.refs.chatLog.scrollTop = this.refs.chatLog.scrollHeight;
+    this.refs.chat.dispatchEvent(new this.refs.chat.ownerDocument.defaultView.CustomEvent("chat-message", { bubbles: true, detail: { from: message.fromKey ?? message.from } }));
 
     if (this.#chatIndex >= this.#chatMessages.length) this.#finishChat({ natural: true });
     else {
+      // Mientras llega el siguiente, quien lo escribe aparece "escribiendo…".
+      const upcoming = this.#chatMessages[this.#chatIndex];
+      const upcomingFrom = upcoming.fromKey ?? upcoming.from;
+      if (!upcoming.system && upcomingFrom && upcomingFrom !== this.#chatSelf) {
+        const typing = document.createElement("div");
+        typing.className = "chat-typing";
+        typing.append(chatAvatar(upcomingFrom), Object.assign(document.createElement("div"), { className: "chat-bubble", innerHTML: "<i></i><i></i><i></i>" }));
+        this.refs.chatLog.append(typing);
+      }
       const delay = Math.min(4200, Math.max(1400, (message.text?.length ?? 0) * 45));
       this.#chatTimer = setTimeout(() => this.#revealChatMessage(), delay);
     }
+    this.refs.chatLog.scrollTop = this.refs.chatLog.scrollHeight;
   }
 
   #skipChat() {
     clearInterval(this.#chatTimer);
     this.#chatTimer = null;
+    this.refs.chatLog.querySelector(".chat-typing")?.remove();
 
     while (this.#chatIndex < this.#chatMessages.length) {
       const message = this.#chatMessages[this.#chatIndex];
@@ -353,6 +368,7 @@ export class VisualNovelView {
     clearInterval(this.#chatTimer);
     this.#chatTimer = null;
     this.#chatRevealing = false;
+    this.refs.chat.dispatchEvent(new this.refs.chat.ownerDocument.defaultView.CustomEvent("chat-finished", { bubbles: true }));
     this.refs.chatHint.hidden = false;
     this.refs.chatSkip.hidden = true;
 
@@ -387,6 +403,11 @@ export class VisualNovelView {
     const side =
       message.side ?? (system ? "system" : from === self ? "out" : "in");
     row.className = `chat-row is-${side}`;
+    // Mensajes seguidos del mismo autor van agrupados: un solo avatar y nombre.
+    const previous = [...this.refs.chatLog.querySelectorAll(".chat-row:not(.chat-typing)")].at(-1);
+    const continued = previous?.dataset.from === from && !system;
+    row.dataset.from = from ?? "";
+    if (continued) row.classList.add("is-continued");
 
     if (system) {
       const systemMessage = document.createElement("div");
@@ -401,7 +422,9 @@ export class VisualNovelView {
     if (message.deleted) bubble.classList.add("is-deleted");
     if (message.hidden) bubble.classList.add("is-hidden-content");
 
-    if (message.from) {
+    if (side === "in") row.append(continued ? Object.assign(document.createElement("span"), { className: "chat-avatar is-spacer" }) : chatAvatar(from));
+
+    if (message.from && !continued) {
       const author = document.createElement("span");
       author.className = "chat-author";
       author.textContent = message.from;
@@ -434,7 +457,7 @@ export class VisualNovelView {
     if (message.time) {
       const time = document.createElement("span");
       time.className = "chat-time";
-      time.textContent = message.time;
+      time.textContent = side === "out" ? `${message.time} ✓✓` : message.time;
       bubble.append(time);
     }
 
@@ -1257,4 +1280,25 @@ function defaultCharacterName(characterId) {
 
 function defaultSceneLabel(sceneId) {
   return sceneId;
+}
+
+// Avatar redondo del chat: el retrato del personaje si existe, si no su inicial
+// sobre un color estable derivado del nombre.
+function chatAvatar(name = "") {
+  const avatar = document.createElement("span");
+  avatar.className = "chat-avatar";
+  avatar.setAttribute("aria-hidden", "true");
+  const src = name && personImage(name);
+  if (src) {
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = "";
+    avatar.append(img);
+  } else {
+    let hash = 0;
+    for (const char of name) hash = (hash * 31 + char.charCodeAt(0)) % 360;
+    avatar.style.background = `hsl(${hash} 45% 42%)`;
+    avatar.textContent = (name.trim()[0] ?? "?").toUpperCase();
+  }
+  return avatar;
 }

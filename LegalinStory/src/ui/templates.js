@@ -67,11 +67,20 @@ export function appTemplate() {
         </section>
 
         <section class="chat" data-chat hidden aria-label="${t("novel.chatAria")}">
+          <div class="chat-status" aria-hidden="true">
+            <span>9:41</span>
+            <svg viewBox="0 0 64 14" width="64" height="14">
+              <g fill="currentColor"><rect x="0" y="9" width="3" height="4" rx="1"/><rect x="4.5" y="6.5" width="3" height="6.5" rx="1"/><rect x="9" y="4" width="3" height="9" rx="1"/><rect x="13.5" y="1" width="3" height="12" rx="1"/></g>
+              <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M22 5.2a9 9 0 0 1 12 0"/><path d="M24.4 8a5.4 5.4 0 0 1 7.2 0"/></g><circle cx="28" cy="11" r="1.4" fill="currentColor"/>
+              <rect x="39.5" y="1.5" width="20" height="11" rx="3" fill="none" stroke="currentColor" stroke-opacity=".55"/><rect x="41.5" y="3.5" width="12.5" height="7" rx="1.5" fill="currentColor"/><path d="M61.5 5.2v3.6a1.8 1.8 0 0 0 0-3.6Z" fill="currentColor" fill-opacity=".55"/>
+            </svg>
+          </div>
           <header class="chat-head">
-            <span class="chat-dot" aria-hidden="true"></span>
+            <span class="chat-dot" data-chat-avatar aria-hidden="true"></span>
             <span class="chat-heading"><span data-chat-title></span><span class="chat-self" data-chat-self></span></span>
           </header>
           <div class="chat-log" data-chat-log role="log" aria-label="${t("novel.chatLogAria")}"></div>
+          <div class="chat-compose" aria-hidden="true"><span>${t("novel.chatCompose")}</span><i><svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M3.4 20.4 21 12 3.4 3.6l.01 6.53L15 12 3.41 13.87z"/></svg></i></div>
           <button class="chat-hint" type="button" data-chat-skip>${t("novel.chatSkip")}</button>
           <button class="chat-hint" type="button" data-chat-hint hidden>${t("novel.continueArrow")}</button>
         </section>

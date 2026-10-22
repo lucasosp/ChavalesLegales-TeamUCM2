@@ -27,11 +27,21 @@ export class SaraExperience {
     this.novelTitle = t("storyTitles.sara");
     root.querySelector(".novel").setAttribute("aria-label", this.novelTitle);
     this.drawingModal = new DrawingCanvasModal({ container: root });
+    this.phase1Triggered = false;
     this.phase2Triggered = false;
     this.phase3Triggered = false;
     root.classList.add("sara-mode");
     this.novel = root.querySelector(".novel");
     this.cast = element("div", "sara-cast");
+    // En los chats se ilumina quien acaba de escribir; al terminar, todos en color.
+    root.addEventListener("chat-message", ({ detail }) => {
+      const name = detail.from?.split(" · ")[0];
+      for (const frame of this.cast.children) frame.classList.toggle("is-speaking", frame.dataset.person === name);
+    });
+    root.addEventListener("chat-finished", () => {
+      for (const frame of this.cast.children) frame.classList.remove("is-speaking");
+      this.cast.classList.add("is-chat-done");
+    });
     this.cast.setAttribute("aria-hidden", "true");
     this.cast.hidden = true;
     root.querySelector("[data-scene]").append(this.cast);
@@ -104,7 +114,8 @@ export class SaraExperience {
     if (params.get("avatar") === "1" || params.get("mode") === "avatar") {
       this.engine.saveStore = this.localStore;
       this.engine.initialFlags = { resolution: "conviction" };
-      this.phase2Triggered = false;
+      this.phase1Triggered = false;
+    this.phase2Triggered = false;
       this.phase3Triggered = false;
       this.closePanel(true);
       this.drawingModal.open({
@@ -158,21 +169,9 @@ export class SaraExperience {
     if (!resume) {
       this.localStore.clear();
       avatarStore.clear();
-      this.phase2Triggered = false;
+      this.phase1Triggered = false;
+    this.phase2Triggered = false;
       this.phase3Triggered = false;
-    }
-
-    if (!resume && !avatarStore.isPhase1Completed()) {
-      this.closePanel(true);
-      this.drawingModal.open({
-        phase: "phase1",
-        onConfirm: () => {
-          this.engine.history = [];
-          this.updateAvatarUI();
-          this.engine.start({ resume: false });
-        },
-      });
-      return;
     }
 
     this.closePanel(true);
@@ -350,8 +349,25 @@ export class SaraExperience {
     const node = this.engine.currentNode;
     this.root.dataset.saraNode = this.engine.nodeId;
 
-    // Check for Phase 2 trigger (Post-Trauma: node c2-04, domestic crisis disclosure)
-    if (this.engine.nodeId === "c2-04" && !avatarStore.isPhase2Completed() && !this.phase2Triggered) {
+    // Los dibujos cierran capítulo: el primero al acabar el 1 (antes de la
+    // tarjeta del 2) y el segundo al acabar el 2 (antes de la del 3).
+    if (this.engine.nodeId === "c2-card" && !avatarStore.isPhase1Completed() && !this.phase1Triggered) {
+      this.phase1Triggered = true;
+      this.engine.history = [];
+      this.app.paused = true;
+      this.drawingModal.open({
+        phase: "phase1",
+        onConfirm: () => {
+          this.engine.history = [];
+          this.updateAvatarUI();
+          this.app.paused = false;
+          this.sync();
+        },
+      });
+      return;
+    }
+
+    if (this.engine.nodeId === "c3-card" && !avatarStore.isPhase2Completed() && !this.phase2Triggered) {
       this.phase2Triggered = true;
       this.engine.history = []; // Crucial: barrier to prevent rewinding before the trauma drawing
       this.app.paused = true;
@@ -401,8 +417,11 @@ export class SaraExperience {
   }
 
   renderCast(node) {
-    this.cast.hidden = !["dialogue", "choice"].includes(node.type);
+    this.cast.hidden = !["dialogue", "choice", "chat"].includes(node.type);
+    this.cast.classList.toggle("is-chat", node.type === "chat");
+    this.cast.classList.remove("is-chat-done");
     if (this.cast.hidden) return;
+    if (node.type === "chat") return this.renderChatCast(node);
     // Portraits are keyed by the untranslated speaker name.
     const speaker = (node.speakerKey ?? node.speaker)?.split(" · ")[0];
     let partner = speaker && speaker !== "Sara" ? speaker : null;
@@ -457,6 +476,29 @@ export class SaraExperience {
       if (typeof image.decode === "function") image.decode().then(ready, failed);
       else { image.onload = ready; image.onerror = failed; }
     }
+  }
+
+  // En un chat, quien escribe va a la izquierda del móvil y Sara a la derecha,
+  // igual que sus burbujas. Se pintan en gris para no competir con la pantalla.
+  renderChatCast(node) {
+    const contact = (node.messages ?? []).map(m => (m.fromKey ?? m.from)?.split(" · ")[0]).find(name => name && name !== "Sara")
+      ?? (node.chatTitle ?? "").split(" · ")[0];
+    const names = [contact, "Sara"].filter(name => name && personPortrait(name));
+    this.cast.dataset.count = String(names.length);
+    this.cast.replaceChildren(...names.map(name => {
+      const art = personPortrait(name);
+      const frame = element("div", "sara-cast-person");
+      frame.dataset.person = name;
+      const windowEl = element("div", "sara-portrait-window");
+      const image = element("img");
+      image.alt = "";
+      image.draggable = false;
+      image.onload = () => framePortrait(image, art);
+      image.src = art.src;
+      windowEl.append(image);
+      frame.append(windowEl);
+      return frame;
+    }));
   }
 
   handleOverlayKey(event) {
