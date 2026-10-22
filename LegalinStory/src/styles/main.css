@@ -663,6 +663,7 @@ a { color: inherit; }
 }
 
 .choice:hover,
+.choice:focus,
 .choice:focus-visible {
   border-color: rgb(255 190 205 / 68%);
   background: rgb(48 26 41 / 90%);
@@ -2272,6 +2273,7 @@ body { background: var(--verde-950); }
 .choice:nth-child(even) { transform: rotate(.5deg); }
 
 .choice:hover,
+.choice:focus,
 .choice:focus-visible {
   background-color: var(--verde-50);
   color: var(--tinta);
@@ -2281,6 +2283,7 @@ body { background: var(--verde-950); }
   outline: none;
 }
 
+.choice:focus,
 .choice:focus-visible {
   outline: 3px solid var(--marca-ambar);
   outline-offset: 3px;

@@ -1038,7 +1038,7 @@ export class VisualNovelView {
   }
 
   #handleKeyDown(event) {
-    if (event.repeat) return;
+    if (event.repeat && event.key !== "ArrowDown" && event.key !== "ArrowUp" && event.key !== "Down" && event.key !== "Up") return;
     if (!this.refs.welcome.hidden) {
       if (event.key === "Tab") {
         event.preventDefault();
@@ -1059,6 +1059,24 @@ export class VisualNovelView {
     }
     if (!this.refs.lesson.hidden || !this.refs.quiz.hidden) {
       if (event.key === "Escape") event.preventDefault();
+      if (!this.refs.quiz.hidden && !this.#quizAnswered) {
+        const isDown = event.key === "ArrowDown" || event.key === "Down";
+        const isUp = event.key === "ArrowUp" || event.key === "Up";
+        if (isDown || isUp) {
+          event.preventDefault();
+          const buttons = [...this.refs.quizOptions.querySelectorAll("button.quiz-option:not(:disabled)")];
+          if (buttons.length > 0) {
+            const current = buttons.indexOf(document.activeElement);
+            let next = 0;
+            if (isDown) {
+              next = current >= 0 ? (current + 1) % buttons.length : 0;
+            } else {
+              next = current >= 0 ? (current - 1 + buttons.length) % buttons.length : buttons.length - 1;
+            }
+            buttons[next].focus({ preventScroll: true });
+          }
+        }
+      }
       return;
     }
     if (this.#rightsVisible && event.key === "Tab") {
@@ -1078,6 +1096,39 @@ export class VisualNovelView {
       event.preventDefault();
       this.#closeRights();
       return;
+    }
+
+    // Navegación con flechas arriba/abajo en las opciones de decisión
+    if (this.#awaitingChoice && !this.refs.choices.hidden) {
+      const isDown = event.key === "ArrowDown" || event.key === "Down";
+      const isUp = event.key === "ArrowUp" || event.key === "Up";
+      if (isDown || isUp) {
+        event.preventDefault();
+        const buttons = [...this.refs.choices.querySelectorAll("button.choice")];
+        if (buttons.length > 0) {
+          const enabled = buttons.filter((b) => !b.disabled);
+          const list = enabled.length > 0 ? enabled : buttons;
+          const current = list.indexOf(document.activeElement);
+          let next = 0;
+          if (isDown) {
+            next = current >= 0 ? (current + 1) % list.length : 0;
+          } else {
+            next = current >= 0 ? (current - 1 + list.length) % list.length : list.length - 1;
+          }
+          list[next].focus({ preventScroll: true });
+        }
+        return;
+      }
+
+      if (event.key === "Enter" || event.key === " ") {
+        const activeChoice = this.refs.choices.querySelector("button.choice:focus");
+        if (!activeChoice) {
+          event.preventDefault();
+          const first = this.refs.choices.querySelector("button.choice:not(:disabled)") || this.refs.choices.querySelector("button.choice");
+          first?.focus({ preventScroll: true });
+          return;
+        }
+      }
     }
 
     if (event.key !== " " && event.key !== "Enter") return;
@@ -1346,7 +1397,7 @@ export class VisualNovelView {
     this.#choiceReadyTimer = setTimeout(() => {
       this.refs.choices.classList.add("is-ready");
       this.refs.choices.querySelectorAll("button").forEach(button => { button.disabled = false; });
-      if (this.autoFocusStory && !this.root.querySelector('[data-sara-overlay]:not([hidden]), .sara-drawing-overlay')) {
+      if (!this.root.querySelector('[data-sara-overlay]:not([hidden]), .sara-drawing-overlay')) {
         this.refs.choices.querySelector("button")?.focus({ preventScroll: true });
       }
     }, 200);
