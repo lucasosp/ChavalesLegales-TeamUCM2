@@ -11,7 +11,9 @@ backend, así que todo es mismo origen. La novela va en un iframe del mismo orig
 """
 from typing import Any, Dict
 
-from fastapi import Body, FastAPI, HTTPException
+import os
+import subprocess
+from fastapi import BackgroundTasks, Body, FastAPI, Header, HTTPException
 
 from casos import caso_store, es_id_valido
 
@@ -85,3 +87,30 @@ def registrar_evento_caso(caso_id: str, evento: Dict[str, Any] = Body(...)):
         return {"total": caso_store.add_evento(validar_id(caso_id), evento)}
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+# =============================================================================
+# WEBHOOK DE DESPLIEGUE AUTOMATICO (HTTPS)
+# =============================================================================
+DEPLOY_TOKEN = os.environ.get("DEPLOY_TOKEN", "chavales-secret-deploy-token-2026")
+
+
+def ejecutar_despliegue():
+    cmd = (
+        "cd /var/www/chavaleslegales && "
+        "git remote set-url origin https://github.com/lucasosp/ChavalesLegales-TeamUCM2.git && "
+        "git fetch origin main && "
+        "git reset --hard origin/main && "
+        "cd frontend && npm install && npm run build && "
+        "cd ../backend && if [ -d venv ]; then source venv/bin/activate; pip install -r requirements.txt; deactivate; fi && "
+        "cd .. && pm2 restart ecosystem.config.js || pm2 start ecosystem.config.js"
+    )
+    subprocess.run(["/bin/bash", "-c", cmd], capture_output=True, text=True)
+
+
+@app.post("/api/deploy")
+def webhook_deploy(background_tasks: BackgroundTasks, x_deploy_token: str = Header(None, alias="X-Deploy-Token")):
+    if not x_deploy_token or x_deploy_token != DEPLOY_TOKEN:
+        raise HTTPException(status_code=403, detail="Token no valido")
+    background_tasks.add_task(ejecutar_despliegue)
+    return {"status": "ok", "message": "Despliegue iniciado en segundo plano"}
