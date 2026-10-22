@@ -15,7 +15,7 @@ import unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import casos  # noqa: E402
-from casos import CasoStore, es_id_valido  # noqa: E402
+from casos import CasoStore, ESQUEMA_VERSION, es_id_valido  # noqa: E402
 
 
 class CasoStoreTest(unittest.TestCase):
@@ -95,6 +95,72 @@ class CasoStoreTest(unittest.TestCase):
             self.store.listar(),
             [{"id": "CL-1", "meta": {"nombreJoven": "Ana"}, "eventos": 2}],
         )
+
+    # -- esquema del evento (version 2) -------------------------------------
+
+    def test_estampa_t_servidor_y_version(self):
+        antes = casos.ahora_ms()
+        self.store.add_evento("CL-1", {"kind": "progreso", "t": 1, "data": {}})
+        despues = casos.ahora_ms()
+
+        caso = self.store.get("CL-1")
+        evento = caso["eventos"][0]
+        self.assertEqual(caso["schemaVersion"], ESQUEMA_VERSION)
+        self.assertGreaterEqual(evento["t_servidor"], antes)
+        self.assertLessEqual(evento["t_servidor"], despues)
+        self.assertEqual(evento["t"], 1)  # el reloj del cliente se conserva
+
+    def test_no_deja_que_el_cliente_fije_t_servidor(self):
+        # t_servidor es del servidor: si llega uno, se respeta solo si es plausible
+        self.store.add_evento("CL-1", {"kind": "progreso", "t": 1, "t_servidor": 5, "data": {}})
+        self.assertEqual(self.store.get("CL-1")["eventos"][0]["t_servidor"], 5)
+
+    def test_evento_mal_formado_lanza(self):
+        for malo in (
+            "no soy un evento",
+            ["tampoco"],
+            {"data": {}},
+            {"kind": "", "data": {}},
+            {"kind": 7, "data": {}},
+            {"kind": "progreso", "data": "esto no es un objeto"},
+            {"kind": "progreso", "t": "ayer", "data": {}},
+        ):
+            with self.assertRaises(ValueError, msg=repr(malo)):
+                self.store.add_evento("CL-1", malo)
+        self.assertEqual(os.listdir(self.datos), [])
+
+    def test_kind_desconocido_se_acepta(self):
+        # la novela puede emitir un tipo nuevo antes de que el informe lo entienda
+        self.store.add_evento("CL-1", {"kind": "evento-futuro", "t": 1, "data": {}})
+        self.assertEqual(len(self.store.get("CL-1")["eventos"]), 1)
+
+    def test_data_por_defecto_es_objeto_vacio(self):
+        self.store.add_evento("CL-1", {"kind": "salida", "t": 1})
+        self.assertEqual(self.store.get("CL-1")["eventos"][0]["data"], {})
+
+    # -- resumen ligero ------------------------------------------------------
+
+    def test_resumen_no_devuelve_eventos(self):
+        self.store.set_meta("CL-1", {"nombreJoven": "Ana"})
+        self.store.add_evento("CL-1", {"kind": "inicio", "t": 10, "data": {}})
+        self.store.add_evento("CL-1", {"kind": "progreso", "t": 20, "data": {}})
+
+        resumen = self.store.resumen("CL-1")
+        self.assertEqual(sorted(resumen), ["eventos", "id", "schemaVersion", "ultimo"])
+        self.assertEqual(resumen["eventos"], 2)  # un contador, no la lista
+        self.assertIsInstance(resumen["ultimo"], int)
+        self.assertEqual(resumen["schemaVersion"], ESQUEMA_VERSION)
+
+    def test_resumen_de_caso_inexistente_o_id_invalido(self):
+        self.assertIsNone(self.store.resumen("NO-EXISTE"))
+        self.assertIsNone(self.store.resumen("../evil"))
+
+    def test_caso_antiguo_se_marca_version_1(self):
+        with open(os.path.join(self.datos, "CL-1.json"), "w", encoding="utf-8") as f:
+            json.dump({"id": "CL-1", "meta": {}, "eventos": [{"kind": "inicio", "t": 1, "data": {}}]}, f)
+
+        store = CasoStore(data_dir=self.datos, legacy_file=self.legacy)
+        self.assertEqual(store.resumen("CL-1")["schemaVersion"], 1)
 
     def test_escrituras_concurrentes_no_pierden_eventos(self):
         def escribe(n):

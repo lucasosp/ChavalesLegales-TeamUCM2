@@ -20,6 +20,7 @@ import logging
 import os
 import re
 import threading
+import time
 from typing import Any, Dict, Optional
 
 logger = logging.getLogger("chavales.casos")
@@ -29,9 +30,52 @@ PATRON_ID = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
 
 MAX_EVENTOS = 5000
 
+# Version del esquema del caso. Se escribe en cada caso; los antiguos se marcan como 1 al leerlos.
+# 2 = los eventos llevan 't_servidor' (reloj del servidor) y el caso lleva 'schemaVersion'.
+ESQUEMA_VERSION = 2
+
+# Tipos de evento que entiende el informe. Un 'kind' desconocido no se rechaza (la novela
+# podria emitir uno nuevo antes de que el informe lo entienda) pero se registra en el log.
+KINDS_CONOCIDOS = frozenset({
+    "inicio", "salida", "progreso", "decision",
+    "minijuego-inicio", "minijuego", "dibujo",
+})
+
 
 def es_id_valido(caso_id: object) -> bool:
     return isinstance(caso_id, str) and bool(PATRON_ID.match(caso_id))
+
+
+def ahora_ms() -> int:
+    return time.time_ns() // 1_000_000
+
+
+def validar_evento(evento: object) -> Dict[str, Any]:
+    """Comprueba la forma del evento. Lanza ValueError si no es un evento.
+
+    No se valida el contenido de 'data': cambia por tipo y lo define la novela. Lo que si se
+    garantiza es la forma, para que analisis.js nunca reciba algo que no sabe leer.
+    """
+    if not isinstance(evento, dict):
+        raise ValueError("El evento debe ser un objeto")
+    kind = evento.get("kind")
+    if not isinstance(kind, str) or not kind:
+        raise ValueError("El evento necesita un 'kind' de texto")
+    data = evento.get("data", {})
+    if not isinstance(data, dict):
+        raise ValueError("El campo 'data' del evento debe ser un objeto")
+    t = evento.get("t")
+    if t is not None and not isinstance(t, (int, float)):
+        raise ValueError("El campo 't' del evento debe ser numerico")
+    if kind not in KINDS_CONOCIDOS:
+        logger.warning("Evento con kind desconocido: %r", kind)
+    return {
+        **evento,
+        "data": data,
+        # Reloj del servidor: las duraciones del informe no pueden depender del reloj del
+        # navegador del menor (reloj mal puesto, pestaña suspendida).
+        "t_servidor": evento.get("t_servidor") or ahora_ms(),
+    }
 
 
 def _data_dir_por_defecto() -> str:
@@ -84,6 +128,7 @@ class CasoStore:
                 logger.warning("No se pudo leer %s: %s", ruta, exc)
                 continue
             if isinstance(caso, dict) and "eventos" in caso:
+                caso.setdefault("schemaVersion", 1)  # anterior a t_servidor
                 self._casos[caso_id] = caso
             else:
                 logger.warning("Ignorando %s: no tiene forma de caso", ruta)
@@ -128,7 +173,10 @@ class CasoStore:
         os.replace(tmp, ruta)
 
     def _caso(self, caso_id: str) -> Dict[str, Any]:
-        return self._casos.setdefault(caso_id, {"id": caso_id, "meta": {}, "eventos": []})
+        return self._casos.setdefault(
+            caso_id,
+            {"id": caso_id, "meta": {}, "eventos": [], "schemaVersion": ESQUEMA_VERSION},
+        )
 
     # -- API pública ----------------------------------------------------------
 
@@ -137,13 +185,16 @@ class CasoStore:
         with self._lock:
             caso = self._caso(caso_id)
             caso["meta"] = {**caso["meta"], **meta}
+            caso["schemaVersion"] = ESQUEMA_VERSION
             self._escribir(caso_id, caso)
             return copy.deepcopy(caso)
 
     def add_evento(self, caso_id: str, evento: Dict[str, Any]) -> int:
         self._ruta(caso_id)
+        evento = validar_evento(evento)
         with self._lock:
             caso = self._caso(caso_id)
+            caso["schemaVersion"] = ESQUEMA_VERSION
             # El dibujo se guarda como última instantánea: evita duplicar imágenes en cada sincronización
             if evento.get("kind") == "dibujo":
                 caso["eventos"] = [e for e in caso["eventos"] if e.get("kind") != "dibujo"]
@@ -151,6 +202,27 @@ class CasoStore:
             caso["eventos"] = caso["eventos"][-MAX_EVENTOS:]
             self._escribir(caso_id, caso)
             return len(caso["eventos"])
+
+    def resumen(self, caso_id: str) -> Optional[Dict[str, Any]]:
+        """Version ligera para el sondeo del informe: no copia los eventos ni las imagenes."""
+        if not es_id_valido(caso_id):
+            return None
+        with self._lock:
+            caso = self._casos.get(caso_id)
+            if caso is None:
+                return None
+            eventos = caso["eventos"]
+            ultimo = None
+            for e in reversed(eventos):
+                ultimo = e.get("t_servidor", e.get("t"))
+                if ultimo is not None:
+                    break
+            return {
+                "id": caso_id,
+                "eventos": len(eventos),
+                "ultimo": ultimo,
+                "schemaVersion": caso.get("schemaVersion", 1),
+            }
 
     def get(self, caso_id: str) -> Optional[Dict[str, Any]]:
         if not es_id_valido(caso_id):

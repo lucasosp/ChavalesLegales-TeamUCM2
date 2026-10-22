@@ -5,29 +5,17 @@ Arrancar con: python -m uvicorn main:app --app-dir backend
 
 Toda la telemetría pasa por `casos`: cada evento de la novela (progreso, decisión,
 minijuego, dibujo) es una fila de `eventos`, y /informe/[caso] es su única vista.
+
+No hay middleware CORS: el navegador solo habla con Next, que reescribe /api/* al
+backend, así que todo es mismo origen. La novela va en un iframe del mismo origen.
 """
-import os
 from typing import Any, Dict
 
 from fastapi import Body, FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
 
 from casos import caso_store, es_id_valido
 
 app = FastAPI(title="Chavales Legales API")
-
-# Orígenes CORS configurables por variable de entorno para producción
-ALLOWED_ORIGINS_ENV = os.environ.get("ALLOWED_ORIGINS", "*")
-allowed_origins = [o.strip() for o in ALLOWED_ORIGINS_ENV.split(",") if o.strip()]
-# Ojo: allow_credentials=True junto con "*" lo rechazan los navegadores. Como la app
-# entra por el rewrite de Next (mismo origen), no hacen falta credenciales.
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=allowed_origins if allowed_origins else ["*"],
-    allow_credentials=False,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 
 @app.get("/")
@@ -55,6 +43,15 @@ def listar_casos():
     return caso_store.listar()
 
 
+@app.get("/api/casos/{caso_id}/resumen")
+def resumen_caso(caso_id: str):
+    """Versión ligera para que el informe sondee sin bajarse las imágenes del dibujo."""
+    resumen = caso_store.resumen(validar_id(caso_id))
+    if not resumen:
+        raise HTTPException(status_code=404, detail="Caso no encontrado")
+    return resumen
+
+
 @app.get("/api/casos/{caso_id}")
 def obtener_caso(caso_id: str):
     caso = caso_store.get(validar_id(caso_id))
@@ -71,4 +68,7 @@ def guardar_meta_caso(caso_id: str, meta: Dict[str, Any] = Body(...)):
 
 @app.post("/api/casos/{caso_id}/eventos")
 def registrar_evento_caso(caso_id: str, evento: Dict[str, Any] = Body(...)):
-    return {"total": caso_store.add_evento(validar_id(caso_id), evento)}
+    try:
+        return {"total": caso_store.add_evento(validar_id(caso_id), evento)}
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
