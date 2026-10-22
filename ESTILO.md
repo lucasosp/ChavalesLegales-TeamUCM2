@@ -34,7 +34,7 @@ Fuentes de verdad (si el doc y el CSS discrepan, manda el CSS):
 | Naranja (acento) | `--naranja-50 … --naranja-900` | destacados, avisos, exportar. **Nunca** en el botón principal |
 | Neutros | `--neutro-50 … --neutro-900` | superficies blancas, texto, grises limpios sin tinte |
 | Peligro | `--peligro`, `--peligro-fuerte`, `--peligro-suave`, `--peligro-borde` | solo error, cancelar, alerta grave y el aspa de borrar del buscador |
-| Marca (restringido) | `--marca-ambar` `#fbbf24`, `--marca-ambar-claro` `#fcd34d`, `--marca-ambar-sombra` `#b45309` | logotipo y **el** botón que hace avanzar |
+| Marca (restringido) | `--marca-ambar` `#fbbf24`, `--marca-ambar-claro` `#fcd34d`, `--marca-ambar-tenue` `#fef3c7`, `--marca-ambar-sombra` `#b45309` | logotipo y **el** botón que hace avanzar |
 | Juegos (restringido) | `--juego-azul` `#50abf2`, `--juego-morado` `#e094f5`, `--juego-rojo` `#ff8a8a`, `--juego-verde` `#67d579` (+ `-borde` de cada uno) | solo las fichas de juego y las zonas planas de los tableros (`cid-table`, `caja-arena`), que necesitan colores distinguibles entre sí |
 
 Tokens semánticos que hay que usar en código nuevo: `--superficie`, `--superficie-alt`,
@@ -53,7 +53,8 @@ Reglas:
   informe). Los secundarios son `--naranja-200` con placa `--naranja-600`; el resto, pegatina
   blanca (ver §12).
 - El **ámbar de marca no es el naranja de acento**. `--marca-ambar` solo en logotipo, botón
-  principal, hover de la barra superior y foco.
+  principal, hover de la barra superior y foco. Para el hover de filas y opciones de menú,
+  `--marca-ambar-tenue`: aclara sin competir con el ámbar de marca.
 - El **foco es siempre el mismo aro ámbar** `box-shadow: 0 0 0 4px rgba(251, 191, 36, .55)`, sin
   cambiar el color del borde. Hoy está escrito a mano en tres archivos: si se toca, se toca en
   los tres (o se convierte en token `--foco`).
@@ -322,7 +323,7 @@ rótulo. La barra ocupa **todo el ancho**; lo que se limita a 1280px es el conte
 | Estado | Transform | Placa | Fondo |
 |---|---|---|---|
 | Reposo | `rotate(±0.5deg)` | base | base |
-| Hover | `translate(-1px,-2px) rotate(0)` | +2px | aclara, o pasa a `--marca-ambar` (barra superior), o a `--naranja-50/300` (campos y secundarios) |
+| Hover | `translate(-1px,-2px) rotate(0)` | +2px | aclara a `--marca-ambar-tenue` (filas y opciones de menú), o pasa a `--marca-ambar` (barra superior), o a `--naranja-50/300` (campos y secundarios) |
 | Activo | `translate(2px,2px) rotate(0)` | 1–2px | el mismo |
 | Foco | — | — | aro `0 0 0 4px rgba(251,191,36,.55)`; el borde no cambia |
 | Deshabilitado | sin giro | ninguna | `--neutro-200` + borde `--neutro-400` + texto `--texto-medio`/`--texto-suave` |

@@ -168,7 +168,7 @@ assert.equal(engine.back(), false);
 
 // Exercise the clean UI, saving, pause and restart. Canvas behavior is covered in Chromium.
 const dom = new JSDOM('<!doctype html><html lang="es"><body><div id="app"></div></body></html>', { url: "http://localhost/", pretendToBeVisual: true });
-for (const key of ["window", "document", "HTMLElement", "Element", "localStorage"]) globalThis[key] = key === "window" ? dom.window : dom.window[key];
+for (const key of ["window", "document", "HTMLElement", "Element", "localStorage", "sessionStorage"]) globalThis[key] = key === "window" ? dom.window : dom.window[key];
 globalThis.requestAnimationFrame = dom.window.requestAnimationFrame.bind(dom.window);
 globalThis.cancelAnimationFrame = dom.window.cancelAnimationFrame.bind(dom.window);
 globalThis.matchMedia = () => ({ matches: true });
@@ -259,10 +259,25 @@ try {
   for (const id of ["c4-dani", "c5-privacy", "c5-short", "c6-conviction", "c6-dani", "epilogue-volley"]) assert.ok(played.has(id), id);
   assert.equal(localStorage.getItem(SARA_SAVE_KEY), null, "Completion removes the local save");
   experience.openPanel("pause");
-  const toggles = [...root.querySelectorAll('button[aria-pressed]')];
-  assert.equal(toggles.length, 2);
+  const toggles = [...root.querySelectorAll('.sara-toggle input[type="checkbox"]')];
+  assert.equal(toggles.length, 2, "Large text and instant text are checkboxes");
   toggles[0].click(); assert.ok(root.classList.contains('sara-large-text'));
+  assert.equal(toggles[0].checked, true, "The box stays ticked when active");
   toggles[1].click(); assert.equal(experience.app.view.typewriter.instant, true);
+  assert.equal(root.querySelector('button[aria-pressed]'), null, "No toggle buttons left in the menu");
+  const dropdowns = root.querySelectorAll(".sara-pause-dropdown");
+  assert.equal(dropdowns.length, 2, "The pause menu offers chapter and language selectors");
+  const language = dropdowns[1];
+  assert.equal(language.querySelector(".sara-pause-dropdown-value").textContent, "Idioma: Castellano");
+  language.querySelector(".sara-pause-dropdown-trigger").click();
+  assert.deepEqual(
+    [...language.querySelectorAll(".sara-pause-dropdown-item")].map((item) => item.textContent),
+    ["Castellano", "Català", "Valencià", "Galego", "Euskara", "Aranés"],
+  );
+  assert.equal(language.querySelector('[aria-selected="true"]').textContent, "Castellano");
+  // Un clic en el fondo oscuro (fuera de la tarjeta) cierra el menú.
+  experience.overlay.dispatchEvent(new dom.window.Event("pointerdown", { bubbles: true }));
+  assert.equal(experience.mode, null, "Clicking the backdrop closes the menu");
   experience.openPanel("help");
   assert.ok(root.querySelector('[href="tel:112"]'));
   experience.closePanel();
@@ -274,5 +289,12 @@ try {
   assert.equal(experience.engine.nodeId, "start");
   assert.deepEqual(experience.engine.flags, { resolution: "conviction" });
   assert.equal(experience.engine.history.length, 0);
+  // Cambiar de idioma recarga: la marca de sesión devuelve al mismo nodo.
+  sessionStorage.setItem("sara.langSwitch", JSON.stringify({ nodeId: "c2-choice", flags: {}, stage: {}, seen: [], history: [] }));
+  assert.equal(experience.resumeAfterLanguageSwitch(), true);
+  assert.equal(sessionStorage.getItem("sara.langSwitch"), null, "The resume mark is consumed once");
+  assert.equal(experience.validSave().nodeId, "c2-choice");
+  sessionStorage.setItem("sara.langSwitch", "1");
+  assert.equal(experience.resumeAfterLanguageSwitch(), false, "Without a snapshot the landing is shown");
 } finally { experience.destroy(); dom.window.close(); }
 console.log(`Sara passed: ${reached.size} reachable nodes, ${choices.size} valid choices, ${seenStates.size} distinct future-relevant states; pause, back, save, restart and deferred consequences.`);

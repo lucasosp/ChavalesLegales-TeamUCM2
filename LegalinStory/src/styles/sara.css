@@ -93,7 +93,7 @@
 .sara-pause-dropdown-trigger:hover,
 .sara-pause-dropdown-trigger:focus-visible,
 .sara-pause-dropdown.is-open .sara-pause-dropdown-trigger {
-  background: var(--verde-50);
+  background: var(--marca-ambar-tenue);
   transform: translate(-1px, -2px) rotate(0deg);
   box-shadow: 4px 5px 0 var(--tinta);
 }
@@ -168,7 +168,7 @@
 }
 
 .sara-pause-dropdown-item:hover {
-  background-color: var(--verde-100);
+  background-color: var(--marca-ambar-tenue);
 }
 
 .sara-pause-dropdown-item.is-selected {
@@ -370,7 +370,53 @@
   box-shadow: 4px 5px 0 var(--tinta);
 }
 .sara-secondary:active { transform: translate(2px, 2px) rotate(0deg); box-shadow: 1px 1px 0 var(--tinta); }
-.sara-secondary[aria-pressed='true'] { background: var(--verde-100); border-color: var(--verde-700); box-shadow: 3px 3px 0 var(--verde-700); }
+
+/* Ajustes del menú: casilla cuadrada con tick, no un botón que se pinta. */
+.sara-toggle {
+  position: relative;
+  display: flex; align-items: center; gap: 12px;
+  min-height: 48px; padding: 12px 16px;
+  margin: 12px 0;
+  border: 3px solid var(--tinta);
+  border-radius: var(--radio-pegatina);
+  background: var(--superficie); color: var(--verde-950);
+  box-shadow: 3px 3px 0 var(--tinta);
+  font-size: 1rem; font-weight: 800; line-height: 1.45;
+  cursor: pointer; text-align: left;
+  transform: rotate(-.4deg);
+  transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease;
+}
+.sara-toggle:hover {
+  /* Ámbar muy pálido: aclara la fila sin competir con el ámbar de marca. */
+  background: var(--marca-ambar-tenue);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 4px 5px 0 var(--tinta);
+}
+.sara-toggle:active { transform: translate(2px, 2px) rotate(0deg); box-shadow: 1px 1px 0 var(--tinta); }
+.sara-toggle-input {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+.sara-toggle-box {
+  --sara-tick: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4.5 12.8 9.5 17.8 19.5 7' fill='none' stroke='%23000' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  position: relative; flex: none;
+  width: 26px; height: 26px;
+  border: 3px solid var(--tinta);
+  border-radius: 6px;
+  background: var(--superficie);
+}
+.sara-toggle-input:checked + .sara-toggle-box { background: var(--verde-100); }
+/* Tick centrado con máscara: el trazo no depende de offsets y el color sigue
+   siendo un token (la máscara solo aporta la forma). */
+.sara-toggle-input:checked + .sara-toggle-box::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-color: var(--verde-800);
+  -webkit-mask: var(--sara-tick) center / 12px 12px no-repeat;
+  mask: var(--sara-tick) center / 12px 12px no-repeat;
+}
+.sara-toggle-input:focus-visible + .sara-toggle-box { outline: 3px solid var(--marca-ambar); outline-offset: 3px; }
+.sara-toggle-text { flex: 1 1 auto; min-width: 0; }
 
 .sara-text-button {
   display: block; min-height: 44px; padding: 8px; border: 0; background: var(--superficie);

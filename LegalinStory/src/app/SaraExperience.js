@@ -3,9 +3,11 @@ import { LocalStorageSaveStore, MemorySaveStore } from "../services/saveStores.j
 import { personPortrait, illustrations, framePortrait } from "../content/characterImages.js";
 import { DrawingCanvasModal } from "../ui/DrawingCanvasModal.js";
 import { avatarStore } from "../services/avatarStore.js";
-import { t } from "../i18n.js";
+import { t, getLang, LANGS, LANG_LABELS, setLang } from "../i18n.js";
 
 export const SARA_SAVE_KEY = "sara.save";
+// Marca de sesión para retomar la partida tras recargar por cambio de idioma.
+const LANG_SWITCH_KEY = "sara.langSwitch";
 const element = (tag, className, text) => {
   const node = document.createElement(tag);
   if (className) node.className = className;
@@ -70,6 +72,13 @@ export class SaraExperience {
     this.title = root.querySelector("#sara-dialog-title");
     this.close = root.querySelector("[data-sara-close]");
     this.close.addEventListener("click", () => this.closePanel());
+    // Clic en el fondo oscuro (fuera de la tarjeta) cierra el panel. Se escucha
+    // `pointerdown` y no `click` para que arrastrar texto dentro y soltar fuera
+    // no cuente como un clic en el fondo. En la portada no hay nada detrás y
+    // `closePanel` ya ignora ese modo.
+    this.overlay.addEventListener("pointerdown", (event) => {
+      if (event.target === this.overlay) this.closePanel();
+    });
     const personIds = {
       Irene: "irene",
       "Irene · abogada": "irene",
@@ -146,7 +155,36 @@ export class SaraExperience {
       });
       return;
     }
+    // Un cambio de idioma recarga la novela: si dejamos la partida apuntada,
+    // seguimos en el mismo nodo en vez de volver a la portada.
+    if (this.resumeAfterLanguageSwitch()) {
+      this.begin(true);
+      return;
+    }
     this.showLanding();
+  }
+
+  /**
+   * Recoge la partida que dejó `changeLanguage()`. La guarda en el store local
+   * y devuelve true para que `start()` la retome.
+   */
+  resumeAfterLanguageSwitch() {
+    let raw = null;
+    try {
+      raw = sessionStorage.getItem(LANG_SWITCH_KEY);
+      sessionStorage.removeItem(LANG_SWITCH_KEY);
+    } catch {
+      return false;
+    }
+    if (!raw || raw === "1") return false;
+    try {
+      const snapshot = JSON.parse(raw);
+      if (!snapshot || typeof snapshot.nodeId !== "string" || !this.engine.story[snapshot.nodeId]) return false;
+      this.localStore.save(snapshot);
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   validSave() {
@@ -343,79 +381,127 @@ export class SaraExperience {
     // más se usa dentro del menú y empuja un escalón hacia abajo al resto.
     const chapterSelector = this.chapterSelector();
     if (chapterSelector) this.body.append(chapterSelector);
-    const largeText = this.button(t("sara.largeText"), () => {
-      const enabled = this.root.classList.toggle("sara-large-text");
-      largeText.setAttribute("aria-pressed", String(enabled));
+    this.body.append(this.languageSelector());
+    this.toggleRow(t("sara.largeText"), this.root.classList.contains("sara-large-text"), (checked) => {
+      this.root.classList.toggle("sara-large-text", checked);
     });
-    largeText.setAttribute("aria-pressed", String(this.root.classList.contains("sara-large-text")));
-    const instant = this.button(t("sara.instantText"), () => {
-      this.app.view.typewriter.instant = !this.app.view.typewriter.instant;
-      instant.setAttribute("aria-pressed", String(this.app.view.typewriter.instant));
+    this.toggleRow(t("sara.instantText"), Boolean(this.app.view.typewriter.instant), (checked) => {
+      this.app.view.typewriter.instant = checked;
     });
-    instant.setAttribute("aria-pressed", String(Boolean(this.app.view.typewriter.instant)));
-    this.button(t("sara.needHelp"), () => this.openPanel("help"));
     this.button(t("sara.restartStory"), () => this.openPanel("restart"));
     this.button(t("sara.exitStory"), () => this.onExit?.());
+  }
+
+  /** Fila con casilla: el estado se ve en el cuadrado con tick, no pintando el botón. */
+  toggleRow(label, checked, onChange) {
+    const row = element("label", "sara-toggle");
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.className = "sara-toggle-input";
+    input.checked = checked;
+    input.addEventListener("change", () => onChange(input.checked));
+    const box = element("span", "sara-toggle-box");
+    box.setAttribute("aria-hidden", "true");
+    row.append(input, box, element("span", "sara-toggle-text", label));
+    this.body.append(row);
+    return input;
   }
 
   /** Selector de capítulo del menú de pausa. Null si la guía no trae capítulos. */
   chapterSelector() {
     if (!this.guide?.chapters?.length) return null;
-    const container = element("div", "sara-pause-dropdown");
     const currentChapter = this.engine.currentNode?.chapter;
     const initialCh = this.guide.chapters.find((c) => c.id === currentChapter) ?? this.guide.chapters[0];
-    const initialLabel = initialCh
-      ? `${t("sara.chapterOf", { n: initialCh.id, total: this.guide.chapters.length })}: ${initialCh.title ?? ""}`
-      : t("novel.chapterSelect");
+    return this.dropdown({
+      value: initialCh
+        ? `${t("sara.chapterOf", { n: initialCh.id, total: this.guide.chapters.length })}: ${initialCh.title ?? ""}`
+        : t("novel.chapterSelect"),
+      ariaLabel: t("novel.chapterSelectTitle"),
+      options: this.guide.chapters.map((ch) => ({
+        value: ch.id,
+        label: `${t("sara.chapterOf", { n: ch.id, total: this.guide.chapters.length })}: ${ch.title ?? ""}`,
+        selected: ch.id === currentChapter,
+      })),
+      onSelect: (chapterId) => this.jumpToChapter(chapterId),
+    });
+  }
 
+  /** Idioma de la novela, debajo del selector de capítulos. */
+  languageSelector() {
+    const current = getLang();
+    return this.dropdown({
+      value: `${t("sara.language")}: ${LANG_LABELS[current] ?? current}`,
+      ariaLabel: t("sara.language"),
+      options: LANGS.map((code) => ({
+        value: code,
+        label: LANG_LABELS[code] ?? code,
+        selected: code === current,
+      })),
+      onSelect: (code) => this.changeLanguage(code),
+    });
+  }
+
+  changeLanguage(code) {
+    if (code === getLang()) return;
+    // El contenido y las cadenas se resuelven al cargar: recargamos y retomamos
+    // la partida en el mismo nodo para no devolver al alumno a la portada.
+    try {
+      const snapshot = this.engine.saveStore?.load();
+      sessionStorage.setItem(LANG_SWITCH_KEY, snapshot ? JSON.stringify(snapshot) : "1");
+    } catch {
+      // Sin sessionStorage el idioma cambia igual; solo se pierde la posición.
+    }
+    setLang(code);
+    location.reload();
+  }
+
+  /** Desplegable de la pausa (capítulos, idioma): trigger + listbox, sin `select` nativo. */
+  dropdown({ value, ariaLabel, options, onSelect }) {
+    const container = element("div", "sara-pause-dropdown");
     const trigger = element("button", "sara-pause-dropdown-trigger");
     trigger.type = "button";
     trigger.setAttribute("aria-haspopup", "listbox");
     trigger.setAttribute("aria-expanded", "false");
-    trigger.setAttribute("aria-label", t("novel.chapterSelectTitle"));
+    trigger.setAttribute("aria-label", ariaLabel);
 
-    const valueSpan = element("span", "sara-pause-dropdown-value", initialLabel);
+    const valueSpan = element("span", "sara-pause-dropdown-value", value);
     const arrowSpan = element("span", "sara-pause-dropdown-arrow", "▾");
     arrowSpan.setAttribute("aria-hidden", "true");
     trigger.append(valueSpan, arrowSpan);
 
     const list = element("ul", "sara-pause-dropdown-list");
     list.setAttribute("role", "listbox");
-    list.setAttribute("aria-label", t("novel.chapterSelectTitle"));
+    list.setAttribute("aria-label", ariaLabel);
     list.hidden = true;
 
+    // El listener de fuera solo vive mientras la lista está abierta: el panel
+    // se vuelve a pintar cada vez que se abre y no debe acumular handlers.
+    const onPointerDown = (event) => {
+      if (!container.contains(event.target)) toggleList(false);
+    };
     const toggleList = (open) => {
       const isOpen = open !== undefined ? open : list.hidden;
       list.hidden = !isOpen;
       trigger.setAttribute("aria-expanded", String(isOpen));
       container.classList.toggle("is-open", isOpen);
+      if (isOpen) document.addEventListener("pointerdown", onPointerDown);
+      else document.removeEventListener("pointerdown", onPointerDown);
     };
 
     trigger.addEventListener("click", () => toggleList());
 
-    for (const ch of this.guide.chapters) {
+    for (const option of options) {
       const item = element("li", "sara-pause-dropdown-item");
       item.setAttribute("role", "option");
-      const isSelected = ch.id === currentChapter;
-      item.setAttribute("aria-selected", String(isSelected));
-      if (isSelected) item.classList.add("is-selected");
-
-      const itemLabel = `${t("sara.chapterOf", { n: ch.id, total: this.guide.chapters.length })}: ${ch.title ?? ""}`;
-      item.textContent = itemLabel;
-
+      item.setAttribute("aria-selected", String(option.selected));
+      if (option.selected) item.classList.add("is-selected");
+      item.textContent = option.label;
       item.addEventListener("click", () => {
         toggleList(false);
-        this.jumpToChapter(ch.id);
+        onSelect(option.value);
       });
       list.append(item);
     }
-
-    const outsideClickListener = (event) => {
-      if (!container.contains(event.target)) {
-        toggleList(false);
-      }
-    };
-    document.addEventListener("pointerdown", outsideClickListener);
 
     container.append(trigger, list);
     return container;

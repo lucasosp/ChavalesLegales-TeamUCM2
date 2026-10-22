@@ -7,6 +7,15 @@ import oc from "./locales/oc.json" with { type: "json" };
 
 export const LANGS = ["es", "ca", "va", "gl", "eu", "oc"];
 export const DEFAULT_LANG = "es";
+// Nombres en su propia lengua (endónimos): no se traducen, se eligen.
+export const LANG_LABELS = {
+  es: "Castellano",
+  ca: "Català",
+  va: "Valencià",
+  gl: "Galego",
+  eu: "Euskara",
+  oc: "Aranés",
+};
 const DICTIONARIES = { es, ca, va, gl, eu, oc };
 const STORAGE_KEY = "chavales_lang";
 
@@ -30,6 +39,27 @@ export function getLang() {
     // Storage can be blocked (private mode, sandboxed iframe).
   }
   return DEFAULT_LANG;
+}
+
+/**
+ * Guarda el idioma elegido y quita el `?lang=` de la URL para que la elección
+ * guardada mande al recargar. La novela se construye con el idioma al cargar,
+ * así que quien llama a esto debe recargar la página después.
+ */
+export function setLang(code) {
+  if (!LANGS.includes(code)) return;
+  try {
+    globalThis.localStorage?.setItem(STORAGE_KEY, code);
+  } catch {
+    // Storage can be blocked (private mode, sandboxed iframe).
+  }
+  try {
+    const url = new URL(globalThis.location.href);
+    url.searchParams.delete("lang");
+    globalThis.history.replaceState({}, "", url);
+  } catch {
+    // Without history the saved language still wins on the next load.
+  }
 }
 
 function lookup(dictionary, key) {
