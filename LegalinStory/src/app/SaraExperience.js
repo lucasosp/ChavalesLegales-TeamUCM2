@@ -33,6 +33,15 @@ export class SaraExperience {
     root.classList.add("sara-mode");
     this.novel = root.querySelector(".novel");
     this.cast = element("div", "sara-cast");
+    // En los chats se ilumina quien acaba de escribir; al terminar, todos en color.
+    root.addEventListener("chat-message", ({ detail }) => {
+      const name = detail.from?.split(" · ")[0];
+      for (const frame of this.cast.children) frame.classList.toggle("is-speaking", frame.dataset.person === name);
+    });
+    root.addEventListener("chat-finished", () => {
+      for (const frame of this.cast.children) frame.classList.remove("is-speaking");
+      this.cast.classList.add("is-chat-done");
+    });
     this.cast.setAttribute("aria-hidden", "true");
     this.cast.hidden = true;
     root.querySelector("[data-scene]").append(this.cast);
@@ -362,6 +371,7 @@ export class SaraExperience {
   renderCast(node) {
     this.cast.hidden = !["dialogue", "choice", "chat"].includes(node.type);
     this.cast.classList.toggle("is-chat", node.type === "chat");
+    this.cast.classList.remove("is-chat-done");
     if (this.cast.hidden) return;
     if (node.type === "chat") return this.renderChatCast(node);
     // Portraits are keyed by the untranslated speaker name.

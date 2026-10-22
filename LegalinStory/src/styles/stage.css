@@ -77,8 +77,19 @@
   #app .sara-cast-person, #app .sara-cast-person img, #app .scene-bg { animation: none; transition: none; }
 }
 
-/* Chat: un personaje a cada lado del móvil, sin color */
-#app .scene > .sara-cast.is-chat { justify-content: space-between; padding-inline: 2vw; --sprite-width: 30cqw; }
-#app .sara-cast.is-chat .sara-cast-person { filter: grayscale(1) contrast(1.05) brightness(1.02); opacity: .92; }
+/* Chat: un personaje a cada lado del móvil. En gris hasta que escribe: entonces
+   se colorea y se ilumina; al acabar la conversación quedan los dos en color. */
+#app .scene > .sara-cast.is-chat { justify-content: space-between; padding-inline: 1vw; --sprite-width: 40cqw; }
+#app .sara-cast.is-chat .sara-cast-person {
+  filter: grayscale(1) brightness(.92);
+  opacity: .85;
+  transition: filter .45s ease, opacity .45s ease, transform .45s ease;
+}
+#app .sara-cast.is-chat .sara-cast-person.is-speaking {
+  filter: grayscale(0) drop-shadow(0 0 22px rgb(255 236 170 / 85%)) drop-shadow(0 0 6px rgb(255 255 255 / 70%));
+  opacity: 1;
+  transform: translateY(-1.5%) scale(1.03);
+}
+#app .sara-cast.is-chat.is-chat-done .sara-cast-person { filter: none; opacity: 1; }
 #app .sara-cast.is-chat::after { display: none; }
 @media (max-width: 760px) { #app .scene > .sara-cast.is-chat { display: none; } }

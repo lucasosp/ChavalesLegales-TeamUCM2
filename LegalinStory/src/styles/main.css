@@ -3455,3 +3455,28 @@ body { background: var(--verde-950); }
 
 /* El móvil empieza por debajo de la barra superior (botones de 44px + márgenes) */
 .chat { top: calc(env(safe-area-inset-top, 0px) + 116px); bottom: 3vh; }
+
+/* Barra de estado de verdad (hora, cobertura, wifi y batería) y botón de enviar */
+.chat { padding-top: 0; }
+.chat::after { content: none; }
+.chat-status {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  height: 30px;
+  padding: 0 22px 0 28px;
+  color: #e9edef;
+  font: 600 .8rem/1 system-ui, sans-serif;
+}
+.chat-compose i {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #00a884;
+  color: #fff;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 35%);
+}
+.chat-compose i svg { margin-left: 2px; }

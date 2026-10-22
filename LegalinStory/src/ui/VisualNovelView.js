@@ -323,6 +323,7 @@ export class VisualNovelView {
     this.#chatIndex += 1;
     this.refs.chatLog.querySelector(".chat-typing")?.remove();
     this.refs.chatLog.append(this.#createChatBubble(message, this.#chatSelf));
+    this.refs.chat.dispatchEvent(new this.refs.chat.ownerDocument.defaultView.CustomEvent("chat-message", { bubbles: true, detail: { from: message.fromKey ?? message.from } }));
 
     if (this.#chatIndex >= this.#chatMessages.length) this.#finishChat({ natural: true });
     else {
@@ -360,6 +361,7 @@ export class VisualNovelView {
     clearInterval(this.#chatTimer);
     this.#chatTimer = null;
     this.#chatRevealing = false;
+    this.refs.chat.dispatchEvent(new this.refs.chat.ownerDocument.defaultView.CustomEvent("chat-finished", { bubbles: true }));
     this.refs.chatHint.hidden = false;
     this.refs.chatSkip.hidden = true;
 
