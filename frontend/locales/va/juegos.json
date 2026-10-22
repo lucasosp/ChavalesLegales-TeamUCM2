@@ -29,7 +29,7 @@
   "cidPersonaje_mother": "Mare",
   "cidPersonaje_father": "Pare",
   "cidPersonaje_grandfather": "Iaio",
-  "cidPersonaje_random": "Persona aleatòria",
+  "cidPersonaje_random": "Persona",
   "cidPersonaje_brother": "Germà Daniel",
   "cidAjustesTitulo": "Configuració del professional",
   "cidAjustesTexto": "Edita els noms i les cadires per defecte (0–{max}; la 0 és la de dalt i les altres seguixen en el sentit de les agulles del rellotge). En guardar, es reinicia la partida.",

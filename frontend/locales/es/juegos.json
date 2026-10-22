@@ -29,7 +29,7 @@
   "cidPersonaje_mother": "Madre",
   "cidPersonaje_father": "Padre",
   "cidPersonaje_grandfather": "Abuelo",
-  "cidPersonaje_random": "Persona Random",
+  "cidPersonaje_random": "Persona",
   "cidPersonaje_brother": "Hermano Daniel",
   "cidAjustesTitulo": "Ajustes del profesional",
   "cidAjustesTexto": "Edita nombres y sillas por defecto (0–{max}, la 0 es la de arriba y siguen en sentido horario). Guardar reinicia la partida.",
