@@ -19,7 +19,7 @@
     },
     {
       "id": 5,
-      "title": "El juzgado"
+      "title": "El tribunal"
     },
     {
       "id": 6,
@@ -34,13 +34,18 @@
     },
     {
       "chapter": 2,
-      "title": "Pedir ayuda",
-      "text": "La tutora avisa a quienes pueden proteger a Sara."
+      "title": "Avisar y proteger",
+      "text": "La tutora avisa enseguida a Servicios Sociales y a la Policía. Se organiza un lugar seguro."
     },
     {
       "chapter": 3,
-      "title": "Ver qué hace falta",
-      "text": "Servicios Sociales mira cómo está la familia y si están seguros."
+      "title": "Un plan de seguridad",
+      "text": "Se escucha a Sara y a Dani. La jueza acuerda medidas y el equipo revisa cómo están."
+    },
+    {
+      "chapter": 3,
+      "title": "Quién defiende a Sara",
+      "text": "Su madre la representa en este caso. Irene es su abogada y actúa como acusación particular."
     },
     {
       "chapter": 4,
@@ -49,23 +54,28 @@
     },
     {
       "chapter": 5,
-      "title": "Entender la citación",
-      "text": "La abogada explica para qué hay que ir al juzgado y quién estará."
+      "title": "Investigar lo ocurrido",
+      "text": "Irene explica la citación, quién participa y por qué Sara tiene que declarar en este caso."
     },
     {
       "chapter": 5,
-      "title": "Hablar con apoyos",
-      "text": "Se pide lo que Sara necesita para estar tranquila al hablar."
+      "title": "Declarar con apoyos",
+      "text": "Se evita el encuentro con Javier. La declaración se graba; eso solo no sustituye hablar en el juicio."
     },
     {
       "chapter": 6,
-      "title": "Esperar noticias",
-      "text": "El juzgado sigue trabajando. A veces tarda."
+      "title": "Terminar la investigación",
+      "text": "Puede haber un archivo o una acusación. En esta historia, el caso pasa a juicio."
+    },
+    {
+      "chapter": 6,
+      "title": "El juicio",
+      "text": "Otro juez o tribunal escucha las pruebas. Sara vuelve a declarar con apoyos."
     },
     {
       "chapter": 6,
       "title": "La sentencia y después",
-      "text": "Se explica qué ha decidido el tribunal. La ayuda sigue."
+      "text": "Irene explica el resultado, los posibles recursos y qué medidas siguen. El apoyo continúa según sus necesidades."
     }
   ],
   "people": [
@@ -74,7 +84,7 @@
       "role": "14 años · 3.º de ESO",
       "initial": "S",
       "color": "peach",
-      "text": "Le gusta el voleibol, dibuja estrellas en sus cuadernos y su mejor amiga es Paula. Su vida es mucho más que lo que pasa en el juzgado.",
+      "text": "Le gusta el voleibol, dibuja estrellas en sus cuadernos y su mejor amiga es Paula. Su vida es mucho más que lo que pasa en el tribunal.",
       "sprite": "assets/characters/sara/smile.svg"
     },
     {
@@ -96,7 +106,7 @@
       "role": "Trabajadora social",
       "initial": "E",
       "color": "purple",
-      "text": "Acompaña a Sara en su día a día y organiza las ayudas. No decide nada en el juzgado."
+      "text": "Acompaña a Sara en su día a día y organiza las ayudas. No decide nada en el tribunal."
     },
     {
       "name": "Irene",
@@ -135,10 +145,10 @@
     },
     {
       "name": "Equipo psicosocial",
-      "role": "Psicólogos y trabajadores sociales del juzgado",
+      "role": "Psicólogos y trabajadores sociales del Tribunal de Instancia",
       "initial": "+",
       "color": "peach",
-      "text": "Cuando el juzgado lo decide, psicólogos y trabajadores sociales del juzgado pueden ayudar a escuchar al menor y dar su opinión como especialistas."
+      "text": "Cuando la plaza que lleva el caso lo decide, psicólogos y trabajadores sociales del Tribunal de Instancia pueden ayudar a escuchar al menor y dar su opinión como especialistas."
     },
     {
       "name": "OAVD",

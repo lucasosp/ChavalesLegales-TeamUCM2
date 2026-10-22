@@ -7,7 +7,7 @@
         "text": "Dilluns al matí."
       },
       "c1-01": {
-        "text": "Sara té catorze anys i va a tercer de l'ESO. Li encanta el voleibol i dibuixa estreles a les vores dels quaderns. Sona el timbre i encara li queda una estrela per acabar."
+        "text": "La Sara té catorze anys i fa tercer d'ESO. Li encanta el voleibol i dibuixa estrelles als marges dels quaderns. Sona el timbre i encara li queda una estrella per acabar."
       },
       "c1-02": {
         "text": "Véns hui a l'entrenament de voleibol? Anem a practicar el servei."
@@ -91,10 +91,10 @@
         "text": "No vull arribar a casa i que el meu pare se n'assabente de sobte. Em fa por el que puga fer."
       },
       "c2-05": {
-        "text": "Ho tindrem en compte abans de parlar amb ningú. Avisaré la persona que cuida del benestar a l'institut i els serveis que protegixen els menors."
+        "text": "Ara avisaré la persona que cuida del benestar a l'institut, els Serveis Socials i la Policia. Els contaré també que tens por de tornar a casa."
       },
       "c2-protection": {
-        "text": "La meua feina és demanar ajuda quan algú de la teua edat ho està passant malament. Tu no has d'anar a denunciar sola perquè comencem a protegir-te. T'aniré contant el que fem."
+        "text": "No esperarem que denuncies tu. Amb el que m'has contat ja he de demanar ajuda i comunicar el que ha passat. T'explicaré què fem per protegir-te."
       },
       "c2-choice": {
         "prompt": "Què pregunta Sara mentre Laura busca ajuda?",
@@ -111,7 +111,7 @@
         ]
       },
       "c2-privacy": {
-        "text": "No et puc prometre que açò queda només entre nosaltres. Però et diré a qui ho conte i per a què. Només ho sabran les persones que et poden ajudar."
+        "text": "No et puc prometre que quede només entre nosaltres. Et diré a quins professionals els ho conte i per a què. La teua classe no necessita saber-ho."
       },
       "c2-dad": {
         "text": "No telefonarem sense pensar en la teua por. Les persones que en saben d'açò decidiran com fer-ho perquè estigues segura. T'aniré contant el que sàpiga."
@@ -120,10 +120,10 @@
         "text": "No has de fer-ho tu sola. En contar-m'ho, les persones adultes que s'encarreguen d'açò ja poden començar a ajudar-te. T'acompanyaran en cada pas."
       },
       "c2-06": {
-        "text": "Eixa mateixa vesprada, l'institut parla amb els serveis que protegixen els menors. El primer és que Sara estiga a salvament. Uns dies després, coneix algú nou."
+        "text": "Laura fa els avisos sense deixar sola la Sara. Aquella vesprada, els professionals organitzen amb la seua mare que ella i Dani estiguen a casa de la seua tia. Uns dies després, coneix algú nou."
       },
       "c2-07": {
-        "text": "Hola, Sara. Em dic Elena i sóc treballadora social. Vaig a acompanyar-te. També m'importa com et va a l'institut, amb les teues amigues i en el teu dia a dia."
+        "text": "Hola, Sara. Soc Elena, treballadora social. T'acompanyaré juntament amb l'equip. La meua faena també té a vore amb com estàs a classe, amb les teues amigues i en el teu dia a dia."
       },
       "c2-08": {
         "text": "Haig de contar-ho tot una altra vegada? Ja no recorde ni com vaig començar."
@@ -132,7 +132,7 @@
         "text": "Intentarem que no hages de repetir-ho si no cal. I abans de preguntar-te alguna cosa, et diré per a què ho necessite."
       },
       "c2-choice2": {
-        "prompt": "Elena acosta una cadira. Com prefereix Sara començar?",
+        "prompt": "Elena acosta una cadira. Com preferix Sara que comencen?",
         "options": [
           {
             "label": "Una cosa cada vegada, amb explicacions curtes."
@@ -160,7 +160,7 @@
         "text": "No, no és un examen. Volem saber què està passant i quina ajuda necessiteu. També parlarem amb ta mare i vorem com està Dani."
       },
       "c3-social": {
-        "text": "Valorar vol dir conéixer què necessiteu i si esteu segurs. D'això ens encarreguem en Servicis Socials. Si un jutjat investiga el que ha passat, això ho fan unes altres persones."
+        "text": "Valorar vol dir conéixer què necessiteu i si esteu segurs. D'això ens encarreguem als Serveis Socials."
       },
       "c3-choice": {
         "prompt": "Sara té moltes preguntes. Quina fa primer?",
@@ -180,7 +180,7 @@
         "text": "A Dani també l'escoltaran i vorem què necessita. Tu no has de vigilar que tot isca bé. Això ens toca a les persones adultes."
       },
       "c3-privacy": {
-        "text": "No et puc prometre que açò queda només entre nosaltres. Però et diré a qui ho conte i per a què. Només ho sabran les persones que et poden ajudar."
+        "text": "No et puc prometre que quede només entre nosaltres. Et diré a quins professionals els ho conte i per a què. La teua classe no necessita saber-ho."
       },
       "c3-home": {
         "text": "Demanar ajuda no vol dir que hages d'eixir de casa sense més. Primer es mira si esteu segurs. I la teua opinió compta: t'han d'escoltar."
@@ -189,10 +189,10 @@
         "text": "Ma mare sap algunes coses, però no totes. A vegades em diu que no li porte la contrària a papà. No sé què he de fer."
       },
       "c3-04": {
-        "text": "Tu no has d'aconseguir que el teu pare es porte bé. Això no és tasca teua. Ta mare també rebrà ajuda."
+        "text": "Tu no has d'aconseguir que el teu pare es porte bé. Això no és tasca teua. La teua mare també rebrà ajuda."
       },
       "c3-05": {
-        "text": "Sara, la seua mare i Dani se'n van uns dies a casa de la seua tia, on estan a salvament. Mentrestant, les persones que els ajuden decidixen què fer. Sara continua anant al seu institut."
+        "text": "Sara, la seua mare i Dani continuen a casa de la seua tia. L'equip ha escoltat els dos germans i revisa com protegir-los."
       },
       "c3-06": {
         "text": "He posat les sabatilles de voleibol a la motxilla. No sé si les faré servir, però no volia deixar-les."
@@ -212,7 +212,7 @@
         ]
       },
       "c3-contact": {
-        "text": "Et donaré els telèfons de l'equip i t'explicaré què fer si alguna cosa canvia. Si hi ha perill de veres, es crida al 112. No has de decidir tu sola si tot va bé."
+        "text": "Et donaré els telèfons de l'equip i t'explicaré què has de fer si alguna cosa canvia. Si hi ha perill immediat, es crida al 112."
       },
       "c3-school": {
         "text": "Ho parlarem amb Laura. T'ajudarà a posar-te al dia amb els deures, sense contar a la classe el que et passa."
@@ -261,7 +261,7 @@
         "text": "Gràcies. M'agrada que em parles d'altres coses."
       },
       "c4-choice": {
-        "prompt": "Elena li pregunta què vol recuperar primer. Sara tria…",
+        "prompt": "Elena pregunta quina part de la seua vida vol recuperar primer. Sara tria…",
         "options": [
           {
             "label": "Tornar a entrenar al voleibol."
@@ -326,49 +326,49 @@
       },
       "c5-card": {
         "kicker": "SARA · CAPÍTOL 5 DE 6",
-        "title": "El jutjat",
+        "title": "El tribunal",
         "text": "Un temps després. Saber qui és qui."
       },
       "c5-01": {
-        "text": "Un jutjat està investigant el que va fer Javier. A casa arriba una carta: Sara ha d'anar-hi. Irene, la seua advocada, li l'explica a Sara i a la seua mare."
+        "text": "Arriba una carta perquè Sara declare. Irene la llig amb ella i amb la seua mare."
       },
       "c5-02": {
         "text": "La carta té paraules molt rares. No entenc res."
       },
       "c5-03": {
-        "text": "La llegim juntes. És una citació: diu que has d'anar al jutjat, quin dia i a quina hora. El que no entengues, m'ho preguntes.",
+        "text": "La llegim juntes. És una citació: diu que has d'anar al Tribunal d'Instància, quin dia i a quina hora. El que no entengues, m'ho preguntes.",
         "speaker": "Irene · advocada"
       },
       "c5-justice": {
-        "text": "Ara un jutjat investigarà el que va fer el teu pare. Això és una cosa. Que tu estigues protegida és una altra, i continua igual. Les dues poden anar alhora.",
+        "text": "El tribunal investiga el que ha passat i si el teu pare és responsable d'un delicte. No cal esperar una sentència per protegir-te.",
         "speaker": "Irene · advocada"
       },
       "c5-team": {
-        "text": "Al jutjat veuràs diverses persones. Cada una té una feina diferent. Te les presente perquè no t'embolliques.",
+        "text": "Abans es deia jutjat; ara és el Tribunal d'Instància. El teu cas el porta una plaça de la seua Secció de Violència contra la Infància i l'Adolescència. Allí veuràs diverses persones.",
         "speaker": "Irene · advocada"
       },
       "c5-oficina": {
-        "text": "Primer, l'oficina judicial del Tribunal d'Instància. Són les persones que organitzen els papers i els passos del cas. Segons el tipus d'assumpte, el du una secció o una altra.",
+        "text": "L'oficina judicial del Tribunal d'Instància organitza els papers i els passos del cas. Segons el tipus d'assumpte, se n'encarrega una secció o una altra.",
         "speaker": "Irene · advocada"
       },
       "c5-juez": {
-        "text": "Després hi ha la jutgessa. Ella dirigix tot el que passa al jutjat, cuida que es respecten els drets de tots i decidix el que s'ha de decidir.",
+        "text": "La jutgessa dirigeix la investigació i decideix les mesures que necessiten una decisió judicial. Si el cas passa a judici, el decidirà un altre jutge o tribunal.",
         "speaker": "Irene · advocada"
       },
       "c5-laj": {
-        "text": "També hi haurà una lletrada de l'Administració de Justícia. És una funcionària que dona fe del que passa: escriu l'acta del que digues i comprova que la gravació ha eixit bé.",
+        "text": "La lletrada de l'Administració de Justícia s'ocupa que el que passa quede documentat amb garanties. És una altra professional; no és la teua advocada.",
         "speaker": "Irene · advocada"
       },
       "c5-fiscal": {
-        "text": "Després, el fiscal. La seua feina és que es complisca la llei. En un cas com este pot acusar qui va fer mal i, a més, s'encarrega de cuidar els teus drets.",
+        "text": "El fiscal defensa la legalitat. La teva advocada defensa els teus interessos.",
         "speaker": "Irene · advocada"
       },
       "c5-psicosocial": {
-        "text": "A vegades el jutjat demana ajuda al seu equip psicosocial: psicòlogues i treballadors socials que saben parlar amb xiquets i xiquetes de la teua edat. Si et toca, t'ajudaran a contar les coses amb calma.",
+        "text": "De vegades el tribunal demana ajuda al seu equip psicosocial: psicòlogues i treballadors socials que saben parlar amb xiquets i xiquetes de la teua edat. Si et toca, t'ajudaran a contar les coses amb calma.",
         "speaker": "Irene · advocada"
       },
       "c5-oavd": {
-        "text": "I l'Oficina d'Assistència a les Víctimes. Allí t'expliquen com va el procés i t'ajuden si estàs malament o tens dubtes. Ells no jutgen el cas: només t'ajuden.",
+        "text": "A l'Oficina d'Assistència a les Víctimes t'expliquen com va el procés i t'ajuden si estàs malament o tens dubtes. No jutgen el cas.",
         "speaker": "Irene · advocada"
       },
       "c5-choice": {
@@ -386,29 +386,29 @@
         ]
       },
       "c5-people": {
-        "text": "Estaran la jutgessa, el fiscal i la lletrada, que dona fe del que es diu. Jo estaré amb tu. El teu pare tindrà el seu propi advocat, que no és el teu. Abans d'entrar et dic qui és cada u.",
+        "text": "La jutgessa dirigeix la declaració i el fiscal també cuida els teus drets. Jo hi participe com a advocada teua. La defensa del teu pare també pot fer preguntes, amb el control de la jutgessa.",
         "speaker": "Irene · advocada"
       },
       "c5-people2": {
-        "text": "Jo no treballe al jutjat ni decidisc res allí. La meua feina és acompanyar-te i ajudar-te amb tota la resta. T'estaré esperant fora."
+        "text": "Jo no decidisc res al tribunal. Puc acompanyar-te si tu vols, tret que s'explique una raó perquè no hi entre."
       },
       "c5-room": {
-        "text": "Anirem abans a vore on esperaràs. Ja hem demanat que no hages de creuar-te amb el teu pare. La jutgessa decidirà com fer-ho.",
+        "text": "Han d'organitzar l'espera perquè no us trobeu. Anirem abans a veure per on entres i on esperes.",
         "speaker": "Irene · advocada"
       },
       "c5-rights": {
-        "text": "Pots dir-me què et fa por, preguntar qui estarà i demanar el que necessites. Jo li ho diré al jutjat abans que comence.",
+        "text": "Pots dir-me què et fa por, preguntar qui hi serà i demanar el que necessites. Jo li ho diré al tribunal abans que comence.",
         "speaker": "Irene · advocada"
       },
       "c5-supports": {
-        "text": "Amb catorze anys pot ser que et toque declarar. Però demanarem que ho facis des d'una altra sala, sense vore el teu pare, i amb algú que t'acompanye. Tot això ho decidix la jutgessa segons el que necessites.",
+        "text": "Han d'organitzar les coses perquè no et trobes amb el teu pare. A més, demanarem una altra sala, videoconferència i suport d'una psicòloga.",
         "speaker": "Irene · advocada"
       },
       "c5-privacy": {
         "text": "Et preocupava qui se n'assabentaria. A la sala només estaran les persones que han d'estar. El que conts allí no ho diran a la teua classe."
       },
       "c5-short": {
-        "text": "Com em vas demanar, una cosa cada vegada. Primer, qui et rep. Després, què passarà. Entre una cosa i una altra, pots preguntar."
+        "text": "Com em vas demanar, una cosa cada vegada. Primer, qui et rep. Després, què passarà."
       },
       "c5-overview": {
         "text": "Et rebran i t'explicaran què passarà. Després parlaràs amb les ajudes que s'hagen demanat. En acabar, vorem juntes què ve després."
@@ -449,17 +449,17 @@
         "text": "Arriba el dia. Sara entra per una altra porta, així no es creua amb Javier. Una dona de l'oficina de víctimes l'acompanya a una sala amb butaques i li explica on estarà cada persona."
       },
       "c5-06": {
-        "text": "Hola, Sara. Sóc la jutgessa. Abans de començar, vull que entengues per a què estem ací. Si alguna cosa no l'entens, m'ho dius.",
+        "text": "Hola, Sara. Hui anem a escoltar-te per investigar el que ha passat. Si alguna cosa no està clara, ho parlem abans de començar.",
         "speaker": "Jutgessa"
       },
       "c5-07": {
-        "text": "Sara declara des d'una sala apartada, per videoconferència, sense vore Javier. Una psicòloga de l'equip psicosocial està al seu costat. La lletrada dona fe del que es diu i comprova la gravació. En eixir, Elena l'està esperant."
+        "text": "Declara per videoconferència des d'una altra sala, sense veure Javier, amb una psicòloga al seu costat. La declaració queda gravada."
       },
       "c5-08": {
         "text": "Estic cansada. Podem estar una estona sense parlar d'açò?"
       },
       "c5-09": {
-        "text": "Clar. Un altre dia Irene et contarà el que vulgues saber. Ara anem a asseure'ns una estona."
+        "text": "Sí. Després revisarem amb Irene la informació que necessites. Ara podem seure un moment."
       },
       "c6-card": {
         "kicker": "SARA · CAPÍTOL 6 DE 6",
@@ -467,7 +467,7 @@
         "text": "Esperar també és part del camí."
       },
       "c6-01": {
-        "text": "Passen les setmanes. Alguns dies no hi ha notícies. Mentrestant, Sara continua veient Elena, i les persones que l'ajuden continuen pendents que la seua família estiga a salvament."
+        "text": "Passen les setmanes. Mentrestant, Sara continua veient Elena, i les persones que l'ajuden continuen pendents que la seua família estiga a salvament."
       },
       "c6-02": {
         "text": "Tots em diuen «ja t'avisarem». A vegades mire el mòbil i no sé si vull que arribe un missatge o que no arribe."
@@ -476,10 +476,10 @@
         "prompt": "Hui, de què vol parlar Sara amb Elena?",
         "options": [
           {
-            "label": "Com saber què està passant al jutjat."
+            "label": "Com saber què està passant al tribunal."
           },
           {
-            "label": "Que a vegades troba a faltar el seu pare."
+            "label": "Que de vegades troba a faltar el seu pare."
           },
           {
             "label": "Les preguntes que li fan a classe."
@@ -487,7 +487,7 @@
         ]
       },
       "c6-news": {
-        "text": "Pots preguntar-me com va tot i t'ho explicaré. No et puc donar una data exacta, però sí que et puc dir amb qui parlar quan tingues dubtes."
+        "text": "Podem consultar amb Irene quina informació et correspon rebre i com demanar-la. No sé donar-te una data exacta; sí que podem aclarir amb qui parlar quan tingues dubtes."
       },
       "c6-dad": {
         "text": "Pots trobar a faltar els moments bons i, alhora, necessitar estar protegida. No has de sentir una sola cosa. El que et va fer va estar malament, encara que l'estimes."
@@ -513,14 +513,14 @@
         ]
       },
       "c6-03": {
-        "text": "Un temps després, el mòbil de Sara vibra."
+        "text": "Mesos després acaba la investigació. Irene es reuneix amb Sara abans de la cita següent."
       },
       "c6-conviction": {
-        "text": "El tribunal ha dit que Javier sí que va fer mal i l'ha condemnat. T'explicaré què vol dir, quines mesures hi ha per a protegir-vos i si ell pot recórrer.",
+        "text": "El tribunal ha condemnat Javier. T'explicaré per què, quina pena li imposa i quines mesures de protecció ha decidit. No has d'entendre-ho tot hui.",
         "speaker": "Irene · advocada"
       },
       "c6-no-conviction": {
-        "text": "El tribunal no ha condemnat Javier. Això no vol dir que no et creguessen: les proves no han sigut suficients. T'explique què significa i què podem fer ara.",
+        "text": "El tribunal ha absolt Javier perquè no ha trobat proves suficients per condemnar-lo. Això no significa que tu hages mentit ni que demanar ajuda estiguera malament. Llegirem amb calma els motius.",
         "speaker": "Irene · advocada"
       },
       "c6-human": {
@@ -565,6 +565,111 @@
         "kicker": "SARA · LA MEUA HISTÒRIA CONTINUA",
         "title": "Encara tinc plans",
         "text": "Sara continua sent germana, amiga, alumna de tercer i jugadora de voleibol. Hi haurà dies bons i dies difícils, i no haurà de passar-los sola."
+      },
+      "c3-safety-question": {
+        "text": "I si papà ve a buscar-me a l'institut?"
+      },
+      "c3-measures": {
+        "text": "En el vostre cas, la jutgessa ja ha prohibit que Javier s'acoste a tu i a Dani o es comunique amb vosaltres. Són mesures per protegir-vos mentre s'investiga."
+      },
+      "c3-safety-plan": {
+        "text": "Si el teu pare intenta acostar-se o escriure-us, avisa una persona adulta de l'equip. Si hi ha perill immediat, crida al 112."
+      },
+      "c3-safety-followup": {
+        "text": "Et donaré els telèfons de l'equip. Tu no has de vigilar el teu pare ni fer que complisca."
+      },
+      "c3-lawyer-intro": {
+        "text": "L'equip presenta Irene, una advocada que defensarà els interessos de Sara. Irene parla amb ella i amb la seua mare, també per separat."
+      },
+      "c3-representation": {
+        "text": "El teu pare no et pot representar en aquest cas. Hem comprovat que la teua mare pot cuidar dels teus interessos i ella et representa. Jo sóc la teua advocada. També parlaré amb tu: la teua opinió compta.",
+        "speaker": "Irene · advocada"
+      },
+      "c3-defender": {
+        "text": "Si la teua mare tampoc et poguera representar bé, es demanaria a la jutgessa una altra persona per fer-ho: un defensor judicial.",
+        "speaker": "Irene · advocada"
+      },
+      "c3-party": {
+        "text": "Podem participar en el cas com a acusació particular, amb la teua pròpia advocada. No ets tu qui decideix el càstig.",
+        "speaker": "Irene · advocada"
+      },
+      "c5-investigation": {
+        "text": "Aquesta part es diu investigació o instrucció. Hui encara no es decideix si hi haurà condemna.",
+        "speaker": "Irene · advocada"
+      },
+      "c5-attend-question": {
+        "text": "He de parlar encara que siga el meu pare?"
+      },
+      "c5-family-rule": {
+        "text": "De vegades la llei permet no declarar contra un familiar. Es diu dispensa.",
+        "speaker": "Irene · advocada"
+      },
+      "c5-family-case": {
+        "text": "En el teu cas, com que ja participes com a acusació particular, eixa dispensa no s'aplica i has de declarar. Jo t'acompanyaré i t'explicaré el que no entengues.",
+        "speaker": "Irene · advocada"
+      },
+      "c5-company": {
+        "text": "A més de la teua advocada, et pot acompanyar una persona que tu triïs, com Elena. Podem parlar de qui t'ajudaria més.",
+        "speaker": "Irene · advocada"
+      },
+      "c5-recording-question": {
+        "text": "Em gravaran? Així no hauré de tornar?"
+      },
+      "c5-recording": {
+        "text": "Sí, es grava perquè ets menor. Per usar-la en el judici sense que tornes a declarar calen garanties especials: també hi ha de participar la defensa del teu pare.",
+        "speaker": "Irene · advocada"
+      },
+      "c5-age-rule": {
+        "text": "Per a certs delictes, eixa declaració amb garanties especials és obligatòria si encara no has complit catorze anys. Tu ja els tens: no és automàtica per la teua edat.",
+        "speaker": "Irene · advocada"
+      },
+      "c5-recording-case": {
+        "text": "En el teu cas, aquesta declaració serveix per a la investigació. La gravaran, però això no substitueix per si sol declarar en el judici.",
+        "speaker": "Irene · advocada"
+      },
+      "c5-communication": {
+        "text": "Recorda: pots demanar que t'expliquen una pregunta, dir que no recordes alguna cosa i demanar una pausa. El important és contar el que recordes amb les teues paraules.",
+        "speaker": "Irene · advocada"
+      },
+      "c6-investigation-end": {
+        "text": "No totes les investigacions arriben a judici. De vegades s'arxiven perquè no es pot continuar, per exemple si no hi ha dades suficients per seguir.",
+        "speaker": "Irene · advocada"
+      },
+      "c6-trial-notice": {
+        "text": "En el teu cas, el fiscal i nosaltres hem presentat una acusació contra Javier. Ara hi haurà un judici: un altre jutge o tribunal escoltarà les proves abans de decidir.",
+        "speaker": "Irene · advocada"
+      },
+      "c6-trial-question": {
+        "text": "Llavors, l'altra vegada era per investigar. Ara decidiran si hi ha proves per condemnar-lo. I he de tornar a parlar?"
+      },
+      "c6-trial-supports": {
+        "text": "Sí, t'han citat per declarar en el judici. Hem tornat a organitzar els suports: una altra sala, videoconferència i una psicòloga amb tu.",
+        "speaker": "Irene · advocada"
+      },
+      "c6-trial": {
+        "text": "El dia del judici, Sara declara amb eixos suports. La decisió no depén només del que diga Sara."
+      },
+      "c6-after-trial": {
+        "text": "Ara el tribunal decidirà i ho explicarà per escrit. Aquest document és la sentència. Pot condemnar o absoldre. Absoldre vol dir que no imposa una condemna.",
+        "speaker": "Irene · advocada"
+      },
+      "c6-sentence-arrives": {
+        "text": "Un temps després del judici, el mòbil de Sara vibra."
+      },
+      "c6-appeal": {
+        "text": "Recórrer és demanar a un altre tribunal que revise la decisió. Quan ja no es pot recórrer, la sentència és ferma.",
+        "speaker": "Irene · advocada"
+      },
+      "c6-protection-after": {
+        "text": "Revisarem quines mesures continuen, quines canvien i quina protecció necessites ara. No has de deixar de demanar ajuda perquè haja arribat una sentència.",
+        "speaker": "Irene · advocada"
+      },
+      "c3-party-warning": {
+        "text": "En participar així, no pots usar la dispensa: la possibilitat que de vegades permet no declarar contra un familiar. Rebre protecció no depén que participes d'aquesta manera.",
+        "speaker": "Irene · advocada"
+      },
+      "c3-party-confirmed": {
+        "text": "Irene respon als dubtes de Sara i de la seua mare. Després d'escoltar Sara i parlar de les opcions, la seua mare formalitza la seua participació com a acusació particular, amb l'ajuda d'Irene."
       }
     }
   },
@@ -583,7 +688,7 @@
         "title": "La meua vida continua"
       },
       {
-        "title": "El jutjat"
+        "title": "El tribunal"
       },
       {
         "title": "Després de tot"
@@ -592,42 +697,50 @@
     "steps": [
       {
         "title": "Un senyal",
-        "text": "A l'institut s'adonen que alguna cosa va mal i escolten."
+        "text": "A l'institut s'adonen que alguna cosa va malament i escolten."
       },
       {
-        "title": "Demanar ajuda",
-        "text": "La tutora avisa qui pot protegir Sara."
+        "title": "Avisar i protegir",
+        "text": "La tutora avisa de seguida els Serveis Socials i la Policia. S'organitza un lloc segur."
       },
       {
-        "title": "Vore què cal",
-        "text": "Servicis Socials mira com està la família i si estan segurs."
+        "title": "Un pla de seguretat",
+        "text": "S'escolta Sara i Dani. La jutgessa acorda mesures i l'equip revisa com estan."
+      },
+      {
+        "title": "Qui defensa Sara",
+        "text": "La seua mare la representa en aquest cas. Irene és la seua advocada i actua com a acusació particular."
       },
       {
         "title": "Continuar vivint",
-        "text": "Classes, amigues i voleibol també importen."
+        "text": "Les classes, les amigues i el voleibol també importen."
       },
       {
-        "title": "Entendre la citació",
-        "text": "L'advocada explica per a què cal anar al jutjat i qui hi estarà."
+        "title": "Investigar el que ha passat",
+        "text": "Irene explica la citació, qui hi participa i per què Sara ha de declarar en aquest cas."
       },
       {
-        "title": "Parlar amb suports",
-        "text": "Es demana el que Sara necessita per a estar tranquil·la en parlar."
+        "title": "Declarar amb suports",
+        "text": "S'evita la trobada amb Javier. La declaració es grava; això només no substitueix parlar en el judici."
       },
       {
-        "title": "Esperar notícies",
-        "text": "El jutjat continua treballant. A vegades tarda."
+        "title": "Acabar la investigació",
+        "text": "Pot haver-hi un arxiu o una acusació. En aquesta història, el cas passa a judici."
+      },
+      {
+        "title": "El judici",
+        "text": "Un altre jutge o tribunal escolta les proves. Sara torna a declarar amb suports."
       },
       {
         "title": "La sentència i després",
-        "text": "S'explica què ha decidit el tribunal. L'ajuda continua."
+        "text": "Irene explica el resultat, els possibles recursos i quines mesures continuen. El suport continua segons les seues necessitats."
       }
     ],
     "people": [
       {
         "name": "Sara",
         "role": "14 anys · 3r d'ESO",
-        "text": "Li agrada el voleibol, dibuixa estreles als seus quaderns i la seua millor amiga és Paula. La seua vida és molt més que el que passa al jutjat."
+        "text": "Li agrada el voleibol, dibuixa estrelles als seus quaderns i la seua millor amiga és Paula. La seua vida és molt més que el que passa al tribunal."
       },
       {
         "name": "Paula",
@@ -637,12 +750,12 @@
       {
         "name": "Laura",
         "role": "Tutora",
-        "text": "Escolta Sara, s'adona que alguna cosa va mal i avisa qui ha d'avisar."
+        "text": "Escolta Sara, s'adona que alguna cosa va malament i avisa qui ha d'avisar."
       },
       {
         "name": "Elena",
         "role": "Treballadora social",
-        "text": "Acompanya Sara en el seu dia a dia i organitza les ajudes. No decidix res al jutjat."
+        "text": "Acompanya Sara en el seu dia a dia i organitza les ajudes. No decideix res al tribunal."
       },
       {
         "name": "Irene",
@@ -657,12 +770,12 @@
       {
         "name": "Jutgessa",
         "role": "Jutge o magistrat",
-        "text": "Dirigix les actuacions judicials, protegix els drets de totes les parts i decidix el que necessita una resolució judicial."
+        "text": "Dirigeix les actuacions judicials, protegeix els drets de totes les parts i decideix el que necessita una resolució judicial."
       },
       {
         "name": "Lletrada (LAJ)",
         "role": "Lletrat de l'Administració de Justícia",
-        "text": "El Lletrat de l'Administració de Justícia és un funcionari públic amb funcions processals, de documentació i de fe pública judicial, entre altres. Quan la llei ho exigix, pot autoritzar l'acta d'una declaració i comprovar la gravació."
+        "text": "El Lletrat de l'Administració de Justícia és un funcionari públic amb funcions processals, de documentació i de fe pública judicial, entre altres. Quan la llei ho exigeix, pot autoritzar l'acta d'una declaració i comprovar l'enregistrament."
       },
       {
         "name": "Fiscal",
@@ -671,18 +784,18 @@
       },
       {
         "name": "Equip psicosocial",
-        "role": "Psicòlegs i treballadors socials del jutjat",
-        "text": "Quan el jutjat ho decidix, psicòlegs i treballadors socials del jutjat poden ajudar a escoltar el menor i donar la seua opinió com a especialistes."
+        "role": "Psicòlegs i treballadors socials del Tribunal d'Instància",
+        "text": "Quan la plaça que du el cas ho decideix, psicòlegs i treballadors socials del Tribunal d'Instància poden ajudar a escoltar el menor i donar la seua opinió com a especialistes."
       },
       {
         "name": "OAVD",
         "role": "Oficina d'Assistència a les Víctimes del Delicte",
-        "text": "Oferix orientació jurídica general, suport psicològic i social, informació sobre el procediment i ajuda personalitzada. No és qui jutja el cas."
+        "text": "Ofereix orientació jurídica general, suport psicològic i social, informació sobre el procediment i ajuda personalitzada. No és qui jutja el cas."
       },
       {
         "name": "La seua família",
         "role": "Dani, la seua mare i Javier",
-        "text": "Dani té deu anys. La seua mare també rep ajuda. Javier, el pare, és responsable del que fa; Sara no ha de canviar-lo per a meréixer protecció."
+        "text": "Dani té deu anys. La seua mare també rep ajuda. Javier, el pare, és responsable del que fa; Sara no ha de canviar-lo per meréixer protecció."
       }
     ]
   },
@@ -699,30 +812,33 @@
         "title": "Estatut de la víctima · arts. 4, 5, 19–26 i 28"
       },
       "lecrim": {
-        "title": "LECrim · arts. 448, 449 bis, 449 ter, 544 ter i 707"
+        "title": "LECrim · arts. 109 bis, 416, 449 bis, 449 ter, 544 ter, 544 quinquies, 637, 641, 703 bis, 707, 730.2, 780–785 i 790"
       },
       "lopj": {
         "title": "LOPJ · arts. 440 i ss. (oficina judicial i LAJ)"
       },
       "eficiencia": {
         "title": "LO 1/2025 · Tribunals d'Instància"
+      },
+      "civil": {
+        "title": "Codi Civil · arts. 158, 162 i 163"
       }
     },
     "notes": {
       "protection": {
         "title": "La protecció pot començar ací",
-        "text": "El personal educatiu ha de comunicar els indicis de violència i activar el protocol. Sara no ha de presentar sola una denúncia per a rebre ajuda.",
-        "dialogue": "La meua feina és demanar ajuda quan algú de la teua edat ho està passant malament. Tu no has d'anar a denunciar sola perquè comencem a protegir-te. T'aniré contant el que fem."
+        "text": "El centre ha d'avisar immediatament els Serveis Socials. No ha d'esperar que Sara denuncie ni reunir proves pel seu compte.",
+        "dialogue": "No esperarem que denuncies tu. Amb el que m'has contat ja he de demanar ajuda i comunicar el que ha passat. T'explicaré què fem per protegir-te."
       },
       "privacy": {
         "title": "Qui necessita saber-ho",
-        "text": "Laura no pot prometre secret absolut. Explicarà quins professionals han d'intervindre per a protegir Sara i compartirà la informació necessària per a això.",
-        "dialogue": "No et puc prometre que açò queda només entre nosaltres. Però et diré a qui ho conte i per a què. Només ho sabran les persones que et poden ajudar."
+        "text": "Laura no pot prometre secret absolut. Explicarà quins professionals han d'intervindre per protegir Sara i compartirà la informació necessària per a això.",
+        "dialogue": "No et puc prometre que quede només entre nosaltres. Et diré a quins professionals els ho conte i per a què. La teua classe no necessita saber-ho."
       },
       "social": {
-        "title": "Valorar és conéixer per a ajudar",
-        "text": "Servicis Socials i protecció de menors valoren la seguretat i les necessitats familiars. La intervenció social i la investigació penal tenen funcions diferents.",
-        "dialogue": "Valorar vol dir conéixer què necessiteu i si esteu segurs. D'això ens encarreguem en Servicis Socials. Si un jutjat investiga el que ha passat, això ho fan unes altres persones."
+        "title": "Valorar és conéixer per ajudar",
+        "text": "Els Serveis Socials i la protecció de menors valoren la seguretat i les necessitats familiars. La intervenció social i la investigació penal tenen funcions diferents.",
+        "dialogue": "Valorar vol dir conéixer què necessiteu i si esteu segurs. D'això ens encarreguem als Serveis Socials."
       },
       "brother": {
         "title": "Dani també compta",
@@ -731,7 +847,7 @@
       },
       "housing": {
         "title": "La convivència es valora en cada cas",
-        "text": "Demanar ajuda no implica automàticament eixir de casa. Les autoritats competents valoren mesures segons la seguretat de cada menor. Sara té dret a ser escoltada.",
+        "text": "Demanar ajuda no implica automàticament eixir de casa. Les autoritats competents valoren mesures segons la seguretat de cada menor.",
         "dialogue": "Demanar ajuda no vol dir que hages d'eixir de casa sense més. Primer es mira si esteu segurs. I la teua opinió compta: t'han d'escoltar."
       },
       "everyday": {
@@ -741,13 +857,13 @@
       },
       "justice": {
         "title": "Dues feines que poden avançar alhora",
-        "text": "La protecció cuida de la seguretat de Sara. El jutjat investiga el que va passar i qui és responsable. Com que Javier és adult, el seu cas el du un jutjat d'adults, encara que Sara siga menor.",
-        "dialogue": "Ara un jutjat investigarà el que va fer el teu pare. Això és una cosa. Que tu estigues protegida és una altra, i continua igual. Les dues poden anar alhora."
+        "text": "La protecció cuida de la seguretat de Sara. Una plaça del Tribunal d'Instància investiga el que va passar i qui n'és responsable.",
+        "dialogue": "El tribunal investiga el que ha passat i si el teu pare és responsable d'un delicte. No cal esperar una sentència per protegir-te."
       },
       "supports": {
         "title": "Una declaració amb suports",
-        "text": "Les mesures es decidixen en cada cas. Amb 14 anys, la gravació prèvia de la declaració (prova preconstituïda) ja no és la regla general, però es pot demanar una sala apartada, la videoconferència, evitar el contacte visual amb l'acusat i el suport de professionals.",
-        "dialogue": "Amb catorze anys pot ser que et toque declarar. Però demanarem que ho facis des d'una altra sala, sense vore el teu pare, i amb algú que t'acompanye. Tot això ho decidix la jutgessa segons el que necessites."
+        "text": "S'ha d'evitar el contacte directe a les dependències judicials. La sala a part, la videoconferència i l'ajuda especialitzada són mesures concretes que l'autoritat acorda segons eixes necessitats.",
+        "dialogue": "Han d'organitzar les coses perquè no et trobes amb el teu pare. A més, demanarem una altra sala, videoconferència i suport d'una psicòloga."
       },
       "repeat": {
         "title": "Demanar una altra explicació",
@@ -756,7 +872,7 @@
       },
       "memory": {
         "title": "No cal omplir els buits",
-        "text": "Pot expressar el que recorda i el que no sap amb exactitud. No necessita inventar-se una dada. La simulació no reproduïx preguntes sobre fets violents.",
+        "text": "Pot expressar el que recorda i el que no sap amb exactitud. No necessita inventar-se una dada.",
         "dialogue": "Si alguna cosa no la recordes bé, pots dir-ho així. No cal que t'inventes una hora o un detall."
       },
       "pause": {
@@ -766,7 +882,7 @@
       },
       "waiting": {
         "title": "Saber què ve després",
-        "text": "Pot demanar informació comprensible sobre les actuacions i resolucions que l'afecten. Els temps varien; Irene i la seua advocada poden ajudar a consultar pels canals adequats.",
+        "text": "Pot demanar informació comprensible sobre les actuacions i resolucions que l'afecten. Els temps varien; Elena i la seua advocada Irene poden ajudar a consultar pels canals adequats.",
         "dialogue": "Pots preguntar-me com va tot i t'ho explicaré. No et puc donar una data exacta, però sí que et puc dir amb qui parlar quan tingues dubtes."
       },
       "school": {
@@ -776,37 +892,112 @@
       },
       "resolution": {
         "title": "Una sentència no conta tota la meua vida",
-        "text": "El resultat depén de les proves i de les garanties del judici. Una sentència sense condemna no diu que Sara mentira, ni decidix com ha de sentir-se. L'ajuda i la protecció continuen segons el que necessite."
+        "text": "La condemna requereix prova suficient amb les garanties del judici. El resultat no determina com s'ha de sentir Sara. El suport continua segons les seues necessitats i les mesures judicials es revisen conforme a la resolució."
       },
       "oficina": {
         "title": "L'oficina judicial",
-        "text": "És l'equip de persones que organitza i tramita el cas al Tribunal d'Instància. Quina secció se n'encarrega depén de com estiga organitzat el tribunal i del tipus d'assumpte.",
-        "dialogue": "Primer, l'oficina judicial del Tribunal d'Instància. Són les persones que organitzen els papers i els passos del cas. Segons el tipus d'assumpte, el du una secció o una altra."
+        "text": "L'oficina judicial del Tribunal d'Instància organitza els papers i els passos del cas. Segons el tipus d'assumpte, se n'encarrega una secció o una altra.",
+        "dialogue": "L'oficina judicial del Tribunal d'Instància organitza els papers i els passos del cas. Segons el tipus d'assumpte, se n'encarrega una secció o una altra."
       },
       "juez": {
         "title": "El jutge o la jutgessa",
-        "text": "Dirigix les actuacions judicials, protegix els drets de totes les parts i decidix el que necessita una resolució judicial.",
-        "dialogue": "Després hi ha la jutgessa. Ella dirigix tot el que passa al jutjat, cuida que es respecten els drets de tots i decidix el que s'ha de decidir."
+        "text": "Dirigeix les actuacions judicials, protegeix els drets de totes les parts i decideix el que necessita una resolució judicial.",
+        "dialogue": "La jutgessa dirigeix la investigació i decideix les mesures que necessiten una decisió judicial. Si el cas passa a judici, el decidirà un altre jutge o tribunal."
       },
       "laj": {
         "title": "El lletrat o la lletrada (LAJ)",
-        "text": "El Lletrat de l'Administració de Justícia és un funcionari públic amb funcions processals, de documentació i de fe pública judicial, entre altres. Quan la llei ho exigix, pot autoritzar l'acta d'una declaració i comprovar la gravació.",
-        "dialogue": "També hi haurà una lletrada de l'Administració de Justícia. És una funcionària que dona fe del que passa: escriu l'acta del que digues i comprova que la gravació ha eixit bé."
+        "text": "El Lletrat de l'Administració de Justícia és un funcionari públic amb funcions processals, de documentació i de fe pública judicial, entre altres. Quan la llei ho exigeix, pot autoritzar l'acta d'una declaració i comprovar l'enregistrament.",
+        "dialogue": "La lletrada de l'Administració de Justícia s'ocupa que el que passa quede documentat amb garanties. És una altra professional; no és la teua advocada."
       },
       "fiscal": {
         "title": "El Ministeri Fiscal",
-        "text": "El fiscal defén la legalitat. En un procés penal pot acusar en nom de la societat i vetla pels drets del menor.",
-        "dialogue": "Després, el fiscal. La seua feina és que es complisca la llei. En un cas com este pot acusar qui va fer mal i, a més, s'encarrega de cuidar els teus drets."
+        "text": "El fiscal defensa la legalitat. Pot acusar qui ha fet mal i també vetlla pels teus drets. La teva advocada defensa els teus interessos.",
+        "dialogue": "El fiscal defensa la legalitat. La teva advocada defensa els teus interessos."
       },
       "psicosocial": {
         "title": "L'equip psicosocial",
-        "text": "Quan el jutjat ho decidix, psicòlegs i treballadors socials del jutjat poden ajudar a escoltar el menor i donar la seua opinió com a especialistes.",
-        "dialogue": "A vegades el jutjat demana ajuda al seu equip psicosocial: psicòlogues i treballadors socials que saben parlar amb xiquets i xiquetes de la teua edat. Si et toca, t'ajudaran a contar les coses amb calma."
+        "text": "Quan la plaça que du el cas ho decideix, psicòlegs i treballadors socials del Tribunal d'Instància poden ajudar a escoltar el menor i donar la seua opinió com a especialistes.",
+        "dialogue": "De vegades el tribunal demana ajuda al seu equip psicosocial: psicòlogues i treballadors socials que saben parlar amb xiquets i xiquetes de la teua edat. Si et toca, t'ajudaran a contar les coses amb calma."
       },
       "oavd": {
         "title": "L'Oficina d'Assistència a les Víctimes",
-        "text": "Oferix orientació jurídica general, suport psicològic i social, informació sobre el procediment i ajuda personalitzada. No és qui jutja el cas.",
-        "dialogue": "I l'Oficina d'Assistència a les Víctimes. Allí t'expliquen com va el procés i t'ajuden si estàs malament o tens dubtes. Ells no jutgen el cas: només t'ajuden."
+        "text": "A l'Oficina d'Assistència a les Víctimes t'expliquen com va el procés i t'ajuden si estàs malament o tens dubtes. No jutgen el cas.",
+        "dialogue": "A l'Oficina d'Assistència a les Víctimes t'expliquen com va el procés i t'ajuden si estàs malament o tens dubtes. No jutgen el cas."
+      },
+      "safety": {
+        "title": "La seguretat necessita un pla",
+        "text": "En el cas de Sara s'ha comunicat el risc al Tribunal d'Instància i s'han acordat prohibicions d'aproximació i comunicació amb Sara i Dani, i suspensió cautelar de visites. Són decisions judicials revisables, no conseqüències automàtiques de demanar ajuda.",
+        "dialogue": "En el vostre cas, la jutgessa ja ha prohibit que Javier s'acoste a tu i a Dani o es comunique amb vosaltres. Són mesures per protegir-vos mentre s'investiga."
+      },
+      "representation": {
+        "title": "Qui em pot representar",
+        "text": "El pare investigat no pot representar Sara en un assumpte amb interessos contraposats. La mare pot fer-ho si està en condicions de defendre adequadament els seus interessos.",
+        "dialogue": "El teu pare no et pot representar en aquest cas. Hem comprovat que la teua mare pot cuidar dels teus interessos i ella et representa. Jo sóc la teua advocada. També parlaré amb tu: la teua opinió compta."
+      },
+      "defender": {
+        "title": "Si necessite una altra persona que em represente",
+        "text": "Si tampoc l'altre progenitor pot representar i assistir adequadament la víctima, la Fiscalia ha de sol·licitar al jutge un defensor judicial. La representació legal, la defensa per advocada i la representació processal tenen funcions diferents.",
+        "dialogue": "Si la teua mare tampoc et poguera representar bé, es demanaria a la jutgessa una altra persona per fer-ho: un defensor judicial."
+      },
+      "party": {
+        "title": "Tindre veu en el procediment",
+        "text": "Permet intervindre, proposar proves, sol·licitar protecció i recórrer conforme a la llei. No és condició per rebre protecció ni fa dependre la persecució penal de la menor.",
+        "dialogue": "Podem participar en el cas com a acusació particular, amb la teua pròpia advocada. No ets tu qui decideix el càstig."
+      },
+      "investigation": {
+        "title": "Investigar no és jutjar",
+        "text": "L'òrgan instructor busca indicis i arreplega declaracions i altres diligències. Aquesta declaració no és per si sola el judici ni determina el resultat.",
+        "dialogue": "Aquesta part es diu investigació o instrucció. Hui encara no es decideix si hi haurà condemna."
+      },
+      "familyRule": {
+        "title": "Declarar quan l'investigat és familiar",
+        "text": "Comparéixer després d'una citació i estar obligada a declarar són qüestions diferents. L'edat de 14 anys no resol per si sola la qüestió.",
+        "dialogue": "De vegades la llei permet no declarar contra un familiar. Es diu dispensa."
+      },
+      "familyCase": {
+        "title": "Què passa en el cas de Sara",
+        "text": "S'aplica l'excepció de l'art. 416.1.4.º: no té dispensa per parentiu. Això no limita els seus suports ni el seu dret a comprendre les preguntes i demanar pauses.",
+        "dialogue": "En el teu cas, com que ja participes com a acusació particular, eixa dispensa no s'aplica i has de declarar. Jo t'acompanyaré i t'explicaré el que no entengues."
+      },
+      "company": {
+        "title": "Triar qui m'acompanya",
+        "text": "Durant les diligències d'investigació, Sara pot estar acompanyada per una persona de la seua elecció, a més de la seua representació, llevat de decisió motivada en contra per garantir el correcte desenvolupament. L'avaluació de suports i protecció s'ha de repetir quan canvien les seues necessitats o la fase processal.",
+        "dialogue": "A més de la teua advocada, et pot acompanyar una persona que tu triïs, com Elena. Podem parlar de qui t'ajudaria més."
+      },
+      "recording": {
+        "title": "Gravar no significa evitar una altra declaració",
+        "text": "L'art. 26.1.a de l'Estatut preveu enregistrament audiovisual de les declaracions de víctimes menors en la investigació. Un enregistrament ordinari no té eixe efecte automàtic.",
+        "dialogue": "Sí, es grava perquè ets menor. Per usar-la en el judici sense que tornes a declarar calen garanties especials: també hi ha de participar la defensa del teu pare."
+      },
+      "ageRule": {
+        "title": "Què canvia als catorze anys",
+        "text": "L'art. 449 ter obliga a preconstituir la declaració de menors de 14 anys en els delictes enumerats, i de persones amb discapacitat necessitades d'especial protecció. Amb 14 complits l'edat sola no activa aquesta obligació.",
+        "dialogue": "Per a certs delictes, eixa declaració amb garanties especials és obligatòria si encara no has complit catorze anys. Tu ja els tens: no és automàtica per la teua edat."
+      },
+      "communication": {
+        "title": "Dir el que necessite en declarar",
+        "text": "Sara rep explicacions adaptades, pot comunicar que no entén o necessita una pausa i pot expressar que no recorda una dada. La preparació explica el procediment i les eines per comunicar les seues necessitats, sense assajar un relat ni suggerir respostes sobre els fets.",
+        "dialogue": "Recorda: pots demanar que t'expliquen una pregunta, dir que no recordes alguna cosa i demanar una pausa. El important és contar el que recordes amb les teues paraules."
+      },
+      "investigationEnd": {
+        "title": "Què pot passar en acabar d'investigar",
+        "text": "En acabar la instrucció pot acordar-se l'arxiu per la causa legal corresponent o continuar cap a l'acusació i el judici. No tota investigació acaba en judici.",
+        "dialogue": "No totes les investigacions arriben a judici. De vegades s'arxiven perquè no es pot continuar, per exemple si no hi ha dades suficients per seguir."
+      },
+      "appeal": {
+        "title": "La sentència pot revisar-se",
+        "text": "Les parts poden recórrer les resolucions en els casos i terminis legals. Una sentència és ferma quan ja no cap el recurs corresponent.",
+        "dialogue": "Recórrer és demanar a un altre tribunal que revise la decisió. Quan ja no es pot recórrer, la sentència és ferma."
+      },
+      "protectionAfter": {
+        "title": "Quines ajudes i mesures continuen després",
+        "text": "El suport social i assistencial atén les necessitats de Sara. S'expliquen els canvis i es valora protecció per les vies pertinents.",
+        "dialogue": "Revisarem quines mesures continuen, quines canvien i quina protecció necessites ara. No has de deixar de demanar ajuda perquè haja arribat una sentència."
+      },
+      "partyChoice": {
+        "title": "Entendre abans de participar",
+        "text": "La personació no és condició per a la protecció ni perquè s'investigue.",
+        "dialogue": "En participar així, no pots usar la dispensa: la possibilitat que de vegades permet no declarar contra un familiar. Rebre protecció no depén que participes d'aquesta manera."
       }
     },
     "help": [
@@ -822,7 +1013,8 @@
         "title": "Una persona adulta de confiança",
         "text": "Pots acudir al professorat, orientació o coordinació de benestar del centre. Per a suport públic, consulta els Servicis Socials del teu ajuntament o el servei de protecció de menors de la teua comunitat autònoma."
       }
-    ]
+    ],
+    "checkedAt": "2026-10-22"
   },
   "scene": {}
 }

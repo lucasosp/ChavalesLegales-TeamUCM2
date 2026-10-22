@@ -4,7 +4,7 @@ export const DEFAULT_CONFIG = {
     { id: 'mother', name: 'Madre', color: '#4ECDC4', seatDefault: 0 },
     { id: 'father', name: 'Padre', color: '#45B7D1', seatDefault: 2 },
     { id: 'grandfather', name: 'Abuelo', color: '#96CEB4', seatDefault: 4 },
-    { id: 'random', name: 'Persona Random', color: '#D4A5A5', seatDefault: 6 },
+    { id: 'random', name: 'Persona', color: '#D4A5A5', seatDefault: 6 },
     { id: 'brother', name: 'Hermano Daniel', color: '#FFE66D', seatDefault: 7 },
   ],
   totalSeats: 8,
