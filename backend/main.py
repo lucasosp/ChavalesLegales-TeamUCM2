@@ -80,13 +80,18 @@ def guardar_meta_caso(caso_id: str, meta: Dict[str, Any] = Body(...)):
                 status_code=400,
                 detail=f"La edad tiene que ser un número entero entre {EDAD_MIN} y {EDAD_MAX}",
             )
-    return caso_store.set_meta(validar_id(caso_id), meta)
+    try:
+        return caso_store.set_meta(validar_id(caso_id), meta)
+    except PermissionError as exc:
+        raise HTTPException(status_code=403, detail=str(exc)) from exc
 
 
 @app.post("/api/casos/{caso_id}/eventos")
 def registrar_evento_caso(caso_id: str, evento: Dict[str, Any] = Body(...)):
     try:
         return {"total": caso_store.add_evento(validar_id(caso_id), evento)}
+    except PermissionError as exc:
+        raise HTTPException(status_code=403, detail=str(exc)) from exc
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 

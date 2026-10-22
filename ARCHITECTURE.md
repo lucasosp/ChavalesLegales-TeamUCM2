@@ -131,7 +131,7 @@ se ve en vez de disfrazarse de datos viejos.
 
 | Función | Contrato |
 |---|---|
-| `casoDesdeUrl()` | `?caso=` o `DEMO` |
+| `casoDesdeUrl()` | `?caso=`; sin él (o con `DEMO`, que es de solo lectura) crea `PRUEBA-<6 dígitos>` |
 | `resumenCaso(id)` | `{eventos, ultimo, …}` o `null`; es lo que sondea el informe |
 | `guardarMetaCaso(id, meta)` | **rechaza** si la API responde != 2xx |
 | `registrarEvento(id, kind, data)` | no rechaza; `console.warn` si falla |

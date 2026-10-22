@@ -2,9 +2,16 @@
 // Todo va al backend. No hay espejo en localStorage (D11: la app asume conexión),
 // así que un fallo de red se ve en vez de disfrazarse de "datos viejos".
 
+// DEMO es un ejemplo de solo lectura (el backend rechaza escribir en él). Quien abre la novela
+// sin código, o con ?caso=DEMO, juega en un caso nuevo: PRUEBA-<6 dígitos>. El prefijo evita
+// chocar con los códigos reales (CL-<5 dígitos>) de los alumnos.
+let casoDeEstaVisita = null
 export function casoDesdeUrl() {
   if (typeof window === 'undefined') return 'DEMO'
-  return new URLSearchParams(location.search).get('caso') || 'DEMO'
+  const caso = new URLSearchParams(location.search).get('caso')
+  if (caso && caso.toUpperCase() !== 'DEMO') return caso
+  casoDeEstaVisita ??= `PRUEBA-${Math.floor(100000 + Math.random() * 900000)}`
+  return casoDeEstaVisita
 }
 
 /**

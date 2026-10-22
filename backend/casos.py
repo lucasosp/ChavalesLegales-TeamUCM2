@@ -30,6 +30,15 @@ PATRON_ID = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
 
 MAX_EVENTOS = 5000
 
+# Casos de ejemplo: se pueden leer pero nunca se modifican. El informe de DEMO se enseña tal
+# cual, y quien juegue sin código lo hace en un caso nuevo (lo decide la web: ver casoDesdeUrl).
+# Se compara en mayúsculas porque en Windows `demo.json` y `DEMO.json` son el mismo archivo.
+CASOS_SOLO_LECTURA = frozenset({"DEMO"})
+
+
+def es_solo_lectura(caso_id: str) -> bool:
+    return isinstance(caso_id, str) and caso_id.upper() in CASOS_SOLO_LECTURA
+
 # Version del esquema del caso. Se escribe en cada caso; los antiguos se marcan como 1 al leerlos.
 # 2 = los eventos llevan 't_servidor' (reloj del servidor) y el caso lleva 'schemaVersion'.
 ESQUEMA_VERSION = 2
@@ -172,6 +181,11 @@ class CasoStore:
             json.dump(caso, f, ensure_ascii=False)
         os.replace(tmp, ruta)
 
+    @staticmethod
+    def _rechazar_si_solo_lectura(caso_id: str) -> None:
+        if es_solo_lectura(caso_id):
+            raise PermissionError(f"El caso {caso_id} es un ejemplo de solo lectura")
+
     def _caso(self, caso_id: str) -> Dict[str, Any]:
         return self._casos.setdefault(
             caso_id,
@@ -182,6 +196,7 @@ class CasoStore:
 
     def set_meta(self, caso_id: str, meta: Dict[str, Any]) -> Dict[str, Any]:
         self._ruta(caso_id)  # valida el id antes de tocar nada
+        self._rechazar_si_solo_lectura(caso_id)
         # Filtrar datos de carácter personal directo del menor (nombre de pila)
         datos_meta = {k: v for k, v in meta.items() if k != "nombreJoven"}
         with self._lock:
@@ -193,6 +208,7 @@ class CasoStore:
 
     def add_evento(self, caso_id: str, evento: Dict[str, Any]) -> int:
         self._ruta(caso_id)
+        self._rechazar_si_solo_lectura(caso_id)
         evento = validar_evento(evento)
         with self._lock:
             caso = self._caso(caso_id)

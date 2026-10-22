@@ -269,6 +269,54 @@ class CasoStoreTest(unittest.TestCase):
         self.assertEqual(self.store.listar(), [])
         self.assertTrue(os.path.isdir(self.datos))
 
+class CasoSoloLecturaTest(unittest.TestCase):
+    """DEMO es un ejemplo: se lee, pero nada lo modifica."""
+
+    def setUp(self):
+        self._dir = tempfile.TemporaryDirectory()
+        self.datos = os.path.join(self._dir.name, "casos_data")
+        os.makedirs(self.datos)
+        self.ruta = os.path.join(self.datos, "DEMO.json")
+        self.original = {
+            "id": "DEMO",
+            "meta": {"edad": 14},
+            "eventos": [{"kind": "inicio", "t": 1, "t_servidor": 1, "data": {}}],
+            "schemaVersion": ESQUEMA_VERSION,
+        }
+        with open(self.ruta, "w", encoding="utf-8") as f:
+            json.dump(self.original, f)
+        self.store = CasoStore(data_dir=self.datos, legacy_file="")
+
+    def tearDown(self):
+        self._dir.cleanup()
+
+    def _contenido(self):
+        with open(self.ruta, encoding="utf-8") as f:
+            return json.load(f)
+
+    def test_se_puede_leer(self):
+        self.assertEqual(self.store.get("DEMO")["meta"], {"edad": 14})
+        self.assertEqual(self.store.resumen("DEMO")["eventos"], 1)
+
+    def test_rechaza_eventos_y_meta(self):
+        with self.assertRaises(PermissionError):
+            self.store.add_evento("DEMO", {"kind": "inicio", "data": {}})
+        with self.assertRaises(PermissionError):
+            self.store.set_meta("DEMO", {"contexto": "x"})
+        self.assertEqual(self._contenido(), self.original)
+
+    def test_da_igual_las_mayusculas(self):
+        # En Windows demo.json y DEMO.json son el mismo archivo
+        with self.assertRaises(PermissionError):
+            self.store.add_evento("demo", {"kind": "inicio", "data": {}})
+        self.assertEqual(self._contenido(), self.original)
+
+    def test_los_demas_casos_siguen_escribiendo(self):
+        self.store.add_evento("PRUEBA-123456", {"kind": "inicio", "data": {}})
+        self.assertEqual(len(self.store.get("PRUEBA-123456")["eventos"]), 1)
+        self.assertEqual(self._contenido(), self.original)
+
+
 
 if __name__ == "__main__":
     unittest.main()
