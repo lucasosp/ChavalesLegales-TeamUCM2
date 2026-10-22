@@ -1,0 +1,77 @@
+# Production stack: caddy (proxy) -> frontend (Next.js) + backend (FastAPI).
+#
+#   cp .env.prod.example .env.prod   # then edit it
+#   docker compose --env-file .env.prod -f compose.prod.yml up -d --build
+#
+# Behind the Cloudflare tunnel, add -f compose.tunnel.yml (Caddy then binds
+# 127.0.0.1:18081 only, TLS is terminated at the Cloudflare edge).
+
+name: datathon
+
+services:
+  caddy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: caddy
+    image: localhost/datathon-caddy:latest
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp" # HTTP/3
+    environment:
+      SITE_ADDRESS: ${SITE_ADDRESS:-localhost}
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - frontend
+      - backend
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: frontend
+    image: localhost/datathon-frontend:latest
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      PORT: "3000"
+      NODE_ENV: production
+      # Only used by next.config.mjs rewrites; Caddy already routes /api/*,
+      # so this is belt and braces for direct access to :3000.
+      API_URL: http://backend:8000
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: backend
+    image: localhost/datathon-backend:latest
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      PORT: "8000"
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-*}
+    # Persists telemetry_data.json, telemetry_drawings.json and
+    # casos_data.json (the app writes them next to its sources).
+    volumes:
+      - app_data:/data
+
+volumes:
+  app_data:
+    name: datathon-data
+  caddy_data:
+    name: datathon-caddy-data
+  caddy_config:
+    name: datathon-caddy-config
+
+networks:
+  default:
+    name: datathon-network

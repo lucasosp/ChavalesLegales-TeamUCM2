@@ -1,0 +1,9 @@
+# Overlay for cloudflared deployments (see DEPLOY.md and the NixOS module):
+# TLS terminates at the Cloudflare edge, so Caddy serves plain HTTP on a
+# loopback-only high port. Rootless podman cannot bind ports below 1024.
+#
+#   docker-compose --env-file .env.prod -f compose.prod.yml -f compose.tunnel.yml up -d
+
+services:
+  caddy:
+    ports: !override ["127.0.0.1:18081:80"]

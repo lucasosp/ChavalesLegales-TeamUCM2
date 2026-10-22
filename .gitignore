@@ -16,6 +16,8 @@ venv/
 .env
 .env.*
 !.env.example
+# Plantilla sin secretos del despliegue (ver DEPLOY.md); .env.prod real sigue ignorado.
+!.env.prod.example
 
 # --- devenv / direnv ---
 .devenv/

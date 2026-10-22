@@ -1,0 +1,28 @@
+# Reverse proxy for Chavales Legales (see compose.prod.yml).
+#
+# The public address comes from SITE_ADDRESS: a DNS name pointing at the
+# host gives automatic HTTPS (Let's Encrypt); ":80" serves plain HTTP,
+# which is what we want when the Cloudflare tunnel terminates TLS at the
+# edge (compose.tunnel.yml).
+#
+# /api/* (REST) and /ws/* (host/player websockets) go to the FastAPI
+# backend; everything else is the Next.js frontend.
+
+{$SITE_ADDRESS:localhost} {
+	encode zstd gzip
+
+	@backend path /api/* /ws/*
+	handle @backend {
+		reverse_proxy backend:8000
+	}
+
+	handle {
+		reverse_proxy frontend:3000
+	}
+
+	header {
+		-Server
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+	}
+}
