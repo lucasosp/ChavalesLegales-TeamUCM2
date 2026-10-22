@@ -91,10 +91,10 @@ export default function AvatarGeometrico({
 
           {/* Gafas de pasta planas geométricas */}
           <circle cx="-8" cy="-34" r="6.5" fill="#FFFFFF" opacity="0.3" />
-          <circle cx="-8" cy="-34" r="6.5" fill="none" stroke="#18181B" strokeWidth="2.2" />
+          <circle cx="-8" cy="-34" r="6.5" fill="none" stroke="#4A2810" strokeWidth="2.2" />
           <circle cx="8" cy="-34" r="6.5" fill="#FFFFFF" opacity="0.3" />
-          <circle cx="8" cy="-34" r="6.5" fill="none" stroke="#18181B" strokeWidth="2.2" />
-          <rect x="-2.5" y="-35" width="5" height="2" rx="1" fill="#18181B" />
+          <circle cx="8" cy="-34" r="6.5" fill="none" stroke="#4A2810" strokeWidth="2.2" />
+          <rect x="-2.5" y="-35" width="5" height="2" rx="1" fill="#4A2810" />
 
           {/* Ojos tras las gafas */}
           <circle cx="-8" cy="-34" r="2.6" fill="#18181B" />
@@ -111,7 +111,7 @@ export default function AvatarGeometrico({
           <rect x="10" y="-29" width="6" height="3" rx="1.5" fill="#F43F5E" opacity="0.4" />
 
           {/* Sonrisa ancha */}
-          <path d="M -5 -25 Q 0 -20 5 -25" stroke="#18181B" strokeWidth="2.4" strokeLinecap="round" fill="none" />
+          <path d="M -5 -25 Q 0 -20 5 -25" stroke="#701A24" strokeWidth="2.4" strokeLinecap="round" fill="none" />
         </g>
       )}
 
@@ -213,7 +213,7 @@ export default function AvatarGeometrico({
           <circle cx="11" cy="-28" r="3" fill="#F43F5E" opacity="0.4" />
 
           {/* Sonrisa dulce */}
-          <path d="M -3.5 -25 Q 0 -22 3.5 -25" stroke="#18181B" strokeWidth="2.2" strokeLinecap="round" fill="none" />
+          <path d="M -3.5 -25 Q 0 -22 3.5 -25" stroke="#701A24" strokeWidth="2.2" strokeLinecap="round" fill="none" />
         </g>
       )}
 
@@ -265,7 +265,7 @@ export default function AvatarGeometrico({
           <ellipse cx="0" cy="-32" rx="2.8" ry="1.7" fill="#5C3A21" />
 
           {/* Sonrisa alegre de Legalín */}
-          <path d="M -5 -26 Q 0 -22 5 -26" stroke="#18181B" strokeWidth="2.2" strokeLinecap="round" fill="none" />
+          <path d="M -5 -26 Q 0 -22 5 -26" stroke="#5C3A21" strokeWidth="2.2" strokeLinecap="round" fill="none" />
         </g>
       )}
     </g>
