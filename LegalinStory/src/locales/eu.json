@@ -133,11 +133,11 @@
     "defaultChapter": "Sararen istorioa"
   },
   "drawing": {
-    "phase1Title": "Zure istorioa marrazki batekin hasten da",
+    "phase1Title": "Marrazteko etenaldi bat",
     "phase2Title": "Marrazteko etenaldi bat",
     "phase1Intro": "Nola irudikatzen duzu Sara? Marraztu zure erara. Hatza, sagua edo arkatz digital bat erabil ditzakezu.",
-    "phase2Intro": "Sarak urrats garrantzitsu bat eman du. Gogoa baduzu, marraztu berriro orain nola irudikatzen duzun. Hartu behar duzun denbora.",
-    "phase1Confirm": "Gorde eta hasi →",
+    "phase2Intro": "Sarak laguntza eskatu du jada. Gogoa baduzu, marraztu berriro orain nola irudikatzen duzun. Hartu behar duzun denbora.",
+    "phase1Confirm": "Gorde eta jarraitu →",
     "phase2Confirm": "Gorde eta jarraitu →",
     "eyebrow": "SORTZEKO UNE BAT",
     "hint": "Zure marrazkia hemen hasten da",

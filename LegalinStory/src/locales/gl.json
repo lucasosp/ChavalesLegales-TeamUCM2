@@ -133,11 +133,11 @@
     "defaultChapter": "A historia de Sara"
   },
   "drawing": {
-    "phase1Title": "A túa historia comeza cun debuxo",
+    "phase1Title": "Unha pausa para debuxar",
     "phase2Title": "Unha pausa para debuxar",
     "phase1Intro": "Como te imaxinas a Sara? Debúxaa á túa maneira. Podes usar o dedo, o rato ou un lapis dixital.",
-    "phase2Intro": "Sara deu un paso importante. Se che apetece, debúxaa outra vez como a imaxinas agora. Tómate o tempo que precises.",
-    "phase1Confirm": "Gardar e comezar →",
+    "phase2Intro": "Sara xa pediu axuda. Se che apetece, debúxaa outra vez como a imaxinas agora. Tómate o tempo que precises.",
+    "phase1Confirm": "Gardar e seguir →",
     "phase2Confirm": "Gardar e seguir →",
     "eyebrow": "UN MOMENTO PARA CREAR",
     "hint": "O teu debuxo comeza aquí",

@@ -185,7 +185,7 @@ export class DrawingCanvasModal {
         avatarStore.savePhase2(dataUrl, metrics);
       }
       this.destroy();
-      this.container.append(cloudLayer("is-closing"));
+      this.container.append(cloudLayer("is-opening"));
       onConfirm?.(dataUrl, metrics);
       this.onComplete?.(phase, dataUrl, metrics);
     });
@@ -261,7 +261,7 @@ export class DrawingCanvasModal {
       avatarStore.saveFinalChoice(selected);
       const chosenData = selected === "phase1" ? avatar1 : avatar2;
       this.destroy();
-      this.container.append(cloudLayer("is-closing"));
+      this.container.append(cloudLayer("is-opening"));
       onConfirm?.(selected, chosenData);
       this.onComplete?.("phase3", chosenData);
     });
@@ -410,8 +410,8 @@ export class DrawingCanvasModal {
   }
 }
 
-// Capa de nubes (la misma forma que MinijuegoNubes de la plataforma). Al abrir
-// cubren la pantalla y se apartan; al cerrar entran, cubren y se retiran.
+// Capa de nubes (la misma forma que MinijuegoNubes de la plataforma): empiezan
+// cubriendo la pantalla y se apartan, al abrir el taller y al cerrarlo.
 // Es decorativa: no bloquea el lienzo y se borra sola al terminar.
 const CLOUDS = [
   [-12, -14, 52], [26, -20, 50], [62, -16, 54], [-20, 22, 50], [72, 18, 52],

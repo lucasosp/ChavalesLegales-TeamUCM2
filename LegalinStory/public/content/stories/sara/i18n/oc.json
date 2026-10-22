@@ -4,99 +4,74 @@
       "start": {
         "kicker": "SARA · CAPÍTOL 1 DE 6",
         "title": "Quauquarren non va ben",
-        "text": "Deluns. Un servici que non entre."
+        "text": "Deluns de matin."
       },
       "c1-01": {
-        "text": "Sara a quinze ans, jògue a volei e dessenhe esteles enes marges des sòns apunts. Ne li manque ua per acabar quan sone eth timbre de quatau d'ESO."
+        "text": "Sara a catòrze ans e va a tresau d'ESO. Li agrade eth volei e dessenhe esteles enes marges des sòns quasèrns. Sone eth timbre e encara li manque ua estela per acabar."
       },
       "c1-02": {
-        "text": "Aguesta tarde practicam eth servici. Eth mèn se'n va mès de cap ara pòrta que de cap ara pista."
+        "text": "Vies uei ar entrenament de volei? Anam a practicar eth servici."
       },
       "c1-03": {
-        "text": "Eth mèn tanben se poirie presentar a delegat de corredor. Mès uei… me pensi que non i vau."
+        "text": "Uei non pòdi. Un aute dia, d'acòrd?"
       },
       "c1-04": {
-        "text": "A casa, Javier, eth sòn pair, li revise es messatges e decidís a qui pòt veir. L'insulte quan quauquarren non li agrade. Quauqui còps l'a possada o tustada. Non mòstram aguestes escènes."
+        "text": "A casa, Javier, eth sòn pair, li cride quan quauquarren non li agrade. Li mire eth mobil e non la daisse veir a qui vò ela. Quauqui còps l'a possada e li a pegat."
       },
       "c1-05": {
-        "text": "Ager me tornèc a prener eth mobil. Dani èra ena auta cramba. Sonque a dètz ans. Non sai guaire ne escotèc."
+        "text": "Ager me tornèc a prener eth mobil. Dani èra ena sua cramba. Sonque a dètz ans. Non sai quant ne escotèc."
       },
       "c1-06": {
-        "text": "D'acòrd. Se cambies d'idèa, te guardi lòc. E se me vòs condar quauquarren, tanben."
+        "text": "D'acòrd. Te guardi un lòc a costat mèn per se cambies d'idèa. E se me vòs condar quauquarren, aciu soi."
       },
       "c1-07": {
-        "text": "En tot recuélher, a Sara li cau er estug. Laura, era sua professora, s'acòte entà ajudar-la. A notat es sues abséncies e que darrèrament s'espante de seguida."
+        "text": "En tot recuélher, a Sara li cau er estug. Laura, era sua tutora, s'acòte entà ajudar-la. S'a avisat que Sara manque mès a classa e que s'espante damb quinsevolh brutit."
       },
       "c1-08": {
-        "text": "Aguesti dies te vedi mès silenciosa. Non sai çò que te passe e non ac vòi endevinar. Te vierie ben parlar un moment en un lòc tranquil?"
+        "text": "Te vedi mès silenciosa aguestes dies. Non sai qué te passe e non ac vòi endevinar. Te vierie ben parlar un shinhau en un lòc tranquil?"
       },
       "c1-choice": {
-        "prompt": "A Sara li còste de començar. Qué a de besonh de díder prumèr?",
+        "prompt": "A Sara li còste de començar. Qué ditz prumèr?",
         "options": [
           {
-            "id": "partial",
-            "label": "«A casa passen causes que me hèn pòur».",
-            "next": "c1-partial",
-            "flags": {
-              "opening": "partial"
-            }
+            "label": "«A casa passen causes que me hèn pòur»."
           },
           {
-            "id": "time",
-            "label": "«Me cau un shinhau de temps».",
-            "next": "c1-time",
-            "flags": {
-              "opening": "time"
-            }
+            "label": "«Me cau un shinhau de temps»."
           },
           {
-            "id": "what",
-            "label": "«Se te conti quauquarren, qué passarà?».",
-            "next": "c1-what",
-            "flags": {
-              "opening": "what"
-            }
+            "label": "«Se te conti quauquarren, qué passarà?»."
           }
         ]
       },
       "c1-partial": {
-        "text": "Mercés per dider-me'c. Non te cau explicar-ac tot ara. Çò que te hè mau merite atencion, encara que non sàpies encara cossí nomentar-ac."
+        "text": "Mercés per dider-me'c. Non te cau explicar-ac tot ara. Se quauquarren te hè mau, ei important, encara que non sàpies cossí díder-ac."
       },
       "c1-time": {
-        "text": "Podem anar a plan a plan. Me demorarè ací damb tu. Encara qu'uei te còste parlar, era mia responsabilitat ei estar atenta as senhaus que m'amoïnen e cercar ajuda."
+        "text": "Podem anar a plan a plan. Me demorarè ací damb tu. Encara qu'uei te còste parlar, eth mèn trabalh ei suenhar-te e cercar ajuda se quauquarren m'amoïne."
       },
       "c1-what": {
-        "text": "T'anirè explicant es passi. Se pensi que pòs èster en perilh, è de demanar ajuda as que te pòden protegir. Me pòs preguntar qué vau comunicar."
+        "text": "T'anirè explicant cada passi. Se pensi qu'ès en perilh, è d'avisar as persones que te pòden protegir. Tostemp me pòs preguntar a qui ac vau a díder."
       },
       "c1-close": {
-        "text": "Sara se sè. Laura met de costat es examens entà escotar-la. Peth prumèr còp aqueth maitin, arrés semble auer prèssa per acabar era convèrsa."
+        "text": "Sara se sè. Laura met de costat es quasèrns qu'èra corregint entà escotar-la. Peth prumèr còp en tot eth maitin, arrés a prèssa."
       },
       "c1-choice2": {
         "prompt": "Abans de seguir, qué ajudarie a Sara?",
         "options": [
           {
-            "id": "door",
-            "label": "Demanar que non entren companhs mentre parle.",
-            "next": "c1-door",
-            "flags": {
-              "schoolPrivacy": true
-            }
+            "label": "Demanar que non entre arrés dera classa mentre parle."
           },
           {
-            "id": "company",
-            "label": "Preguntar se Paula la pòt demorar dehòra.",
-            "next": "c1-company",
-            "flags": {
-              "paulaWaiting": true
-            }
+            "label": "Preguntar se Paula la pòt demorar dehòra."
           }
         ]
       },
       "c1-door": {
-        "text": "Cercaram un espaci a on poguem parlar damb intimitat. Se quauquarrés pregunte per tu, non a per qué conéisher era tua istòria."
+        "text": "Parlaram en un lòc a on arrés mos copèsque. Se quauquarrés pregunte per tu, non a per qué saber çò que me condes."
       },
       "c1-company": {
-        "text": "Li diram que ès acompanhada e que sortiràs quan acabem. Tu pòs decidir qué li vòs condar dempús."
+        "text": "Li direm a Paula qu'ès damb jo e que sortiràs de seguida. Tu decidisses qué li condes dempús."
       },
       "c2-card": {
         "kicker": "SARA · CAPÍTOL 2 DE 6",
@@ -104,676 +79,610 @@
         "text": "En institut. Ua convèrsa, pas a pas."
       },
       "c2-01": {
-        "text": "Bèth còp pensi que s'auessa responut d'ua auta manèra… Mès ager non auia hèt arren. E totun s'enfadèc."
+        "text": "Bèth còp pensi que, se me portèsse mèlhor, non passarie. Mès ager non è hèt arren e totun s'enfadèc."
       },
       "c2-02": {
-        "text": "Arren de çò que digues justifique que quauquarrés te hèsque mau. Non te cau trobar era frasa perfècta entà que t'ajudem."
+        "text": "Arren de çò que hèsques o digues hè qu'ei ben que quauquarrés te hèsque mau. Era colpa non ei tua."
       },
       "c2-03": {
-        "text": "Sara conde ua part de çò que s'a passat. Laura escote shens demanar-li que repetisque es detalhs. Li pregunte pera sua seguretat en sortir der institut."
+        "text": "Sara conde ua part de çò que passe a casa. Laura l'escote shens demanar-li que ac repetisque. Dempús li pregunte se se sent segura en tornar a casa."
       },
       "c2-04": {
-        "text": "Non vòi tornar a casa e qu'eth ac sàpie de còp. Me hè pòur çò que pogue passar."
+        "text": "Non vòi arribar a casa e que eth mèn pair ac sàpie de còp. Me hè pòur çò que pogue hèr."
       },
       "c2-05": {
-        "text": "Ac tieram en compde abans de contactar damb arrés. Vau parlar damb era coordinacion de benèster e comunicar era situacion as servicis que an d'intervier."
+        "text": "Ac tieram en compde abans de parlar damb arrés. Vau a avisar ara persona que suenhe deth benèster en institut e as servicis que protegissen es menors."
       },
       "c2-protection": {
-        "text": "Me tòque demanar ajuda e activar eth protocòl deth centre. Tu non as d'anar a denonciar soleta entà que comencem a protegir-te. T'explicaram çò que hèsquem."
+        "text": "Eth mèn trabalh ei demanar ajuda quan quauquarrés dera tua edat ac passe mau. Tu non as d'anar a denonciar soleta entà que comencem a protegir-te. T'anirè condant çò que hèsquem."
       },
       "c2-choice": {
-        "prompt": "Qué pregunte Sara mentre Laura organize era ajuda?",
+        "prompt": "Qué pregunte Sara mentre Laura cerque ajuda?",
         "options": [
           {
-            "id": "privacy",
-            "label": "«Ac diràs a tot eth professorat?».",
-            "next": "c2-privacy",
-            "flags": {
-              "concernPrivacy": true
-            }
+            "label": "«Ac diràs a tot eth professorat?»."
           },
           {
-            "id": "dad",
-            "label": "«Telefonaratz ara madeish ath mèn pair?».",
-            "next": "c2-dad",
-            "flags": {
-              "concernDad": true
-            }
+            "label": "«Telefonaratz ara ath mèn pair?»."
           },
           {
-            "id": "alone",
-            "label": "«È d'anar jo a denonciar?».",
-            "next": "c2-alone",
-            "flags": {
-              "concernAlone": true
-            }
+            "label": "«È d'anar jo ara polícia?»."
           }
         ]
       },
       "c2-privacy": {
-        "text": "Non te pòdi prométer qu'aquerò se demore entre nosates. T'explicarè qui a besonh d'intervier e entà qué. Çò que compartiscam aurà de servir entà protegir-te."
+        "text": "Non te pòdi prométer qu'aquerò se demore sonque entre nosati. Mès te dirè a qui ac conti e entà qué. Sonque ac sauberàn es persones que te pòden ajudar."
       },
       "c2-dad": {
-        "text": "Non improvisaram ua trucada shens tier en compde era tua pòur. Es professionaus coordinaràn cossí actuar de manèra segura. T'explicarè çò que sapiam."
+        "text": "Non telefonaram shens pensar en eth tòn pòur. Es persones que sàben d'aquerò decidiràn cossí hèr-ac entà que sigues segura. T'anirè condant çò que sàpie."
       },
       "c2-alone": {
-        "text": "Non ac as d'organizar tu soleta. Demanar ajuda ací ja permet que es persones responsables actuen. T'acompanharàn e t'explicaràn es actuacions que corresponguen."
+        "text": "Non as de hèr-ac tu soleta. En dider-m'ac, es persones adultes qu'an d'ocupar-se'n ja pòden començar a ajudar-te. T'acompanharàn en cada passi."
       },
       "c2-06": {
-        "text": "Eth centre coordine era atencion damb es servicis de proteccion. Era seguretat s'atén dès eth començament. Aguesta istòria arremasse diuèrsi encontres; non represente un calendari obligatòri."
+        "text": "Aquera madeisha tarde, er institut parle damb es servicis que protegissen es menors. Çò prumèr ei qu'era Sara age de segurtat. Quauqui dies dempús, coneish ua persona nava."
       },
       "c2-07": {
-        "text": "Ola, Sara. Sò Irene, trabalhadora sociau. T'acompanharè amassa damb er equip. Eth mèn trabalh tanben a a veir damb cossí estàs en classa, damb es tues amigues e en tòn dia a dia."
+        "text": "Adiu, Sara. Me cridi Elena e soi trabalhadora sociau. Te vau a acompanhar. Tanben me compde cossí te va en institut, damb es tues amigues e en eth tòn dia a dia."
       },
       "c2-08": {
-        "text": "Aurè de tornar a condar-ac tot sancèr? Non sai ne per a on è començat abans."
+        "text": "È de condar-ac tot un aute còp? Ja non me brembi ne de cossí comencèc."
       },
       "c2-09": {
-        "text": "Ensajaram de coordinar-mos entà que non ac ages de repetir shens besonh. Abans de preguntar-te quauquarren, te pòdi explicar entà qué mos ac cau."
+        "text": "Ensajaram que non age de repetir-ac se non cau. E abans de preguntar-te quauquarren, te dirè entà qué ac besonhi."
       },
       "c2-choice2": {
-        "prompt": "Irene apròpe ua cadièra. Cossí s'estime mès Sara que comencen?",
+        "prompt": "Elena apròpie ua cadira. Cossí vò començar Sara?",
         "options": [
           {
-            "id": "short",
-            "label": "Ua causa cada còp, damb explicacions cortes.",
-            "next": "c2-short",
-            "flags": {
-              "shortExplanations": true
-            }
+            "label": "Ua causa cada còp, damb explicacions corteses."
           },
           {
-            "id": "overview",
-            "label": "Veir prumèr eth recorrut generau.",
-            "next": "c2-overview",
-            "flags": {
-              "overviewFirst": true
-            }
+            "label": "Saber prumèr tot çò que passarà."
           }
         ]
       },
       "c2-short": {
-        "text": "D'acòrd. Prumèr: ocupar-mos dera tua seguretat. Dempús anaram veigent es passi següents. Se parli massa, m'ac pòs díder."
+        "text": "Perfèct. Çò prumèr: qu'ages de segurtat. Dempús vederem eth demés. Se parli massa, me ac dius."
       },
       "c2-overview": {
-        "text": "Agacharam era tua situacion familiara, organizaram supòrts e t'explicaram es actuacions que se comencen. Pòs daurir eth mapa quan te calgue situar-te."
+        "text": "Prumèr vederem cossí ei era tua familha. Dempús cercaram ajudes entà vosati. E t'explicaram cada causa abans qu'arribe."
       },
       "c3-card": {
         "kicker": "SARA · CAPÍTOL 3 DE 6",
         "title": "Qué me passarà?",
-        "text": "Servicis Sociaus. Méter nòm as preocupacions."
+        "text": "Servicis Sociaus. Hèr es preguntes que hèn pòur."
       },
       "c3-01": {
-        "text": "Valorar era mia situacion vò díder que me botaratz ua nòta? Pr'amor que darrèrament non ne trèc de guaire bones."
+        "text": "Laura diguec que valoraratz era mia situacion. Aquerò ei coma un examen?"
       },
       "c3-02": {
-        "text": "Cap de nòta. Volem conéisher çò que se passe, quini risci i a e quina ajuda vos cau. Tanben escotaram ara tua mair e valoraram cossí ei Dani."
+        "text": "Non, non ei un examen. Volem saber qué passe e quina ajuda vos cau. Tanben parlaram damb era tua mair e vederem cossí ei Dani."
       },
       "c3-social": {
-        "text": "Valorar vò díder conéisher çò que vos cau e se ètz segurs. Aguest ei eth trabalh des servicis de proteccion. S'investigue un possible delicte, ei un aute procès, damb d'auti professionaus."
+        "text": "Valorar vò díder conéisher çò que vos cau e se ètz segurs. D'aquerò mos ocupam es Servicis Sociaus. Se un jutjat investigue çò que s'a passat, aquerò ac hèn d'autes persones."
       },
       "c3-choice": {
-        "prompt": "Sara a fòrça preguntes. Quina hè prumèr?",
+        "prompt": "Sara a nombrosi preguntes. Quina hè prumèr?",
         "options": [
           {
-            "id": "dani",
-            "label": "«Qué passarà damb Dani?».",
-            "next": "c3-dani",
-            "flags": {
-              "concernDani": true
-            }
+            "label": "«Qué passarà damb Dani?»."
           },
           {
-            "id": "privacy",
-            "label": "«Qui coneisherà era mia istòria?».",
-            "next": "c3-privacy",
-            "flags": {
-              "concernPrivacy": true
-            }
+            "label": "«Qui s'assabentarà d'aquerò?»."
           },
           {
-            "id": "home",
-            "label": "«Aurè d'abandonar era mia casa?».",
-            "next": "c3-home",
-            "flags": {
-              "concernHome": true
-            }
+            "label": "«Me cauerà anar-me'n de casa?»."
           }
         ]
       },
       "c3-dani": {
-        "text": "Dani tanben serà escotat e er equip valorarà qué li cau. Non te tòque a tu vigilar que tot vage ben. Aquerò mos tòque as persones adultes."
+        "text": "A Dani tanben l'escotaràn e vederem qué a de besonh. Tu non as de vigilar que tot sigue ben. Aquerò mos tòque as persones adultes."
       },
       "c3-privacy": {
-        "text": "Non te pòdi prométer qu'aquerò se demore entre nosates. T'explicarè qui a besonh d'intervier e entà qué. Çò que compartiscam aurà de servir entà protegir-te."
+        "text": "Non te pòdi prométer qu'aquerò se demore sonque entre nosati. Mès te dirè a qui ac conti e entà qué. Sonque ac sauberàn es persones que te pòden ajudar."
       },
       "c3-home": {
-        "text": "Demanar ajuda non vò díder que t'ages d'anar de casa automaticament. Cau valorar era vòsta seguretat e es mesures possibles. Era tua opinion compde e t'an d'escotar."
+        "text": "Demanar ajuda non vò díder qu'ages d'anar-te'n de casa shens mès. Prumèr se mire se ètz segurs. E era tua opinion compde: t'an d'escotar."
       },
       "c3-03": {
-        "text": "Era mia mair sap quauques causes, mès non totes. Bèth còp me ditz qu'ensage de non discutir. Non sai qué espère que hèsqui."
+        "text": "Era mia mair sap qualques causes, mès non totes. Bèth còp me ditz que non contradiga a papà. Non sai qué è de hèr."
       },
       "c3-04": {
-        "text": "Tu non ès responsabla de controlar eth comportament de Javier. Era tua mair tanben a besonh de supòrt. Era seguretat de cadun se valore per separat e en conjunt."
+        "text": "Tu non as de hèr qu'eth tòn pair se comporte ben. Aquerò non ei tasca tua. Era tua mair tanben recebrà ajuda."
       },
       "c3-05": {
-        "text": "En aguest cas fictici s'organize ua estada segura damb era sua mair e Dani, en casa d'ua tia, mentre es professionaus valoren es mesures. Sara conserve eth contacte damb eth sòn institut."
+        "text": "Sara, era sua mair e Dani se'n van quauqui dies ara casa dera sua tia, a on son segurs. Entretant, es persones que les ajuden decidissen qué hèr. Sara seguís anant ath sòn institut."
       },
       "c3-06": {
-        "text": "È botat es sabatilhes de volei ena motxilla. Non sai s'es utilizarè, mès non les volia deishar."
+        "text": "È botat es sabatilhes de volei ena motxilha. Non sai se les emplegarè, mès non les volia deishar."
       },
       "c3-07": {
-        "text": "Me semble important qu'es ages portades. Podem parlar de çò que te cau aguesta setmana, a mès des cites."
+        "text": "As hèt ben en portar-les. Podem parlar de çò que te cau aguesta setmana, non sonque des cites."
       },
       "c3-choice2": {
-        "prompt": "Qué li agradarie acordar a Sara entàs dies que vien?",
+        "prompt": "Qué vò acordar Sara entàs pròplèus dies?",
         "options": [
           {
-            "id": "contact",
-            "label": "Saber a qui avisar se cambie quauquarren o se sent pòur.",
-            "next": "c3-contact",
-            "flags": {
-              "wantsContact": true
-            }
+            "label": "Saber a qui telefonar se passe quauquarren o a pòur."
           },
           {
-            "id": "school",
-            "label": "Organizar es abséncies e es prètzhèts der institut.",
-            "next": "c3-school",
-            "flags": {
-              "wantsSchoolPlan": true
-            }
+            "label": "Organizar es classes e es devèrs que s'a perdut."
           }
         ]
       },
       "c3-contact": {
-        "text": "Deisharam clars es contactes der equip e qué hèr se cambie era situacion. Se i a perilh immediat, se demane ajuda d'emergéncia. Non as de valorar tu soleta se tot va ben."
+        "text": "Te darè es telefòns der equip e t'explicarè qué hèr se quauquarren cambie. Se i a perilh de vertat, se telefone ath 112. Non as de decidir tu soleta se tot va ben."
       },
       "c3-school": {
-        "text": "Ac coordinaram damb Laura. Demanaram ajustaments concrets, coma organizar es liuraments e recuperar apunts, shens explicar era tua istòria a tota era classa."
+        "text": "Ac parlaram damb Laura. T'ajudarà a méter-te ath dia damb es devèrs, shens condar ara classa çò que te passe."
       },
       "c3-end": {
-        "text": "Aquera nueit, Dani li demane que agache un dessenh d'un dragon. Sara tròbe ua estela en canton e ne dessenhe ua auta ath costat. Encara i a lòc entà causes petites."
+        "text": "Aquera net, Dani li mòstre un dessenh d'un dragon. Sara vei ua estela en ua esquina e ne dessenhe ua auta a costat."
       },
       "c3-mesa": {
-        "text": "E se demorèc en tot pensar a on se seirie segons era gent que venguesse a minjar."
+        "text": "E se demorèc pensant en a on se sedarie en foncion dera gent que age de víer a minjar."
       },
       "c4-card": {
         "kicker": "SARA · CAPÍTOL 4 DE 6",
         "title": "Era mia vida contunhe",
-        "text": "Dies dempús. Dehòra des entrevistes."
+        "text": "Quauqui dies dempús."
       },
-      "c4-perros": {
-        "text": "Comencèc a veir es diferents cans, e es aventures que poirie víuer damb eri."
+      "c4-chat": {
+        "chatTitle": "Paula",
+        "messages": [
+          {
+            "text": "adiu sara!! te mancas en classa"
+          },
+          {
+            "text": "te è guardat es apunts de mates e de cono"
+          },
+          {
+            "text": "mercés paula"
+          },
+          {
+            "text": "estoi ben. soi quauqui dies ena casa dera mia tia"
+          },
+          {
+            "text": "d'acòrd. non cau que me condes arren s'ac vòs pas"
+          },
+          {
+            "text": "doman te les do ath repòs?"
+          },
+          {
+            "text": "òc. e me sedi damb tu"
+          }
+        ]
       },
       "c4-01": {
-        "text": "T'è guardat es apunts. Tanben un vidèo deth mèn pejor servici, mès aquerò demane un pacte de silenci."
+        "text": "Tè, es apunts. Les è passat a net damb era mia milhora letra."
       },
       "c4-02": {
-        "text": "Es apunts òc. Eth vidèo… m'ac pensi. Me va ben que me parles d'autes causes."
+        "text": "Mercés. Me agrade qu'em parles d'autes causes."
       },
       "c4-choice": {
-        "prompt": "Irene li pregunte quina part dera sua vida vò recuperar prumèr. Sara chausís…",
+        "prompt": "Elena li pregunte qué vò recuperar prumèr. Sara causís…",
         "options": [
           {
-            "id": "volleyball",
-            "label": "Tornar a entrenar a volei.",
-            "next": "c4-volley",
-            "flags": {
-              "everyday": "volleyball"
-            }
+            "label": "Tornar a entrenar ath volei."
           },
           {
-            "id": "school",
-            "label": "Recuperar eth ritme des classes.",
-            "next": "c4-school",
-            "flags": {
-              "everyday": "school"
-            }
+            "label": "Méter-se ath dia en classa."
           },
           {
-            "id": "friends",
-            "label": "Trobar-se damb Paula shens parlar tostemps deth procès.",
-            "next": "c4-friends",
-            "flags": {
-              "everyday": "friends"
-            }
+            "label": "Trobar-se damb Paula shens parlar tostemp dera madeisha causa."
           }
         ]
       },
       "c4-volley": {
-        "text": "Podem començar per un entrenament, shens exigir-te que jògues coma abans. Acordaram es detalhs practics damb es persones que te suenhen."
+        "text": "Podem començar damb un entrenament, shens qu'ages de jogar coma abans. Ac organizaram damb es persones que te suenhen."
       },
       "c4-volley2": {
-        "text": "Sonque vòi tornar a enténer eth balon contra eth solèr e pensar a on me plaçar. Encara que falhi toti es servicis."
+        "text": "Sonque vòi tornar a sentir eth balon contra eth sòl. Encara que hale tots es servicis."
       },
       "c4-school": {
-        "text": "Causiram dus prètzhèts entad aguesta setmana. Recuperar-ac tot de còp serie massa. Qu'un dia non te poscas concentrar non vò díder qu'ages deishat de saber."
+        "text": "Causiram sonque dues tasques entà aguesta setmana. Hèr-ac tot de còp seria massa. Se un dia non te pòs concentrar, non passe arren."
       },
       "c4-school2": {
-        "text": "Es mates prumèr. Se deishi d'enténer ua pagina, era següenta semble escrita en un aute lengatge."
+        "text": "Prumèr es mates. Se me pèrdi en ua pagina, dempús non compreni era seguenta."
       },
       "c4-friends": {
-        "text": "Podem passejar, parlar de musica o non díder guaire arren. Non cau que cada còp que mos vedem me botes ath dia de tot."
+        "text": "Podem jogar, escotar musica o non díder arren. Non as de condar-me cossí va tot cada còp que quedem."
       },
       "c4-friends2": {
-        "text": "Alavetz uei vòi discutir damb tu sus aquera playlist. En aquerò òc que me senti preparada."
+        "text": "Dongues uei vòi qu'em mòstres era cançon nava que t'agrade."
       },
       "c4-dani": {
-        "text": "Eth darrèr còp t'amoïnaue fòrça Dani. Er equip tanben escote çò qu'eth a de besonh. Uei te pòs ocupar deth tòn plan shens sentir que li falhes."
+        "text": "Era auta vegada t'amoïnaue guaire Dani. I a persones qu'er escoten e er suenhen. Uei pòs pensar en tu, e aquerò non ei hèr-li mau."
       },
       "c4-general": {
-        "text": "Seguim revisant cossí estatz tu, Dani e era tua mair. Non cau qu'ua soleta persona s'encargue des preocupacions de tota era familha."
+        "text": "Seguim pendents de cossí ètz tu, Dani e era tua mair. Non cau qu'ua sola persona cargue damb tot."
       },
       "c4-info": {
-        "text": "Podem ocupar-mos des cites e tanben des tòns entrenaments, des tòns estudis e des tues amigues. Non cau deishar de costat tot çò que t'importe entà recéber supòrt."
+        "text": "A mès des cites, te podem ajudar damb er institut, damb es tues amigues e damb eth volei. Non as de deishar de costat çò que t'agrade."
       },
       "c4-choice2": {
-        "prompt": "En institut quauquarrés pregunte pes sues abséncies. Qué vò Sara?",
+        "prompt": "En classa, un companh li pregunte per qué a mancat. Qué vò hèr Sara?",
         "options": [
           {
-            "id": "boundary",
-            "label": "Preparar ua responsa cuerta damb Paula.",
-            "next": "c4-boundary",
-            "flags": {
-              "boundaryWithPaula": true
-            }
+            "label": "Preparar damb Paula ua responsa cortesa."
           },
           {
-            "id": "laura",
-            "label": "Demanar a Laura que l'ajude a suenhar era sua privacitat.",
-            "next": "c4-laura",
-            "flags": {
-              "schoolPrivacy": true
-            }
+            "label": "Demanar a Laura qu'ajude a qu'arrés s'assabente."
           }
         ]
       },
       "c4-boundary": {
-        "text": "Pòs díder: «Sò resolvent quauques causes damb ajuda e non ne vòi parlar». Se vòs, cambi de tèma dempús. Non as de dar explicacions entà estar damb nosates."
+        "text": "Pòs díder: «È agut quauqui afars de familha e non vòi parlar d'aquerò». Dempús jo cambii de tèma. Non as d'explicar arren a arrés."
       },
       "c4-laura": {
-        "text": "Podem acordar qué a de saber eth professorat e cossí suenhar era tua intimitat. Damb es tues amigues tanben pòs méter limits a çò que vulgues condar."
+        "text": "Podem decidir amassa qué an de saber es professors e qué non. E as tues amigues les condes sonque çò que tu vulgues."
       },
       "c4-end": {
-        "text": "I a dies tranquils e d'auti que còsten mès. Es cites contunhen, mès Sara ja a quauquarren ena agenda que non ei ua entrevista: un plan qu'a causit era."
+        "text": "I a dies tranquils e dies mès dificils. Seguissen es cites, mès ena agenda de Sara ja i a quauquarren qu'a causit ela."
+      },
+      "c4-perros": {
+        "text": "Comencèc a veir es divèrsi cans, e es aventures que poderie víuer damb eri."
       },
       "c5-card": {
         "kicker": "SARA · CAPÍTOL 5 DE 6",
         "title": "Eth jutjat",
-        "text": "Temps dempús. Saber a on sò."
+        "text": "Un temps dempús. Saber qui ei qui."
       },
       "c5-01": {
-        "text": "S'a dubèrt ua investigacion penau sus çò que s'a passat. Era advocada li explique ua citacion a Sara e as que l'acompanhen. Aguesta escèna resumís diferentes actuacions, shens fixar es sòns terminis."
+        "text": "Un jutjat ei investigant çò que hec Javier. A casa arribe ua carta: Sara a d'anar. Irene, era sua advocada, ac explique a Sara e ara sua mair."
       },
       "c5-02": {
-        "text": "Era carta semblaue escrita entà quauquarrés que ja sap cossí fonciona tot. Jo non sai ne a on me sèir."
+        "text": "Era carta a paraules de bon de rares. Non compreni arren."
       },
       "c5-03": {
-        "text": "La liegeram amassa. Ua citacion indique que t'as de presentar a ua actuacion: cau verificar entà qué, a on e damb quini supòrts. Se quauquarren non s'enten, ac preguntam abans."
+        "text": "Era liegem amassa. Ei ua citacion: ditz qu'as d'anar ath jutjat, quin dia e a quina ora. Çò que non comprengues, me ac pregunteràs.",
+        "speaker": "Irene · advocada"
       },
       "c5-justice": {
-        "text": "Ací s'investigue çò que s'a passat e era possibla responsabilitat deth tòn pair. Eth supòrt e era proteccion seguissen eth sòn pròpri camin. Que tu sigues menor non convertís era causa contra Javier en justícia penau de menors."
+        "text": "Ara un jutjat va a investigar çò que hec eth tòn pair. Aquerò ei ua causa. Qu'ages de proteccion ei ua auta, e seguís parièr. Es dues pòden anar ath còp.",
+        "speaker": "Irene · advocada"
+      },
+      "c5-team": {
+        "text": "Ath jutjat veiràs a diuèrses persones. Cada ua a un trabalh diferent. Te les presenti entà que non te lies.",
+        "speaker": "Irene · advocada"
+      },
+      "c5-oficina": {
+        "text": "Prumèr, era oficina judiciau deth Tribunau d'Instància. Son es persones qu'organizen es papèrs e es passi deth cas. Segons eth tipe d'afar, ac mene ua seccion o ua auta.",
+        "speaker": "Irene · advocada"
+      },
+      "c5-juez": {
+        "text": "Dempús ei era jutgessa. Era dirigís tot çò que passe ath jutjat, suenhe qu'es drets de toti sigan respectadi e decidís çò que cau decidir.",
+        "speaker": "Irene · advocada"
+      },
+      "c5-laj": {
+        "text": "Tanben i aurà ua letrada dera Administracion de Justícia. Ei ua foncionària qu'a fe de çò que passe: escriu era acta de çò que digues e comprove que era gravacion a sortit ben.",
+        "speaker": "Irene · advocada"
+      },
+      "c5-fiscal": {
+        "text": "Dempús, eth fiscau. Eth sòn trabalh ei qu'era lei se complisque. En un cas coma aguest pòt acusar a qui hec mau e, a mès, se'n ocupe de suenhar es tòns drets.",
+        "speaker": "Irene · advocada"
+      },
+      "c5-psicosocial": {
+        "text": "Bèth còp eth jutjat demane ajuda ath sòn equip psicosociau: psicològues e trabalhadors sociaus qu'an de parlar damb mainatges e adolescents dera tua edat. Se te tòque, t'ajudaràn a condar es causes damb carma.",
+        "speaker": "Irene · advocada"
+      },
+      "c5-oavd": {
+        "text": "E era Oficina d'Assisténcia as Victimes. Aquiu t'explicaràn cossí va eth procès e t'ajudaràn se ès mau o as dubtes. Eri non jutgen eth cas: sonque t'ajuden.",
+        "speaker": "Irene · advocada"
       },
       "c5-choice": {
-        "prompt": "Abans dera actuacion, qué vò conéisher Sara?",
+        "prompt": "Abans d'anar-i, qué vò saber Sara?",
         "options": [
           {
-            "id": "people",
-            "label": "Qui i serà e qué hè cada professionau.",
-            "next": "c5-people",
-            "flags": {
-              "askedProfessionals": true
-            }
+            "label": "Qui serà ena sala."
           },
           {
-            "id": "room",
-            "label": "Cossí ei er espaci e s'aurà de veir ath sòn pair.",
-            "next": "c5-room",
-            "flags": {
-              "askedRoom": true
-            }
+            "label": "Cossí ei era sala e se veirà eth sòn pair."
           },
           {
-            "id": "rights",
-            "label": "Quini supòrts pòt demanar e a qui les ditz.",
-            "next": "c5-rights",
-            "flags": {
-              "askedSupports": true
-            }
+            "label": "Qué pòt demanar e a qui ac ditz."
           }
         ]
       },
       "c5-people": {
-        "text": "Era jutgessa dirigís era actuacion. Era Fiscalia intervie entà promòir era accion dera justícia. Es advocades e advocats defenen es interèssi des sòns representats. Jo t'explicarè qui i ei e per qué."
+        "text": "I serà era jutgessa, eth fiscau e era letrada, qu'a fe de çò que se ditz. Jo serè damb tu. Eth tòn pair aurà eth sòn pròpri advocat, qu'non ei eth tòn. Abans d'entrar te dic qui ei cada un.",
+        "speaker": "Irene · advocada"
       },
       "c5-people2": {
-        "text": "Era mia foncion ei acompanhar-te en çò de socioeducatiu e coordinar supòrts. Non decidisqui era sentença. Pòs daurir es fiches des professionaus quan se te mesclen es nòms."
+        "text": "Jo non trabalhi ath jutjat ne i decidissi arren. Eth mèn trabalh ei acompanhar-te e ajudar-te damb tot eth demés. Te demorarè dehòra."
       },
       "c5-room": {
-        "text": "Abans d'anar-i verificaram a on demoraràs e cossí serà era actuacion. Plantejaram çò que t'amoïne de trobar-te damb eth tòn pair entà que se valoren es mesures adequades."
+        "text": "Anirem abans a veir a on demoraràs. Ja è demanat que non te cròsses damb eth tòn pair. Era jutgessa decidirà cossí hèr-ac.",
+        "speaker": "Irene · advocada"
       },
       "c5-rights": {
-        "text": "Me pòs explicar qué te cau, preguntar qui i serà e avisar de çò que te hè sentir insegura. Ac comunicaram entà que se valore abans dera actuacion."
+        "text": "Me pòs díder qué te hè pòur, preguntar qui serà e demanar çò que te cale. Jo ac diderè ath jutjat abans que comence.",
+        "speaker": "Irene · advocada"
       },
       "c5-supports": {
-        "text": "Abans de declarar se valorarà quini supòrts te cau e cossí evitar que passes mès pòur. Er espaci e es mesures cambien segons eth cas; auer quinze ans non determine ua sala concrèta."
+        "text": "Damb catòrze ans pòt èster que te age de declarar. Mès demanaram que ac hèsques dès ua auta sala, shens veir eth tòn pair, e damb quauquarrés qu't'acompanhe. Tot aquerò ac decidís era jutgessa segons çò que te cale.",
+        "speaker": "Irene · advocada"
       },
       "c5-privacy": {
-        "text": "T'amoïnaue qui anaue a conéisher era tua istòria. Per aquerò uei repassam qui pòt èster en aguesta actuacion. Era intimitat tanben se suenhe en organizar er espaci e era informacion."
+        "text": "T'amoïnaue qui s'assabentarie. Ena sala sonque seràn es persones que an d'èster. Çò que condes aquiu non ac diràn ara tua classa."
       },
       "c5-short": {
-        "text": "Coma me demanères, ua causa cada còp: prumèr vedem qui te receb. Dempús, qué passarà. E podem arturar-mos entà preguntar entre ua causa e ua auta."
+        "text": "Coma me demanères, ua causa cada còp. Prumèr, qui te recep. Dempús, qué passarà. Entre ua causa e era auta, pòs preguntar."
       },
       "c5-overview": {
-        "text": "Prumèr te receberàn e t'explicaràn era actuacion; dempús poiràs intervier damb es supòrts que s'agen acordat. En acabar, revisaram qué vie dempús."
+        "text": "Te recebràn e t'explicaràn qué passarà. Dempús parlaràs damb es ajudes que s'age demanat. En acabar, vederem amassa qué vien dempús."
       },
       "c5-simulation": {
-        "text": "Abans dera actuacion, practiquen cossí comunicar un besonh. Non ensagen çò que Sara condarà ne hèn preguntes sus era violéncia. En aguest petit exercici non i a responses que dèn mès punts."
+        "text": "Quauqui dies abans, Sara e Irene practiquen cossí demanar çò que cau. Non parlen de çò que passèc a casa. Sonque de cossí díder «non comprengui» o «me cau arturar-me»."
       },
       "c5-choice2": {
-        "prompt": "Quina frasa vò brembar Sara entà exprimir çò que li cau pendent era actuacion?",
+        "prompt": "Quina frasa vò brembar Sara entath dia?",
         "options": [
           {
-            "id": "repeat",
-            "label": "«Non ac è comprenut. Ac pòs repetir?».",
-            "next": "c5-repeat",
-            "flags": {
-              "communication": "repeat"
-            }
+            "label": "«Non è comprés. Me ac tornes a díder?»."
           },
           {
-            "id": "memory",
-            "label": "«Aguesta dada non la brembi damb exactitud».",
-            "next": "c5-memory",
-            "flags": {
-              "communication": "memory"
-            }
+            "label": "«Aquerò non me'n brembi ben»."
           },
           {
-            "id": "pause",
-            "label": "«Me cau ua pausa».",
-            "next": "c5-pause",
-            "flags": {
-              "communication": "pause"
-            }
+            "label": "«Me cau arturar-me un moment»."
           }
         ]
       },
       "c5-repeat": {
-        "text": "Pòs díder que non comprenes e demanar ua auta explicacion. Te prepararam entà compréner era actuacion. Çò que condes sus es hèts aurà de gésser de çò que tu brembes."
+        "text": "Se non compreners quauquarren, ac pòs díder e demanar qu'te ac expliquen damb autes paraules. Preparar-se servís entà compréner çò que passe, non entà aprener-te çò qu'as de díder.",
+        "speaker": "Irene · advocada"
       },
       "c5-memory": {
-        "text": "Se quauquarren non ac brembes damb exactitud, ac pòs díder atau. Non cau inventar ua ora o un detalh entà completar ua responsa."
+        "text": "Se quauquarren non ac brembes ben, ac pòs díder atau. Non cau qu't'inventes ua ora o un detalh.",
+        "speaker": "Irene · advocada"
       },
       "c5-pause": {
-        "text": "Pòs díder que te cau arturar-te. Ac comunicaram a qui dirigisque era actuacion entà que valore cossí ocupar-se'n. Demanar-ac permet que sàpien çò que te cau."
+        "text": "Pòs díder que te cau arturar-te. Era jutgessa decidirà cossí hèr-ac. Demanar-ac ei ben: atau sàben çò que te cau.",
+        "speaker": "Irene · advocada"
       },
       "c5-04": {
-        "text": "Pensaua que se me demoraua en blanc ac arroïnaria tot. M'ajude saber que pòdi díder que non compreni quauquarren."
+        "text": "Pensaue que se me demorave en blanc ac estaussi tot. M'ajude saber que pòdi díder que non compreni quauquarren."
       },
       "c5-05": {
-        "text": "Arribe eth dia. En aguest cas, s'a acordat ua organizacion entà evitar que Sara se trobe damb Javier pendent era demora e pendent era sua intervencion. Eth personau li explique a on serà cada persona."
+        "text": "Arribe eth dia. Sara entre per ua auta pòrta, atau non se cròse damb Javier. Ua hemna dera oficina de victimes l'acompanhe a ua sala damb fautulhs e li explique a on serà cada persona."
       },
       "c5-06": {
-        "text": "Abans de començar, verificaram que comprenes entà qué èm ací. Se non comprenes quauquarren, ac pòs díder."
+        "text": "Adiu, Sara. Soi era jutgessa. Abans de començar, vòi qu'entengues entà qué sèm ací. Se quauquarren non ac compreners, me ac dius.",
+        "speaker": "Jutgessa"
       },
       "c5-07": {
-        "text": "Sara participe ena actuacion damb es mesures acordades. Era istòria dèishe dehòra es preguntes sus çò que s'a passat. En acabar, Irene la demore entà acompanhar-la."
+        "text": "Sara declare dès ua sala a part, per videoconferéncia, shens veir a Javier. Ua psicològa der equip psicosociau ei a costat sòn. Era letrada a fe de çò que se ditz e comprove era gravacion. En gésser, Elena l'espère."
       },
       "c5-08": {
-        "text": "Sò cansada. Podem estar un moment shens parlar d'aquerò?"
+        "text": "Soi cansada. Podem estar un shinhau shens parlar d'aquerò?"
       },
       "c5-09": {
-        "text": "Òc. Dempús revisaram damb Elena era informacion que te calgue. Ara podem sèir-mos un moment."
+        "text": "Clar. Un aute dia Irene te condarà çò que vulgues saber. Ara anam a sèir-mos un shinhau."
       },
       "c6-card": {
         "kicker": "SARA · CAPÍTOL 6 DE 6",
         "title": "Dempús de tot",
-        "text": "Era demora tanben forme part deth camin."
+        "text": "Demorar tanben ei part deth camin."
       },
       "c6-01": {
-        "text": "Eth procediment seguís eth sòn cors. I a dies shens nauetats. Mentre se practiquen es actuacions necessàries, contunhen es cites de supòrt e era atencion ara seguretat dera familha."
+        "text": "Passen es setmanes. Quauqui dies non i a notícies. Entretant, Sara seguís veent a Elena, e es persones que l'ajuden seguissen pendentes de qu'era sua familha sigue segura."
       },
       "c6-02": {
-        "text": "Tot eth mon ditz «ja t'avisaram». Bèth còp agachi eth mobil e non sai se vòi un messatge o que non n'i age cap."
+        "text": "Toti me díden «ja t'avisaram». Bèth còp mire eth mobil e non sai se vòi que vengue un messatge o que non vengue."
       },
       "c6-choice": {
-        "prompt": "Uei, qué vò méter Sara sus era taula?",
+        "prompt": "Uei, de qué vò parlar Sara damb Elena?",
         "options": [
           {
-            "id": "news",
-            "label": "Preguntar cossí pòt saber en quin punt ei eth procediment.",
-            "next": "c6-news",
-            "flags": {
-              "waiting": "news"
-            }
+            "label": "Cossí saber qué passe ath jutjat."
           },
           {
-            "id": "dad",
-            "label": "Díder que bèth còp tròbe a mancar ath sòn pair.",
-            "next": "c6-dad",
-            "flags": {
-              "waiting": "mixed"
-            }
+            "label": "Qu'a bèth còp manque eth sòn pair."
           },
           {
-            "id": "privacy",
-            "label": "Demanar ajuda damb es preguntes que li hèn en institut.",
-            "next": "c6-school",
-            "flags": {
-              "waiting": "privacy"
-            }
+            "label": "Es preguntes que li hèn en classa."
           }
         ]
       },
       "c6-news": {
-        "text": "Podem consultar damb Elena quina informacion te correspon recéber e cossí demanar-la. Non te sai dar ua data exacta; òc que podem aclarir damb qui parlar quan ages dubtes."
+        "text": "Me pòs preguntar cossí va tot e t'ac explicarè. Non te pòdi dar ua data exacta, mès òc que te pòdi díder damb qui parlar quan ajas dubtes."
       },
       "c6-dad": {
-        "text": "Pòs trobar a mancar es bons moments e, ath còp, auer besonh d'èster protegida. Non as de sentir ua soleta causa peth tòn pair. Parlar-ne non cambie que çò que te hec siguec mau hèt."
+        "text": "Pòs trobar a mancar es moments bons e, ath còp, auer besonh d'èster protegida. Non as de sentir ua sola causa. Çò que te hec siguec mau, encara que l'estimes."
       },
       "c6-school": {
-        "text": "Podem acordar qué a de saber eth professorat e cossí suenhar era tua intimitat. Damb es tues amigues tanben pòs méter limits a çò que vulgues condar."
+        "text": "Podem decidir amassa qué an de saber es professors e qué non. E as tues amigues les condes sonque çò que tu vulgues."
       },
-      "c6-03": {
-        "text": "Temps dempús, après es actuacions e eth judici, Elena se reunís damb Sara entà explicar-li ua sentença simulada. Eth resultat d'aguesta demo ei fixat abans de jogar: cap de causida emocionau decidís era resolucion."
-      },
-      "c6-conviction": {
-        "text": "En aguest cas fictici, eth tribunau a considerat provadi hèts de violéncia e a dictat ua sentença condemnatòria contra Javier. T'explicaram eth sòn abast, es mesures acordades e se i a possibilitat de recors."
-      },
-      "c6-no-conviction": {
-        "text": "En aguesta variant fictícia, eth tribunau a dictat ua sentença absolutòria: era pròva non a permetut ua condemna damb es garanties necessàries. T'explicarè era resolucion e es possibilitats de recors que corresponguen."
-      },
-      "c6-human": {
-        "text": "Non sai guaire ben qué senti. Pensaua qu'en liéger ua resolucion tot encaisharie de còp."
-      },
-      "c6-04": {
-        "text": "Non te cau sentir-te d'ua manèra concrèta. Revisaram cossí estàs e quin supòrt te cau. Era proteccion e era convivéncia se valoren pera vòsta seguretat, non per cossí recebes era notícia."
-      },
-      "c6-dani": {
-        "text": "E tornaram a çò que preguntères sus Dani: er equip seguís pendent d'eth. Pòs èster era sua sòr shens auer de convertir-te ena persona adulta que ac resòlv tot."
-      },
-      "c6-home": {
-        "text": "Ath començament te preguntaues a on anàuetz a víuer. Quinsevolh cambi de convivéncia se revisarà damb tu e damb er equip responsable. Era sentença non substituís aquera valoracion."
-      },
-      "c6-choice2": {
-        "prompt": "En sortir, Sara vò reservar espaci entà quauquarren sòn. Qué perpause?",
-        "options": [
+      "c6-msg": {
+        "chatTitle": "Irene · advocada",
+        "messages": [
           {
-            "id": "play",
-            "label": "Trobar-se damb Paula e portar eth balon.",
-            "next": "c6-play",
-            "flags": {
-              "nextPlan": "play"
-            }
+            "text": "Adiu, Sara. Ja a sortit era sentença."
           },
           {
-            "id": "quiet",
-            "label": "Anar damb Dani a dessenhar e deishar eth mobil un moment.",
-            "next": "c6-quiet",
-            "flags": {
-              "nextPlan": "quiet"
-            }
+            "text": "Doman t'ac explicarè en persona, damb era tua mair e damb Elena."
+          },
+          {
+            "text": "d'acòrd. è un shinhau de pòur"
+          },
+          {
+            "text": "Ei normau. Non cau qu'hèsques arren. Sonque víer e preguntar çò que vulgues."
+          }
+        ]
+      },
+      "c6-03": {
+        "text": "Un temps dempús, eth mobil de Sara vibre."
+      },
+      "c6-conviction": {
+        "text": "Eth tribunau a dit qu'a Javier hec mau e l'a condemnat. T'explicarè qué vò díder, quines mesures i a entà protegir-vos e se eth pòt recórrer.",
+        "speaker": "Irene · advocada"
+      },
+      "c6-no-conviction": {
+        "text": "Eth tribunau non a condemnat a Javier. Aquerò non vò díder que non te credessen: es pròves non son estades suficients. T'explicarè qué significa e qué podem hèr ara.",
+        "speaker": "Irene · advocada"
+      },
+      "c6-human": {
+        "text": "Non sai guaire ben qué senti. Pensaue qu'en dider-m'ac tot aurie sens de còp."
+      },
+      "c6-04": {
+        "text": "Non te cau sentir-te de nonsiquina manèra concrèta. Vederem cossí ès e quina ajuda te cau. Era tua segurtat non depen de cossí te prengues era notícia."
+      },
+      "c6-dani": {
+        "text": "E sus Dani: seguim suenhant-lo. Tu pòs èster era sua sòr màger shens auer de resòlver-ac tot."
+      },
+      "c6-home": {
+        "text": "Ath començament te preguntaues a on anaratz a víuer. Se quauquarren cambie a casa, ac parlaram damb tu abans. Era tua opinion compde."
+      },
+      "c6-choice2": {
+        "prompt": "En gésser, Sara vò hèr quauquarren sonque entà ela. Qué perpause?",
+        "options": [
+          {
+            "label": "Trobar-se damb Paula e portar eth balon."
+          },
+          {
+            "label": "Dessenhar damb Dani e deishar eth mobil un shinhau."
           }
         ]
       },
       "c6-play": {
-        "text": "È practicat eth servici. Ara ja quasi jamès se'n va pera pòrta. Mès s'uei t'estimes mès sonque sèir-te ena grada, tanben me va ben."
+        "text": "È estat practicant eth servici. Jogam? E s'uei t'estimes mès sonque sèir-te a guardar, tanben me va ben."
       },
       "c6-quiet": {
-        "text": "Dani trè eth dessenh deth dragon. Sara li demane un creion blu. Pendent un moment, çò mès urgent ei decidir se es dragons pòden portar sabatilhes."
+        "text": "Dani sòrte eth dessenh deth dragon. Sara li demane un creion blu e pinte eth cèl entornes. Pendent bon de temps, sonque existissen es colors."
       },
       "epilogue-volley": {
-        "text": "Te brembes de quan diguí que volia tornar a entrenar? Uei eth servici a entrat. E se doman non entre, encara è lòc en equip."
+        "text": "Te brembes qu'èra volia tornar a entrenar? Uei eth servici a entrat. E se doman non entre, encara è lòc en equip."
       },
       "epilogue-school": {
-        "text": "È acabat aquera pagina de mates. Semble ua bestiesa, mès tornar a compréner quauquarren qu'auia deishat a mieges tanben compde."
+        "text": "È acabat aquera pagina de mates. Semble pòc, mès tornar a compréner quauquarren qu'auia deishat a mieges me hè sentir ben."
       },
       "epilogue-friends": {
-        "text": "Uei è estat damb Paula e non auem parlat tot eth temps dera madeisha causa. M'a hèt ben seguir estant era sua amiga, damb totes es causes que aquerò vò díder."
+        "text": "Uei è estat damb Paula e non auem parlat tot eth temps dera madeisha causa. M'a agradat seguir estant sonque era sua amiga."
       },
       "epilogue": {
         "kicker": "SARA · ERA MIA ISTÒRIA CONTUNHE",
         "title": "Encara è plans",
-        "text": "Sara seguís estant sòr, amiga, estudianta e jogadora de volei. I aurà dies diferents e eth supòrt pòt contunhar. Non les a de víuer soleta."
+        "text": "Sara seguís estant sòr, amiga, alumna de tresau e jogadora de volei. I aurà dies bons e dies dificils, e non les aurà de passar soleta."
       }
     }
   },
   "guide": {
-    "version": 1,
     "chapters": [
       {
-        "id": 1,
         "title": "Quauquarren non va ben"
       },
       {
-        "id": 2,
         "title": "Quauquarrés escote"
       },
       {
-        "id": 3,
         "title": "Qué me passarà?"
       },
       {
-        "id": 4,
         "title": "Era mia vida contunhe"
       },
       {
-        "id": 5,
         "title": "Eth jutjat"
       },
       {
-        "id": 6,
         "title": "Dempús de tot"
       }
     ],
     "steps": [
       {
-        "chapter": 1,
         "title": "Un senhau",
-        "text": "Eth centre escote e se'n ocupe des indicis de violéncia."
+        "text": "En institut se'n avisen que quauquarren va mau e escoten."
       },
       {
-        "chapter": 2,
         "title": "Demanar ajuda",
-        "text": "Eth personau coordine era comunicacion e es supòrts entà protegir."
+        "text": "Era tutora avise as que pòden protegir a Sara."
       },
       {
-        "chapter": 3,
-        "title": "Valorar e protegir",
-        "text": "Es Servicis Sociaus e era proteccion de menors valoren es besonhs e era seguretat."
+        "title": "Veir qué cau",
+        "text": "Es Servicis Sociaus miren cossí ei era familha e se son segurs."
       },
       {
-        "chapter": 4,
         "title": "Seguir viuent",
-        "text": "Acompanhament socioeducatiu: classes, ligams e activitats."
+        "text": "Classes, amigues e volei tanben compden."
       },
       {
-        "chapter": 5,
         "title": "Compréner era citacion",
-        "text": "S'explique entà qué ei era actuacion e qui i intervie."
+        "text": "Era advocada explique entà qué cau anar ath jutjat e qui i serà."
       },
       {
-        "chapter": 5,
-        "title": "Participar damb supòrts",
-        "text": "Se valoren mesures entara declaracion. Era demo omet es preguntes sus era violéncia."
+        "title": "Parlar damb supòrts",
+        "text": "Se demane çò que cau a Sara entà èster tranquilla en parlar."
       },
       {
-        "chapter": 6,
-        "title": "Demorar informacion",
-        "text": "Eth procediment contunhe. Es tempsi e es actuacions varien."
+        "title": "Demorar notícies",
+        "text": "Eth jutjat seguís trabalhant. Bèth còp tarde."
       },
       {
-        "chapter": 6,
-        "title": "Resolucion e continuïtat",
-        "text": "S'explique era resolucion. Es supòrts se revisen segons es besonhs."
+        "title": "Era sentença e dempús",
+        "text": "S'explique qué a decidit eth tribunau. Era ajuda seguís."
       }
     ],
     "people": [
       {
         "name": "Sara",
-        "role": "15 ans · 4au d'ESO",
-        "initial": "S",
-        "color": "peach",
-        "text": "Li agrade eth volei, dessenhe enes marges e a ua amiga que se ditz Paula. Era sua vida ei mès ampla qu'eth procediment.",
-        "sprite": "assets/characters/sara/smile.svg"
+        "role": "14 ans · 3au d'ESO",
+        "text": "Li agrade eth volei, dessenhe esteles enes sòns quasèrns e era sua milhora amiga ei Paula. Era sua vida ei guaire mès qu'çò que passe ath jutjat."
       },
       {
         "name": "Paula",
-        "role": "Era sua milhor amiga",
-        "initial": "P",
-        "color": "pink",
-        "text": "Ofrís companhia e conserve es plans compartits. Non a d'investigar ne de resòlver era situacion."
+        "role": "Era sua milhora amiga",
+        "text": "Li hè companhia e li guarde es apunts. Non a d'investigar ne d'arreglar arren."
       },
       {
         "name": "Laura",
-        "role": "Professora",
-        "initial": "L",
-        "color": "green",
-        "text": "Escote, ei atenta as senhaus e coordine era comunicacion damb eth protocòl deth centre. Non investigue delictes."
-      },
-      {
-        "name": "Irene",
-        "role": "Trabalhadora sociau",
-        "initial": "I",
-        "color": "purple",
-        "text": "Acompanhe era vida de cada dia e coordine supòrts damb er equip. Non dicte mesures judiciaus ne sentences."
+        "role": "Tutora",
+        "text": "Escote a Sara, s'avise que quauquarren va mau e avise a qui cau avisar."
       },
       {
         "name": "Elena",
+        "role": "Trabalhadora sociau",
+        "text": "Acompanhe a Sara en eth sòn dia a dia e organize es ajudes. Non decidís arren ath jutjat."
+      },
+      {
+        "name": "Irene",
         "role": "Advocada",
-        "initial": "E",
-        "color": "blue",
-        "text": "Conselhe a Sara, li explique es actuacions e defen es sòns interèssi. Era defensa de Javier correspon a un aute professionau."
+        "text": "Li explique a Sara cada passi e defen es sòns interèssi. Javier a eth sòn pròpri advocat."
+      },
+      {
+        "name": "Oficina judiciau",
+        "role": "Tribunau d'Instància",
+        "text": "Ei er equip de persones qu'organize e tramite eth cas ath Tribunau d'Instància. Quina seccion se'n ocupe depen de cossí age organizat eth tribunau e deth tipe d'afar."
       },
       {
         "name": "Jutgessa",
-        "role": "Autoritat judiciau",
-        "initial": "J",
-        "color": "purple",
-        "text": "Dirigís es actuacions que li corresponen e pren decisions damb es garanties deth procediment."
+        "role": "Jutge o magistrat",
+        "text": "Dirigís es actuacions judiciaus, protegís es drets de toti es partidi e decidís çò que cau dera resolucion judiciau."
       },
       {
-        "name": "Fiscalia",
+        "name": "Letrada (LAJ)",
+        "role": "Letrat dera Administracion de Justícia",
+        "text": "Eth Letrat dera Administracion de Justícia ei un foncionari public damb foncions processaus, de documentacion e de fe publica judiciau, entre d'autes. Quan era lei ac exigís, pòt autorizar era acta d'ua declaracion e comprovar era gravacion."
+      },
+      {
+        "name": "Fiscau",
         "role": "Ministèri Fiscau",
-        "initial": "F",
-        "color": "green",
-        "text": "Promòu era accion dera justícia e vetle pera legalitat e es drets. Que Sara sigue menor non convertís era causa contra eth sòn pair en justícia penau de menors."
+        "text": "Eth fiscau defen era legalitat. En un procès penau pòt acusar en nom dera societat e vetle pes drets deth menor."
       },
       {
-        "name": "Equip de supòrt",
-        "role": "Servicis Sociaus e atencion a victimes",
-        "initial": "+",
-        "color": "blue",
-        "text": "An foncions diferentes: era proteccion de menors valore era seguretat familiara; era assisténcia a victimes informe e ofrís supòrts en procès."
+        "name": "Equip psicosociau",
+        "role": "Psicològs e trabalhadors sociaus deth jutjat",
+        "text": "Quan eth jutjat ac decidís, psicològs e trabalhadors sociaus deth jutjat pòden ajudar a escotar ath menor e balhar era sua opinion coma especialistes."
+      },
+      {
+        "name": "OAVD",
+        "role": "Oficina d'Assisténcia as Victimes deth Delicte",
+        "text": "Ofrís orientacion juridica generau, supòrt psicologic e sociau, informacion sus eth procediment e ajuda personalizada. Non ei qui jutge eth cas."
       },
       {
         "name": "Era sua familha",
         "role": "Dani, era sua mair e Javier",
-        "initial": "D",
-        "color": "peach",
-        "text": "Dani a dètz ans. Era sua mair tanben recep supòrt. Javier, eth pair, ei responsable deth sòn comportament; Sara non l'a de cambiar entà meritar proteccion."
+        "text": "Dani a dètz ans. Era sua mair tanben recep ajuda. Javier, eth pair, ei responsable de çò que hè; Sara non l'a de cambiar entà meritar proteccion."
       }
     ]
   },
@@ -791,91 +700,123 @@
       },
       "lecrim": {
         "title": "LECrim · arts. 448, 449 bis, 449 ter, 544 ter y 707"
+      },
+      "lopj": {
+        "title": "LOPJ · arts. 440 y ss. (oficina judiciau e LAJ)"
+      },
+      "eficiencia": {
+        "title": "LO 1/2025 · Tribunaus d'Instància"
       }
     },
     "notes": {
       "protection": {
         "title": "Era proteccion pòt començar ací",
         "text": "Eth personau educatiu a de comunicar es indicis de violéncia e activar eth protocòl. Sara non a de presentar soleta ua denóncia entà recéber ajuda.",
-        "dialogue": "Me tòque demanar ajuda e activar eth protocòl deth centre. Tu non as d'anar a denonciar soleta entà que comencem a protegir-te. T'explicaram çò que hèsquem."
+        "dialogue": "Eth mèn trabalh ei demanar ajuda quan quauquarrés dera tua edat ac passe mau. Tu non as d'anar a denonciar soleta entà que comencem a protegir-te. T'anirè condant çò que hèsquem."
       },
       "privacy": {
         "title": "Qui a besonh de saber-ac",
         "text": "Laura non pòt prométer un secret absolut. Explicarà quini professionaus an d'intervier entà protegir a Sara e compartirà era informacion necessària entà aquerò.",
-        "dialogue": "Non te pòdi prométer qu'aquerò se demore entre nosates. T'explicarè qui a besonh d'intervier e entà qué. Çò que compartiscam aurà de servir entà protegir-te."
+        "dialogue": "Non te pòdi prométer qu'aquerò se demore sonque entre nosati. Mès te dirè a qui ac conti e entà qué. Sonque ac sauberàn es persones que te pòden ajudar."
       },
       "social": {
         "title": "Valorar ei conéisher entà ajudar",
         "text": "Es Servicis Sociaus e era proteccion de menors valoren era seguretat e es besonhs familiars. Era intervencion sociau e era investigacion penau an foncions diferentes.",
-        "dialogue": "Valorar vò díder conéisher çò que vos cau e se ètz segurs. Aguest ei eth trabalh des servicis de proteccion. S'investigue un possible delicte, ei un aute procès, damb d'auti professionaus."
+        "dialogue": "Valorar vò díder conéisher çò que vos cau e se ètz segurs. D'aquerò mos ocupam es Servicis Sociaus. Se un jutjat investigue çò que s'a passat, aquerò ac hèn d'autes persones."
       },
       "brother": {
         "title": "Dani tanben compde",
         "text": "Es professionaus an de conéisher es besonhs de Dani e valorar era sua proteccion. Aguesta responsabilitat correspon as persones adultes, non a Sara.",
-        "dialogue": "Dani tanben serà escotat e er equip valorarà qué li cau. Non te tòque a tu vigilar que tot vage ben. Aquerò mos tòque as persones adultes."
+        "dialogue": "A Dani tanben l'escotaràn e vederem qué a de besonh. Tu non as de vigilar que tot sigue ben. Aquerò mos tòque as persones adultes."
       },
       "housing": {
         "title": "Era convivéncia se valore en cada cas",
         "text": "Demanar ajuda non implique automaticament gésser de casa. Es autoritats competentes valoren mesures segons era seguretat de cada menor. Sara a dret a èster escotada.",
-        "dialogue": "Demanar ajuda non vò díder que t'ages d'anar de casa automaticament. Cau valorar era vòsta seguretat e es mesures possibles. Era tua opinion compde e t'an d'escotar."
+        "dialogue": "Demanar ajuda non vò díder qu'ages d'anar-te'n de casa shens mès. Prumèr se mire se ètz segurs. E era tua opinion compde: t'an d'escotar."
       },
       "everyday": {
         "title": "Tanben importe era vida de cada dia",
         "text": "Er acompanhament pòt ajudar damb es estudis, es amistats e es activitats. Era proteccion considère eth benèster e es besonhs de Sara, a mès des actuacions judiciaus.",
-        "dialogue": "Podem ocupar-mos des cites e tanben des tòns entrenaments, des tòns estudis e des tues amigues. Non cau deishar de costat tot çò que t'importe entà recéber supòrt."
+        "dialogue": "A mès des cites, te podem ajudar damb er institut, damb es tues amigues e damb eth volei. Non as de deishar de costat çò que t'agrade."
       },
       "justice": {
         "title": "Dus trabalhs que pòden auançar ath còp",
-        "text": "Era proteccion se'n ocupe dera seguretat. Eth procediment penau investigue hèts e responsabilitats. Coma Javier ei adult, eth sòn cas non correspon ara justícia penau de menors pera edat de Sara.",
-        "dialogue": "Ací s'investigue çò que s'a passat e era possibla responsabilitat deth tòn pair. Eth supòrt e era proteccion seguissen eth sòn pròpri camin. Que tu sigues menor non convertís era causa contra Javier en justícia penau de menors."
+        "text": "Era proteccion suenhe dera seguretat de Sara. Eth jutjat investigue çò que passèc e qui n'ei responsable. Coma Javier ei adult, eth sòn cas lo mene un jutjat d'adults, encara que Sara sigue menor.",
+        "dialogue": "Ara un jutjat va a investigar çò que hec eth tòn pair. Aquerò ei ua causa. Qu'ages de proteccion ei ua auta, e seguís parièr. Es dues pòden anar ath còp."
       },
       "supports": {
         "title": "Ua declaracion damb supòrts",
-        "text": "Es mesures se valoren individualament. Pòden evitar eth contacte visuau e adaptar er espaci. Auer 15 ans non hè obligatòria per si solet ua Sala Gesell o ua pròva preconstituïda.",
-        "dialogue": "Abans de declarar se valorarà quini supòrts te cau e cossí evitar que passes mès pòur. Er espaci e es mesures cambien segons eth cas; auer quinze ans non determine ua sala concrèta."
+        "text": "Es mesures se decidissen en cada cas. Damb 14 ans, era gravacion previa dera declaracion (pròva preconstituïda) ja non ei era règla generau, mès se pòt demanar ua sala a part, era videoconferéncia, evitar eth contacte visuau damb er acusat e eth supòrt de professionaus.",
+        "dialogue": "Damb catòrze ans pòt èster que te age de declarar. Mès demanaram que ac hèsques dès ua auta sala, shens veir eth tòn pair, e damb quauquarrés qu't'acompanhe. Tot aquerò ac decidís era jutgessa segons çò que te cale."
       },
       "repeat": {
         "title": "Demanar ua auta explicacion",
         "text": "Sara pòt díder que non compren e demanar paraules mès simples. Preparar-se servís entà compréner era actuacion, shens ensajar ua version des hèts.",
-        "dialogue": "Pòs díder que non comprenes e demanar ua auta explicacion. Te prepararam entà compréner era actuacion. Çò que condes sus es hèts aurà de gésser de çò que tu brembes."
+        "dialogue": "Se non compreners quauquarren, ac pòs díder e demanar qu'te ac expliquen damb autes paraules. Preparar-se servís entà compréner çò que passe, non entà aprener-te çò qu'as de díder."
       },
       "memory": {
         "title": "Non cau emplenar es traucs",
         "text": "Pòt exprimir çò que brembe e çò que non sap damb exactitud. Non a besonh d'inventar ua dada. Era simulacion non reprodusís preguntes sus hèts violents.",
-        "dialogue": "Se quauquarren non ac brembes damb exactitud, ac pòs díder atau. Non cau inventar ua ora o un detalh entà completar ua responsa."
+        "dialogue": "Se quauquarren non ac brembes ben, ac pòs díder atau. Non cau qu't'inventes ua ora o un detalh."
       },
       "pause": {
         "title": "Pòdi demanar ua pausa",
         "text": "Sara pòt comunicar que li cau arturar-se. Er equip e era autoritat que dirigís era actuacion valoren cossí atier aqueth besonh.",
-        "dialogue": "Pòs díder que te cau arturar-te. Ac comunicaram a qui dirigisque era actuacion entà que valore cossí ocupar-se'n. Demanar-ac permet que sàpien çò que te cau."
+        "dialogue": "Pòs díder que te cau arturar-te. Era jutgessa decidirà cossí hèr-ac. Demanar-ac ei ben: atau sàben çò que te cau."
       },
       "waiting": {
         "title": "Saber qué vie dempús",
         "text": "Pòt demanar informacion comprensibla sus es actuacions e resolucions que l'afècten. Es tempsi varien; Irene e era sua advocada la pòden ajudar a consultar pes canaus adequats.",
-        "dialogue": "Podem consultar damb Elena quina informacion te correspon recéber e cossí demanar-la. Non te sai dar ua data exacta; òc que podem aclarir damb qui parlar quan ages dubtes."
+        "dialogue": "Me pòs preguntar cossí va tot e t'ac explicarè. Non te pòdi dar ua data exacta, mès òc que te pòdi díder damb qui parlar quan ajas dubtes."
       },
       "school": {
         "title": "Decidir qué condar as mèns companhs",
         "text": "Eth centre a de suenhar era intimitat. Sara pòt acordar damb Laura quina informacion practica a besonh eth professorat e exprimir qué s'estime mès compartir damb es sues amistats.",
-        "dialogue": "Podem acordar qué a de saber eth professorat e cossí suenhar era tua intimitat. Damb es tues amigues tanben pòs méter limits a çò que vulgues condar."
+        "dialogue": "Podem decidir amassa qué an de saber es professors e qué non. E as tues amigues les condes sonque çò que tu vulgues."
       },
       "resolution": {
         "title": "Ua sentença non conde tota era mia vida",
-        "text": "Eth resultat depen dera pròva e des garanties deth procès. Ua resolucion shens condemna non decidís cossí s'a de sentir Sara. Es supòrts e era proteccion se valoren segons es sòns besonhs, shens depéner de punts o causides deth jòc."
+        "text": "Eth resultat depen des pròves e des garanties deth judici. Ua sentença shens condemna non ditz qu'era Sara mentisse, ne decidís cossí se deu sentir. Era ajuda e era proteccion seguissen segons çò que age de besonh."
+      },
+      "oficina": {
+        "title": "Era oficina judiciau",
+        "text": "Ei er equip de persones qu'organize e tramite eth cas ath Tribunau d'Instància. Quina seccion se'n ocupe depen de cossí age organizat eth tribunau e deth tipe d'afar.",
+        "dialogue": "Prumèr, era oficina judiciau deth Tribunau d'Instància. Son es persones qu'organizen es papèrs e es passi deth cas. Segons eth tipe d'afar, ac mene ua seccion o ua auta."
+      },
+      "juez": {
+        "title": "Eth jutge o era jutgessa",
+        "text": "Dirigís es actuacions judiciaus, protegís es drets de toti es partidi e decidís çò que cau dera resolucion judiciau.",
+        "dialogue": "Dempús ei era jutgessa. Era dirigís tot çò que passe ath jutjat, suenhe qu'es drets de toti sigan respectadi e decidís çò que cau decidir."
+      },
+      "laj": {
+        "title": "Eth letrat o era letrada (LAJ)",
+        "text": "Eth Letrat dera Administracion de Justícia ei un foncionari public damb foncions processaus, de documentacion e de fe publica judiciau, entre d'autes. Quan era lei ac exigís, pòt autorizar era acta d'ua declaracion e comprovar era gravacion.",
+        "dialogue": "Tanben i aurà ua letrada dera Administracion de Justícia. Ei ua foncionària qu'a fe de çò que passe: escriu era acta de çò que digues e comprove que era gravacion a sortit ben."
+      },
+      "fiscal": {
+        "title": "Eth Ministèri Fiscau",
+        "text": "Eth fiscau defen era legalitat. En un procès penau pòt acusar en nom dera societat e vetle pes drets deth menor.",
+        "dialogue": "Dempús, eth fiscau. Eth sòn trabalh ei qu'era lei se complisque. En un cas coma aguest pòt acusar a qui hec mau e, a mès, se'n ocupe de suenhar es tòns drets."
+      },
+      "psicosocial": {
+        "title": "Er equip psicosociau",
+        "text": "Quan eth jutjat ac decidís, psicològs e trabalhadors sociaus deth jutjat pòden ajudar a escotar ath menor e balhar era sua opinion coma especialistes.",
+        "dialogue": "Bèth còp eth jutjat demane ajuda ath sòn equip psicosociau: psicològues e trabalhadors sociaus qu'an de parlar damb mainatges e adolescents dera tua edat. Se te tòque, t'ajudaràn a condar es causes damb carma."
+      },
+      "oavd": {
+        "title": "Era Oficina d'Assisténcia as Victimes",
+        "text": "Ofrís orientacion juridica generau, supòrt psicologic e sociau, informacion sus eth procediment e ajuda personalizada. Non ei qui jutge eth cas.",
+        "dialogue": "E era Oficina d'Assisténcia as Victimes. Aquiu t'explicaràn cossí va eth procès e t'ajudaràn se ès mau o as dubtes. Eri non jutgen eth cas: sonque t'ajuden."
       }
     },
     "help": [
       {
         "title": "Perilh immediat · 112",
-        "text": "En Espanha pòs telefonar ath 112 se i a un perilh immediat. Ei eth numèro d'emergéncies.",
-        "phone": "112",
-        "url": "https://administracion.gob.es/tu-espacio-europeo/derechos-obligaciones/ciudadanos/asistencia-sanitaria/numeros-urgencia"
+        "text": "En Espanha pòs telefonar ath 112 se i a perilh immediat. Ei eth numèro d'emergéncies."
       },
       {
         "title": "ANAR · 900 20 20 10",
-        "text": "Ajuda gratuita entà mainatges e adolescents en tota Espanha. Tanben pòs consultar eth chat d'ANAR.",
-        "phone": "900202010",
-        "url": "https://www.anar.org/que-hacemos/telefono-chat-anar/"
+        "text": "Ajuda gratuita entà mainatges e adolescents en tota Espanha. Tanben pòs consultar eth chat d'ANAR."
       },
       {
         "title": "Ua persona adulta de confiança",

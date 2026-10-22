@@ -133,11 +133,11 @@
     "defaultChapter": "La història de Sara"
   },
   "drawing": {
-    "phase1Title": "La teua història comença amb un dibuix",
+    "phase1Title": "Una pausa per a dibuixar",
     "phase2Title": "Una pausa per a dibuixar",
     "phase1Intro": "Com t'imagines Sara? Dibuixa-la a la teua manera. Pots usar el dit, el ratolí o un llapis digital.",
-    "phase2Intro": "Sara ha fet un pas important. Si et ve de gust, torna a dibuixar-la com te la imagines ara. Pren-te el temps que necessites.",
-    "phase1Confirm": "Guarda i comença →",
+    "phase2Intro": "Sara ja ha demanat ajuda. Si et ve de gust, torna a dibuixar-la com te la imagines ara. Pren-te el temps que necessites.",
+    "phase1Confirm": "Guarda i continua →",
     "phase2Confirm": "Guarda i continua →",
     "eyebrow": "UN MOMENT PER A CREAR",
     "hint": "El teu dibuix comença ací",
