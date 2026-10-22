@@ -39,6 +39,16 @@ CASOS_SOLO_LECTURA = frozenset({"DEMO"})
 def es_solo_lectura(caso_id: str) -> bool:
     return isinstance(caso_id, str) and caso_id.upper() in CASOS_SOLO_LECTURA
 
+
+# El DEMO que ven todos los usuarios vive en el repo (backend/demo/DEMO.json) y se siembra al
+# arrancar: casos_data/ es estado de runtime (en producción, un volumen) y no se versiona.
+DEMO_ID = "DEMO"
+DEMO_FIXTURE = os.environ.get("CASOS_DEMO_FILE") or os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "demo", "DEMO.json"
+)
+# Las partidas sin código se juegan en casos `PRUEBA-<dígitos>` (lo decide la web: casoDesdeUrl).
+PREFIJO_PRUEBA = "PRUEBA-"
+
 # Version del esquema del caso. Se escribe en cada caso; los antiguos se marcan como 1 al leerlos.
 # 2 = los eventos llevan 't_servidor' (reloj del servidor) y el caso lleva 'schemaVersion'.
 ESQUEMA_VERSION = 2
@@ -102,7 +112,12 @@ LEGACY_FILE = os.environ.get("CASOS_LEGACY_FILE") or os.path.join(
 
 
 class CasoStore:
-    def __init__(self, data_dir: Optional[str] = None, legacy_file: Optional[str] = None) -> None:
+    def __init__(
+        self,
+        data_dir: Optional[str] = None,
+        legacy_file: Optional[str] = None,
+        demo_file: Optional[str] = None,
+    ) -> None:
         self._lock = threading.Lock()
         self._dir = data_dir or DATA_DIR
         self._legacy = legacy_file if legacy_file is not None else LEGACY_FILE
@@ -111,6 +126,7 @@ class CasoStore:
         with self._lock:
             self._migrar_legacy()
             self._cargar()
+            self._sembrar_demo(demo_file)
 
     # -- rutas ----------------------------------------------------------------
 
@@ -141,6 +157,53 @@ class CasoStore:
                 self._casos[caso_id] = caso
             else:
                 logger.warning("Ignorando %s: no tiene forma de caso", ruta)
+
+    def _sembrar_demo(self, ruta: Optional[str]) -> None:
+        """Deja el caso DEMO igual que el archivo versionado.
+
+        Se reemplaza cuando falta o cuando no coincide con el archivo (distinta `meta.semilla` o
+        distinto número de eventos). Al sembrar una versión nueva también se vacían las partidas
+        de prueba (`PRUEBA-*`): eran partidas contra la versión anterior. Los casos reales
+        (`CL-*`) no se tocan nunca.
+        """
+        if not ruta or not os.path.exists(ruta):
+            return
+        try:
+            with open(ruta, encoding="utf-8") as f:
+                demo = json.load(f)
+        except (OSError, ValueError) as exc:
+            logger.warning("No se pudo leer el caso de ejemplo %s: %s", ruta, exc)
+            return
+        if not isinstance(demo, dict) or not isinstance(demo.get("eventos"), list):
+            logger.warning("Ignorando %s: no tiene forma de caso", ruta)
+            return
+
+        actual = self._casos.get(DEMO_ID)
+        if (
+            actual is not None
+            and actual.get("meta", {}).get("semilla") == demo.get("meta", {}).get("semilla")
+            and len(actual.get("eventos", [])) == len(demo["eventos"])
+        ):
+            return
+
+        demo["id"] = DEMO_ID
+        demo.setdefault("meta", {})
+        demo.setdefault("schemaVersion", ESQUEMA_VERSION)
+        self._casos[DEMO_ID] = demo
+        self._escribir(DEMO_ID, demo)
+
+        borradas = 0
+        for caso_id in [c for c in self._casos if c.startswith(PREFIJO_PRUEBA)]:
+            del self._casos[caso_id]
+            try:
+                os.remove(self._ruta(caso_id))
+            except FileNotFoundError:
+                pass
+            borradas += 1
+        logger.info(
+            "Caso de ejemplo %s sembrado desde %s (%s eventos); %s partidas de prueba vaciadas",
+            DEMO_ID, ruta, len(demo["eventos"]), borradas,
+        )
 
     def _migrar_legacy(self) -> None:
         """Importa casos_data.json una sola vez y lo renombra a .migrado."""
@@ -257,4 +320,4 @@ class CasoStore:
             ]
 
 
-caso_store = CasoStore()
+caso_store = CasoStore(demo_file=DEMO_FIXTURE)

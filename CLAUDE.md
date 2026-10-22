@@ -248,7 +248,10 @@ duplicar imágenes. Un caso con dibujos pesa ~50 KB (base64).
 6. **`DEMO` es un ejemplo de solo lectura.** El backend responde 403 a cualquier escritura en él
    (sin distinguir mayúsculas: en Windows `demo.json` es `DEMO.json`). Un `/novela` sin `?caso=`, o
    con `?caso=DEMO`, juega en un caso nuevo `PRUEBA-<6 dígitos>` que aparece en `/servicios` sin que
-   nadie lo haya creado. El contenido de `DEMO` vive en `backend/casos_data/` (local, no se versiona).
+   nadie lo haya creado. El contenido de `DEMO` vive en `backend/demo/DEMO.json` (versionado) y el
+   backend lo siembra al arrancar: si el del volumen tiene otra `meta.semilla` u otro nº de eventos
+   se reemplaza **y se vacían todos los `PRUEBA-*`** (nunca los `CL-*`). Para cambiar el ejemplo,
+   cambia la `semilla` del archivo.
 7. **Ids de caso enumerables** (`CL-` + 5 dígitos) y **sin auth**: quien conozca un id puede leer
    y sobrescribir el caso. Aceptado por decisión de producto; no lo "arregles" sin hablarlo.
 8. **`casos_data.json` y `casos_data/` son estado de runtime**, no fixtures. Están gitignorados.

@@ -316,6 +316,88 @@ class CasoSoloLecturaTest(unittest.TestCase):
         self.assertEqual(len(self.store.get("PRUEBA-123456")["eventos"]), 1)
         self.assertEqual(self._contenido(), self.original)
 
+class SembrarDemoTest(unittest.TestCase):
+    """El DEMO sale de un archivo versionado; al cambiar de versión se vacían las pruebas."""
+
+    def setUp(self):
+        self._dir = tempfile.TemporaryDirectory()
+        self.datos = os.path.join(self._dir.name, "casos_data")
+        self.demo = os.path.join(self._dir.name, "DEMO.json")
+        self._escribir_demo(semilla="v1", n=3)
+
+    def tearDown(self):
+        self._dir.cleanup()
+
+    def _escribir_demo(self, semilla, n):
+        caso = {
+            "id": "OTRO",
+            "meta": {"semilla": semilla, "edad": 14},
+            "eventos": [{"kind": "inicio", "t": i, "t_servidor": i, "data": {}} for i in range(n)],
+            "schemaVersion": ESQUEMA_VERSION,
+        }
+        with open(self.demo, "w", encoding="utf-8") as f:
+            json.dump(caso, f)
+
+    def _store(self):
+        return CasoStore(data_dir=self.datos, legacy_file="", demo_file=self.demo)
+
+    def _existe(self, caso_id):
+        return os.path.exists(os.path.join(self.datos, f"{caso_id}.json"))
+
+    def test_siembra_el_demo_si_falta(self):
+        caso = self._store().get("DEMO")
+        self.assertEqual(caso["id"], "DEMO")
+        self.assertEqual(len(caso["eventos"]), 3)
+        self.assertTrue(self._existe("DEMO"))
+
+    def test_sin_archivo_no_crea_demo(self):
+        store = CasoStore(data_dir=self.datos, legacy_file="", demo_file=os.path.join(self._dir.name, "no_existe.json"))
+        self.assertIsNone(store.get("DEMO"))
+
+    def test_un_demo_antiguo_se_reemplaza_y_se_vacian_las_pruebas(self):
+        previo = CasoStore(data_dir=self.datos, legacy_file="")
+        previo.add_evento("PRUEBA-111111", {"kind": "inicio", "data": {}})
+        previo.add_evento("PRUEBA-222222", {"kind": "inicio", "data": {}})
+        previo.add_evento("CL-12345", {"kind": "inicio", "data": {}})
+        with open(os.path.join(self.datos, "DEMO.json"), "w", encoding="utf-8") as f:
+            json.dump({"id": "DEMO", "meta": {}, "eventos": [{"kind": "inicio", "t": 0, "data": {}}] * 674}, f)
+
+        store = self._store()
+        self.assertEqual(len(store.get("DEMO")["eventos"]), 3)
+        self.assertEqual(store.get("DEMO")["meta"]["semilla"], "v1")
+        self.assertIsNone(store.get("PRUEBA-111111"))
+        self.assertIsNone(store.get("PRUEBA-222222"))
+        self.assertFalse(self._existe("PRUEBA-111111"))
+        # Los casos reales no se tocan nunca
+        self.assertEqual(len(store.get("CL-12345")["eventos"]), 1)
+        self.assertTrue(self._existe("CL-12345"))
+
+    def test_si_el_demo_ya_coincide_no_se_toca_nada(self):
+        self._store()
+        previo = CasoStore(data_dir=self.datos, legacy_file="")
+        previo.add_evento("PRUEBA-333333", {"kind": "inicio", "data": {}})
+        ruta = os.path.join(self.datos, "DEMO.json")
+        antes = os.path.getmtime(ruta)
+        os.utime(ruta, (antes - 100, antes - 100))
+
+        store = self._store()
+        self.assertEqual(os.path.getmtime(ruta), antes - 100)
+        self.assertEqual(len(store.get("PRUEBA-333333")["eventos"]), 1)
+
+    def test_una_semilla_nueva_reemplaza_el_demo(self):
+        self._store()
+        self._escribir_demo(semilla="v2", n=3)
+        self.assertEqual(self._store().get("DEMO")["meta"]["semilla"], "v2")
+
+    def test_archivo_roto_se_ignora_y_no_borra_nada(self):
+        previo = CasoStore(data_dir=self.datos, legacy_file="")
+        previo.add_evento("PRUEBA-444444", {"kind": "inicio", "data": {}})
+        with open(self.demo, "w", encoding="utf-8") as f:
+            f.write("{no es json")
+        store = self._store()
+        self.assertIsNone(store.get("DEMO"))
+        self.assertEqual(len(store.get("PRUEBA-444444")["eventos"]), 1)
+
 
 
 if __name__ == "__main__":
