@@ -36,7 +36,7 @@ if (!forzar && publicado > fuente) {
   process.exit(0);
 }
 
-const result = spawnSync("npm", ["run", "build", "--", "--base=./", "--outDir=../frontend/public/novela"], {
+const result = spawnSync("npm", ["run", "build", "--", "--base=./", "--outDir=../frontend/public/novela", "--emptyOutDir"], {
   cwd: raizNovela,
   stdio: "inherit",
   shell: true,

@@ -294,63 +294,63 @@
         "width": 1920,
         "height": 1080
       },
-      "src": "backgrounds/photos/classroom.jpg"
+      "src": "backgrounds/photos/classroom.webp"
     },
     "hallway-dusk": {
       "size": {
         "width": 1920,
         "height": 1080
       },
-      "src": "backgrounds/photos/school-hallway.jpg"
+      "src": "backgrounds/photos/school-hallway.webp"
     },
     "clubroom": {
       "size": {
         "width": 1920,
         "height": 1080
       },
-      "src": "backgrounds/photos/library.jpg"
+      "src": "backgrounds/photos/library.webp"
     },
     "hallway-day": {
       "size": {
         "width": 1920,
         "height": 1080
       },
-      "src": "backgrounds/photos/school-hallway.jpg"
+      "src": "backgrounds/photos/school-hallway.webp"
     },
     "classroom-day": {
       "size": {
         "width": 1920,
         "height": 1080
       },
-      "src": "backgrounds/photos/classroom.jpg"
+      "src": "backgrounds/photos/classroom.webp"
     },
     "bedroom-evening": {
       "size": {
         "width": 1920,
         "height": 1080
       },
-      "src": "backgrounds/photos/bedroom.jpg"
+      "src": "backgrounds/photos/bedroom.webp"
     },
     "patio-day": {
       "size": {
         "width": 1920,
         "height": 1080
       },
-      "src": "backgrounds/photos/school-courtyard.jpg"
+      "src": "backgrounds/photos/school-courtyard.webp"
     },
     "orientation-office": {
       "size": {
         "width": 1920,
         "height": 1080
       },
-      "src": "backgrounds/photos/guidance-office.jpg"
+      "src": "backgrounds/photos/guidance-office.webp"
     },
     "quiet-room": {
       "size": {
         "width": 1920,
         "height": 1080
       },
-      "src": "backgrounds/photos/quiet-room.jpg"
+      "src": "backgrounds/photos/quiet-room.webp"
     },
     "home-living-cold": {
       "size": {

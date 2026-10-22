@@ -35,6 +35,23 @@ const nextConfig = {
       },
     ]
   },
+  // Caché del navegador. Sin esto, lo que vive en public/ sale con max-age=0 y se vuelve a
+  // pedir entero en cada visita (la novela publicada son varios MB de imágenes).
+  async headers() {
+    const cache = (valor) => [{ key: 'Cache-Control', value: valor }]
+    return [
+      // Si dos reglas coinciden, gana la última: primero la general y después la específica.
+      // Imágenes de la novela (unas con hash y otras copiadas tal cual de public/): un día
+      // sin preguntar y una semana sirviendo la copia mientras se revalida.
+      { source: '/novela/assets/:path*', headers: cache('public, max-age=86400, stale-while-revalidate=604800') },
+      // JS y CSS de la novela: Vite les pone hash en el nombre, así que no cambian nunca.
+      { source: '/novela/assets/:file(.+\\.(?:js|css))', headers: cache('public, max-age=31536000, immutable') },
+      // Historias y textos: cambian al desplegar, pero no entre dos visitas seguidas.
+      { source: '/novela/content/:path*', headers: cache('public, max-age=300, stale-while-revalidate=3600') },
+      { source: '/fonts/:path*', headers: cache('public, max-age=31536000, immutable') },
+      { source: '/flags/:path*', headers: cache('public, max-age=2592000, stale-while-revalidate=86400') },
+    ]
+  },
   async rewrites() {
     return [{ source: '/api/:path*', destination: `${API_URL}/api/:path*` }]
   },
