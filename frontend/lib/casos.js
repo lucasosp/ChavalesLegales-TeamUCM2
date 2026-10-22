@@ -1,4 +1,4 @@
-// Registro por caso: metadatos de la sesión y eventos que alimentan /informe/[caso].
+// Registro por caso: metadatos de la sesión y eventos que alimentan /servicios/[caso].
 // Todo va al backend. No hay espejo en localStorage (D11: la app asume conexión),
 // así que un fallo de red se ve en vez de disfrazarse de "datos viejos".
 
@@ -9,13 +9,15 @@ export function casoDesdeUrl() {
 
 /**
  * Crea o actualiza el caso en el backend.
- * Lanza si el backend no confirma: el educador NO debe repartir un código que no existe.
+ * Lanza si el backend no confirma: el trabajador social NO debe repartir un código que no existe.
+ * Acepta `signal` para poder abortar la petición si el trabajador social cancela.
  */
-export async function guardarMetaCaso(id, meta) {
+export async function guardarMetaCaso(id, meta, { signal } = {}) {
   const res = await fetch(`/api/casos/${encodeURIComponent(id)}/meta`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(meta),
+    signal,
   })
   if (!res.ok) {
     throw new Error(`No se pudo crear el caso (HTTP ${res.status})`)

@@ -1,22 +1,89 @@
+/* Caja de arena (caja-arena) con el lenguaje de la portada: pegatinas de tebeo
+   sobre fondo oscuro. Las reglas están en ESTILO.md; aquí solo se aplican. Las
+   recetas de botón, campo y tarjeta son las mismas que usa cid-table
+   (cid.module.css) a propósito: los dos juegos deben parecer el mismo juego. */
+
+/* ==========================================================================
+   SHELL DE PÁGINA
+   ========================================================================== */
+
 .page {
   position: fixed;
   inset: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 10px 14px 12px;
+  gap: 8px;
+  padding: 0.55rem 0.75rem 0.65rem;
   box-sizing: border-box;
   overflow: hidden;
+  /* Mismo fondo que el resto de la web: tinta verde y dos resplandores. */
   background:
-    radial-gradient(ellipse at 50% 30%, rgba(255, 236, 200, 0.12), transparent 60%),
-    linear-gradient(180deg, #2c4a3e 0%, #1a2f27 100%);
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  color: #1c1917;
+    radial-gradient(90% 70% at 84% 4%, rgba(16, 185, 129, 0.28) 0%, transparent 62%),
+    radial-gradient(85% 70% at 6% 98%, rgba(249, 115, 22, 0.2) 0%, transparent 66%),
+    linear-gradient(180deg, #0e1e18 0%, #08120e 100%);
+  font-family: var(--font-body);
+  color: var(--texto-inverso);
   user-select: none;
   touch-action: none;
 }
 
+/* Manchas orgánicas del fondo, las mismas de la portada (sin el SVG de curvas).
+   El difuminado va detrás de todo y no recibe clics. */
+.bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bgWave {
+  position: absolute;
+  top: -15%;
+  left: -20%;
+  width: 75vw;
+  height: 130vh;
+  border-radius: 50%;
+  transform: rotate(-25deg);
+  background: radial-gradient(ellipse at center, var(--verde-400) 0%, var(--verde-800) 60%, transparent 80%);
+  opacity: 0.28;
+  filter: blur(2px);
+}
+
+.bgArc {
+  position: absolute;
+  top: -10%;
+  right: -25%;
+  width: 70vw;
+  height: 120vh;
+  border-radius: 50%;
+  transform: rotate(15deg);
+  background: radial-gradient(circle at 60% 40%, var(--verde-700) 0%, var(--verde-900) 50%, transparent 75%);
+  opacity: 0.45;
+}
+
+.bgGlow {
+  position: absolute;
+  bottom: -20%;
+  left: 20%;
+  width: 55vw;
+  height: 60vh;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--verde-500) 0%, var(--verde-700) 58%, transparent 78%);
+  opacity: 0.22;
+  filter: blur(40px);
+}
+
+/* ==========================================================================
+   BARRA SUPERIOR
+   ========================================================================== */
+
 .topbar {
+  position: relative;
+  /* Por encima del velo de los diálogos (z-index 50): el acceso al panel del
+     profesional tiene que funcionar también en la intro, que es cuando se
+     exportan las sesiones anteriores. */
+  z-index: 60;
   flex: none;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -31,19 +98,280 @@
   gap: 10px;
 }
 
+/* Título del juego: display en blanco, sin sombra difusa */
 .title {
   margin: 0;
-  font-family: 'Fredoka', 'Plus Jakarta Sans', sans-serif;
-  font-size: clamp(18px, 2.4vw, 26px);
-  font-weight: 600;
-  color: #fef3c7;
-  letter-spacing: 0.01em;
-  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--superficie);
+  white-space: nowrap;
 }
+
+/* ==========================================================================
+   BOTONES
+   Base común: trazo de tinta, placa dura del propio color oscurecido, esquinas
+   de pegatina y un pelín de giro. El hover sube y endereza, el activo hunde.
+   ========================================================================== */
+
+.btn,
+.btnPrimary,
+.btnGhost,
+.btnDanger {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  font-family: var(--font-display);
+  /* 800 es el máximo real de Plus Jakarta Sans: 900 se redondea y no engorda */
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  color: var(--verde-950);
+  border: 3px solid var(--verde-950);
+  border-radius: 16px 11px 15px 12px / 12px 16px 11px 15px;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+}
+
+/* Motas solo en el arranque izquierdo del botón, fundidas hacia el centro. */
+.btn::before,
+.btnPrimary::before,
+.btnDanger::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background-image: radial-gradient(rgba(1, 25, 19, 0.16) 1.1px, transparent 1.2px);
+  background-size: 7px 7px;
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, transparent 58%);
+  mask-image: linear-gradient(90deg, #000 0%, transparent 58%);
+  pointer-events: none;
+}
+
+.btn > *,
+.btnPrimary > *,
+.btnGhost > *,
+.btnDanger > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Primario: el ámbar de la marca. Uno por pantalla y es el que avanza. */
+.btnPrimary {
+  background-color: var(--marca-ambar);
+  box-shadow: 5px 5px 0 var(--marca-ambar-sombra);
+  transform: rotate(-0.4deg);
+}
+
+.btnPrimary:hover:not(:disabled) {
+  background-color: var(--marca-ambar-claro);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 7px 8px 0 var(--marca-ambar-sombra);
+}
+
+.btnPrimary:active:not(:disabled) {
+  transform: translate(2px, 2px) rotate(0deg);
+  box-shadow: 2px 2px 0 var(--marca-ambar-sombra);
+}
+
+/* Secundario: naranja de acento suave con placa naranja. */
+.btn {
+  padding: 11px 18px;
+  font-size: 0.85rem;
+  background-color: var(--naranja-200);
+  box-shadow: 3px 3px 0 var(--naranja-600);
+  transform: rotate(0.5deg);
+}
+
+.btn:hover:not(:disabled) {
+  background-color: var(--naranja-300);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 4px 5px 0 var(--naranja-600);
+}
+
+.btn:active:not(:disabled) {
+  transform: translate(2px, 2px) rotate(0deg);
+  box-shadow: 1px 1px 0 var(--naranja-600);
+}
+
+/* Terciario / navegación: pegatina blanca con motas y placa gris. */
+.btnGhost {
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  background-color: var(--superficie);
+  background-image: radial-gradient(rgba(1, 25, 19, 0.12) 1.1px, transparent 1.2px);
+  background-size: 7px 7px;
+  box-shadow: 3px 3px 0 var(--neutro-400);
+  transform: rotate(-0.6deg);
+}
+
+.btnGhost:hover:not(:disabled) {
+  background-color: var(--naranja-50);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 4px 5px 0 var(--neutro-400);
+}
+
+.btnGhost:active:not(:disabled) {
+  transform: translate(2px, 2px) rotate(0deg);
+  box-shadow: 1px 1px 0 var(--neutro-400);
+}
+
+/* Destructivo: la única pieza en rojo (borrar el histórico del navegador) */
+.btnDanger {
+  padding: 11px 18px;
+  font-size: 0.85rem;
+  color: var(--peligro);
+  background-color: var(--peligro-suave);
+  box-shadow: 3px 3px 0 var(--peligro-borde);
+  transform: rotate(-0.5deg);
+}
+
+.btnDanger:hover:not(:disabled) {
+  background-color: var(--superficie);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 4px 5px 0 var(--peligro);
+}
+
+.btnDanger:active:not(:disabled) {
+  transform: translate(2px, 2px) rotate(0deg);
+  box-shadow: 1px 1px 0 var(--peligro);
+}
+
+/* Deshabilitado: sin giro, sin placa y borde gris (la única pieza que cambia
+   el color del borde). */
+.btn:disabled,
+.btnPrimary:disabled,
+.btnGhost:disabled,
+.btnDanger:disabled {
+  background-color: var(--neutro-200);
+  background-image: none;
+  color: var(--texto-suave);
+  border-color: var(--neutro-400);
+  box-shadow: none;
+  transform: none;
+  cursor: not-allowed;
+}
+
+.btn:disabled::before,
+.btnPrimary:disabled::before,
+.btnDanger:disabled::before {
+  display: none;
+}
+
+/* Volver: pegatina terciaria de la barra, misma altura que la de ajustes. */
+.back {
+  justify-self: start;
+  min-height: 50px;
+  padding-inline: 1.15rem;
+}
+
+/* Panel del profesional: pegatina de la barra. La tuerca es lo que lleva el
+   color (no un aro alrededor): tinta verde en reposo, tinta sobre ámbar al pasar. */
+.gear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  background-color: var(--superficie);
+  background-image: radial-gradient(rgba(1, 25, 19, 0.12) 1.1px, transparent 1.2px);
+  background-size: 7px 7px;
+  border: 3px solid var(--verde-950);
+  border-radius: 14px 10px 13px 11px / 11px 14px 10px 13px;
+  box-shadow: 3px 3px 0 var(--neutro-400);
+  transform: rotate(0.6deg);
+  color: var(--verde-900);
+  cursor: pointer;
+  user-select: none;
+  -webkit-touch-callout: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease, color 0.12s ease;
+}
+
+.gear svg {
+  width: 24px;
+  height: 24px;
+}
+
+.gear:hover {
+  background-color: var(--marca-ambar);
+  color: var(--verde-950);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 4px 5px 0 var(--marca-ambar-sombra);
+}
+
+.gear:active {
+  transform: translate(2px, 2px) rotate(0deg);
+  box-shadow: 1px 1px 0 var(--marca-ambar-sombra);
+}
+
+.gear:focus-visible,
+.btn:focus-visible,
+.btnPrimary:focus-visible,
+.btnGhost:focus-visible,
+.btnDanger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.55);
+}
+
+/* ==========================================================================
+   ESCENARIO: la caja vive dentro de una tarjeta-pegatina
+   ========================================================================== */
 
 .stage {
   position: relative;
+  z-index: 1;
   flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Aire mínimo con la barra y con el borde inferior, aunque la ventana sea más
+     apaisada que el lienzo y el tablero quede limitado por el alto. */
+  padding-block: 12px;
+  /* Contenedor de consulta: la tarjeta ajusta su ancho al alto que le queda para
+     no dejar franjas blancas dentro del marco (la caja es 1600×840). */
+  container-type: size;
+}
+
+.stageCard {
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  /* Ancho de respaldo (navegadores sin consultas de contenedor) */
+  width: 100%;
+  max-width: 1700px;
+  aspect-ratio: 1600 / 840;
+  max-height: 100%;
+  /* El tablero ocupa casi toda la pantalla: lienzo 1600×840 (más ancho que alto),
+     así llena el ancho y deja aire con los botones de arriba. */
+  width: min(100%, 1700px, calc(100cqh * 1.9048));
+  padding: 6px;
+  box-sizing: border-box;
+  background-color: var(--superficie);
+  background-image: radial-gradient(rgba(1, 25, 19, 0.06) 1.2px, transparent 1.3px);
+  background-size: 11px 11px;
+  border: 3px solid var(--verde-950);
+  border-radius: 18px 14px 16px 15px / 15px 17px 14px 16px;
+  /* Placa de tinta: sobre el fondo casi negro, la tarjeta blanca la aguanta. */
+  box-shadow: 6px 6px 0 var(--verde-950);
+}
+
+/* Caja de las capas (escenario, clima y capa interactiva): las tres comparten
+   la misma caja para que sus viewBox coincidan al píxel. */
+.tablero {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
   min-height: 0;
 }
 
@@ -57,7 +385,7 @@
   width: 100%;
   height: 100%;
   display: block;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .interactive {
@@ -72,17 +400,19 @@
   cursor: grabbing;
 }
 
+/* Nombre y rasgo de cada perro en el estante */
 .dogName {
-  font-family: 'Fredoka', sans-serif;
-  font-size: 19px;
-  font-weight: 600;
-  fill: #fef3c7;
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 800;
+  fill: var(--verde-900);
 }
 
 .dogTrait {
-  font-size: 13px;
+  font-family: var(--font-display);
+  font-size: 14px;
   font-weight: 700;
-  fill: #a7f3d0;
+  fill: var(--verde-700);
   letter-spacing: 0.04em;
 }
 
@@ -100,24 +430,35 @@
   transform-box: view-box;
 }
 
+/* Aviso del evento meteorológico: pegatina blanca con placa naranja. Esquina
+   irregular y no píldora: el texto puede partirse en dos líneas. */
 .toast {
   position: absolute;
-  top: 12px;
+  top: 14px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(15, 23, 42, 0.88);
-  color: #f8fafc;
-  padding: 10px 20px;
-  border-radius: 999px;
-  font-family: 'Fredoka', sans-serif;
-  font-size: clamp(15px, 1.8vw, 20px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-  animation: drop 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.3);
+  max-width: min(92%, 34rem);
+  padding: 9px 16px;
+  background-color: var(--superficie);
+  background-image: radial-gradient(rgba(1, 25, 19, 0.12) 1.1px, transparent 1.2px);
+  background-size: 7px 7px;
+  border: 3px solid var(--verde-950);
+  border-radius: 16px 11px 15px 12px / 12px 16px 11px 15px;
+  box-shadow: 4px 4px 0 var(--naranja-600);
+  color: var(--verde-950);
+  font-family: var(--font-display);
+  font-size: clamp(0.85rem, 1.6vw, 1.15rem);
+  font-weight: 800;
+  line-height: 1.25;
+  text-align: center;
+  animation: drop 0.5s var(--ease-spring);
   pointer-events: none;
-  white-space: nowrap;
 }
 
-/* Clima */
+/* ==========================================================================
+   CLIMA (animaciones de las partículas; los colores los pone el SVG)
+   ========================================================================== */
+
 .weatherIn {
   animation: fadeIn 2.5s ease both;
 }
@@ -214,7 +555,7 @@
 
 @keyframes cover {
   from { opacity: 0; }
-  to { opacity: 0.6; }
+  to { opacity: 0.55; }
 }
 
 @keyframes pulse {
@@ -241,187 +582,310 @@
 }
 
 @keyframes rise {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(-10px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tail, .zzz, .rain, .snow, .gust, .leaf, .cloud, .sunRays, .shimmer, .heat {
+  .tail,
+  .zzz,
+  .rain,
+  .snow,
+  .gust,
+  .leaf,
+  .cloud,
+  .sunRays,
+  .shimmer,
+  .heat,
+  .toast {
     animation: none;
   }
 }
 
-/* Botones y diálogos */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #fde68a;
-  color: #1c1917;
-  border: none;
-  border-radius: 999px;
-  box-shadow: 0 4px 0 #b45309, 0 8px 18px rgba(0, 0, 0, 0.18);
-  padding: 9px 18px;
-  font-weight: 800;
-  font-size: 15px;
-  cursor: pointer;
-  text-decoration: none;
-  font-family: inherit;
-  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease, opacity 0.2s;
-  justify-self: start;
-}
-
-.btn:hover:not(:disabled) {
-  filter: brightness(1.05);
-  transform: translateY(-1px);
-}
-
-.btn:active:not(:disabled) {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 #b45309;
-}
-
-.btn:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
-.btnPrimary {
-  composes: btn;
-  background: linear-gradient(180deg, #34d399, #10b981);
-  color: #fff;
-  box-shadow: 0 4px 0 #047857, 0 8px 18px rgba(4, 120, 87, 0.35);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-}
-
-.btnGhost {
-  composes: btn;
-  background: #fff;
-  box-shadow: 0 4px 0 #cbd5e1, 0 8px 18px rgba(0, 0, 0, 0.15);
-}
-
-.btnDanger {
-  composes: btn;
-  background: #fee2e2;
-  color: #991b1b;
-  box-shadow: 0 4px 0 #fca5a5;
-}
-
-.gear {
-  width: 36px;
-  height: 36px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.4);
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  -webkit-touch-callout: none;
-}
+/* ==========================================================================
+   SUPERPOSICIONES Y TARJETAS
+   ========================================================================== */
 
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(10, 25, 20, 0.55);
-  backdrop-filter: blur(3px);
+  z-index: 50;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
-  z-index: 50;
+  padding: 1.2rem;
+  /* Velo de tinta sin desenfoque: nada de cristal */
+  background: rgba(1, 25, 19, 0.72);
   user-select: text;
 }
 
-.dialog,
-.panel {
-  background: #fffdf7;
-  border-radius: 24px;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
-  width: 100%;
-  max-width: 500px;
-  text-align: center;
-  padding: 28px 30px 26px;
+/* Tarjeta-pegatina: superficie blanca, motas al 6 %, trazo de tinta y placa.
+   Sin giro: pesa demasiado y además contiene campos que se teclean. */
+.card {
+  position: relative;
   box-sizing: border-box;
-  animation: rise 0.4s ease;
+  background-color: var(--superficie);
+  background-image: radial-gradient(rgba(1, 25, 19, 0.06) 1.2px, transparent 1.3px);
+  background-size: 11px 11px;
+  border: 3px solid var(--verde-950);
+  border-radius: 18px 14px 16px 15px / 15px 17px 14px 16px;
+  box-shadow: 6px 6px 0 var(--verde-950);
+  color: var(--verde-950);
 }
 
-.panel {
-  max-width: 560px;
-  text-align: left;
+.dialog {
+  composes: card;
+  width: 100%;
+  max-width: 480px;
+  padding: 1.75rem 1.6rem 1.6rem;
+  text-align: center;
+  animation: rise 0.4s var(--ease-spring);
 }
 
+/* La insignia dentro de un diálogo va justo encima del título */
+.dialog > .badge {
+  margin-bottom: 2px;
+}
+
+.dialogTitle {
+  margin: 12px 0 8px;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--verde-800);
+}
+
+.dialogText {
+  margin: 0 0 1.25rem;
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--texto-medio);
+  text-wrap: balance;
+}
+
+/* Insignia: píldora con trazo de tinta de 2px (pieza pequeña) */
 .badge {
   display: inline-block;
+  padding: 4px 12px;
   font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #92400e;
-  background: #fef3c7;
-  border-radius: 999px;
-  padding: 4px 12px;
+  line-height: 1.4;
+  color: var(--naranja-800);
+  background-color: var(--naranja-100);
+  border: 2px solid var(--verde-950);
+  border-radius: 9999px;
+  white-space: nowrap;
 }
 
-.dialogTitle {
-  font-family: 'Fredoka', 'Plus Jakarta Sans', sans-serif;
-  font-size: 30px;
-  font-weight: 700;
-  margin: 12px 0 8px;
-  color: #064e3b;
-}
-
-.dialogText {
-  font-size: 16px;
-  line-height: 1.55;
-  color: #44403c;
-  margin: 0 0 20px;
-}
-
-.panelTitle {
-  margin: 0 0 6px;
-  font-size: 20px;
-  font-weight: 900;
-}
-
-.panelText {
-  margin: 0 0 16px;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #475569;
-}
-
+/* Campo de la historia: caja de datos, radio plano de 12px y foco ámbar */
 .textarea {
   width: 100%;
   box-sizing: border-box;
-  border: 2px solid #e7e5e4;
-  border-radius: 16px;
+  margin-bottom: 1.1rem;
   padding: 12px 14px;
-  font-family: 'Fredoka', sans-serif;
-  font-size: 17px;
-  resize: none;
-  margin-bottom: 18px;
-  background: #fff;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--verde-950);
+  background-color: var(--superficie);
+  border: 3px solid var(--verde-950);
+  border-radius: 12px;
   outline: none;
+  resize: none;
+  transition: box-shadow 0.15s ease;
+}
+
+.textarea::placeholder {
+  color: var(--texto-suave);
+  font-weight: 500;
 }
 
 .textarea:focus {
-  border-color: #34d399;
+  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.55);
 }
 
 .stars {
-  color: #fbbf24;
-  font-size: 30px;
-  letter-spacing: 6px;
-  text-shadow: 0 2px 0 #b45309;
+  font-size: 1.9rem;
+  letter-spacing: 8px;
+  line-height: 1;
+  color: var(--marca-ambar);
+  text-shadow: 3px 3px 0 var(--marca-ambar-sombra);
 }
 
 .row {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
+/* ==========================================================================
+   PANEL DEL PROFESIONAL
+   ========================================================================== */
+
+.panel {
+  composes: card;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 1.5rem 1.4rem 1.4rem;
+  text-align: left;
+  animation: rise 0.4s var(--ease-spring);
+}
+
+.panelTitle {
+  margin: 0 0 6px;
+  padding-right: 42px;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--verde-800);
+}
+
+.panelText {
+  margin: 0 0 1.15rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--texto-medio);
+}
+
+.panel strong {
+  color: var(--verde-800);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
 .panel .row {
   justify-content: flex-start;
+  gap: 10px;
+}
+
+/* Cerrar: pegatina pequeña en la esquina, para no gastar una fila de botones */
+.cerrarBoton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--verde-950);
+  background-color: var(--superficie);
+  border: 2px solid var(--verde-950);
+  border-radius: 12px 9px 11px 10px / 10px 12px 9px 11px;
+  box-shadow: 2px 2px 0 var(--neutro-400);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+}
+
+.cerrarBoton:hover {
+  background-color: var(--naranja-50);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 3px 4px 0 var(--neutro-400);
+}
+
+.cerrarBoton:active {
+  transform: translate(1px, 1px) rotate(0deg);
+  box-shadow: 1px 1px 0 var(--neutro-400);
+}
+
+.cerrarBoton:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.55);
+}
+
+/* ==========================================================================
+   PANTALLAS ESTRECHAS Y BAJAS
+   ========================================================================== */
+
+@media (max-width: 720px) {
+  .page {
+    gap: 8px;
+    padding: 0.4rem 0.4rem 0.5rem;
+  }
+  .stageCard {
+    padding: 4px;
+  }
+  .dialog,
+  .panel {
+    padding: 1.3rem 1.15rem 1.25rem;
+  }
+  .dialogTitle {
+    font-size: 1.3rem;
+  }
+  .title {
+    /* El título no cabe con las dos pegatinas: se queda solo para lectores de
+       pantalla. Sigue en el flujo (1px) para que la rejilla de la barra no se
+       desplace; el diálogo de inicio ya nombra el juego. */
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .btn,
+  .btnPrimary,
+  .btnGhost,
+  .btnDanger {
+    font-size: 0.85rem;
+    padding: 10px 14px;
+  }
+  .back {
+    padding-inline: 0.9rem;
+  }
+  .dogName {
+    font-size: 34px;
+  }
+  .dogTrait {
+    font-size: 22px;
+  }
+  /* El tablero es pequeño en vertical: el aviso baja al hueco de debajo de la
+     tarjeta en vez de taparlo. */
+  .toast {
+    position: fixed;
+    top: auto;
+    bottom: 1.5rem;
+    padding: 7px 14px;
+    font-size: 0.8rem;
+    max-width: 88%;
+  }
+}
+
+@media (max-height: 760px) {
+  .page {
+    gap: 6px;
+    padding-top: 0.4rem;
+    padding-bottom: 0.45rem;
+  }
+  .gear {
+    width: 44px;
+    height: 44px;
+  }
+  .gear svg {
+    width: 21px;
+    height: 21px;
+  }
+  .back {
+    min-height: 44px;
+  }
+  .dialogTitle {
+    font-size: 1.35rem;
+    margin-top: 8px;
+  }
+  .dialogText {
+    margin-bottom: 1rem;
+  }
 }

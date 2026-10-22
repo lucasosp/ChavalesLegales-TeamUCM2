@@ -1,0 +1,1256 @@
+/* Informe descriptivo de sesión con el lenguaje de la portada: fondo verde, una
+   plancha blanca gigante con trazo de tinta y, dentro, los bloques separados
+   por reglas de tinta. Reglas en ESTILO.md. Aquí solo se aplican. */
+
+/* ==========================================================================
+   1. Shell: página oscura + plancha blanca
+   ========================================================================== */
+
+.pagina {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  color: var(--verde-950);
+  font-family: var(--font-body);
+  /* Mismo verde de tinta que la portada, en degradado largo: el informe puede
+     medir seis pantallas y no queremos que el fondo salte a mitad. */
+  background: linear-gradient(180deg, #0e1e18 0%, #08120e 100%);
+}
+
+/* Resplandores y manchas: capa fija, así el fondo no se va con el scroll.
+   Las manchas son las clases globales de globals.css (.bg-wave-left, etc.),
+   las mismas de la portada: un solo sitio donde están definidas. */
+.fondo {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(90% 70% at 84% 4%, rgba(16, 185, 129, 0.28) 0%, transparent 62%),
+    radial-gradient(85% 70% at 6% 98%, rgba(249, 115, 22, 0.2) 0%, transparent 66%);
+}
+
+.principal {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.1rem clamp(1rem, 3vw, 2.2rem) 3rem;
+  box-sizing: border-box;
+}
+
+/* La caja blanca gigante: pegatina sobre el verde, como las tarjetas de la
+   portada pero a lo ancho de la pantalla. */
+.pliego {
+  position: relative;
+  background-color: var(--superficie);
+  background-image: radial-gradient(rgba(1, 25, 19, 0.06) 1.2px, transparent 1.3px);
+  background-size: 11px 11px;
+  border: 3px solid var(--verde-950);
+  border-radius: 18px 14px 16px 15px / 15px 17px 14px 16px;
+  box-shadow: 6px 6px 0 var(--verde-950);
+  padding: clamp(1.15rem, 2.4vw, 2.4rem);
+  /* Sin overflow: recortaría las placas duras de lo que va dentro */
+}
+
+/* Bloques separados por una regla de tinta, no por tarjetas apiladas: una sola
+   hoja, varios apartados. */
+.bloque {
+  margin-top: 1.6rem;
+  padding-top: 1.6rem;
+  border-top: 3px solid var(--verde-950);
+}
+
+/* ==========================================================================
+   2. Cabecera de la hoja
+   ========================================================================== */
+
+.cabecera {
+  display: flex;
+  /* Los botones van a la derecha del título, pegados a su borde superior */
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem 1.4rem;
+  flex-wrap: wrap;
+}
+
+.cabeceraTexto {
+  display: flex;
+  flex: 1 1 240px;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.titulo {
+  margin: 0;
+  font-size: clamp(1.45rem, 2.4vw, 1.95rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--verde-800);
+}
+
+.subtitulo {
+  margin: 0;
+  /* Aire por debajo de la línea de actualizado, antes de la ficha */
+  padding-bottom: 0.6rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--texto-medio);
+}
+
+/* Botones del informe: finos y con aire dentro (no se estiran a lo alto) */
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.acciones > * {
+  padding: 0.6rem 1.25rem;
+  font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   3. Botones pegatina
+   ========================================================================== */
+
+.btnSticker,
+.btnSec,
+.btnFila {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--verde-950);
+  border: 2px solid var(--verde-950);
+  border-radius: 12px 9px 11px 10px / 10px 12px 9px 11px;
+  padding: 0.5rem 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+}
+
+/* Secundario blanco: navegación y acciones de la hoja (imprimir) */
+.btnSticker {
+  background-color: var(--superficie);
+  background-image: radial-gradient(rgba(1, 25, 19, 0.12) 1.1px, transparent 1.2px);
+  background-size: 7px 7px;
+  box-shadow: 3px 3px 0 var(--neutro-400);
+  transform: rotate(-0.5deg);
+}
+
+/* Exportar: naranja de acento, como manda la paleta */
+.btnSec {
+  background-color: var(--naranja-200);
+  box-shadow: 3px 3px 0 var(--naranja-600);
+  transform: rotate(0.5deg);
+}
+
+.btnSticker:hover {
+  background-color: var(--marca-ambar);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 4px 5px 0 var(--marca-ambar-sombra);
+}
+
+.btnSec:hover {
+  background-color: var(--naranja-300);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 4px 5px 0 var(--naranja-600);
+}
+
+.btnSticker:active {
+  transform: translate(2px, 2px) rotate(0deg);
+  box-shadow: 1px 1px 0 var(--neutro-400);
+}
+
+.btnSec:active {
+  transform: translate(2px, 2px) rotate(0deg);
+  box-shadow: 1px 1px 0 var(--naranja-600);
+}
+
+/* Botón de fila: la misma pieza, más pequeña.
+   Nace torcido como las fichas de la portada y se endereza al pasar por encima;
+   el signo del giro se alterna por fila con --giro (par/impar). */
+.btnFila {
+  --giro: -0.5deg;
+  font-size: 0.72rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 10px 8px 9px 8px / 8px 10px 8px 9px;
+  background-color: var(--superficie);
+  box-shadow: 2px 2px 0 var(--neutro-400);
+  transform: rotate(var(--giro));
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+}
+
+.btnFila:hover {
+  background-color: var(--marca-ambar);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 3px 4px 0 var(--marca-ambar-sombra);
+}
+
+.btnFila:active {
+  transform: translate(1px, 1px) rotate(0deg);
+  box-shadow: 1px 1px 0 var(--neutro-400);
+}
+
+/* ==========================================================================
+   4. Ficha del caso (datos de la sesión)
+   ========================================================================== */
+
+.fichaGrid {
+  display: grid;
+  /* Rejilla de 12: cada dato ocupa 2 y la edad solo 1, así "Situación" se lleva
+     el hueco que deja la edad. */
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0.9rem 1.1rem;
+  margin: 0;
+  padding: 1rem 1.1rem;
+  background-color: var(--verde-50);
+  background-image: radial-gradient(rgba(1, 25, 19, 0.07) 1.1px, transparent 1.2px);
+  background-size: 9px 9px;
+  border: 2px solid var(--verde-950);
+  border-radius: 14px 11px 13px 12px / 12px 14px 11px 13px;
+}
+
+.fichaItem {
+  display: flex;
+  grid-column: span 2;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* La edad, a la mitad que el resto */
+.fichaEdad {
+  grid-column: span 1;
+}
+
+/* …y su hueco se lo queda la situación */
+.fichaSituacion {
+  grid-column: span 3;
+}
+
+.fichaItem dt {
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--verde-700);
+}
+
+.fichaItem dd {
+  margin: 0;
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: var(--verde-900);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   5. Avisos
+   ========================================================================== */
+
+.avisos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+/* Calidad del dato: naranja, no verde (esto sí hay que mirarlo) */
+.avisoDatos {
+  margin: 0;
+  padding: 0.85rem 1.05rem;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--naranja-900);
+  background: var(--naranja-50);
+  border: 2px solid var(--naranja-500);
+  border-radius: 14px 11px 13px 12px / 12px 14px 11px 13px;
+}
+
+.contextoCard {
+  margin: 0;
+  padding: 0.85rem 1.05rem;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--naranja-900);
+  background: var(--naranja-50);
+  border: 2px solid var(--naranja-300);
+  border-radius: 14px 11px 13px 12px / 12px 14px 11px 13px;
+}
+
+/* ==========================================================================
+   6. KPIs
+   ========================================================================== */
+
+.kpisSection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+  gap: 0.7rem;
+}
+
+.kpiCard {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.8rem 0.9rem 0.9rem;
+  background: var(--verde-50);
+  border: 2px solid var(--verde-950);
+  border-radius: 14px 11px 13px 12px / 12px 14px 11px 13px;
+}
+
+.kpiLabel {
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--verde-700);
+}
+
+.kpiValue {
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--verde-900);
+  font-variant-numeric: tabular-nums;
+}
+
+.kpiNote {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--texto-suave);
+}
+
+/* ==========================================================================
+   7. Buscador y cabeceras ordenables
+   ========================================================================== */
+
+.buscador {
+  /* Aire alrededor del buscador dentro de la hoja */
+  margin: 0.1rem 0 1.4rem;
+}
+
+.buscadorEtiqueta {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--verde-700);
+}
+
+.buscadorFila {
+  position: relative;
+  display: flex;
+  align-items: center;
+  /* A todo el ancho de la hoja */
+  width: 100%;
+}
+
+.buscadorLupa {
+  position: absolute;
+  left: 1rem;
+  color: var(--verde-700);
+  pointer-events: none;
+}
+
+/* Mismo cuerpo que los campos del panel: 12px, tinta, foco ámbar */
+.buscadorCampo {
+  width: 100%;
+  height: 52px;
+  /* Aire a los dos lados: la lupa a la izquierda y el aspa a la derecha */
+  padding: 0 3.2rem 0 3.1rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--verde-950);
+  background: var(--superficie);
+  border: 3px solid var(--verde-950);
+  border-radius: 12px;
+  outline: none;
+  transition: box-shadow 0.15s ease;
+}
+
+.buscadorCampo::placeholder {
+  color: var(--texto-suave);
+  font-weight: 500;
+}
+
+.buscadorCampo:focus {
+  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.55);
+}
+
+.buscadorLimpiar {
+  position: absolute;
+  right: 0.65rem;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  /* En reposo es una pieza neutra más; el rojo (borrar) solo entra al pasar
+     por encima: es la única pieza roja fuera de los errores. */
+  color: var(--verde-950);
+  background: var(--neutro-100);
+  border: 2px solid var(--verde-950);
+  border-radius: 10px 8px 9px 8px / 8px 10px 8px 9px;
+  cursor: pointer;
+  transition: background-color 0.12s ease, color 0.12s ease, transform 0.12s ease;
+}
+
+/* El glifo es un SVG (no el carácter ×), así queda centrado óptico de verdad */
+.buscadorLimpiar svg {
+  display: block;
+}
+
+.buscadorLimpiar:hover {
+  color: #fff;
+  background: var(--peligro-fuerte);
+}
+
+.buscadorLimpiar:hover svg {
+  transform: scale(1.15);
+}
+
+.buscadorLimpiar:active {
+  transform: translate(1px, 1px);
+}
+
+.buscadorLimpiar:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.55);
+}
+
+.buscadorAyuda {
+  margin: 0.4rem 0 0;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--texto-suave);
+}
+
+/* La cabecera entera es un botón: ordena al pulsar y lleva aria-sort en el th */
+.thBoton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.thBoton:hover {
+  color: var(--verde-950);
+}
+
+.thBoton:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.55);
+}
+
+.thBotonActiva {
+  color: var(--verde-950);
+}
+
+.thFlecha {
+  font-size: 0.72em;
+  opacity: 0.5;
+}
+
+.thBotonActiva .thFlecha {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   8. Tablas
+   ========================================================================== */
+
+/* La tabla vive dentro de un carril con scroll horizontal: en móvil se arrastra
+   en vez de desbordar la hoja. El scroll va en el envoltorio y no en el propio
+   <table> porque cambiar el display de una tabla rompe sus grupos de filas. */
+.tablaScroll {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.82rem;
+}
+
+.tabla thead th {
+  padding: 0.55rem 0.7rem;
+  background: var(--verde-50);
+  color: var(--verde-800);
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  border-bottom: 3px solid var(--verde-950);
+}
+
+.tabla td {
+  padding: 0.65rem 0.7rem;
+  color: var(--neutro-800);
+  vertical-align: top;
+  border-bottom: 2px solid var(--neutro-200);
+}
+
+.tabla tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.tabla tbody tr:hover {
+  background: var(--verde-50);
+}
+
+/* Dato marcado (naranja), nunca rojo: no es un error */
+.filaDestacada td {
+  background: var(--naranja-50);
+  color: var(--naranja-800);
+  font-weight: 700;
+}
+
+.filaDestacada td:first-child {
+  box-shadow: inset 3px 0 0 var(--naranja-500);
+}
+
+.alt {
+  color: var(--texto-suave);
+  font-size: 0.76rem;
+}
+
+.thCentro {
+  text-align: center;
+}
+
+/* Centrado simple para columnas cortas (nº de decisión, capítulo) */
+.celdaCentroPlano {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.celdaFecha {
+  color: var(--texto-medio);
+  font-size: 0.76rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.celdaNum {
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  color: var(--verde-800);
+  text-align: right;
+}
+
+.chipCaso {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+  color: var(--verde-900);
+  background: var(--verde-50);
+  border: 2px solid var(--verde-950);
+  border-radius: 10px 8px 9px 8px / 8px 10px 8px 9px;
+  white-space: nowrap;
+}
+
+/* La tabla del listado necesita un mínimo para no aplastar la columna de la
+   situación: en móvil se arrastra dentro de su carril. */
+.tablaLista {
+  min-width: 620px;
+}
+
+/* Cabeceras del listado: centradas y un punto más grandes que las del informe */
+.tablaLista thead th {
+  text-align: center;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+}
+
+/* Cifra centrada bajo su cabecera (el listado) */
+.celdaCentro {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  color: var(--verde-800);
+}
+
+/* Todas las entradas del listado, centradas bajo su cabecera */
+.tablaLista tbody td {
+  text-align: center;
+}
+
+/* El giro alterno del botón, fila sí fila no (como nth-child en la portada) */
+.tablaLista tbody tr:nth-child(odd) .btnFila {
+  --giro: -0.7deg;
+}
+
+.tablaLista tbody tr:nth-child(even) .btnFila {
+  --giro: 0.6deg;
+}
+
+/* La última columna se encoge a su contenido y se pega al borde derecho con un
+   poco de aire: el botón queda lo más a la derecha posible. */
+.tablaLista th:last-child,
+.tablaLista td:last-child {
+  width: 1%;
+  padding-right: 0.9rem;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ---------- Acordeón de decisiones ---------- */
+.filaClic {
+  cursor: pointer;
+}
+
+/* La fila desplegada se marca con un tono suave, no con color de alarma */
+.filaAbierta td {
+  background: var(--verde-50);
+}
+
+.btnDetalle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.1rem 0.3rem;
+  font: inherit;
+  font-weight: 800;
+  color: var(--verde-900);
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btnDetalle:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.55);
+}
+
+.flechaDetalle {
+  font-size: 0.75em;
+  color: var(--verde-700);
+}
+
+/* La fila desplegada no lleva el padding de celda: dentro va el panel.
+   Fondo con la trama de puntos de la casa, para que se lea como una pieza más
+   y no como una caja gris pegada debajo de la tabla. */
+.filaDetalle td {
+  padding: 0;
+  background-color: var(--neutro-50);
+  background-image: radial-gradient(rgba(1, 25, 19, 0.09) 1.1px, transparent 1.2px);
+  background-size: 9px 9px;
+}
+
+.detalle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 0.9rem 1rem 1rem;
+}
+
+.detalleEtiqueta {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--verde-700);
+}
+
+.detalleTexto {
+  margin: 0;
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--neutro-800);
+}
+
+/* Las opciones se leen como una tabla: filas marcadas una sí una no, y la
+   elegida con un tinte suave (naranja de destacado, no ámbar a bloque). */
+.detalleOpciones {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 2px solid var(--borde);
+  border-radius: 10px 8px 9px 8px / 8px 10px 8px 9px;
+  overflow: hidden;
+  background: var(--superficie);
+}
+
+.detalleOpciones li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--neutro-800);
+  border-bottom: 2px solid var(--borde);
+}
+
+.detalleOpciones li:nth-child(even) {
+  background: var(--neutro-50);
+}
+
+.detalleOpciones li:last-child {
+  border-bottom: none;
+}
+
+.detalleOpciones li.opcionElegida {
+  background: var(--naranja-50);
+  color: var(--naranja-900);
+  font-weight: 800;
+  box-shadow: inset 3px 0 0 var(--naranja-500);
+}
+
+.opcionTexto {
+  min-width: 0;
+}
+
+.opcionEtiqueta {
+  flex: none;
+  font-size: 9.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--naranja-800);
+  white-space: nowrap;
+}
+
+.detalleElegida {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--verde-900);
+}
+
+.leyenda {
+  margin: 0.5rem 0 0;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--texto-suave);
+}
+
+.swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 4px;
+  vertical-align: -1px;
+  border-radius: 3px;
+  background: var(--naranja-700);
+}
+
+/* ==========================================================================
+   9. Secciones
+   ========================================================================== */
+
+.seccionCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.seccionHead {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.8rem;
+  align-items: start;
+}
+
+.seccionNum {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--verde-950);
+  background: var(--verde-400);
+  border: 2px solid var(--verde-950);
+  border-radius: 12px 9px 11px 10px / 10px 12px 9px 11px;
+  transform: rotate(-0.7deg);
+}
+
+.seccionHead h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--verde-900);
+}
+
+.seccionHead p {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--texto-suave);
+}
+
+.h3 {
+  margin: 1.1rem 0 0.5rem;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--verde-900);
+}
+
+.subtituloBloque {
+  margin: 1.2rem 0 0.5rem;
+  padding-bottom: 0.3rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--verde-800);
+  border-bottom: 2px solid var(--borde);
+}
+
+/* ==========================================================================
+   10. Gráficas y figuras
+   ========================================================================== */
+
+.chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: inherit;
+}
+
+.dos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+/* Los dibujos del avatar van acotados: una sola fase no debe convertirse en un
+   cuadrado de 1100px. */
+.dosDibujo {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 340px));
+  justify-content: start;
+}
+
+.tres {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.9rem;
+}
+
+.figura {
+  margin: 0;
+  overflow: hidden; /* aquí no hay giro: recortar es seguro */
+  background: var(--superficie-alt);
+  border: 3px solid var(--verde-950);
+  border-radius: 16px 11px 15px 12px / 12px 16px 11px 15px;
+}
+
+.figura svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.figura figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--texto-medio);
+  background: var(--superficie);
+  border-top: 3px solid var(--verde-950);
+}
+
+.figura figcaption strong {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--verde-900);
+}
+
+/* Recorte de la caja de arena: la altura del lienzo del juego (VIEW.height,
+   hoy 840) se queda por encima del estante de los perros, que no pinta nada en
+   el informe. Si cambia el lienzo, cambian estos dos números. */
+.mundo {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1600 / 640;
+  background: var(--verde-900);
+}
+
+.capa {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% * 840 / 640);
+}
+
+.capa svg {
+  width: 100%;
+  height: 100%;
+}
+
+.dibujo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  background: var(--superficie);
+}
+
+/* ==========================================================================
+   11. Bloques de contenido sueltos
+   ========================================================================== */
+
+.nota {
+  padding: 0.8rem 1rem;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--verde-800);
+  background: var(--verde-50);
+  border: 2px solid var(--verde-700);
+  border-radius: 14px 11px 13px 12px / 12px 14px 11px 13px;
+}
+
+.nota summary {
+  cursor: pointer;
+  font-weight: 800;
+  color: var(--verde-800);
+  outline: none;
+}
+
+.nota summary:focus-visible {
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.55);
+  border-radius: 4px;
+}
+
+.nota p {
+  margin: 0.5rem 0 0;
+  color: var(--verde-700);
+}
+
+.pendiente {
+  margin: 0;
+  padding: 1.6rem 1.2rem;
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--texto-suave);
+  background: var(--neutro-50);
+  border: 2px dashed var(--neutro-300);
+  border-radius: 14px 11px 13px 12px / 12px 14px 11px 13px;
+}
+
+.orden {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.82rem;
+  line-height: 1.75;
+  color: var(--neutro-700);
+}
+
+.evento {
+  margin-top: 0.5rem;
+  padding: 0.9rem 1rem;
+  background: var(--naranja-50);
+  border: 2px solid var(--naranja-500);
+  border-radius: 14px 11px 13px 12px / 12px 14px 11px 13px;
+}
+
+.dl {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0.5rem 1rem;
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.dl dt {
+  font-weight: 800;
+  color: var(--naranja-900);
+}
+
+.dl dd {
+  margin: 0;
+  font-weight: 600;
+  color: var(--neutro-800);
+}
+
+.cita {
+  margin: 1rem 0 0;
+  padding: 0.8rem 1rem;
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--neutro-800);
+  background: var(--superficie-alt);
+  border-left: 4px solid var(--verde-500);
+  border-radius: 0 12px 12px 0;
+}
+
+.cita span {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 10.5px;
+  font-style: normal;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--verde-700);
+}
+
+.normas {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.8rem;
+  line-height: 1.75;
+  color: var(--neutro-700);
+}
+
+.listaAlertas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.listaAlertas li {
+  padding: 0.7rem 0.9rem;
+  background: var(--superficie-alt);
+  border: 2px solid var(--neutro-300);
+  border-left: 4px solid var(--neutro-400);
+  border-radius: 12px 9px 11px 10px / 10px 12px 9px 11px;
+}
+
+.listaAlertas li p {
+  margin: 0.3rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--neutro-700);
+}
+
+.listaAlertas li strong {
+  font-size: 0.85rem;
+  color: var(--neutro-900);
+}
+
+.alertaGrave {
+  background: var(--peligro-suave) !important;
+  border-left-color: var(--peligro-fuerte) !important;
+}
+
+.alertaLeve {
+  background: var(--naranja-50) !important;
+  border-left-color: var(--naranja-700) !important;
+}
+
+/* Registro cronológico: despliegue al final de la hoja. Sin caja propia para
+   que la regla de tinta de .bloque sea su único borde. */
+.registro summary {
+  padding: 0.35rem 0;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--verde-900);
+  outline: none;
+}
+
+.registro[open] summary {
+  margin-bottom: 0.7rem;
+}
+
+.registro summary:focus-visible {
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.55);
+  border-radius: 4px;
+}
+
+.pie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  text-align: center;
+}
+
+.pie p {
+  margin: 0;
+  max-width: 70ch;
+  font-size: 0.74rem;
+  font-weight: 600;
+  line-height: 1.55;
+  color: var(--texto-suave);
+}
+
+/* Aviso metodológico: letra pequeña gris al final del documento.
+   Ocupa todo el ancho de la hoja (el .pie p de arriba la limitaba a 70ch). */
+.pie .letraPequena {
+  align-self: stretch;
+  max-width: none;
+  margin: 0;
+  /* Mismo cuerpo y color que la línea de "informe generado…" */
+  font-size: 0.74rem;
+  font-weight: 600;
+  line-height: 1.55;
+  text-align: left;
+  color: var(--texto-suave);
+}
+
+.letraPequena strong {
+  font-weight: 800;
+  color: var(--texto-medio);
+}
+
+/* ==========================================================================
+   12. Carga y estados vacíos
+   ========================================================================== */
+
+/* Esqueleto de la tabla: la misma forma que las filas que van a llegar */
+.esqueleto {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: 1.4rem;
+}
+
+.esqueletoFila {
+  height: 2.4rem;
+  background: var(--neutro-100);
+  border-radius: 10px;
+  animation: latido 1.5s ease-in-out infinite;
+}
+
+.esqueletoFila:nth-child(2) { animation-delay: 0.12s; }
+.esqueletoFila:nth-child(3) { animation-delay: 0.24s; }
+.esqueletoFila:nth-child(4) { animation-delay: 0.36s; }
+.esqueletoFila:nth-child(5) { animation-delay: 0.48s; }
+
+@keyframes latido {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .esqueletoFila { animation: none; }
+}
+
+/* ==========================================================================
+   13. Responsive
+   ========================================================================== */
+
+@media (max-width: 760px) {
+  .dl {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+  .dl dd {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .pliego {
+    padding: 1.1rem 0.95rem 1.4rem;
+    box-shadow: 4px 4px 0 var(--verde-950);
+  }
+  .kpisSection {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .kpiValue {
+    font-size: 1.45rem;
+  }
+  .fichaGrid {
+    grid-template-columns: 1fr;
+  }
+  .fichaItem,
+  .fichaEdad,
+  .fichaSituacion {
+    grid-column: auto;
+  }
+  .seccionNum {
+    width: 30px;
+    height: 30px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ==========================================================================
+   14. Impresión: la hoja en blanco, sin fondo ni pegatinas
+   ========================================================================== */
+
+@media print {
+  /* La barra compartida no se imprime (ver barra.module.css) */
+  .fondo {
+    display: none;
+  }
+  .pagina {
+    background: #fff;
+    min-height: 0;
+  }
+  .principal {
+    padding: 0;
+    max-width: none;
+  }
+  .pliego {
+    background-image: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  .bloque {
+    border-top-color: var(--neutro-300);
+    break-inside: avoid;
+  }
+  .tablaScroll {
+    overflow: visible;
+  }
+  /* En papel no sirven los botones (exportar, imprimir, volver) ni el sello de
+     "actualizado": se ocultan para que la hoja quede limpia. */
+  .acciones,
+  .btnSticker,
+  .btnSec,
+  .btnFila,
+  .buscador {
+    display: none;
+  }
+  .nota {
+    display: block;
+  }
+}

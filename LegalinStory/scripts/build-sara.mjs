@@ -61,7 +61,7 @@ explain("c2-privacy", "Laura", "privacy", "c2-06");
 say("c2-dad", "Laura", "No vamos a improvisar una llamada ignorando tu miedo. Los profesionales coordinarán cómo actuar de forma segura. Te explicaré lo que sepamos.", "c2-06");
 say("c2-alone", "Laura", "No tienes que organizarlo tú sola. Pedir ayuda aquí ya permite que las personas responsables actúen. Te acompañarán y te explicarán las actuaciones que correspondan.", "c2-06");
 narration("c2-06", "El centro coordina la atención con los servicios de protección. La seguridad se atiende desde el principio. Esta historia reúne varios encuentros; no representa un calendario obligatorio.", "c2-07");
-say("c2-07", "Irene", "Hola, Sara. Soy Irene, educadora social. Voy a acompañarte junto con el equipo. Mi trabajo también tiene que ver con cómo estás en clase, con tus amigas y en tu día a día.", "c2-08");
+say("c2-07", "Irene", "Hola, Sara. Soy Irene, trabajadora social. Voy a acompañarte junto con el equipo. Mi trabajo también tiene que ver con cómo estás en clase, con tus amigas y en tu día a día.", "c2-08");
 say("c2-08", "Sara", "¿Tendré que contarlo entero otra vez? No sé ni por dónde he empezado antes.", "c2-09");
 say("c2-09", "Irene", "Intentaremos coordinarnos para que no tengas que repetirlo sin necesidad. Antes de preguntarte algo, puedo explicarte para qué lo necesitamos.", "c2-choice2");
 choice("c2-choice2", "Irene acerca una silla. ¿Cómo prefiere Sara que empiecen?", [
@@ -217,7 +217,7 @@ const guide = {
     { name: "Sara", role: "15 años · 4.º de ESO", initial: "S", color: "peach", text: "Le gusta el voleibol, dibuja en los márgenes y tiene una amiga llamada Paula. Su vida es más amplia que el procedimiento.", sprite: "assets/characters/sara/smile.svg" },
     { name: "Paula", role: "Su mejor amiga", initial: "P", color: "pink", text: "Ofrece compañía y conserva los planes compartidos. No tiene que investigar ni resolver la situación." },
     { name: "Laura", role: "Profesora", initial: "L", color: "green", text: "Escucha, atiende señales y coordina la comunicación mediante el protocolo del centro. No investiga delitos." },
-    { name: "Irene", role: "Educadora social", initial: "I", color: "purple", text: "Acompaña la vida cotidiana y coordina apoyos con el equipo. No dicta medidas judiciales ni sentencias." },
+    { name: "Irene", role: "Trabajadora social", initial: "I", color: "purple", text: "Acompaña la vida cotidiana y coordina apoyos con el equipo. No dicta medidas judiciales ni sentencias." },
     { name: "Elena", role: "Abogada", initial: "E", color: "blue", text: "Asesora a Sara, explica las actuaciones y defiende sus intereses. La defensa de Javier corresponde a otro profesional." },
     { name: "Jueza", role: "Autoridad judicial", initial: "J", color: "purple", text: "Dirige las actuaciones que le corresponden y adopta decisiones con las garantías del procedimiento." },
     { name: "Fiscalía", role: "Ministerio Fiscal", initial: "F", color: "green", text: "Promueve la acción de la justicia y vela por la legalidad y los derechos. Que Sara sea menor no convierte la causa contra su padre en justicia penal de menores." },

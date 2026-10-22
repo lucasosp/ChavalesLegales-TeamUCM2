@@ -71,7 +71,7 @@ export class SaraExperience {
     document.addEventListener("keydown", this.onKey, true);
     this.unsubscribe = this.app.bus.on("state", () => this.sync());
     // The epilogue offers a real restart, using the same menu as mid-story pause.
-    const restart = element("button", "ending-library", t("sara.restart"));
+    const restart = element("button", "ending-button", t("sara.restart"));
     restart.type = "button";
     restart.dataset.saraAction = "restart";
     root.querySelector(".ending-actions").append(restart);

@@ -1,6 +1,6 @@
 'use client'
 
-import styles from './informe.module.css'
+import styles from './servicios.module.css'
 import { useT } from '../../lib/i18n'
 
 export const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1)
@@ -18,7 +18,7 @@ export function Nota({ titulo, children }) {
 
 export function Seccion({ numero, titulo, sub, children }) {
   return (
-    <section className={styles.seccionCard}>
+    <section className={`${styles.seccionCard} ${styles.bloque}`}>
       <header className={styles.seccionHead}>
         <span className={styles.seccionNum}>{numero}</span>
         <div>

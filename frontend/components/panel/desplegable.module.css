@@ -1,0 +1,140 @@
+/* Desplegable con el lenguaje de la portada: trazo de tinta, esquinas
+   irregulares y placa dura. Reglas en ESTILO.md. */
+
+.caja {
+  position: relative;
+}
+
+/* Disparador: mismo cuerpo que los campos del formulario */
+.disparador {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: left;
+  color: var(--verde-950);
+  background-color: var(--superficie);
+  border: 3px solid var(--verde-950);
+  border-radius: 12px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.disparador:hover:not(:disabled) {
+  background-color: var(--naranja-50);
+}
+
+/* Abierto o con el foco: aro ámbar, igual que el campo del alumno */
+.disparador:focus-visible,
+.disparadorAbierto {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.55);
+}
+
+.disparador:disabled {
+  background-color: var(--neutro-100);
+  color: var(--texto-suave);
+  border-color: var(--neutro-400);
+  cursor: not-allowed;
+}
+
+.valor {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flecha {
+  flex: none;
+  font-size: 0.8rem;
+  color: var(--verde-800);
+  transition: transform 0.15s ease;
+}
+
+.disparadorAbierto .flecha {
+  transform: rotate(180deg);
+}
+
+/* Panel: pegatina blanca con placa */
+.lista {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background-color: var(--superficie);
+  border: 3px solid var(--verde-950);
+  border-radius: 14px 11px 13px 12px / 12px 14px 11px 13px;
+  box-shadow: 4px 4px 0 var(--verde-700);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-height: 280px;
+  overflow-y: auto;
+  animation: desplegableEntra 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lista:focus {
+  outline: none;
+}
+
+@keyframes desplegableEntra {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+.opcion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--verde-950);
+  cursor: pointer;
+}
+
+/* Resalte del teclado o del ratón */
+.opcionActiva {
+  background-color: var(--neutro-100);
+}
+
+/* La elegida se queda en ámbar, como el idioma seleccionado de la portada */
+.opcionElegida {
+  background-color: var(--marca-ambar);
+  font-weight: 800;
+}
+
+.opcionElegida.opcionActiva {
+  background-color: var(--marca-ambar-claro);
+}
+
+.marca {
+  flex: none;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--verde-950);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lista {
+    animation: none;
+  }
+  .flecha {
+    transition: none;
+  }
+}

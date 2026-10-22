@@ -214,7 +214,7 @@ function Basset() {
         <path d="M4 -8 Q9 -5 14 -8" stroke="#1c130d" strokeWidth="2" fill="none" strokeLinecap="round" />
         <path d="M5 -5 Q9 -1 13 -5" stroke="#b45309" strokeWidth="1" fill="none" opacity=".6" />
       </g>
-      <g className={styles.zzz} fill="#64748b" fontFamily="Fredoka, sans-serif" fontWeight="700">
+      <g className={styles.zzz} fill="var(--neutro-500)" fontFamily="var(--font-display)" fontWeight="800">
         <text x="60" y="-46" fontSize="13">z</text>
         <text x="70" y="-58" fontSize="17">z</text>
       </g>
@@ -299,7 +299,7 @@ export function Perro({ dog, flip, lifted, idle }) {
   const { Art, scale } = dog
   return (
     <g>
-      <ellipse cx="0" cy="0" rx={dog.width * 0.42 * scale} ry={7 * scale} fill="rgba(40,24,8,.35)" style={{ transform: lifted ? 'translateY(10px) scale(1.15)' : 'none', transition: 'transform .15s' }} />
+      <ellipse cx="0" cy="0" rx={dog.width * 0.42 * scale} ry={7 * scale} fill="rgba(1, 25, 19, 0.18)" style={{ transform: lifted ? 'translateY(10px) scale(1.15)' : 'none', transition: 'transform .15s' }} />
       <g
         className={idle ? styles.idle : undefined}
         style={{ transform: `translateY(${lifted ? -12 : 0}px) scale(${(flip ? -1 : 1) * scale * (lifted ? 1.08 : 1)}, ${scale * (lifted ? 1.08 : 1)})`, transition: 'transform .15s' }}

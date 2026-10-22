@@ -1,4 +1,4 @@
-// Tipos de riesgo que ofrece el educador.
+// Tipos de riesgo que ofrece el trabajador social.
 //
 // Solo se guarda el `value`: el texto se resuelve en la UI con
 // t(`profesores.riesgo_${value}`), que existe en las 6 lenguas. Antes había aquí un

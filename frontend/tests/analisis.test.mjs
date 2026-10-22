@@ -7,7 +7,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { analizar, tEvento, fmtDuracion, fmtSeg, mediana, desviacion, media } from '../app/informe/analisis.js'
+import { analizar, tEvento, fmtDuracion, fmtSeg, fmtFechaCorta, mediana, desviacion, media } from '../app/servicios/analisis.js'
 
 // Atajo: evento con reloj de servidor (esquema 2). El `t` del cliente va desfasado a propósito
 // en algunos tests para comprobar que se ignora.
@@ -190,4 +190,10 @@ test('helpers de formato y estadística', () => {
   assert.equal(media([2, 4]), 3)
   assert.equal(desviacion([5]), 0)
   assert.ok(desviacion([2, 4, 4, 4, 5, 5, 7, 9]) > 2)
+})
+
+test('fmtFechaCorta da DD/MM/AAAA HH:mm con dos cifras siempre', () => {
+  const t = new Date(2026, 9, 22, 3, 7, 45).getTime()   // 22 oct 2026, 03:07
+  assert.equal(fmtFechaCorta(t), '22/10/2026 03:07')
+  assert.equal(fmtFechaCorta(null), '—')
 })

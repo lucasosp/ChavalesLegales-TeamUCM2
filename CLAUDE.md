@@ -9,6 +9,8 @@ Everything user-facing is in Spanish (identifiers, data keys, UI). Keep new code
 
 > **Deep dive:** see [`ARCHITECTURE.md`](./ARCHITECTURE.md) for the data contracts, the
 > LegalinStory internals and the verified list of architectural gaps.
+> **Lenguaje visual:** see [`ESTILO.md`](./ESTILO.md) para replicar en cualquier pantalla la
+> pegatina de tebeo de la portada (tinta, placas, motas, giros, fondos).
 
 ---
 
@@ -18,19 +20,20 @@ Everything user-facing is in Spanish (identifiers, data keys, UI). Keep new code
 backend/                     FastAPI API: ONE resource, casos
   main.py                    app + 6 rutas, sin CORS (todo es mismo origen)
   casos.py                   CasoStore: un JSON por caso, lock, validación de id (170)
-  tests/test_casos.py        17 tests con unittest de la stdlib
+  tests/test_casos.py        25 tests con unittest de la stdlib
   casos_data/<id>.json       estado de runtime (gitignored)
 
 frontend/                    Next.js 14 App Router (JavaScript, no TS, no lint, no tests)
-  app/page.jsx               landing: entrada del alumno + rejilla de 4 juegos
-  app/alumno/page.jsx        entrada por código: 5 dígitos -> valida contra la API
-  app/profesores/page.jsx    panel del educador (genera el caso y su código)
+  app/page.jsx               landing: entrada del alumno (código en línea) + 4 juegos
+  components/EntradaCodigo.jsx  formulario de 5 dígitos -> valida contra la API
+  app/profesores/page.jsx    panel del trabajador social (genera el caso y su código)
   app/novela/page.jsx        EMBEBE la novela en un iframe y registra sus eventos
   app/avatar/page.jsx        EMBEBE la novela en modo avatar (?avatar=1)
-  app/informe/               listado + [caso] (analisis.js, Graficas.jsx, informe.module.css)
+  app/servicios/             listado + [caso] (analisis.js, Graficas.jsx, servicios.module.css)
   app/experiments/           cid-table + caja-arena: demos sueltas, NO registran nada
-  app/asistentes-sociales/   redirige a /informe
-  components/PanelEducador.jsx  orquestador del panel
+  app/asistentes-sociales/   redirige a /servicios
+  components/Barra.jsx       barra compartida: volver + rótulo mini (enlaza a /) + idioma
+  components/PanelTrabajadorSocial.jsx  orquestador del panel
   components/panel/          FormularioCaso · ResultadoCaso · opcionesRiesgo
   components/AvatarGeometrico.jsx  SVG paramétrico (también lo usa MesaCID)
   lib/casos.js               el ÚNICO cliente HTTP de la app
@@ -58,8 +61,13 @@ Preferred (Nix):
 
 ```bash
 devenv up          # backend :8000 + frontend :3000 (instala deps la primera vez)
-devenv shell       # luego: setup | backend | frontend | build | test | novela
+devenv shell       # luego: setup | backend | frontend | build | test | novela | clean
 ```
+
+El frontend va **fijado al puerto 3000**: si está ocupado, el proceso falla en voz alta en vez
+de arrancar en 3001 dejando un `next dev` viejo atendiendo 3000. Dos `next dev` sobre el mismo
+`.next` se pisan la caché y el navegador empieza a ver 404s: si eso pasa, `clean` (para los
+procesos y borra `.next`) y vuelve a arrancar.
 
 Sin Nix:
 
@@ -72,11 +80,12 @@ Tests:
 
 ```bash
 cd backend && python -m unittest discover -s tests -v   # 25 tests, sin dependencias
-cd frontend && npm test                                  # 16 tests de analisis.js (node:test)
+cd frontend && npm test                                  # 20 tests: analisis.js + edad del panel (node:test)
 cd LegalinStory && npm test                             # validador + 12 suites
 cd LegalinStory && npm run validate
 bash scripts/smoke.sh                                   # API de punta a punta
 npm --prefix frontend run build                         # el único "linter" que hay
+npm --prefix frontend run build:check                   # idem, en .next-check (no rompe el dev)
 ```
 
 Variables de entorno:
@@ -88,6 +97,9 @@ Variables de entorno:
 | `CASOS_DIR` | directorio del store de casos | `backend/casos_data` |
 | `CASOS_LEGACY_FILE` | blob antiguo a migrar | `<padre de CASOS_DIR>/casos_data.json` |
 | `VITE_PLATFORM_URL` | destino de "Salir" en la novela suelta | `http://<host>:3000/` |
+| `NEXT_TELEMETRY_DISABLED` | la fija `scripts/dev.mjs` y `devenv.nix`; sin ella el arranque se cuelga | `1` |
+| `NEXT_DIST_DIR` | carpeta de salida de Next | `.next` (`build:check` usa `.next-check`) |
+| `FORCE_NOVELA_BUILD` | fuerza el build de LegalinStory en `predev`/`prebuild` | sin definir |
 
 `ALLOWED_ORIGINS` ya no hace nada: el backend no tiene middleware CORS porque el navegador solo
 habla con Next, que reescribe `/api/*` (mismo origen). Si añades un cliente cross-origin, tendrás
@@ -98,12 +110,12 @@ que volver a ponerlo.
 ## 3. Data flow (memorize this)
 
 ```
-/profesores  PanelEducador ──await guardarMetaCaso──► POST /api/casos/CL-12345/meta
+/profesores  PanelTrabajadorSocial ──await guardarMetaCaso──► POST /api/casos/CL-12345/meta
                                                         │  (si falla, NO se muestra el código)
                                                         ▼
                                              código CL-12345 que dicta al alumno
 
-/alumno     5 dígitos ──► GET /api/casos/CL-12345 ──► /novela?caso=CL-12345
+/           5 dígitos ──► GET /api/casos/CL-12345 ──► /novela?caso=CL-12345
                                                         │  (404 = código inexistente)
 
 /novela     iframe /novela/index.html  (LegalinStory)
@@ -116,7 +128,7 @@ que volver a ponerlo.
             además: sincronizarDibujo() copia legalinstory_avatar_drawings -> evento 'dibujo'
             Todo va a  POST /api/casos/{id}/eventos   (una sola fuente de verdad)
 
-/informe/[caso]  GET /api/casos/{id} ──► analisis.js(eventos) ──► KPI + gráficas
+/servicios/[caso]  GET /api/casos/{id} ──► analisis.js(eventos) ──► KPI + gráficas
                                                               └─► MesaCID / Escenario / Clima
 ```
 
@@ -173,7 +185,7 @@ duplicar imágenes. Un caso con dibujos pesa ~50 KB (base64).
 
 * Todo es `'use client'`. Sin componentes de servidor, sin TypeScript, sin ESLint.
   **`npm run build` es el único chequeo estático** — úsalo tras tocar imports.
-* Estilos mezclados: CSS modules (`informe`, `cid`, `arena`, `nubes`), `app/globals.css` e inline.
+* Estilos mezclados: CSS modules (`servicios`, `cid`, `arena`, `nubes`), `app/globals.css` e inline.
   En los CSS modules, **una clase que no existe en el `.css` llega como `undefined`** y React
   omite el atributo: el elemento sale sin estilo y no hay error. Si añades una clase, añádela al
   módulo.
@@ -181,8 +193,19 @@ duplicar imágenes. Un caso con dibujos pesa ~50 KB (base64).
   `registrarEvento` avisa por `console.warn`; `cargarCaso`/`listarCasos` devuelven vacío marcado.
   No hay espejo en localStorage: la app asume conexión.
 * Nada de `catch {}` vacíos en código nuevo: convierten un fallo de red en "no hay datos".
-* i18n: `t('<ns>.<clave>')`, 6 lenguas × 7 espacios. `alumno.json` solo existe en `es`; el resto
-  cae al español por el fallback de `lib/i18n.jsx`.
+* i18n: `t('<ns>.<clave>')`, 6 lenguas × 6 espacios. Todas las lenguas traducen la entrada del
+  alumno (`inicio.entradaAlumno*`); si falta una clave, cae al español por `lib/i18n.jsx`.
+* Paleta: `app/globals.css` es la única fuente de color. Tres grupos y un token por rol:
+  `--verde-50..950` (principal: fondo, botones, foco, navegación, datos), `--naranja-50..900`
+  (acento: destacados, avisos, exportar), `--neutro-50..900` (superficies blancas/casi blancas y
+  texto, grises limpios sin tinte) y `--peligro*` (solo error / alerta grave). Aparte, dos grupos
+  de uso restringido: `--marca-ambar*` (logotipo y botón Entrar, el ámbar de la marca) y
+  `--juego-*` (azul, morado, rojo y verde en tonos planos tipo Excalidraw, solo para las cuatro
+  fichas de juego).
+  Encima hay tokens semánticos (`--superficie`, `--borde`, `--texto*`, `--acento*`) que son los que
+  deben usarse en código nuevo: en CSS modules, `var(--texto-medio)` en lugar de un hex.
+  `--naranja-500` y más claros solo rellenan; para texto naranja sobre fondo claro hay que usar
+  `--naranja-700` u `800` (los demás no pasan AA).
 
 ---
 
@@ -223,13 +246,13 @@ duplicar imágenes. Un caso con dibujos pesa ~50 KB (base64).
 5. **`/experiments/*` no registra nada.** Se puede jugar y no queda rastro: el único camino
    instrumentado es `MinijuegoNubes` dentro de `/novela`.
 6. **`casoDesdeUrl()` devuelve `DEMO` si no hay `?caso=`.** Un `/novela` sin parámetros escribe
-   eventos en el caso `DEMO`, que aparece en `/informe` sin que nadie lo haya creado.
+   eventos en el caso `DEMO`, que aparece en `/servicios` sin que nadie lo haya creado.
 7. **Ids de caso enumerables** (`CL-` + 5 dígitos) y **sin auth**: quien conozca un id puede leer
    y sobrescribir el caso. Aceptado por decisión de producto; no lo "arregles" sin hablarlo.
 8. **`casos_data.json` y `casos_data/` son estado de runtime**, no fixtures. Están gitignorados.
    `casos_data.json.migrado` es el respaldo del store antiguo: no lo borres.
 9. **Sin auth en ninguna capa.** El antiguo gate `2026`/`SOCIAL` se eliminó por ser un literal en
-   el cliente; ahora `/informe` se alcanza por un enlace desde `/profesores`.
+   el cliente; ahora `/servicios` se alcanza por un enlace desde `/profesores`.
 10. **`ecosystem.config.js` está obsoleto** (PM2, `/var/www/…`). El despliegue real es Docker
     Compose + Caddy. No lo uses como referencia.
 
@@ -237,7 +260,7 @@ duplicar imágenes. Un caso con dibujos pesa ~50 KB (base64).
 
 ## 8. Change recipes
 
-* **Nuevo tipo de evento** → `/novela` (`registrarEvento`), `app/informe/analisis.js` y la vista
+* **Nuevo tipo de evento** → `/novela` (`registrarEvento`), `app/servicios/analisis.js` y la vista
   `[caso]`. Recuerda que `CasoStore` tiene un caso especial para `dibujo`.
 * **Nueva cadena de UI** → las 6 lenguas en `frontend/locales/*/<ns>.json`. Añádela a `es` siempre;
   el resto puede caer al fallback, pero entonces queda sin traducir.
@@ -245,9 +268,9 @@ duplicar imágenes. Un caso con dibujos pesa ~50 KB (base64).
   luego `npm run validate`. Si el story es generado, edita su `scripts/build-*.mjs`.
 * **Minijuego nuevo** → regístralo en `GAMES` de `app/novela/MinijuegoNubes.jsx` y usa un nodo
   `external { game }` en el story. El `report` que devuelva es lo que verá el informe.
-* **Nueva sección del informe** → `app/informe/[caso]/page.jsx` + derivaciones en `analisis.js` +
+* **Nueva sección del informe** → `app/servicios/[caso]/page.jsx` + derivaciones en `analisis.js` +
   gráficas en `Graficas.jsx`, con claves en el espacio `informe`. Usa clases que existan en
-  `informe.module.css`.
+  `servicios.module.css`.
 * **Tocar el backend** → recuerda validar el id, tomar el lock y devolver copia. Añade un test en
   `backend/tests/`.
 

@@ -1,10 +1,8 @@
 {
-  "accesoEducadores": "Accés per a educadors socials",
-  "vistaAsistentesAria": "Vista d'Assistents Socials",
-  "vistaAsistentesTitle": "Panell exclusiu per a Assistents i Treballadors Socials",
-  "asistentesSociales": "Assistents Socials",
-  "jugarSinPinAria": "Jugar sense PIN",
-  "jugarSinPinTitulo": "Jugar sense PIN · Sessió individual",
+  "accesoTrabajadores": "Accés per a treballadors socials",
+  "accesoTrabajadoresCorto": "Treballadors",
+  "juegosLibresAria": "Jocs sense codi",
+  "juegosLibresTitulo": "Juga sense codi · Sessió individual",
   "juegoHistoriaTag": "Història",
   "juegoHistoriaTitulo": "Sara · La meua història continua",
   "juegoFamiliaTag": "Família",
@@ -13,5 +11,13 @@
   "juegoArenaTitulo": "El meu món amb gossos",
   "juegoAvatarTag": "Avatar",
   "juegoAvatarTitulo": "Fes el teu avatar",
-  "pieAdminJusticia": "Administració de Justícia"
+  "pieAdminJusticia": "Administració de Justícia",
+  "entradaAlumnoAria": "Entrada del menor amb el codi de la seua sessió",
+  "entradaAlumnoTitulo": "Tens un codi?",
+  "entradaAlumnoTexto": "El teu treballador social et donarà un codi de 5 xifres per a entrar en la teua sessió.",
+  "entradaAlumnoEtiqueta": "Codi de la sessió",
+  "entradaAlumnoBoton": "Entra",
+  "entradaAlumnoBuscando": "Buscant…",
+  "entradaAlumnoNoExiste": "Eixe codi no existeix. Demana al teu treballador social que el revise.",
+  "entradaAlumnoSinConexion": "No es pot connectar. Comprova la teua connexió i torna-ho a provar."
 }

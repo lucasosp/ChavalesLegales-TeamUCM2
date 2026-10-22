@@ -1,10 +1,8 @@
 {
-  "accesoEducadores": "Accès entà educadors sociaus",
-  "vistaAsistentesAria": "Vista d'Assistents Sociaus",
-  "vistaAsistentesTitle": "Panèu exclusiu entà Assistents e Trabalhadors Sociaus",
-  "asistentesSociales": "Assistents Sociaus",
-  "jugarSinPinAria": "Jogar sense PIN",
-  "jugarSinPinTitulo": "Jogar sense PIN · Session individuau",
+  "accesoTrabajadores": "Accès entà trabalhadores sociaus",
+  "accesoTrabajadoresCorto": "Trabalhadores",
+  "juegosLibresAria": "Jòcs sense còdi",
+  "juegosLibresTitulo": "Jogar sense còdi · Session individuau",
   "juegoHistoriaTag": "Istòria",
   "juegoHistoriaTitulo": "Sara · Era mia istòria seguís",
   "juegoFamiliaTag": "Familha",
@@ -13,5 +11,13 @@
   "juegoArenaTitulo": "Eth mèn mon damb cans",
   "juegoAvatarTag": "Avatar",
   "juegoAvatarTitulo": "Hè eth tòn avatar",
-  "pieAdminJusticia": "Administracion de Justícia"
+  "pieAdminJusticia": "Administracion de Justícia",
+  "entradaAlumnoAria": "Entrada deth menor damb eth còdi dera sua session",
+  "entradaAlumnoTitulo": "As un còdi?",
+  "entradaAlumnoTexto": "Eth tòn trabalhador sociau te darà un còdi de 5 xifres entà entrar ena tua session.",
+  "entradaAlumnoEtiqueta": "Còdi dera session",
+  "entradaAlumnoBoton": "Entrar",
+  "entradaAlumnoBuscando": "Bèrèc…",
+  "entradaAlumnoNoExiste": "Aguest còdi n'existís pas. Demana ath tòn trabalhador sociau que'u revise.",
+  "entradaAlumnoSinConexion": "Non se pòt connectar. Compròva era tua connexion e torna-o a ensajar."
 }

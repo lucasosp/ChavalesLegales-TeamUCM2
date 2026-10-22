@@ -92,7 +92,7 @@ export default function Novela() {
   }, [router])
 
   return (
-    <main style={{ position: 'fixed', inset: 0, zIndex: 100, background: '#461020' }}>
+    <main style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'var(--verde-900)' }}>
       <iframe id="novela-frame" title={t('juegos.novelaIframeTitulo')} src={iframeSrc} style={{ display: 'block', width: '100%', height: '100%', border: 0 }} />
       {minijuego && (
         <MinijuegoNubes

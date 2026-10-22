@@ -24,22 +24,29 @@ CODE=$(curl -s -o /dev/null -w '%{http_code}' "$B/api/telemetria/resumen")
 # --- 3. ciclo completo de un caso ------------------------------------------
 curl -fsS -X POST "$B/api/casos/$CID/meta" \
   -H 'content-type: application/json' \
-  -d '{"nombreJoven":"Smoke","tipoRiesgo":"ciberacoso","creadoEn":"2026-01-01T00:00:00Z"}' \
+  -d '{"nombreJoven":"Smoke","edad":12,"tipoRiesgo":"ciberacoso","creadoEn":"2026-01-01T00:00:00Z"}' \
   >/dev/null || fail "POST meta"
+
+# --- 3b. la edad solo admite el rango 5–18 --------------------------------
+for E in 4 19 0 18.5 '"12"' true; do
+  CODE=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$B/api/casos/$CID/meta" \
+    -H 'content-type: application/json' -d "{\"edad\":$E}")
+  [ "$CODE" = "400" ] || fail "POST meta con edad $E devuelve $CODE (esperado 400)"
+done
 
 # evento de progreso
 curl -fsS -X POST "$B/api/casos/$CID/eventos" \
   -H 'content-type: application/json' \
   -d '{"kind":"inicio","t":1,"data":{}}' >/dev/null || fail "POST evento inicio"
 
-# evento de decisión (mismos campos que lee app/informe/analisis.js)
+# evento de decisión (mismos campos que lee app/servicios/analisis.js)
 curl -fsS -X POST "$B/api/casos/$CID/eventos" \
   -H 'content-type: application/json' \
   -d '{"kind":"decision","t":2,"data":{"node_id":"c1-01","chapter":1,"prompt":"¿Qué haces?","option_label":"Avisar","time_ms":1200}}' \
   >/dev/null || fail "POST evento decision"
 
 # evento de minijuego con un report mínimo: comprueba el camino que alimenta
-# <Mesa report> / <Mundo report> en /informe/[caso], sin jugar 3 capítulos.
+# <Mesa report> / <Mundo report> en /servicios/[caso], sin jugar 3 capítulos.
 curl -fsS -X POST "$B/api/casos/$CID/eventos" \
   -H 'content-type: application/json' \
   -d '{"kind":"minijuego","t":3,"data":{"game":"cid-table","report":{"config":{"characters":[]},"rounds":[]}}}' \

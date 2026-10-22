@@ -1,10 +1,10 @@
-"""API de Chavales Legales: registro por caso que alimenta /informe.
+"""API de Chavales Legales: registro por caso que alimenta /servicios.
 
 Arrancar con: python -m uvicorn main:app --app-dir backend
 (los imports son planos a propósito; ver CLAUDE.md §4)
 
 Toda la telemetría pasa por `casos`: cada evento de la novela (progreso, decisión,
-minijuego, dibujo) es una fila de `eventos`, y /informe/[caso] es su única vista.
+minijuego, dibujo) es una fila de `eventos`, y /servicios/[caso] es su única vista.
 
 No hay middleware CORS: el navegador solo habla con Next, que reescribe /api/* al
 backend, así que todo es mismo origen. La novela va en un iframe del mismo origen.
@@ -26,6 +26,11 @@ def root():
 # =============================================================================
 # CASOS · el caso es el agregado: metadatos de la sesión + registro de eventos
 # =============================================================================
+
+# Rango de edad que cubre el contenido. El panel ya lo limita; aquí se vuelve a comprobar
+# porque cualquiera puede POSTear a /meta directamente.
+EDAD_MIN = 5
+EDAD_MAX = 18
 
 
 def validar_id(caso_id: str) -> str:
@@ -62,7 +67,15 @@ def obtener_caso(caso_id: str):
 
 @app.post("/api/casos/{caso_id}/meta")
 def guardar_meta_caso(caso_id: str, meta: Dict[str, Any] = Body(...)):
-    """Crea o actualiza el caso. El educador no reparte un código hasta que esto responde."""
+    """Crea o actualiza el caso. El trabajador social no reparte un código hasta que esto responde."""
+    if "edad" in meta:
+        edad = meta["edad"]
+        # bool es subclase de int en Python: True no es una edad válida
+        if isinstance(edad, bool) or not isinstance(edad, int) or not EDAD_MIN <= edad <= EDAD_MAX:
+            raise HTTPException(
+                status_code=400,
+                detail=f"La edad tiene que ser un número entero entre {EDAD_MIN} y {EDAD_MAX}",
+            )
     return caso_store.set_meta(validar_id(caso_id), meta)
 
 

@@ -4,9 +4,11 @@
   "version": "0.1.0",
   "scripts": {
     "predev": "node scripts/prepare-novel.mjs",
-    "dev": "next dev",
+    "dev": "node scripts/dev.mjs",
     "prebuild": "node scripts/prepare-novel.mjs",
     "build": "next build",
+    "build:check": "NEXT_DIST_DIR=.next-check next build",
+    "clean": "rm -rf .next .next-check",
     "start": "next start",
     "test": "node --test tests/*.test.mjs"
   },

@@ -10,41 +10,109 @@
 }
 
 :root {
-  /* Paleta oficial: Emerald Forest (Verde esmeralda fresca, lima y ámbar) */
-  --granate: #064e3b;
-  --granate-dark: #022c22;
-  --granate-deep: #011913;
-  --granate-light: #047857;
-  
-  --naranja: #f97316;
-  --naranja-dark: #c2410c;
-  --naranja-light: #fb923c;
-  
-  --amarillo: #fbbf24;
-  --amarillo-dark: #d97706;
-  --amarillo-light: #fde68a;
-  
-  --verde: #10b981;
-  --verde-dark: #059669;
-  --verde-light: #34d399;
-  
-  --verde-oscuro: #047857;
-  --verde-oscuro-dark: #064e3b;
-  
-  --title-color-1: #fbbf24;
-  --title-shadow-1: #b45309;
-  --title-color-2: #34d399;
-  --title-shadow-2: #059669;
-  
+  /* ======================================================================
+     SISTEMA DE COLOR: dos familias y nada más.
+     1. VERDE  -> color principal. Fondo, superficies oscuras, botones, foco,
+                  navegación, datos y todo lo estructural.
+     2. NARANJA -> único acento. Titular de marca, fichas de juego, avisos,
+                  destacados y acciones de exportar. Nunca en el botón
+                  principal (ese es verde).
+     El rojo queda reservado para error / alerta grave.
+     ====================================================================== */
+
+  /* --- 1. Escala verde (color principal) --- */
+  --verde-50: #ecfdf5;
+  --verde-100: #d1fae5;
+  --verde-200: #a7f3d0;
+  --verde-300: #6ee7b7;
+  --verde-400: #34d399;
+  --verde-500: #10b981;
+  --verde-600: #059669;
+  --verde-700: #047857;
+  --verde-800: #064e3b;
+  --verde-900: #022c22;
+  --verde-950: #011913;
+
+  /* --- 2. Escala naranja (acento único) ---
+     Naranja de verdad: es el color del botón Entrar y de todo lo que señala.
+     naranja-500 y más claros son relleno y borde, nunca texto sobre fondo
+     claro (no pasan AA); para texto va naranja-700 u 800. --- */
+  --naranja-50: #fff7ed;
+  --naranja-100: #ffedd5;
+  --naranja-200: #fed7aa;
+  --naranja-300: #fdba74;
+  --naranja-400: #fb923c;
+  --naranja-500: #f97316;
+  --naranja-600: #ea580c;
+  --naranja-700: #c2410c;
+  --naranja-800: #9a3412;
+  --naranja-900: #7c2d12;
+
+  /* --- Neutros: grises limpios, sin tinte. Las superficies claras son
+         blancas o casi blancas; el color lo pone el verde y el naranja. --- */
+  --neutro-50: #fafafa;
+  --neutro-100: #f4f4f5;
+  --neutro-200: #e4e4e7;
+  --neutro-300: #d4d4d8;
+  --neutro-400: #a1a1aa;
+  --neutro-500: #71717a;
+  --neutro-600: #52525b;
+  --neutro-700: #3f3f46;
+  --neutro-800: #27272a;
+  --neutro-900: #18181b;
+
+  /* --- Tokens semánticos: son los que se usan en las páginas --- */
+  --superficie: #ffffff;
+  --superficie-alt: var(--neutro-50);
+  --borde: var(--neutro-200);
+  --borde-fuerte: var(--verde-800);
+  --texto: var(--neutro-900);
+  --texto-medio: var(--neutro-600);
+  --texto-suave: var(--neutro-500);
+  --acento: var(--naranja-500);
+  --acento-fuerte: var(--naranja-700);
+  --acento-texto: var(--naranja-800);
+  --acento-suave: var(--naranja-100);
+  --acento-tenue: var(--naranja-50);
+  --peligro: #b91c1c;
+  --peligro-fuerte: #dc2626;
+  --peligro-suave: #fef2f2;
+  --peligro-borde: #fca5a5;
+
+  /* --- 3. Colores de los minijuegos ---
+     Azul, morado, rojo y verde saturados tipo Excalidraw, aclarados un punto
+     sobre el tono base para que la ficha no pese tanto. Llevan tinta verde
+     oscura, así que el contraste va de 7:1 a 10:1. --- */
+  --juego-azul: #50abf2;
+  --juego-azul-borde: #1c7ed6;
+  --juego-morado: #e094f5;
+  --juego-morado-borde: #be4bdb;
+  --juego-rojo: #ff8a8a;
+  --juego-rojo-borde: #f03e3e;
+  --juego-verde: #67d579;
+  --juego-verde-borde: #2f9e44;
+
+  /* El logotipo y el botón Entrar comparten el ámbar de Chavales Legales,
+     que no es el naranja de acento. */
+  --marca-ambar: #fbbf24;
+  --marca-ambar-claro: #fcd34d;
+  --marca-ambar-sombra: #b45309;
+
+  --title-color-1: var(--marca-ambar);
+  --title-shadow-1: var(--marca-ambar-sombra);
+  --title-color-2: var(--verde-400);
+  --title-shadow-2: var(--verde-700);
+
   --card-border-glow: rgba(16, 185, 129, 0.4);
-  
+
   /* Utilidades UI */
   --text-light: #ffffff;
-  --text-dim: #f3e8df;
+  --texto-inverso: #ffffff; /* texto sobre fondo verde oscuro */
+  --text-dim: var(--verde-100);
   --text-muted: rgba(255, 255, 255, 0.72);
   --card-bg: #ffffff;
   --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 4px 14px rgba(0, 0, 0, 0.25);
-  
+
   --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   
@@ -67,7 +135,7 @@ html, body {
   width: 100%;
   font-family: var(--font-body);
   color: var(--text-light);
-  background-color: var(--granate-dark);
+  background-color: var(--verde-900);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
@@ -83,28 +151,28 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: radial-gradient(circle at 50% 25%, var(--granate) 0%, var(--granate-dark) 65%, var(--granate-deep) 100%);
+  /* Variante oscura del fondo: tinta verde muy apagada en vez de pared verde.
+     El verde se queda en las formas orgánicas y el naranja en un resplandor
+     cálido abajo a la izquierda, así el blanco de las tarjetas y el botón
+     naranja son lo que resalta. */
+  background:
+    radial-gradient(90% 70% at 84% 4%, rgba(16, 185, 129, 0.28) 0%, transparent 62%),
+    radial-gradient(85% 70% at 6% 98%, rgba(249, 115, 22, 0.20) 0%, transparent 66%),
+    linear-gradient(180deg, #0e1e18 0%, #08120e 100%);
   overflow-x: hidden;
   transition: background 0.4s ease;
 }
 
 /* Sin scroll: la página se ajusta a la altura de la pantalla (compactando el contenido) */
+/* La página cabe en la pantalla; si no cabe, scrollea en vez de recortar contenido */
 @media (min-height: 560px) {
   .kahoot-page {
     height: 100vh;
     height: 100dvh;
-    overflow-y: hidden;
+    overflow-y: auto;
   }
 }
 
-@media (min-height: 560px) and (max-height: 799px) {
-  .kahoot-title-wrapper { margin-bottom: 0.5rem; }
-  .kahoot-sections-stack { gap: 0.55rem; }
-  .pin-section-card { padding: 0.9rem 1.1rem 0.85rem; }
-  .solo-game-icon { width: 34px; height: 34px; }
-  .solo-game-tile { padding: 6px 4px; }
-  .teacher-game-btn { padding-block: 0.7rem; }
-}
 
 /* Capa de fondo orgánico curvado estilo Kahoot */
 .kahoot-bg-canvas {
@@ -122,7 +190,7 @@ html, body {
   left: -20%;
   width: 75vw;
   height: 130vh;
-  background: radial-gradient(ellipse at center, var(--verde-light) 0%, var(--granate) 60%, transparent 80%);
+  background: radial-gradient(ellipse at center, var(--verde-400) 0%, var(--verde-800) 60%, transparent 80%);
   opacity: 0.28;
   border-radius: 50%;
   transform: rotate(-25deg);
@@ -137,22 +205,22 @@ html, body {
   right: -25%;
   width: 70vw;
   height: 120vh;
-  background: radial-gradient(circle at 60% 40%, var(--verde-oscuro) 0%, var(--granate-dark) 50%, transparent 75%);
+  background: radial-gradient(circle at 60% 40%, var(--verde-700) 0%, var(--verde-900) 50%, transparent 75%);
   opacity: 0.45;
   border-radius: 50%;
   transform: rotate(15deg);
   transition: background 0.4s ease, opacity 0.4s ease;
 }
 
-/* Esfera luminosa dinámica */
+/* Esfera luminosa dinámica: verde, con un borde cálido muy tenue que anticipa el acento */
 .bg-sphere-glow {
   position: absolute;
   bottom: -20%;
   left: 20%;
   width: 55vw;
   height: 60vh;
-  background: radial-gradient(circle, var(--verde) 0%, var(--amarillo) 40%, transparent 70%);
-  opacity: 0.25;
+  background: radial-gradient(circle, var(--verde-500) 0%, var(--verde-700) 58%, transparent 78%);
+  opacity: 0.22;
   filter: blur(40px);
   transition: background 0.4s ease, opacity 0.4s ease;
 }
@@ -171,34 +239,6 @@ html, body {
   transition: fill 0.4s ease, fill-opacity 0.4s ease;
 }
 
-/* Partículas y formas geométricas flotantes tipo Kahoot */
-.floating-elements {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-  overflow: hidden;
-}
-
-.float-item {
-  position: absolute;
-  opacity: 0.28;
-  animation: floatMotion 8s ease-in-out infinite alternate;
-}
-
-.float-item.item-1 { top: 12%; left: 8%; animation-duration: 9s; transform: rotate(12deg); }
-.float-item.item-2 { top: 22%; right: 9%; animation-duration: 11s; animation-delay: -2s; transform: rotate(-15deg); }
-.float-item.item-3 { top: 65%; left: 6%; animation-duration: 8.5s; animation-delay: -3s; transform: rotate(20deg); }
-.float-item.item-4 { top: 72%; right: 7%; animation-duration: 10s; animation-delay: -1.5s; transform: rotate(-8deg); }
-.float-item.item-5 { top: 40%; left: 14%; animation-duration: 12s; animation-delay: -4s; transform: rotate(45deg); }
-.float-item.item-6 { top: 48%; right: 12%; animation-duration: 9.5s; animation-delay: -2.5s; transform: rotate(-30deg); }
-
-@keyframes floatMotion {
-  0% { transform: translateY(0px) rotate(0deg) scale(1); }
-  50% { transform: translateY(-16px) rotate(6deg) scale(1.05); }
-  100% { transform: translateY(8px) rotate(-4deg) scale(0.98); }
-}
-
 /* ==========================================================================
    TOP BAR (PARTE SUPERIOR: BOTÓN ACCESO A PROFESORES MINIMAL GLASS)
    ========================================================================== */
@@ -210,26 +250,29 @@ html, body {
   display: flex;
   justify-content: flex-start; /* Arriba a la izquierda */
   align-items: center;
-  padding: 1.15rem 2.2rem 0.5rem;
+  padding: 1.15rem 2.2rem 0.1rem;
 }
 
 /* --------------------------------------------------------------------------
-   BOTÓN ACCESO A PROFESORES (MINIMAL GLASS)
+   BOTÓN ACCESO A PROFESORES (PEGATINA: SIN CRISTAL)
    -------------------------------------------------------------------------- */
 .btn-pro-opt1 {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.55rem 1.15rem 0.55rem 0.65rem;
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  gap: 0.65rem;
+  padding: 0.4rem 1rem 0.4rem 0.45rem;
+  background-color: var(--superficie);
+  /* Trama de puntos, como las fichas */
+  background-image: radial-gradient(rgba(1, 25, 19, 0.12) 1.1px, transparent 1.2px);
+  background-size: 7px 7px;
+  color: var(--verde-950);
+  border: 3px solid var(--verde-950);
   border-radius: 9999px;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  /* Placa del propio color, oscurecido (blanco -> gris) */
+  box-shadow: 3px 3px 0 var(--neutro-400);
+  transform: rotate(-0.6deg);
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
   text-decoration: none;
 }
 
@@ -237,12 +280,12 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  background: rgba(255, 255, 255, 0.15);
+  width: 26px;
+  height: 26px;
+  background: var(--verde-900);
   border-radius: 50%;
-  color: #ffffff;
-  transition: transform 0.25s ease, background-color 0.25s ease;
+  color: var(--superficie);
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .btn-pro-opt1 .pro-icon-chip svg {
@@ -253,37 +296,41 @@ html, body {
 
 .btn-pro-opt1 .pro-label {
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+/* En pantallas estrechas cabe la etiqueta corta, no la larga */
+.btn-pro-opt1 .pro-label-corto {
+  display: none;
 }
 
 .btn-pro-opt1 .pro-arrow {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.5);
-  transition: transform 0.25s ease, color 0.25s ease;
+  color: var(--verde-800);
+  transition: transform 0.15s ease;
 }
 
 .btn-pro-opt1:hover {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.45);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background-color: var(--marca-ambar);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 4px 5px 0 var(--marca-ambar-sombra);
 }
 
 .btn-pro-opt1:hover .pro-icon-chip {
-  background: var(--amarillo);
-  color: var(--granate-deep);
-  transform: rotate(-8deg);
+  background: var(--verde-950);
+  color: var(--marca-ambar);
 }
 
 .btn-pro-opt1:hover .pro-arrow {
-  color: #ffffff;
   transform: translateX(3px);
 }
 
 .btn-pro-opt1:active {
-  transform: translateY(0);
+  transform: translate(2px, 2px) rotate(0deg);
+  box-shadow: 1px 1px 0 var(--neutro-400);
 }
 
 /* ==========================================================================
@@ -293,6 +340,7 @@ html, body {
 .kahoot-main-content {
   position: relative;
   z-index: 10;
+  flex: 1;
   width: 100%;
   max-width: 460px;
   margin: 0 auto;
@@ -300,15 +348,61 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 /* Título web oficial Chavales Legales con fuente Talina */
 .kahoot-title-wrapper {
-  margin-bottom: 1.15rem;
+  position: relative;
+  isolation: isolate;
+  /* Poco aire con la barra de arriba y bastante con la caja del código, que es
+     lo que separa el logotipo del resto. La sombra 3D se sale de la caja, así
+     que el margen inferior lleva extra para que no toque la tarjeta. */
+  margin: 0.35rem 0 3rem;
+  padding-bottom: 0.5rem;
   text-align: center;
   animation: logoEntrance 0.7s var(--ease-spring);
   display: flex;
   justify-content: center;
+}
+
+/* Confeti de motas de color detrás del logotipo.
+   La caja de las motas es mucho más grande que el rótulo (se sale por los
+   lados y por arriba/abajo) y la máscara se cierra DENTRO de esa caja: así se
+   ve una elipse de verdad, con las motas apagándose antes de llegar al borde,
+   en vez del corte recto que salía cuando el degradado se quedaba sin recorrido
+   fuera de la caja. El ancho del sangrado va en `vw` con tope para que la
+   elipse crezca con la pantalla sin salirse por los lados en un móvil. */
+.kahoot-title-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -70px clamp(-180px, -12vw, -40px);
+  z-index: 0;
+  background-image:
+    radial-gradient(circle at 3px 3px, var(--marca-ambar) 2.1px, transparent 2.3px),
+    radial-gradient(circle at 3px 3px, var(--juego-azul) 2.1px, transparent 2.3px),
+    radial-gradient(circle at 3px 3px, var(--juego-rojo) 2.1px, transparent 2.3px),
+    radial-gradient(circle at 3px 3px, var(--juego-morado) 2.1px, transparent 2.3px);
+  background-size: 22px 22px;
+  background-position: 0 0, 11px 0, 0 11px, 11px 11px;
+  /* Trama más abierta (22px) y más tenue (0.38): el confeti se insinúa detrás
+     del rótulo en vez de competir con él. */
+  opacity: 0.38;
+  /* Radio al 60 % de la caja y opaco hasta el 58 % del radio (justo el ancho
+     del rótulo): se desvanece entre el 58 % y el 80 %, o sea al 48 % de la
+     caja, siempre por dentro del borde. */
+  -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, #000 58%, transparent 80%);
+  mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, #000 58%, transparent 80%);
+  pointer-events: none;
+}
+
+.kahoot-title-wrapper > * {
+  position: relative;
+  z-index: 1;
+  /* El rótulo no se achica ni se parte: si no cabe en los 460 px de la columna
+     se sale por los lados (centrado) en vez de partir las palabras en dos
+     líneas. Es lo que da al logotipo su ancho completo. */
+  flex-shrink: 0;
 }
 
 .brand-title {
@@ -341,16 +435,26 @@ html, body {
 .title-word {
   display: block;
   font-family: 'Talina', cursive, system-ui, sans-serif;
-  color: var(--title-color-1, var(--amarillo));
-  font-size: clamp(2.2rem, 5.8vw, 3.35rem);
+  /* Base opaca de las letras punteadas: ámbar para CHAVALES / LEGAL */
+  --letter-base: var(--marca-ambar);
+  color: var(--title-color-1, var(--verde-300));
+  /* ×1,75 exacto sobre el original (clamp 2rem / 5.2vw / 3rem): los tres
+     valores del clamp se multiplican por el mismo factor, así el rótulo crece
+     en la misma proporción (ancho y alto) en cualquier tamaño de pantalla. */
+  font-size: clamp(3.5rem, 9.1vw, 5.25rem);
   line-height: 0.84;
-  letter-spacing: 0.02em;
+  /* Una palabra por línea: CHAVAL arriba y LEGAL abajo. Sin esto, al crecer el
+     tipo las letras se reparten en tres y cuatro líneas. */
+  white-space: nowrap;
+  /* Letras solapadas como el rótulo original: en negativo se montan unas sobre
+     otras en vez de dejar aire (0.02em era el valor de antes). */
+  letter-spacing: -0.04em;
   text-shadow:
-    -1px 1px 0 var(--title-shadow-1, #b45309),
-    -2px 2px 0 var(--title-shadow-1, #b45309),
-    -3px 3px 0 var(--title-shadow-1, #b45309),
-    -4px 4px 0 var(--title-shadow-1, #b45309),
-    -5px 5px 0 var(--title-shadow-1, #92400e),
+    -1px 1px 0 var(--title-shadow-1, var(--verde-800)),
+    -2px 2px 0 var(--title-shadow-1, var(--verde-800)),
+    -3px 3px 0 var(--title-shadow-1, var(--verde-800)),
+    -4px 4px 0 var(--title-shadow-1, var(--verde-800)),
+    -5px 5px 0 var(--verde-900),
     -6px 6px 1px rgba(0, 0, 0, 0.4),
     -8px 8px 12px rgba(0, 0, 0, 0.45);
   transition: color 0.35s ease;
@@ -361,18 +465,24 @@ html, body {
   z-index: 1;
   display: block;
   font-family: 'Talina', cursive, system-ui, sans-serif;
-  color: var(--title-color-2, var(--verde));
-  font-size: clamp(4.9rem, 13vw, 7.5rem);
+  /* El sufijo ES mantiene su verde como base de las motas */
+  --letter-base: var(--verde-400);
+  color: var(--title-color-2, var(--verde-500));
+  /* ×1,75 exacto sobre el original (clamp 4.2rem / 11.4vw / 6.6rem), con el
+     mismo factor que las palabras: el sufijo ES guarda su proporción. */
+  font-size: clamp(7.35rem, 19.95vw, 11.55rem);
   line-height: 0.80;
-  margin-left: 0.2rem;
-  letter-spacing: -0.01em;
+  /* Solape también en el sufijo, un punto menos porque son dos letras muy
+     grandes y se emborronan enseguida. */
+  margin-left: 1.1rem;
+  letter-spacing: -0.03em;
   text-shadow:
-    -1px 1px 0 var(--title-shadow-2, #059669),
-    -2px 2px 0 var(--title-shadow-2, #059669),
-    -3px 3px 0 var(--title-shadow-2, #059669),
-    -4px 4px 0 var(--title-shadow-2, #047857),
-    -5px 5px 0 var(--title-shadow-2, #065f46),
-    -6px 6px 0 var(--title-shadow-2, #064e3b),
+    -1px 1px 0 var(--title-shadow-2, var(--verde-700)),
+    -2px 2px 0 var(--title-shadow-2, var(--verde-700)),
+    -3px 3px 0 var(--title-shadow-2, var(--verde-700)),
+    -4px 4px 0 var(--verde-700),
+    -5px 5px 0 var(--verde-800),
+    -6px 6px 0 var(--verde-900),
     -7px 7px 0 rgba(0, 0, 0, 0.35),
     -9px 9px 1px rgba(0, 0, 0, 0.4),
     -11px 11px 16px rgba(0, 0, 0, 0.55);
@@ -427,217 +537,226 @@ html, body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.95rem;
+  gap: 1.35rem;
 }
 
 /* ==========================================================================
-   SECCIÓN 1: ACCESO POR PIN A SESIONES (ESTILO KAHOOT CARD)
+   ENTRADA DEL ALUMNO (código de sesión, integrada en la portada)
    ========================================================================== */
 
-.pin-section-card {
+.acceso-card {
   width: 100%;
   background-color: var(--card-bg);
-  border-radius: 16px;
-  padding: 1.45rem 1.5rem 1.35rem;
-  box-shadow: var(--card-shadow);
+  /* Misma trama de puntos que las fichas de juego, en gris de tinta suave */
+  background-image: radial-gradient(rgba(1, 25, 19, 0.06) 1.2px, transparent 1.3px);
+  background-size: 11px 11px;
+  /* Trazo grueso de tinta + sombra dura y desplazada: viñeta de cómic. */
+  border: 3px solid var(--verde-950);
+  border-radius: 18px 14px 16px 15px / 15px 17px 14px 16px;
+  padding: 1.4rem 1.5rem 1.35rem;
+  box-shadow: 6px 6px 0 var(--verde-950);
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   overflow: hidden;
-  border-top: 5px solid var(--amarillo);
   animation: cardEntrance 0.6s var(--ease-spring) 0.1s backwards;
 }
 
-.pin-card-header {
-  margin-bottom: 0.85rem;
+.acceso-header {
+  /* El título y la frase de debajo son un solo bloque de texto: se leen
+     seguidos, así que van casi pegados (antes 0.5rem). */
+  margin-bottom: 0.15rem;
   text-align: center;
 }
 
-/* Texto de apoyo dentro de las tarjetas de acceso (home y /alumno) */
-.pin-card-texto {
-  margin: 0 0 0.9rem;
-  font-size: 0.85rem;
-  line-height: 1.4;
-  color: #4b5563;
+/* Texto de apoyo de la tarjeta de acceso */
+.acceso-texto {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--texto-medio);
   text-align: center;
+  text-wrap: balance;
 }
 
-.pin-badge-title {
+.acceso-titulo {
   display: inline-block;
   font-family: var(--font-display);
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1.05rem;
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #242526;
+  color: var(--verde-800);
 }
 
-.pin-form {
+.acceso-form {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
 }
 
-.pin-input-container {
+.acceso-campo {
   width: 100%;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: left;
 }
 
-.pin-input {
+.acceso-etiqueta {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--verde-700);
+}
+
+/* Campo del código: variante blanca. Fondo blanco y borde neutro para que el
+   código tecleado se lea como un dato, no como una caja verde; el verde entra
+   solo en el foco. */
+.acceso-input {
   width: 100%;
   height: 52px;
-  background-color: #f8fafc;
-  border: 2px solid #dcdfe4;
-  border-radius: 10px;
+  background-color: var(--superficie);
+  border: 3px solid var(--verde-950);
+  border-radius: 12px;
   font-family: var(--font-display);
   font-size: 1.3rem;
   font-weight: 700;
   text-align: center;
   letter-spacing: 0.12em;
-  color: #1a1a1a;
+  color: var(--neutro-900);
   outline: none;
-  transition: all 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-.pin-input::placeholder {
-  color: #8c939e;
+.acceso-input::placeholder {
+  color: var(--texto-suave);
   font-size: 1.05rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.06em;
 }
 
-.pin-input:focus {
-  background-color: #ffffff;
-  border-color: var(--naranja);
-  box-shadow: 0 0 0 4px rgba(176, 57, 33, 0.18);
+.acceso-input:focus {
+  background-color: var(--superficie);
+  /* Aro ámbar, el mismo acento del botón que hay debajo */
+  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.55);
 }
 
-/* Botón Entrar (3D Tactile Kahoot style) */
-.btn-pin-submit {
+/* Botón Entrar: misma pegatina que las fichas de juego (trazo de tinta, placa
+   desplazada, esquinas irregulares, puntos en la esquina y rayas al pasar por
+   encima), pero en el ámbar de la marca. Tinta verde muy oscura sobre ámbar:
+   12,7:1 de contraste. */
+.btn-acceso {
+  position: relative;
+  isolation: isolate;
   width: 100%;
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: #333333;
-  color: #ffffff;
+  background: var(--marca-ambar);
+  color: var(--verde-950);
   font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1.15rem;
+  font-weight: 800;
   letter-spacing: 0.03em;
-  border: none;
-  border-radius: 10px;
-  border-bottom: 4px solid #1a1a1a;
+  border: 3px solid var(--verde-950);
+  border-radius: 16px 11px 15px 12px / 12px 16px 11px 15px;
+  box-shadow: 5px 5px 0 var(--marca-ambar-sombra);
+  transform: rotate(-0.4deg);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
   user-select: none;
 }
 
-.btn-pin-submit:hover {
-  background-color: #222222;
-  transform: translateY(-1px);
+/* Trama de puntos en la esquina derecha (igual que las fichas) */
+.btn-acceso::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 96px;
+  height: 100%;
+  background-image: radial-gradient(rgba(1, 25, 19, 0.5) 1.1px, transparent 1.2px);
+  background-size: 7px 7px;
+  opacity: 0.13;
+  pointer-events: none;
+  z-index: 0;
+  -webkit-mask-image: radial-gradient(130% 130% at 100% 100%, #000 30%, transparent 80%);
+  mask-image: radial-gradient(130% 130% at 100% 100%, #000 30%, transparent 80%);
 }
 
-.btn-pin-submit:active {
-  transform: translateY(3px);
-  border-bottom-width: 1px;
+.btn-acceso > * {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-acceso:hover:not(:disabled) {
+  background-color: var(--marca-ambar-claro);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 7px 8px 0 var(--marca-ambar-sombra);
+}
+
+.btn-acceso:active:not(:disabled) {
+  transform: translate(2px, 2px) rotate(0deg);
+  box-shadow: 2px 2px 0 var(--marca-ambar-sombra);
+}
+
+.btn-acceso:disabled {
+  background: var(--neutro-200);
+  color: var(--texto-medio);
+  border-color: var(--neutro-400);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* El error es el único sitio donde el verde no vale: tiene que leerse como aviso */
+.acceso-error {
+  margin: 0.7rem 0 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--peligro);
+  text-align: center;
 }
 
 /* ==========================================================================
-   SECCIÓN 2: JUGAR SIN PIN (ACCESO INDIVIDUAL)
+   JUEGOS LIBRES (sin código de sesión)
    ========================================================================== */
 
 .solo-section-card {
   width: 100%;
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(16px);
-  border-radius: 16px;
-  padding: 1.25rem 1.6rem 1.35rem;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
-  border: 2px solid var(--card-border-glow, rgba(253, 198, 35, 0.4));
+  background-color: var(--superficie);
+  background-image: radial-gradient(rgba(1, 25, 19, 0.06) 1.2px, transparent 1.3px);
+  background-size: 11px 11px;
+  /* Mismo trazo de tinta que la tarjeta de acceso: las dos cajas de la portada
+     hablan el mismo idioma de viñeta. */
+  border: 3px solid var(--verde-950);
+  border-radius: 14px 18px 15px 16px / 16px 14px 17px 15px;
+  padding: 1.1rem 1.4rem 1.25rem;
+  box-shadow: 6px 6px 0 var(--verde-950);
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 0.9rem;
+  gap: 0.75rem;
   animation: cardEntrance 0.6s var(--ease-spring) 0.2s backwards;
-  transition: border-color 0.35s ease;
+  /* Sin overflow:hidden: recortaba las sombras duras de las fichas giradas */
 }
 
 .solo-title {
   font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--granate-dark);
-  line-height: 1.25;
-}
-
-/* Botón jugar sin PIN */
-.btn-solo-action {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.65rem;
-  background: linear-gradient(180deg, var(--verde) 0%, var(--verde-dark) 100%);
-  color: #ffffff;
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  border: none;
-  border-radius: 10px;
-  border-bottom: 4px solid var(--verde-oscuro-dark);
-  cursor: pointer;
-  transition: all 0.15s ease;
-  user-select: none;
-  box-shadow: 0 6px 16px rgba(62, 107, 50, 0.35);
-}
-
-.btn-solo-action:hover {
-  background: linear-gradient(180deg, var(--verde-light) 0%, var(--verde) 100%);
-  transform: translateY(-1px);
-}
-
-.btn-solo-action:active {
-  transform: translateY(3px);
-  border-bottom-width: 1px;
-}
-
-.btn-solo-action:hover {
-  background: linear-gradient(180deg, var(--verde-light) 0%, var(--verde) 100%);
-  transform: translateY(-1px);
-}
-
-.btn-solo-action:active {
-  transform: translateY(3px);
-  border-bottom-width: 1px;
-}
-
-/* Modo chips interactivos bajo el botón */
-.solo-modes-pills {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.mode-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.76rem;
-  font-weight: 700;
-  color: var(--granate);
-  background: rgba(70, 16, 32, 0.06);
-  padding: 0.25rem 0.6rem;
-  border-radius: 6px;
-  border: 1px solid rgba(70, 16, 32, 0.12);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  color: var(--verde-800);
+  line-height: 1.2;
 }
 
 @keyframes cardEntrance {
@@ -672,20 +791,6 @@ html, body {
   gap: 0.4rem;
 }
 
-.footer-highlight {
-  font-weight: 700;
-  color: var(--amarillo);
-}
-
-.footer-sub {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-}
-
-.footer-sub b {
-  color: #ffffff;
-}
-
 .footer-links-row {
   margin-top: 0.25rem;
   display: flex;
@@ -705,187 +810,43 @@ html, body {
 }
 
 .footer-links-row a:hover {
-  color: var(--amarillo);
+  color: var(--naranja-400);
 }
 
-/* ==========================================================================
-   ESTILOS DE SUBPÁGINAS (HISTORIA, PREGUNTAS, COOPERATIVO)
-   MANTENIENDO COHERENCIA CON LA PALETA
-   ========================================================================== */
-
-.game-subpage-container {
-  min-height: 100vh;
-  padding: 2rem 1.5rem;
-  background: radial-gradient(circle at 50% 20%, var(--granate) 0%, var(--granate-dark) 85%);
+/* Giro del indicador de carga del panel del trabajador social (usa style="animation: spin") */
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-.subpage-topbar {
-  max-width: 900px;
-  margin: 0 auto 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
+/* Enlace de vuelta de las subpáginas (panel del trabajador social, informe) */
 .btn-back-home {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.55rem 1.1rem;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0.4rem 1rem;
+  background-color: var(--superficie);
+  background-image: radial-gradient(rgba(1, 25, 19, 0.12) 1.1px, transparent 1.2px);
+  background-size: 7px 7px;
+  border: 3px solid var(--verde-950);
   border-radius: 9999px;
-  color: #fff;
+  box-shadow: 3px 3px 0 var(--neutro-400);
+  transform: rotate(-0.5deg);
+  color: var(--verde-950);
   text-decoration: none;
   font-size: 0.9rem;
-  font-weight: 600;
-  transition: all 0.2s ease;
+  font-weight: 700;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
 }
 
 .btn-back-home:hover {
-  background: var(--amarillo);
-  color: var(--granate-deep);
-  border-color: var(--amarillo);
+  background-color: var(--naranja-50);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 4px 5px 0 var(--neutro-400);
 }
 
-.juego {
-  max-width: 820px;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  padding: 2.2rem;
-  backdrop-filter: blur(12px);
-}
-
-.juego h1 {
-  font-family: var(--font-display);
-  font-size: 2.4rem;
-  color: var(--amarillo);
-  margin-bottom: 1.25rem;
-}
-
-.juez {
-  display: flex;
-  gap: 1.2rem;
-  align-items: flex-start;
-  margin: 1.5rem 0;
-}
-
-.juez img {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--amarillo);
-}
-
-.bocadillo {
-  background: #ffffff;
-  color: #1a1a1a;
-  border-radius: 16px;
-  padding: 1.2rem 1.4rem;
-  font-size: 1.15rem;
-  line-height: 1.5;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-}
-
-.opciones {
-  display: grid;
-  gap: 0.85rem;
-  margin-top: 1.5rem;
-}
-
-.opcion {
-  text-align: left;
-  padding: 1.1rem 1.3rem;
-  border-radius: 12px;
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  font-family: var(--font-body);
-  font-size: 1.05rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.opcion:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: var(--amarillo);
-  transform: translateX(4px);
-}
-
-.opcion.ok {
-  background: var(--verde);
-  border-color: var(--verde-light);
-}
-
-.opcion.ko {
-  background: var(--naranja);
-  border-color: var(--naranja-light);
-}
-
-.resultado {
-  padding: 1.5rem;
-  border-radius: 16px;
-  font-size: 1.35rem;
-  font-weight: 700;
-  font-family: var(--font-display);
-  margin-top: 1.5rem;
-}
-
-.resultado.ok {
-  background: var(--verde-oscuro);
-  color: #ffffff;
-  border: 2px solid var(--verde);
-}
-
-.resultado.ko {
-  background: var(--granate);
-  color: #ffffff;
-  border: 2px solid var(--naranja);
-}
-
-.btn {
-  display: inline-block;
-  padding: 0.85rem 1.8rem;
-  border-radius: 10px;
-  border: none;
-  background: var(--amarillo);
-  color: var(--granate-deep);
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 700;
-  cursor: pointer;
-  margin-top: 1.25rem;
-  border-bottom: 3px solid var(--amarillo-dark);
-  transition: all 0.15s ease;
-}
-
-.btn:hover {
-  background: var(--amarillo-light);
-  transform: translateY(-1px);
-}
-
-.turno {
-  display: inline-block;
-  padding: 0.45rem 1.1rem;
-  border-radius: 9999px;
-  font-weight: 800;
-  font-size: 0.95rem;
-  letter-spacing: 0.05em;
-  margin-bottom: 1rem;
-}
-
-.turno.j1 {
-  background: var(--verde);
-  color: #fff;
-}
-
-.turno.j2 {
-  background: var(--naranja);
-  color: #fff;
+.btn-back-home:active {
+  transform: translate(2px, 2px) rotate(0deg);
+  box-shadow: 1px 1px 0 var(--neutro-400);
 }
 
 /* ==========================================================================
@@ -894,439 +855,176 @@ html, body {
 
 @media (max-width: 640px) {
   .kahoot-topbar {
-    padding: 0.85rem 1rem;
-    justify-content: center;
+    padding: 0.85rem 1rem 0.1rem;
+    gap: 0.6rem;
+    justify-content: space-between;
   }
-  
-  .btn-pro-opt1 {
-    width: 100%;
-    justify-content: center;
+
+  .btn-pro-opt1 .pro-label-largo {
+    display: none;
   }
-  
+
+  .btn-pro-opt1 .pro-label-corto {
+    display: inline;
+  }
+
   .kahoot-main-content {
     padding: 0 1rem 1.5rem;
   }
 
-  .kahoot-logo-img {
-    max-width: 290px;
-  }
-
-  .pin-section-card {
-    padding: 1.45rem 1.2rem;
+  .acceso-card {
+    padding: 1.35rem 1.15rem;
   }
 
   .solo-section-card {
-    padding: 1.25rem 1.1rem;
-  }
-
-  .solo-content-row {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .solo-modes-pills {
-    justify-content: center;
+    padding: 1.1rem 1rem;
   }
 }
 
-/* ==========================================================================
-   APARTADO DE PROFESORES: ESTILOS Y BOTONES GRANDES DE JUEGOS
-   ========================================================================== */
-
-.teacher-panel-container {
-  max-width: 860px;
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  z-index: 10;
-  position: relative;
-  padding: 0 1rem;
-}
-
-.teacher-header-box {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.65rem;
-}
-
-.teacher-badge-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 1.15rem;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: var(--amarillo);
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  backdrop-filter: blur(10px);
-}
-
-.teacher-title {
-  font-family: 'Talina', var(--font-display);
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  color: #ffffff;
-  letter-spacing: 0.02em;
-  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
-  margin: 0;
-}
-
-.teacher-subtitle {
-  font-family: var(--font-body);
-  color: var(--text-dim);
-  font-size: 1.05rem;
-  max-width: 600px;
-  line-height: 1.5;
-  margin: 0;
-}
-
-/* Contenedor vertical para los dos botones grandes: Superior e Inferior */
-.teacher-buttons-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 1.85rem;
-  width: 100%;
-  max-width: 780px;
-  margin: 0 auto;
-}
-
-/* Botones gigantes de juegos para profesores */
-.teacher-game-btn {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  width: 100%;
-  padding: 2.1rem 2.3rem;
-  border-radius: 26px;
-  text-decoration: none;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.22s var(--ease-smooth);
-}
-
-/* Botón 1: Superior - Modo Historieta */
-.teacher-game-btn--historia {
-  background: linear-gradient(135deg, #ffffff 0%, #fffbf0 100%);
-  color: #1a1a2e;
-  border: 3px solid var(--amarillo);
-  box-shadow: 0 10px 0 var(--amarillo-dark), 0 20px 35px rgba(0, 0, 0, 0.35);
-}
-
-.teacher-game-btn--historia:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 0 var(--amarillo-dark), 0 26px 45px rgba(0, 0, 0, 0.45);
-}
-
-.teacher-game-btn--historia:active {
-  transform: translateY(4px);
-  box-shadow: 0 6px 0 var(--amarillo-dark), 0 12px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Botón 2: Inferior - Modo Juicio */
-.teacher-game-btn--juicio {
-  background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
-  color: #1a1a2e;
-  border: 3px solid var(--verde);
-  box-shadow: 0 10px 0 var(--verde-dark), 0 20px 35px rgba(0, 0, 0, 0.35);
-}
-
-.teacher-game-btn--juicio:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 0 var(--verde-dark), 0 26px 45px rgba(0, 0, 0, 0.45);
-}
-
-.teacher-game-btn--juicio:active {
-  transform: translateY(4px);
-  box-shadow: 0 6px 0 var(--verde-dark), 0 12px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Contenido interno de cada botón grande */
-.game-btn-left {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.game-btn-icon-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 76px;
-  height: 76px;
-  border-radius: 20px;
-  font-size: 2.6rem;
-  flex-shrink: 0;
-  transition: transform 0.25s var(--ease-spring);
-}
-
-.teacher-game-btn--historia .game-btn-icon-wrapper {
-  background: rgba(251, 191, 36, 0.2);
-  border: 2px solid rgba(251, 191, 36, 0.4);
-}
-
-.teacher-game-btn--juicio .game-btn-icon-wrapper {
-  background: rgba(6, 182, 212, 0.2);
-  border: 2px solid rgba(6, 182, 212, 0.4);
-}
-
-.teacher-game-btn:hover .game-btn-icon-wrapper {
-  transform: scale(1.1) rotate(-5deg);
-}
-
-.game-btn-text-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  text-align: left;
-}
-
-.game-btn-badge {
-  display: inline-block;
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--naranja);
-}
-
-.teacher-game-btn--juicio .game-btn-badge {
-  color: var(--verde-oscuro);
-}
-
-.game-btn-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.6rem, 3vw, 2.15rem);
-  font-weight: 800;
-  color: #111827;
-  line-height: 1.2;
-}
-
-.game-btn-desc {
-  font-family: var(--font-body);
-  font-size: 0.96rem;
-  color: #4b5563;
-  line-height: 1.45;
-  max-width: 440px;
-}
-
-.game-btn-action {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.85rem 1.6rem;
-  border-radius: 14px;
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 700;
-  flex-shrink: 0;
-  transition: all 0.2s ease;
-}
-
-.teacher-game-btn--historia .game-btn-action {
-  background: var(--amarillo);
-  color: #1a1a2e;
-}
-
-.teacher-game-btn--juicio .game-btn-action {
-  background: var(--verde);
-  color: #ffffff;
-}
-
-.teacher-game-btn:hover .game-btn-action {
-  transform: translateX(4px);
-}
-
-@media (max-width: 640px) {
-  .teacher-game-btn {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1.6rem 1.3rem;
-    gap: 1.25rem;
-  }
-  
-  .game-btn-left {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-  
-  .game-btn-action {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-/* ==========================================================================
-   ESTILOS ESPECÍFICOS MODO JUICIO
-   ========================================================================== */
-
-.juicio-case-card {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  padding: 1.6rem 1.8rem;
-  margin-bottom: 1.5rem;
-  backdrop-filter: blur(12px);
-}
-
-.juicio-case-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.8rem;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.juicio-case-title {
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: var(--amarillo);
-  font-family: var(--font-display);
-}
-
-.juicio-case-tag {
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 0.3rem 0.8rem;
-  border-radius: 9999px;
-  background: rgba(6, 182, 212, 0.25);
-  color: #ffffff;
-  border: 1px solid rgba(6, 182, 212, 0.4);
-}
-
-.juicio-hechos {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #ffffff;
-  margin-bottom: 1.2rem;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 1rem 1.25rem;
-  border-radius: 12px;
-  border-left: 4px solid var(--amarillo);
-}
-
-.juicio-pregunta {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--amarillo-light);
-  margin-bottom: 0.5rem;
-}
-
-/* Botón 3: Juzgado de Legalín (variante naranja, mismo patrón que los otros dos) */
-.teacher-game-btn--juzgado {
-  background: linear-gradient(135deg, #ffffff 0%, #fff7ed 100%);
-  color: #1a1a2e;
-  border: 3px solid var(--naranja);
-  box-shadow: 0 10px 0 var(--naranja-dark), 0 20px 35px rgba(0, 0, 0, 0.35);
-}
-
-.teacher-game-btn--juzgado:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 0 var(--naranja-dark), 0 26px 45px rgba(0, 0, 0, 0.45);
-}
-
-.teacher-game-btn--juzgado:active {
-  transform: translateY(4px);
-  box-shadow: 0 6px 0 var(--naranja-dark), 0 12px 20px rgba(0, 0, 0, 0.3);
-}
-
-.teacher-game-btn--juzgado .game-btn-icon-wrapper {
-  background: rgba(249, 115, 22, 0.15);
-  border: 2px solid rgba(249, 115, 22, 0.4);
-}
-
-.teacher-game-btn--juzgado .game-btn-badge {
-  color: var(--naranja-dark);
-}
-
-.teacher-game-btn--juzgado .game-btn-title {
-  font-size: clamp(1.4rem, 2.4vw, 1.75rem);
-}
-
-.teacher-game-btn--juzgado .game-btn-action {
-  background: var(--naranja);
-  color: #ffffff;
-}
-
-/* Selector compacto de juegos individuales (cabe en una pantalla sin scroll) */
+/* Rejilla de juegos libres: 2 x 2. Cada ficha es logo a la izquierda y dos
+   líneas de texto a la derecha (título y subtítulo). */
 .solo-games-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
   width: 100%;
 }
 
 .solo-game-tile {
+  /* Tono de cada ficha por estilo en línea (--tile-bg / --tile-borde). */
+  --tile-bg: var(--juego-azul);
+  --tile-borde: var(--juego-azul-borde);
+  --tile-tinta: var(--juego-azul-borde);
+  --tile-texto: var(--verde-950);
+  position: relative;
+  /* Contexto propio: la trama y el contenido ordenan sus capas dentro de la
+     ficha y nada de ahí dentro puede colarse encima de otra ficha. */
+  isolation: isolate;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 4px;
-  padding: 10px 4px 10px;
-  border-radius: 16px;
-  border: 3px solid #18181b;
-  background: #fff;
-  box-shadow: 0 4px 0 #18181b;
+  gap: 10px;
+  padding: 10px 12px;
+  /* Esquinas irregulares + trazo de tinta + sombra dura desplazada: pegatina
+     de tebeo, no tarjeta de SaaS. */
+  border: 3px solid var(--verde-950);
+  border-radius: 16px 11px 15px 12px / 12px 16px 11px 15px;
+  background: var(--tile-bg);
+  /* La placa desplazada va en el tono oscuro de la propia ficha, no en tinta:
+     así el contorno negro se lee nítido y no se funde con la sombra. */
+  box-shadow: 5px 5px 0 var(--tile-borde);
   text-decoration: none;
-  text-align: center;
+  text-align: left;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+/* Trama de puntos pop en la esquina (semitono). Va en z-index 0 y el contenido
+   en 1, así el punteado nunca pasa por encima de las letras. */
+.solo-game-tile::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 88px;
+  height: 76px;
+  background-image: radial-gradient(var(--verde-950) 1.1px, transparent 1.2px);
+  background-size: 7px 7px;
+  opacity: 0.14;
+  pointer-events: none;
+  z-index: 0;
+  /* Se apaga sola hacia el centro: sin border-radius ni overflow que recortar */
+  -webkit-mask-image: radial-gradient(120% 120% at 100% 100%, #000 35%, transparent 78%);
+  mask-image: radial-gradient(120% 120% at 100% 100%, #000 35%, transparent 78%);
+}
+
+.solo-game-icon,
+.solo-game-text {
+  position: relative;
+  z-index: 1;
+}
+
+/* Un pelín torcidas, como pegadas a mano; se enderezan al pasar por encima.
+   La ficha no lleva overflow:hidden ni filter (ambos obligan a recortar y
+   rasterizar el subárbol, y ahí es donde el borde y los glifos se rompen). */
+.solo-game-tile:nth-child(odd) { transform: rotate(-0.7deg); }
+.solo-game-tile:nth-child(even) { transform: rotate(0.6deg); }
+
 .solo-game-tile:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 0 #18181b;
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 7px 8px 0 var(--tile-borde);
 }
 
 .solo-game-tile:active {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 #18181b;
+  transform: translate(2px, 2px) rotate(0deg);
+  box-shadow: 2px 2px 0 var(--tile-borde);
 }
 
 .solo-game-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  border: 2px solid #18181b;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px 9px 11px 10px / 10px 12px 9px 11px;
+  border: 2px solid var(--verde-950);
   display: grid;
   place-items: center;
-  margin-bottom: 2px;
+  background: var(--superficie);
+  color: var(--tile-tinta);
+}
+
+/* El glifo se escala con la pastilla (72 % de su caja interior) en vez de ir
+   con un tamaño fijo: así nunca toca el borde redondeado ni se recorta,
+   tampoco cuando la ficha se compacta en pantallas bajas. */
+.solo-game-icon svg {
+  width: 72%;
+  height: 72%;
+}
+
+/* Las dos líneas: título arriba, subtítulo abajo */
+.solo-game-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
 }
 
 .solo-game-tag {
-  font-size: 10px;
-  font-weight: 800;
+  font-size: 10.5px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
+  line-height: 1.15;
+  color: var(--tile-texto);
 }
 
+/* Ojo: Plus Jakarta Sans se carga hasta 800 (ver layout.jsx), así que 900 no
+   existe y el navegador lo redondea. El título se hace fuerte con tamaño y
+   color, no pidiendo un peso que la fuente no tiene. */
 .solo-game-title {
-  font-size: 12px;
-  font-weight: 900;
-  line-height: 1.2;
-  color: #18181b;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--tile-texto);
   word-break: break-word;
 }
 
-@media (max-width: 440px) {
+@media (max-width: 420px) {
   .solo-games-grid {
-    grid-template-columns: repeat(2, 1fr);
     gap: 8px;
   }
+  .solo-game-tile {
+    padding: 8px 9px;
+    gap: 7px;
+  }
+  .solo-game-icon {
+    width: 32px;
+    height: 32px;
+  }
+  .solo-game-title { font-size: 11.5px; }
+  .solo-game-tag { font-size: 9.5px; letter-spacing: 0.03em; }
 }
 
 /* ==========================================================================
-   SELECTOR DE IDIOMA CUSTOM (ESTILO GLASSMORPHISM / WEB ADAPTADA)
+   SELECTOR DE IDIOMA (PEGATINA: SIN CRISTAL)
    ========================================================================== */
 .selector-idioma-custom {
   position: relative;
@@ -1336,17 +1034,18 @@ html, body {
 .selector-idioma-trigger {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
-  padding: 0.55rem 1.1rem 0.55rem 0.65rem;
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  gap: 0.6rem;
+  padding: 0.4rem 1rem 0.4rem 0.45rem;
+  background-color: var(--superficie);
+  background-image: radial-gradient(rgba(1, 25, 19, 0.12) 1.1px, transparent 1.2px);
+  background-size: 7px 7px;
+  color: var(--verde-950);
+  border: 3px solid var(--verde-950);
   border-radius: 9999px;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 3px 3px 0 var(--neutro-400);
+  transform: rotate(0.6deg);
   cursor: pointer;
-  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
   font-family: var(--font-body);
   user-select: none;
 }
@@ -1355,46 +1054,41 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  background: rgba(255, 255, 255, 0.15);
+  width: 26px;
+  height: 26px;
+  background: var(--verde-900);
   border-radius: 50%;
-  color: #ffffff;
-  transition: transform 0.25s ease, background-color 0.25s ease;
+  color: var(--superficie);
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .selector-idioma-trigger .selector-idioma-label {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.01em;
-  color: #ffffff;
+  color: var(--verde-950);
 }
 
 .selector-idioma-trigger .selector-idioma-arrow {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.65);
-  transition: transform 0.2s ease, color 0.2s ease;
+  color: var(--verde-800);
+  transition: transform 0.15s ease;
 }
 
 .selector-idioma-trigger:hover {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.45);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background-color: var(--marca-ambar);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 4px 5px 0 var(--marca-ambar-sombra);
 }
 
 .selector-idioma-trigger:hover .selector-idioma-chip {
-  background: var(--verde-light);
-  color: var(--granate-deep);
-  transform: rotate(-8deg);
-}
-
-.selector-idioma-trigger:hover .selector-idioma-arrow {
-  color: #ffffff;
+  background: var(--verde-950);
+  color: var(--marca-ambar);
 }
 
 .selector-idioma-trigger:active {
-  transform: translateY(0);
+  transform: translate(2px, 2px) rotate(0deg);
+  box-shadow: 1px 1px 0 var(--neutro-400);
 }
 
 /* Desplegable estilizado */
@@ -1403,11 +1097,10 @@ html, body {
   top: calc(100% + 8px);
   right: 0;
   min-width: 170px;
-  background: #ffffff;
-  border: 2px solid #18181b;
-  border-radius: 16px;
+  background: var(--superficie);
+  border: 3px solid var(--verde-950);
+  border-radius: 14px 11px 13px 12px / 12px 14px 11px 13px;
   padding: 6px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 4px 0 #18181b;
   z-index: 100;
   list-style: none;
   margin: 0;
@@ -1441,59 +1134,30 @@ html, body {
   padding: 9px 12px;
   border: none;
   background: transparent;
-  border-radius: 10px;
+  border-radius: 9px;
   font-family: var(--font-body);
   font-size: 0.88rem;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--verde-950);
   cursor: pointer;
-  transition: all 0.12s ease;
+  transition: background-color 0.12s ease;
   text-align: left;
 }
 
 .selector-idioma-opt:hover {
-  background: #ecfdf5;
-  color: #065f46;
+  background: var(--neutro-100);
 }
 
 .selector-idioma-opt.is-selected {
-  background: #10b981;
-  color: #022c22;
-  font-weight: 900;
+  background-color: var(--marca-ambar);
+  color: var(--verde-950);
+  font-weight: 800;
 }
 
 .selector-idioma-opt .opt-check {
   font-size: 0.85rem;
-  font-weight: 900;
-  color: #022c22;
-}
-
-/* Fallback o selector simple legacy */
-.selector-idioma {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #fff;
-  backdrop-filter: blur(6px);
-  cursor: pointer;
-}
-
-.selector-idioma select {
-  appearance: none;
-  background: transparent;
-  border: none;
-  color: inherit;
-  font: 700 14px/1.2 var(--font-body);
-  cursor: pointer;
-  padding-right: 4px;
-}
-
-.selector-idioma select option {
-  color: #111827;
+  font-weight: 800;
+  color: var(--verde-950);
 }
 
 .sr-only {
@@ -1534,4 +1198,95 @@ html, body {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+/* ==========================================================================
+   PANTALLAS BAJAS (portátiles de 800 px de alto y menos)
+   Este bloque va al FINAL a propósito: en el orden original quedaba antes de
+   las reglas base y estas lo anulaban, así que nunca se aplicaba.
+   ========================================================================== */
+
+@media (min-height: 560px) and (max-height: 820px) {
+  .kahoot-title-wrapper { margin: 0.2rem 0 2.2rem; padding-bottom: 0.3rem; }
+  .kahoot-sections-stack { gap: 0.9rem; }
+  .acceso-card { padding: 0.85rem 1.1rem 0.9rem; }
+  .acceso-texto { font-size: 0.92rem; margin-bottom: 0.6rem; }
+  .acceso-input { height: 46px; font-size: 1.15rem; }
+  .btn-acceso { height: 44px; font-size: 1.05rem; }
+  .solo-section-card { padding: 0.8rem 1rem 0.9rem; gap: 0.5rem; }
+  .solo-title { font-size: 1rem; }
+  .solo-games-grid { gap: 8px; }
+  .solo-game-tile { padding: 7px 9px; gap: 8px; }
+  .solo-game-icon { width: 34px; height: 34px; }
+  .solo-game-title { font-size: 12px; }
+  .solo-game-tag { font-size: 9.5px; }
+  .kahoot-footer { padding: 0.9rem 1.25rem; }
+}
+
+/* ==========================================================================
+   BARRA SUPERIOR: TAMAÑO Y ACABADO COMÚN
+   Va al final del archivo a propósito. `.btn-pro-opt1`, `.btn-back-home` y
+   `.selector-idioma-trigger` tienen cada uno su sección más arriba, con su
+   propio radio y padding; este bloque es el que manda porque llega después
+   (misma especificidad, gana el último). De ahí que los tres compartan alto,
+   padding, radio de botón y el mismo hover en ámbar.
+   ========================================================================== */
+/* Barra superior: los tres botones (acceso a trabajadores sociales, volver e idioma)
+   comparten alto, aire vertical y acabado. 52px y un padding-block holgado;
+   sin esto `.btn-back-home` no lleva pastilla de icono y salía más bajo que los
+   otros dos, así que la fila de arriba bailaba entre la portada y el panel. */
+.btn-pro-opt1,
+.btn-back-home,
+.selector-idioma-trigger {
+  box-sizing: border-box;
+  min-height: 52px;
+  padding-block: 0.6rem;
+  font-size: 0.95rem;
+  /* Esquinas de pegatina, no píldora: mismo tipo de radio irregular que las
+     tarjetas, mucho menos redondeado que el 9999px de antes. */
+  border-radius: 14px 10px 13px 11px / 11px 14px 10px 13px;
+  /* En reposo, la pegatina blanca de siempre; el ámbar de la marca —el mismo
+     naranja del hover del botón de acceso— entra al pasar por encima. */
+  background-color: var(--superficie);
+  background-image: radial-gradient(rgba(1, 25, 19, 0.12) 1.1px, transparent 1.2px);
+  background-size: 7px 7px;
+  color: var(--verde-950);
+  box-shadow: 3px 3px 0 var(--neutro-400);
+}
+
+/* Más aire a los lados. El de volver no lleva pastilla, así que reparte igual
+   por los dos; los otros dos mantienen el lado izquierdo corto (la pastilla del
+   icono ya hace de margen) y estiran el derecho. */
+.btn-back-home {
+  padding-inline: 1.25rem;
+}
+
+.btn-pro-opt1,
+.selector-idioma-trigger {
+  padding-inline: 0.6rem 1.4rem;
+}
+
+/* Estados iguales en los tres: el hover pinta el ámbar de la marca y sube la
+   placa, el activo la hunde. */
+.btn-pro-opt1:hover,
+.btn-back-home:hover,
+.selector-idioma-trigger:hover {
+  background-color: var(--marca-ambar);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 4px 5px 0 var(--marca-ambar-sombra);
+}
+
+.btn-pro-opt1:active,
+.btn-back-home:active,
+.selector-idioma-trigger:active {
+  background-color: var(--marca-ambar);
+  transform: translate(2px, 2px) rotate(0deg);
+  box-shadow: 1px 1px 0 var(--marca-ambar-sombra);
+}
+
+/* Pastilla del icono al pasar por encima: tinta más oscura y glifo en ámbar. */
+.btn-pro-opt1:hover .pro-icon-chip,
+.selector-idioma-trigger:hover .selector-idioma-chip {
+  background: var(--verde-950);
+  color: var(--marca-ambar);
 }

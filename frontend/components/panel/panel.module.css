@@ -1,0 +1,572 @@
+/* Panel del trabajador social con el lenguaje de la portada: pegatina de tebeo.
+   Reglas en ESTILO.md. Aquí solo se aplican. */
+
+/* ---------- Tarjeta principal ---------- */
+.wrap {
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.card {
+  position: relative;
+  background-color: var(--superficie);
+  background-image: radial-gradient(rgba(1, 25, 19, 0.06) 1.2px, transparent 1.3px);
+  background-size: 11px 11px;
+  border: 3px solid var(--verde-950);
+  border-radius: 18px 14px 16px 15px / 15px 17px 14px 16px;
+  box-shadow: 6px 6px 0 var(--verde-950);
+  padding: 2rem 2rem 2.1rem;
+  color: var(--verde-950);
+}
+
+.titulo {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--verde-800);
+}
+
+/* ---------- Formulario ---------- */
+.campo {
+  margin-bottom: 18px;
+}
+
+/* Nombre + edad en una fila: el nombre se queda el 85 % y el 15 % derecho es para la edad.
+   `align-items: start` mantiene las dos etiquetas a la misma altura aunque la ayuda de la
+   edad ocupe más de una línea. */
+.filaNombreEdad {
+  display: grid;
+  grid-template-columns: 85fr 15fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.etiqueta {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--verde-800);
+}
+
+.obligatorio {
+  color: var(--peligro-fuerte);
+}
+
+.control {
+  width: 100%;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--verde-950);
+  background-color: var(--superficie);
+  border: 3px solid var(--verde-950);
+  border-radius: 12px;
+  outline: none;
+  box-sizing: border-box;
+  transition: box-shadow 0.15s ease;
+}
+
+.control::placeholder {
+  color: var(--texto-suave);
+  font-weight: 500;
+}
+
+/* Aro ámbar, el mismo foco que el campo del alumno */
+.control:focus {
+  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.55);
+}
+
+.control:disabled {
+  background-color: var(--neutro-100);
+  color: var(--texto-suave);
+  border-color: var(--neutro-400);
+}
+
+/* La edad vive en su columna: el input la rellena entera (en la fila son ~90 px) */
+.controlEdad {
+  max-width: none;
+}
+/* Fuera de 5–18: se marca el campo; el mensaje sale debajo del botón */
+.controlMal {
+  border-color: var(--peligro-fuerte);
+}
+
+.ayuda {
+  margin: 6px 0 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--texto-medio);
+}
+
+/* Mismo formato que tenía el aviso bajo el campo, pero en su sitio: bajo el botón */
+.ayudaMal {
+  color: var(--peligro);
+  font-weight: 700;
+}
+
+/* Hueco reservado para el aviso: una línea siempre libre bajo el botón, para que la tarjeta
+   no cambie de alto (ni el botón se mueva) cuando aparece el mensaje. */
+.huecoAviso {
+  min-height: 1.2em;
+  line-height: 1.2;
+}
+
+.area {
+  min-height: 84px;
+  font-weight: 500;
+  resize: vertical;
+}
+
+/* Botón principal del panel: la misma pegatina ámbar que "Entrar" en la portada.
+   En cada pantalla hay un solo botón ámbar: el que hace avanzar. */
+.accion {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 15px 24px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--verde-950);
+  background-color: var(--marca-ambar);
+  border: 3px solid var(--verde-950);
+  /* Pastilla: el mismo radio en reposo y en carga, así no salta al arrancar */
+  border-radius: 9999px;
+  box-shadow: 5px 5px 0 var(--marca-ambar-sombra);
+  transform: rotate(-0.4deg);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+  margin-top: 4px;
+}
+
+.accion:hover:not(:disabled) {
+  background-color: var(--marca-ambar-claro);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 7px 8px 0 var(--marca-ambar-sombra);
+}
+
+.accion:active:not(:disabled) {
+  transform: translate(2px, 2px) rotate(0deg);
+  box-shadow: 2px 2px 0 var(--marca-ambar-sombra);
+}
+
+.accion:disabled {
+  background-color: var(--neutro-200);
+  color: var(--texto-suave);
+  border-color: var(--neutro-400);
+  box-shadow: none;
+  transform: none;
+  cursor: not-allowed;
+}
+
+/* ---------- Carga dentro del botón ---------- */
+.accion.accionCargando {
+  /* Carril neutro: el relleno ámbar tiene que verse avanzar.
+     Sin giro y con recorte, para que el relleno quede dentro del botón
+     (girar + overflow:hidden es justo la combinación que denta los bordes). */
+  background-color: var(--neutro-100);
+  /* Los extremos de la barra son círculos, como los del botón */
+  border-radius: 9999px;
+  /* El color cambia suave al entrar y salir con el ratón */
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    background-color 0.22s ease,
+    color 0.22s ease,
+    border-color 0.22s ease;
+  transform: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Vuelta al estado normal tras cancelar: entrada corta del botón */
+.accionEntra {
+  animation: accionEntra 0.12s ease-out;
+}
+
+@keyframes accionEntra {
+  from {
+    opacity: 0.35;
+    transform: rotate(-0.4deg) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-0.4deg) scale(1);
+  }
+}
+
+/* Los puntitos del botón estorban encima de las rayas */
+.accion.accionCargando::before {
+  display: none;
+}
+
+/* Al pasar por encima: aviso de cancelar. El fondo del botón se queda blanco y
+   lo que se pone rojo es la barra (y la placa); el texto sigue en tinta, que se
+   lee igual sobre el blanco y sobre el rojo claro. */
+.accion.accionCargando:hover {
+  background-color: var(--superficie);
+  color: var(--verde-950);
+  transform: none;
+  box-shadow: 5px 5px 0 var(--peligro);
+}
+
+.accion.accionCargando:hover .accionRelleno {
+  background-color: var(--peligro-borde);
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(185, 28, 28, 0.35) 0 6px,
+    transparent 6px 12px
+  );
+}
+
+.accion.accionCargando:active {
+  transform: none;
+  box-shadow: 3px 3px 0 var(--peligro);
+}
+
+
+/* Relleno con rayas diagonales que corren hacia la derecha.
+   Selector con dos clases para ganar a `.accion > *`, que pone position:relative
+   a todos los hijos y dejaría el relleno sin caja. */
+.accion .accionRelleno {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  background-color: var(--marca-ambar);
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(1, 25, 19, 0.22) 0 6px,
+    transparent 6px 12px
+  );
+  background-size: 17px 17px;
+  /* Punta redonda: el borde de avance es un semicírculo, no un corte recto */
+  border-radius: 0 9999px 9999px 0;
+  transition:
+    width 0.1s linear,
+    background-color 0.22s ease,
+    background-image 0.22s ease;
+  animation: rayasAvanzan 0.5s linear infinite;
+}
+
+@keyframes rayasAvanzan {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 17px 0;
+  }
+}
+
+
+/* El texto va por encima del relleno */
+.cargaNormal,
+.cargaCancelar {
+  position: relative;
+  z-index: 1;
+}
+
+.cargaCancelar {
+  display: none;
+}
+
+.accionCargando:hover .cargaNormal {
+  display: none;
+}
+
+.accionCargando:hover .cargaCancelar {
+  display: inline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accion .accionRelleno {
+    animation: none;
+  }
+  .accionEntra {
+    animation: none;
+  }
+}
+
+/* ---------- Resultado del caso ---------- */
+.resultado {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* El código es el dato clave: bloque verde de la familia principal, con puntos.
+   El ámbar se reserva para el botón que hace avanzar. */
+.codigo {
+  position: relative;
+  isolation: isolate;
+  padding: 18px 20px;
+  text-align: center;
+  background-color: var(--verde-50);
+  background-image: radial-gradient(rgba(1, 25, 19, 0.08) 1.2px, transparent 1.3px);
+  background-size: 9px 9px;
+  border: 3px solid var(--verde-950);
+  border-radius: 16px 11px 15px 12px / 12px 16px 11px 15px;
+  box-shadow: 5px 5px 0 var(--verde-700);
+  transform: rotate(-0.3deg);
+}
+
+.codigoEtiqueta {
+  position: relative;
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--verde-700);
+}
+
+.codigoNumero {
+  position: relative;
+  display: block;
+  margin: 2px 0;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--verde-950);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Ficha resumen (panel anidado: trazo sí, placa no) */
+.ficha {
+  padding: 16px 18px;
+  background-color: var(--superficie-alt);
+  border: 3px solid var(--verde-950);
+  border-radius: 14px 11px 13px 12px / 12px 14px 11px 13px;
+}
+
+.fichaGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.fichaEtiqueta {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--texto-suave);
+}
+
+.fichaValor {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--verde-800);
+}
+
+/* Enlace para compartir */
+.enlaceLabel {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--verde-800);
+}
+
+.enlaceFila {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.enlaceInput {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--neutro-700);
+  background-color: var(--superficie);
+  border: 3px solid var(--verde-950);
+  border-radius: 12px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* Botón copiar: secundario blanco (el ámbar es solo del botón que avanza) */
+.copiar {
+  flex: none;
+  /* Ancho fijo: al pasar a "¡Copiado!" el texto es más corto y el botón no
+     debe encogerse (movía el campo del enlace). */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 10.5rem;
+  padding: 12px 16px;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--verde-950);
+  /* Ámbar suave: los botones pequeños no compiten con la acción principal */
+  background-color: var(--naranja-200);
+  border: 3px solid var(--verde-950);
+  border-radius: 12px 9px 11px 10px / 10px 12px 9px 11px;
+  box-shadow: 3px 3px 0 var(--naranja-600);
+  transform: rotate(0.6deg);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+}
+
+.copiar:hover {
+  background-color: var(--naranja-300);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 4px 5px 0 var(--naranja-600);
+}
+
+.copiar:active {
+  transform: translate(2px, 2px) rotate(0deg);
+  box-shadow: 1px 1px 0 var(--naranja-600);
+}
+
+/* Acciones finales */
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.btnPrimario,
+.btnTerciario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+  border: 3px solid var(--verde-950);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+}
+
+.btnPrimario {
+  flex: 1;
+  min-width: 200px;
+  padding: 14px 20px;
+  font-size: 0.95rem;
+  color: var(--verde-950);
+  background-color: var(--marca-ambar);
+  border-radius: 16px 11px 15px 12px / 12px 16px 11px 15px;
+  box-shadow: 5px 5px 0 var(--marca-ambar-sombra);
+  transform: rotate(-0.4deg);
+}
+
+.btnTerciario {
+  justify-content: center;
+  min-width: 9.5rem;
+  white-space: nowrap;
+  padding: 14px 20px;
+  font-size: 0.85rem;
+  color: var(--verde-950);
+  background-color: var(--naranja-200);
+  /* Mismo recorte irregular que el resto de botones */
+  border-radius: 16px 11px 15px 12px / 12px 16px 11px 15px;
+  box-shadow: 3px 3px 0 var(--naranja-600);
+  transform: rotate(-0.5deg);
+}
+
+.btnPrimario:hover {
+  background-color: var(--marca-ambar-claro);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 7px 8px 0 var(--marca-ambar-sombra);
+}
+
+.btnTerciario:hover {
+  background-color: var(--naranja-300);
+  transform: translate(-1px, -2px) rotate(0deg);
+  box-shadow: 4px 5px 0 var(--naranja-600);
+}
+
+.btnPrimario:active,
+.btnTerciario:active {
+  transform: translate(2px, 2px) rotate(0deg);
+  box-shadow: 1px 1px 0 var(--neutro-400);
+}
+
+/* Puntos solo en el arranque izquierdo del botón, fundidos hacia el centro.
+   Van en un pseudo con la máscara, no en el fondo del botón, para que el
+   desvanecido no afecte al texto ni al color de fondo. */
+.accion,
+.copiar,
+.btnPrimario,
+.btnTerciario {
+  position: relative;
+  isolation: isolate;
+}
+
+.accion::before,
+.copiar::before,
+.btnPrimario::before,
+.btnTerciario::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background-image: radial-gradient(rgba(1, 25, 19, 0.16) 1.1px, transparent 1.2px);
+  background-size: 7px 7px;
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, transparent 58%);
+  mask-image: linear-gradient(90deg, #000 0%, transparent 58%);
+  pointer-events: none;
+}
+
+.accion > *,
+.copiar > *,
+.btnPrimario > *,
+.btnTerciario > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 480px) {
+  /* En móvil no hay hueco que dejar al lado: nombre y edad se apilan */
+  .filaNombreEdad {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  /* Apilada, la edad no necesita más de dos dígitos de ancho */
+  .controlEdad {
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 1.3rem 1.15rem 1.4rem;
+  }
+  .titulo {
+    font-size: 1.3rem;
+  }
+  .codigoNumero {
+    font-size: 2.1rem;
+  }
+  .enlaceFila {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

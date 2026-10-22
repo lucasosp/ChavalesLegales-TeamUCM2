@@ -163,7 +163,7 @@
         "text": "Ikastetxeak babes-zerbitzuekin koordinatzen du arreta. Segurtasuna hasieratik zaintzen da. Istorio honek hainbat topaketa biltzen ditu; ez du nahitaezko egutegirik adierazten."
       },
       "c2-07": {
-        "text": "Kaixo, Sara. Irene naiz, gizarte-hezitzailea. Taldearekin batera lagunduko zaitut. Nire lana zerikusia du, halaber, klasean, zure lagunekin eta egunerokoan nola zauden."
+        "text": "Kaixo, Sara. Irene naiz, gizarte-langilea. Taldearekin batera lagunduko zaitut. Nire lana zerikusia du, halaber, klasean, zure lagunekin eta egunerokoan nola zauden."
       },
       "c2-08": {
         "text": "Berriro osorik kontatu beharko dut? Ez dakit lehen nondik hasi naizen ere."
@@ -734,7 +734,7 @@
       },
       {
         "name": "Irene",
-        "role": "Gizarte-hezitzailea",
+        "role": "Gizarte-langilea",
         "initial": "I",
         "color": "purple",
         "text": "Eguneroko bizitzan laguntzen du eta laguntzak koordinatzen ditu taldearekin. Ez du neurri judizialik ezartzen, ezta epairik ematen ere."

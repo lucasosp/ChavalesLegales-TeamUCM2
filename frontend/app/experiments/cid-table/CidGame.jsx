@@ -21,7 +21,11 @@ export default function CidGame({ embedded = false, onFinish }) {
   const [showSettings, setShowSettings] = useState(false)
   const startRef = useRef(0)
   const hoverRef = useRef({ sequence: [], firstMs: null })
-  const settingsPress = useLongPress(() => setShowSettings(true))
+  // El panel se abre con un clic (y también manteniendo pulsado, para que siga
+  // funcionando el gesto de siempre: nunca hay un toque accidental del niño
+  // porque el botón es una pegatina pequeña en la esquina).
+  const openSettings = () => setShowSettings(true)
+  const settingsPress = useLongPress(openSettings)
 
   const round = ROUNDS[roundIndex]
   const finished = results.length === ROUNDS.length
@@ -85,16 +89,25 @@ export default function CidGame({ embedded = false, onFinish }) {
 
   return (
     <div className={styles.page}>
+      {/* Fondo orgánico, el mismo de la portada (sin el SVG de curvas) */}
+      <div className={styles.bg} aria-hidden="true">
+        <span className={styles.bgWave} />
+        <span className={styles.bgArc} />
+        <span className={styles.bgGlow} />
+      </div>
+
       <header className={styles.topbar}>
-        {embedded ? <span /> : <Link href="/" className={styles.btnGhost} aria-label={t('juegos.volverInicio')}>{t('juegos.inicioBtn')}</Link>}
+        {embedded ? <span /> : <Link href="/" className={`${styles.btnGhost} ${styles.back}`} aria-label={t('juegos.volverInicio')}>{t('juegos.inicioBtn')}</Link>}
         <div className={styles.progress} aria-label={t('juegos.cidProgresoAria', { n: roundIndex + 1, total: ROUNDS.length })}>
           {ROUNDS.map((r, i) => (
             <span key={r.id} className={i < results.length ? styles.dotDone : i === roundIndex ? styles.dotNow : styles.dot} />
           ))}
         </div>
-        <button type="button" className={styles.gear} title={t('juegos.cidAjustesHint')} aria-label={t('juegos.cidAjustesAria')} {...settingsPress}>
-          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.6 7.6 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.6 7.6 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.6 7.6 0 0 0 1.7 1l.4 2.6h4l.4-2.6a7.6 7.6 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)" /></svg>
-        </button>
+        <div className={styles.topbarRight}>
+          <button type="button" className={styles.gear} title={t('juegos.cidAjustesHint')} aria-label={t('juegos.cidAjustesAria')} onClick={openSettings} {...settingsPress}>
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.6 7.6 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.6 7.6 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.6 7.6 0 0 0 1.7 1l.4 2.6h4l.4-2.6a7.6 7.6 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)" /></svg>
+          </button>
+        </div>
       </header>
 
       <div className={styles.banner} key={`${roundIndex}-${childSeat !== null}`}>
@@ -108,16 +121,18 @@ export default function CidGame({ embedded = false, onFinish }) {
       </div>
 
       <main className={styles.stage}>
-        <MesaCID
-          totalSeats={config.totalSeats}
-          seating={seating}
-          childSeat={childSeat}
-          childAvatar={config.childAvatar}
-          theme={round.theme}
-          onSelect={handleSelect}
-          onHover={handleHover}
-          locked={!started || childSeat !== null}
-        />
+        <div className={styles.stageCard}>
+          <MesaCID
+            totalSeats={config.totalSeats}
+            seating={seating}
+            childSeat={childSeat}
+            childAvatar={config.childAvatar}
+            theme={round.theme}
+            onSelect={handleSelect}
+            onHover={handleHover}
+            locked={!started || childSeat !== null}
+          />
+        </div>
       </main>
 
       {!started && (

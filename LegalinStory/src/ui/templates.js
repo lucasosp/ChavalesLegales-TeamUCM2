@@ -135,16 +135,18 @@ export function appTemplate() {
         </section>
 
         <section class="ending" data-ending aria-hidden="true">
-          <p class="ending-kicker" data-ending-kicker></p>
-          <h1 class="ending-title" data-ending-title></h1>
-          <p class="ending-text" data-ending-text></p>
-          <div class="ending-actions">
-            <button class="ending-rights" type="button" data-ending-rights hidden>
-              ${t("novel.knowRights")}
-            </button>
-            <button class="ending-library" type="button" data-ending-library>
-              ${t("novel.backToPlatform")}
-            </button>
+          <div class="ending-card">
+            <p class="ending-kicker" data-ending-kicker></p>
+            <h1 class="ending-title" data-ending-title></h1>
+            <p class="ending-text" data-ending-text></p>
+            <div class="ending-actions">
+              <button class="ending-rights" type="button" data-ending-rights hidden>
+                ${t("novel.knowRights")}
+              </button>
+              <button class="ending-library" type="button" data-ending-library>
+                ${t("novel.backToPlatform")}
+              </button>
+            </div>
           </div>
         </section>
 

@@ -163,7 +163,7 @@
         "text": "El centre coordina l'atenció amb els serveis de protecció. La seguretat s'atén des del principi. Aquesta història reuneix diverses trobades; no representa un calendari obligatori."
       },
       "c2-07": {
-        "text": "Hola, Sara. Soc la Irene, educadora social. T'acompanyaré juntament amb l'equip. La meva feina també té a veure amb com estàs a classe, amb les teves amigues i en el teu dia a dia."
+        "text": "Hola, Sara. Soc la Irene, treballadora social. T'acompanyaré juntament amb l'equip. La meva feina també té a veure amb com estàs a classe, amb les teves amigues i en el teu dia a dia."
       },
       "c2-08": {
         "text": "Ho hauré d'explicar tot sencer una altra vegada? No sé ni per on he començat abans."
@@ -735,7 +735,7 @@
       },
       {
         "name": "Irene",
-        "role": "Educadora social",
+        "role": "Treballadora social",
         "initial": "I",
         "color": "purple",
         "text": "Acompanya la vida quotidiana i coordina els suports amb l'equip. No dicta mesures judicials ni sentències."

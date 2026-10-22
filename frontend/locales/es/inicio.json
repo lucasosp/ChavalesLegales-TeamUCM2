@@ -1,10 +1,8 @@
 {
-  "accesoEducadores": "Acceso a educadores sociales",
-  "vistaAsistentesAria": "Vista de Asistentes Sociales",
-  "vistaAsistentesTitle": "Panel exclusivo para Asistentes y Trabajadores Sociales",
-  "asistentesSociales": "Asistentes Sociales",
-  "jugarSinPinAria": "Jugar sin PIN",
-  "jugarSinPinTitulo": "Jugar sin PIN · Sesión individual",
+  "accesoTrabajadores": "Acceso a trabajadores sociales",
+  "accesoTrabajadoresCorto": "Trabajadores",
+  "juegosLibresAria": "Juegos sin código",
+  "juegosLibresTitulo": "Juega sin código · Sesión individual",
   "juegoHistoriaTag": "Historia",
   "juegoHistoriaTitulo": "Sara · Mi historia sigue",
   "juegoFamiliaTag": "Familia",
@@ -14,9 +12,12 @@
   "juegoAvatarTag": "Avatar",
   "juegoAvatarTitulo": "Haz tu avatar",
   "pieAdminJusticia": "Administración de Justicia",
-  "entradaAlumnoAria": "Entrada del alumno con el código de su sesión",
-  "entradaAlumnoTitulo": "¿TIENES UN CÓDIGO?",
-  "entradaAlumnoTexto": "Tu educador te dará un código de 5 dígitos para entrar en tu sesión.",
-  "entradaAlumnoBoton": "Entrar con mi código",
-  "pideAyuda": "Pide ayuda"
+  "entradaAlumnoAria": "Entrada del menor con el código de su sesión",
+  "entradaAlumnoTitulo": "¿Tienes un código?",
+  "entradaAlumnoTexto": "Tu trabajador social te dará un código de 5 dígitos para entrar en tu sesión.",
+  "entradaAlumnoEtiqueta": "Código de la sesión",
+  "entradaAlumnoBoton": "Entrar",
+  "entradaAlumnoBuscando": "Buscando…",
+  "entradaAlumnoNoExiste": "Ese código no existe. Pídele a tu trabajador social que lo revise.",
+  "entradaAlumnoSinConexion": "No se puede conectar. Comprueba tu conexión e inténtalo otra vez."
 }

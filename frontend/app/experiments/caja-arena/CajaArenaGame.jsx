@@ -34,10 +34,13 @@ export default function CajaArenaGame({ embedded = false, onFinish }) {
   const t0Ref = useRef(0)
   const startedAtRef = useRef(null)
   const reportRef = useRef(null)
-  const panelPress = useLongPress(() => {
+  // El panel se abre con un clic (y también manteniendo pulsado): un toque suelto
+  // en la esquina no puede quedarse sin respuesta. El gesto largo sigue vivo.
+  function openPanel() {
     setSavedCount(readStorage(STORAGE_KEY, []).length)
     setShowPanel(true)
-  })
+  }
+  const panelPress = useLongPress(openPanel)
 
   posRef.current = positions
   const placedCount = DOGS.filter((d) => positions[d.id].placed).length
@@ -193,8 +196,15 @@ export default function CajaArenaGame({ embedded = false, onFinish }) {
 
   return (
     <div className={styles.page}>
+      {/* Fondo orgánico, el mismo de la portada (sin el SVG de curvas) */}
+      <div className={styles.bg} aria-hidden="true">
+        <span className={styles.bgWave} />
+        <span className={styles.bgArc} />
+        <span className={styles.bgGlow} />
+      </div>
+
       <header className={styles.topbar}>
-        {embedded ? <span /> : <Link href="/" className={styles.btnGhost}>{t('juegos.inicioBtn')}</Link>}
+        {embedded ? <span /> : <Link href="/" className={`${styles.btnGhost} ${styles.back}`}>{t('juegos.inicioBtn')}</Link>}
         <h1 className={styles.title}>{t('juegos.arenaTitulo')}</h1>
         <div className={styles.topRight}>
           {phase === 'play' && (
@@ -202,54 +212,59 @@ export default function CajaArenaGame({ embedded = false, onFinish }) {
               {t('juegos.arenaTerminado')}
             </button>
           )}
-          <button type="button" className={styles.gear} title={t('juegos.arenaPanelHint')} aria-label={t('juegos.arenaPanelAria')} {...panelPress}>
-            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.6 7.6 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.6 7.6 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.6 7.6 0 0 0 1.7 1l.4 2.6h4l.4-2.6a7.6 7.6 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)" /></svg>
+          <button type="button" className={styles.gear} title={t('juegos.arenaPanelHint')} aria-label={t('juegos.arenaPanelAria')} onClick={openPanel} {...panelPress}>
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.6 7.6 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.6 7.6 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.6 7.6 0 0 0 1.7 1l.4 2.6h4l.4-2.6a7.6 7.6 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)" /></svg>
           </button>
         </div>
       </header>
 
       <main className={styles.stage}>
-        <div className={styles.layer}><Escenario /></div>
-        {weather && <div className={styles.layer}><Clima weather={weather} /></div>}
-        <div className={`${styles.layer} ${styles.interactive}`}>
-          <svg
-            ref={svgRef}
-            viewBox={`0 0 ${VIEW.width} ${VIEW.height}`}
-            preserveAspectRatio="xMidYMid meet"
-            onPointerMove={onMove}
-            onPointerUp={onUp}
-            onPointerCancel={onUp}
-            role="application"
-            aria-label={t('juegos.arenaAria')}
-          >
-            {DOGS.map((d, i) => {
-              const s = shelfSlot(i)
-              return (
-                <g key={`tag-${d.id}`} transform={`translate(${s.x} ${SHELF.y + 156})`} opacity={positions[d.id].placed ? 0.35 : 1}>
-                  <text textAnchor="middle" className={styles.dogName}>{d.name}</text>
-                  <text y="17" textAnchor="middle" className={styles.dogTrait}>{t(`juegos.arenaRasgo_${d.id}`)}</text>
-                </g>
-              )
-            })}
-            {order.map((d) => {
-              const p = positions[d.id]
-              return (
-                <g
-                  key={d.id}
-                  transform={`translate(${p.x} ${p.y})`}
-                  className={phase === 'play' ? styles.dog : undefined}
-                  onPointerDown={(e) => onDogDown(e, d.id)}
-                  role="button"
-                  aria-label={t('juegos.arenaPerroAria', { nombre: d.name, rasgo: t(`juegos.arenaRasgo_${d.id}`) })}
-                >
-                  <rect x={-d.width * 0.5} y="-120" width={d.width} height="130" fill="transparent" />
-                  <Perro dog={d} flip={p.flip} lifted={dragging === d.id} idle={p.placed && dragging !== d.id} />
-                </g>
-              )
-            })}
-          </svg>
+        <div className={styles.stageCard}>
+          {/* Las tres capas comparten caja: sus viewBox tienen que coincidir */}
+          <div className={styles.tablero}>
+            <div className={styles.layer}><Escenario /></div>
+            {weather && <div className={styles.layer}><Clima weather={weather} /></div>}
+            <div className={`${styles.layer} ${styles.interactive}`}>
+              <svg
+                ref={svgRef}
+                viewBox={`0 0 ${VIEW.width} ${VIEW.height}`}
+                preserveAspectRatio="xMidYMid meet"
+                onPointerMove={onMove}
+                onPointerUp={onUp}
+                onPointerCancel={onUp}
+                role="application"
+                aria-label={t('juegos.arenaAria')}
+              >
+                {DOGS.map((d, i) => {
+                  const s = shelfSlot(i)
+                  return (
+                    <g key={`tag-${d.id}`} transform={`translate(${s.x} ${SHELF.y + 156})`} opacity={positions[d.id].placed ? 0.35 : 1}>
+                      <text textAnchor="middle" className={styles.dogName}>{d.name}</text>
+                      <text y="20" textAnchor="middle" className={styles.dogTrait}>{t(`juegos.arenaRasgo_${d.id}`)}</text>
+                    </g>
+                  )
+                })}
+                {order.map((d) => {
+                  const p = positions[d.id]
+                  return (
+                    <g
+                      key={d.id}
+                      transform={`translate(${p.x} ${p.y})`}
+                      className={phase === 'play' ? styles.dog : undefined}
+                      onPointerDown={(e) => onDogDown(e, d.id)}
+                      role="button"
+                      aria-label={t('juegos.arenaPerroAria', { nombre: d.name, rasgo: t(`juegos.arenaRasgo_${d.id}`) })}
+                    >
+                      <rect x={-d.width * 0.5} y="-120" width={d.width} height="130" fill="transparent" />
+                      <Perro dog={d} flip={p.flip} lifted={dragging === d.id} idle={p.placed && dragging !== d.id} />
+                    </g>
+                  )
+                })}
+              </svg>
+            </div>
+            {toast && <div className={styles.toast} role="status">{t(`juegos.arenaClima_${toast.zone}_${toast.type}`)}</div>}
+          </div>
         </div>
-        {toast && <div className={styles.toast} role="status">{t(`juegos.arenaClima_${toast.zone}_${toast.type}`)}</div>}
       </main>
 
       {phase === 'intro' && (
@@ -270,7 +285,7 @@ export default function CajaArenaGame({ embedded = false, onFinish }) {
           <div className={styles.dialog}>
             <h2 className={styles.dialogTitle}>{t('juegos.arenaHistoriaTitulo')}</h2>
             <p className={styles.dialogText}>{t('juegos.arenaHistoriaTexto')}</p>
-            <textarea className={styles.textarea} rows={4} value={story} onChange={(e) => setStory(e.target.value)} placeholder={t('juegos.arenaHistoriaPlaceholder')} maxLength={1200} />
+            <textarea className={styles.textarea} rows={4} value={story} onChange={(e) => setStory(e.target.value)} placeholder={t('juegos.arenaHistoriaPlaceholder')} aria-label={t('juegos.arenaHistoriaTexto')} maxLength={1200} />
             <div className={styles.row}>
               <button type="button" className={styles.btnGhost} onClick={() => setPhase('play')}>{t('juegos.arenaSeguirJugando')}</button>
               <button type="button" className={styles.btnPrimary} onClick={saveAndClose}>{t('juegos.arenaTerminar')}</button>
@@ -302,6 +317,7 @@ export default function CajaArenaGame({ embedded = false, onFinish }) {
       {showPanel && (
         <div className={styles.overlay} onClick={() => setShowPanel(false)}>
           <div className={styles.panel} onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="ar-panel-title">
+            <button type="button" className={styles.cerrarBoton} onClick={() => setShowPanel(false)} aria-label={t('juegos.cerrar')}>×</button>
             <h2 id="ar-panel-title" className={styles.panelTitle}>{t('juegos.arenaPanelTitulo')}</h2>
             <p className={styles.panelText}>
               {t('juegos.arenaPanelTexto')}{' '}
@@ -324,7 +340,6 @@ export default function CajaArenaGame({ embedded = false, onFinish }) {
                   setSavedCount(0)
                 }
               }}>{t('juegos.arenaBorrar')}</button>
-              <button type="button" className={styles.btnGhost} onClick={() => setShowPanel(false)}>{t('juegos.cerrar')}</button>
             </div>
           </div>
         </div>

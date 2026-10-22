@@ -1,6 +1,11 @@
-export const VIEW = { width: 1600, height: 900 }
-export const TRAY = { x: 60, y: 24, w: 1480, h: 650, inset: 34 }
-export const SHELF = { y: 700, h: 186 }
+// Lienzo 1600×840 (1,9:1): más ancho que el 16:9 de antes, para que el tablero
+// llene el ancho de la pantalla sin pegarse a los botones de arriba.
+export const VIEW = { width: 1600, height: 840 }
+// La bandeja ocupa casi todo el lienzo: 36px de margen a los lados y 12px arriba.
+// El área jugable es el rectángulo interior (inset), que es también el recorte de
+// la escena y el borde discontinuo que se ve: ningún ecosistema se sale de él.
+export const TRAY = { x: 36, y: 12, w: 1528, h: 612, inset: 34 }
+export const SHELF = { y: 636, h: 186 }
 
 export const STORAGE_KEY = 'caja_arena_sessions'
 export const WEATHER_MIN_MS = 18000 // primer momento posible del evento (si ya hay algún perro)
@@ -30,12 +35,15 @@ export function smoothPath(pts) {
   return `${d} Z`
 }
 
+// Los radios están calculados para que cada ecosistema quepa ENTERO dentro del
+// área jugable (el recorte de la bandeja): antes el bosque y las montañas se
+// cortaban contra el borde y salían con el contorno plano.
 export const ZONES = [
-  { id: 'bosque', name: 'el bosque', cx: 360, cy: 190, pts: blob(360, 200, 270, 135, 1.2), weathers: ['tormenta', 'viento'] },
-  { id: 'montana', name: 'las montañas', cx: 1250, cy: 180, pts: blob(1250, 185, 250, 125, 2.7), weathers: ['nevada', 'tormenta'] },
-  { id: 'lago', name: 'el lago', cx: 800, cy: 370, pts: blob(800, 375, 175, 95, 4.1), weathers: ['tormenta'] },
-  { id: 'pradera', name: 'la pradera', cx: 350, cy: 520, pts: blob(345, 515, 255, 120, 0.4), weathers: ['tormenta', 'viento'] },
-  { id: 'desierto', name: 'el desierto', cx: 1255, cy: 520, pts: blob(1255, 515, 250, 120, 5.3), weathers: ['calor', 'viento'] },
+  { id: 'bosque', name: 'el bosque', cx: 360, cy: 205, pts: blob(360, 205, 240, 124, 1.2), weathers: ['tormenta', 'viento'] },
+  { id: 'montana', name: 'las montañas', cx: 1250, cy: 190, pts: blob(1250, 190, 235, 118, 2.7), weathers: ['nevada', 'tormenta'] },
+  { id: 'lago', name: 'el lago', cx: 800, cy: 375, pts: blob(800, 375, 175, 95, 4.1), weathers: ['tormenta'] },
+  { id: 'pradera', name: 'la pradera', cx: 345, cy: 477, pts: blob(345, 477, 230, 92, 0.4), weathers: ['tormenta', 'viento'] },
+  { id: 'desierto', name: 'el desierto', cx: 1255, cy: 477, pts: blob(1255, 477, 230, 92, 5.3), weathers: ['calor', 'viento'] },
 ]
 
 export const WEATHER_LABEL = {

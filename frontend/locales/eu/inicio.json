@@ -1,10 +1,8 @@
 {
-  "accesoEducadores": "Gizarte-hezitzaileentzako sarbidea",
-  "vistaAsistentesAria": "Gizarte-laguntzaileen ikuspegia",
-  "vistaAsistentesTitle": "Gizarte-laguntzaile eta gizarte-langileentzako panel esklusiboa",
-  "asistentesSociales": "Gizarte-laguntzaileak",
-  "jugarSinPinAria": "Jolastu PINik gabe",
-  "jugarSinPinTitulo": "Jolastu PINik gabe · Saio indibiduala",
+  "accesoTrabajadores": "Gizarte-langileentzako sarbidea",
+  "accesoTrabajadoresCorto": "Gizarte-langileak",
+  "juegosLibresAria": "Koderik gabeko jolasak",
+  "juegosLibresTitulo": "Jolastu koderik gabe · Saio indibiduala",
   "juegoHistoriaTag": "Istorioa",
   "juegoHistoriaTitulo": "Sara · Nire istorioak jarraitzen du",
   "juegoFamiliaTag": "Familia",
@@ -13,5 +11,13 @@
   "juegoArenaTitulo": "Nire mundua txakurrekin",
   "juegoAvatarTag": "Avatarra",
   "juegoAvatarTitulo": "Egin zure avatarra",
-  "pieAdminJusticia": "Justizia Administrazioa"
+  "pieAdminJusticia": "Justizia Administrazioa",
+  "entradaAlumnoAria": "Adingabearen sarrera, saioaren kodearekin",
+  "entradaAlumnoTitulo": "Koderik baduzu?",
+  "entradaAlumnoTexto": "Zure gizarte-langileak 5 digituko kode bat emango dizu zure saiora sartzeko.",
+  "entradaAlumnoEtiqueta": "Saioaren kodea",
+  "entradaAlumnoBoton": "Sartu",
+  "entradaAlumnoBuscando": "Bilatzen…",
+  "entradaAlumnoNoExiste": "Kode hori ez dago. Eskatu zure gizarte-langileari berrikus dezan.",
+  "entradaAlumnoSinConexion": "Ezin da konektatu. Egiaztatu zure konexioa eta saiatu berriro."
 }

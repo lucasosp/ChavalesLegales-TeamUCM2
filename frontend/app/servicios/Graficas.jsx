@@ -1,12 +1,15 @@
 'use client'
 
-import styles from './informe.module.css'
+import styles from './servicios.module.css'
 import { useT } from '../../lib/i18n'
 
-const ACENTO = '#0f766e'
-const DESTACADO = '#c2410c'
-const REJILLA = '#e2e8f0'
-const TEXTO = '#475569'
+// Paleta de gráficas: verde para las series y naranja para el dato destacado.
+// Los tokens salen de globals.css, así que el informe sigue el mismo esquema
+// que el resto de la app sin hexes sueltos repartidos por los SVG.
+const ACENTO = 'var(--verde-700)'
+const DESTACADO = 'var(--naranja-700)'
+const REJILLA = 'var(--borde)'
+const TEXTO = 'var(--texto-medio)'
 
 function ticks(max, n = 4) {
   if (!max) return [0]
@@ -16,11 +19,19 @@ function ticks(max, n = 4) {
 }
 
 // Barras verticales con línea de referencia opcional (p. ej. la mediana del propio menor)
-export function Barras({ datos, unidad = '', referencia, alto = 220, formato = (v) => v }) {
+export function Barras({ datos, unidad = '', referencia, leyenda, ejeY, ejeX, alto = 220, formato = (v) => v }) {
   const t = useT()
   const W = 720
   const H = alto
-  const m = { t: 30, r: 16, b: 46, l: 60 }
+  // Leyendas dentro del gráfico, arriba a la derecha y en la misma columna: la
+  // de la mediana y, si la hay, la del dato destacado, las dos a cuerpo 11.
+  const leyendas = [
+    ...(referencia ? [{ texto: referencia.etiqueta, tipo: 'linea' }] : []),
+    ...(leyenda ? [{ texto: leyenda, tipo: 'cuadro' }] : []),
+  ]
+  const m = { t: 30 + Math.max(0, leyendas.length - 1) * 16, r: 16, b: ejeX ? 58 : 46, l: ejeY ? 74 : 60 }
+  // Ancho aproximado del rótulo más largo (dentro del SVG no se puede medir)
+  const anchoLeyenda = Math.max(0, ...leyendas.map((l) => l.texto.length * 5.8))
   const max = Math.max(...datos.map((d) => d.valor), referencia?.valor ?? 0) * 1.1 || 1
   const ts = ticks(max)
   const top = ts.at(-1)
@@ -41,19 +52,52 @@ export function Barras({ datos, unidad = '', referencia, alto = 220, formato = (
           <g key={i}>
             <title>{`${d.titulo ?? d.etiqueta}: ${formato(d.valor)}${unidad}`}</title>
             <rect x={x} y={y(d.valor)} width={w} height={y(0) - y(d.valor)} rx="3" fill={d.destacado ? DESTACADO : ACENTO} opacity={d.destacado ? 1 : 0.85} />
-            <text x={x + w / 2} y={y(d.valor) - 6} textAnchor="middle" fontSize="11" fontWeight="700" fill="#1e293b">{formato(d.valor)}</text>
+            <text x={x + w / 2} y={y(d.valor) - 6} textAnchor="middle" fontSize="11" fontWeight="700" fill="var(--neutro-800)">{formato(d.valor)}</text>
             <text x={x + w / 2} y={H - m.b + 16} textAnchor="middle" fontSize="11" fill={TEXTO}>{d.etiqueta}</text>
           </g>
         )
       })}
-      {referencia && (
-        <g>
-          <line x1={m.l} x2={W - m.r} y1={y(referencia.valor)} y2={y(referencia.valor)} stroke="#334155" strokeDasharray="5 4" />
-          <line x1={W - m.r - 190} x2={W - m.r - 170} y1={10} y2={10} stroke="#334155" strokeDasharray="5 4" />
-          <text x={W - m.r} y={14} textAnchor="end" fontSize="11" fontWeight="700" fill="#334155">{referencia.etiqueta}</text>
-        </g>
+      {ejeY && (
+        <text
+          transform="rotate(-90)"
+          x={-(m.t + (H - m.t - m.b) / 2)}
+          y={13}
+          textAnchor="middle"
+          fontSize="11"
+          fontWeight="800"
+          letterSpacing="0.04em"
+          fill={TEXTO}
+        >
+          {ejeY}
+        </text>
       )}
-      <line x1={m.l} x2={W - m.r} y1={y(0)} y2={y(0)} stroke="#94a3b8" />
+      {ejeX && (
+        <text x={m.l + (W - m.l - m.r) / 2} y={H - 8} textAnchor="middle" fontSize="11" fontWeight="800" letterSpacing="0.04em" fill={TEXTO}>
+          {ejeX}
+        </text>
+      )}
+      {referencia && (
+        <line x1={m.l} x2={W - m.r} y1={y(referencia.valor)} y2={y(referencia.valor)} stroke="var(--neutro-700)" strokeDasharray="5 4" />
+      )}
+      {leyendas.map((l, i) => {
+        const yb = 14 + i * 16
+        // Las dos filas comparten columna: el texto arranca en la misma x (la que
+        // deja el rótulo más largo) y la marca va 16 unidades a su izquierda. Así
+        // "Mediana = 1,5 s" y "Outliers" quedan cuadrados en vertical.
+        const xTexto = W - m.r - anchoLeyenda
+        const xMarca = xTexto - 16
+        return (
+          <g key={l.texto}>
+            {l.tipo === 'linea' ? (
+              <line x1={xMarca} x2={xMarca + 12} y1={yb - 4} y2={yb - 4} stroke="var(--neutro-700)" strokeDasharray="5 4" />
+            ) : (
+              <rect x={xMarca} y={yb - 9} width="10" height="10" rx="2" fill={DESTACADO} />
+            )}
+            <text x={xTexto} y={yb} textAnchor="start" fontSize="11" fontWeight="700" fill="var(--neutro-700)">{l.texto}</text>
+          </g>
+        )
+      })}
+      <line x1={m.l} x2={W - m.r} y1={y(0)} y2={y(0)} stroke="var(--neutro-400)" />
     </svg>
   )
 }
@@ -73,10 +117,10 @@ export function BarrasH({ datos, unidad = '', formato = (v) => v, ancho = 720 })
         const yy = 6 + i * fila
         return (
           <g key={i}>
-            <text x={l - 10} y={yy + 17} textAnchor="end" fontSize="12" fill="#1e293b">{d.etiqueta}</text>
-            <rect x={l} y={yy + 4} width={W - l - 60} height={fila - 10} rx="4" fill="#f1f5f9" />
+            <text x={l - 10} y={yy + 17} textAnchor="end" fontSize="12" fill="var(--neutro-800)">{d.etiqueta}</text>
+            <rect x={l} y={yy + 4} width={W - l - 60} height={fila - 10} rx="4" fill="var(--neutro-100)" />
             <rect x={l} y={yy + 4} width={Math.max(w, 2)} height={fila - 10} rx="4" fill={d.color ?? ACENTO} />
-            <text x={l + Math.max(w, 2) + 8} y={yy + 18} fontSize="12" fontWeight="700" fill="#1e293b">{formato(d.valor)}{unidad}</text>
+            <text x={l + Math.max(w, 2) + 8} y={yy + 18} fontSize="12" fontWeight="700" fill="var(--neutro-800)">{formato(d.valor)}{unidad}</text>
           </g>
         )
       })}
@@ -92,10 +136,10 @@ export function LineaTiempo({ duracion, marcas, eventos = [] }) {
   const l = 20
   const r = 20
   const x = (t) => l + ((W - l - r) * t) / Math.max(duracion, 1)
-  const colores = { colocar: ACENTO, mover: '#0284c7', girar: '#7c3aed', retirar: '#94a3b8' }
+  const colores = { colocar: ACENTO, mover: 'var(--naranja-600)', girar: 'var(--verde-500)', retirar: 'var(--neutro-400)' }
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className={styles.chart} role="img" aria-label={t('informe.ariaLineaTiempo')}>
-      <line x1={l} x2={W - r} y1={50} y2={50} stroke="#cbd5e1" strokeWidth="2" />
+      <line x1={l} x2={W - r} y1={50} y2={50} stroke="var(--neutro-300)" strokeWidth="2" />
       {eventos.map((e) => (
         <line key={e.etiqueta} x1={x(e.t)} x2={x(e.t)} y1={14} y2={70} stroke={DESTACADO} strokeWidth="2" strokeDasharray="4 3">
           <title>{e.etiqueta}</title>
@@ -105,7 +149,7 @@ export function LineaTiempo({ duracion, marcas, eventos = [] }) {
         <text key={`${e.etiqueta}-t`} x={x(e.t) + 6} y={20} fontSize="11" fontWeight="700" fill={DESTACADO}>{e.etiqueta}</text>
       ))}
       {marcas.map((m, i) => (
-        <circle key={i} cx={x(m.t)} cy={50} r="6" fill={colores[m.tipo] ?? ACENTO} stroke="#fff" strokeWidth="1.5">
+        <circle key={i} cx={x(m.t)} cy={50} r="6" fill={colores[m.tipo] ?? ACENTO} stroke="var(--superficie)" strokeWidth="1.5">
           <title>{`${m.etiqueta} · ${(m.t / 1000).toFixed(1)} s`}</title>
         </circle>
       ))}

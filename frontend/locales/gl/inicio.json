@@ -1,10 +1,8 @@
 {
-  "accesoEducadores": "Acceso para educadores sociais",
-  "vistaAsistentesAria": "Vista de Asistentes Sociais",
-  "vistaAsistentesTitle": "Panel exclusivo para Asistentes e Traballadores Sociais",
-  "asistentesSociales": "Asistentes Sociais",
-  "jugarSinPinAria": "Xogar sen PIN",
-  "jugarSinPinTitulo": "Xogar sen PIN · Sesión individual",
+  "accesoTrabajadores": "Acceso para traballadores sociais",
+  "accesoTrabajadoresCorto": "Traballadores",
+  "juegosLibresAria": "Xogos sen código",
+  "juegosLibresTitulo": "Xoga sen código · Sesión individual",
   "juegoHistoriaTag": "Historia",
   "juegoHistoriaTitulo": "Sara · A miña historia segue",
   "juegoFamiliaTag": "Familia",
@@ -13,5 +11,13 @@
   "juegoArenaTitulo": "O meu mundo con cans",
   "juegoAvatarTag": "Avatar",
   "juegoAvatarTitulo": "Fai o teu avatar",
-  "pieAdminJusticia": "Administración de Xustiza"
+  "pieAdminJusticia": "Administración de Xustiza",
+  "entradaAlumnoAria": "Entrada do menor co código da súa sesión",
+  "entradaAlumnoTitulo": "Tes un código?",
+  "entradaAlumnoTexto": "O teu traballador social darache un código de 5 díxitos para entrar na túa sesión.",
+  "entradaAlumnoEtiqueta": "Código da sesión",
+  "entradaAlumnoBoton": "Entrar",
+  "entradaAlumnoBuscando": "Buscando…",
+  "entradaAlumnoNoExiste": "Ese código non existe. Pídelle ao teu traballador social que o revise.",
+  "entradaAlumnoSinConexion": "Non se pode conectar. Comproba a túa conexión e téntao outra vez."
 }

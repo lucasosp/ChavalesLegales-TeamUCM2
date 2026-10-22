@@ -114,3 +114,12 @@ export function fmtDuracion(ms) {
 const LOCALES = { es: 'es-ES', ca: 'ca-ES', va: 'ca-ES', gl: 'gl-ES', eu: 'eu-ES', oc: 'oc' }
 export const localeDe = (lang) => LOCALES[lang] ?? 'es-ES'
 export const fmtFecha = (t, lang = 'es') => (t ? new Date(t).toLocaleString(localeDe(lang), { dateStyle: 'long', timeStyle: 'short' }) : '—')
+
+// Fecha compacta para las fichas: 22/10/2026 03:22 (DD/MM/AAAA HH:mm).
+// Se construye a mano para no depender del formato largo de cada locale.
+export const fmtFechaCorta = (t) => {
+  if (!t) return '—'
+  const d = new Date(t)
+  const dos = (n) => String(n).padStart(2, '0')
+  return `${dos(d.getDate())}/${dos(d.getMonth() + 1)}/${d.getFullYear()} ${dos(d.getHours())}:${dos(d.getMinutes())}`
+}

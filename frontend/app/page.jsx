@@ -3,11 +3,11 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import EntradaCodigo from '../components/EntradaCodigo'
 import SelectorIdioma from '../components/SelectorIdioma'
 import { useT } from '../lib/i18n'
 
-// El profesor genera un caso y comparte su código; el alumno lo teclea en /alumno.
-// Un enlace directo con ?caso= o ?pin= (que es el código del caso) entra sin pasar por ahí.
+// Un enlace directo con ?caso= o ?pin= (que es el código del caso) entra sin teclear nada.
 function codigoDesdeUrl(searchParams) {
   const caso = searchParams.get('caso')
   if (caso) return caso.startsWith('CL-') ? caso : `CL-${caso.replace(/\D/g, '')}`
@@ -32,16 +32,19 @@ export default function Home() {
     if (destino) router.push(`/novela?caso=${encodeURIComponent(destino)}`)
   }, [router])
 
+  // Los cuatro juegos sueltos: no piden código y no registran informe.
+  // Azul, morado, rojo y verde en tonos planos de lápiz (paleta tipo Excalidraw):
+  // se distinguen de un vistazo sin parecer cuatro avisos distintos.
   const juegosLibres = [
-    { href: '/novela', tag: t('inicio.juegoHistoriaTag'), title: t('inicio.juegoHistoriaTitulo'), bg: '#FEF08A', color: '#854D0E', icon: <><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></> },
-    { href: '/experiments/cid-table', tag: t('inicio.juegoFamiliaTag'), title: t('inicio.juegoFamiliaTitulo'), bg: '#D1FAE5', color: '#047857', icon: <><ellipse cx="12" cy="12" rx="7" ry="4.5"/><circle cx="12" cy="4" r="1.6"/><circle cx="12" cy="20" r="1.6"/><circle cx="3" cy="12" r="1.6"/><circle cx="21" cy="12" r="1.6"/></> },
-    { href: '/experiments/caja-arena', tag: t('inicio.juegoArenaTag'), title: t('inicio.juegoArenaTitulo'), bg: '#FFEDD5', color: '#C2410C', icon: <><path d="M4 7c0-1.5 1-2.5 2.5-2.5L9 7h3.5c2.5 0 4.5 2 4.5 4.5V13l3 1v3h-3l-1 3H8l-1-3H5.5L4 13z"/><circle cx="7.5" cy="8.5" r=".7" fill="currentColor"/></> },
-    { href: '/novela?avatar=1', tag: t('inicio.juegoAvatarTag'), title: t('inicio.juegoAvatarTitulo'), bg: '#EDE9FE', color: '#6D28D9', icon: <><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></> },
+    { href: '/novela', tag: t('inicio.juegoHistoriaTag'), title: t('inicio.juegoHistoriaTitulo'), bg: 'var(--juego-azul)', borde: 'var(--juego-azul-borde)', color: 'var(--juego-azul-borde)', icon: <><path d="M12 7.4C10.4 6 8.2 5.3 5.4 5.3H3.6v13.4h1.8c2.8 0 5 .7 6.6 2.1 1.6-1.4 3.8-2.1 6.6-2.1h1.8V5.3h-1.8c-2.8 0-5 .7-6.6 2.1Z"/><path d="M12 7.4v13.4"/></> },
+    { href: '/experiments/cid-table', tag: t('inicio.juegoFamiliaTag'), title: t('inicio.juegoFamiliaTitulo'), bg: 'var(--juego-morado)', borde: 'var(--juego-morado-borde)', color: 'var(--juego-morado-borde)', icon: <><ellipse cx="12" cy="12.4" rx="5.6" ry="3"/><circle cx="12" cy="5.6" r="1.5" fill="currentColor"/><circle cx="5.4" cy="12.4" r="1.5" fill="currentColor"/><circle cx="18.6" cy="12.4" r="1.5" fill="currentColor"/><circle cx="12" cy="19.2" r="1.5" fill="currentColor"/></> },
+    { href: '/experiments/caja-arena', tag: t('inicio.juegoArenaTag'), title: t('inicio.juegoArenaTitulo'), bg: 'var(--juego-rojo)', borde: 'var(--juego-rojo-borde)', color: 'var(--juego-rojo-borde)', icon: <><ellipse cx="12" cy="15.6" rx="4.6" ry="3.9"/><ellipse cx="6.6" cy="8.6" rx="1.9" ry="2.3"/><ellipse cx="10.1" cy="5.6" rx="1.9" ry="2.3"/><ellipse cx="13.9" cy="5.6" rx="1.9" ry="2.3"/><ellipse cx="17.4" cy="8.6" rx="1.9" ry="2.3"/></> },
+    { href: '/novela?avatar=1', tag: t('inicio.juegoAvatarTag'), title: t('inicio.juegoAvatarTitulo'), bg: 'var(--juego-verde)', borde: 'var(--juego-verde-borde)', color: 'var(--juego-verde-borde)', icon: <><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.3 3.1-5.5 7-5.5s7 2.2 7 5.5"/></> },
   ]
 
   return (
     <div className="kahoot-page">
-      {/* Fondo orgánico curvado estilo Kahoot */}
+      {/* Fondo orgánico curvado, todo en la escala verde */}
       <div className="kahoot-bg-canvas" aria-hidden="true">
         <div className="bg-wave-left" />
         <div className="bg-arc-right" />
@@ -55,35 +58,33 @@ export default function Home() {
         >
           <path
             d="M-100 200 C300 120 500 500 1000 350 C1250 270 1400 480 1550 420 L1550 1000 L-100 1000 Z"
-            fill="var(--granate)"
+            fill="var(--verde-800)"
             fillOpacity="0.45"
           />
           <path
             d="M-50 780 C320 620 680 720 1100 520 C1300 420 1480 460 1600 410 L1600 950 L-50 950 Z"
-            fill="var(--verde-oscuro)"
+            fill="var(--verde-700)"
             fillOpacity="0.35"
           />
           <path
             d="M-80 -80 C200 -20 320 220 180 440 C80 580 -40 620 -120 600 Z"
-            fill="var(--verde-light)"
+            fill="var(--verde-400)"
             fillOpacity="0.20"
           />
-          <circle cx="1350" cy="150" r="480" fill="var(--verde)" fillOpacity="0.25" />
-          <circle cx="1350" cy="150" r="340" fill="var(--amarillo)" fillOpacity="0.12" />
+          <circle cx="1350" cy="150" r="480" fill="var(--verde-500)" fillOpacity="0.25" />
+          <circle cx="1350" cy="150" r="340" fill="var(--naranja-400)" fillOpacity="0.12" />
         </svg>
       </div>
 
-      <header
-        className="kahoot-topbar"
-        style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}
-      >
-        <Link href="/profesores" className="btn-pro-opt1" aria-label={t('inicio.accesoEducadores')}>
+      <header className="kahoot-topbar">
+        <Link href="/profesores" className="btn-pro-opt1" aria-label={t('inicio.accesoTrabajadores')}>
           <span className="pro-icon-chip" aria-hidden="true">
             <svg viewBox="0 0 24 24">
               <path d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18C5 19.94 8.13 22 12 22C15.87 22 19 19.94 19 17.18V13.18L12 17L5 13.18Z" />
             </svg>
           </span>
-          <span className="pro-label">{t('inicio.accesoEducadores')}</span>
+          <span className="pro-label pro-label-largo">{t('inicio.accesoTrabajadores')}</span>
+          <span className="pro-label pro-label-corto">{t('inicio.accesoTrabajadoresCorto')}</span>
         </Link>
 
         <SelectorIdioma className="selector-idioma-topbar" />
@@ -133,33 +134,29 @@ export default function Home() {
         </div>
 
         <div className="kahoot-sections-stack">
-          {/* ENTRADA DEL ALUMNO: el código del caso se teclea en /alumno */}
-          <section className="pin-section-card" aria-label={t('inicio.entradaAlumnoAria')}>
-            <div className="pin-card-header">
-              <span className="pin-badge-title">{t('inicio.entradaAlumnoTitulo')}</span>
-            </div>
-            <p className="pin-card-texto">{t('inicio.entradaAlumnoTexto')}</p>
-            <Link href="/alumno" className="btn-pin-submit" style={{ display: 'block', textAlign: 'center', textDecoration: 'none' }}>
-              <span>{t('inicio.entradaAlumnoBoton')}</span>
-            </Link>
-          </section>
+          {/* Entrada del alumno: el código de 5 dígitos se teclea aquí mismo */}
+          <EntradaCodigo />
 
-          {/* JUEGOS SIN CÓDIGO */}
-          <section className="solo-section-card" aria-label={t('inicio.jugarSinPinAria')}>
-            <div style={{ textAlign: 'center', marginBottom: 2 }}>
-              <h2 className="solo-title" style={{ margin: 0, fontSize: 16 }}>
-                {t('inicio.jugarSinPinTitulo')}
-              </h2>
-            </div>
+          {/* Juegos que no piden código */}
+          <section className="solo-section-card" aria-label={t('inicio.juegosLibresAria')}>
+            <h2 className="solo-title">{t('inicio.juegosLibresTitulo')}</h2>
 
             <div className="solo-games-grid">
               {juegosLibres.map((g) => (
-                <Link key={g.href} href={g.href} className="solo-game-tile">
-                  <span className="solo-game-icon" style={{ background: g.bg, color: g.color }}>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{g.icon}</svg>
+                <Link
+                  key={g.href}
+                  href={g.href}
+                  className="solo-game-tile"
+                  style={{ '--tile-bg': g.bg, '--tile-borde': g.borde, '--tile-tinta': g.color }}
+                >
+                  <span className="solo-game-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{g.icon}</svg>
                   </span>
-                  <span className="solo-game-tag" style={{ color: g.color }}>{g.tag}</span>
-                  <strong className="solo-game-title">{g.title}</strong>
+                  {/* Dos líneas: título del juego y, debajo, el subtítulo */}
+                  <span className="solo-game-text">
+                    <strong className="solo-game-title">{g.title}</strong>
+                    <span className="solo-game-tag">{g.tag}</span>
+                  </span>
                 </Link>
               ))}
             </div>
@@ -175,8 +172,6 @@ export default function Home() {
             <a href="https://dataforumjusticia.es/datathon-2026/" target="_blank" rel="noopener noreferrer" className="footer-link">Datathon Justicia</a>
             <span>•</span>
             <a href="https://www.administraciondejusticia.gob.es/" target="_blank" rel="noopener noreferrer" className="footer-link">{t('inicio.pieAdminJusticia')}</a>
-            <span>•</span>
-            <Link href="/informe" className="footer-link">{t('inicio.pideAyuda')}</Link>
           </div>
         </div>
       </footer>

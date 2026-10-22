@@ -1,6 +1,6 @@
 'use client'
 
-import styles from './informe.module.css'
+import styles from './servicios.module.css'
 import { Barras, BarrasH, LineaTiempo } from './Graficas'
 import { fmtDuracion, fmtSeg } from './analisis'
 import { useT } from '../../lib/i18n'
@@ -26,7 +26,7 @@ export function Mesa({ report }) {
       <div className={styles.tres}>
         {report.rounds.map((r) => {
           const ronda = ROUNDS.find((x) => x.id === r.roundId)
-          const seating = r.distances.map((d) => ({ id: d.characterId, name: d.name, seat: d.seatIndex, color: colores[d.characterId] ?? '#94a3b8' }))
+          const seating = r.distances.map((d) => ({ id: d.characterId, name: d.name, seat: d.seatIndex, color: colores[d.characterId] ?? 'var(--neutro-400)' }))
           return (
             <figure key={r.roundId} className={styles.figura}>
               <MesaCID totalSeats={report.config.totalSeats} seating={seating} childSeat={r.childSeat} childAvatar={report.config.childAvatar} theme={ronda?.theme ?? 'daily'} locked onSelect={() => {}} />
@@ -44,14 +44,16 @@ export function Mesa({ report }) {
         datos={report.summary.characterSummary.map((c) => ({ etiqueta: persona(c.characterId, c.name), valor: c.meanEuclidean, color: colores[c.characterId] }))}
         formato={(v) => Math.round(v)}
       />
-      <table className={styles.tabla}>
-        <thead><tr><th>{t('informe.colPersona')}</th><th>{t('informe.colDistanciaMedia')}</th><th>{t('informe.colVecesCercana')}</th><th>{t('informe.colVecesLejana')}</th></tr></thead>
-        <tbody>
-          {report.summary.characterSummary.map((c) => (
-            <tr key={c.characterId}><td>{persona(c.characterId, c.name)}</td><td>{Math.round(c.meanEuclidean)}</td><td>{c.closestCount}</td><td>{c.furthestCount}</td></tr>
-          ))}
-        </tbody>
-      </table>
+      <div className={styles.tablaScroll}>
+        <table className={styles.tabla}>
+          <thead><tr><th>{t('informe.colPersona')}</th><th>{t('informe.colDistanciaMedia')}</th><th>{t('informe.colVecesCercana')}</th><th>{t('informe.colVecesLejana')}</th></tr></thead>
+          <tbody>
+            {report.summary.characterSummary.map((c) => (
+              <tr key={c.characterId}><td>{persona(c.characterId, c.name)}</td><td>{Math.round(c.meanEuclidean)}</td><td>{c.closestCount}</td><td>{c.furthestCount}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <h3 className={styles.h3}>{t('informe.mesaTiempoTitulo')}</h3>
       <Barras datos={report.rounds.map((r, i) => ({ etiqueta: t('informe.ronda', { n: i + 1 }), titulo: tr(`ronda_${r.roundId}`, r.title), valor: r.reactionTimeMs / 1000 }))} unidad=" s" formato={(v) => v.toFixed(1)} alto={180} />
     </>
@@ -94,7 +96,7 @@ export function Mundo({ report }) {
       <div className={styles.dos}>
         <div>
           <h3 className={styles.h3}>{t('informe.perrosPorEcosistema')}</h3>
-          <BarrasH ancho={360} datos={Object.entries(report.summary.zoneCounts).map(([z, n]) => ({ etiqueta: cap(zona(z)), valor: n, color: z === w?.zone ? '#c2410c' : undefined }))} />
+          <BarrasH ancho={360} datos={Object.entries(report.summary.zoneCounts).map(([z, n]) => ({ etiqueta: cap(zona(z)), valor: n, color: z === w?.zone ? 'var(--naranja-700)' : undefined }))} />
           {w && <p className={styles.leyenda}><span className={styles.swatch} /> {t('informe.ecosistemaAfectado')}</p>}
         </div>
         <div>
@@ -134,21 +136,23 @@ export function Mundo({ report }) {
         eventos={w ? [{ t: w.atMs, etiqueta: tr(`climaCorto_${w.type}`, cap(w.type)) }] : []}
       />
 
-      <table className={styles.tabla}>
-        <thead><tr><th>{t('informe.colPerro')}</th><th>{t('informe.colEcosistemaFinal')}</th><th>{t('informe.colMovimientos')}</th><th>{t('informe.colGiros')}</th><th>{t('informe.colPerroCercano')}</th><th>{t('informe.colDistCentro')}</th></tr></thead>
-        <tbody>
-          {report.dogs.map((d) => (
-            <tr key={d.id}>
-              <td>{d.name} <small>({rasgo(d)})</small></td>
-              <td>{d.placed ? cap(zona(d.zone)) : t('informe.noColocado')}</td>
-              <td>{d.moves}</td>
-              <td>{d.turns}</td>
-              <td>{d.nearestDogId ? `${nombre(d.nearestDogId)} (${Math.round(d.nearestDogDistance)})` : '—'}</td>
-              <td>{d.distanceToCenter != null ? Math.round(d.distanceToCenter) : '—'}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className={styles.tablaScroll}>
+        <table className={styles.tabla}>
+          <thead><tr><th>{t('informe.colPerro')}</th><th>{t('informe.colEcosistemaFinal')}</th><th>{t('informe.colMovimientos')}</th><th>{t('informe.colGiros')}</th><th>{t('informe.colPerroCercano')}</th><th>{t('informe.colDistCentro')}</th></tr></thead>
+          <tbody>
+            {report.dogs.map((d) => (
+              <tr key={d.id}>
+                <td>{d.name} <small>({rasgo(d)})</small></td>
+                <td>{d.placed ? cap(zona(d.zone)) : t('informe.noColocado')}</td>
+                <td>{d.moves}</td>
+                <td>{d.turns}</td>
+                <td>{d.nearestDogId ? `${nombre(d.nearestDogId)} (${Math.round(d.nearestDogDistance)})` : '—'}</td>
+                <td>{d.distanceToCenter != null ? Math.round(d.distanceToCenter) : '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <p className={styles.leyenda}>{t('informe.distanciaMediaPerros', { valor: report.summary.meanPairDistance ?? '—' })}</p>
 
       {report.story && (

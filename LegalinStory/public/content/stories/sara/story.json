@@ -376,7 +376,7 @@
       "chapter": 2,
       "type": "dialogue",
       "speaker": "Irene",
-      "text": "Hola, Sara. Soy Irene, educadora social. Voy a acompañarte junto con el equipo. Mi trabajo también tiene que ver con cómo estás en clase, con tus amigas y en tu día a día.",
+      "text": "Hola, Sara. Soy Irene, trabajadora social. Voy a acompañarte junto con el equipo. Mi trabajo también tiene que ver con cómo estás en clase, con tus amigas y en tu día a día.",
       "next": "c2-08",
       "cast": {
         "sara": null

@@ -1,6 +1,6 @@
 # ARCHITECTURE.md
 
-Mapa técnico de **Chavales Legales**: una plataforma en la que un educador genera un *caso*, un
+Mapa técnico de **Chavales Legales**: una plataforma en la que un trabajador social genera un *caso*, un
 menor juega una novela visual y el registro de esa sesión se convierte en un informe descriptivo.
 
 > Convención: todo lo que aparece aquí está verificado en el código. Si algo cambia, cámbialo
@@ -12,9 +12,9 @@ menor juega una novela visual y el registro de esa sesión se convierte en un in
 
 | Actor | Qué hace | Dónde |
 |---|---|---|
-| **Educador / asistente social** | Genera un caso, reparte su código, lee el informe | `/profesores` → `/informe/[caso]` |
-| **Menor (alumno)** | Teclea el código y juega la novela | `/alumno` → `/novela` |
-| **Profesional de servicios sociales** | Consulta el listado de casos | `/informe` |
+| **Trabajador social / asistente social** | Genera un caso, reparte su código, lee el informe | `/profesores` → `/servicios/[caso]` |
+| **Menor (alumno)** | Teclea el código y juega la novela | `/` → `/novela` |
+| **Profesional de servicios sociales** | Consulta el listado de casos | `/servicios` |
 
 No hay cuentas, ni roles, ni sesión de servidor. El "acceso" es conocer un código de caso.
 
@@ -76,8 +76,9 @@ escribirían en la capa efímera del contenedor.
 // casos_data/CL-12345.json
 {
   "id": "CL-12345",
-  "meta": {                       // libre: lo pone el educador
+  "meta": {                       // libre: lo pone el trabajador social
     "nombreJoven": "…",
+    "edad": 12,                  // entero 5–18: el panel solo admite dígitos y el POST /meta lo valida
     "tipoRiesgo": "…",            // texto ya traducido en el momento de crear
     "tipoRiesgoId": "grooming",   // id estable, es lo que usa el informe para traducir
     "contexto": "…",
@@ -99,28 +100,28 @@ escribirían en la capa efímera del contenedor.
 
 | Ruta | Rol | Datos que toca |
 |---|---|---|
-| `/` | Landing: entrada del alumno + 4 juegos sueltos | ninguno (normaliza `?caso=`/`?pin=`) |
-| `/alumno` | Entrada por código de 5 dígitos | `GET /api/casos/{id}` para validar |
-| `/profesores` | Panel del educador | `POST /api/casos/{id}/meta` |
+| `/` | Landing: entrada del alumno (código en línea) + 4 juegos sueltos | `GET /api/casos/{id}` para validar el código |
+| `/alumno` | Redirección a `/` (`next.config.mjs`); ya no es una pantalla | — |
+| `/profesores` | Panel del trabajador social | `POST /api/casos/{id}/meta` |
 | `/novela` | Embebe la novela y registra sus eventos | `POST /api/casos/{id}/eventos` |
 | `/avatar` | Embebe la novela en modo dibujo | idem |
-| `/informe` | Listado de casos | `GET /api/casos` |
-| `/informe/[caso]` | Informe descriptivo, con refresco cada 5 s | `GET /api/casos/{id}` |
+| `/servicios` | Listado de casos | `GET /api/casos` |
+| `/servicios/[caso]` | Informe descriptivo, con refresco cada 5 s | `GET /api/casos/{id}` |
 | `/experiments/*` | Demos jugables, **sin instrumentar** | ninguno |
-| `/asistentes-sociales` | Redirección a `/informe` | — |
+| `/asistentes-sociales` | Redirección a `/servicios` | — |
 
 ### Flujo de creación y entrada
 
 ```
-PanelEducador
+PanelTrabajadorSocial
   └─ await guardarMetaCaso(id, meta)      // lanza si la API no confirma
        └─ sólo si resuelve se muestra el código CL-12345
-            └─ alumno teclea 12345 en /alumno
+            └─ alumno teclea 12345 en la portada
                  └─ GET /api/casos/CL-12345 → 404 = "código inexistente"
                       └─ /novela?caso=CL-12345
 ```
 
-El educador **nunca** ve un código que no exista en el backend. Es la razón de que
+El trabajador social **nunca** ve un código que no exista en el backend. Es la razón de que
 `guardarMetaCaso` lance en vez de ser fire-and-forget.
 
 ### Cliente HTTP
@@ -139,15 +140,16 @@ se ve en vez de disfrazarse de datos viejos.
 
 ### Estilos
 
-CSS modules (`informe`, `cid`, `arena`, `nubes`), `app/globals.css` e inline. En un CSS module,
+CSS modules (`servicios`, `cid`, `arena`, `nubes`), `app/globals.css` e inline. En un CSS module,
 una clase inexistente llega como `undefined` y React omite el atributo: **el elemento sale sin
 estilo y sin error**. Es un fallo silencioso; si añades una clase, añádela al módulo.
 
 ### i18n
 
 `lib/i18n.jsx` carga con `require.context` y compone claves `"<ns>.<clave>"`.
-6 lenguas (`es ca va gl eu oc`) × 7 espacios (`asistentes comun informe inicio juegos profesores
-alumno`). `alumno` solo existe en `es`; el resto cae al español.
+6 lenguas (`es ca va gl eu oc`) × 6 espacios (`asistentes comun informe inicio juegos profesores`).
+La entrada del alumno vive en el espacio `inicio` (`inicio.entradaAlumno*`) y está traducida en
+las seis lenguas; cualquier clave ausente cae al español.
 
 ---
 
@@ -302,13 +304,13 @@ novela se regenera dentro de la imagen. El estado (`casos_data/`) vive en un vol
 
 | Si cambias… | Revisa también |
 |---|---|
-| Un tipo de evento | `novela/page.jsx`, `analisis.js`, `informe/[caso]`, `CasoStore` (caso especial `dibujo`) |
+| Un tipo de evento | `novela/page.jsx`, `analisis.js`, `[caso]/page.jsx`, `CasoStore` (caso especial `dibujo`) |
 | El esquema de un caso | `casos.py`, migración, `lib/casos.js`, `analisis.js` |
 | Una ruta de la API | `main.py`, `lib/casos.js`, `scripts/smoke.sh` |
 | Un nodo o story | `validate-content.mjs`, `npm test`, y el `build-*.mjs` si es generado |
 | Un minijuego | `GAMES` en `MinijuegoNubes.jsx`, nodo `external`, y el `<Mesa>`/`<Mundo>` del informe |
 | Una cadena de UI | `frontend/locales/*/<ns>.json` (6 lenguas) |
-| Estilos del informe | `informe.module.css` **y** las clases usadas en los 3 archivos que lo importan |
+| Estilos del informe | `servicios.module.css` **y** las clases usadas en los 3 archivos que lo importan |
 | Algo de `LegalinStory` | rebuild a través de `frontend` (`npm run dev`), nunca editar `public/novela` |
 | La forma de un evento | `casos.validar_evento`, `analisis.js` **y sus tests**, `detalleEvento` |
 | Los tiempos del informe | `tEvento()`, `desfase`, y `backend/casos.py` (`t_servidor`) |
