@@ -236,29 +236,11 @@ class AvatarStore {
   }
 
   async #syncTelemetry(phase, metrics, previewUrl = null, delta = null, alerts = null) {
-    try {
-      const payload = {
-        phase,
-        timestamp: new Date().toISOString(),
-        metrics,
-        delta,
-        alerts,
-        preview: previewUrl ? previewUrl.slice(0, 150) + "..." : null, // preview indicator
-      };
-
-      // Try sending to the backend if available
-      if (typeof fetch === "function") {
-        fetch("/api/telemetria/dibujo", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }).catch(() => {
-          // Silent fallback for standalone / offline usage
-        });
-      }
-    } catch {
-      // offline safety
-    }
+    // Deprecated: la telemetría de dibujo vive en `casos`.
+    // /novela lee este mismo snapshot desde localStorage (legalinstory_avatar_drawings)
+    // y lo registra como evento 'dibujo' con las imágenes y las métricas del delta.
+    // Se conserva la firma para no romper llamadas existentes, pero no hace red.
+    void phase; void metrics; void previewUrl; void delta; void alerts;
   }
 
   exportReport() {

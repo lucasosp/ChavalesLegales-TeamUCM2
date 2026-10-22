@@ -272,13 +272,11 @@ export class VisualNovelEngine {
           time_ms: elapsedMs,
           timestamp: Date.now() / 1000,
         };
+        // La plataforma (o el propio motor) guarda la decisión en el caso.
+        // No hay endpoint de telemetría aparte: `casos` es la única fuente.
         if (window.parent && window.parent !== window) {
           window.parent.postMessage(telemetryPayload, window.location.origin);
-        } else fetch("/api/telemetria/decision", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(telemetryPayload),
-        }).catch(() => {});
+        }
       } catch (_) {}
     }
 

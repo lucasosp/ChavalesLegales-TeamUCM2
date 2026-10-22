@@ -9,7 +9,9 @@ const read = async (name) => JSON.parse(await readFile(new URL(`../public/conten
 const [storyDoc, scenes, assets, legal, guide] = await Promise.all(["story", "scene", "assets", "legal", "guide"].map(read));
 const compiled = compileStory({ storyDoc, scenes, assets });
 const story = compiled.nodes;
-const nodeTypes = Object.fromEntries(["interstitial", "chat", "minigame"].map((type) => [type, { present() {}, next: (node) => node.next }]));
+// "external" hace falta: sara tiene los minijuegos c3-mesa y c4-perros, y sin su handler
+// el motor rechaza el story con "unsupported type". Sin él esta suite no arrancaba.
+const nodeTypes = Object.fromEntries(["interstitial", "chat", "minigame", "external"].map((type) => [type, { present() {}, next: (node) => node.next }]));
 const makeEngine = (saveStore = null, resolution = "conviction") => new VisualNovelEngine({ story, startId: compiled.startId, nodeTypes, saveStore, initialFlags: { resolution } });
 
 // An acyclic graph with an ending and no dead ends guarantees finite paths.
@@ -114,6 +116,10 @@ try {
       await new Promise(resolve => setTimeout(resolve, 220));
       root.querySelectorAll(".choice")[optionIndex].click();
     } else if (node.type === "interstitial") click("[data-interstitial-next]");
+    // Los nodos "external" pausan el motor y se reanudan con un setTimeout
+    // (en jsdom window.parent === window, así que no hay postMessage). Sin ceder
+    // el event loop aquí, la partida se queda pausada para siempre.
+    else if (node.type === "external") await new Promise((resolve) => setTimeout(resolve, 0));
     else experience.app.advance();
   }
   assert.equal(experience.engine.isFinished, true);
