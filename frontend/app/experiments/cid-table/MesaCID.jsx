@@ -247,7 +247,38 @@ export default function MesaCID({ totalSeats, seating, childSeat, childAvatar, t
         }
         if (childSeat === i) {
           const childLook = { baseType: 4, hairColor: childAvatar?.colorPelo || '#4A2810' }
-          return <Persona key={`p-${i}`} x={x} y={y} color={childAvatar?.color || '#FF6B6B'} label={childLabel(t, childAvatar)} look={childLook} isChild appear />
+          const persona = (
+            <Persona
+              x={x}
+              y={y}
+              color={childAvatar?.color || '#FF6B6B'}
+              label={childLabel(t, childAvatar)}
+              look={childLook}
+              isChild
+              appear
+            />
+          )
+          if (locked) {
+            return <g key={`p-${i}`}>{persona}</g>
+          }
+          return (
+            <g
+              key={`p-${i}`}
+              className={styles.childSeatInteractive}
+              role="button"
+              tabIndex={0}
+              aria-label={t('juegos.cidTuAsientoAria', { n: i + 1 })}
+              onClick={() => onSelect(i)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  onSelect(i)
+                }
+              }}
+            >
+              {persona}
+            </g>
+          )
         }
         if (locked) return null
         return (

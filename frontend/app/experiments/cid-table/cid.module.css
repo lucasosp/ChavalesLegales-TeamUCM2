@@ -347,6 +347,13 @@
   text-wrap: balance;
 }
 
+.bannerActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 /* Insignia: píldora con trazo de tinta de 2px (pieza pequeña) */
 .badge {
   flex: none;
@@ -414,9 +421,15 @@
    ASIENTOS (interacción dentro del SVG)
    ========================================================================== */
 
-.emptySeat {
+.emptySeat,
+.childSeatInteractive {
   cursor: pointer;
   outline: none;
+}
+
+.childSeatInteractive:hover,
+.childSeatInteractive:focus-visible {
+  filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.6));
 }
 
 .emptySeat .glow {

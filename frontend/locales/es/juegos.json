@@ -16,6 +16,8 @@
   "cidRondaTexto_celebration": "¡Hoy hay tarta! Todos han cambiado de sitio para la fiesta. ¿Dónde te sientas ahora?",
   "cidRondaTexto_freeChoice": "La cena termina y todos vuelven a su sitio de siempre. Elige libremente tu silla para cerrar la historia.",
   "cidYaEnMesa": "¡Ya estás en la mesa! Cuando quieras, seguimos.",
+  "cidCambiarAsiento": "Cambiar asiento",
+  "cidTuAsientoAria": "Tu silla {n}. Pulsa para levantarte o elige otra silla libre",
   "cidContinuar": "Continuar",
   "cidIntroBadge": "La mesa de la familia",
   "cidIntroTitulo": "¡Vamos a cenar!",
