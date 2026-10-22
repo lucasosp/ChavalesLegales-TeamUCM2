@@ -65,10 +65,11 @@ export function appTemplate() {
 
         <section class="chat" data-chat hidden aria-label="${t("novel.chatAria")}">
           <header class="chat-head">
-            <span class="chat-dot" aria-hidden="true"></span>
+            <span class="chat-dot" data-chat-avatar aria-hidden="true"></span>
             <span class="chat-heading"><span data-chat-title></span><span class="chat-self" data-chat-self></span></span>
           </header>
           <div class="chat-log" data-chat-log role="log" aria-label="${t("novel.chatLogAria")}"></div>
+          <div class="chat-compose" aria-hidden="true"><span>${t("novel.chatCompose")}</span><i></i></div>
           <button class="chat-hint" type="button" data-chat-skip>${t("novel.chatSkip")}</button>
           <button class="chat-hint" type="button" data-chat-hint hidden>${t("novel.continueArrow")}</button>
         </section>
