@@ -46,7 +46,7 @@ function compileNode(id, node, context) {
   }
 
   const compiled = { id, type: node.type };
-  for (const key of ["chapter", "learn", "a11y"]) {
+  for (const key of ["chapter", "learn", "a11y", "reference"]) {
     if (node[key] !== undefined) compiled[key] = structuredClone(node[key]);
   }
 

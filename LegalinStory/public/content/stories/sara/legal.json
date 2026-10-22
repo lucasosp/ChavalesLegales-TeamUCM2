@@ -36,7 +36,7 @@
     "protection": {
       "title": "La protección puede empezar aquí",
       "text": "El centro debe avisar inmediatamente a Servicios Sociales. No debe esperar a que Sara denuncie ni reunir pruebas por su cuenta.",
-      "dialogue": "No vamos a esperar a que denuncies tú. Con lo que me has contado ya tengo que pedir ayuda y comunicar lo ocurrido. Te explicaré qué hacemos para protegerte.",
+      "dialogue": "No tienes que denunciar tú sola. Ya podemos empezar a ayudarte.",
       "sources": [
         "lopivi"
       ]
@@ -44,7 +44,7 @@
     "privacy": {
       "title": "Quién necesita saberlo",
       "text": "Laura no puede prometer secreto absoluto. Explicará qué profesionales deben intervenir para proteger a Sara y compartirá la información necesaria para ello.",
-      "dialogue": "No te puedo prometer que quede solo entre nosotras. Te diré a qué profesionales se lo cuento y para qué. Tu clase no necesita saberlo.",
+      "dialogue": "Tu clase no tiene que saberlo. Solo lo contaré a quienes deban ayudarte o trabajar en el caso.",
       "sources": [
         "lopivi",
         "proteccion"
@@ -53,7 +53,7 @@
     "social": {
       "title": "Valorar es conocer para ayudar",
       "text": "Servicios Sociales y protección de menores valoran la seguridad y las necesidades familiares. La intervención social y la investigación penal tienen funciones distintas.",
-      "dialogue": "Valorar quiere decir conocer qué necesitáis y si estáis seguros. De eso nos encargamos en Servicios Sociales.",
+      "dialogue": "Queremos saber qué necesitáis para estar seguros. Investigar lo ocurrido les toca a otras personas.",
       "sources": [
         "proteccion",
         "lopivi"
@@ -86,7 +86,7 @@
     "justice": {
       "title": "Dos trabajos que pueden avanzar a la vez",
       "text": "La protección cuida de la seguridad de Sara. Una plaza del Tribunal de Instancia investiga lo que pasó y quién es responsable.",
-      "dialogue": "El tribunal investiga lo ocurrido y si tu padre es responsable de un delito. No hay que esperar a una sentencia para protegerte.",
+      "dialogue": "Van a averiguar qué pasó. Mientras, seguiremos cuidando de tu seguridad.",
       "sources": [
         "lecrim",
         "proteccion"
@@ -95,7 +95,7 @@
     "supports": {
       "title": "Una declaración con apoyos",
       "text": "Debe evitarse el contacto directo en las dependencias judiciales. La sala aparte, videoconferencia y ayuda especializada son medidas concretas que la autoridad acuerda según esas necesidades.",
-      "dialogue": "Tienen que organizar las cosas para que no te encuentres con tu padre. Además, vamos a pedir otra sala, videoconferencia y apoyo de una psicóloga.",
+      "dialogue": "Pediremos otra sala y una psicóloga contigo para que puedas hablar sin ver a tu padre.",
       "sources": [
         "victima",
         "lecrim"
@@ -104,7 +104,7 @@
     "repeat": {
       "title": "Pedir otra explicación",
       "text": "Sara puede decir que no entiende y pedir palabras más sencillas. Prepararse sirve para comprender la actuación, sin ensayar una versión de los hechos.",
-      "dialogue": "Si no entiendes algo, puedes decirlo y pedir que te lo expliquen con otras palabras. Prepararte sirve para entender lo que pasa, no para aprenderte lo que tienes que decir.",
+      "dialogue": "Puedes pedir que te expliquen cualquier pregunta. No tienes que aprenderte lo que vas a decir.",
       "sources": [
         "victima"
       ]
@@ -121,7 +121,7 @@
     "pause": {
       "title": "Puedo pedir una pausa",
       "text": "Sara puede comunicar que necesita parar. El equipo y la autoridad que dirige la actuación valoran cómo atender esa necesidad.",
-      "dialogue": "Puedes decir que necesitas parar. La jueza decidirá cómo hacerlo. Pedirlo está bien: así saben lo que necesitas.",
+      "dialogue": "Puedes pedir una pausa. Así sabrán que necesitas descansar.",
       "sources": [
         "victima"
       ]
@@ -200,7 +200,7 @@
     "safety": {
       "title": "La seguridad necesita un plan",
       "text": "En el caso de Sara se ha comunicado el riesgo al Tribunal de Instancia y se han acordado prohibiciones de aproximación y comunicación con Sara y Dani, y suspensión cautelar de visitas. Son decisiones judiciales revisables, no consecuencias automáticas de pedir ayuda.",
-      "dialogue": "En vuestro caso, la jueza ya ha prohibido que Javier se acerque a ti y a Dani o se comunique con vosotros. Son medidas para protegeros mientras se investiga.",
+      "dialogue": "La jueza ha prohibido que tu padre se acerque o escriba a ti y a Dani. Por ahora tampoco habrá visitas.",
       "sources": [
         "civil",
         "lecrim",
@@ -210,7 +210,7 @@
     "representation": {
       "title": "Quién puede representarme",
       "text": "El padre investigado no puede representar a Sara en un asunto con intereses contrapuestos. La madre puede hacerlo si está en condiciones de defender adecuadamente sus intereses.",
-      "dialogue": "Tu padre no puede representarte en este caso. Hemos comprobado que tu madre puede cuidar de tus intereses y ella te representa. Yo soy tu abogada. También hablaré contigo: tu opinión cuenta.",
+      "dialogue": "Tu padre no puede decidir por ti en este caso. Tu madre te ayudará. Si ella no pudiera, la jueza buscaría otra persona.",
       "sources": [
         "civil",
         "victima",
@@ -229,7 +229,7 @@
     "party": {
       "title": "Tener voz en el procedimiento",
       "text": "Permite intervenir, proponer pruebas, solicitar protección y recurrir conforme a la ley. No es condición para recibir protección ni hace depender la persecución penal de la menor.",
-      "dialogue": "Podemos participar en el caso como acusación particular, con tu propia abogada. No eres tú quien decide el castigo.",
+      "dialogue": "Podemos participar en el caso con tu propia abogada. Yo defenderé tus derechos. El castigo lo decide el tribunal.",
       "sources": [
         "lecrim",
         "lopivi",
@@ -239,7 +239,7 @@
     "partyChoice": {
       "title": "Entender antes de participar",
       "text": "La personación no es condición para protección ni para que se investigue.",
-      "dialogue": "Al participar así, no puedes usar la dispensa: la posibilidad que a veces permite no declarar contra un familiar. Recibir protección no depende de que participes de esta forma.",
+      "dialogue": "Si participáis así, tendrás que contar lo ocurrido, aunque sea tu padre. Antes lo hablaremos con calma. Recibir ayuda no depende de elegir esto.",
       "sources": [
         "lecrim",
         "lopivi",
@@ -250,7 +250,7 @@
     "investigation": {
       "title": "Investigar no es juzgar",
       "text": "El órgano instructor busca indicios y recoge declaraciones y otras diligencias. Esa declaración no es por sí sola el juicio ni determina el resultado.",
-      "dialogue": "Esta parte se llama investigación o instrucción. Hoy todavía no se decide si hay condena.",
+      "dialogue": "Ahora están buscando pruebas y escuchando a las personas. Hoy todavía no deciden si hay castigo.",
       "sources": [
         "lecrim"
       ]
@@ -266,7 +266,7 @@
     "familyCase": {
       "title": "Qué ocurre en el caso de Sara",
       "text": "Se aplica la excepción del art. 416.1.4.º: no tiene dispensa por parentesco. Esto no limita sus apoyos ni su derecho a comprender las preguntas y pedir pausas.",
-      "dialogue": "En tu caso, como ya participas como acusación particular, esa dispensa no se aplica y tienes que declarar. Yo te acompañaré y explicaré lo que no entiendas.",
+      "dialogue": "En tu caso sí tienes que contar lo ocurrido. Ya lo hablamos contigo y con tu madre. Yo te ayudaré con lo que no entiendas.",
       "sources": [
         "lecrim",
         "victima"
@@ -275,7 +275,7 @@
     "company": {
       "title": "Elegir quién me acompaña",
       "text": "Durante las diligencias de investigación, Sara puede estar acompañada por una persona de su elección, además de su representación, salvo decisión motivada en contrario para garantizar el correcto desarrollo. La evaluación de apoyos y protección debe repetirse cuando cambien sus necesidades o la fase procesal.",
-      "dialogue": "Además de tu abogada, puede acompañarte una persona que tú elijas, como Elena. Podemos hablar de quién te ayudaría más.",
+      "dialogue": "Puedes elegir quién te acompaña. Si deciden que esa persona no puede entrar, tienen que explicarte por qué.",
       "sources": [
         "victima"
       ]
@@ -283,7 +283,7 @@
     "recording": {
       "title": "Grabar no significa evitar otra declaración",
       "text": "El art. 26.1.a del Estatuto prevé grabación audiovisual de las declaraciones de víctimas menores en la investigación. Una grabación ordinaria no tiene ese efecto automático.",
-      "dialogue": "Sí, se graba porque eres menor. Para usarla en el juicio sin que vuelvas a declarar hacen falta garantías especiales: también debe participar la defensa de tu padre.",
+      "dialogue": "Sí, lo grabarán. En tu caso tendrás que volver a hablar en el juicio. Te avisaré antes y prepararemos la ayuda que necesites.",
       "sources": [
         "victima",
         "lecrim"
@@ -292,7 +292,7 @@
     "communication": {
       "title": "Decir lo que necesito al declarar",
       "text": "Sara recibe explicaciones adaptadas, puede comunicar que no entiende o necesita una pausa y puede expresar que no recuerda un dato. La preparación explica el procedimiento y las herramientas para comunicar sus necesidades, sin ensayar un relato ni sugerir respuestas sobre los hechos.",
-      "dialogue": "Recuerda: puedes pedir que te expliquen una pregunta, decir que no recuerdas algo y pedir una pausa. Lo importante es contar lo que recuerdas con tus palabras.",
+      "dialogue": "Cuenta lo que recuerdas con tus palabras. Puedes decir «no lo sé», pedir otra explicación o una pausa.",
       "sources": [
         "victima",
         "proteccion",
@@ -311,7 +311,7 @@
     "investigationEnd": {
       "title": "Qué puede pasar al terminar de investigar",
       "text": "Al terminar la instrucción puede acordarse el archivo por la causa legal correspondiente o continuar hacia la acusación y el juicio. No toda investigación acaba en juicio.",
-      "dialogue": "No todas las investigaciones llegan a juicio. A veces se archivan porque no se puede continuar, por ejemplo si no hay datos suficientes para seguir.",
+      "dialogue": "A veces faltan datos para seguir y el caso se cierra. En tu caso habrá un juicio.",
       "sources": [
         "lecrim"
       ]
@@ -319,7 +319,7 @@
     "appeal": {
       "title": "La sentencia puede revisarse",
       "text": "Las partes pueden recurrir las resoluciones en los casos y plazos legales. Una sentencia es firme cuando ya no cabe el recurso correspondiente.",
-      "dialogue": "Recurrir es pedir a otro tribunal que revise la decisión. Cuando ya no se puede recurrir, la sentencia es firme.",
+      "dialogue": "Podemos pedir que revisen la decisión si la ley lo permite. Yo te explicaré cómo.",
       "sources": [
         "lecrim",
         "victima"
@@ -328,7 +328,7 @@
     "protectionAfter": {
       "title": "Qué ayudas y medidas siguen después",
       "text": "El apoyo social y asistencial atiende las necesidades de Sara. Se explican los cambios y se valora protección por las vías pertinentes.",
-      "dialogue": "Revisaremos qué medidas siguen, cuáles cambian y qué protección necesitas ahora. No tienes que dejar de pedir ayuda porque haya llegado una sentencia.",
+      "dialogue": "Revisaremos qué protección necesitas ahora. Elena seguirá ayudándote. Puedes volver a pedir ayuda.",
       "sources": [
         "lecrim",
         "civil",

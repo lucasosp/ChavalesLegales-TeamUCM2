@@ -68,6 +68,10 @@ try {
     for (let guard = 0; guard < 170; guard++) {
       const id = await page.locator('#app').getAttribute('data-sara-node');
       visited.add(id);
+      if (await page.locator('[data-sara-people-continue]').isVisible()) {
+        await page.locator('[data-sara-people-continue]').click();
+        continue;
+      }
       if (await page.locator('.sara-drawing-canvas').count()) { await draw(); continue; }
       if (await page.locator('.sara-phase3-card').count()) {
         await page.locator('[data-choice="phase1"]').focus();

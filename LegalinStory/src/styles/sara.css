@@ -187,8 +187,6 @@
   border: 3px solid var(--tinta);
   border-radius: 14px 10px 13px 11px / 11px 14px 10px 13px;
   background-color: var(--superficie);
-  background-image: radial-gradient(rgb(1 25 19 / 12%) 1px, transparent 1.1px);
-  background-size: 7px 7px;
   color: var(--verde-950);
   box-shadow: 4px 4px 0 var(--neutro-400);
   font-weight: 800;
@@ -212,6 +210,10 @@
 .sara-mode .dialogue { cursor: pointer; }
 .sara-mode .nameplate { font-size: .82rem; }
 .sara-mode .legal-badge { font-size: .84rem; }
+.sara-mode button.legal-badge { pointer-events: auto; cursor: pointer; min-height: 44px; background: var(--verde-50); box-shadow: 3px 4px 0 var(--verde-700); max-width: calc(100% - 90px); white-space: normal; text-align: left; }
+.sara-mode button.legal-badge:hover { background: #fff; }
+.sara-mode button.legal-badge:focus-visible { outline: 3px solid var(--marca-ambar); outline-offset: 4px; }
+.sara-mode button.legal-badge::after { content: "›"; font-size: 1.3em; }
 .sara-mode .nameplate.is-voice::after { display: none; }
 .sara-mode .dialogue-text { scrollbar-color: var(--neutro-300) transparent; }
 
@@ -268,7 +270,41 @@
 .sara-dialog h1 { font-size: clamp(1.7rem, 4vw, 2.3rem); font-weight: 800; line-height: 1.12; letter-spacing: -.01em; color: var(--verde-800); margin: 22px 0 16px; }
 .sara-dialog h2 { font-size: 1.05rem; font-weight: 800; color: var(--verde-800); margin: 0 0 10px; }
 .sara-dialog p { line-height: 1.65; }
+.sara-overlay.is-person { place-items: end; background: transparent; }
+.is-person .sara-dialog { width: min(380px, 100%); padding: 20px; }
+.is-person .sara-dialog h1 { font-size: 1.5rem; margin: 14px 0 12px; }
+.is-person .sara-person-summary { font-weight: 800; margin: 0 0 8px; }
+.is-person .sara-person-explanation { margin: 0 0 16px; }
+.is-person .sara-primary { margin-bottom: 0; }
 .sara-panel-intro { margin: 0 0 20px; color: var(--texto-medio); font-size: 1rem; }
+
+.is-people .sara-dialog { width: min(640px, 100%); display: flex; flex-direction: column; overflow: hidden; }
+.is-people .sara-dialog h1 { font-size: 1.6rem; margin: 16px 0 10px; }
+.is-people .sara-dialog-head, .is-people .sara-dialog h1, .is-people .sara-panel-intro { flex-shrink: 0; }
+.is-people [data-sara-body] { display: flex; flex-direction: column; min-height: 0; }
+.sara-people-scroll { min-height: 0; overflow-y: auto; overscroll-behavior: contain; border: 3px solid var(--tinta); border-radius: var(--radio-control); background: var(--superficie); scrollbar-width: thin; }
+.sara-people-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: .95rem; }
+.sara-people-table th, .sara-people-table td { padding: 8px 12px; text-align: left; vertical-align: middle; overflow-wrap: anywhere; border-bottom: 2px solid var(--tinta); line-height: 1.4; }
+.sara-people-table thead th { padding-block: 10px; font-size: .72rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--verde-800); background: var(--verde-50); border-bottom-width: 3px; }
+.sara-people-table th:first-child { width: 43%; }
+.sara-person-toggle { display: block; width: 100%; min-height: 44px; padding: 5px 18px 5px 0; position: relative; border: 0; background: var(--superficie); color: var(--tinta); text-align: left; font: inherit; cursor: pointer; }
+.sara-person-toggle::after { content: ""; position: absolute; top: calc(50% - 5px); right: 2px; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); }
+.sara-person-toggle[aria-expanded="true"]::after { top: calc(50% - 1px); transform: rotate(225deg); }
+.sara-person-toggle:focus-visible { outline: none; box-shadow: var(--foco); border-radius: 9px; }
+.sara-person-name { display: block; }
+.sara-person-name { font-weight: 800; }
+.sara-people-table .is-open { background: var(--verde-50); }
+.sara-people-table .is-open .sara-person-toggle { background: var(--verde-50); }
+.sara-person-detail td { background: var(--verde-50); padding: 10px 12px; color: var(--texto-medio); font-size: .9rem; }
+.sara-person-detail[hidden] { display: none; }
+.sara-people-actions { flex-shrink: 0; padding: 16px 0 2px; background: var(--superficie); }
+@media (max-height: 520px) {
+  .is-people .sara-dialog { padding: 14px 24px; }
+  .is-people .sara-dialog h1 { margin: 8px 0; font-size: 1.35rem; }
+  .is-people .sara-panel-intro { margin-bottom: 6px; font-size: .88rem; line-height: 1.4; }
+  .is-people .sara-people-actions { padding-top: 8px; }
+  .is-people .sara-people-actions button { min-height: 44px; margin: 0; padding: 8px 16px; }
+}
 
 .sara-primary, .sara-secondary {
   display: block; width: 100%; min-height: 48px; padding: 12px 16px;
@@ -305,7 +341,7 @@
 .sara-secondary[aria-pressed='true'] { background: var(--verde-100); border-color: var(--verde-700); box-shadow: 3px 3px 0 var(--verde-700); }
 
 .sara-text-button {
-  display: block; min-height: 44px; padding: 8px; border: 0; background: none;
+  display: block; min-height: 44px; padding: 8px; border: 0; background: var(--superficie);
   color: var(--verde-800); font-weight: 800; cursor: pointer;
   text-decoration: underline; text-underline-offset: 4px;
 }

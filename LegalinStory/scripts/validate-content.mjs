@@ -47,6 +47,7 @@ const COMMON_NODE_KEYS = [
   "chapter",
   "learn",
   "a11y",
+  "reference",
 ];
 const NODE_KEYS = {
   dialogue: [...COMMON_NODE_KEYS, "speaker", "text", "next"],
@@ -1310,6 +1311,9 @@ function validateCommonNode(node, where, catalog, sceneIndex, ctx, setFlags) {
   }
   if (node.a11y !== undefined && !isObject(node.a11y)) {
     ctx.errors.push(`${where}.a11y must be an object`);
+  }
+  if (node.reference !== undefined && node.reference !== "people") {
+    ctx.errors.push(`${where}.reference must be "people"`);
   }
 }
 

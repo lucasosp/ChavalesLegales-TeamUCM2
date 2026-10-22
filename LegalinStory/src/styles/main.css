@@ -2019,8 +2019,6 @@ body { background: var(--verde-950); }
   border: 3px solid var(--tinta);
   border-radius: 14px 10px 13px 11px / 11px 14px 10px 13px;
   background-color: var(--superficie);
-  background-image: radial-gradient(rgb(1 25 19 / 12%) 1px, transparent 1.1px);
-  background-size: 7px 7px;
   color: var(--tinta);
   box-shadow: 3px 3px 0 var(--neutro-400);
   font-family: var(--brand-font);
@@ -2261,8 +2259,6 @@ body { background: var(--verde-950); }
   border: 3px solid var(--tinta);
   border-radius: var(--radio-pegatina);
   background-color: var(--superficie);
-  background-image: radial-gradient(rgb(1 25 19 / 6%) 1.2px, transparent 1.3px);
-  background-size: 11px 11px;
   color: var(--tinta);
   box-shadow: 5px 5px 0 var(--tinta);
   font-family: var(--brand-font);
@@ -2484,8 +2480,6 @@ body { background: var(--verde-950); }
   border: 3px solid var(--tinta);
   border-radius: var(--radio-pegatina);
   background-color: var(--superficie);
-  background-image: radial-gradient(rgb(1 25 19 / 6%) 1.2px, transparent 1.3px);
-  background-size: 11px 11px;
   color: var(--tinta);
   box-shadow: 4px 4px 0 var(--neutro-400);
   font-family: var(--brand-font);
@@ -2747,8 +2741,6 @@ body { background: var(--verde-950); }
   border: 3px solid var(--tinta);
   border-radius: var(--radio-pegatina-grande);
   background-color: var(--superficie);
-  background-image: radial-gradient(rgb(1 25 19 / 6%) 1.2px, transparent 1.3px);
-  background-size: 11px 11px;
   box-shadow: 6px 6px 0 var(--tinta);
   color: var(--tinta);
   transition: transform .14s ease, box-shadow .14s ease;

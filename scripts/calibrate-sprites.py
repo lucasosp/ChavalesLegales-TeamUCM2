@@ -32,7 +32,7 @@ CALIBRATION_CONFIG = {
   'laura': {'src': 'Warm Studio Portrait of a Woman.png', 'top': -25, 'bottom': 975, 'center': 535, 'label': 'Laura'},
   'irene': {'src': 'Elegant Office Professional Portrait.png', 'top': -25, 'bottom': 975, 'center': 500, 'label': 'Irene'},
   'elena': {'src': 'Elegant Office Professional Portrait(1).png', 'top': -25, 'bottom': 975, 'center': 500, 'label': 'Elena'},
-  'judge': {'src': 'jueza-transparente.png', 'top': -25, 'bottom': 975, 'center': 500, 'label': 'Jueza'},
+  'judge': {'src': 'jueza-transparente.png', 'top': -40, 'bottom': 1140, 'center': 505, 'label': 'Jueza'},
 }
 
 def generate_js():

@@ -30,6 +30,7 @@ export class SaraExperience {
     this.phase1Triggered = false;
     this.phase2Triggered = false;
     this.phase3Triggered = false;
+    this.referenceNode = null;
     root.classList.add("sara-mode");
     this.novel = root.querySelector(".novel");
     this.cast = element("div", "sara-cast");
@@ -69,13 +70,18 @@ export class SaraExperience {
     this.title = root.querySelector("#sara-dialog-title");
     this.close = root.querySelector("[data-sara-close]");
     this.close.addEventListener("click", () => this.closePanel());
+    const personIds = { Irene: "irene", Elena: "elena", Jueza: "judge", Juez: "judge", Fiscal: "prosecutor", "Psicóloga": "psychologist", "Oficina de víctimas": "victimOffice", "Oficina judicial": "courtOffice", "Letrada": "clerk", "Letrada (LAJ)": "clerk", "Abogado de Javier": "defence" };
+    this.app.view.setLegalPersonReference(
+      (speaker) => this.guide.peopleTable?.rows.find((person) => person.id === personIds[speaker] || person.name === speaker),
+      (personId) => this.openPerson(personId),
+    );
 
     this.onRootClick = (event) => {
       const button = event.target.closest("[data-sara-action]");
       if (!button) return;
       const action = button.dataset.saraAction;
       if (action === "back") { if (this.engine.back()) this.app.view.skipTyping(); return; }
-      if (["pause", "help", "restart"].includes(action)) this.openPanel(action);
+      if (["pause", "help", "restart", "people"].includes(action)) this.openPanel(action);
     };
     root.addEventListener("click", this.onRootClick);
     this.onKey = (event) => this.handleOverlayKey(event);
@@ -119,6 +125,7 @@ export class SaraExperience {
 
   showLanding() {
     this.engine.isRunning = false;
+    this.referenceNode = null;
     this.openShell("start", "Sara");
     this.chrome.forEach((node) => { node.hidden = true; });
     this.overlay.classList.add("is-landing");
@@ -220,9 +227,12 @@ export class SaraExperience {
     this.chrome.forEach((node) => { node.inert = true; });
     this.overlay.hidden = false;
     this.overlay.classList.remove("is-landing");
+    this.overlay.classList.toggle("is-people", mode === "people");
+    this.overlay.classList.toggle("is-person", mode === "person");
     this.close.hidden = false;
     this.title.textContent = title;
     this.body.replaceChildren();
+    delete this.body.dataset.personId;
     this.dialog.scrollTop = 0;
     this.close.focus({ preventScroll: true });
   }
@@ -240,9 +250,10 @@ export class SaraExperience {
 
   openPanel(mode) {
     if (this.mode === "start" && mode === "help") this.helpFromLanding = true;
-    const titles = { help: t("sara.titleHelp"), pause: t("sara.titlePause"), restart: t("sara.titleRestart") };
+    const titles = { help: t("sara.titleHelp"), pause: t("sara.titlePause"), restart: t("sara.titleRestart"), people: this.guide.peopleTable?.title };
     this.openShell(mode, titles[mode] ?? "Sara");
-    if (mode === "help") this.renderHelp();
+    if (mode === "people") this.renderPeople();
+    else if (mode === "help") this.renderHelp();
     else if (mode === "restart") {
       this.body.append(element("p", "sara-panel-intro", t("sara.restartIntro")));
       this.button(t("sara.restartConfirm"), () => { this.localStore.clear(); this.engine.saveStore?.clear(); avatarStore.clear(); this.showLanding(); }, "sara-primary");
@@ -301,6 +312,9 @@ export class SaraExperience {
     });
     instant.setAttribute("aria-pressed", String(Boolean(this.app.view.typewriter.instant)));
     this.button(t("sara.needHelp"), () => this.openPanel("help"));
+    if (this.engine.currentNode?.chapter >= 5 && this.guide.peopleTable) {
+      this.button(this.guide.peopleTable.title, () => this.openPanel("people"));
+    }
 
     if (this.guide?.chapters?.length) {
       const container = element("div", "sara-pause-dropdown");
@@ -387,6 +401,70 @@ export class SaraExperience {
     this.body.append(element("p", "sara-fineprint", t("sara.helpNote", { date: this.legal.checkedAt })));
   }
 
+  openPerson(personId) {
+    const person = this.guide.peopleTable?.rows.find((row) => row.id === personId);
+    if (!person) return;
+    this.openShell("person", person.name);
+    this.body.dataset.personId = person.id;
+    this.body.append(element("p", "sara-person-summary", person.summary), element("p", "sara-person-explanation", person.detail));
+    this.button(this.guide.peopleTable.continueLabel, () => this.closePanel(), "sara-primary");
+  }
+
+  renderPeople() {
+    const content = this.guide.peopleTable;
+    this.body.append(element("p", "sara-panel-intro", content.intro));
+    const table = element("table", "sara-people-table");
+    table.setAttribute("aria-labelledby", this.title.id);
+    const head = table.createTHead().insertRow();
+    for (const label of [content.personColumn, content.taskColumn]) {
+      const cell = element("th", "", label);
+      cell.scope = "col";
+      head.append(cell);
+    }
+    const rows = table.createTBody();
+    for (const person of content.rows) {
+      const row = rows.insertRow();
+      const name = element("th");
+      name.scope = "row";
+      const toggle = element("button", "sara-person-toggle");
+      toggle.type = "button";
+      toggle.dataset.personId = person.id;
+      toggle.append(element("span", "sara-person-name", person.name));
+      const detail = rows.insertRow();
+      detail.hidden = true;
+      detail.id = `sara-person-detail-${person.id}`;
+      detail.className = "sara-person-detail";
+      const cell = detail.insertCell();
+      cell.colSpan = 2;
+      cell.textContent = person.detail;
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-controls", detail.id);
+      toggle.addEventListener("click", () => {
+        const expanded = toggle.getAttribute("aria-expanded") === "true";
+        for (const other of table.querySelectorAll('[aria-expanded="true"]')) {
+          other.setAttribute("aria-expanded", "false");
+          document.getElementById(other.getAttribute("aria-controls")).hidden = true;
+          other.closest("tr").classList.remove("is-open");
+        }
+        toggle.setAttribute("aria-expanded", String(!expanded));
+        detail.hidden = expanded;
+        row.classList.toggle("is-open", !expanded);
+      });
+      name.append(toggle);
+      row.append(name, element("td", "", person.summary));
+    }
+    const scroll = element("div", "sara-people-scroll");
+    scroll.append(table);
+    this.body.append(scroll);
+    const actions = element("div", "sara-people-actions");
+    const continueButton = this.button(content.continueLabel, () => {
+      this.closePanel();
+      if (this.engine.currentNode.reference === "people") this.app.advance();
+    }, "sara-primary", actions);
+    continueButton.dataset.saraPeopleContinue = "";
+    this.body.append(actions);
+  }
+
   sync() {
     const node = this.engine.currentNode;
     this.root.dataset.saraNode = this.engine.nodeId;
@@ -453,6 +531,11 @@ export class SaraExperience {
     this.renderCast(node);
     const backBtn = this.root.querySelector("[data-sara-action='back']");
     if (backBtn) backBtn.disabled = this.engine.history.length === 0 || this.engine.isFinished;
+    // One opening per visit, including a restored save. Closing it does not reopen it.
+    if (node.reference === "people" && this.referenceNode !== this.engine.nodeId) {
+      this.referenceNode = this.engine.nodeId;
+      this.openPanel("people");
+    } else if (node.reference !== "people") this.referenceNode = null;
   }
 
   renderCast(node) {
