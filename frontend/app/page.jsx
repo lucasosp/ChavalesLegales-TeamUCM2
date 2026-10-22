@@ -32,14 +32,9 @@ export default function Home() {
     if (destino) router.push(`/novela?caso=${encodeURIComponent(destino)}`)
   }, [router])
 
-  // Los cuatro juegos sueltos: no piden código y no registran informe.
-  // Azul, morado, rojo y verde en tonos planos de lápiz (paleta tipo Excalidraw):
-  // se distinguen de un vistazo sin parecer cuatro avisos distintos.
+  // Juegos sueltos: no piden código y no registran informe. Solo queda el de la historia.
   const juegosLibres = [
     { href: '/novela', tag: t('inicio.juegoHistoriaTag'), title: t('inicio.juegoHistoriaTitulo'), bg: 'var(--juego-azul)', borde: 'var(--juego-azul-borde)', color: 'var(--juego-azul-borde)', icon: <><path d="M12 7.4C10.4 6 8.2 5.3 5.4 5.3H3.6v13.4h1.8c2.8 0 5 .7 6.6 2.1 1.6-1.4 3.8-2.1 6.6-2.1h1.8V5.3h-1.8c-2.8 0-5 .7-6.6 2.1Z"/><path d="M12 7.4v13.4"/></> },
-    { href: '/experiments/cid-table', tag: t('inicio.juegoFamiliaTag'), title: t('inicio.juegoFamiliaTitulo'), bg: 'var(--juego-morado)', borde: 'var(--juego-morado-borde)', color: 'var(--juego-morado-borde)', icon: <><ellipse cx="12" cy="12.4" rx="5.6" ry="3"/><circle cx="12" cy="5.6" r="1.5" fill="currentColor"/><circle cx="5.4" cy="12.4" r="1.5" fill="currentColor"/><circle cx="18.6" cy="12.4" r="1.5" fill="currentColor"/><circle cx="12" cy="19.2" r="1.5" fill="currentColor"/></> },
-    { href: '/experiments/caja-arena', tag: t('inicio.juegoArenaTag'), title: t('inicio.juegoArenaTitulo'), bg: 'var(--juego-rojo)', borde: 'var(--juego-rojo-borde)', color: 'var(--juego-rojo-borde)', icon: <><ellipse cx="12" cy="15.6" rx="4.6" ry="3.9"/><ellipse cx="6.6" cy="8.6" rx="1.9" ry="2.3"/><ellipse cx="10.1" cy="5.6" rx="1.9" ry="2.3"/><ellipse cx="13.9" cy="5.6" rx="1.9" ry="2.3"/><ellipse cx="17.4" cy="8.6" rx="1.9" ry="2.3"/></> },
-    { href: '/novela?avatar=1', tag: t('inicio.juegoAvatarTag'), title: t('inicio.juegoAvatarTitulo'), bg: 'var(--juego-verde)', borde: 'var(--juego-verde-borde)', color: 'var(--juego-verde-borde)', icon: <><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.3 3.1-5.5 7-5.5s7 2.2 7 5.5"/></> },
   ]
 
   return (
