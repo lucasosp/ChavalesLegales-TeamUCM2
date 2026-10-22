@@ -228,7 +228,11 @@ moving the group moves the light.
   `tense`, `warm`, `safe`, or `hope`.
 - `transition` — how this beat's visual changes apply (default: `cut`).
 - `audio` — `{ "music": "rain", "fade": 800 }` or `{ "sfx": "page-turn" }`.
-- `tone` — presentation hint (`narration`, `spoken`, `poem`), never logic.
+- `tone` — presentation hint, never logic: `spoken` (default when there is a
+  speaker), `narration` (third-person voice for a beat with no speaker),
+  `thought` (inner voice: the view drops surrounding «…»/"…" quotation marks,
+  uses its own nameplate and an italic, tinted box so it never reads as
+  something said out loud), or `poem`.
 - `reference: "people"` — in Sara, opens the short interactive people table from
   `guide.peopleTable`. The story waits while the panel is open; its continue
   button follows the beat's ordinary `next`. No row has to be opened first.

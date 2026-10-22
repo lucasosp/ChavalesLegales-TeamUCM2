@@ -2119,6 +2119,18 @@ body { background: var(--verde-950); }
   box-shadow: 3px 3px 0 var(--verde-700);
 }
 
+/* Voz interna: lo que se piensa no se dice en voz alta. La placa pierde el
+   tono de nombre propio y pasa a ir a trazos, en cursiva y sobre papel. */
+.nameplate[data-speaker="pensamiento"] {
+  border-width: 2px;
+  border-style: dashed;
+  background: var(--superficie);
+  color: var(--verde-900);
+  box-shadow: 3px 3px 0 var(--verde-300);
+  font-style: italic;
+  letter-spacing: .03em;
+}
+
 .nameplate[data-speaker="decisión"],
 .nameplate[data-speaker="decision"],
 .nameplate[data-speaker="you"] {
@@ -2197,10 +2209,21 @@ body { background: var(--verde-950); }
   scrollbar-width: thin;
 }
 
-.dialogue.is-narration .dialogue-text,
-.dialogue.is-thought .dialogue-text {
+.dialogue.is-narration .dialogue-text {
   color: var(--texto-medio);
   font-style: italic;
+}
+
+/* El pensamiento usa la misma caja, pero tintada y con la voz en cursiva y
+   sin comillas: se ve de un vistazo que nadie lo ha dicho en voz alta. */
+.dialogue.is-thought {
+  background-color: var(--verde-50);
+}
+
+.dialogue.is-thought .dialogue-text {
+  color: var(--verde-900);
+  font-style: italic;
+  font-weight: 600;
 }
 
 .dialogue.is-poem .dialogue-text {

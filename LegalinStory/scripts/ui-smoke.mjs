@@ -141,6 +141,26 @@ if (secondRoot.querySelector("[data-text]").textContent !== story[saved.nodeId].
   fail("resumed view did not render the saved line");
 }
 
+// Voz interna y voz alta no se pintan igual: el pensamiento pierde las comillas,
+// lleva placa propia y una caja tintada; lo hablado conserva sus comillas.
+resumed.view.showDialogue({ speaker: "Sara", text: "«Esto lo pienso yo.»", tone: "thought" });
+resumed.view.skipTyping();
+const thoughtPanel = secondRoot.querySelector("[data-panel]");
+const thoughtText = secondRoot.querySelector("[data-text]").textContent;
+const thoughtPlate = secondRoot.querySelector("[data-speaker-name]");
+if (!thoughtPanel.classList.contains("is-thought")) fail("thought line lost its is-thought class");
+if (thoughtText !== "Esto lo pienso yo.") fail(`thought kept its quotation marks: ${thoughtText}`);
+if (thoughtPlate.dataset.speaker !== "pensamiento") fail(`unexpected thought plate: ${thoughtPlate.dataset.speaker}`);
+
+resumed.view.showDialogue({ speaker: "Sara", text: "«Esto lo digo en voz alta.»", tone: "spoken" });
+resumed.view.skipTyping();
+if (secondRoot.querySelector("[data-panel]").classList.contains("is-thought")) {
+  fail("spoken line flagged as thought");
+}
+if (secondRoot.querySelector("[data-text]").textContent !== "«Esto lo digo en voz alta.»") {
+  fail("spoken line lost its quotation marks");
+}
+
 console.log("UI smoke test passed");
 console.log("final node:", app.engine.nodeId);
 console.log("resumed at:", saved.nodeId);

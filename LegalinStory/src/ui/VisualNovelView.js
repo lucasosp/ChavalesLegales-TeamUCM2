@@ -3,6 +3,16 @@ import { Typewriter } from "./Typewriter.js";
 import { t } from "../i18n.js";
 import { personImage } from "../content/characterImages.js";
 
+// Un pensamiento no se pronuncia: si el texto llega entrecomillado se quitan
+// las comillas al pintarlo. Así «lo que se dice» conserva sus comillas y lo que
+// se piensa se lee en cursiva, sin comillas y con su propia placa.
+const THOUGHT_QUOTES = /^\s*[«“"]([\s\S]*)[»”"]\s*$/;
+
+function withoutQuotes(text) {
+  const match = THOUGHT_QUOTES.exec(text ?? "");
+  return match ? match[1].trim() : text;
+}
+
 /**
  * DOM presentation layer.
  *
@@ -239,20 +249,24 @@ export class VisualNovelView {
     this.#awaitingChoice = false;
     this.#clearChoices();
     this.#applyStage(stage);
-    const voice = tone === "thought"
+    const isThought = tone === "thought";
+    const voice = isThought
       ? (speaker ? t("novel.thoughtOf", { speaker }) : t("novel.thought"))
       : speaker ?? (tone === "narration" ? t("novel.narration") : null);
-    this.#setSpeaker(voice, remote, tone === "thought" ? null : speakerKey);
-    this.refs.announcement.textContent = `${voice ? `${voice}: ` : ""}${text}`;
+    // "pensamiento" es una clave de estilo estable para la placa, no un nombre:
+    // así el CSS distingue la voz interna sin depender del idioma.
+    this.#setSpeaker(voice, remote, isThought ? null : speakerKey, isThought ? "pensamiento" : null);
+    const body = isThought ? withoutQuotes(text) : text;
+    this.refs.announcement.textContent = `${voice ? `${voice}: ` : ""}${body}`;
 
     this.refs.panel.classList.toggle("is-narration", tone === "narration");
-    this.refs.panel.classList.toggle("is-thought", tone === "thought");
+    this.refs.panel.classList.toggle("is-thought", isThought);
     this.refs.panel.classList.toggle("is-poem", tone === "poem");
     this.refs.text.scrollTop = 0;
     this.refs.advance.hidden = false;
     this.refs.advance.textContent = t("novel.seeFullLine");
 
-    this.typewriter.play(text, () => {
+    this.typewriter.play(body, () => {
       if (this.#awaitingChoice) return;
       this.refs.advance.hidden = false;
       this.refs.advance.textContent = t("novel.nextLine");
@@ -269,7 +283,8 @@ export class VisualNovelView {
     this.#applyStage(stage);
     const voice = speaker ?? t("novel.yourTurn");
     this.#setSpeaker(voice, remote, speaker ? speakerKey : null);
-    this.refs.announcement.textContent = `${voice}: ${prompt}`;
+    const body = tone === "thought" ? withoutQuotes(prompt) : prompt;
+    this.refs.announcement.textContent = `${voice}: ${body}`;
     this.#clearChoices();
 
     this.refs.panel.classList.toggle("is-narration", tone === "narration");
@@ -277,7 +292,7 @@ export class VisualNovelView {
     this.refs.panel.classList.toggle("is-poem", tone === "poem");
     this.refs.advance.hidden = true;
 
-    this.typewriter.play(prompt, () => {
+    this.typewriter.play(body, () => {
       this.refs.text.scrollTop = 0;
       this.#awaitingChoice = true;
       this.#renderChoices(options);
@@ -1144,7 +1159,9 @@ export class VisualNovelView {
     this.onAdvance();
   }
 
-  #setSpeaker(name, remote = false, key = null) {
+  // `style` fuerza una clave de estilo cuando la placa no es un personaje
+  // (p. ej. "pensamiento"), sin tocar la resolución del cargo jurídico.
+  #setSpeaker(name, remote = false, key = null, style = null) {
     if (!name) {
       this.#hideLegalBadge(true);
       this.refs.speaker.hidden = true;
@@ -1157,7 +1174,7 @@ export class VisualNovelView {
     this.refs.speaker.hidden = false;
     this.refs.speaker.textContent = name;
     // El estilo depende de un identificador estable, no del texto traducido
-    const styleKey = key ?? (name === t("novel.narration") ? "narración" : name === t("novel.yourTurn") ? "decisión" : name);
+    const styleKey = style ?? key ?? (name === t("novel.narration") ? "narración" : name === t("novel.yourTurn") ? "decisión" : name);
     this.refs.speaker.dataset.speaker = styleKey.toLowerCase();
     const normalized = (key ?? name)
       .toLowerCase()
