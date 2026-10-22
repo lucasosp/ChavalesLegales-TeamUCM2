@@ -32,7 +32,7 @@
     "protection": {
       "title": "La protección puede empezar aquí",
       "text": "El personal educativo debe comunicar los indicios de violencia y activar el protocolo. Sara no tiene que presentar sola una denuncia para recibir ayuda.",
-      "dialogue": "Mi trabajo es pedir ayuda cuando un niño o una niña lo está pasando mal. Tú no tienes que ir a denunciar sola para que empecemos a protegerte. Te iré contando lo que hagamos.",
+      "dialogue": "Mi trabajo es pedir ayuda cuando alguien de tu edad lo está pasando mal. Tú no tienes que ir a denunciar sola para que empecemos a protegerte. Te iré contando lo que hagamos.",
       "sources": [
         "lopivi"
       ]
@@ -74,7 +74,7 @@
     "everyday": {
       "title": "También importa la vida cotidiana",
       "text": "El acompañamiento puede ayudar con estudios, amistades y actividades. La protección considera el bienestar y las necesidades de Sara, además de las actuaciones judiciales.",
-      "dialogue": "Además de las citas, podemos ayudarte con el cole, con tus amigas y con el voleibol. No tienes que dejar de lado lo que te gusta.",
+      "dialogue": "Además de las citas, podemos ayudarte con el instituto, con tus amigas y con el voleibol. No tienes que dejar de lado lo que te gusta.",
       "sources": [
         "proteccion"
       ]
@@ -90,8 +90,8 @@
     },
     "supports": {
       "title": "Una declaración con apoyos",
-      "text": "Las medidas se deciden en cada caso. Para menores de 14 años, en ciertos delitos, la ley prevé grabar su declaración una vez antes del juicio (prueba preconstituida), con ayuda de profesionales, para que no tengan que repetirla ni encontrarse con el acusado.",
-      "dialogue": "Como tienes menos de catorce años, la ley quiere que no tengas que contarlo muchas veces. Normalmente se graba lo que dices una sola vez, en una sala tranquila, para que no tengas que ir al juicio ni ver a tu padre.",
+      "text": "Las medidas se deciden en cada caso. Con 14 años, la grabación previa de la declaración (prueba preconstituida) ya no es la regla general, pero se puede pedir una sala aparte, la videoconferencia, evitar el contacto visual con el acusado y el apoyo de profesionales.",
+      "dialogue": "Con catorce años puede que te toque declarar. Pero vamos a pedir que lo hagas desde otra sala, sin ver a tu padre, y con alguien que te acompañe. Todo eso lo decide la jueza según lo que necesites.",
       "sources": [
         "victima",
         "lecrim"
@@ -133,7 +133,7 @@
     "school": {
       "title": "Decidir qué contar a mis compañeros",
       "text": "El centro debe cuidar la intimidad. Sara puede acordar con Laura qué información práctica necesita el profesorado y expresar qué prefiere compartir con sus amistades.",
-      "dialogue": "Podemos decidir juntas qué necesitan saber los profes y qué no. Y a tus amigas les cuentas solo lo que tú quieras.",
+      "dialogue": "Podemos decidir juntas qué necesitan saber los profesores y qué no. Y a tus amigas les cuentas solo lo que tú quieras.",
       "sources": [
         "lopivi",
         "proteccion"
@@ -187,7 +187,7 @@
     "psicosocial": {
       "title": "El equipo psicosocial",
       "text": "Cuando el juzgado lo decide, psicólogos y trabajadores sociales del juzgado pueden ayudar a escuchar al menor y dar su opinión como especialistas.",
-      "dialogue": "A veces el juzgado pide ayuda a su equipo psicosocial: psicólogas y trabajadores sociales que saben hablar con niños y niñas. Si te toca, te ayudarán a contar las cosas con calma.",
+      "dialogue": "A veces el juzgado pide ayuda a su equipo psicosocial: psicólogas y trabajadores sociales que saben hablar con chicos y chicas de tu edad. Si te toca, te ayudarán a contar las cosas con calma.",
       "sources": [
         "lecrim",
         "victima"

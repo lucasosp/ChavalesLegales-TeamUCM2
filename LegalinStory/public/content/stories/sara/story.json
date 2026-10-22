@@ -21,7 +21,7 @@
       "chapter": 1,
       "type": "dialogue",
       "speaker": null,
-      "text": "Sara tiene once años y va a quinto de primaria. Le encanta el voleibol y dibuja estrellas en los bordes de sus cuadernos. Suena el timbre y todavía le queda una estrella por terminar.",
+      "text": "Sara tiene catorce años y va a tercero de la ESO. Le encanta el voleibol y dibuja estrellas en los bordes de sus cuadernos. Suena el timbre y todavía le queda una estrella por terminar.",
       "next": "c1-02",
       "cast": {
         "sara": "neutral"
@@ -62,7 +62,7 @@
       "chapter": 1,
       "type": "dialogue",
       "speaker": "Sara",
-      "text": "Ayer me volvió a quitar el móvil. Dani estaba en su cuarto. Solo tiene siete años. No sé cuánto oyó.",
+      "text": "Ayer me volvió a quitar el móvil. Dani estaba en su cuarto. Solo tiene diez años. No sé cuánto oyó.",
       "next": "c1-06",
       "cast": {
         "sara": "sad"
@@ -225,7 +225,7 @@
       "type": "interstitial",
       "kicker": "SARA · CAPÍTULO 2 DE 6",
       "title": "Alguien escucha",
-      "text": "En el cole. Una conversación, paso a paso.",
+      "text": "En el instituto. Una conversación, paso a paso.",
       "next": "c2-01",
       "scene": "orientation-office",
       "cast": {
@@ -276,7 +276,7 @@
       "chapter": 2,
       "type": "dialogue",
       "speaker": "Laura",
-      "text": "Lo tendremos en cuenta antes de hablar con nadie. Voy a avisar a la persona que cuida del bienestar en el cole y a los servicios que ayudan a los niños y niñas.",
+      "text": "Lo tendremos en cuenta antes de hablar con nadie. Voy a avisar a la persona que cuida del bienestar en el instituto y a los servicios que protegen a los menores.",
       "next": "c2-protection",
       "cast": {
         "sara": null
@@ -286,7 +286,7 @@
       "chapter": 2,
       "type": "dialogue",
       "speaker": "Laura",
-      "text": "Mi trabajo es pedir ayuda cuando un niño o una niña lo está pasando mal. Tú no tienes que ir a denunciar sola para que empecemos a protegerte. Te iré contando lo que hagamos.",
+      "text": "Mi trabajo es pedir ayuda cuando alguien de tu edad lo está pasando mal. Tú no tienes que ir a denunciar sola para que empecemos a protegerte. Te iré contando lo que hagamos.",
       "next": "c2-choice",
       "cast": {
         "sara": null
@@ -302,7 +302,7 @@
       "options": [
         {
           "id": "privacy",
-          "label": "«¿Se lo vas a contar a todos los profes?».",
+          "label": "«¿Se lo vas a contar a todo el profesorado?».",
           "next": "c2-privacy",
           "flags": {
             "concernPrivacy": true
@@ -366,7 +366,7 @@
       "chapter": 2,
       "type": "dialogue",
       "speaker": null,
-      "text": "Esa misma tarde, el cole habla con los servicios que protegen a los niños y niñas. Lo primero es que Sara esté a salvo. Unos días después, conoce a alguien nuevo.",
+      "text": "Esa misma tarde, el instituto habla con los servicios que protegen a los menores. Lo primero es que Sara esté a salvo. Unos días después, conoce a alguien nuevo.",
       "next": "c2-07",
       "cast": {
         "sara": "neutral"
@@ -376,7 +376,7 @@
       "chapter": 2,
       "type": "dialogue",
       "speaker": "Elena",
-      "text": "Hola, Sara. Me llamo Elena y soy trabajadora social. Voy a acompañarte. También me importa cómo te va en el cole, con tus amigas y en tu día a día.",
+      "text": "Hola, Sara. Me llamo Elena y soy trabajadora social. Voy a acompañarte. También me importa cómo te va en el instituto, con tus amigas y en tu día a día.",
       "next": "c2-08",
       "cast": {
         "sara": null
@@ -590,7 +590,7 @@
       "chapter": 3,
       "type": "dialogue",
       "speaker": null,
-      "text": "Sara, su madre y Dani se van unos días a casa de su tía, donde están a salvo. Mientras, las personas que les ayudan deciden qué hacer. Sara sigue yendo a su cole.",
+      "text": "Sara, su madre y Dani se van unos días a casa de su tía, donde están a salvo. Mientras, las personas que les ayudan deciden qué hacer. Sara sigue yendo a su instituto.",
       "next": "c3-06",
       "cast": {
         "sara": "neutral"
@@ -900,7 +900,7 @@
       "chapter": 4,
       "type": "dialogue",
       "speaker": "Elena",
-      "text": "Además de las citas, podemos ayudarte con el cole, con tus amigas y con el voleibol. No tienes que dejar de lado lo que te gusta.",
+      "text": "Además de las citas, podemos ayudarte con el instituto, con tus amigas y con el voleibol. No tienes que dejar de lado lo que te gusta.",
       "next": "c4-choice2",
       "cast": {
         "sara": null
@@ -950,7 +950,7 @@
       "chapter": 4,
       "type": "dialogue",
       "speaker": "Laura",
-      "text": "Podemos decidir juntas qué necesitan saber los profes y qué no. Y a tus amigas les cuentas solo lo que tú quieras.",
+      "text": "Podemos decidir juntas qué necesitan saber los profesores y qué no. Y a tus amigas les cuentas solo lo que tú quieras.",
       "next": "c4-end",
       "cast": {
         "sara": null
@@ -1090,7 +1090,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "A veces el juzgado pide ayuda a su equipo psicosocial: psicólogas y trabajadores sociales que saben hablar con niños y niñas. Si te toca, te ayudarán a contar las cosas con calma.",
+      "text": "A veces el juzgado pide ayuda a su equipo psicosocial: psicólogas y trabajadores sociales que saben hablar con chicos y chicas de tu edad. Si te toca, te ayudarán a contar las cosas con calma.",
       "next": "c5-oavd",
       "cast": {
         "sara": null
@@ -1150,7 +1150,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Estarán la jueza, el fiscal y la letrada que levanta el acta. Yo estaré contigo. Tu padre tendrá su propio abogado, que no es el tuyo. Antes de entrar te digo quién es cada uno.",
+      "text": "Estarán la jueza, el fiscal y la letrada, que da fe de lo que se dice. Yo estaré contigo. Tu padre tendrá su propio abogado, que no es el tuyo. Antes de entrar te digo quién es cada uno.",
       "next": "c5-people2",
       "cast": {
         "sara": null
@@ -1190,7 +1190,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Como tienes menos de catorce años, la ley quiere que no tengas que contarlo muchas veces. Normalmente se graba lo que dices una sola vez, en una sala tranquila, para que no tengas que ir al juicio ni ver a tu padre.",
+      "text": "Con catorce años puede que te toque declarar. Pero vamos a pedir que lo hagas desde otra sala, sin ver a tu padre, y con alguien que te acompañe. Todo eso lo decide la jueza según lo que necesites.",
       "next": "c5-privacy-route",
       "cast": {
         "sara": null
@@ -1365,7 +1365,7 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": null,
-      "text": "Sara habla con una psicóloga del juzgado en una sala pequeña, mientras la graban. La jueza, el fiscal e Irene lo siguen desde otra sala. La letrada comprueba que la grabación está bien. Al salir, Elena la está esperando.",
+      "text": "Sara declara desde una sala aparte, por videoconferencia, sin ver a Javier. Una psicóloga del equipo psicosocial está a su lado. La letrada da fe de lo que se dice y comprueba la grabación. Al salir, Elena la está esperando.",
       "next": "c5-08",
       "cast": {
         "sara": "neutral"
@@ -1484,7 +1484,7 @@
       "chapter": 6,
       "type": "dialogue",
       "speaker": "Laura",
-      "text": "Podemos decidir juntas qué necesitan saber los profes y qué no. Y a tus amigas les cuentas solo lo que tú quieras.",
+      "text": "Podemos decidir juntas qué necesitan saber los profesores y qué no. Y a tus amigas les cuentas solo lo que tú quieras.",
       "next": "c6-03",
       "cast": {
         "sara": null
@@ -1740,7 +1740,7 @@
       "type": "ending",
       "kicker": "SARA · MI HISTORIA SIGUE",
       "title": "Todavía tengo planes",
-      "text": "Sara sigue siendo hermana, amiga, alumna de quinto y jugadora de voleibol. Habrá días buenos y días difíciles, y no tendrá que pasarlos sola.",
+      "text": "Sara sigue siendo hermana, amiga, alumna de tercero y jugadora de voleibol. Habrá días buenos y días difíciles, y no tendrá que pasarlos sola.",
       "scene": "patio-day",
       "cast": {
         "sara": "happy"

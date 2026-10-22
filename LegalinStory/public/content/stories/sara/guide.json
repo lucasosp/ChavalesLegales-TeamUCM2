@@ -30,7 +30,7 @@
     {
       "chapter": 1,
       "title": "Una señal",
-      "text": "En el cole se dan cuenta de que algo va mal y escuchan."
+      "text": "En el instituto se dan cuenta de que algo va mal y escuchan."
     },
     {
       "chapter": 2,
@@ -71,7 +71,7 @@
   "people": [
     {
       "name": "Sara",
-      "role": "11 años · 5.º de primaria",
+      "role": "14 años · 3.º de ESO",
       "initial": "S",
       "color": "peach",
       "text": "Le gusta el voleibol, dibuja estrellas en sus cuadernos y su mejor amiga es Paula. Su vida es mucho más que lo que pasa en el juzgado.",
@@ -152,7 +152,7 @@
       "role": "Dani, su madre y Javier",
       "initial": "D",
       "color": "peach",
-      "text": "Dani tiene siete años. Su madre también recibe ayuda. Javier, el padre, es responsable de lo que hace; Sara no tiene que cambiarle para merecer protección."
+      "text": "Dani tiene diez años. Su madre también recibe ayuda. Javier, el padre, es responsable de lo que hace; Sara no tiene que cambiarle para merecer protección."
     }
   ]
 }
