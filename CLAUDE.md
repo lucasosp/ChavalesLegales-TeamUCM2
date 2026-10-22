@@ -16,7 +16,7 @@ Everything user-facing is in Spanish (identifiers, data keys, UI). Keep new code
 
 ```
 backend/                     FastAPI API: ONE resource, casos
-  main.py                    app + CORS + 5 rutas (74 líneas)
+  main.py                    app + 6 rutas, sin CORS (todo es mismo origen)
   casos.py                   CasoStore: un JSON por caso, lock, validación de id (170)
   tests/test_casos.py        17 tests con unittest de la stdlib
   casos_data/<id>.json       estado de runtime (gitignored)
@@ -71,7 +71,8 @@ npm --prefix frontend install && npm --prefix frontend run dev
 Tests:
 
 ```bash
-cd backend && python -m unittest discover -s tests -v   # 17 tests, sin dependencias
+cd backend && python -m unittest discover -s tests -v   # 25 tests, sin dependencias
+cd frontend && npm test                                  # 16 tests de analisis.js (node:test)
 cd LegalinStory && npm test                             # validador + 12 suites
 cd LegalinStory && npm run validate
 bash scripts/smoke.sh                                   # API de punta a punta
@@ -83,11 +84,14 @@ Variables de entorno:
 | Var | Dónde | Defecto |
 | --- | --- | --- |
 | `API_URL` | rewrite de `next.config.mjs` | `http://localhost:8000` |
-| `ALLOWED_ORIGINS` | CORS del backend (lista separada por comas) | `*` |
 | `NEXT_PUBLIC_API_URL` | base REST del front | `""` = mismo origen |
 | `CASOS_DIR` | directorio del store de casos | `backend/casos_data` |
 | `CASOS_LEGACY_FILE` | blob antiguo a migrar | `<padre de CASOS_DIR>/casos_data.json` |
 | `VITE_PLATFORM_URL` | destino de "Salir" en la novela suelta | `http://<host>:3000/` |
+
+`ALLOWED_ORIGINS` ya no hace nada: el backend no tiene middleware CORS porque el navegador solo
+habla con Next, que reescribe `/api/*` (mismo origen). Si añades un cliente cross-origin, tendrás
+que volver a ponerlo.
 
 ---
 
@@ -121,7 +125,15 @@ Variables de entorno:
 
 ### Contrato de eventos
 
-Todo evento es `{kind, t, data}` dentro del array `eventos` del caso.
+Todo evento es `{kind, t, t_servidor, data}` dentro del array `eventos` del caso.
+
+- `t` es el reloj del **cliente**; `t_servidor` lo estampa el backend al recibir. El informe usa
+  `t_servidor` (ver `tEvento()` en `analisis.js`): un reloj mal puesto o una pestaña suspendida
+  corrompen todas las duraciones si se confía en el navegador.
+- `schemaVersion` en el caso: 1 = anterior a `t_servidor`; 2 = actual.
+- `add_evento` valida la **forma** (dict, `kind` texto no vacío, `data` objeto, `t` numérico) y
+  responde 400 si no cuadra. Un `kind` desconocido se acepta con un warning: la novela puede
+  emitir un tipo nuevo antes de que el informe lo entienda.
 
 | `kind` | `data` | Emisor |
 |---|---|---|
@@ -150,6 +162,8 @@ duplicar imágenes. Un caso con dibujos pesa ~50 KB (base64).
   Sin eso es path traversal: el id llega de `?caso=`. `main.py` responde 400.
 * Migración: si existe el `casos_data.json` antiguo se importa una vez y se renombra a
   `.migrado`. No lo borres: es el respaldo.
+* `resumen(caso_id)` es la versión ligera (`{id, eventos, ultimo, schemaVersion}`) que sondea el
+  informe. No copia eventos ni imágenes: existe para que la página no se baje 50 KB cada 5 s.
 * No hay base de datos, ni auth, ni expiración. Un proceso único; con `--workers` habría copias
   divergentes del store.
 

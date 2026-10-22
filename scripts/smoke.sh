@@ -45,6 +45,27 @@ curl -fsS -X POST "$B/api/casos/$CID/eventos" \
   -d '{"kind":"minijuego","t":3,"data":{"game":"cid-table","report":{"config":{"characters":[]},"rounds":[]}}}' \
   >/dev/null || fail "POST evento minijuego"
 
+# el servidor estampa su propio reloj: las duraciones no dependen del navegador
+curl -fsS "$B/api/casos/$CID" | python3 -c '
+import sys, json
+c = json.load(sys.stdin)
+assert c["schemaVersion"] >= 2, c["schemaVersion"]
+assert all(isinstance(e.get("t_servidor"), int) for e in c["eventos"]), "falta t_servidor"
+' || fail "los eventos no llevan t_servidor / schemaVersion"
+
+# resumen ligero: es lo que sondea el informe, no debe traer los eventos
+curl -fsS "$B/api/casos/$CID/resumen" | python3 -c '
+import sys, json
+r = json.load(sys.stdin)
+assert set(r) == {"id", "eventos", "ultimo", "schemaVersion"}, r
+assert isinstance(r["eventos"], int)
+' || fail "GET /api/casos/$CID/resumen"
+
+# un evento mal formado se rechaza con 400 en vez de corromper el caso
+CODE=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$B/api/casos/$CID/eventos" \
+  -H 'content-type: application/json' -d '{"kind":"progreso","data":"no soy un objeto"}')
+[ "$CODE" = "400" ] || fail "evento mal formado devuelve $CODE (esperado 400)"
+
 # lectura: el caso existe y tiene los 3 eventos
 N=$(curl -fsS "$B/api/casos/$CID" | python3 -c 'import sys,json;print(len(json.load(sys.stdin)["eventos"]))')
 [ "$N" = "3" ] || fail "eventos leídos: $N (esperado 3)"

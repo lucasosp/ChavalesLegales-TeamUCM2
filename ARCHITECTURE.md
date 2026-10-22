@@ -43,12 +43,16 @@ que se genera y **no** está versionado.
 Cinco rutas y un recurso.
 
 ```
-GET  /                      salud
-GET  /api/casos             [{id, meta, eventos: n}]
-GET  /api/casos/{id}        caso completo (404 si no existe, 400 si el id no es válido)
-POST /api/casos/{id}/meta   crea o fusiona metadatos
-POST /api/casos/{id}/eventos añade un evento
+GET  /                        salud
+GET  /api/casos               [{id, meta, eventos: n}]
+GET  /api/casos/{id}/resumen  {id, eventos, ultimo, schemaVersion}  (sondeo ligero)
+GET  /api/casos/{id}          caso completo (404 si no existe, 400 si el id no es válido)
+POST /api/casos/{id}/meta     crea o fusiona metadatos
+POST /api/casos/{id}/eventos  añade un evento (400 si la forma no cuadra)
 ```
+
+Sin middleware CORS: el navegador solo habla con Next, que reescribe `/api/*`. Todo es mismo
+origen, incluido el iframe de la novela.
 
 ### `CasoStore`
 
@@ -59,6 +63,8 @@ POST /api/casos/{id}/eventos añade un evento
 | Lecturas | `copy.deepcopy` en `get()`/`set_meta()` | serializar el dict vivo durante una mutación lanza *dictionary changed size* |
 | Ids | `^[A-Za-z0-9_-]{1,64}$` | el id llega de `?caso=` y se usa como nombre de archivo (path traversal) |
 | Tope | `MAX_EVENTOS = 5000` por caso | acota el crecimiento; **no** acota bytes |
+| Reloj | `t_servidor` lo estampa el backend al recibir | las duraciones no pueden depender del reloj del navegador |
+| Esquema | `schemaVersion` en el caso; forma del evento validada | los casos viejos se marcan como 1 y el informe cae a `t` |
 | Migración | `casos_data.json` → carpeta, una vez, y se renombra a `.migrado` | no perder las sesiones del store monolítico |
 
 `CASOS_DIR` permite mover el directorio (en Docker apunta al volumen). Sin él, los casos se
@@ -77,8 +83,10 @@ escribirían en la capa efímera del contenedor.
     "contexto": "…",
     "creadoEn": "ISO-8601"
   },
+  "schemaVersion": 2,
   "eventos": [                    // append-only, salvo 'dibujo'
-    { "kind": "inicio", "t": 1700000000000, "data": {} }
+    // t = reloj del cliente · t_servidor = reloj del servidor (el que usa el informe)
+    { "kind": "inicio", "t": 1700000000000, "t_servidor": 1700000000123, "data": {} }
   ]
 }
 ```
@@ -123,6 +131,7 @@ se ve en vez de disfrazarse de datos viejos.
 | Función | Contrato |
 |---|---|
 | `casoDesdeUrl()` | `?caso=` o `DEMO` |
+| `resumenCaso(id)` | `{eventos, ultimo, …}` o `null`; es lo que sondea el informe |
 | `guardarMetaCaso(id, meta)` | **rechaza** si la API responde != 2xx |
 | `registrarEvento(id, kind, data)` | no rechaza; `console.warn` si falla |
 | `cargarCaso(id)` | objeto con `fuente: 'servidor' \| 'error' \| 'inexistente'` |
@@ -224,6 +233,7 @@ caso.eventos ──► analisis.js (descriptivo, sin valoraciones)
                    ├─ decisiones + latencia (mediana, media, sd, min, max) + destacadas
                    ├─ capitulos (lectura, pantallas, relecturas, decisiones)
                    ├─ minijuegos[game] = { report, duracionMs }
+                   ├─ desfase = comparación de relojes cliente/servidor
                    └─ dibujo = último snapshot
                         └─► Graficas.jsx (Barras, BarrasH, LineaTiempo, Kpi)
                         └─► MesaCID / Escenario / Clima (replay de los minijuegos)
@@ -232,6 +242,18 @@ caso.eventos ──► analisis.js (descriptivo, sin valoraciones)
 
 `analisis.js` **no emite juicios**: calcula y describe. La interpretación clínica vive en las
 `alerts` que genera el motor.
+
+Dos decisiones que sostienen la validez del informe:
+
+- **Reloj del servidor.** `tEvento()` prefiere `t_servidor`. Si el dispositivo del menor tenía el
+  reloj mal, la mediana de latencia, los tiempos de lectura y la duración de los minijuegos
+  saldrían mal. `desfase` mide la diferencia y el informe **avisa** cuando supera 5 s.
+- **Sondeo ligero.** El informe se refresca cada 5 s contra `/resumen` (unos bytes) y solo baja el
+  caso completo —con las imágenes— cuando cambian el contador de eventos o el último sello. Se
+  pausa con la pestaña oculta.
+
+Tiene tests propios (`frontend/tests/analisis.test.mjs`, `npm test`): es el único sitio donde un
+error de matemáticas se publica como informe profesional.
 
 Exportación: "Exportar JSON" baja `{caso, analisis}` sin el array de eventos; "Exportar eventos"
 baja `{id, meta, eventos}` en crudo, con las imágenes y los reports.
@@ -269,7 +291,7 @@ novela se regenera dentro de la imagen. El estado (`casos_data/`) vive en un vol
 | Ids enumerables (`CL-` + 5 dígitos) | ~90 000 combinaciones, adivinables | aceptada |
 | `GET /api/casos` devuelve **todos** los casos con `nombreJoven` y `contexto` | datos de menores sin control de acceso | pendiente, alto impacto |
 | `casos_data.json` es un único archivo por caso, reescrito entero en cada evento | con ~30 alumnos simultáneos son muchas escrituras de 50 KB | aceptable hoy |
-| `localStorage` se llena con las imágenes del dibujo (~50 KB/caso) | el fallback del navegador deja de escribir en silencio | eliminado: ya no se espeja |
+| `localStorage` ya no espeja los casos | el informe no tiene respaldo offline | asumido: la app requiere conexión |
 | `/experiments/*` no registra | sesiones invisibles si alguien entra por ahí | aceptado: son demos |
 | Solo `sara` tiene minijuegos, y en los capítulos 3-4 | los paneles del informe salen vacíos casi siempre | es contenido, no código |
 | Dos sistemas i18n sincronizados solo por URL | añadir una cadena puede requerir dos archivos | deuda asumida |
@@ -288,3 +310,5 @@ novela se regenera dentro de la imagen. El estado (`casos_data/`) vive en un vol
 | Una cadena de UI | `frontend/locales/*/<ns>.json` (6 lenguas) |
 | Estilos del informe | `informe.module.css` **y** las clases usadas en los 3 archivos que lo importan |
 | Algo de `LegalinStory` | rebuild a través de `frontend` (`npm run dev`), nunca editar `public/novela` |
+| La forma de un evento | `casos.validar_evento`, `analisis.js` **y sus tests**, `detalleEvento` |
+| Los tiempos del informe | `tEvento()`, `desfase`, y `backend/casos.py` (`t_servidor`) |
