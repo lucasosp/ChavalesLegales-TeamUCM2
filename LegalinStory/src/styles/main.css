@@ -3266,3 +3266,109 @@ body { background: var(--verde-950); }
     font-size: clamp(1.04rem, 1.3vw, 1.18rem);
   }
 }
+
+/* --------------------------------------------------------- chat como móvil
+   Va al final para mandar sobre la versión "pegatina" de arriba: los chats
+   son mensajes en el móvil de un personaje, así que se pintan como su
+   pantalla (carcasa, muesca, barra de estado y burbujas de mensajería),
+   partiendo del panel oscuro original de la novela. */
+
+.chat {
+  top: 4vh;
+  bottom: 4vh;
+  width: min(400px, 92vw);
+  padding: 30px 0 0;
+  border: 12px solid #111;
+  border-radius: 46px;
+  background: #0b141a;
+  box-shadow: 0 0 0 2px #3a3a3a, 0 30px 80px rgb(0 0 0 / 60%);
+  color: #e9edef;
+}
+
+/* Muesca de la cámara */
+.chat::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 120px;
+  height: 26px;
+  border-radius: 0 0 16px 16px;
+  background: #111;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+/* Barra de estado: hora a la izquierda, cobertura y batería a la derecha */
+.chat::after {
+  content: "9:41";
+  position: absolute;
+  top: 6px;
+  left: 26px;
+  color: #e9edef;
+  font: 700 .78rem/1 system-ui, sans-serif;
+}
+
+.chat-head {
+  padding: 10px 16px;
+  border-bottom: 0;
+  background: #202c33;
+  color: #e9edef;
+  font-family: system-ui, sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* El punto pasa a ser el avatar redondo del contacto */
+.chat-dot {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: #6b7c85;
+  box-shadow: none;
+}
+
+.chat-self { color: #8696a0; font-weight: 400; }
+
+.chat-log {
+  background-color: #0b141a;
+  background-image: radial-gradient(rgb(255 255 255 / 4%) 1px, transparent 1px);
+  background-size: 18px 18px;
+  scrollbar-color: #374248 transparent;
+}
+
+.chat-bubble {
+  border: 0;
+  border-radius: 10px 10px 10px 3px;
+  background: #202c33;
+  color: #e9edef;
+  box-shadow: 0 1px 1px rgb(0 0 0 / 30%);
+}
+
+.chat-row.is-out .chat-bubble {
+  border-radius: 10px 10px 3px 10px;
+  background: #005c4b;
+}
+
+.chat-bubble.is-hidden-content { background: #202c33; }
+.chat-author { color: #53bdeb; font-family: system-ui, sans-serif; font-size: .8rem; letter-spacing: 0; }
+.chat-text { color: #e9edef; font-family: system-ui, sans-serif; font-size: 1.02rem; line-height: 1.4; }
+.chat-time { color: #8696a0; }
+
+.chat-system {
+  border: 0;
+  border-radius: 8px;
+  background: #182229;
+  color: #8696a0;
+}
+
+.chat-hint {
+  border-top: 0;
+  background: #202c33;
+  color: #00a884;
+  font-family: system-ui, sans-serif;
+}
+
+.chat button:focus-visible { outline: 3px solid #00a884; }
