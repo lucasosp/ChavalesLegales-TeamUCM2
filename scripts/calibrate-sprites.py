@@ -32,6 +32,7 @@ CALIBRATION_CONFIG = {
   'laura': {'src': 'Warm Studio Portrait of a Woman.webp', 'top': -25, 'bottom': 975, 'center': 535, 'label': 'Laura'},
   'irene': {'src': 'Elegant Office Professional Portrait.webp', 'top': -25, 'bottom': 975, 'center': 500, 'label': 'Irene'},
   'elena': {'src': 'Elegant Office Professional Portrait(1).webp', 'top': -25, 'bottom': 975, 'center': 500, 'label': 'Elena'},
+  'elenaSocialWorker': {'src': 'Confident Professional in Sage and Navy.png', 'top': -20, 'bottom': 700, 'center': 512, 'label': 'Elena · trabajadora social'},
   'judge': {'src': 'jueza-transparente.webp', 'top': -40, 'bottom': 1140, 'center': 505, 'label': 'Jueza'},
 }
 
