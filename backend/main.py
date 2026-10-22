@@ -12,7 +12,7 @@ from typing import Any, Dict
 from fastapi import Body, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
-from casos import caso_store
+from casos import caso_store, es_id_valido
 
 app = FastAPI(title="Chavales Legales API")
 
@@ -40,6 +40,16 @@ def root():
 # =============================================================================
 
 
+def validar_id(caso_id: str) -> str:
+    """El id se usa como nombre de archivo: sin esto hay path traversal."""
+    if not es_id_valido(caso_id):
+        raise HTTPException(
+            status_code=400,
+            detail="Identificador de caso no válido (letras, números, guion y guion bajo, máx. 64)",
+        )
+    return caso_id
+
+
 @app.get("/api/casos")
 def listar_casos():
     return caso_store.listar()
@@ -47,7 +57,7 @@ def listar_casos():
 
 @app.get("/api/casos/{caso_id}")
 def obtener_caso(caso_id: str):
-    caso = caso_store.get(caso_id)
+    caso = caso_store.get(validar_id(caso_id))
     if not caso:
         raise HTTPException(status_code=404, detail="Caso no encontrado")
     return caso
@@ -56,9 +66,9 @@ def obtener_caso(caso_id: str):
 @app.post("/api/casos/{caso_id}/meta")
 def guardar_meta_caso(caso_id: str, meta: Dict[str, Any] = Body(...)):
     """Crea o actualiza el caso. El educador no reparte un código hasta que esto responde."""
-    return caso_store.set_meta(caso_id, meta)
+    return caso_store.set_meta(validar_id(caso_id), meta)
 
 
 @app.post("/api/casos/{caso_id}/eventos")
 def registrar_evento_caso(caso_id: str, evento: Dict[str, Any] = Body(...)):
-    return {"total": caso_store.add_evento(caso_id, evento)}
+    return {"total": caso_store.add_evento(validar_id(caso_id), evento)}
