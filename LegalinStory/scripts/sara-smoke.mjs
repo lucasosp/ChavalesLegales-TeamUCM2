@@ -40,18 +40,15 @@ const requiredBeats = {
   "c3-measures": "judicial safety measures, separate from staying with an aunt",
   "c3-safety-plan": "school collection, reporting contact and emergencies",
   "c3-representation": "a suitable legal representative distinct from the lawyer",
-  "c3-defender": "a judicial defender if parental representation is inadequate",
   "c3-party": "participation as private prosecution without deciding punishment",
   "c3-party-warning": "understanding the consequences before joining the prosecution",
   "c3-party-confirmed": "formal participation after explaining options and hearing Sara",
   "c5-investigation": "the purpose of the investigation",
-  "c5-family-rule": "attendance versus testimony and the family exemption",
   "c5-family-case": "the reason Sara must testify in this particular case",
+  "c5-team": "a brief interactive introduction to the people involved",
   "c5-supports": "avoiding contact and individually assessed supports",
   "c5-company": "chosen accompaniment and a reasoned exception",
-  "c5-recording": "recording versus preconstituted evidence",
-  "c5-age-rule": "the under-14 threshold without losing protection at 14",
-  "c5-recording-case": "what this investigation recording does in Sara's case",
+  "c5-recording": "being recorded and preparing for a further declaration in this case",
   "c5-communication": "clarification, memory gaps and requesting a pause",
   "c6-investigation-end": "possible closure instead of a trial",
   "c6-trial-notice": "an accusation, a defence and a separate trial court",
@@ -78,6 +75,9 @@ function reaches(doc, target, blocked) {
 const localeDir = new URL("../public/content/stories/sara/i18n/", import.meta.url);
 const overlays = await Promise.all((await readdir(localeDir)).filter((file) => file.endsWith(".json")).map(async (file) => [file, JSON.parse(await readFile(new URL(file, localeDir), "utf8"))]));
 for (const [locale, overlay] of [["es", null], ...overlays]) {
+  for (const id of Object.keys(overlay?.story?.nodes ?? {})) {
+    assert.ok(storyDoc.nodes[id], `${locale}: translation would introduce an invalid scene ${id}`);
+  }
   const doc = overlay ? applyOverlay(storyDoc, overlay.story) : storyDoc;
   for (const [id, explanation] of Object.entries(requiredBeats)) {
     assert.ok(doc.nodes[id]?.text, `${locale}: missing ${explanation}`);
@@ -85,7 +85,7 @@ for (const [locale, overlay] of [["es", null], ...overlays]) {
     if (overlay) assert.ok(overlay.story.nodes[id]?.text, `${locale}: untranslated ${explanation}`);
   }
   // Explicit phase ordering prevents an investigation declaration from becoming a verdict.
-  for (const [before, after] of [["c3-party-warning", "c3-party-confirmed"], ["c3-party-confirmed", "c5-family-case"], ["c5-recording-case", "c5-07"], ["c5-07", "c6-trial"], ["c6-trial", "c6-msg"]]) {
+  for (const [before, after] of [["c3-party-warning", "c3-party-confirmed"], ["c3-party-confirmed", "c5-family-case"], ["c5-recording", "c5-07"], ["c5-07", "c6-trial"], ["c6-trial", "c6-msg"]]) {
     assert.equal(reaches(doc, after, before), false, `${locale}: ${after} precedes ${before}`);
   }
   const localizedGuide = overlay ? applyOverlay(guide, overlay.guide) : guide;
@@ -95,6 +95,14 @@ for (const [locale, overlay] of [["es", null], ...overlays]) {
   assert.match(localizedGuide.people[0].role, /^14\b/, `${locale}: Sara must be 14`);
   assert.equal(localizedGuide.people[3].name, "Elena", `${locale}: Elena is the social worker`);
   assert.equal(localizedGuide.people[4].name, "Irene", `${locale}: Irene is the lawyer`);
+  assert.deepEqual(localizedGuide.peopleTable.rows.map((person) => person.id), guide.peopleTable.rows.map((person) => person.id), `${locale}: incomplete people table`);
+  for (const field of ["title", "intro", "personColumn", "taskColumn", "continueLabel"]) {
+    assert.ok(localizedGuide.peopleTable[field], `${locale}: missing table label ${field}`);
+    if (overlay) assert.ok(overlay.guide.peopleTable[field], `${locale}: untranslated table label ${field}`);
+  }
+  for (const person of localizedGuide.peopleTable.rows) {
+    assert.ok(person.name && person.summary && person.detail, `${locale}: incomplete table row ${person.id}`);
+  }
   const localizedLegal = overlay ? applyOverlay(legal, overlay.legal) : legal;
   for (const node of Object.values(doc.nodes)) {
     for (const key of node.learn ?? []) {
@@ -103,6 +111,9 @@ for (const [locale, overlay] of [["es", null], ...overlays]) {
     }
   }
 }
+assert.equal(story["c5-team"].reference, "people", "The compiler must preserve the reference-table cue");
+const spokenText = Object.values(story).map((node) => node.text ?? "").join(" ");
+assert.doesNotMatch(spokenText, /dispensa|prueba preconstituida|acusación particular|Sección de Violencia|sentencia firme/iu, "Explain actions to young readers without the legal lecture");
 const futureFlags = ["resolution", "concernDani", "concernPrivacy", "concernHome", "shortExplanations", "everyday"];
 const seenStates = new Set(), reached = new Set(), choices = new Set();
 const queue = ["conviction", "no-conviction"].map((resolution) => ({ nodeId: "start", flags: { resolution }, seen: [], stage: { background: null, character: null } }));
@@ -180,8 +191,57 @@ try {
   experience.closePanel();
   const route = { "c3-choice": "dani", "c2-choice": "privacy", "c2-choice2": "short", "c4-choice": "volleyball", "c5-choice2": "pause" };
   const played = new Set();
+  let peopleTableChecks = 0;
   for (let guard = 0; guard < 200 && !experience.engine.isFinished; guard++) {
     const node = experience.engine.currentNode; played.add(experience.engine.nodeId);
+    if (experience.engine.nodeId === "c5-06") {
+      const badge = root.querySelector('button[data-legal-badge][data-person-id="judge"]');
+      assert.ok(badge && !badge.hidden, "The judge offers a clickable role explanation");
+      badge.focus();
+      badge.click();
+      assert.equal(experience.mode, "person");
+      const person = guide.peopleTable.rows.find((row) => row.id === "judge");
+      assert.equal(experience.title.textContent, person.name);
+      assert.equal(root.querySelector(".sara-person-summary").textContent, person.summary);
+      assert.equal(root.querySelector(".sara-person-explanation").textContent, person.detail);
+      experience.app.advance();
+      assert.equal(experience.engine.nodeId, "c5-06", "Reading a role pauses the dialogue");
+      root.querySelector(".is-person .sara-primary").click();
+      assert.equal(experience.engine.nodeId, "c5-06", "Closing a role never skips its scene");
+      assert.equal(document.activeElement, badge);
+    }
+    if (experience.mode === "people") {
+      peopleTableChecks++;
+      const before = experience.engine.nodeId;
+      const table = root.querySelector(".sara-people-table");
+      assert.ok(table, "The table opens where Irene introduces the professionals");
+      const toggle = table.querySelector('button[data-person-id="irene"]');
+      const detail = document.getElementById(toggle.getAttribute("aria-controls"));
+      assert.equal(detail.hidden, true);
+      toggle.click();
+      assert.equal(toggle.getAttribute("aria-expanded"), "true");
+      assert.equal(detail.hidden, false);
+      const other = table.querySelector('button[data-person-id="elena"]');
+      other.click();
+      assert.equal(toggle.getAttribute("aria-expanded"), "false");
+      assert.equal(detail.hidden, true, "Only one short explanation opens at a time");
+      toggle.click();
+      assert.equal(other.getAttribute("aria-expanded"), "false");
+      experience.app.advance();
+      document.dispatchEvent(new dom.window.KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+      assert.equal(experience.engine.nodeId, before, "Reading the table pauses the story");
+      toggle.click();
+      assert.equal(detail.hidden, true);
+      document.dispatchEvent(new dom.window.KeyboardEvent("keydown", { key: "Escape", bubbles: true, cancelable: true }));
+      assert.equal(experience.mode, null);
+      experience.sync();
+      assert.equal(experience.mode, null, "Closing the table must not immediately reopen it");
+      experience.openPanel("people");
+      // No row needs opening to continue; the table has no required answers.
+      click("[data-sara-people-continue]");
+      assert.notEqual(experience.engine.nodeId, before);
+      continue;
+    }
     if (node.type === "choice") {
       const selected = node.options.find((o) => o.id === route[experience.engine.nodeId]) ?? node.options[0];
       const optionIndex = node.options.indexOf(selected);
@@ -195,6 +255,7 @@ try {
     else experience.app.advance();
   }
   assert.equal(experience.engine.isFinished, true);
+  assert.equal(peopleTableChecks, 2, "The reference opens at the introduction and on asking who will attend");
   for (const id of ["c4-dani", "c5-privacy", "c5-short", "c6-conviction", "c6-dani", "epilogue-volley"]) assert.ok(played.has(id), id);
   assert.equal(localStorage.getItem(SARA_SAVE_KEY), null, "Completion removes the local save");
   experience.openPanel("pause");

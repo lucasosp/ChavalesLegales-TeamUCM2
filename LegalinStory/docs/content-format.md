@@ -229,6 +229,9 @@ moving the group moves the light.
 - `transition` — how this beat's visual changes apply (default: `cut`).
 - `audio` — `{ "music": "rain", "fade": 800 }` or `{ "sfx": "page-turn" }`.
 - `tone` — presentation hint (`narration`, `spoken`, `poem`), never logic.
+- `reference: "people"` — in Sara, opens the short interactive people table from
+  `guide.peopleTable`. The story waits while the panel is open; its continue
+  button follows the beat's ordinary `next`. No row has to be opened first.
 
 `dialogue.next` and every choice option's `next` must point at an existing
 node. `ending` must not have `next`. A `branch` with neither `then` nor `else`

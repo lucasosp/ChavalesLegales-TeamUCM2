@@ -212,6 +212,24 @@ export class VisualNovelView {
 
   /* ------------------------------------------------------------ story events */
 
+  // Sara supplies the same short profiles used by its people table.
+  setLegalPersonReference(resolvePerson, onOpen) {
+    this.resolveLegalPerson = resolvePerson;
+    const badge = document.createElement("button");
+    badge.type = "button";
+    badge.className = this.refs.legalBadge.className;
+    badge.dataset.legalBadge = "";
+    badge.hidden = true;
+    badge.setAttribute("aria-haspopup", "dialog");
+    badge.append(...this.refs.legalBadge.childNodes);
+    this.refs.legalBadge.replaceWith(badge);
+    this.refs.legalBadge = badge;
+    badge.addEventListener("click", (event) => {
+      event.stopPropagation();
+      if (badge.dataset.personId) onOpen(badge.dataset.personId);
+    });
+  }
+
   showDialogue({ speaker, speakerKey, remote, text, tone, stage }) {
     this.#resetTransientOverlays();
     this.#leaveEnding();
@@ -914,6 +932,7 @@ export class VisualNovelView {
   }
 
   #resetTransientOverlays() {
+    if (this.resolveLegalPerson) this.refs.legalBadge.hidden = true;
     this.refs.announcement.textContent = "";
     this.typewriter.stop();
     this.#clearChoices();
@@ -1074,6 +1093,7 @@ export class VisualNovelView {
 
   #setSpeaker(name, remote = false, key = null) {
     if (!name) {
+      if (this.resolveLegalPerson) this.refs.legalBadge.hidden = true;
       this.refs.speaker.hidden = true;
       this.refs.speaker.textContent = "";
       this.refs.speaker.classList.remove("is-voice");
@@ -1109,6 +1129,17 @@ export class VisualNovelView {
 
   #checkLegalBadge(name, key) {
     if (!this.refs.legalBadge || !this.refs.legalBadgeText) return;
+
+    if (this.resolveLegalPerson) {
+      const person = this.resolveLegalPerson(key ?? name);
+      this.refs.legalBadge.hidden = !person;
+      delete this.refs.legalBadge.dataset.personId;
+      if (person) {
+        this.refs.legalBadge.dataset.personId = person.id;
+        this.refs.legalBadgeText.textContent = person.role || person.name;
+      }
+      return;
+    }
 
     const raw = (key ?? name ?? "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     if (!raw) return;

@@ -15,7 +15,7 @@ export const illustrations = {
   laura: { src: new URL("../../../images/Warm Studio Portrait of a Woman.webp", import.meta.url).href, label: "Laura", frame: { top: -30, bottom: 690, center: 535 } },
   irene: { src: new URL("../../../images/Elegant Office Professional Portrait.webp", import.meta.url).href, label: "Irene", frame: { top: -30, bottom: 690, center: 500 } },
   elena: { src: new URL("../../../images/Elegant Office Professional Portrait(1).webp", import.meta.url).href, label: "Elena", frame: { top: -30, bottom: 690, center: 500 } },
-  judge: { src: new URL("../../../images/jueza-transparente.webp", import.meta.url).href, label: "Jueza", frame: { top: -30, bottom: 690, center: 500 } },
+  judge: { src: new URL("../../../images/jueza-transparente.webp", import.meta.url).href, label: "Jueza", frame: { top: -40, bottom: 1140, center: 505 } },
 };
 
 const people = { Sara: "saraNormal", Paula: "paula", Julia: "julia", Dani: "dani", Laura: "laura", Irene: "elena", Elena: "irene", Jueza: "judge", "Su familia": "dani" };

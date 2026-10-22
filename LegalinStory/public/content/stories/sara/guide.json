@@ -44,8 +44,8 @@
     },
     {
       "chapter": 3,
-      "title": "Quién defiende a Sara",
-      "text": "Su madre la representa en este caso. Irene es su abogada y actúa como acusación particular."
+      "title": "Quién ayuda a Sara",
+      "text": "Su madre la ayuda con las decisiones. Irene es su abogada y cuida de sus derechos."
     },
     {
       "chapter": 4,
@@ -64,8 +64,8 @@
     },
     {
       "chapter": 6,
-      "title": "Terminar la investigación",
-      "text": "Puede haber un archivo o una acusación. En esta historia, el caso pasa a juicio."
+      "title": "Terminar de investigar",
+      "text": "A veces el caso se cierra. En esta historia habrá un juicio."
     },
     {
       "chapter": 6,
@@ -78,6 +78,78 @@
       "text": "Irene explica el resultado, los posibles recursos y qué medidas siguen. El apoyo continúa según sus necesidades."
     }
   ],
+  "peopleTable": {
+    "title": "¿Quién es quién?",
+    "intro": "Toca una flecha para saber más.",
+    "personColumn": "Persona",
+    "taskColumn": "Qué hace",
+    "continueLabel": "Seguir con Sara",
+    "rows": [
+      {
+        "id": "irene",
+        "name": "Irene",
+        "role": "Tu abogada",
+        "summary": "Tu abogada. Defiende tus derechos.",
+        "detail": "Pregúntale lo que no entiendas."
+      },
+      {
+        "id": "elena",
+        "name": "Elena",
+        "role": "Trabajadora social",
+        "summary": "Te ayuda en tu día a día.",
+        "detail": "Es la trabajadora social."
+      },
+      {
+        "id": "judge",
+        "name": "Jueza",
+        "role": "",
+        "summary": "Escucha y toma decisiones.",
+        "detail": "Decide cómo protegerte durante la investigación."
+      },
+      {
+        "id": "prosecutor",
+        "name": "Fiscal",
+        "role": "",
+        "summary": "Vigila que se cumpla la ley.",
+        "detail": "También cuida de tus derechos."
+      },
+      {
+        "id": "psychologist",
+        "name": "Psicóloga",
+        "role": "Equipo de apoyo",
+        "summary": "Te ayuda a contar las cosas con calma.",
+        "detail": "Puede acompañarte mientras hablas."
+      },
+      {
+        "id": "victimOffice",
+        "name": "Oficina de víctimas",
+        "role": "",
+        "summary": "Te orienta y te ofrece apoyo.",
+        "detail": "Te explica dónde ir."
+      },
+      {
+        "id": "courtOffice",
+        "name": "Oficina judicial",
+        "role": "",
+        "summary": "Organiza citas y documentos.",
+        "detail": "Prepara las cartas con tus citas."
+      },
+      {
+        "id": "clerk",
+        "name": "Letrada del tribunal",
+        "role": "",
+        "summary": "Registra lo que se dice.",
+        "detail": "No es tu abogada."
+      },
+      {
+        "id": "defence",
+        "name": "Abogado de Javier",
+        "role": "",
+        "summary": "Defiende a tu padre.",
+        "detail": "Puede hacer preguntas con permiso de la jueza."
+      }
+    ]
+  },
   "people": [
     {
       "name": "Sara",

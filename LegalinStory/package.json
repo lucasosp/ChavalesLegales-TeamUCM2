@@ -13,6 +13,7 @@
     "test": "node scripts/validate-content.mjs && node scripts/validation-smoke.mjs && node scripts/ui-smoke.mjs && node scripts/library-smoke.mjs && node scripts/no-lo-reenvies-smoke.mjs && node scripts/no-soy-yo-smoke.mjs && node scripts/dos-voces-smoke.mjs && node scripts/dos-voces-endings-smoke.mjs && node scripts/input-buffer-smoke.mjs && node scripts/engine-regressions.mjs && node scripts/sara-smoke.mjs",
     "test:sara": "node scripts/sara-smoke.mjs",
     "test:browser": "node scripts/sara-browser.mjs",
+    "test:people": "node scripts/sara-people-browser.mjs",
     "test:sprites": "node scripts/sprite-layout-browser.mjs",
     "story:build": "node scripts/build-no-lo-reenvies.mjs",
     "story:build:dos-voces": "node scripts/build-dos-voces.mjs",
