@@ -77,26 +77,13 @@ export default function Novela() {
         return
       }
 
-      // Registro de decisión y tiempo de los niños en la novela
+      // Registro de decisión y tiempo de los niños en la novela.
+      // Todo va a `casos` (una sola fuente): la decisión completa ya viaja en el evento.
       if (event.data?.type === 'legalinstory:decision') {
         try {
-          const decision = event.data
-          registrarEvento(casoRef.current, 'decision', decision)
-          // Guardar copia local en localStorage para redundancia
-          const localStored = localStorage.getItem('chavales_telemetria_decisiones')
-          const list = localStored ? JSON.parse(localStored) : []
-          list.unshift(decision)
-          if (list.length > 500) list.pop()
-          localStorage.setItem('chavales_telemetria_decisiones', JSON.stringify(list))
-
-          // Enviar al backend si no se hubiera enviado ya
-          fetch('/api/telemetria/decision', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(decision),
-          }).catch(() => {})
+          registrarEvento(casoRef.current, 'decision', event.data)
         } catch (e) {
-          console.warn('[Novela] Error al registrar telemetría:', e)
+          console.warn('[Novela] Error al registrar la decisión:', e)
         }
       }
     }

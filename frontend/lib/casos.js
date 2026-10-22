@@ -1,85 +1,72 @@
-// Registro por caso para el informe de servicios sociales.
-// Se guarda en el backend y, como respaldo, en este navegador (por si la API no está disponible).
-
-const localKey = (id) => `chavales_caso_${id}`
-
-function leerLocal(id) {
-  try {
-    return JSON.parse(localStorage.getItem(localKey(id))) || { id, meta: {}, eventos: [] }
-  } catch {
-    return { id, meta: {}, eventos: [] }
-  }
-}
-
-function escribirLocal(caso) {
-  try {
-    localStorage.setItem(localKey(caso.id), JSON.stringify(caso))
-  } catch {
-    // Cuota llena (p. ej. por imágenes): se conserva lo que ya había
-  }
-}
+// Registro por caso: metadatos de la sesión y eventos que alimentan /informe/[caso].
+// Todo va al backend. No hay espejo en localStorage (D11: la app asume conexión),
+// así que un fallo de red se ve en vez de disfrazarse de "datos viejos".
 
 export function casoDesdeUrl() {
   if (typeof window === 'undefined') return 'DEMO'
   return new URLSearchParams(location.search).get('caso') || 'DEMO'
 }
 
-export function guardarMetaCaso(id, meta) {
-  const caso = leerLocal(id)
-  caso.meta = { ...caso.meta, ...meta }
-  escribirLocal(caso)
-  fetch(`/api/casos/${encodeURIComponent(id)}/meta`, {
+/**
+ * Crea o actualiza el caso en el backend.
+ * Lanza si el backend no confirma: el educador NO debe repartir un código que no existe.
+ */
+export async function guardarMetaCaso(id, meta) {
+  const res = await fetch(`/api/casos/${encodeURIComponent(id)}/meta`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(meta),
-  }).catch(() => {})
+  })
+  if (!res.ok) {
+    throw new Error(`No se pudo crear el caso (HTTP ${res.status})`)
+  }
+  return res.json()
 }
 
-export function registrarEvento(id, kind, data = {}) {
+/**
+ * Añade un evento al caso. No lanza (se llama desde callbacks de postMessage donde
+ * no hay nadie esperando), pero deja rastro en consola en vez de fallar en silencio.
+ * El primer evento puede crear el caso si el meta aún no llegó.
+ */
+export async function registrarEvento(id, kind, data = {}) {
   const evento = { kind, t: Date.now(), data }
-  const caso = leerLocal(id)
-  if (kind === 'dibujo') caso.eventos = caso.eventos.filter((e) => e.kind !== 'dibujo')
-  caso.eventos.push(evento)
-  escribirLocal(caso)
-  fetch(`/api/casos/${encodeURIComponent(id)}/eventos`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(evento),
-  }).catch(() => {})
+  try {
+    const res = await fetch(`/api/casos/${encodeURIComponent(id)}/eventos`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(evento),
+    })
+    if (!res.ok) console.warn(`[casos] evento "${kind}" rechazado (HTTP ${res.status})`, id)
+  } catch (err) {
+    console.warn(`[casos] no se pudo registrar el evento "${kind}"`, id, err)
+  }
 }
 
+/** Carga un caso para el informe. Devuelve un caso vacío marcado si falla. */
 export async function cargarCaso(id) {
-  const local = leerLocal(id)
   try {
-    const r = await fetch(`/api/casos/${encodeURIComponent(id)}`, { cache: 'no-store' })
-    if (r.ok) {
-      const remoto = await r.json()
-      // Se usa la fuente con más eventos; los metadatos se combinan
-      const base = remoto.eventos.length >= local.eventos.length ? remoto : local
-      return { ...base, meta: { ...local.meta, ...remoto.meta }, fuente: base === remoto ? 'servidor' : 'navegador' }
+    const res = await fetch(`/api/casos/${encodeURIComponent(id)}`, { cache: 'no-store' })
+    if (res.ok) {
+      return { ...(await res.json()), fuente: 'servidor' }
     }
-  } catch {}
-  return { ...local, fuente: 'navegador' }
+    if (res.status !== 404) {
+      console.warn(`[casos] error ${res.status} al cargar el caso`, id)
+      return { id, meta: {}, eventos: [], fuente: 'error', error: res.status }
+    }
+  } catch (err) {
+    console.warn('[casos] no se pudo cargar el caso', id, err)
+    return { id, meta: {}, eventos: [], fuente: 'error', error: 'red' }
+  }
+  return { id, meta: {}, eventos: [], fuente: 'inexistente' }
 }
 
 export async function listarCasos() {
-  const locales = []
   try {
-    for (let i = 0; i < localStorage.length; i++) {
-      const k = localStorage.key(i)
-      if (k.startsWith('chavales_caso_')) {
-        const c = JSON.parse(localStorage.getItem(k))
-        locales.push({ id: c.id, meta: c.meta, eventos: c.eventos.length })
-      }
-    }
-  } catch {}
-  try {
-    const r = await fetch('/api/casos', { cache: 'no-store' })
-    if (r.ok) {
-      const remotos = await r.json()
-      const ids = new Set(remotos.map((c) => c.id))
-      return [...remotos, ...locales.filter((c) => !ids.has(c.id))]
-    }
-  } catch {}
-  return locales
+    const res = await fetch('/api/casos', { cache: 'no-store' })
+    if (res.ok) return await res.json()
+    console.warn(`[casos] error ${res.status} al listar los casos`)
+  } catch (err) {
+    console.warn('[casos] no se pudo listar los casos', err)
+  }
+  return []
 }

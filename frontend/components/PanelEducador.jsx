@@ -18,6 +18,7 @@ export default function PanelEducador({ onCerrarSesion = null }) {
   const [cargando, setCargando] = useState(false)
   const [casoGenerado, setCasoGenerado] = useState(null)
   const [copiado, setCopiado] = useState(false)
+  const [error, setError] = useState(null)
 
   // Opciones estéticas de tipo de riesgo
   const opcionesRiesgo = [
@@ -28,25 +29,29 @@ export default function PanelEducador({ onCerrarSesion = null }) {
     { value: 'privacidad', label: 'Sobreexposición y pérdida de privacidad' },
   ]
 
-  // Simulación de generación de caso con IA
-  const handleGenerarCaso = (e) => {
+  // El caso tiene que existir en el backend ANTES de repartir su código:
+  // si la creación falla, el alumno no debe recibir un código que /alumno va a rechazar.
+  const handleGenerarCaso = async (e) => {
     e.preventDefault()
+    if (cargando) return
+
     setCargando(true)
+    setError(null)
 
-    setTimeout(() => {
-      const randomId = Math.floor(10000 + Math.random() * 90000)
-      const casoId = `CL-${randomId}`
-      const baseOrigin = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000'
-      const linkUnico = `${baseOrigin}/novela?caso=${casoId}`
+    const randomId = Math.floor(10000 + Math.random() * 90000)
+    const casoId = `CL-${randomId}`
+    const baseOrigin = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000'
+    const linkUnico = `${baseOrigin}/novela?caso=${casoId}`
+    const riesgoSeleccionado = opcionesRiesgo.find((r) => r.value === tipoRiesgo)?.label || tipoRiesgo
 
-      const riesgoSeleccionado = opcionesRiesgo.find((r) => r.value === tipoRiesgo)?.label || tipoRiesgo
-
-      guardarMetaCaso(casoId, {
-        nombreJoven: nombreJoven.trim() || 'Joven participante',
+    try {
+      await guardarMetaCaso(casoId, {
+        nombreJoven: nombreJoven.trim() || t('profesores.jovenParticipante'),
         tipoRiesgo: riesgoSeleccionado,
         contexto: contexto.trim(),
         creadoEn: new Date().toISOString(),
       })
+
       setCasoGenerado({
         id: casoId,
         enlace: linkUnico,
@@ -56,8 +61,12 @@ export default function PanelEducador({ onCerrarSesion = null }) {
         contexto: contexto.trim() || t('profesores.sinObservaciones'),
         fecha: new Date().toLocaleDateString(LOCALES_FECHA[lang] || 'es-ES', { day: '2-digit', month: 'short', year: 'numeric' }),
       })
+    } catch (err) {
+      console.error('[PanelEducador] no se pudo crear el caso', err)
+      setError(t('profesores.errorCrearCaso'))
+    } finally {
       setCargando(false)
-    }, 1400)
+    }
   }
 
   // Copiar enlace generado al portapapeles
@@ -262,6 +271,27 @@ export default function PanelEducador({ onCerrarSesion = null }) {
                 <span>{t('profesores.generarCaso')}</span>
               )}
             </button>
+
+            {/* D13: si el caso no se pudo crear en el backend, el educador lo ve aquí
+                y NO recibe ningún código que repartir. */}
+            {error && (
+              <div
+                role="alert"
+                style={{
+                  marginTop: 12,
+                  padding: '10px 14px',
+                  borderRadius: 12,
+                  background: '#FEF2F2',
+                  border: '2px solid #DC2626',
+                  color: '#B91C1C',
+                  fontSize: 13,
+                  fontWeight: 700,
+                  textAlign: 'center',
+                }}
+              >
+                {error}
+              </div>
+            )}
           </form>
         ) : (
           /* ===================================================================
