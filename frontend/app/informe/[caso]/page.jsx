@@ -39,6 +39,27 @@ function Nota({ titulo, children }) {
   )
 }
 
+// Detalle de una fila del registro de eventos. Antes las filas 'dibujo' salían con la
+// celda vacía y los minijuegos no mostraban nada aunque analisis.js ya calcula su duración.
+function detalleEvento(e, a, t) {
+  if (e.kind === 'decision') return `${e.data.prompt} → ${e.data.option_label} (${fmtSeg(e.data.time_ms)})`
+  if (e.kind === 'progreso') return `${e.data.node_id} · ${t('informe.capDetalle', { n: e.data.chapter ?? '—' })}`
+  if (e.kind === 'dibujo') {
+    const fases = [e.data?.phase1 && '1', e.data?.phase2 && '2'].filter(Boolean)
+    const elegido = e.data?.finalChoice === 'phase1' ? '1' : e.data?.finalChoice === 'phase2' ? '2' : null
+    return t('informe.dibujoDetalle', {
+      fases: fases.length ? fases.join(' + ') : '—',
+      elegido: elegido ?? '—',
+    })
+  }
+  if (e.kind.startsWith('minijuego')) {
+    const juego = e.data?.game ?? '—'
+    const duracion = a?.minijuegos?.[juego]?.duracionMs
+    return duracion ? `${juego} · ${fmtDuracion(duracion)}` : juego
+  }
+  return ''
+}
+
 function Seccion({ numero, titulo, sub, children }) {
   return (
     <section className={styles.seccion}>
@@ -204,6 +225,83 @@ function Mundo({ report }) {
   )
 }
 
+// Δ entre la fase 1 y la fase 2 tal como lo calculó el motor (avatarStore.#computeDelta).
+// El dato ya llegaba al informe dentro del snapshot 'dibujo' y se descartaba: aquí solo
+// se muestra, sin recalcular nada, para que lo que se ve y lo que se guarda sea lo mismo.
+function Delta({ dibujo }) {
+  const t = useT()
+  const d = dibujo?.deltaMetrics
+  if (!d) return <Pendiente texto={t('informe.sinDelta')} />
+
+  const conSigno = (v) => (v == null ? '—' : `${v > 0 ? '+' : ''}${v}`)
+  const pct = (v) => (v == null ? '—' : `${v > 0 ? '+' : ''}${v} %`)
+  const siNo = (v) => (v ? t('informe.si') : t('informe.no'))
+
+  const filas = [
+    [t('informe.deltaTemblor'), conSigno(d.delta_tremor_index), pct(d.tremor_change_percent)],
+    [t('informe.deltaPresion'), conSigno(d.delta_pressure_mean), pct(d.pressure_change_percent)],
+    [t('informe.deltaOcupacion'), conSigno(d.delta_occupancy_ratio), pct(d.occupancy_change_percent)],
+    [t('informe.deltaLatencia'), fmtSeg(d.delta_initial_latency_ms), ''],
+    [t('informe.deltaAire'), conSigno(d.delta_air_time_ratio), ''],
+    [t('informe.deltaVelocidad'), conSigno(d.delta_velocity_mean), ''],
+    [t('informe.deltaBorrados'), conSigno(d.delta_eraser_strokes), ''],
+    [t('informe.deltaMonocromia'), `${siNo(d.m1_monochrome)} → ${siNo(d.m2_monochrome)}`, ''],
+  ]
+
+  return (
+    <>
+      <h4 className={styles.subtituloBloque}>{t('informe.deltaTitulo')}</h4>
+      <table className={styles.tabla}>
+        <thead>
+          <tr>
+            <th>{t('informe.colIndicador')}</th>
+            <th>{t('informe.colDiferencia')}</th>
+            <th>{t('informe.colVariacion')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filas.map(([nombre, valor, variacion]) => (
+            <tr key={nombre}>
+              <td>{nombre}</td>
+              <td>{valor}</td>
+              <td>{variacion}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p className={styles.leyenda}>{t('informe.deltaLeyenda')}</p>
+    </>
+  )
+}
+
+// Las alertas las genera el motor (avatarStore.#generateAlerts) con título y detalle ya
+// redactados. Se muestran tal cual: traducir el texto clínico no entra en este refactor (D12).
+function Alertas({ alertas }) {
+  const t = useT()
+  const lista = Array.isArray(alertas) ? alertas : []
+
+  return (
+    <>
+      <h4 className={styles.subtituloBloque}>{t('informe.alertasTitulo')}</h4>
+      {lista.length === 0 ? (
+        <p className={styles.leyenda}>{t('informe.sinAlertas')}</p>
+      ) : (
+        <ul className={styles.listaAlertas}>
+          {lista.map((alerta) => (
+            <li
+              key={alerta.type}
+              className={alerta.severity === 'warning' ? styles.alertaGrave : styles.alertaLeve}
+            >
+              <strong>{alerta.title}</strong>
+              <p>{alerta.detail}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  )
+}
+
 function Dibujo({ dibujo }) {
   const t = useT()
   const fases = [['phase1', t('informe.primerDibujo')], ['phase2', t('informe.segundoDibujo')]].filter(([k]) => dibujo[k])
@@ -246,6 +344,8 @@ function Dibujo({ dibujo }) {
           </tbody>
         </table>
       ) : <Pendiente texto={t('informe.sinMetricasDibujo')} />}
+      <Delta dibujo={dibujo} />
+      <Alertas alertas={dibujo.alerts} />
     </>
   )
 }
@@ -288,6 +388,9 @@ export default function InformeCaso({ params }) {
         <span className={styles.vivo}>{enCurso ? t('informe.sesionEnCurso') : ''}{t('informe.actualizado', { hora: actualizado?.toLocaleTimeString(locale) ?? '' })}</span>
         <div className={styles.acciones}>
           <button type="button" className={styles.btnGhost} onClick={() => downloadJson({ caso, analisis: { ...a, eventos: undefined } }, `informe-${id}`)}>{t('informe.exportarJson')}</button>
+          {/* Eventos crudos: es el formato con el que se puede analizar fuera de la app
+              (incluye las imágenes del dibujo y los reports de los minijuegos). */}
+          <button type="button" className={styles.btnGhost} onClick={() => downloadJson({ id, meta, eventos: caso.eventos ?? [] }, `eventos-${id}`)}>{t('informe.exportarEventos')}</button>
           <button type="button" className={styles.btn} onClick={() => window.print()}>{t('informe.imprimir')}</button>
         </div>
       </div>
@@ -376,14 +479,28 @@ export default function InformeCaso({ params }) {
         </Seccion>
 
         <Seccion numero="3" titulo={t('informe.s3Titulo')} sub={t('informe.s3Sub')}>
-          {cid ? <Mesa report={cid} /> : <Pendiente texto={t('informe.sinMinijuego')} />}
+          {cid ? (
+            <>
+              <Mesa report={cid} />
+              <p className={styles.leyenda}>
+                {t('informe.duracionActividad', { duracion: fmtDuracion(a.minijuegos['cid-table']?.duracionMs) })}
+              </p>
+            </>
+          ) : <Pendiente texto={t('informe.sinMinijuego')} />}
           <Nota>
             <p>{t('informe.s3Nota')}</p>
           </Nota>
         </Seccion>
 
         <Seccion numero="4" titulo={t('informe.s4Titulo')} sub={t('informe.s4Sub')}>
-          {arena ? <Mundo report={arena} /> : <Pendiente texto={t('informe.sinMinijuego')} />}
+          {arena ? (
+            <>
+              <Mundo report={arena} />
+              <p className={styles.leyenda}>
+                {t('informe.duracionActividad', { duracion: fmtDuracion(a.minijuegos['caja-arena']?.duracionMs) })}
+              </p>
+            </>
+          ) : <Pendiente texto={t('informe.sinMinijuego')} />}
           <Nota>
             <p>{t('informe.s4Nota')}</p>
           </Nota>
@@ -415,12 +532,7 @@ export default function InformeCaso({ params }) {
                 <tr key={i}>
                   <td>{new Date(e.t).toLocaleTimeString(locale)}</td>
                   <td>{tr(`tipo_${e.kind}`, e.kind)}</td>
-                  <td className={styles.alt}>
-                    {e.kind === 'decision' ? `${e.data.prompt} → ${e.data.option_label} (${fmtSeg(e.data.time_ms)})`
-                      : e.kind === 'progreso' ? `${e.data.node_id} · ${t('informe.capDetalle', { n: e.data.chapter ?? '—' })}`
-                        : e.kind.startsWith('minijuego') ? e.data.game
-                          : ''}
-                  </td>
+                  <td className={styles.alt}>{detalleEvento(e, a, t)}</td>
                 </tr>
               ))}
             </tbody>

@@ -678,3 +678,53 @@
   .nota { display: block; }
   .nota[open] summary, .nota summary { list-style: none; }
 }
+
+/* --- Etapa 2b: diferencia fase 1 → fase 2 y alertas del dibujo --- */
+
+.subtituloBloque {
+  margin: 1.6rem 0 0.6rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #4a1a1c;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.35rem;
+}
+
+.listaAlertas {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.listaAlertas li {
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  border-left: 4px solid #94a3b8;
+  background: #f8fafc;
+}
+
+.listaAlertas li p {
+  margin: 0.3rem 0 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: #374151;
+}
+
+.listaAlertas li strong {
+  font-size: 0.9rem;
+}
+
+.alertaGrave {
+  border-left-color: #dc2626 !important;
+  background: #fef2f2 !important;
+}
+
+.alertaLeve {
+  border-left-color: #2563eb !important;
+  background: #eff6ff !important;
+}
