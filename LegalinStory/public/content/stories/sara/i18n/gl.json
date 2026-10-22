@@ -4,99 +4,74 @@
       "start": {
         "kicker": "SARA · CAPÍTULO 1 DE 6",
         "title": "Algo non vai ben",
-        "text": "O luns. Un saque que non sae."
+        "text": "Luns pola mañá."
       },
       "c1-01": {
         "text": "Sara ten catorce anos e vai a terceiro da ESO. Encántalle o voleibol e debuxa estrelas nas marxes dos cadernos. Soa o timbre e aínda lle queda unha estrela por rematar."
       },
       "c1-02": {
-        "text": "Esta tarde practicamos o saque. O meu está saíndo máis cara á porta ca cara á pista."
+        "text": "Vés hoxe ao adestramento de voleibol? Imos practicar o saque."
       },
       "c1-03": {
-        "text": "O meu tamén podería presentarse a delegado de corredor. Pero hoxe… creo que non vou."
+        "text": "Hoxe non podo. Outro día, vale?"
       },
       "c1-04": {
-        "text": "Na casa, Javier, o seu pai, revisa as súas mensaxes e decide a quen pode ver. Insúltaa cando algo non lle gusta. Algunhas veces empurrouna ou bateu nela. Non mostramos esas escenas."
+        "text": "Na casa, Javier, o seu pai, berra cando algo non lle gusta. Revísalle o móbil e non a deixa ver a quen ela quere. Algunhas veces empurrouna e bateu nela."
       },
       "c1-05": {
-        "text": "Onte volveu quitarme o móbil. Dani estaba no outro cuarto. Só ten dez anos. Non sei canto escoitou."
+        "text": "Onte volveu quitarme o móbil. Dani estaba no seu cuarto. Só ten dez anos. Non sei canto oíu."
       },
       "c1-06": {
-        "text": "Vale. Se cambias de idea, gárdoche sitio. E se queres contarme algo, tamén."
+        "text": "Vale. Gárdoche un sitio ao meu carón por se cambias de idea. E se queres contarme algo, aquí estou."
       },
       "c1-07": {
-        "text": "Ao recoller, a Sara cáeselle o estoxo. Laura, a súa profesora, agáchase para axudala. Notou as súas ausencias e que ultimamente se sobresalta con facilidade."
+        "text": "Ao recoller, a Sara cáelle o estoxo. Laura, a súa titora, agáchase para axudala. Decatouse de que Sara falta máis á clase e de que se asusta con calquera ruído."
       },
       "c1-08": {
-        "text": "Estes días véxote máis calada. Non sei que che pasa e non quero adiviñalo. Viríache ben falar un momento nun lugar tranquilo?"
+        "text": "Noto que estes días estás máis calada. Non sei que che pasa e non quero adiviñalo. Apetécheche que falemos un anaco nun sitio tranquilo?"
       },
       "c1-choice": {
-        "prompt": "A Sara cústalle empezar. Que precisa dicir primeiro?",
+        "prompt": "A Sara cústalle empezar. Que di primeiro?",
         "options": [
           {
-            "id": "partial",
-            "label": "«Na casa pasan cousas que me dan medo».",
-            "next": "c1-partial",
-            "flags": {
-              "opening": "partial"
-            }
+            "label": "«Na casa pasan cousas que me dan medo»."
           },
           {
-            "id": "time",
-            "label": "«Necesito un pouco de tempo».",
-            "next": "c1-time",
-            "flags": {
-              "opening": "time"
-            }
+            "label": "«Necesito un pouco de tempo»."
           },
           {
-            "id": "what",
-            "label": "«Se che conto algo, que vai pasar?».",
-            "next": "c1-what",
-            "flags": {
-              "opening": "what"
-            }
+            "label": "«Se che conto algo, que vai pasar?»."
           }
         ]
       },
       "c1-partial": {
-        "text": "Grazas por dicirmo. Non tes que explicalo todo agora. O que che fai dano merece atención, aínda que aínda non saibas como chamalo."
+        "text": "Grazas por contármelo. Non tes que explicalo todo agora. Se algo che fai dano, é importante, aínda que non saibas como dicilo."
       },
       "c1-time": {
-        "text": "Podemos ir amodo. Quedarei aquí contigo. Aínda que hoxe che custe falar, a miña responsabilidade é atender os sinais que me preocupan e buscar axuda."
+        "text": "Podemos ir amodo. Quedo aquí contigo. Aínda que hoxe che custe falar, o meu traballo é coidarte e buscar axuda se algo me preocupa."
       },
       "c1-what": {
-        "text": "Irei explicándoche os pasos. Se creo que podes estar en perigo, teño que pedirlles axuda a quen pode protexerte. Podes preguntarme que vou comunicar."
+        "text": "Irei contándoche cada paso. Se creo que estás en perigo, teño que avisar as persoas que poden protexerte. Sempre podes preguntarme a quen llo digo."
       },
       "c1-close": {
-        "text": "Sara séntase. Laura aparta os exames para escoitala. Por primeira vez esa mañá, ninguén parece ter présa por rematar a conversa."
+        "text": "Sara senta. Laura aparta os cadernos que estaba a corrixir para escoitala. Por primeira vez en toda a mañá, ninguén ten présa."
       },
       "c1-choice2": {
-        "prompt": "Antes de seguir, que axudaría a Sara?",
+        "prompt": "Antes de seguir, que lle axudaría a Sara?",
         "options": [
           {
-            "id": "door",
-            "label": "Pedir que non entren compañeiros mentres fala.",
-            "next": "c1-door",
-            "flags": {
-              "schoolPrivacy": true
-            }
+            "label": "Pedir que non entre ninguén da clase mentres fala."
           },
           {
-            "id": "company",
-            "label": "Preguntar se Paula pode agardala fóra.",
-            "next": "c1-company",
-            "flags": {
-              "paulaWaiting": true
-            }
+            "label": "Preguntar se Paula pode agardala fóra."
           }
         ]
       },
       "c1-door": {
-        "text": "Buscaremos un espazo onde poidamos falar con intimidade. Se alguén pregunta por ti, non ten por que coñecer a túa historia."
+        "text": "Falaremos nun sitio onde ninguén nos interrompa. Se alguén pregunta por ti, non ten por que saber o que me contes."
       },
       "c1-company": {
-        "text": "Dirémoslle que estás acompañada e que sairás cando rematemos. Ti podes decidir que queres contarlle despois."
+        "text": "Direille a Paula que estás comigo e que sairás en seguida. Ti decides que lle contas despois."
       },
       "c2-card": {
         "kicker": "SARA · CAPÍTULO 2 DE 6",
@@ -104,16 +79,16 @@
         "text": "No instituto. Unha conversa, paso a paso."
       },
       "c2-01": {
-        "text": "Ás veces penso que se contestase doutra maneira… Pero onte non fixen nada. E aínda así anoxouse."
+        "text": "Ás veces penso que, se me portase mellor, non pasaría. Pero onte non fixen nada e aínda así enfadouse."
       },
       "c2-02": {
-        "text": "Nada do que digas xustifica que alguén che faga dano. Non tes que atopar a frase perfecta para que te axudemos."
+        "text": "Nada do que fagas ou digas fai que estea ben que alguén che faga dano. A culpa non é túa."
       },
       "c2-03": {
-        "text": "Sara conta unha parte do que pasou. Laura escoita sen pedirlle que repita os detalles. Pregúntalle pola súa seguridade ao saír do instituto."
+        "text": "Sara conta unha parte do que pasa na casa. Laura escóitaa sen pedirlle que o repita. Despois pregúntalle se se sente segura ao volver á casa."
       },
       "c2-04": {
-        "text": "Non quero volver á casa e que el se decate de súpeto. Dáme medo o que poida pasar."
+        "text": "Non quero chegar á casa e que meu pai se decate de súpeto. Témolle medo ao que poida facer."
       },
       "c2-05": {
         "text": "Vou avisar agora a persoa que coida do benestar no instituto, os Servizos Sociais e a Policía. Tamén lles contarei que tes medo de volver á casa."
@@ -122,31 +97,16 @@
         "text": "Non imos esperar a que denuncies ti. Co que me contaches xa teño que pedir axuda e comunicar o ocorrido. Explicareiche que facemos para protexerte."
       },
       "c2-choice": {
-        "prompt": "Que pregunta Sara mentres Laura organiza a axuda?",
+        "prompt": "Que pregunta Sara mentres Laura busca axuda?",
         "options": [
           {
-            "id": "privacy",
-            "label": "«Contaraslle a todo o profesorado?».",
-            "next": "c2-privacy",
-            "flags": {
-              "concernPrivacy": true
-            }
+            "label": "«Vas contarllo a todo o profesorado?»."
           },
           {
-            "id": "dad",
-            "label": "«Ides chamar agora mesmo ao meu pai?».",
-            "next": "c2-dad",
-            "flags": {
-              "concernDad": true
-            }
+            "label": "«Vades chamar agora a meu pai?»."
           },
           {
-            "id": "alone",
-            "label": "«Teño que ir eu denunciar?».",
-            "next": "c2-alone",
-            "flags": {
-              "concernAlone": true
-            }
+            "label": "«Teño que ir eu á policía?»."
           }
         ]
       },
@@ -154,10 +114,10 @@
         "text": "Non podo prometer que quede só entre nós. Direiche a que profesionais llo conto e para que. Se hai un proceso xudicial, tamén terán que sabelo as persoas que interveñan nel. A túa clase non necesita sabelo."
       },
       "c2-dad": {
-        "text": "Non imos improvisar unha chamada ignorando o teu medo. Os profesionais coordinarán como actuar de forma segura. Explicareiche o que saibamos."
+        "text": "Non imos chamar sen pensar no teu medo. As persoas que saben disto decidirán como facelo para que esteas segura. Irei contándoche o que saiba."
       },
       "c2-alone": {
-        "text": "Non tes que organizalo ti soa. Pedir axuda aquí xa permite que as persoas responsables actúen. Acompañarante e explicaranche as actuacións que correspondan."
+        "text": "Non tes que facelo ti soa. Ao contármelo, as persoas adultas que se ocupan disto xa poden empezar a axudarte. Acompañaranche en cada paso."
       },
       "c2-06": {
         "text": "Laura fai os avisos sen deixar soa a Sara. Esa tarde, os profesionais organizan coa súa nai que ela e Dani estean na casa da súa tía. Uns días despois, coñece alguén novo."
@@ -166,92 +126,67 @@
         "text": "Ola, Sara. Son Elena, traballadora social. Vou acompañarte xunto co equipo. O meu traballo tamén ten que ver con como estás na clase, coas túas amigas e no teu día a día."
       },
       "c2-08": {
-        "text": "Terei que contalo enteiro outra vez? Non sei nin por onde empecei antes."
+        "text": "Teño que contalo todo outra vez? Xa nin me lembro de como empecei."
       },
       "c2-09": {
-        "text": "Intentaremos coordinarnos para que non teñas que repetilo sen necesidade. Antes de preguntarche algo, podo explicarche para que o precisamos."
+        "text": "Imos intentar que non teñas que repetilo se non fai falta. E antes de preguntarche algo, direiche para que o necesito."
       },
       "c2-choice2": {
         "prompt": "Elena achega unha cadeira. Como prefire Sara que empecen?",
         "options": [
           {
-            "id": "short",
-            "label": "Unha cousa de cada vez, con explicacións curtas.",
-            "next": "c2-short",
-            "flags": {
-              "shortExplanations": true
-            }
+            "label": "Unha cousa cada vez, con explicacións curtas."
           },
           {
-            "id": "overview",
-            "label": "Ver primeiro o percorrido xeral.",
-            "next": "c2-overview",
-            "flags": {
-              "overviewFirst": true
-            }
+            "label": "Saber primeiro todo o que vai pasar."
           }
         ]
       },
       "c2-short": {
-        "text": "De acordo. Primeiro: atender a túa seguridade. Despois iremos vendo os seguintes pasos. Se me enrolo, podes dicirmo."
+        "text": "Moi ben. O primeiro: que esteas segura. Despois iremos vendo o demais. Se falo moito, dísmo."
       },
       "c2-overview": {
-        "text": "Miraremos a túa situación familiar, organizaremos apoios e explicarémosche as actuacións que se inicien. Podes abrir o mapa cando necesites situarte."
+        "text": "Primeiro imos ver como está a túa familia. Logo buscaremos axudas para vós. E explicarémosche cada cousa antes de que pase."
       },
       "c3-card": {
         "kicker": "SARA · CAPÍTULO 3 DE 6",
         "title": "Que vai pasar comigo?",
-        "text": "Servizos Sociais. Poñerlles nome ás preocupacións."
+        "text": "Servizos Sociais. Facer as preguntas que dan medo."
       },
       "c3-01": {
-        "text": "Valorar a miña situación significa que me ides poñer unha nota? Porque ultimamente non as saco moi boas."
+        "text": "Laura dixo que ían valorar a miña situación. Iso é coma un exame?"
       },
       "c3-02": {
-        "text": "Ningunha nota. Queremos coñecer que está pasando, que riscos hai e que axuda precisades. Tamén escoitaremos a túa nai e valoraremos como está Dani."
+        "text": "Non, non é un exame. Queremos saber que está pasando e que axuda necesitades. Tamén falaremos coa túa nai e veremos como está Dani."
       },
       "c3-social": {
-        "text": "Valorar significa coñecer que precisades e se estades seguros. Ese é o traballo dos servizos de protección. Se se investiga un posible delito, é outro proceso, con outros profesionais."
+        "text": "Valorar quere dicir coñecer que necesitades e se estades seguros. Disto ocupámonos en Servizos Sociais. Se un xulgado investiga o que pasou, iso fano outras persoas."
       },
       "c3-choice": {
         "prompt": "Sara ten moitas preguntas. Cal fai primeiro?",
         "options": [
           {
-            "id": "dani",
-            "label": "«Que vai pasar con Dani?».",
-            "next": "c3-dani",
-            "flags": {
-              "concernDani": true
-            }
+            "label": "«Que vai pasar con Dani?»."
           },
           {
-            "id": "privacy",
-            "label": "«Quen vai coñecer a miña historia?».",
-            "next": "c3-privacy",
-            "flags": {
-              "concernPrivacy": true
-            }
+            "label": "«Quen se vai enterar disto?»."
           },
           {
-            "id": "home",
-            "label": "«Terei que deixar a miña casa?».",
-            "next": "c3-home",
-            "flags": {
-              "concernHome": true
-            }
+            "label": "«Terei que marchar da casa?»."
           }
         ]
       },
       "c3-dani": {
-        "text": "Dani tamén será escoitado e o equipo valorará que precisa. Non che corresponde vixiar que todo saia ben. Iso tócanos ás persoas adultas."
+        "text": "A Dani tamén o van escoitar e imos ver que necesita. Ti non tes que vixiar que todo saia ben. Iso toca ás persoas adultas."
       },
       "c3-privacy": {
         "text": "Non podo prometer que quede só entre nós. Direiche a que profesionais llo conto e para que. Se hai un proceso xudicial, tamén terán que sabelo as persoas que interveñan nel. A túa clase non necesita sabelo."
       },
       "c3-home": {
-        "text": "Pedir axuda non significa que teñas que marchar da casa automaticamente. Hai que valorar a vosa seguridade e as medidas posibles. A túa opinión importa e teñen que escoitarte."
+        "text": "Pedir axuda non quere dicir que teñas que marchar da casa sen máis. Primeiro mírase se estades seguros. E a túa opinión conta: teñen que escoitarte."
       },
       "c3-03": {
-        "text": "A miña nai sabe algunhas cousas, pero non todas. Ás veces dime que intente non discutir. Non sei que espera que faga."
+        "text": "Miña nai sabe algunhas cousas, pero non todas. Ás veces dime que non lle leve a contraria a papá. Non sei que teño que facer."
       },
       "c3-04": {
         "text": "Ti non tes que conseguir que o teu pai se porte ben. Iso non é tarefa túa. A túa nai tamén vai recibir axuda. Falaremos contigo a soas para escoitar que necesitas e que che preocupa."
@@ -263,26 +198,16 @@
         "text": "Metín as zapatillas de voleibol na mochila. Non sei se as vou usar, pero non quería deixalas."
       },
       "c3-07": {
-        "text": "Paréceme importante que as trouxeses. Podemos falar do que precisas esta semana, ademais das citas."
+        "text": "Fixeches ben en traelas. Podemos falar do que necesitas esta semana, non só das citas."
       },
       "c3-choice2": {
-        "prompt": "Que lle gustaría acordar a Sara para os próximos días?",
+        "prompt": "Que quere acordar Sara para os próximos días?",
         "options": [
           {
-            "id": "contact",
-            "label": "Saber a quen avisar se cambia algo ou se sente medo.",
-            "next": "c3-contact",
-            "flags": {
-              "wantsContact": true
-            }
+            "label": "Saber a quen chamar se pasa algo ou ten medo."
           },
           {
-            "id": "school",
-            "label": "Organizar as faltas e as tarefas do instituto.",
-            "next": "c3-school",
-            "flags": {
-              "wantsSchoolPlan": true
-            }
+            "label": "Organizar as clases e os deberes que perdeu."
           }
         ]
       },
@@ -290,233 +215,242 @@
         "text": "Dareiche os teléfonos do equipo e explicareiche que facer se algo cambia. Se hai perigo inmediato, chama ao 112. Podes pedir axuda aínda que non saibas canto perigo hai."
       },
       "c3-school": {
-        "text": "Coordinarémolo con Laura. Pediremos axustes concretos, como organizar as entregas e recuperar apuntamentos, sen explicarlle a túa historia a toda a clase."
+        "text": "Falarémolo con Laura. Axudarache a poñerte ao día cos deberes, sen contarlle á clase o que che pasa."
       },
       "c3-end": {
-        "text": "Esa noite Dani pídelle que mire un debuxo dun dragón. Sara atopa unha estrela na esquina e debuxa outra ao lado. Aínda hai sitio para cousas pequenas."
+        "text": "Esa noite, Dani ensínalle un debuxo dun dragón. Sara ve unha estrela nunha esquina e debuxa outra ao seu carón."
       },
       "c3-mesa": {
-        "text": "E quedou pensando onde se sentaría segundo a xente que vaia comer."
+        "text": "E quedou pensando en onde se sentaría dependendo da xente que vaia comer."
       },
       "c4-card": {
         "kicker": "SARA · CAPÍTULO 4 DE 6",
         "title": "A miña vida continúa",
-        "text": "Días despois. Fóra das entrevistas."
+        "text": "Uns días despois."
       },
-      "c4-perros": {
-        "text": "Empezou a ver os diferentes cans e as aventuras que podería vivir con eles."
+      "c4-chat": {
+        "chatTitle": "Paula",
+        "messages": [
+          {
+            "text": "ola sara!! boto de menos na clase"
+          },
+          {
+            "text": "gardeiche os apuntamentos de mates e de coñecemento"
+          },
+          {
+            "text": "grazas paula"
+          },
+          {
+            "text": "estou ben. estou uns días na casa da miña tía"
+          },
+          {
+            "text": "vale. non tes que contarme nada se non queres"
+          },
+          {
+            "text": "mañá dóucheos no recreo?"
+          },
+          {
+            "text": "si. e séntome contigo"
+          }
+        ]
       },
       "c4-01": {
-        "text": "Gardei os teus apuntamentos. Tamén un vídeo do meu peor saque, pero iso require un pacto de silencio."
+        "text": "Toma, os apuntamentos. Pasei a limpo coa miña mellor letra."
       },
       "c4-02": {
-        "text": "Os apuntamentos si. O vídeo… xa o pensarei. Vénme ben que me fales doutras cousas."
+        "text": "Grazas. Gústame que me fales doutras cousas."
       },
       "c4-choice": {
         "prompt": "Elena pregunta que parte da súa vida quere recuperar primeiro. Sara escolle…",
         "options": [
           {
-            "id": "volleyball",
-            "label": "Volver adestrar ao voleibol.",
-            "next": "c4-volley",
-            "flags": {
-              "everyday": "volleyball"
-            }
+            "label": "Volver adestrar ao voleibol."
           },
           {
-            "id": "school",
-            "label": "Recuperar o ritmo das clases.",
-            "next": "c4-school",
-            "flags": {
-              "everyday": "school"
-            }
+            "label": "Poñerse ao día na clase."
           },
           {
-            "id": "friends",
-            "label": "Quedar con Paula sen falar sempre do proceso.",
-            "next": "c4-friends",
-            "flags": {
-              "everyday": "friends"
-            }
+            "label": "Quedar con Paula sen falar sempre do mesmo."
           }
         ]
       },
       "c4-volley": {
-        "text": "Podemos empezar por un adestramento, sen esixirche que xogues coma antes. Acordaremos os detalles prácticos coas persoas que te coidan."
+        "text": "Podemos empezar cun adestramento, sen que teñas que xogar igual ca antes. Organizarémolo coas persoas que te coidan."
       },
       "c4-volley2": {
-        "text": "Só quero volver escoitar o balón contra o chan e pensar onde colocarme. Aínda que falle todos os saques."
+        "text": "Só quero oír outra vez o balón contra o chan. Aínda que falle todos os saques."
       },
       "c4-school": {
-        "text": "Imos escoller dúas tarefas para esta semana. Recuperalo todo dunha vez sería demasiado. Que un día non te poidas concentrar non significa que deixases de saber."
+        "text": "Imos elixir só dúas tarefas para esta semana. Facelo todo de golpe sería demasiado. Se un día non te concentras, non pasa nada."
       },
       "c4-school2": {
-        "text": "As mates primeiro. Se deixo de entender unha páxina, a seguinte parece escrita noutro idioma."
+        "text": "Primeiro as mates. Se me perdo nunha páxina, logo non entendo a seguinte."
       },
       "c4-friends": {
-        "text": "Podemos pasear, falar de música ou non dicir moito. Non fai falta que cada vez que quedemos me poñas ao día de todo."
+        "text": "Podemos xogar, escoitar música ou non dicir nada. Non tes que contarme como vai todo cada vez que quedemos."
       },
       "c4-friends2": {
-        "text": "Entón hoxe quero discutir contigo sobre esa playlist. Niso si que me sinto preparada."
+        "text": "Pois hoxe quero que me ensines a canción nova que che gusta."
       },
       "c4-dani": {
-        "text": "A última vez preocupábache moito Dani. O equipo tamén está escoitando o que el precisa. Hoxe podes ocuparte do teu plan sen sentir que lle estás fallando."
+        "text": "A outra vez preocupábate moito Dani. Hai persoas que o están escoitando e coidando. Hoxe podes pensar en ti, e iso non é fallarlle."
       },
       "c4-general": {
-        "text": "Seguimos revisando como estades ti, Dani e a túa nai. Non fai falta que unha soa persoa se encargue das preocupacións de toda a familia."
+        "text": "Seguimos pendentes de como estades ti, Dani e a túa nai. Non fai falta que unha soa persoa cargue con todo."
       },
       "c4-info": {
-        "text": "Podemos ocuparnos das citas e tamén dos teus adestramentos, dos teus estudos e das túas amigas. Non fai falta aparcar todo o que che importa para recibir apoio."
+        "text": "Ademais das citas, podemos axudarte co instituto, coas túas amigas e co voleibol. Non tes que deixar de lado o que che gusta."
       },
       "c4-choice2": {
-        "prompt": "No instituto alguén pregunta polas súas ausencias. Que quere Sara?",
+        "prompt": "Na clase, un compañeiro pregúntalle por que faltou. Que quere facer Sara?",
         "options": [
           {
-            "id": "boundary",
-            "label": "Preparar unha resposta breve con Paula.",
-            "next": "c4-boundary",
-            "flags": {
-              "boundaryWithPaula": true
-            }
+            "label": "Preparar con Paula unha resposta curta."
           },
           {
-            "id": "laura",
-            "label": "Pedirlle a Laura que a axude a coidar a súa privacidade.",
-            "next": "c4-laura",
-            "flags": {
-              "schoolPrivacy": true
-            }
+            "label": "Pedirlle a Laura que a axude a que ninguén se decate."
           }
         ]
       },
       "c4-boundary": {
-        "text": "Podes dicir: «Estou resolvendo unhas cousas con axuda e non quero falar diso». Se queres, cambio de tema despois. Non tes que dar explicacións para estar connosco."
+        "text": "Podes dicir: «Tiven uns asuntos de familia e non quero falar diso». Logo eu cambio de tema. Non tes que explicarlle nada a ninguén."
       },
       "c4-laura": {
-        "text": "Podemos acordar que precisa saber o profesorado e como coidar a túa intimidade. Coas túas amigas tamén podes poñerlle límites ao que queiras contar."
+        "text": "Podemos decidir xuntas que necesitan saber os profesores e que non. E ás túas amigas contas só o que ti queiras."
       },
       "c4-end": {
-        "text": "Hai días tranquilos e outros que custan máis. As citas continúan, pero Sara xa ten algo na axenda que non é unha entrevista: un plan que escolleu ela."
+        "text": "Hai días tranquilos e días máis difíciles. Segue habendo citas, pero na axenda de Sara xa hai algo que elixiu ela."
+      },
+      "c4-perros": {
+        "text": "Empezou a ver os diferentes cans, e as aventuras que podería vivir con eles."
       },
       "c5-card": {
         "kicker": "SARA · CAPÍTULO 5 DE 6",
         "title": "O xulgado",
-        "text": "Tempo despois. Saber onde estou."
+        "text": "Un tempo despois. Saber quen é quen."
       },
       "c5-01": {
         "text": "Despois do aviso do instituto e das primeiras medidas de protección, o xulgado segue investigando o ocorrido. Chega unha carta para que Sara declare. Irene le a carta con ela e coa súa nai."
       },
       "c5-02": {
-        "text": "A carta parecía escrita para alguén que xa sabe como funciona todo. Eu non sei nin onde sentarme."
+        "text": "A carta ten palabras moi raras. Non entendo nada."
       },
       "c5-03": {
-        "text": "Lémola xuntas. Unha citación indica que debes acudir a unha actuación: hai que comprobar para que, onde e con que apoios. Se algo non se entende, preguntámolo antes."
+        "text": "Lémola xuntas. É unha citación: di que tes que ir ao xulgado, que día e a que hora. O que non entendas, pregúntasmo.",
+        "speaker": "Irene · avogada"
       },
       "c5-justice": {
-        "text": "O xulgado investiga o ocorrido e se o teu pai é responsable dun delito. Mentres, seguimos coidando da túa seguridade. Non hai que esperar unha sentenza para protexerte."
+        "text": "O xulgado investiga o ocorrido e se o teu pai é responsable dun delito. Mentres, seguimos coidando da túa seguridade. Non hai que esperar unha sentenza para protexerte.",
+        "speaker": "Irene · avogada"
+      },
+      "c5-team": {
+        "text": "No xulgado vas ver varias persoas. Cada unha ten un traballo distinto. Presentoche elas para que non te líes.",
+        "speaker": "Irene · avogada"
+      },
+      "c5-oficina": {
+        "text": "A oficina xudicial do Tribunal de Instancia organiza os papeis e os pasos do caso. Segundo o tipo de asunto, encárgase unha sección ou outra.",
+        "speaker": "Irene · avogada"
+      },
+      "c5-juez": {
+        "text": "A xuíza dirixe a investigación e decide as medidas que necesitan unha decisión xudicial. Se o caso pasa a xuízo, decidirá outro xuíz ou tribunal. Todos teñen que respectar os teus dereitos e os das demais persoas.",
+        "speaker": "Irene · avogada"
+      },
+      "c5-laj": {
+        "text": "A letrada da Administración de Xustiza ocúpase de que o que pasa quede documentado con garantías. É outra profesional; non é a túa avogada. Non sempre ten que estar na sala.",
+        "speaker": "Irene · avogada"
+      },
+      "c5-fiscal": {
+        "text": "O fiscal defende a legalidade. Pode acusar a quen fixo dano e tamén vela polos teus dereitos. A túa avogada defende os teus intereses.",
+        "speaker": "Irene · avogada"
+      },
+      "c5-psicosocial": {
+        "text": "Ás veces o xulgado pide axuda ao seu equipo psicosocial: profesionais da psicoloxía e do traballo social. Poden axudar a escoitarte e dar unha opinión como especialistas.",
+        "speaker": "Irene · avogada"
+      },
+      "c5-oavd": {
+        "text": "Na Oficina de Asistencia ás Vítimas explícanche como vai o proceso e axúdanche se estás mal ou tes dúbidas. Non xulgan o caso.",
+        "speaker": "Irene · avogada"
       },
       "c5-choice": {
-        "prompt": "Antes da actuación, que quere coñecer Sara?",
+        "prompt": "Antes de ir, que quere saber Sara?",
         "options": [
           {
-            "id": "people",
-            "label": "Quen estará e que fai cada profesional.",
-            "next": "c5-people",
-            "flags": {
-              "askedProfessionals": true
-            }
+            "label": "Quen vai estar na sala."
           },
           {
-            "id": "room",
-            "label": "Como é o espazo e se terá que ver o seu pai.",
-            "next": "c5-room",
-            "flags": {
-              "askedRoom": true
-            }
+            "label": "Como é a sala e se vai ver o seu pai."
           },
           {
-            "id": "rights",
-            "label": "Que apoios pode pedir e a quen llelos di.",
-            "next": "c5-rights",
-            "flags": {
-              "askedSupports": true
-            }
+            "label": "Que pode pedir e a quen llo di."
           }
         ]
       },
       "c5-people": {
-        "text": "A xuíza dirixe a declaración e o fiscal coida tamén dos teus dereitos. Eu participo como a túa avogada. A defensa do teu pai tamén pode facer preguntas, co control da xuíza. Antes explicareiche como."
+        "text": "A xuíza dirixe a declaración e o fiscal coida tamén dos teus dereitos. Eu participo como a túa avogada. A defensa do teu pai tamén pode facer preguntas, co control da xuíza. Antes explicareiche como.",
+        "speaker": "Irene · avogada"
       },
       "c5-people2": {
         "text": "Eu non decido nada no xulgado. Podo acompañarte se ti queres, salvo que se explique unha razón para que non entre. Tamén podemos acordar que te espere fóra."
       },
       "c5-room": {
-        "text": "Teñen que organizar a espera para que non vos atopedes. Iremos antes ver por onde entras e onde esperas. Xa falamos coa oficina de vítimas."
+        "text": "Teñen que organizar a espera para que non vos atopedes. Iremos antes ver por onde entras e onde esperas. Xa falamos coa oficina de vítimas.",
+        "speaker": "Irene · avogada"
       },
       "c5-rights": {
-        "text": "Podes explicarme que precisas, preguntar quen estará e avisar do que che fai sentir insegura. Comunicarémolo para que se valore antes da actuación."
+        "text": "Podes dicirme que che dá medo, preguntar quen vai estar e pedir o que necesites. Eu direillo ao xulgado antes de que empece.",
+        "speaker": "Irene · avogada"
       },
       "c5-supports": {
-        "text": "Teñen que organizar as cousas para que non te atopes co teu pai. Ademais, pediremos outra sala, videoconferencia e apoio dunha psicóloga. A xuíza decidirá como organizar eses apoios segundo o que necesites."
+        "text": "Teñen que organizar as cousas para que non te atopes co teu pai. Ademais, pediremos outra sala, videoconferencia e apoio dunha psicóloga. A xuíza decidirá como organizar eses apoios segundo o que necesites.",
+        "speaker": "Irene · avogada"
       },
       "c5-privacy": {
-        "text": "Preocupábache quen ía coñecer a túa historia. Por iso hoxe repasamos quen pode estar nesta actuación. A intimidade cóidase tamén ao organizar o espazo e a información."
+        "text": "Preocupábate quen se ía enterar. Na sala só estarán as persoas que teñen que estar. O que contes alí non llo dirán á túa clase."
       },
       "c5-short": {
-        "text": "Como me pediches, unha cousa de cada vez: primeiro vemos quen te recibe. Despois, que vai pasar. E podemos parar para preguntar entre unha cousa e outra."
+        "text": "Como me pediches, unha cousa cada vez. Primeiro, quen te recibe. Despois, que vai pasar. Entre unha cousa e outra, podes preguntar."
       },
       "c5-overview": {
-        "text": "Primeiro recibirante e explicaranche a actuación; despois poderás intervir cos apoios que se acordasen. Ao rematar, revisaremos que vén despois."
+        "text": "Recibiranche e explicaranche que vai pasar. Logo falarás coas axudas que se pedisen. Ao rematar, veremos xuntas que vén despois."
       },
       "c5-simulation": {
-        "text": "Antes da actuación, practican como comunicar unha necesidade. Non ensaian o que Sara contará nin fan preguntas sobre a violencia. Neste pequeno exercicio non hai respostas que dean máis puntos."
+        "text": "Uns días antes, Sara e Irene practican como pedir o que necesita. Non falan do que pasou na casa. Só de como dicir «non entendo» ou «necesito parar»."
       },
       "c5-choice2": {
-        "prompt": "Que frase quere lembrar Sara para expresar o que precisa durante a actuación?",
+        "prompt": "Que frase quere lembrar Sara para ese día?",
         "options": [
           {
-            "id": "repeat",
-            "label": "«Non o entendín. Podes repetilo?».",
-            "next": "c5-repeat",
-            "flags": {
-              "communication": "repeat"
-            }
+            "label": "«Non o entendín. Repítesmo?»."
           },
           {
-            "id": "memory",
-            "label": "«Ese dato non o lembro con exactitude».",
-            "next": "c5-memory",
-            "flags": {
-              "communication": "memory"
-            }
+            "label": "«Iso non o lembro ben»."
           },
           {
-            "id": "pause",
-            "label": "«Necesito unha pausa».",
-            "next": "c5-pause",
-            "flags": {
-              "communication": "pause"
-            }
+            "label": "«Necesito parar un momento»."
           }
         ]
       },
       "c5-repeat": {
-        "text": "Podes dicir que non entendes e pedir outra explicación. Imos prepararte para comprender a actuación. O que contes sobre os feitos terá que saír do que ti lembres."
+        "text": "Se non entendes algo, podes dicilo e pedir que cho expliquen con outras palabras. Prepararte serve para entender o que pasa, non para aprender o que tes que dicir.",
+        "speaker": "Irene · avogada"
       },
       "c5-memory": {
-        "text": "Se algo non o lembras con exactitude, podes dicilo así. Non fai falta inventar unha hora ou un detalle para completar unha resposta."
+        "text": "Se algo non o lembras ben, podes dicilo así. Non fai falta que te inventes unha hora ou un detalle.",
+        "speaker": "Irene · avogada"
       },
       "c5-pause": {
-        "text": "Podes dicir que necesitas parar. Comunicarémosllo a quen dirixa a actuación para que valore como atendelo. Pedilo permite que saiban o que precisas."
+        "text": "Podes dicir que necesitas parar. A xuíza decidirá como facelo. Pedilo está ben: así saben o que necesitas.",
+        "speaker": "Irene · avogada"
       },
       "c5-04": {
         "text": "Pensaba que se me quedaba en branco ía estragalo todo. Axúdame saber que podo dicir que non entendo algo."
       },
       "c5-05": {
-        "text": "Chega o día. Neste caso, acordouse unha organización para evitar que Sara se atope con Javier na espera e durante a súa intervención. O persoal explícalle onde estará cada persoa."
+        "text": "Chega o día. Sara entra por outra porta, así non se cruza con Javier. Unha muller da oficina de vítimas acompáñaa a unha sala con butacas e explícalle onde estará cada persoa."
       },
       "c5-06": {
-        "text": "Ola, Sara. Hoxe imos escoitarte para investigar o que pasou. Irene xa che explicou por que tes que declarar neste caso. Se algo non está claro, falámolo antes de empezar."
+        "text": "Ola, Sara. Hoxe imos escoitarte para investigar o que pasou. Irene xa che explicou por que tes que declarar neste caso. Se algo non está claro, falámolo antes de empezar.",
+        "speaker": "Xuíza"
       },
       "c5-07": {
         "text": "Acordáronse os apoios para Sara. Declara por videoconferencia desde outra sala, sen ver a Javier, cunha psicóloga ao seu lado. A declaración queda gravada. Sara preferiu que Elena a espere fóra."
@@ -530,40 +464,25 @@
       "c6-card": {
         "kicker": "SARA · CAPÍTULO 6 DE 6",
         "title": "Despois de todo",
-        "text": "A espera tamén forma parte do camiño."
+        "text": "Agardar tamén é parte do camiño."
       },
       "c6-01": {
-        "text": "O procedemento segue o seu curso. Hai días sen novidades. Mentres se practican as actuacións necesarias, continúan as citas de apoio e a atención á seguridade da familia."
+        "text": "Pasan as semanas. Algúns días non hai novas. Mentres, Sara segue vendo Elena, e as persoas que a axudan seguen pendentes de que a súa familia estea a salvo."
       },
       "c6-02": {
-        "text": "Todo o mundo di «avisarémoste». Ás veces miro o móbil e non sei se quero unha mensaxe ou que non haxa ningunha."
+        "text": "Todos me din «xa te avisaremos». Ás veces miro o móbil e non sei se quero que chegue unha mensaxe ou que non chegue."
       },
       "c6-choice": {
-        "prompt": "Hoxe, que quere poñer Sara enriba da mesa?",
+        "prompt": "Hoxe, de que quere falar Sara con Elena?",
         "options": [
           {
-            "id": "news",
-            "label": "Preguntar como pode saber en que punto está o procedemento.",
-            "next": "c6-news",
-            "flags": {
-              "waiting": "news"
-            }
+            "label": "Como saber que está pasando no xulgado."
           },
           {
-            "id": "dad",
-            "label": "Dicir que ás veces bota de menos o seu pai.",
-            "next": "c6-dad",
-            "flags": {
-              "waiting": "mixed"
-            }
+            "label": "Que ás veces bota de menos o seu pai."
           },
           {
-            "id": "privacy",
-            "label": "Pedir axuda coas preguntas que lle fan no instituto.",
-            "next": "c6-school",
-            "flags": {
-              "waiting": "privacy"
-            }
+            "label": "As preguntas que lle fan na clase."
           }
         ]
       },
@@ -571,72 +490,81 @@
         "text": "Podemos consultar con Irene que información che corresponde recibir e como pedila. Non che sei dar unha data exacta; si que podemos aclarar con quen falar cando teñas dúbidas."
       },
       "c6-dad": {
-        "text": "Podes botar de menos momentos bos e, ao mesmo tempo, necesitar estar protexida. Non tes que sentir unha soa cousa polo teu pai. Falalo non cambia que o que che fixo estivo mal."
+        "text": "Podes botar de menos os momentos bos e, á vez, necesitar estar protexida. Non tes que sentir unha soa cousa. O que che fixo estivo mal, aínda que o queiras."
       },
       "c6-school": {
-        "text": "Podemos acordar que precisa saber o profesorado e como coidar a túa intimidade. Coas túas amigas tamén podes poñerlle límites ao que queiras contar."
+        "text": "Podemos decidir xuntas que necesitan saber os profesores e que non. E ás túas amigas contas só o que ti queiras."
+      },
+      "c6-msg": {
+        "chatTitle": "Irene · avogada",
+        "messages": [
+          {
+            "text": "Ola, Sara. Xa saíu a sentenza."
+          },
+          {
+            "text": "Mañá explícoche en persoa, coa túa nai e con Elena."
+          },
+          {
+            "text": "vale. teño un pouco de medo"
+          },
+          {
+            "text": "É normal. Non tes que facer nada. Só vir e preguntar o que queiras."
+          }
+        ]
       },
       "c6-03": {
         "text": "Meses despois remata a investigación. Irene reúnese con Sara antes da seguinte cita."
       },
       "c6-conviction": {
-        "text": "O tribunal condenou a Javier. Explicareiche por que, que pena lle impón e que medidas de protección decidiu. Non tes que entendelo todo hoxe."
+        "text": "O tribunal condenou a Javier. Explicareiche por que, que pena lle impón e que medidas de protección decidiu. Non tes que entendelo todo hoxe.",
+        "speaker": "Irene · avogada"
       },
       "c6-no-conviction": {
-        "text": "O tribunal absolveu a Javier porque non atopou probas suficientes para condenalo. Iso non significa que mentises nin que pedir axuda estivese mal. Imos ler os motivos con calma."
+        "text": "O tribunal absolveu a Javier porque non atopou probas suficientes para condenalo. Iso non significa que mentises nin que pedir axuda estivese mal. Imos ler os motivos con calma.",
+        "speaker": "Irene · avogada"
       },
       "c6-human": {
-        "text": "Non sei moi ben que sinto. Pensaba que ao ler unha resolución todo ía encaixar de súpeto."
+        "text": "Non sei moi ben que sinto. Pensaba que cando mo dixesen todo ía ter sentido de golpe."
       },
       "c6-04": {
-        "text": "Non tes que sentirte dunha maneira concreta. Imos revisar como estás e que apoio precisas. A protección e a convivencia valóranse pola vosa seguridade, non por como recibas a noticia."
+        "text": "Non tes que sentirte de ningunha maneira concreta. Imos ver como estás e que axuda necesitas. A túa seguridade non depende de como te tomes a noticia."
       },
       "c6-dani": {
-        "text": "E retomaremos o que preguntaches por Dani: o equipo segue pendente del. Podes ser a súa irmá sen teres que converterte na persoa adulta que o resolve todo."
+        "text": "E sobre Dani: seguimos coidándoo. Ti podes ser a súa irmá maior sen ter que solucionalo todo."
       },
       "c6-home": {
-        "text": "Ao principio preguntábaste onde ibades vivir. Calquera cambio de convivencia revisarase contigo e co equipo responsable. A sentenza non substitúe esa valoración."
+        "text": "Ao principio preguntabaste onde ibades vivir. Se algo cambia na casa, falarémolo contigo antes. A túa opinión conta."
       },
       "c6-choice2": {
-        "prompt": "Ao saír, Sara quere reservar espazo para algo seu. Que propón?",
+        "prompt": "Ao saír, Sara quere facer algo só para ela. Que propón?",
         "options": [
           {
-            "id": "play",
-            "label": "Quedar con Paula e levar o balón.",
-            "next": "c6-play",
-            "flags": {
-              "nextPlan": "play"
-            }
+            "label": "Quedar con Paula e levar o balón."
           },
           {
-            "id": "quiet",
-            "label": "Ir debuxar con Dani e deixar o móbil un anaco.",
-            "next": "c6-quiet",
-            "flags": {
-              "nextPlan": "quiet"
-            }
+            "label": "Debuxar con Dani e deixar o móbil un anaco."
           }
         ]
       },
       "c6-play": {
-        "text": "Practiquei o saque. Agora xa case nunca sae pola porta. Pero se hoxe prefires só sentar na bancada, tamén me vale."
+        "text": "Estiven practicando o saque. Xogamos? E se hoxe prefires só sentar a mirar, tamén me vale."
       },
       "c6-quiet": {
-        "text": "Dani saca o debuxo do dragón. Sara pídelle un lapis azul. Durante un anaco, o máis urxente é decidir se os dragóns poden levar zapatillas."
+        "text": "Dani saca o debuxo do dragón. Sara pídelle un lapis azul e pinta o ceo arredor. Durante un bo anaco, só existen as cores."
       },
       "epilogue-volley": {
-        "text": "Lémbraste de cando dixen que quería volver adestrar? Hoxe o saque entrou. E se mañá non entra, sigo tendo sitio no equipo."
+        "text": "Lémbraste de que quería volver adestrar? Hoxe o saque entrou. E se mañá non entra, sigo tendo sitio no equipo."
       },
       "epilogue-school": {
-        "text": "Rematei aquela páxina de mates. Parece unha parvada, pero volver entender algo que deixara a medias tamén conta."
+        "text": "Rematei aquela páxina de mates. Parece pouca cousa, pero volver entender algo que deixara a medias fainme sentir ben."
       },
       "epilogue-friends": {
-        "text": "Hoxe estiven con Paula e non falamos todo o tempo do mesmo. Sentoume ben seguir sendo a súa amiga, con todas as cousas que iso significa."
+        "text": "Hoxe estiven con Paula e non falamos todo o rato do mesmo. Gustoume seguir sendo só a súa amiga."
       },
       "epilogue": {
         "kicker": "SARA · A MIÑA HISTORIA SEGUE",
         "title": "Aínda teño plans",
-        "text": "Sara segue sendo irmá, amiga, estudante e xogadora de voleibol. Haberá días distintos e o apoio pode continuar. Non ten que percorrelos soa."
+        "text": "Sara segue sendo irmá, amiga, alumna de terceiro e xogadora de voleibol. Haberá días bos e días difíciles, e non terá que pasalos soa."
       },
       "c3-safety-question": {
         "text": "E se papá vén buscarme ao instituto?"
@@ -673,12 +601,6 @@
       },
       "c5-family-case": {
         "text": "No teu caso, como xa participas como acusación particular, esa dispensa non se aplica e tes que declarar. Non é porque fixeses catorce anos. Acompañareite e explicareiche o que non entendas."
-      },
-      "c5-juez": {
-        "text": "A xuíza dirixe a investigación e decide as medidas que necesitan unha decisión xudicial. Se o caso pasa a xuízo, decidirá outro xuíz ou tribunal. Todos teñen que respectar os teus dereitos e os das demais persoas."
-      },
-      "c5-laj": {
-        "text": "A letrada da Administración de Xustiza ocúpase de que o que pasa quede documentado con garantías. É outra profesional; non é a túa avogada. Non sempre ten que estar na sala."
       },
       "c5-company": {
         "text": "Ademais da túa avogada, pode acompañarte unha persoa que ti elixas, como Elena. Se se decide que non entre para que a declaración se faga ben, teñen que explicar o motivo. Podemos falar de quen che axudaría máis."
@@ -725,18 +647,6 @@
       "c6-protection-after": {
         "text": "Revisaremos que medidas seguen, cales cambian e que protección necesitas agora. A axuda de Elena e do equipo organízase segundo como esteas. Non tes que deixar de pedir axuda porque chegase unha sentenza."
       },
-      "c5-oficina": {
-        "text": "A oficina xudicial do Tribunal de Instancia organiza os papeis e os pasos do caso. Segundo o tipo de asunto, encárgase unha sección ou outra."
-      },
-      "c5-fiscal": {
-        "text": "O fiscal defende a legalidade. Pode acusar a quen fixo dano e tamén vela polos teus dereitos. A túa avogada defende os teus intereses."
-      },
-      "c5-psicosocial": {
-        "text": "Ás veces o xulgado pide axuda ao seu equipo psicosocial: profesionais da psicoloxía e do traballo social. Poden axudar a escoitarte e dar unha opinión como especialistas."
-      },
-      "c5-oavd": {
-        "text": "Na Oficina de Asistencia ás Vítimas explícanche como vai o proceso e axúdanche se estás mal ou tes dúbidas. Non xulgan o caso."
-      },
       "c3-party-warning": {
         "text": "Ao participar así, non podes usar a dispensa: a posibilidade que ás veces permite non declarar contra un familiar. Antes de facelo, imos falalo con calma. Recibir protección non depende de participar desta forma."
       },
@@ -748,27 +658,21 @@
   "guide": {
     "chapters": [
       {
-        "id": 1,
         "title": "Algo non vai ben"
       },
       {
-        "id": 2,
         "title": "Alguén escoita"
       },
       {
-        "id": 3,
         "title": "Que vai pasar comigo?"
       },
       {
-        "id": 4,
         "title": "A miña vida continúa"
       },
       {
-        "id": 5,
         "title": "O xulgado"
       },
       {
-        "id": 6,
         "title": "Despois de todo"
       }
     ],
@@ -913,23 +817,25 @@
     ]
   },
   "legal": {
-    "review": "Fontes primarias contrastadas; pendente de revisión xurídica e pedagóxica profesional antes de sesións con menores reais.",
+    "review": "Fontes primarias contrastadas; pendente revisión xurídica e pedagóxica profesional antes de sesións con menores reais.",
     "sources": {
       "lopivi": {
-        "title": "LO 8/2021 · arts. 15, 16, 34 e 35",
-        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-9347"
+        "title": "LO 8/2021 · arts. 15, 16, 34 e 35"
       },
       "proteccion": {
-        "title": "LO 1/1996 · arts. 2, 9, 12, 16–18",
-        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1996-1069"
+        "title": "LO 1/1996 · arts. 2, 9, 12, 16–18"
       },
       "victima": {
-        "title": "Estatuto da vítima · arts. 4, 5, 19–26 e 28",
-        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-4606"
+        "title": "Estatuto da vítima · arts. 4, 5, 19–26 e 28"
       },
       "lecrim": {
-        "title": "LECrim · arts. 109 bis, 416, 449 bis, 449 ter, 544 ter, 544 quinquies, 637, 641, 703 bis, 707, 730.2, 780–785 y 790",
-        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1882-6036"
+        "title": "LECrim · arts. 109 bis, 416, 449 bis, 449 ter, 544 ter, 544 quinquies, 637, 641, 703 bis, 707, 730.2, 780–785 y 790"
+      },
+      "lopj": {
+        "title": "LOPJ · arts. 440 e ss. (oficina xudicial e LAX)"
+      },
+      "eficiencia": {
+        "title": "LO 1/2025 · Tribunais de Instancia"
       },
       "civil": {
         "title": "Código Civil · arts. 158, 162 y 163",
@@ -940,137 +846,109 @@
       "protection": {
         "title": "A protección pode empezar aquí",
         "text": "Non imos esperar a que denuncies ti. Co que me contaches xa teño que pedir axuda e comunicar o ocorrido. Explicareiche que facemos para protexerte.",
-        "dialogue": "Non imos esperar a que denuncies ti. Co que me contaches xa teño que pedir axuda e comunicar o ocorrido. Explicareiche que facemos para protexerte.",
-        "sources": [
-          "lopivi"
-        ]
+        "dialogue": "Non imos esperar a que denuncies ti. Co que me contaches xa teño que pedir axuda e comunicar o ocorrido. Explicareiche que facemos para protexerte."
       },
       "privacy": {
         "title": "Quen precisa sabelo",
         "text": "Non podo prometer que quede só entre nós. Direiche a que profesionais llo conto e para que. Se hai un proceso xudicial, tamén terán que sabelo as persoas que interveñan nel. A túa clase non necesita sabelo.",
-        "dialogue": "Non podo prometer que quede só entre nós. Direiche a que profesionais llo conto e para que. Se hai un proceso xudicial, tamén terán que sabelo as persoas que interveñan nel. A túa clase non necesita sabelo.",
-        "sources": [
-          "lopivi",
-          "proteccion"
-        ]
+        "dialogue": "Non podo prometer que quede só entre nós. Direiche a que profesionais llo conto e para que. Se hai un proceso xudicial, tamén terán que sabelo as persoas que interveñan nel. A túa clase non necesita sabelo."
       },
       "social": {
         "title": "Valorar é coñecer para axudar",
-        "text": "Os Servizos Sociais e a protección de menores valoran a seguridade e as necesidades familiares. A intervención social e a investigación penal teñen funcións distintas.",
-        "dialogue": "Valorar significa coñecer que precisades e se estades seguros. Ese é o traballo dos servizos de protección. Se se investiga un posible delito, é outro proceso, con outros profesionais.",
-        "sources": [
-          "proteccion",
-          "lopivi"
-        ]
+        "text": "Servizos Sociais e protección de menores valoran a seguridade e as necesidades familiares. A intervención social e a investigación penal teñen funcións distintas.",
+        "dialogue": "Valorar quere dicir coñecer que necesitades e se estades seguros. Disto ocupámonos en Servizos Sociais. Se un xulgado investiga o que pasou, iso fano outras persoas."
       },
       "brother": {
         "title": "Dani tamén conta",
         "text": "Os profesionais deben coñecer as necesidades de Dani e valorar a súa protección. Esa responsabilidade correspóndelles ás persoas adultas, non a Sara.",
-        "dialogue": "Dani tamén será escoitado e o equipo valorará que precisa. Non che corresponde vixiar que todo saia ben. Iso tócanos ás persoas adultas.",
-        "sources": [
-          "proteccion"
-        ]
+        "dialogue": "A Dani tamén o van escoitar e imos ver que necesita. Ti non tes que vixiar que todo saia ben. Iso toca ás persoas adultas."
       },
       "housing": {
         "title": "A convivencia valórase en cada caso",
         "text": "Pedir axuda non implica automaticamente saír da casa. As autoridades competentes valoran medidas segundo a seguridade de cada menor. Sara ten dereito a ser escoitada.",
-        "dialogue": "Pedir axuda non significa que teñas que marchar da casa automaticamente. Hai que valorar a vosa seguridade e as medidas posibles. A túa opinión importa e teñen que escoitarte.",
-        "sources": [
-          "proteccion"
-        ]
+        "dialogue": "Pedir axuda non quere dicir que teñas que marchar da casa sen máis. Primeiro mírase se estades seguros. E a túa opinión conta: teñen que escoitarte."
       },
       "everyday": {
         "title": "Tamén importa a vida cotiá",
-        "text": "O acompañamento pode axudar cos estudos, as amizades e as actividades. A protección ten en conta o benestar e as necesidades de Sara, ademais das actuacións xudiciais.",
-        "dialogue": "Podemos ocuparnos das citas e tamén dos teus adestramentos, dos teus estudos e das túas amigas. Non fai falta aparcar todo o que che importa para recibir apoio.",
-        "sources": [
-          "proteccion"
-        ]
+        "text": "O acompañamento pode axudar cos estudos, as amizades e as actividades. A protección considera o benestar e as necesidades de Sara, ademais das actuacións xudiciais.",
+        "dialogue": "Ademais das citas, podemos axudarte co instituto, coas túas amigas e co voleibol. Non tes que deixar de lado o que che gusta."
       },
       "justice": {
         "title": "Dous traballos que poden avanzar á vez",
         "text": "O xulgado investiga o ocorrido e se o teu pai é responsable dun delito. Mentres, seguimos coidando da túa seguridade. Non hai que esperar unha sentenza para protexerte.",
-        "dialogue": "O xulgado investiga o ocorrido e se o teu pai é responsable dun delito. Mentres, seguimos coidando da túa seguridade. Non hai que esperar unha sentenza para protexerte.",
-        "sources": [
-          "lecrim",
-          "proteccion"
-        ]
+        "dialogue": "O xulgado investiga o ocorrido e se o teu pai é responsable dun delito. Mentres, seguimos coidando da túa seguridade. Non hai que esperar unha sentenza para protexerte."
       },
       "supports": {
         "title": "Unha declaración con apoios",
         "text": "Teñen que organizar as cousas para que non te atopes co teu pai. Ademais, pediremos outra sala, videoconferencia e apoio dunha psicóloga. A xuíza decidirá como organizar eses apoios segundo o que necesites.",
-        "dialogue": "Teñen que organizar as cousas para que non te atopes co teu pai. Ademais, pediremos outra sala, videoconferencia e apoio dunha psicóloga. A xuíza decidirá como organizar eses apoios segundo o que necesites.",
-        "sources": [
-          "victima",
-          "lecrim"
-        ]
+        "dialogue": "Teñen que organizar as cousas para que non te atopes co teu pai. Ademais, pediremos outra sala, videoconferencia e apoio dunha psicóloga. A xuíza decidirá como organizar eses apoios segundo o que necesites."
       },
       "repeat": {
         "title": "Pedir outra explicación",
         "text": "Sara pode dicir que non entende e pedir palabras máis sinxelas. Prepararse serve para comprender a actuación, sen ensaiar unha versión dos feitos.",
-        "dialogue": "Podes dicir que non entendes e pedir outra explicación. Imos prepararte para comprender a actuación. O que contes sobre os feitos terá que saír do que ti lembres.",
-        "sources": [
-          "victima"
-        ]
+        "dialogue": "Se non entendes algo, podes dicilo e pedir que cho expliquen con outras palabras. Prepararte serve para entender o que pasa, non para aprender o que tes que dicir."
       },
       "memory": {
         "title": "Non hai que encher os ocos",
-        "text": "Pode expresar o que lembra e o que non sabe con exactitude. Non precisa inventar ningún dato. A simulación non reproduce preguntas sobre feitos violentos.",
-        "dialogue": "Se algo non o lembras con exactitude, podes dicilo así. Non fai falta inventar unha hora ou un detalle para completar unha resposta.",
-        "sources": [
-          "victima",
-          "lecrim"
-        ]
+        "text": "Pode expresar o que lembra e o que non sabe con exactitude. Non necesita inventar un dato. A simulación non reproduce preguntas sobre feitos violentos.",
+        "dialogue": "Se algo non o lembras ben, podes dicilo así. Non fai falta que te inventes unha hora ou un detalle."
       },
       "pause": {
         "title": "Podo pedir unha pausa",
         "text": "Sara pode comunicar que necesita parar. O equipo e a autoridade que dirixe a actuación valoran como atender esa necesidade.",
-        "dialogue": "Podes dicir que necesitas parar. Comunicarémosllo a quen dirixa a actuación para que valore como atendelo. Pedilo permite que saiban o que precisas.",
-        "sources": [
-          "victima"
-        ]
+        "dialogue": "Podes dicir que necesitas parar. A xuíza decidirá como facelo. Pedilo está ben: así saben o que necesitas."
       },
       "waiting": {
         "title": "Saber que vén despois",
         "text": "Podemos consultar con Irene que información che corresponde recibir e como pedila. Non che sei dar unha data exacta; si que podemos aclarar con quen falar cando teñas dúbidas.",
-        "dialogue": "Podemos consultar con Irene que información che corresponde recibir e como pedila. Non che sei dar unha data exacta; si que podemos aclarar con quen falar cando teñas dúbidas.",
-        "sources": [
-          "victima"
-        ]
+        "dialogue": "Podemos consultar con Irene que información che corresponde recibir e como pedila. Non che sei dar unha data exacta; si que podemos aclarar con quen falar cando teñas dúbidas."
       },
       "school": {
-        "title": "Decidir que lles conto aos meus compañeiros",
-        "text": "O centro debe coidar a intimidade. Sara pode acordar con Laura que información práctica precisa o profesorado e expresar que prefire compartir coas súas amizades.",
-        "dialogue": "Podemos acordar que precisa saber o profesorado e como coidar a túa intimidade. Coas túas amigas tamén podes poñerlle límites ao que queiras contar.",
-        "sources": [
-          "lopivi",
-          "proteccion"
-        ]
+        "title": "Decidir que contar aos meus compañeiros",
+        "text": "O centro debe coidar a intimidade. Sara pode acordar con Laura que información práctica necesita o profesorado e expresar que prefire compartir coas súas amizades.",
+        "dialogue": "Podemos decidir xuntas que necesitan saber os profesores e que non. E ás túas amigas contas só o que ti queiras."
       },
       "resolution": {
         "title": "Unha sentenza non conta toda a miña vida",
-        "text": "Agora o tribunal decidirá e explicarao por escrito. Ese documento é a sentenza. Pode condenar ou absolver. Absolver quere dicir que non impón unha condena. Cando chegue, lerémola xuntas. Revisaremos que medidas seguen, cales cambian e que protección necesitas agora. A axuda de Elena e do equipo organízase segundo como esteas. Non tes que deixar de pedir axuda porque chegase unha sentenza.",
-        "sources": [
-          "lecrim",
-          "victima",
-          "proteccion"
-        ]
+        "text": "Agora o tribunal decidirá e explicarao por escrito. Ese documento é a sentenza. Pode condenar ou absolver. Absolver quere dicir que non impón unha condena. Cando chegue, lerémola xuntas. Revisaremos que medidas seguen, cales cambian e que protección necesitas agora. A axuda de Elena e do equipo organízase segundo como esteas. Non tes que deixar de pedir axuda porque chegase unha sentenza."
+      },
+      "oficina": {
+        "title": "A oficina xudicial",
+        "text": "A oficina xudicial do Tribunal de Instancia organiza os papeis e os pasos do caso. Segundo o tipo de asunto, encárgase unha sección ou outra.",
+        "dialogue": "A oficina xudicial do Tribunal de Instancia organiza os papeis e os pasos do caso. Segundo o tipo de asunto, encárgase unha sección ou outra."
       },
       "juez": {
-        "dialogue": "A xuíza dirixe a investigación e decide as medidas que necesitan unha decisión xudicial. Se o caso pasa a xuízo, decidirá outro xuíz ou tribunal. Todos teñen que respectar os teus dereitos e os das demais persoas.",
+        "title": "O xuíz ou a xuíza",
         "text": "A xuíza dirixe a investigación e decide as medidas que necesitan unha decisión xudicial. Se o caso pasa a xuízo, decidirá outro xuíz ou tribunal. Todos teñen que respectar os teus dereitos e os das demais persoas.",
+        "dialogue": "A xuíza dirixe a investigación e decide as medidas que necesitan unha decisión xudicial. Se o caso pasa a xuízo, decidirá outro xuíz ou tribunal. Todos teñen que respectar os teus dereitos e os das demais persoas.",
         "sources": [
           "lopj",
           "lecrim"
         ]
       },
       "laj": {
-        "dialogue": "A letrada da Administración de Xustiza ocúpase de que o que pasa quede documentado con garantías. É outra profesional; non é a túa avogada. Non sempre ten que estar na sala.",
+        "title": "O letrado ou a letrada (LAX)",
         "text": "A letrada da Administración de Xustiza ocúpase de que o que pasa quede documentado con garantías. É outra profesional; non é a túa avogada. Non sempre ten que estar na sala.",
+        "dialogue": "A letrada da Administración de Xustiza ocúpase de que o que pasa quede documentado con garantías. É outra profesional; non é a túa avogada. Non sempre ten que estar na sala.",
         "sources": [
           "lopj",
           "lecrim"
         ]
+      },
+      "fiscal": {
+        "title": "O Ministerio Fiscal",
+        "text": "O fiscal defende a legalidade. Pode acusar a quen fixo dano e tamén vela polos teus dereitos. A túa avogada defende os teus intereses.",
+        "dialogue": "O fiscal defende a legalidade. Pode acusar a quen fixo dano e tamén vela polos teus dereitos. A túa avogada defende os teus intereses."
+      },
+      "psicosocial": {
+        "title": "O equipo psicosocial",
+        "text": "Ás veces o xulgado pide axuda ao seu equipo psicosocial: profesionais da psicoloxía e do traballo social. Poden axudar a escoitarte e dar unha opinión como especialistas.",
+        "dialogue": "Ás veces o xulgado pide axuda ao seu equipo psicosocial: profesionais da psicoloxía e do traballo social. Poden axudar a escoitarte e dar unha opinión como especialistas."
+      },
+      "oavd": {
+        "title": "A Oficina de Asistencia ás Vítimas",
+        "text": "Na Oficina de Asistencia ás Vítimas explícanche como vai o proceso e axúdanche se estás mal ou tes dúbidas. Non xulgan o caso.",
+        "dialogue": "Na Oficina de Asistencia ás Vítimas explícanche como vai o proceso e axúdanche se estás mal ou tes dúbidas. Non xulgan o caso."
       },
       "safety": {
         "dialogue": "No voso caso, a xuíza xa prohibiu que Javier se achegue a ti e a Dani ou se comunique convosco. Tamén suspendeu as súas visitas polo de agora. Son medidas para protexervos mentres se investiga.",
@@ -1200,22 +1078,6 @@
         ],
         "title": "Que axudas e medidas seguen despois"
       },
-      "oficina": {
-        "text": "A oficina xudicial do Tribunal de Instancia organiza os papeis e os pasos do caso. Segundo o tipo de asunto, encárgase unha sección ou outra.",
-        "dialogue": "A oficina xudicial do Tribunal de Instancia organiza os papeis e os pasos do caso. Segundo o tipo de asunto, encárgase unha sección ou outra."
-      },
-      "fiscal": {
-        "text": "O fiscal defende a legalidade. Pode acusar a quen fixo dano e tamén vela polos teus dereitos. A túa avogada defende os teus intereses.",
-        "dialogue": "O fiscal defende a legalidade. Pode acusar a quen fixo dano e tamén vela polos teus dereitos. A túa avogada defende os teus intereses."
-      },
-      "psicosocial": {
-        "text": "Ás veces o xulgado pide axuda ao seu equipo psicosocial: profesionais da psicoloxía e do traballo social. Poden axudar a escoitarte e dar unha opinión como especialistas.",
-        "dialogue": "Ás veces o xulgado pide axuda ao seu equipo psicosocial: profesionais da psicoloxía e do traballo social. Poden axudar a escoitarte e dar unha opinión como especialistas."
-      },
-      "oavd": {
-        "text": "Na Oficina de Asistencia ás Vítimas explícanche como vai o proceso e axúdanche se estás mal ou tes dúbidas. Non xulgan o caso.",
-        "dialogue": "Na Oficina de Asistencia ás Vítimas explícanche como vai o proceso e axúdanche se estás mal ou tes dúbidas. Non xulgan o caso."
-      },
       "partyChoice": {
         "title": "Entender antes de participar",
         "text": "Ao participar así, non podes usar a dispensa: a posibilidade que ás veces permite non declarar contra un familiar. Antes de facelo, imos falalo con calma. Recibir protección non depende de participar desta forma.",
@@ -1231,15 +1093,11 @@
     "help": [
       {
         "title": "Perigo inmediato · 112",
-        "text": "En España podes chamar ao 112 se hai perigo inmediato. É o número de emerxencias.",
-        "phone": "112",
-        "url": "https://administracion.gob.es/tu-espacio-europeo/derechos-obligaciones/ciudadanos/asistencia-sanitaria/numeros-urgencia"
+        "text": "En España podes chamar ao 112 se hai perigo inmediato. É o número de emerxencias."
       },
       {
         "title": "ANAR · 900 20 20 10",
-        "text": "Axuda gratuíta para nenos, nenas e adolescentes en toda España. Tamén podes consultar o chat de ANAR.",
-        "phone": "900202010",
-        "url": "https://www.anar.org/que-hacemos/telefono-chat-anar/"
+        "text": "Axuda gratuíta para nenos, nenas e adolescentes en toda España. Tamén podes consultar o chat de ANAR."
       },
       {
         "title": "Unha persoa adulta de confianza",

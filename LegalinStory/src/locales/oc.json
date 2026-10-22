@@ -44,6 +44,8 @@
     "knowRights": "Coneish es tòns drets",
     "backToPlatform": "Tornar a Chavales Legales",
     "back": "Tornar",
+    "chapterSelect": "Capítols (Debug)",
+    "chapterSelectTitle": "Sautar a capítol",
     "thoughtOf": "Pensament de {speaker}",
     "thought": "Pensament",
     "narration": "Narracion",
@@ -131,11 +133,11 @@
     "defaultChapter": "Era istòria de Sara"
   },
   "drawing": {
-    "phase1Title": "Era tua istòria comence damb un dessenh",
+    "phase1Title": "Ua pausa entà dessenhar",
     "phase2Title": "Ua pausa entà dessenhar",
     "phase1Intro": "Com t'imagines a Sara? Dessenha-la ara tua manèra. Pòts emplegar eth dit, era murga o un lapis digitau.",
-    "phase2Intro": "Sara a hèt un pas important. Se n'as ganes, dessenha-la un aute còp com te l'imagines ara. Pren-te eth temps que te calgue.",
-    "phase1Confirm": "Sauvar e començar →",
+    "phase2Intro": "Sara ja a demanat ajuda. Se n'as ganes, dessenha-la un aute còp com te l'imagines ara. Pren-te eth temps que te calgue.",
+    "phase1Confirm": "Sauvar e contunhar →",
     "phase2Confirm": "Sauvar e contunhar →",
     "eyebrow": "UN MOMENT ENTÀ CREAR",
     "hint": "Eth tèn dessenh comence aciu",

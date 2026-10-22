@@ -583,6 +583,37 @@ a { color: inherit; }
     background 180ms ease;
 }
 
+.chapter-debug-select {
+  cursor: pointer;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid rgb(255 222 231 / 22%);
+  border-radius: 4px;
+  background: rgb(10 8 16 / 75%);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  pointer-events: auto;
+  backdrop-filter: blur(8px);
+  outline: none;
+  max-width: min(220px, 40vw);
+  text-overflow: ellipsis;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.chapter-debug-select:hover,
+.chapter-debug-select:focus-visible {
+  border-color: var(--marca-ambar, #fbbf24);
+  background: rgb(10 8 16 / 90%);
+}
+
+.chapter-debug-select option {
+  background: #18181b;
+  color: #fafafa;
+  font-size: 0.85rem;
+}
+
 .library {
   border-color: rgb(255 222 231 / 28%);
 }
@@ -3452,3 +3483,31 @@ body { background: var(--verde-950); }
 @keyframes chat-dots { 0%, 60%, 100% { opacity: .35; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
 @media (prefers-reduced-motion: reduce) { .chat-bubble, .chat-typing i { animation: none; } }
 .chat-row.is-out .chat-author { display: none; }
+
+/* El móvil empieza por debajo de la barra superior (botones de 44px + márgenes) */
+.chat { top: calc(env(safe-area-inset-top, 0px) + 116px); bottom: 3vh; }
+
+/* Barra de estado de verdad (hora, cobertura, wifi y batería) y botón de enviar */
+.chat { padding-top: 0; }
+.chat::after { content: none; }
+.chat-status {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  height: 30px;
+  padding: 0 22px 0 28px;
+  color: #e9edef;
+  font: 600 .8rem/1 system-ui, sans-serif;
+}
+.chat-compose i {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #00a884;
+  color: #fff;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 35%);
+}
+.chat-compose i svg { margin-left: 2px; }

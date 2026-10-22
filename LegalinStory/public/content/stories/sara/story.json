@@ -804,20 +804,10 @@
       "kicker": "SARA · CAPÍTULO 4 DE 6",
       "title": "Mi vida continúa",
       "text": "Unos días después.",
-      "next": "c4-perros",
+      "next": "c4-chat",
       "scene": "patio-day",
       "cast": {
         "sara": "neutral"
-      }
-    },
-    "c4-perros": {
-      "chapter": 4,
-      "type": "external",
-      "game": "caja-arena",
-      "text": "Empezó a ver los diferentes perros, y las aventuras que podría vivir con ellos.",
-      "next": "c4-chat",
-      "cast": {
-        "sara": "smile"
       }
     },
     "c4-chat": {
@@ -1079,9 +1069,19 @@
       "type": "dialogue",
       "speaker": null,
       "text": "Hay días tranquilos y días más difíciles. Sigue habiendo citas, pero en la agenda de Sara ya hay algo que ha elegido ella.",
-      "next": "c5-card",
+      "next": "c4-perros",
       "cast": {
         "sara": "neutral"
+      }
+    },
+    "c4-perros": {
+      "chapter": 4,
+      "type": "external",
+      "game": "caja-arena",
+      "text": "Empezó a ver los diferentes perros, y las aventuras que podría vivir con ellos.",
+      "next": "c5-card",
+      "cast": {
+        "sara": "smile"
       }
     },
     "c5-card": {

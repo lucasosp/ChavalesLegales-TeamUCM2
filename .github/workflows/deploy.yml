@@ -1,9 +1,8 @@
 name: Despliegue Automático en Servidor FDI UCM
 
 on:
-  # El despliegue automático por SSH desde GitHub Actions no funciona
-  # porque el firewall de la UCM bloquea el puerto 22 desde IPs externas.
-  # Usar deploy-server.bat desde la red de la facultad (eduroam/cable/VPN).
+  push:
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -12,52 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Comprobar configuración de credenciales
+      - name: Disparar despliegue vía Webhook HTTPS
         run: |
-          echo "=== Verificación de credenciales SSH ==="
-          if [ -n "${{ secrets.SERVER_PASSWORD || secrets.PASSWORD || secrets.SSH_PASSWORD || secrets.DATATHON_PASSWORD || vars.SERVER_PASSWORD || vars.PASSWORD }}" ] || [ -n "${{ secrets.SERVER_KEY || secrets.SSH_KEY || secrets.KEY || vars.SERVER_KEY || vars.SSH_KEY }}" ]; then
-            echo " Credencial SSH detectada correctamente."
+          echo "Disparando despliegue en https://chavaleslegales.fdi.ucm.es/api/deploy..."
+          STATUS=$(curl -k -s -o response.txt -w "%{http_code}" -X POST https://chavaleslegales.fdi.ucm.es/api/deploy \
+            -H "X-Deploy-Token: chavales-secret-deploy-token-2026")
+          
+          echo "Código HTTP de respuesta: $STATUS"
+          cat response.txt || true
+          echo ""
+
+          if [ "$STATUS" -eq 200 ] || [ "$STATUS" -eq 202 ]; then
+            echo "Despliegue disparado con éxito en el servidor."
           else
-            echo " ERROR: No se ha detectado ninguna contrasena o clave SSH en los secretos del repositorio."
-            echo "Por favor, crea el secreto 'SERVER_PASSWORD' en GitHub: Settings > Secrets and variables > Actions > Repository secrets."
+            echo "Aviso/Error: El servidor respondió con código $STATUS"
+            exit 1
           fi
-
-      - name: Ejecutar despliegue vía SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SERVER_HOST || secrets.HOST || vars.SERVER_HOST || 'chavaleslegales.fdi.ucm.es' }}
-          username: ${{ secrets.SERVER_USER || secrets.USERNAME || vars.SERVER_USER || 'datathon' }}
-          password: ${{ secrets.SERVER_PASSWORD || secrets.PASSWORD || secrets.SSH_PASSWORD || secrets.DATATHON_PASSWORD || vars.SERVER_PASSWORD || vars.PASSWORD }}
-          key: ${{ secrets.SERVER_KEY || secrets.SSH_KEY || secrets.KEY || vars.SERVER_KEY || vars.SSH_KEY }}
-          passphrase: ${{ secrets.PASSPHRASE || vars.PASSPHRASE }}
-          port: ${{ secrets.SERVER_PORT || secrets.PORT || vars.SERVER_PORT || 22 }}
-          script: |
-            echo "Iniciando despliegue en /var/www/chavaleslegales..."
-            cd /var/www/chavaleslegales
-            
-            # Conectar al nuevo repositorio TeamUCM2
-            git remote set-url origin https://github.com/lucasosp/ChavalesLegales-TeamUCM2.git || true
-            
-            # Actualizar código limpio desde el nuevo repositorio
-            git fetch origin main
-            git reset --hard origin/main
-            
-            # Actualizar dependencias y compilar frontend
-            cd /var/www/chavaleslegales/frontend
-            npm install
-            npm run build
-            
-            # Actualizar dependencias de backend
-            cd /var/www/chavaleslegales/backend
-            if [ ! -d "venv" ]; then python3 -m venv venv; fi
-            source venv/bin/activate
-            pip install -r requirements.txt
-            deactivate
-            
-            # Reiniciar servicios con PM2
-            cd /var/www/chavaleslegales
-            pm2 restart ecosystem.config.js || pm2 start ecosystem.config.js
-            pm2 save
-            
-            echo "Despliegue completado con éxito."
-

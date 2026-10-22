@@ -27,11 +27,21 @@ export class SaraExperience {
     this.novelTitle = t("storyTitles.sara");
     root.querySelector(".novel").setAttribute("aria-label", this.novelTitle);
     this.drawingModal = new DrawingCanvasModal({ container: root });
+    this.phase1Triggered = false;
     this.phase2Triggered = false;
     this.phase3Triggered = false;
     root.classList.add("sara-mode");
     this.novel = root.querySelector(".novel");
     this.cast = element("div", "sara-cast");
+    // En los chats se ilumina quien acaba de escribir; al terminar, todos en color.
+    root.addEventListener("chat-message", ({ detail }) => {
+      const name = detail.from?.split(" · ")[0];
+      for (const frame of this.cast.children) frame.classList.toggle("is-speaking", frame.dataset.person === name);
+    });
+    root.addEventListener("chat-finished", () => {
+      for (const frame of this.cast.children) frame.classList.remove("is-speaking");
+      this.cast.classList.add("is-chat-done");
+    });
     this.cast.setAttribute("aria-hidden", "true");
     this.cast.hidden = true;
     root.querySelector("[data-scene]").append(this.cast);
@@ -43,6 +53,9 @@ export class SaraExperience {
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11"/></svg>
           </button>
           <div class="sara-chapter"><span class="sara-eyebrow" data-sara-chapter-number></span><span data-sara-chapter></span></div>
+          <select class="sara-chapter-select" data-sara-chapter-select aria-label="${t("novel.chapterSelectTitle")}">
+            <option value="" disabled selected>${t("novel.chapterSelect")}</option>
+          </select>
         </div>
         <button type="button" class="sara-menu-button" data-sara-action="pause" aria-label="${t("sara.menuAria")}">${t("sara.menu")}</button>
       </header>
@@ -59,6 +72,24 @@ export class SaraExperience {
     this.title = root.querySelector("#sara-dialog-title");
     this.close = root.querySelector("[data-sara-close]");
     this.close.addEventListener("click", () => this.closePanel());
+
+    this.chapterSelect = root.querySelector("[data-sara-chapter-select]");
+    if (this.chapterSelect && this.guide?.chapters) {
+      for (const ch of this.guide.chapters) {
+        const option = document.createElement("option");
+        option.value = ch.id;
+        option.textContent = t("sara.chapterOf", { n: ch.id, total: this.guide.chapters.length }) + (ch.title ? `: ${ch.title}` : "");
+        this.chapterSelect.append(option);
+      }
+      this.chapterSelect.addEventListener("change", (e) => {
+        const chId = Number(e.target.value);
+        if (chId) {
+          this.jumpToChapter(chId);
+          this.chapterSelect.blur();
+        }
+      });
+    }
+
     this.onRootClick = (event) => {
       const button = event.target.closest("[data-sara-action]");
       if (!button) return;
@@ -83,7 +114,8 @@ export class SaraExperience {
     if (params.get("avatar") === "1" || params.get("mode") === "avatar") {
       this.engine.saveStore = this.localStore;
       this.engine.initialFlags = { resolution: "conviction" };
-      this.phase2Triggered = false;
+      this.phase1Triggered = false;
+    this.phase2Triggered = false;
       this.phase3Triggered = false;
       this.closePanel(true);
       this.drawingModal.open({
@@ -137,21 +169,9 @@ export class SaraExperience {
     if (!resume) {
       this.localStore.clear();
       avatarStore.clear();
-      this.phase2Triggered = false;
+      this.phase1Triggered = false;
+    this.phase2Triggered = false;
       this.phase3Triggered = false;
-    }
-
-    if (!resume && !avatarStore.isPhase1Completed()) {
-      this.closePanel(true);
-      this.drawingModal.open({
-        phase: "phase1",
-        onConfirm: () => {
-          this.engine.history = [];
-          this.updateAvatarUI();
-          this.engine.start({ resume: false });
-        },
-      });
-      return;
     }
 
     this.closePanel(true);
@@ -185,6 +205,30 @@ export class SaraExperience {
         <span>${label}</span>
       </div>
     `;
+  }
+
+  jumpToChapter(chapterId) {
+    // Find the starting node for the given chapter id
+    let targetNodeId = null;
+    for (const [id, node] of Object.entries(this.engine.story)) {
+      if (node.chapter === chapterId) {
+        targetNodeId = id;
+        break;
+      }
+    }
+    if (!targetNodeId) return;
+
+    // Adjust drawing phases flags based on chapter target so debug jumps won't block
+    if (chapterId >= 3) {
+      this.phase2Triggered = true;
+    } else {
+      this.phase2Triggered = false;
+    }
+
+    this.app.paused = false;
+    this.app.view.resetTransientOverlays();
+    this.closePanel(true);
+    this.engine.jumpTo(targetNodeId);
   }
 
   openShell(mode, title) {
@@ -305,8 +349,25 @@ export class SaraExperience {
     const node = this.engine.currentNode;
     this.root.dataset.saraNode = this.engine.nodeId;
 
-    // Check for Phase 2 trigger (Post-Trauma: node c2-04, domestic crisis disclosure)
-    if (this.engine.nodeId === "c2-04" && !avatarStore.isPhase2Completed() && !this.phase2Triggered) {
+    // Los dibujos cierran capítulo: el primero al acabar el 1 (antes de la
+    // tarjeta del 2) y el segundo al acabar el 2 (antes de la del 3).
+    if (this.engine.nodeId === "c2-card" && !avatarStore.isPhase1Completed() && !this.phase1Triggered) {
+      this.phase1Triggered = true;
+      this.engine.history = [];
+      this.app.paused = true;
+      this.drawingModal.open({
+        phase: "phase1",
+        onConfirm: () => {
+          this.engine.history = [];
+          this.updateAvatarUI();
+          this.app.paused = false;
+          this.sync();
+        },
+      });
+      return;
+    }
+
+    if (this.engine.nodeId === "c3-card" && !avatarStore.isPhase2Completed() && !this.phase2Triggered) {
       this.phase2Triggered = true;
       this.engine.history = []; // Crucial: barrier to prevent rewinding before the trauma drawing
       this.app.paused = true;
@@ -347,14 +408,20 @@ export class SaraExperience {
     const chapter = this.guide.chapters.find((c) => c.id === node.chapter);
     this.root.querySelector("[data-sara-chapter-number]").textContent = t("sara.chapterOf", { n: node.chapter, total: this.guide.chapters.length });
     this.root.querySelector("[data-sara-chapter]").textContent = chapter?.title ?? t("sara.defaultChapter");
+    if (this.chapterSelect && node.chapter) {
+      this.chapterSelect.value = String(node.chapter);
+    }
     this.renderCast(node);
     const backBtn = this.root.querySelector("[data-sara-action='back']");
     if (backBtn) backBtn.disabled = this.engine.history.length === 0 || this.engine.isFinished;
   }
 
   renderCast(node) {
-    this.cast.hidden = !["dialogue", "choice"].includes(node.type);
+    this.cast.hidden = !["dialogue", "choice", "chat"].includes(node.type);
+    this.cast.classList.toggle("is-chat", node.type === "chat");
+    this.cast.classList.remove("is-chat-done");
     if (this.cast.hidden) return;
+    if (node.type === "chat") return this.renderChatCast(node);
     // Portraits are keyed by the untranslated speaker name.
     const speaker = (node.speakerKey ?? node.speaker)?.split(" · ")[0];
     let partner = speaker && speaker !== "Sara" ? speaker : null;
@@ -409,6 +476,29 @@ export class SaraExperience {
       if (typeof image.decode === "function") image.decode().then(ready, failed);
       else { image.onload = ready; image.onerror = failed; }
     }
+  }
+
+  // En un chat, quien escribe va a la izquierda del móvil y Sara a la derecha,
+  // igual que sus burbujas. Se pintan en gris para no competir con la pantalla.
+  renderChatCast(node) {
+    const contact = (node.messages ?? []).map(m => (m.fromKey ?? m.from)?.split(" · ")[0]).find(name => name && name !== "Sara")
+      ?? (node.chatTitle ?? "").split(" · ")[0];
+    const names = [contact, "Sara"].filter(name => name && personPortrait(name));
+    this.cast.dataset.count = String(names.length);
+    this.cast.replaceChildren(...names.map(name => {
+      const art = personPortrait(name);
+      const frame = element("div", "sara-cast-person");
+      frame.dataset.person = name;
+      const windowEl = element("div", "sara-portrait-window");
+      const image = element("img");
+      image.alt = "";
+      image.draggable = false;
+      image.onload = () => framePortrait(image, art);
+      image.src = art.src;
+      windowEl.append(image);
+      frame.append(windowEl);
+      return frame;
+    }));
   }
 
   handleOverlayKey(event) {

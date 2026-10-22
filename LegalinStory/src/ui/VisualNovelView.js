@@ -57,6 +57,8 @@ export class VisualNovelView {
    *   resolveBackground?: (sceneId: string) => string | null,
    *   resolveSceneLabel?: (sceneId: string) => string,
    *   rights?: Record<string, any> | null,
+   *   chapters?: Array<{ id: string, label: string }>,
+   *   onJumpToChapter?: (nodeId: string) => void,
    * }} callbacks
    */
   constructor(
@@ -71,6 +73,8 @@ export class VisualNovelView {
       resolveBackground = null,
       resolveSceneLabel = defaultSceneLabel,
       rights = null,
+      chapters = [],
+      onJumpToChapter = null,
     },
   ) {
     if (!(root instanceof HTMLElement)) {
@@ -85,6 +89,8 @@ export class VisualNovelView {
     this.resolveBackground = resolveBackground;
     this.resolveSceneLabel = resolveSceneLabel;
     this.rights = rights;
+    this.chapters = chapters;
+    this.onJumpToChapter = onJumpToChapter;
     this.root = root;
     this.#onKeyDown = (event) => this.#handleKeyDown(event);
 
@@ -155,6 +161,7 @@ export class VisualNovelView {
       rightsTitle: root.querySelector("[data-rights-title]"),
       rightsBody: root.querySelector("[data-rights-body]"),
       rightsClose: root.querySelector("[data-rights-close]"),
+      chapterSelect: root.querySelector("[data-chapter-select]"),
     };
 
     this.refs.brand.textContent = title;
@@ -323,6 +330,7 @@ export class VisualNovelView {
     this.#chatIndex += 1;
     this.refs.chatLog.querySelector(".chat-typing")?.remove();
     this.refs.chatLog.append(this.#createChatBubble(message, this.#chatSelf));
+    this.refs.chat.dispatchEvent(new this.refs.chat.ownerDocument.defaultView.CustomEvent("chat-message", { bubbles: true, detail: { from: message.fromKey ?? message.from } }));
 
     if (this.#chatIndex >= this.#chatMessages.length) this.#finishChat({ natural: true });
     else {
@@ -360,6 +368,7 @@ export class VisualNovelView {
     clearInterval(this.#chatTimer);
     this.#chatTimer = null;
     this.#chatRevealing = false;
+    this.refs.chat.dispatchEvent(new this.refs.chat.ownerDocument.defaultView.CustomEvent("chat-finished", { bubbles: true }));
     this.refs.chatHint.hidden = false;
     this.refs.chatSkip.hidden = true;
 
@@ -893,6 +902,10 @@ export class VisualNovelView {
     if (this.#endingVisible) this.refs.endingRights.focus({ preventScroll: true });
   }
 
+  resetTransientOverlays() {
+    this.#resetTransientOverlays();
+  }
+
   #resetTransientOverlays() {
     this.refs.announcement.textContent = "";
     this.typewriter.stop();
@@ -979,6 +992,23 @@ export class VisualNovelView {
     this.refs.minigameContinue.addEventListener("click", () => this.#completeMinigame());
     this.refs.endingRights.addEventListener("click", () => this.#openRights());
     this.refs.rightsClose.addEventListener("click", () => this.#closeRights());
+
+    if (this.refs.chapterSelect && Array.isArray(this.chapters) && this.chapters.length > 0) {
+      this.refs.chapterSelect.hidden = false;
+      for (const ch of this.chapters) {
+        const option = document.createElement("option");
+        option.value = ch.id;
+        option.textContent = ch.label;
+        this.refs.chapterSelect.append(option);
+      }
+      this.refs.chapterSelect.addEventListener("change", (e) => {
+        const targetId = e.target.value;
+        if (targetId && this.onJumpToChapter) {
+          this.onJumpToChapter(targetId);
+          this.refs.chapterSelect.blur();
+        }
+      });
+    }
   }
 
   #handleKeyDown(event) {

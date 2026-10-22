@@ -42,6 +42,7 @@ export class App {
     resolveSceneLabel,
     rights = null,
     initialFlags = {},
+    chapters = [],
   }) {
     this.bus = new EventBus();
     this.paused = false;
@@ -90,9 +91,17 @@ export class App {
       resolveBackground,
       resolveSceneLabel,
       rights,
+      chapters,
+      onJumpToChapter: (nodeId) => this.jumpTo(nodeId),
     });
 
     this.#wireEvents();
+  }
+
+  jumpTo(nodeId) {
+    this.paused = false;
+    this.view.resetTransientOverlays();
+    this.engine.jumpTo(nodeId);
   }
 
   start() {

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import styles from './nubes.module.css'
 import CidGame from '../experiments/cid-table/CidGame'
 import CajaArenaGame from '../experiments/caja-arena/CajaArenaGame'
+import { useT } from '../../lib/i18n'
 
 const GAMES = { 'cid-table': CidGame, 'caja-arena': CajaArenaGame }
 
@@ -35,20 +36,61 @@ function Nube({ size }) {
   )
 }
 
+function NubeTexto({ children }) {
+  return (
+    <div className={styles.cloudSpeechContainer}>
+      <svg
+        className={styles.cloudSpeechSvg}
+        viewBox="0 0 900 520"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <filter id="nube-shadow" x="-10%" y="-10%" width="125%" height="130%">
+            <feDropShadow dx="0" dy="16" stdDeviation="20" floodColor="#0d3b66" floodOpacity="0.22" />
+          </filter>
+          <linearGradient id="nube-speech-g" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#ffffff" />
+            <stop offset="85%" stopColor="#f7fbff" />
+            <stop offset="100%" stopColor="#d5e8fb" />
+          </linearGradient>
+        </defs>
+        <g filter="url(#nube-shadow)" fill="url(#nube-speech-g)">
+          {/* Cuerpo principal con bulbos exteriores amplios para dar máxima área útil */}
+          <ellipse cx="450" cy="260" rx="360" ry="175" />
+          <ellipse cx="230" cy="260" rx="175" ry="140" />
+          <ellipse cx="670" cy="260" rx="175" ry="140" />
+          <ellipse cx="330" cy="150" rx="195" ry="135" />
+          <ellipse cx="570" cy="150" rx="195" ry="135" />
+          <ellipse cx="140" cy="270" rx="120" ry="105" />
+          <ellipse cx="760" cy="270" rx="120" ry="105" />
+          <ellipse cx="320" cy="370" rx="175" ry="105" />
+          <ellipse cx="580" cy="370" rx="175" ry="105" />
+          <ellipse cx="450" cy="390" rx="160" ry="95" />
+        </g>
+      </svg>
+      <div className={styles.cloudSpeechContent}>
+        {children}
+      </div>
+    </div>
+  )
+}
+
 /**
- * Transición de "pensamiento": las nubes entran con el texto, se abren para mostrar el
- * minijuego y, al terminar, vuelven a cubrir la pantalla y se retiran hacia la historia.
+ * Transición de "pensamiento": las nubes entran con el texto en una gran nube,
+ * se abren para mostrar el minijuego y, al terminar, vuelven a cubrir la pantalla y se retiran.
  */
 export default function MinijuegoNubes({ game, text, onDone }) {
+  const t = useT()
   const [phase, setPhase] = useState('enter') // enter → think → open → play → close → leave
   const timers = useRef([])
   const Game = GAMES[game]
   const later = (fn, ms) => timers.current.push(setTimeout(fn, ms))
 
   useEffect(() => {
-    later(() => setPhase('think'), 30)
-    later(() => setPhase('open'), 5600)
-    later(() => setPhase('play'), 6800)
+    later(() => setPhase('think'), 20)
+    later(() => setPhase('open'), 3200)
+    later(() => setPhase('play'), 3900)
     return () => timers.current.forEach(clearTimeout)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -57,13 +99,13 @@ export default function MinijuegoNubes({ game, text, onDone }) {
     if (phase !== 'think') return
     timers.current.forEach(clearTimeout)
     setPhase('open')
-    later(() => setPhase('play'), 1200)
+    later(() => setPhase('play'), 700)
   }
 
   const finish = (report) => {
     setPhase('close')
-    later(() => setPhase('leave'), 1500)
-    later(() => onDone(report), 2900)
+    later(() => setPhase('leave'), 800)
+    later(() => onDone(report), 1500)
   }
 
   const covered = phase === 'think' || phase === 'close'
@@ -88,16 +130,31 @@ export default function MinijuegoNubes({ game, text, onDone }) {
                 left: `${x}vw`,
                 top: `${y}vh`,
                 transform: covered ? 'translate(0,0) scale(1)' : `translate(${dx}vw, ${dy}vh) scale(.8)`,
-                transitionDelay: `${(covered ? i : CLOUDS.length - i) * 45}ms`,
+                transitionDelay: `${(covered ? i : CLOUDS.length - i) * 20}ms`,
               }}
             >
               <div className={styles.bob} style={{ animationDelay: `${-i * 0.7}s` }}><Nube size={size} /></div>
             </div>
           )
         })}
-        <div className={`${styles.thought} ${phase === 'think' ? styles.thoughtOn : ''}`} aria-live="polite">
-          <p className={styles.text}>{text}</p>
-          <span className={styles.tail1} /><span className={styles.tail2} /><span className={styles.tail3} />
+        <div
+          className={`${styles.thought} ${phase === 'think' ? styles.thoughtOn : ''}`}
+          aria-live="polite"
+        >
+          <NubeTexto>
+            <p className={styles.text}>{text}</p>
+            <button
+              type="button"
+              className={styles.skipBtn}
+              onClick={(e) => {
+                e.stopPropagation()
+                skipThinking()
+              }}
+              title={t('juegos.saltarPensamiento')}
+            >
+              {t('juegos.saltarPensamiento')} ➔
+            </button>
+          </NubeTexto>
         </div>
       </div>
     </div>

@@ -86,7 +86,7 @@ fases, los perfiles, las fuentes y ambos resultados, además del funcionamiento 
 la novela. El guion se regenera con `npm run story:sara`.
 
 Verificación ejecutada: batería completa `npm test` superada; Sara tiene 163 nodos
-alcanzables, 31 opciones y 5.128 estados relevantes recorridos. La compilación
+alcanzables, 31 opciones y 5.168 estados relevantes recorridos. La compilación
 integrada mediante `node frontend/scripts/prepare-novel.mjs` también se completó.
 El número de estados es una comprobación del motor, no una evaluación de lectura.
 
