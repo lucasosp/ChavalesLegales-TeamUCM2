@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import EntradaCodigo from '../components/EntradaCodigo'
 import SelectorIdioma from '../components/SelectorIdioma'
 import { useT } from '../lib/i18n'
+import { precargarNovela } from '../lib/precargaNovela'
 
 // Un enlace directo con ?caso= o ?pin= (que es el código del caso) entra sin teclear nada.
 function codigoDesdeUrl(searchParams) {
@@ -30,6 +31,7 @@ export default function Home() {
     if (typeof window === 'undefined') return
     const destino = codigoDesdeUrl(new URLSearchParams(window.location.search))
     if (destino) router.push(`/novela?caso=${encodeURIComponent(destino)}`)
+    else precargarNovela()
   }, [router])
 
   // Juegos sueltos: no piden código y no registran informe. Solo queda el de la historia.
