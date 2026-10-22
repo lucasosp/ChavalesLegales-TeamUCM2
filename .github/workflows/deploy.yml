@@ -17,6 +17,8 @@ jobs:
           host: ${{ secrets.SERVER_HOST || secrets.HOST || 'chavaleslegales.fdi.ucm.es' }}
           username: ${{ secrets.SERVER_USER || secrets.USERNAME || 'datathon' }}
           password: ${{ secrets.SERVER_PASSWORD || secrets.PASSWORD }}
+          key: ${{ secrets.SERVER_KEY || secrets.SSH_KEY || secrets.KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
           port: ${{ secrets.SERVER_PORT || secrets.PORT || 22 }}
           script: |
             echo "Iniciando despliegue en /var/www/chavaleslegales..."
