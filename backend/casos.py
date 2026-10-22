@@ -164,7 +164,8 @@ class CasoStore:
         Se reemplaza cuando falta o cuando no coincide con el archivo (distinta `meta.semilla` o
         distinto número de eventos). Al sembrar una versión nueva también se vacían las partidas
         de prueba (`PRUEBA-*`): eran partidas contra la versión anterior. Los casos reales
-        (`CL-*`) no se tocan nunca.
+        (`CL-*`) no se tocan nunca, salvo los ids EXACTOS que el archivo liste en `meta.limpiar_ids`
+        (para retirar casos de prueba concretos). Nunca se admiten prefijos ni el propio DEMO.
         """
         if not ruta or not os.path.exists(ruta):
             return
@@ -188,12 +189,13 @@ class CasoStore:
 
         demo["id"] = DEMO_ID
         demo.setdefault("meta", {})
+        retirar = [i for i in demo["meta"].pop("limpiar_ids", []) if es_id_valido(i) and i.upper() not in CASOS_SOLO_LECTURA]
         demo.setdefault("schemaVersion", ESQUEMA_VERSION)
         self._casos[DEMO_ID] = demo
         self._escribir(DEMO_ID, demo)
 
         borradas = 0
-        for caso_id in [c for c in self._casos if c.startswith(PREFIJO_PRUEBA)]:
+        for caso_id in [c for c in self._casos if c.startswith(PREFIJO_PRUEBA) or c in retirar]:
             del self._casos[caso_id]
             try:
                 os.remove(self._ruta(caso_id))
@@ -201,7 +203,7 @@ class CasoStore:
                 pass
             borradas += 1
         logger.info(
-            "Caso de ejemplo %s sembrado desde %s (%s eventos); %s partidas de prueba vaciadas",
+            "Caso de ejemplo %s sembrado desde %s (%s eventos); %s casos de prueba retirados",
             DEMO_ID, ruta, len(demo["eventos"]), borradas,
         )
 

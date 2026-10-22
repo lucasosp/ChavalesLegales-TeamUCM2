@@ -389,6 +389,30 @@ class SembrarDemoTest(unittest.TestCase):
         self._escribir_demo(semilla="v2", n=3)
         self.assertEqual(self._store().get("DEMO")["meta"]["semilla"], "v2")
 
+    def test_limpiar_ids_retira_solo_los_ids_exactos_y_nunca_el_demo(self):
+        previo = CasoStore(data_dir=self.datos, legacy_file="")
+        for caso_id in ("CL-11111", "CL-22222", "CL-111110"):
+            previo.add_evento(caso_id, {"kind": "inicio", "data": {}})
+        caso = json.load(open(self.demo, encoding="utf-8"))
+        caso["meta"]["limpiar_ids"] = ["CL-11111", "DEMO", "../x", "CL-99999"]  # un id real, el DEMO, uno inválido y uno que no existe
+        json.dump(caso, open(self.demo, "w", encoding="utf-8"))
+
+        store = self._store()
+        self.assertIsNone(store.get("CL-11111"))                    # el listado: se retira
+        self.assertEqual(len(store.get("CL-22222")["eventos"]), 1)  # el resto de casos reales, intactos
+        self.assertEqual(len(store.get("CL-111110")["eventos"]), 1)  # no es prefijo: 'CL-11111' != 'CL-111110'
+        self.assertEqual(len(store.get("DEMO")["eventos"]), 3)       # el DEMO nunca se borra
+        self.assertNotIn("limpiar_ids", store.get("DEMO")["meta"])   # y no se queda en la ficha
+
+    def test_limpiar_ids_solo_actua_al_sembrar(self):
+        self._store()
+        previo = CasoStore(data_dir=self.datos, legacy_file="")
+        previo.add_evento("CL-33333", {"kind": "inicio", "data": {}})
+        caso = json.load(open(self.demo, encoding="utf-8"))
+        caso["meta"]["limpiar_ids"] = ["CL-33333"]
+        json.dump(caso, open(self.demo, "w", encoding="utf-8"))  # misma semilla y mismos eventos: no se siembra
+        self.assertEqual(len(self._store().get("CL-33333")["eventos"]), 1)
+
     def test_archivo_roto_se_ignora_y_no_borra_nada(self):
         previo = CasoStore(data_dir=self.datos, legacy_file="")
         previo.add_evento("PRUEBA-444444", {"kind": "inicio", "data": {}})

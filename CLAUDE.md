@@ -251,7 +251,9 @@ duplicar imágenes. Un caso con dibujos pesa ~50 KB (base64).
    nadie lo haya creado. El contenido de `DEMO` vive en `backend/demo/DEMO.json` (versionado) y el
    backend lo siembra al arrancar: si el del volumen tiene otra `meta.semilla` u otro nº de eventos
    se reemplaza **y se vacían todos los `PRUEBA-*`** (nunca los `CL-*`). Para cambiar el ejemplo,
-   cambia la `semilla` del archivo.
+   cambia la `semilla` del archivo. Para retirar un caso de prueba concreto, ponlo en
+   `meta.limpiar_ids` (ids exactos, nunca prefijos) junto con una `semilla` nueva y quítalo del
+   archivo en el commit siguiente, para que no se repita.
 7. **Ids de caso enumerables** (`CL-` + 5 dígitos) y **sin auth**: quien conozca un id puede leer
    y sobrescribir el caso. Aceptado por decisión de producto; no lo "arregles" sin hablarlo.
 8. **`casos_data.json` y `casos_data/` son estado de runtime**, no fixtures. Están gitignorados.
