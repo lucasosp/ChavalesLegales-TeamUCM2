@@ -95,13 +95,11 @@ for (const [locale, overlay] of [["es", null], ...overlays]) {
   assert.match(localizedGuide.people[0].role, /^14\b/, `${locale}: Sara must be 14`);
   assert.equal(localizedGuide.people[3].name, "Elena", `${locale}: Elena is the social worker`);
   assert.equal(localizedGuide.people[4].name, "Irene", `${locale}: Irene is the lawyer`);
-  assert.deepEqual(localizedGuide.peopleTable.rows.map((person) => person.id), guide.peopleTable.rows.map((person) => person.id), `${locale}: incomplete people table`);
-  for (const field of ["title", "intro", "personColumn", "taskColumn", "continueLabel"]) {
-    assert.ok(localizedGuide.peopleTable[field], `${locale}: missing table label ${field}`);
-    if (overlay) assert.ok(overlay.guide.peopleTable[field], `${locale}: untranslated table label ${field}`);
-  }
-  for (const person of localizedGuide.peopleTable.rows) {
-    assert.ok(person.name && person.summary && person.detail, `${locale}: incomplete table row ${person.id}`);
+  assert.deepEqual(localizedGuide.peopleProfiles.rows.map((person) => person.id), guide.peopleProfiles.rows.map((person) => person.id), `${locale}: incomplete people profiles`);
+  assert.ok(localizedGuide.peopleProfiles.continueLabel, `${locale}: missing profile continuation label`);
+  if (overlay) assert.ok(overlay.guide.peopleProfiles.continueLabel, `${locale}: untranslated profile continuation label`);
+  for (const person of localizedGuide.peopleProfiles.rows) {
+    assert.ok(person.name && person.summary && person.detail, `${locale}: incomplete profile row ${person.id}`);
   }
   const localizedLegal = overlay ? applyOverlay(legal, overlay.legal) : legal;
   for (const node of Object.values(doc.nodes)) {
@@ -111,7 +109,6 @@ for (const [locale, overlay] of [["es", null], ...overlays]) {
     }
   }
 }
-assert.equal(story["c5-team"].reference, "people", "The compiler must preserve the reference-table cue");
 const spokenText = Object.values(story).map((node) => node.text ?? "").join(" ");
 assert.doesNotMatch(spokenText, /dispensa|prueba preconstituida|acusación particular|Sección de Violencia|sentencia firme/iu, "Explain actions to young readers without the legal lecture");
 const futureFlags = ["resolution", "concernDani", "concernPrivacy", "concernHome", "shortExplanations", "everyday"];
@@ -176,12 +173,14 @@ const { SaraExperience, SARA_SAVE_KEY } = await import("../src/app/SaraExperienc
 const { resolveCharacterAsset, resolveBackgroundAsset } = await import("../src/content/contentLoader.js");
 const root = document.querySelector("#app");
 const experience = new SaraExperience({ root, content: { story, startId: "start", title: "Sara", resolveCharacter: (c) => resolveCharacterAsset(assets, c), resolveBackground: (s) => resolveBackgroundAsset(scenes, assets, s) }, guide, legal, onExit() {} });
-experience.drawingModal.open = ({ onConfirm }) => onConfirm?.();
+const drawings = [];
+experience.drawingModal.open = ({ phase, onConfirm }) => { drawings.push(phase); onConfirm?.(); };
 const click = (selector) => { const node = root.querySelector(selector); assert.ok(node, selector); node.click(); };
 try {
   assert.equal(localStorage.getItem(SARA_SAVE_KEY), null);
   assert.equal(root.querySelector('[data-sara-action="map"], [data-sara-action="people"], [data-sara-action="notebook"], .sara-bottom'), null);
   click("[data-sara-start]");
+  assert.deepEqual(drawings, ["phase1"], "El primer dibujo se pide antes de la primera línea");
   assert.ok(localStorage.getItem(SARA_SAVE_KEY));
   const pausedAt = experience.engine.nodeId;
   experience.openPanel("pause");
@@ -191,55 +190,32 @@ try {
   experience.closePanel();
   const route = { "c3-choice": "dani", "c2-choice": "privacy", "c2-choice2": "short", "c4-choice": "volleyball", "c5-choice2": "pause" };
   const played = new Set();
-  let peopleTableChecks = 0;
+  const intros = new Set();
   for (let guard = 0; guard < 200 && !experience.engine.isFinished; guard++) {
     const node = experience.engine.currentNode; played.add(experience.engine.nodeId);
-    if (experience.engine.nodeId === "c5-06") {
-      const badge = root.querySelector('button[data-legal-badge][data-person-id="judge"]');
-      assert.ok(badge && !badge.hidden, "The judge offers a clickable role explanation");
-      badge.focus();
-      badge.click();
-      assert.equal(experience.mode, "person");
-      const person = guide.peopleTable.rows.find((row) => row.id === "judge");
+    if (experience.mode === "person") {
+      // La primera vez que aparece un personaje con ficha, ésta se abre sola.
+      const personId = root.querySelector("[data-sara-body]").dataset.personId;
+      const person = guide.peopleProfiles.rows.find((row) => row.id === personId);
+      const nodeId = experience.engine.nodeId;
+      assert.ok(person, `First meeting with ${personId} opens their profile`);
       assert.equal(experience.title.textContent, person.name);
       assert.equal(root.querySelector(".sara-person-summary").textContent, person.summary);
       assert.equal(root.querySelector(".sara-person-explanation").textContent, person.detail);
+      const badge = root.querySelector(`button[data-legal-badge][data-person-id="${personId}"]`);
+      assert.ok(badge && !badge.hidden, "The role badge stays to reopen the profile");
       experience.app.advance();
-      assert.equal(experience.engine.nodeId, "c5-06", "Reading a role pauses the dialogue");
+      assert.equal(experience.engine.nodeId, nodeId, "Reading who someone is pauses the dialogue");
       root.querySelector(".is-person .sara-primary").click();
-      assert.equal(experience.engine.nodeId, "c5-06", "Closing a role never skips its scene");
-      assert.equal(document.activeElement, badge);
-    }
-    if (experience.mode === "people") {
-      peopleTableChecks++;
-      const before = experience.engine.nodeId;
-      const table = root.querySelector(".sara-people-table");
-      assert.ok(table, "The table opens where Irene introduces the professionals");
-      const toggle = table.querySelector('button[data-person-id="irene"]');
-      const detail = document.getElementById(toggle.getAttribute("aria-controls"));
-      assert.equal(detail.hidden, true);
-      toggle.click();
-      assert.equal(toggle.getAttribute("aria-expanded"), "true");
-      assert.equal(detail.hidden, false);
-      const other = table.querySelector('button[data-person-id="elena"]');
-      other.click();
-      assert.equal(toggle.getAttribute("aria-expanded"), "false");
-      assert.equal(detail.hidden, true, "Only one short explanation opens at a time");
-      toggle.click();
-      assert.equal(other.getAttribute("aria-expanded"), "false");
-      experience.app.advance();
-      document.dispatchEvent(new dom.window.KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
-      assert.equal(experience.engine.nodeId, before, "Reading the table pauses the story");
-      toggle.click();
-      assert.equal(detail.hidden, true);
-      document.dispatchEvent(new dom.window.KeyboardEvent("keydown", { key: "Escape", bubbles: true, cancelable: true }));
       assert.equal(experience.mode, null);
-      experience.sync();
-      assert.equal(experience.mode, null, "Closing the table must not immediately reopen it");
-      experience.openPanel("people");
-      // No row needs opening to continue; the table has no required answers.
-      click("[data-sara-people-continue]");
-      assert.notEqual(experience.engine.nodeId, before);
+      assert.equal(experience.engine.nodeId, nodeId, "Closing a role never skips its scene");
+      assert.equal(document.activeElement, badge, "Closing returns the focus to the badge");
+      badge.focus();
+      badge.click();
+      assert.equal(experience.mode, "person", "The badge reopens the profile on demand");
+      assert.equal(experience.title.textContent, person.name);
+      root.querySelector(".is-person .sara-primary").click();
+      intros.add(personId);
       continue;
     }
     if (node.type === "choice") {
@@ -255,7 +231,8 @@ try {
     else experience.app.advance();
   }
   assert.equal(experience.engine.isFinished, true);
-  assert.equal(peopleTableChecks, 2, "The reference opens at the introduction and on asking who will attend");
+  assert.deepEqual(drawings, ["phase1", "phase2", "phase3"], "Un dibujo al empezar y otro al cerrar cada capítulo dibujado");
+  assert.deepEqual([...intros].sort(), ["elena", "irene", "judge"], "Every character with a profile introduces themselves once, unasked");
   for (const id of ["c4-dani", "c5-privacy", "c5-short", "c6-conviction", "c6-dani", "epilogue-volley"]) assert.ok(played.has(id), id);
   assert.equal(localStorage.getItem(SARA_SAVE_KEY), null, "Completion removes the local save");
   experience.openPanel("pause");
@@ -289,6 +266,13 @@ try {
   assert.equal(experience.engine.nodeId, "start");
   assert.deepEqual(experience.engine.flags, { resolution: "conviction" });
   assert.equal(experience.engine.history.length, 0);
+  assert.deepEqual(drawings, ["phase1", "phase2", "phase3", "phase1"], "Empezar de nuevo vuelve a pedir el primer dibujo");
+  // Retomar una partida guardada no repite el dibujo de presentación.
+  experience.localStore.save({ nodeId: "c1-02", flags: {}, stage: {}, seen: [], history: [] });
+  experience.showLanding();
+  click("[data-sara-resume]");
+  assert.equal(experience.engine.nodeId, "c1-02", "Resuming returns to the saved scene");
+  assert.deepEqual(drawings, ["phase1", "phase2", "phase3", "phase1"], "Resuming never asks for the first drawing again");
   // Cambiar de idioma recarga: la marca de sesión devuelve al mismo nodo.
   sessionStorage.setItem("sara.langSwitch", JSON.stringify({ nodeId: "c2-choice", flags: {}, stage: {}, seen: [], history: [] }));
   assert.equal(experience.resumeAfterLanguageSwitch(), true);

@@ -233,9 +233,6 @@ moving the group moves the light.
   `thought` (inner voice: the view drops surrounding «…»/"…" quotation marks,
   uses its own nameplate and an italic, tinted box so it never reads as
   something said out loud), or `poem`.
-- `reference: "people"` — in Sara, opens the short interactive people table from
-  `guide.peopleTable`. The story waits while the panel is open; its continue
-  button follows the beat's ordinary `next`. No row has to be opened first.
 
 `dialogue.next` and every choice option's `next` must point at an existing
 node. `ending` must not have `next`. A `branch` with neither `then` nor `else`

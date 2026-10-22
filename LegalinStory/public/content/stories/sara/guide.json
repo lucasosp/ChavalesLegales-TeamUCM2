@@ -78,11 +78,7 @@
       "text": "Irene explica el resultado, los posibles recursos y qué medidas siguen. El apoyo continúa según sus necesidades."
     }
   ],
-  "peopleTable": {
-    "title": "¿Quién es quién?",
-    "intro": "Toca una flecha para saber más.",
-    "personColumn": "Persona",
-    "taskColumn": "Qué hace",
+  "peopleProfiles": {
     "continueLabel": "Seguir con Sara",
     "rows": [
       {

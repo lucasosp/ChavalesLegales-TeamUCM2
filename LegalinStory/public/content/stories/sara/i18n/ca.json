@@ -327,7 +327,7 @@
       "c5-card": {
         "kicker": "SARA · CAPÍTOL 5 DE 6",
         "title": "El tribunal",
-        "text": "Un temps després. Saber qui és qui."
+        "text": "Un temps després. Et toca declarar."
       },
       "c5-01": {
         "text": "Arriba una carta perquè la Sara declari. La Irene la llegeix amb ella i amb la seva mare."
@@ -344,7 +344,7 @@
         "speaker": "Irene · advocada"
       },
       "c5-team": {
-        "text": "Hi ha diverses persones per ajudar-te. Mira qui és qui. No cal que t'aprenguis els noms.",
+        "text": "Hi ha diverses persones per ajudar-te. No cal que t'aprenguis els noms.",
         "speaker": "Irene · advocada"
       },
       "c5-choice": {
@@ -362,7 +362,7 @@
         ]
       },
       "c5-people": {
-        "text": "Pots tornar a mirar la taula. Abans d'entrar, et diré qui serà amb tu.",
+        "text": "Abans d'entrar, et diré qui serà amb tu i què fa cada persona.",
         "speaker": "Irene · advocada"
       },
       "c5-room": {
@@ -755,11 +755,7 @@
         "text": "En Dani té deu anys. La seva mare també rep ajuda. En Javier, el pare, és responsable del que fa; la Sara no ha de canviar-lo per merèixer protecció."
       }
     ],
-    "peopleTable": {
-      "title": "Qui és qui?",
-      "intro": "Toca una fletxa per saber-ne més.",
-      "personColumn": "Persona",
-      "taskColumn": "Què fa",
+    "peopleProfiles": {
       "continueLabel": "Seguir amb la Sara",
       "rows": [
         {

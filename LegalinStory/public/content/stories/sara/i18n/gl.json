@@ -327,7 +327,7 @@
       "c5-card": {
         "kicker": "SARA · CAPÍTULO 5 DE 6",
         "title": "O tribunal",
-        "text": "Un tempo despois. Saber quen é quen."
+        "text": "Un tempo despois. Tócache declarar."
       },
       "c5-01": {
         "text": "Chega unha carta para que Sara declare. Irene le con ela e coa súa nai."
@@ -344,7 +344,7 @@
         "speaker": "Irene · avogada"
       },
       "c5-team": {
-        "text": "Hai varias persoas para axudarte. Mira quen é quen. Non tes que aprender os nomes de memoria.",
+        "text": "Hai varias persoas para axudarte. Non tes que aprender os nomes de memoria.",
         "speaker": "Irene · avogada"
       },
       "c5-choice": {
@@ -362,7 +362,7 @@
         ]
       },
       "c5-people": {
-        "text": "Podes volver mirar a táboa. Antes de entrar, direiche quen estará contigo.",
+        "text": "Antes de entrar, direiche quen estará contigo e que fai cada persoa.",
         "speaker": "Irene · avogada"
       },
       "c5-room": {
@@ -755,11 +755,7 @@
         "text": "Dani ten dez anos. A súa nai tamén recibe axuda. Javier, o pai, é responsable do que fai; Sara non ten que cambialo para merecer protección."
       }
     ],
-    "peopleTable": {
-      "title": "Quen é quen?",
-      "intro": "Toca unha frecha para saber máis.",
-      "personColumn": "Persoa",
-      "taskColumn": "Que fai",
+    "peopleProfiles": {
       "continueLabel": "Seguir con Sara",
       "rows": [
         {

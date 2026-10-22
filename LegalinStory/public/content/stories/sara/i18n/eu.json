@@ -327,7 +327,7 @@
       "c5-card": {
         "kicker": "SARA · 5. KAPITULUA, 6TIK",
         "title": "Auzitegia",
-        "text": "Denbora bat geroago. Nor zer den jakitea."
+        "text": "Denbora bat geroago. Deklaratzera zoaz."
       },
       "c5-01": {
         "text": "Gutun bat iristen da Sarak deklaratzeko. Irenek berarekin eta amarekin irakurtzen du."
@@ -344,7 +344,7 @@
         "speaker": "Irene · abokatua"
       },
       "c5-team": {
-        "text": "Hainbat pertsona daude zuri laguntzeko. Begiratu nor den nor. Ez dituzu izenak buruz ikasi behar.",
+        "text": "Hainbat pertsona daude zuri laguntzeko. Ez dituzu izenak buruz ikasi behar.",
         "speaker": "Irene · abokatua"
       },
       "c5-choice": {
@@ -362,7 +362,7 @@
         ]
       },
       "c5-people": {
-        "text": "Taula berriro begira dezakezu. Sartu aurretik, zurekin nor egongo den esango dizut.",
+        "text": "Sartu aurretik, zurekin nor egongo den eta bakoitzak zer egiten duen esango dizut.",
         "speaker": "Irene · abokatua"
       },
       "c5-room": {
@@ -755,11 +755,7 @@
         "text": "Danik hamar urte ditu. Bere amak ere laguntza jasotzen du. Javier aita da eta berak egiten duenaren erantzulea da; Sarak ez du hura aldatu behar babesa merezi izateko."
       }
     ],
-    "peopleTable": {
-      "title": "Nor da nor?",
-      "intro": "Ukitu gezi bat gehiago jakiteko.",
-      "personColumn": "Pertsona",
-      "taskColumn": "Zer egiten du",
+    "peopleProfiles": {
       "continueLabel": "Sararekin jarraitu",
       "rows": [
         {

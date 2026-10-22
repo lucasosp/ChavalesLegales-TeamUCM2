@@ -149,7 +149,7 @@ narration("c4-end", "Hay días tranquilos y días más difíciles. Sigue habiend
 add("c4-perros", { type: "external", game: "caja-arena", text: "Empezó a ver los diferentes perros, y las aventuras que podría vivir con ellos.", next: "c5-card", cast: { sara: "smile" } });
 
 chapter = 5;
-card("c5-card", "El tribunal", "Un tiempo después. Saber quién es quién.", "c5-01", "quiet-room");
+card("c5-card", "El tribunal", "Un tiempo después. Te toca declarar.", "c5-01", "quiet-room");
 narration("c5-01", "Llega una carta para que Sara declare. Irene la lee con ella y con su madre.", "c5-02");
 say("c5-02", "Sara", "La carta tiene palabras muy raras. No entiendo nada.", "c5-03");
 say("c5-03", ABOGADA, "La carta dice dónde tienes que ir y cuándo. Iremos preparadas. Puedes preguntarme todo lo que no entiendas.", "c5-justice");
@@ -157,13 +157,13 @@ explain("c5-justice", ABOGADA, "justice", "c5-investigation");
 explain("c5-investigation", ABOGADA, "investigation", "c5-attend-question");
 say("c5-attend-question", "Sara", "¿Tengo que hablar aunque sea mi padre?", "c5-family-case");
 explain("c5-family-case", ABOGADA, "familyCase", "c5-team");
-say("c5-team", ABOGADA, "Hay varias personas para ayudarte. Mira quién es quién. No tienes que aprenderte los nombres.", "c5-choice", { reference: "people" });
+say("c5-team", ABOGADA, "Hay varias personas para ayudarte. No tienes que aprenderte los nombres.", "c5-choice");
 choice("c5-choice", "Antes de ir, ¿qué quiere saber Sara?", [
   option("people", "Quién va a estar en la sala.", "c5-people", { askedProfessionals: true }),
   option("room", "Cómo es la sala y si va a ver a su padre.", "c5-room", { askedRoom: true }),
   option("rights", "Qué puede pedir y a quién se lo dice.", "c5-rights", { askedSupports: true }),
 ]);
-say("c5-people", ABOGADA, "Puedes volver a mirar la tabla. Antes de entrar, te diré quién estará contigo.", "c5-supports", { reference: "people" });
+say("c5-people", ABOGADA, "Antes de entrar, te diré quién estará contigo y qué hace cada persona.", "c5-supports");
 say("c5-room", ABOGADA, "Organizaremos la entrada y la espera para que no te encuentres con tu padre.", "c5-supports");
 say("c5-rights", ABOGADA, "Cuéntame qué te da miedo y qué necesitas. Yo pediré los apoyos antes de que vayas.", "c5-supports");
 explain("c5-supports", ABOGADA, "supports", "c5-company");
@@ -258,11 +258,7 @@ const guide = {
     [6, "El juicio", "Otro juez o tribunal escucha las pruebas. Sara vuelve a declarar con apoyos."],
     [6, "La sentencia y después", "Irene explica el resultado, los posibles recursos y qué medidas siguen. El apoyo continúa según sus necesidades."],
   ].map(([chapter, title, text]) => ({ chapter, title, text })),
-  peopleTable: {
-    title: "¿Quién es quién?",
-    intro: "Toca una flecha para saber más.",
-    personColumn: "Persona",
-    taskColumn: "Qué hace",
+  peopleProfiles: {
     continueLabel: "Seguir con Sara",
     rows: [
       { id: "irene", name: "Irene", role: "Abogada", summary: "Tu abogada. Defiende tus derechos.", detail: "Pregúntale lo que no entiendas." },

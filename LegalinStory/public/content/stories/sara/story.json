@@ -1076,7 +1076,7 @@
       "type": "interstitial",
       "kicker": "SARA · CAPÍTULO 5 DE 6",
       "title": "El tribunal",
-      "text": "Un tiempo después. Saber quién es quién.",
+      "text": "Un tiempo después. Te toca declarar.",
       "next": "c5-01",
       "scene": "quiet-room",
       "cast": {
@@ -1166,12 +1166,11 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Hay varias personas para ayudarte. Mira quién es quién. No tienes que aprenderte los nombres.",
+      "text": "Hay varias personas para ayudarte. No tienes que aprenderte los nombres.",
       "next": "c5-choice",
       "cast": {
         "sara": null
-      },
-      "reference": "people"
+      }
     },
     "c5-choice": {
       "chapter": 5,
@@ -1211,12 +1210,11 @@
       "chapter": 5,
       "type": "dialogue",
       "speaker": "Irene · abogada",
-      "text": "Puedes volver a mirar la tabla. Antes de entrar, te diré quién estará contigo.",
+      "text": "Antes de entrar, te diré quién estará contigo y qué hace cada persona.",
       "next": "c5-supports",
       "cast": {
         "sara": null
-      },
-      "reference": "people"
+      }
     },
     "c5-room": {
       "chapter": 5,

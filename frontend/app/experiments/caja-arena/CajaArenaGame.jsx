@@ -8,7 +8,7 @@ import Clima from './Clima'
 import { DOGS, Perro } from './Perros'
 import { SHELF, STORAGE_KEY, TRAY, VIEW, WEATHER_MAX_MS, WEATHER_MIN_MS, ZONES, inTray, zoneAt } from './config'
 import { buildReport } from './metrics'
-import { downloadJson, readStorage, useLongPress, writeStorage } from '../shared'
+import { readStorage, writeStorage } from '../shared'
 import { useT } from '../../../lib/i18n'
 
 const SLOT_W = (TRAY.w - 220) / (DOGS.length - 1)
@@ -24,8 +24,6 @@ export default function CajaArenaGame({ embedded = false, onFinish }) {
   const [weather, setWeather] = useState(null)
   const [toast, setToast] = useState(null)
   const [story, setStory] = useState('')
-  const [showPanel, setShowPanel] = useState(false)
-  const [savedCount, setSavedCount] = useState(0)
 
   const svgRef = useRef(null)
   const posRef = useRef(positions)
@@ -34,14 +32,6 @@ export default function CajaArenaGame({ embedded = false, onFinish }) {
   const t0Ref = useRef(0)
   const startedAtRef = useRef(null)
   const reportRef = useRef(null)
-  // El panel se abre con un clic (y también manteniendo pulsado): un toque suelto
-  // en la esquina no puede quedarse sin respuesta. El gesto largo sigue vivo.
-  function openPanel() {
-    setSavedCount(readStorage(STORAGE_KEY, []).length)
-    setShowPanel(true)
-  }
-  const panelPress = useLongPress(openPanel)
-
   posRef.current = positions
   const placedCount = DOGS.filter((d) => positions[d.id].placed).length
   const elapsed = () => Math.round(performance.now() - t0Ref.current)
@@ -212,9 +202,6 @@ export default function CajaArenaGame({ embedded = false, onFinish }) {
               {t('juegos.arenaTerminado')}
             </button>
           )}
-          <button type="button" className={styles.gear} title={t('juegos.arenaPanelHint')} aria-label={t('juegos.arenaPanelAria')} onClick={openPanel} {...panelPress}>
-            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.6 7.6 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.6 7.6 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.6 7.6 0 0 0 1.7 1l.4 2.6h4l.4-2.6a7.6 7.6 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)" /></svg>
-          </button>
         </div>
       </header>
 
@@ -309,37 +296,6 @@ export default function CajaArenaGame({ embedded = false, onFinish }) {
                   <button type="button" className={styles.btnGhost} onClick={restart}>{t('juegos.arenaOtroMundo')}</button>
                 </>
               )}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {showPanel && (
-        <div className={styles.overlay} onClick={() => setShowPanel(false)}>
-          <div className={styles.panel} onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="ar-panel-title">
-            <button type="button" className={styles.cerrarBoton} onClick={() => setShowPanel(false)} aria-label={t('juegos.cerrar')}>×</button>
-            <h2 id="ar-panel-title" className={styles.panelTitle}>{t('juegos.arenaPanelTitulo')}</h2>
-            <p className={styles.panelText}>
-              {t('juegos.arenaPanelTexto')}{' '}
-              {t('juegos.arenaSesionesGuardadas')} <strong>{savedCount}</strong>.
-            </p>
-            <div className={styles.row}>
-              <button type="button" className={styles.btn} disabled={phase === 'intro' && !reportRef.current}
-                onClick={() => downloadJson(reportRef.current && phase === 'done' ? reportRef.current : makeReport(), 'caja-arena')}>
-                {t('juegos.exportarActual')}
-              </button>
-              <button type="button" className={styles.btn} onClick={() => downloadJson(readStorage(STORAGE_KEY, []), 'caja-arena-sesiones')}>
-                {t('juegos.exportarTodas')}
-              </button>
-              {phase === 'play' && !weather && (
-                <button type="button" className={styles.btn} onClick={() => { triggerWeather(); setShowPanel(false) }}>{t('juegos.arenaLanzarEvento')}</button>
-              )}
-              <button type="button" className={styles.btnDanger} onClick={() => {
-                if (confirm(t('juegos.arenaBorrarConfirm'))) {
-                  writeStorage(STORAGE_KEY, [])
-                  setSavedCount(0)
-                }
-              }}>{t('juegos.arenaBorrar')}</button>
             </div>
           </div>
         </div>

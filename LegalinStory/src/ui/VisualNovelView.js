@@ -55,6 +55,8 @@ export class VisualNovelView {
   #noticeTimer = null;
   #interactionLockBeforeNotice = false;
   #badgeTimer = null;
+  #badgeFadeTimer = null;
+  #pendingPersonIntro = null;
 
   /**
    * @param {HTMLElement} root
@@ -106,6 +108,11 @@ export class VisualNovelView {
     this.#onKeyDown = (event) => this.#handleKeyDown(event);
     this.seenLegalRoles = new Set();
     this.#badgeTimer = null;
+    this.#badgeFadeTimer = null;
+    this.#pendingPersonIntro = null;
+    // Quien resuelve la ficha de cada personaje decide dónde se abre. Lo fija
+    // setLegalPersonReference(); sin él la placa es solo informativa.
+    this.onOpenLegalPerson = null;
 
     root.innerHTML = appTemplate();
 
@@ -195,15 +202,18 @@ export class VisualNovelView {
     clearTimeout(this.#choiceReadyTimer);
     clearInterval(this.#chatTimer);
     clearTimeout(this.#badgeTimer);
+    clearTimeout(this.#badgeFadeTimer);
     this.#choiceReadyTimer = null;
     this.#chatTimer = null;
     this.#badgeTimer = null;
+    this.#badgeFadeTimer = null;
     this.#hideNotice();
     this.typewriter.stop();
   }
 
   showWelcome(onStart) {
     this.seenLegalRoles.clear();
+    this.#pendingPersonIntro = null;
     this.#hideLegalBadge(true);
     this.refs.welcome.hidden = false;
     this.refs.welcome.setAttribute("aria-hidden", "false");
@@ -224,9 +234,10 @@ export class VisualNovelView {
 
   /* ------------------------------------------------------------ story events */
 
-  // Sara supplies the same short profiles used by its people table.
+  // Sara supplies the short profiles behind each character badge.
   setLegalPersonReference(resolvePerson, onOpen) {
     this.resolveLegalPerson = resolvePerson;
+    this.onOpenLegalPerson = onOpen;
     const badge = document.createElement("button");
     badge.type = "button";
     badge.className = this.refs.legalBadge.className;
@@ -241,6 +252,26 @@ export class VisualNovelView {
       event.stopPropagation();
       if (badge.dataset.personId) onOpen(badge.dataset.personId);
     });
+  }
+
+  /**
+   * Mueve la placa del personaje al contenedor que le da el anfitrión: en Sara
+   * vive en la esquina superior derecha, en la barra, para quedar justo enfrente
+   * de la placa del nombre (que va abajo a la izquierda).
+   */
+  attachLegalBadge(container) {
+    if (!container || !this.refs.legalBadge) return;
+    container.append(this.refs.legalBadge);
+  }
+
+  /**
+   * Primera aparición de un personaje: devuelve su id una sola vez para que el
+   * anfitrión abra la ficha de quién es. Devuelve null si no hay ninguna.
+   */
+  takePendingPersonIntro() {
+    const personId = this.#pendingPersonIntro;
+    this.#pendingPersonIntro = null;
+    return personId;
   }
 
   showDialogue({ speaker, speakerKey, remote, text, tone, stage }) {
@@ -952,6 +983,9 @@ export class VisualNovelView {
   #resetTransientOverlays() {
     this.refs.announcement.textContent = "";
     this.typewriter.stop();
+    // La placa del personaje se repinta con cada hablante; aquí se retira para
+    // que no se quede la del anterior durante un chat o un salto de escena.
+    this.#hideLegalBadge(true);
     this.#clearChoices();
     this.#awaitingChoice = false;
     this.#leaveEnding();
@@ -1263,14 +1297,14 @@ export class VisualNovelView {
       return;
     }
 
-    // Solo mostrarlo la primera vez que aparece el cargo en la historia
-    if (this.seenLegalRoles.has(badgeKey)) {
-      if (this.refs.legalBadge.dataset.badgeKey && this.refs.legalBadge.dataset.badgeKey !== badgeKey) {
-        this.#hideLegalBadge();
-      }
+    const known = this.seenLegalRoles.has(badgeKey);
+    // Con ficha abrible la placa sigue a quien habla: se puede releer su
+    // explicación en cualquier momento. Sin ficha solo se presenta una vez.
+    const interactive = Boolean(personId && this.onOpenLegalPerson);
+    if (known && !interactive) {
+      if (this.refs.legalBadge.dataset.badgeKey !== badgeKey) this.#hideLegalBadge();
       return;
     }
-    this.seenLegalRoles.add(badgeKey);
 
     delete this.refs.legalBadge.dataset.personId;
     if (personId) {
@@ -1281,11 +1315,33 @@ export class VisualNovelView {
     this.refs.legalBadgeText.textContent = roleTitle;
     this.refs.legalBadge.hidden = false;
     this.refs.legalBadge.classList.remove("is-hiding");
+    if (this.#badgeFadeTimer) {
+      clearTimeout(this.#badgeFadeTimer);
+      this.#badgeFadeTimer = null;
+    }
+
+    // Placa que se queda mientras hable esa persona: no lleva temporizador.
+    if (interactive) {
+      if (this.#badgeTimer) {
+        clearTimeout(this.#badgeTimer);
+        this.#badgeTimer = null;
+      }
+    }
+
+    if (known) return;
+    this.seenLegalRoles.add(badgeKey);
 
     // Pequeño aria-label o announcement para accesibilidad
     const currentAnnounce = this.refs.announcement.textContent;
     this.refs.announcement.textContent = `[Cargo: ${roleTitle}] ${currentAnnounce}`;
 
+    // Primera aparición con ficha propia: la tarjeta de quién es se abre sola.
+    if (interactive) {
+      this.#pendingPersonIntro = personId;
+      return;
+    }
+
+    // Placa solo informativa (cargos sin ficha): se retira sola.
     if (this.#badgeTimer) clearTimeout(this.#badgeTimer);
     this.#badgeTimer = setTimeout(() => {
       this.#hideLegalBadge();
@@ -1298,20 +1354,25 @@ export class VisualNovelView {
       clearTimeout(this.#badgeTimer);
       this.#badgeTimer = null;
     }
-    if (immediate) {
+    // Un desvanecido pendiente (el del hablante anterior) no puede apagar la
+    // placa de quien acaba de entrar en escena: al pintar una nueva se cancela.
+    if (this.#badgeFadeTimer) {
+      clearTimeout(this.#badgeFadeTimer);
+      this.#badgeFadeTimer = null;
+    }
+    const hide = () => {
+      this.#badgeFadeTimer = null;
+      if (!this.refs.legalBadge) return;
       this.refs.legalBadge.hidden = true;
       this.refs.legalBadge.classList.remove("is-hiding");
       delete this.refs.legalBadge.dataset.badgeKey;
+    };
+    if (immediate) {
+      hide();
       return;
     }
     this.refs.legalBadge.classList.add("is-hiding");
-    setTimeout(() => {
-      if (this.refs.legalBadge) {
-        this.refs.legalBadge.hidden = true;
-        this.refs.legalBadge.classList.remove("is-hiding");
-        delete this.refs.legalBadge.dataset.badgeKey;
-      }
-    }, 350);
+    this.#badgeFadeTimer = setTimeout(hide, 350);
   }
 
   #applyStage(stage) {

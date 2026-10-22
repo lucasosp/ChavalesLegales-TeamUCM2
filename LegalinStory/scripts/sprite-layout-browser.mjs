@@ -112,11 +112,10 @@ try {
     const drawing=await page.evaluate(()=>{
       const d=window.spriteDebug;d.experience.openPanel('pause');
       return {sprite:document.querySelector('[data-person="Sara"] img').src,
-        profile:document.querySelector('.sara-pause-profile img')?.src,
         removed:document.querySelector('[data-sara-action="map"], [data-sara-action="people"], [data-sara-action="notebook"], .sara-bottom')};
     });
     assert.ok(!drawing.sprite.startsWith('data:'),'A drawing replaced the story character');
-    assert.match(drawing.profile,/^data:image\/png/);assert.equal(drawing.removed,null);
+    assert.equal(drawing.removed,null);
     await page.evaluate(()=>{window.spriteDebug.experience.closePanel();window.spriteDebug.avatar=null;});
     const photos=await page.evaluate(async()=>Promise.all(Object.values(window.spriteDebug.backgroundImages).map(src=>new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(true);i.onerror=reject;i.src=src;}))));
     assert.equal(photos.length,9);assert.deepEqual(errors,[]);

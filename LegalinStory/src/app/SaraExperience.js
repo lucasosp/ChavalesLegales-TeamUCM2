@@ -32,7 +32,6 @@ export class SaraExperience {
     this.phase1Triggered = false;
     this.phase2Triggered = false;
     this.phase3Triggered = false;
-    this.referenceNode = null;
     root.classList.add("sara-mode");
     this.novel = root.querySelector(".novel");
     this.cast = element("div", "sara-cast");
@@ -110,12 +109,16 @@ export class SaraExperience {
         if (!speaker) return null;
         const clean = speaker.split(" · ")[0].trim();
         const id = personIds[speaker] || personIds[clean] || (clean.toLowerCase().includes("irene") ? "irene" : null);
-        return this.guide.peopleTable?.rows.find(
+        return this.guide.peopleProfiles?.rows.find(
           (person) => (id && person.id === id) || person.id === speaker || person.id === clean || person.name === speaker || person.name === clean
         );
       },
       (personId) => this.openPerson(personId),
     );
+    // La placa de «quién es» se pega a la caja de diálogo, en la esquina
+    // contraria a la del nombre: el nombre va arriba a la izquierda y ésta
+    // arriba a la derecha, igual que una pegatina más de la caja.
+    this.app.view.attachLegalBadge(root.querySelector("[data-panel]"));
 
     this.onRootClick = (event) => {
       const button = event.target.closest("[data-sara-action]");
@@ -142,16 +145,11 @@ export class SaraExperience {
       this.engine.saveStore = this.localStore;
       this.engine.initialFlags = { resolution: "conviction" };
       this.phase1Triggered = false;
-    this.phase2Triggered = false;
+      this.phase2Triggered = false;
       this.phase3Triggered = false;
       this.closePanel(true);
-      this.drawingModal.open({
-        phase: "phase1",
-        onConfirm: () => {
-          this.engine.history = [];
-          this.updateAvatarUI();
-          this.engine.start({ resume: false });
-        },
+      this.#openFirstDrawing(() => {
+        this.engine.start({ resume: false });
       });
       return;
     }
@@ -195,7 +193,6 @@ export class SaraExperience {
 
   showLanding() {
     this.engine.isRunning = false;
-    this.referenceNode = null;
     this.openShell("start", "Sara");
     this.chrome.forEach((node) => { node.hidden = true; });
     this.overlay.classList.add("is-landing");
@@ -227,18 +224,38 @@ export class SaraExperience {
       this.localStore.clear();
       avatarStore.clear();
       this.phase1Triggered = false;
-    this.phase2Triggered = false;
+      this.phase2Triggered = false;
       this.phase3Triggered = false;
     }
 
     this.closePanel(true);
+    // El primer dibujo va antes de la primera línea: el niño se presenta con su
+    // avatar y la historia arranca con él ya guardado. Al retomar una partida no
+    // se vuelve a pedir.
+    if (!resume && !avatarStore.isPhase1Completed()) {
+      this.#openFirstDrawing(() => {
+        this.engine.start({ resume: false });
+      });
+      return;
+    }
     this.engine.start({ resume });
-    this.updateAvatarUI();
   }
 
-  updateAvatarUI() {
-    // Drawings belong to the child's profile; story characters keep their artwork.
-    if (this.mode === "pause") this.renderPause();
+  /**
+   * Abre el taller del primer dibujo y deja la historia esperándolo. El cierre
+   * del taller continúa con `onConfirm`.
+   */
+  #openFirstDrawing(onConfirm) {
+    this.phase1Triggered = true;
+    this.app.paused = true;
+    this.drawingModal.open({
+      phase: "phase1",
+      onConfirm: () => {
+        this.engine.history = [];
+        this.app.paused = false;
+        onConfirm();
+      },
+    });
   }
 
   renderEndingAvatarCard(choice, dataUrl) {
@@ -297,7 +314,6 @@ export class SaraExperience {
     this.chrome.forEach((node) => { node.inert = true; });
     this.overlay.hidden = false;
     this.overlay.classList.remove("is-landing");
-    this.overlay.classList.toggle("is-people", mode === "people");
     this.overlay.classList.toggle("is-person", mode === "person");
     this.close.hidden = false;
     this.title.textContent = title;
@@ -310,20 +326,26 @@ export class SaraExperience {
   closePanel(starting = false) {
     if (this.mode === "start" && !starting) return;
     if (this.helpFromLanding && !starting) { this.helpFromLanding = false; this.showLanding(); return; }
+    // La ficha se abre sola la primera vez que aparece alguien: al cerrarla, el
+    // foco vuelve a su placa (arriba a la derecha), no a un botón del fondo.
+    const badge = this.mode === "person" && this.body.dataset.personId
+      ? this.root.querySelector(`button[data-legal-badge][data-person-id="${this.body.dataset.personId}"]`)
+      : null;
     this.overlay.hidden = true;
     this.mode = null;
     this.app.paused = false;
     this.novel.inert = false;
     this.chrome.forEach((node) => { node.inert = false; node.hidden = false; });
-    if (!starting && this.returnFocus?.isConnected) this.returnFocus.focus({ preventScroll: true });
+    if (starting) return;
+    const target = badge && !badge.hidden ? badge : this.returnFocus;
+    if (target?.isConnected) target.focus({ preventScroll: true });
   }
 
   openPanel(mode) {
     if (this.mode === "start" && mode === "help") this.helpFromLanding = true;
-    const titles = { help: t("sara.titleHelp"), pause: t("sara.titlePause"), restart: t("sara.titleRestart"), people: this.guide.peopleTable?.title };
+    const titles = { help: t("sara.titleHelp"), pause: t("sara.titlePause"), restart: t("sara.titleRestart") };
     this.openShell(mode, titles[mode] ?? "Sara");
-    if (mode === "people") this.renderPeople();
-    else if (mode === "help") this.renderHelp();
+    if (mode === "help") this.renderHelp();
     else if (mode === "restart") {
       this.body.append(element("p", "sara-panel-intro", t("sara.restartIntro")));
       this.button(t("sara.restartConfirm"), () => {
@@ -347,13 +369,6 @@ export class SaraExperience {
   renderPause() {
     this.body.replaceChildren();
     this.body.append(element("p", "sara-panel-intro", t("sara.pauseIntro")));
-    const avatar = avatarStore.getActiveAvatar();
-    if (avatar) {
-      const profile = element("div", "sara-pause-profile");
-      const image = element("img"); image.src = avatar; image.alt = t("sara.yourDrawing");
-      profile.append(image, element("span", "", t("sara.drawingWithYou")));
-      this.body.append(profile);
-    }
     this.button(t("sara.keepGoing"), () => this.closePanel(), "sara-primary");
     const previous = this.button(t("sara.previousLine"), () => {
       this.closePanel();
@@ -527,91 +542,19 @@ export class SaraExperience {
   }
 
   openPerson(personId) {
-    const person = this.guide.peopleTable?.rows.find((row) => row.id === personId);
+    const person = this.guide.peopleProfiles?.rows.find((row) => row.id === personId);
     if (!person) return;
     this.openShell("person", person.name);
     this.body.dataset.personId = person.id;
     this.body.append(element("p", "sara-person-summary", person.summary), element("p", "sara-person-explanation", person.detail));
-    this.button(this.guide.peopleTable.continueLabel, () => this.closePanel(), "sara-primary");
-  }
-
-  renderPeople() {
-    const content = this.guide.peopleTable;
-    this.body.append(element("p", "sara-panel-intro", content.intro));
-    const table = element("table", "sara-people-table");
-    table.setAttribute("aria-labelledby", this.title.id);
-    const head = table.createTHead().insertRow();
-    for (const label of [content.personColumn, content.taskColumn]) {
-      const cell = element("th", "", label);
-      cell.scope = "col";
-      head.append(cell);
-    }
-    const rows = table.createTBody();
-    for (const person of content.rows) {
-      const row = rows.insertRow();
-      const name = element("th");
-      name.scope = "row";
-      const toggle = element("button", "sara-person-toggle");
-      toggle.type = "button";
-      toggle.dataset.personId = person.id;
-      toggle.append(element("span", "sara-person-name", person.name));
-      const detail = rows.insertRow();
-      detail.hidden = true;
-      detail.id = `sara-person-detail-${person.id}`;
-      detail.className = "sara-person-detail";
-      const cell = detail.insertCell();
-      cell.colSpan = 2;
-      cell.textContent = person.detail;
-      toggle.setAttribute("aria-expanded", "false");
-      toggle.setAttribute("aria-controls", detail.id);
-      toggle.addEventListener("click", () => {
-        const expanded = toggle.getAttribute("aria-expanded") === "true";
-        for (const other of table.querySelectorAll('[aria-expanded="true"]')) {
-          other.setAttribute("aria-expanded", "false");
-          document.getElementById(other.getAttribute("aria-controls")).hidden = true;
-          other.closest("tr").classList.remove("is-open");
-        }
-        toggle.setAttribute("aria-expanded", String(!expanded));
-        detail.hidden = expanded;
-        row.classList.toggle("is-open", !expanded);
-      });
-      name.append(toggle);
-      row.append(name, element("td", "", person.summary));
-    }
-    const scroll = element("div", "sara-people-scroll");
-    scroll.append(table);
-    this.body.append(scroll);
-    const actions = element("div", "sara-people-actions");
-    const continueButton = this.button(content.continueLabel, () => {
-      this.closePanel();
-      if (this.engine.currentNode.reference === "people") this.app.advance();
-    }, "sara-primary", actions);
-    continueButton.dataset.saraPeopleContinue = "";
-    this.body.append(actions);
+    this.button(this.guide.peopleProfiles.continueLabel, () => this.closePanel(), "sara-primary");
   }
 
   sync() {
     const node = this.engine.currentNode;
     this.root.dataset.saraNode = this.engine.nodeId;
 
-    // Los dibujos cierran capítulo: el primero al acabar el 1 (antes de la
-    // tarjeta del 2) y el segundo al acabar el 2 (antes de la del 3).
-    if (this.engine.nodeId === "c2-card" && !avatarStore.isPhase1Completed() && !this.phase1Triggered) {
-      this.phase1Triggered = true;
-      this.engine.history = [];
-      this.app.paused = true;
-      this.drawingModal.open({
-        phase: "phase1",
-        onConfirm: () => {
-          this.engine.history = [];
-          this.updateAvatarUI();
-          this.app.paused = false;
-          this.sync();
-        },
-      });
-      return;
-    }
-
+    // El segundo dibujo cierra el capítulo 2, justo antes de la tarjeta del 3.
     if (this.engine.nodeId === "c3-card" && !avatarStore.isPhase2Completed() && !this.phase2Triggered) {
       this.phase2Triggered = true;
       this.engine.history = []; // Crucial: barrier to prevent rewinding before the trauma drawing
@@ -621,7 +564,6 @@ export class SaraExperience {
         phase: "phase2",
         onConfirm: () => {
           this.engine.history = []; // Irreversible
-          this.updateAvatarUI();
           this.app.paused = false;
           this.sync();
         },
@@ -638,7 +580,6 @@ export class SaraExperience {
         phase: "phase3",
         onConfirm: (choice, dataUrl) => {
           this.engine.history = [];
-          this.updateAvatarUI();
           this.app.paused = false;
           this.renderEndingAvatarCard(choice, dataUrl);
         },
@@ -656,11 +597,9 @@ export class SaraExperience {
     this.renderCast(node);
     const backBtn = this.root.querySelector("[data-sara-action='back']");
     if (backBtn) backBtn.disabled = this.engine.history.length === 0 || this.engine.isFinished;
-    // One opening per visit, including a restored save. Closing it does not reopen it.
-    if (node.reference === "people" && this.referenceNode !== this.engine.nodeId) {
-      this.referenceNode = this.engine.nodeId;
-      this.openPanel("people");
-    } else if (node.reference !== "people") this.referenceNode = null;
+    // Primera aparición de un personaje: la ficha de quién es se abre sola.
+    const intro = this.app.view.takePendingPersonIntro();
+    if (intro) this.openPerson(intro);
   }
 
   renderCast(node) {

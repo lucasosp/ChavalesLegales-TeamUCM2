@@ -13,18 +13,18 @@ para lectores de 10–12 años. Las decisiones emocionales no cambian la sentenc
 - En vez de aprender términos legales, el lector sabe qué va a pasar: buscar
   pruebas, contar lo ocurrido con ayuda, ir al juicio y conocer la decisión.
 - Los detalles técnicos y las fuentes se conservan en `legal.json`. No se recitan
-  en la historia ni aparecen en la tabla infantil.
+  en la historia ni aparecen en las fichas de personajes.
 
-## Tabla interactiva
+## Fichas de personajes
 
-`c5-team` abre «¿Quién es quién?»: nueve filas con un nombre y una función breve.
-Cada fila tiene una flecha que abre una sola frase. Al abrir otra, la anterior se cierra. No hay preguntas, puntuación ni obligación
-de abrir todas las filas. Se puede continuar, cerrar con Escape y volver a
-consultarla al preguntar quién estará en la sala o desde el menú de pausa.
+Cada personaje con ficha (`guide.peopleProfiles`) tiene una placa con su nombre en
+la barra superior. La primera vez que aparece, su ficha se abre sola: el nombre,
+una frase sobre su papel y una explicación breve. Al cerrarla, el foco vuelve a su
+placa, que permite releerla cuando haga falta. Leer una ficha pausa la novela y no
+hace avanzar la escena ni salta ninguna línea.
 
-La tabla conserva la pausa de la novela, el foco dentro del panel y las cabeceras
-semánticas de una tabla. Sus controles tienen etiquetas de estado y funcionan con
-teclado. El panel permite desplazarse en pantallas pequeñas.
+Las fichas conservan la pausa de la novela y el foco dentro del panel, y funcionan
+con teclado y lector de pantalla.
 
 ## Garantías que permanecen en la historia
 
@@ -52,13 +52,14 @@ la [LECrim](https://www.boe.es/buscar/act.php?id=BOE-A-1882-6036), la
 [Código Civil, arts. 158 y 163](https://www.boe.es/buscar/act.php?id=BOE-A-1889-4763#art158).
 
 La prueba `npm run test:sara` recorre las rutas de ambos resultados y comprueba
-que no se saltan las explicaciones esenciales. Cubre también abrir y cerrar la
-tabla, desplegar ejemplos, pausar la historia y continuar sin leer todas las filas.
-Comprueba los datos y textos de la tabla en los seis idiomas.
+que no se saltan las explicaciones esenciales. Cubre también las fichas que se
+abren solas al conocer a cada personaje, pausar la historia y continuar sin perder
+la escena. Comprueba los datos y textos de las fichas en los seis idiomas.
 
 `npm run test:people` comprueba en navegador escritorio, móvil y pantalla
-horizontal, además de cargar los seis idiomas. Verifica que queda espacio para
-leer una fila completa y que el teclado no hace avanzar la historia. Estas
+horizontal, además de cargar los seis idiomas. Verifica que la ficha se ancla a su
+placa, que el teclado no hace avanzar la historia y que al cerrarla el foco vuelve
+a la placa. Estas
 comprobaciones han pasado con Chromium; requieren Playwright y Chromium. La novela y la guía se
 regeneran con `npm run story:sara`.
 

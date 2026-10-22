@@ -327,7 +327,7 @@
       "c5-card": {
         "kicker": "SARA · CAPÍTOL 5 DE 6",
         "title": "Eth tribunau",
-        "text": "Un temps dempús. Saber qui ei qui."
+        "text": "Un temps dempús. Te toca declarar."
       },
       "c5-01": {
         "text": "Arribe ua carta entà que Sara declare. Irene la lieg damb era e damb sa mair."
@@ -344,7 +344,7 @@
         "speaker": "Irene · advocada"
       },
       "c5-team": {
-        "text": "I a diuèrses persones entà ajudar-te. Mira qui ei qui. Non as d'apréner es nòms de memòria.",
+        "text": "I a diuèrses persones entà ajudar-te. Non as d'apréner es nòms de memòria.",
         "speaker": "Irene · advocada"
       },
       "c5-choice": {
@@ -362,7 +362,7 @@
         ]
       },
       "c5-people": {
-        "text": "Pòdes tornar a mirar era taula. Abans d'entrar, te dirè qui serà damb tu.",
+        "text": "Abans d'entrar, te dirè qui serà damb tu e qué hè cada persona.",
         "speaker": "Irene · advocada"
       },
       "c5-room": {
@@ -755,11 +755,7 @@
         "text": "Dani a dètz ans. Era sua mair tanben recep ajuda. Javier, eth pair, ei responsable de çò que hè; Sara non l'a de cambiar entà meritar proteccion."
       }
     ],
-    "peopleTable": {
-      "title": "Qui ei qui?",
-      "intro": "Tòca ua flècha entà saber-ne mès.",
-      "personColumn": "Persona",
-      "taskColumn": "Çò que hè",
+    "peopleProfiles": {
       "continueLabel": "Contunhar damb Sara",
       "rows": [
         {

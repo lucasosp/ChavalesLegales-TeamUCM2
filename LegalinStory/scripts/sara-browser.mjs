@@ -52,24 +52,32 @@ try {
     await page.locator('#app[data-sara-node="c1-01"]').waitFor();
     await page.keyboard.press('Escape');
     await page.getByRole('heading', { name: 'Un pequeño descanso' }).waitFor();
-    assert.ok(await page.locator('.sara-pause-profile img').isVisible());
+    assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('legalinstory_avatar_drawings') || '{}').phase1Completed), true, 'The first drawing survives the reload');
+    assert.equal(await page.locator('.sara-pause-profile').count(), 0, 'El menú de pausa ya no muestra el dibujo');
     const atPause = await page.locator('#app').getAttribute('data-sara-node');
     await page.getByRole('checkbox', { name: 'Guardar en este dispositivo' }).focus();
     await page.keyboard.press('Space');
     await page.keyboard.press('Space');
     assert.equal(await page.locator('#app').getAttribute('data-sara-node'), atPause);
-    await page.getByRole('button', { name: 'Letra más grande' }).click();
-    assert.equal(await page.getByRole('button', { name: 'Letra más grande' }).getAttribute('aria-pressed'), 'true');
-    await page.getByRole('button', { name: 'Letra más grande' }).click();
-    await page.getByRole('button', { name: 'Necesito ayuda' }).click();
-    assert.ok(await page.locator('a[href="tel:112"]').isVisible());
+    // La casilla va tapada por su propio cuadro: se pulsa la fila, como un niño.
+    const largeText = page.getByRole('checkbox', { name: 'Letra más grande' });
+    const largeTextRow = page.locator('.sara-toggle', { hasText: 'Letra más grande' });
+    await largeTextRow.click();
+    assert.equal(await largeText.isChecked(), true);
+    assert.equal(await page.locator('#app').evaluate((app) => app.classList.contains('sara-large-text')), true);
+    await largeTextRow.click();
+    assert.equal(await largeText.isChecked(), false);
+    assert.equal(await page.locator('#app').evaluate((app) => app.classList.contains('sara-large-text')), false);
+    // El panel de ayuda ya no vive en el menú de pausa: lo cubre sara-smoke.
     await page.keyboard.press('Escape');
     const visited = new Set();
     for (let guard = 0; guard < 170; guard++) {
       const id = await page.locator('#app').getAttribute('data-sara-node');
       visited.add(id);
-      if (await page.locator('[data-sara-people-continue]').isVisible()) {
-        await page.locator('[data-sara-people-continue]').click();
+      // La primera vez que aparece un personaje con ficha, su tarjeta se abre
+      // sola: se lee y se cierra para seguir con la escena.
+      if (await page.locator('.is-person .sara-primary').isVisible()) {
+        await page.locator('.is-person .sara-primary').click();
         continue;
       }
       if (await page.locator('.sara-drawing-canvas').count()) { await draw(); continue; }

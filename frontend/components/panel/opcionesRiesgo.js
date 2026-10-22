@@ -10,4 +10,5 @@ export const OPCIONES_RIESGO = [
   { value: 'grooming' },
   { value: 'control_pareja' },
   { value: 'privacidad' },
+  { value: 'violencia_intrafamiliar' },
 ]
