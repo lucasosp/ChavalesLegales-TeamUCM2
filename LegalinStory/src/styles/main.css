@@ -3447,7 +3447,10 @@ body { background: var(--verde-950); }
 }
 
 .chat-hint {
-  border-top: 0;
+  /* Sin borde del navegador: `border-top: 0` dejaba los otros tres lados con la
+     cenefa 3D por defecto (2px outset), que asomaba como una línea gris en las
+     esquinas redondeadas del móvil. */
+  border: 0;
   background: #202c33;
   color: #00a884;
   font-family: system-ui, sans-serif;
