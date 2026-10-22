@@ -316,13 +316,12 @@
   width: min(100%, 1700px, calc(100cqh * 1.9048));
   padding: 6px;
   box-sizing: border-box;
-  background-color: var(--superficie);
-  background-image: radial-gradient(rgba(1, 25, 19, 0.06) 1.2px, transparent 1.3px);
-  background-size: 11px 11px;
-  border: 3px solid var(--verde-950);
+  background-color: #F7F1E8;
+  background-image: none;
+  border: 3px solid #D8C8B5;
   border-radius: 18px 14px 16px 15px / 15px 17px 14px 16px;
-  /* Placa de tinta: sobre el fondo casi negro, la tarjeta blanca la aguanta. */
-  box-shadow: 6px 6px 0 var(--verde-950);
+  /* Placa cálida tono madera */
+  box-shadow: 6px 6px 0 #C4B5A2;
 }
 
 /* Caja de las capas (escenario, clima y capa interactiva): las tres comparten
@@ -364,14 +363,14 @@
   font-family: var(--font-display);
   font-size: 21px;
   font-weight: 800;
-  fill: var(--verde-900);
+  fill: #4A2810;
 }
 
 .dogTrait {
   font-family: var(--font-display);
   font-size: 14px;
   font-weight: 700;
-  fill: var(--verde-700);
+  fill: #8D5524;
   letter-spacing: 0.04em;
 }
 

@@ -400,13 +400,12 @@
   width: min(100%, 1000px, calc(100cqh * 1.4815));
   padding: 10px;
   box-sizing: border-box;
-  background-color: var(--superficie);
-  background-image: radial-gradient(rgba(1, 25, 19, 0.06) 1.2px, transparent 1.3px);
-  background-size: 11px 11px;
-  border: 3px solid var(--verde-950);
+  background-color: #F7F1E8;
+  background-image: none;
+  border: 3px solid #D8C8B5;
   border-radius: 18px 14px 16px 15px / 15px 17px 14px 16px;
-  /* Placa de tinta: sobre el fondo casi negro, la tarjeta blanca la aguanta. */
-  box-shadow: 6px 6px 0 var(--verde-950);
+  /* Placa cálida tono madera */
+  box-shadow: 6px 6px 0 #C4B5A2;
 }
 
 /* El SVG se queda sin fondo ni sombra propios: el marco lo pone la tarjeta.

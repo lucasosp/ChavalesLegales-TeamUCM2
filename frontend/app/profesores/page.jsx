@@ -24,7 +24,7 @@ export default function ApartadoProfesores() {
           a la derecha el enlace a los informes + el idioma. */}
       <Barra
         href="/"
-        texto={`← ${t('profesores.inicio')}`}
+        texto={t('profesores.inicio')}
         acciones={<Link href="/servicios" className="btn-back-home">{t('profesores.verInformes')}</Link>}
       />
 

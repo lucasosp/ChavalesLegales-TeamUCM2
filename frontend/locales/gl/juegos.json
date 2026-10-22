@@ -46,7 +46,7 @@
   "cidPorDefecto": "Valores predeterminados",
   "cidInformeNoDisponible": "O informe estará dispoñible cando se complete polo menos unha rolda.",
   "arenaTitulo": "A miña caixa de area",
-  "arenaTerminado": "Rematei ✓",
+  "arenaTerminado": "Rematei",
   "arenaAria": "Caixa de area: arrastra os cans desde o andel ata a area",
   "arenaPerroAria": "{nombre}, o can {rasgo}",
   "arenaRasgo_pipo": "pequeno",

@@ -46,7 +46,7 @@
   "cidPorDefecto": "Valores por defecto",
   "cidInformeNoDisponible": "El informe estará disponible al completar al menos una ronda.",
   "arenaTitulo": "Mi caja de arena",
-  "arenaTerminado": "He terminado ✓",
+  "arenaTerminado": "He terminado",
   "arenaAria": "Caja de arena: arrastra los perros desde el estante hasta la arena",
   "arenaPerroAria": "{nombre}, el perro {rasgo}",
   "arenaRasgo_pipo": "pequeño",

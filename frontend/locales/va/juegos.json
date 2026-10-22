@@ -46,7 +46,7 @@
   "cidPorDefecto": "Valors per defecte",
   "cidInformeNoDisponible": "L'informe estarà disponible quan es complete almenys una ronda.",
   "arenaTitulo": "La meua caixa d'arena",
-  "arenaTerminado": "He acabat ✓",
+  "arenaTerminado": "He acabat",
   "arenaAria": "Caixa d'arena: arrossega els gossos des del prestatge fins a l'arena",
   "arenaPerroAria": "{nombre}, el gos {rasgo}",
   "arenaRasgo_pipo": "xicotet",
