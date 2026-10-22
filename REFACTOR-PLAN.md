@@ -23,7 +23,7 @@
 | 2b · Enseñar `deltaMetrics`/`alerts` | ✅ hecho | Δ + alertas + duración de minijuego + export de eventos |
 | 4 · Routers | ✅ absorbida | ya no hay nada que partir: 5 rutas |
 | 5 · Destrackear `public/novela` | ✅ hecho | −190 archivos, −33.095 líneas; D4 resuelto |
-| 3b · Archivo por caso | 🅿️ aplazada | ticket aparte, no es refactor |
+| 3b · Archivo por caso | ✅ hecho | `casos_data/<id>.json`, validación de id, migración automática |
 | 6 · Partir `PanelEducador` | ✅ hecho | 474 → 4 archivos, el mayor 190 |
 
 **Bug preexistente detectado y arreglado:** `informe.module.css` y las dos páginas de
@@ -711,5 +711,7 @@ informe, también resuelto.
 
 **Cuando se confirme D4:** destrackear `frontend/public/novela` (190 archivos).
 
-**Ticket aparte:** etapa 3b (un archivo JSON por caso) — no es refactor, cambia durabilidad, y
-requiere sanear `caso_id` antes de usarlo como nombre de archivo.
+**Etapa 3b hecha:** un archivo por caso, con validación de `caso_id` (path traversal) y migración
+automática del blob antiguo. **Requiere un cambio en el servidor antes de desplegar**: el
+`deploy/backend-entrypoint.sh` enlaza `/app/casos_data.json`, así que hay que definir
+`CASOS_DIR=/data/casos_data` o los casos se escribirían en la capa efímera del contenedor.
