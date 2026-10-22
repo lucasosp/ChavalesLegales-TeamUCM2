@@ -7,3 +7,4 @@ echo Contraseña de datathon: D4t4th0n#FdI
 echo.
 powershell -ExecutionPolicy Bypass -File "%~dp0deploy-server.ps1"
 pause
+

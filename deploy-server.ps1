@@ -42,3 +42,4 @@ echo ' Despliegue completado con exito en http://chavaleslegales.fdi.ucm.es/'
 "@
 
 ssh -o StrictHostKeyChecking=no "$serverUser@$serverHost" $remoteCommands
+
