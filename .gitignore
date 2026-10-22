@@ -16,6 +16,13 @@ venv/
 .env.*
 !.env.example
 
+# --- devenv / direnv ---
+.devenv/
+.direnv/
+devenv.local.nix
+devenv.local.yaml
+.envrc.local
+
 # --- Editores / SO ---
 .vscode/
 .idea/
