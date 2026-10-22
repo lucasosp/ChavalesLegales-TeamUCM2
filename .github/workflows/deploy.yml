@@ -1,8 +1,9 @@
 name: Despliegue Automático en Servidor FDI UCM
 
 on:
-  push:
-    branches: [ main ]
+  # El despliegue automático por SSH desde GitHub Actions no funciona
+  # porque el firewall de la UCM bloquea el puerto 22 desde IPs externas.
+  # Usar deploy-server.bat desde la red de la facultad (eduroam/cable/VPN).
   workflow_dispatch:
 
 jobs:
