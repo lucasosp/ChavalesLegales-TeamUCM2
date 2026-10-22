@@ -20,11 +20,20 @@
 | 2 · Telemetría (D2-a) | ✅ hecho | `telemetry.py` borrado; todo pasa por `casos` |
 | 3a · `lib/casos.js` sin offline (D11) | ✅ hecho | 85→72, cero `catch {}` mudos |
 | 3 · Locking de `CasosStore` | ⏳ pendiente | ver §Etapa 3 |
-| 2b · Enseñar `deltaMetrics`/`alerts` | ⏳ pendiente | ver §Etapa 2b |
+| 2b · Enseñar `deltaMetrics`/`alerts` | ✅ hecho | Δ + alertas + duración de minijuego + export de eventos |
 | 4 · Routers | ✅ absorbida | ya no hay nada que partir: 5 rutas |
 | 5 · Destrackear `public/novela` | ⛔ bloqueada | D4 sin responder (se deja como está) |
 | 3b · Archivo por caso | 🅿️ aplazada | ticket aparte, no es refactor |
 | 6 · Partir `PanelEducador` | ⏳ pendiente | ahora es el mayor del front (474) |
+
+**Bug preexistente detectado (no arreglado):** `informe.module.css` y las dos páginas de
+`/informe` usan **nombres de clase distintos**. La hoja define `topbar`, `mainContainer`,
+`headerCard`, `seccionCard`, `kpisSection`, `btnTop`, `btnTopGhost`… y las páginas piden
+`toolbar`, `doc`, `portada`, `seccion`, `kpis`, `btn`, `btnGhost`… Resultado: `styles.toolbar`
+es `undefined`, React omite el atributo y esos contenedores salen **sin clase**. En el HTML de
+`/informe` se ve `<div>` y `<article>` pelados. Faltan 5 de 10 clases en la lista y 13 de 43 en el
+detalle. El informe se pinta casi sin estilos (solo funcionan `tabla`, `leyenda`, `page`…).
+Es un cambio visual: va en su propio commit, con un mapa de renombrado, no dentro del refactor.
 
 **Trabajo extra no previsto:** `sara-smoke.mjs` **ya fallaba en HEAD** (los nodos `external` de
 `sara` no estaban registrados en el test y el bucle no cedía el event loop). Arreglado en 2 líneas;
