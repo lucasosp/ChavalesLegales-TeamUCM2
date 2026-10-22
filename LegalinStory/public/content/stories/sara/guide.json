@@ -30,51 +30,51 @@
     {
       "chapter": 1,
       "title": "Una señal",
-      "text": "El centro escucha y atiende indicios de violencia."
+      "text": "En el instituto se dan cuenta de que algo va mal y escuchan."
     },
     {
       "chapter": 2,
       "title": "Pedir ayuda",
-      "text": "El personal coordina la comunicación y los apoyos para proteger."
+      "text": "La tutora avisa a quienes pueden proteger a Sara."
     },
     {
       "chapter": 3,
-      "title": "Valorar y proteger",
-      "text": "Servicios Sociales y protección de menores valoran necesidades y seguridad."
+      "title": "Ver qué hace falta",
+      "text": "Servicios Sociales mira cómo está la familia y si están seguros."
     },
     {
       "chapter": 4,
       "title": "Seguir viviendo",
-      "text": "Acompañamiento socioeducativo: clases, vínculos y actividades."
+      "text": "Clases, amigas y voleibol también importan."
     },
     {
       "chapter": 5,
       "title": "Entender la citación",
-      "text": "Se explica para qué es la actuación y quién interviene."
+      "text": "La abogada explica para qué hay que ir al juzgado y quién estará."
     },
     {
       "chapter": 5,
-      "title": "Participar con apoyos",
-      "text": "Se valoran medidas para la declaración. La demo omite las preguntas sobre violencia."
+      "title": "Hablar con apoyos",
+      "text": "Se pide lo que Sara necesita para estar tranquila al hablar."
     },
     {
       "chapter": 6,
-      "title": "Esperar información",
-      "text": "El procedimiento continúa. Los tiempos y actuaciones varían."
+      "title": "Esperar noticias",
+      "text": "El juzgado sigue trabajando. A veces tarda."
     },
     {
       "chapter": 6,
-      "title": "Resolución y continuidad",
-      "text": "Se explica la resolución. Los apoyos se revisan según las necesidades."
+      "title": "La sentencia y después",
+      "text": "Se explica qué ha decidido el tribunal. La ayuda sigue."
     }
   ],
   "people": [
     {
       "name": "Sara",
-      "role": "15 años · 4.º de ESO",
+      "role": "14 años · 3.º de ESO",
       "initial": "S",
       "color": "peach",
-      "text": "Le gusta el voleibol, dibuja en los márgenes y tiene una amiga llamada Paula. Su vida es más amplia que el procedimiento.",
+      "text": "Le gusta el voleibol, dibuja estrellas en sus cuadernos y su mejor amiga es Paula. Su vida es mucho más que lo que pasa en el juzgado.",
       "sprite": "assets/characters/sara/smile.svg"
     },
     {
@@ -82,56 +82,77 @@
       "role": "Su mejor amiga",
       "initial": "P",
       "color": "pink",
-      "text": "Ofrece compañía y conserva los planes compartidos. No tiene que investigar ni resolver la situación."
+      "text": "Le hace compañía y le guarda los apuntes. No tiene que investigar ni arreglar nada."
     },
     {
       "name": "Laura",
-      "role": "Profesora",
+      "role": "Tutora",
       "initial": "L",
       "color": "green",
-      "text": "Escucha, atiende señales y coordina la comunicación mediante el protocolo del centro. No investiga delitos."
-    },
-    {
-      "name": "Irene",
-      "role": "Trabajadora social",
-      "initial": "I",
-      "color": "purple",
-      "text": "Acompaña la vida cotidiana y coordina apoyos con el equipo. No dicta medidas judiciales ni sentencias."
+      "text": "Escucha a Sara, se da cuenta de que algo va mal y avisa a quien tiene que avisar."
     },
     {
       "name": "Elena",
-      "role": "Abogada",
+      "role": "Trabajadora social",
       "initial": "E",
+      "color": "purple",
+      "text": "Acompaña a Sara en su día a día y organiza las ayudas. No decide nada en el juzgado."
+    },
+    {
+      "name": "Irene",
+      "role": "Abogada",
+      "initial": "I",
       "color": "blue",
-      "text": "Asesora a Sara, explica las actuaciones y defiende sus intereses. La defensa de Javier corresponde a otro profesional."
+      "text": "Le explica a Sara cada paso y defiende sus intereses. Javier tiene su propio abogado."
+    },
+    {
+      "name": "Oficina judicial",
+      "role": "Tribunal de Instancia",
+      "initial": "O",
+      "color": "green",
+      "text": "Es el equipo de personas que organiza y tramita el caso en el Tribunal de Instancia. Qué sección se encarga depende de cómo esté organizado el tribunal y del tipo de asunto."
     },
     {
       "name": "Jueza",
-      "role": "Autoridad judicial",
+      "role": "Juez o magistrado",
       "initial": "J",
       "color": "purple",
-      "text": "Dirige las actuaciones que le corresponden y adopta decisiones con las garantías del procedimiento."
+      "text": "Dirige las actuaciones judiciales, protege los derechos de todas las partes y decide lo que necesita una resolución judicial."
     },
     {
-      "name": "Fiscalía",
+      "name": "Letrada (LAJ)",
+      "role": "Letrado de la Administración de Justicia",
+      "initial": "L",
+      "color": "blue",
+      "text": "El Letrado de la Administración de Justicia es un funcionario público con funciones procesales, de documentación y de fe pública judicial, entre otras. Cuando la ley lo exige, puede autorizar el acta de una declaración y comprobar la grabación."
+    },
+    {
+      "name": "Fiscal",
       "role": "Ministerio Fiscal",
       "initial": "F",
       "color": "green",
-      "text": "Promueve la acción de la justicia y vela por la legalidad y los derechos. Que Sara sea menor no convierte la causa contra su padre en justicia penal de menores."
+      "text": "El fiscal defiende la legalidad. En un proceso penal puede acusar en nombre de la sociedad y vela por los derechos del menor."
     },
     {
-      "name": "Equipo de apoyo",
-      "role": "Servicios Sociales y atención a víctimas",
+      "name": "Equipo psicosocial",
+      "role": "Psicólogos y trabajadores sociales del juzgado",
       "initial": "+",
-      "color": "blue",
-      "text": "Sus funciones son distintas: la protección de menores valora la seguridad familiar; la asistencia a víctimas informa y ofrece apoyos en el proceso."
+      "color": "peach",
+      "text": "Cuando el juzgado lo decide, psicólogos y trabajadores sociales del juzgado pueden ayudar a escuchar al menor y dar su opinión como especialistas."
+    },
+    {
+      "name": "OAVD",
+      "role": "Oficina de Asistencia a las Víctimas del Delito",
+      "initial": "V",
+      "color": "pink",
+      "text": "Ofrece orientación jurídica general, apoyo psicológico y social, información sobre el procedimiento y ayuda personalizada. No es quien juzga el caso."
     },
     {
       "name": "Su familia",
       "role": "Dani, su madre y Javier",
       "initial": "D",
       "color": "peach",
-      "text": "Dani tiene diez años. Su madre también recibe apoyo. Javier, el padre, es responsable de su conducta; Sara no tiene que cambiarla para merecer protección."
+      "text": "Dani tiene diez años. Su madre también recibe ayuda. Javier, el padre, es responsable de lo que hace; Sara no tiene que cambiarle para merecer protección."
     }
   ]
 }
