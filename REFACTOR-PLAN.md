@@ -22,7 +22,7 @@
 | 3 · Locking de `CasosStore` | ✅ hecho | 4 operaciones bajo lock + copias defensivas + 8 tests |
 | 2b · Enseñar `deltaMetrics`/`alerts` | ✅ hecho | Δ + alertas + duración de minijuego + export de eventos |
 | 4 · Routers | ✅ absorbida | ya no hay nada que partir: 5 rutas |
-| 5 · Destrackear `public/novela` | ⛔ bloqueada | D4 sin responder (se deja como está) |
+| 5 · Destrackear `public/novela` | ✅ hecho | −190 archivos, −33.095 líneas; D4 resuelto |
 | 3b · Archivo por caso | 🅿️ aplazada | ticket aparte, no es refactor |
 | 6 · Partir `PanelEducador` | ✅ hecho | 474 → 4 archivos, el mayor 190 |
 
@@ -218,7 +218,7 @@ Necesario para la etapa 5 (dejar de versionar `frontend/public/novela`, 190 arch
 | **D12** | Traducciones pendientes | La etapa 2b añade claves **solo a `locales/es/`**; el resto cae a español por el fallback `DICTS[es]` de `lib/i18n.jsx` |
 | **D2** | **D2-a**: borrar `telemetry.py` y usar la API de casos | ✅ Hecho. −764 líneas + 7 rutas. Los dibujos no se tocan (van por `casos`) |
 | **D3** | **Borrar** `contenido.py` y `/api/juegos` | ✅ Hecho. −179 líneas + 1 ruta |
-| **D4** | No se hace (se desconoce el deploy) | ⛔ `frontend/public/novela` sigue versionado |
+| **D4** | **Resuelto: SÍ se ejecuta** | ✅ `.dockerignore` ya excluía `frontend/public/novela`; el Dockerfile la reconstruye con `npm run build` |
 | **D13** | El fallo de creación **tiene que verse en la UI** | ✅ `guardarMetaCaso` lanza, `PanelEducador` hace `await` y muestra un `role="alert"`; el código no se muestra si falla |
 
 **D6b · ✅ Resuelto: (a) el PIN es el código del caso.**
@@ -597,11 +597,23 @@ Hoy no se nota porque todo va por el rewrite de Next (mismo origen), pero es una
 
 ---
 
-### Etapa 5 · ⛔ Bloqueada por D4 (no se hace)
+### Etapa 5 · ✅ Hecha (D4 resuelto en el servidor)
 
-Sin confirmación de que producción ejecute `npm run build`, `frontend/public/novela` sigue
-versionado. Riesgo asumido conscientemente: son 190 archivos de ruido en git a cambio de no
-poder tumbar `/novela` en el servidor.
+Comprobado en `tete@miquella`: el deploy es **Docker + Caddy** (`datathon.service`), no PM2
+(`ecosystem.config.js` está obsoleto). El `.dockerignore` del servidor **ya excluía**
+`frontend/public/novela/` del contexto de build, y el `Dockerfile` la regenera:
+
+```dockerfile
+COPY LegalinStory ./LegalinStory
+RUN cd LegalinStory && npm ci ...          # vite disponible
+COPY frontend ./frontend
+RUN cd frontend && npm run build           # prebuild -> prepare-novel.mjs -> public/novela
+COPY --from=frontend-build /src/frontend/public ./public
+```
+
+Es decir: la copia commiteada **nunca ha entrado en la imagen**. Destrackearla no podía afectar
+a producción. Hecho: −190 archivos, −33.095 líneas, y `.gitignore` documenta que tras un
+`git clone` hay que pasar por `setup` o `npm --prefix frontend run dev` antes de abrir `/novela`.
 
 Solo si **D4 = sí** (el deploy corre `npm run build`, que ya dispara `prebuild`).
 
