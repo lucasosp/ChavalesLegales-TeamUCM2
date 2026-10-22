@@ -29,5 +29,7 @@
   "verInforme": "Ver informe del caso",
   "crearOtroCaso": "Crear otro caso",
   "verInformes": "Ver informes",
-  "errorCrearCaso": "No se pudo crear el caso. Comprueba la conexión e inténtalo otra vez: sin caso no hay código que dar al alumno."
+  "errorCrearCaso": "No se pudo crear el caso. Comprueba la conexión e inténtalo otra vez: sin caso no hay código que dar al alumno.",
+  "codigoAlumnoLabel": "Código que teclea el alumno",
+  "codigoAlumnoAyuda": "El alumno entra en «Soy alumno» y escribe estos 5 dígitos."
 }

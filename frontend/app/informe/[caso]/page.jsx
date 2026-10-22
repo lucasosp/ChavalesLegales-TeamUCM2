@@ -17,6 +17,11 @@ import { VIEW } from '../../experiments/caja-arena/config'
 
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1)
 
+// El caso guarda el id del riesgo; el texto se resuelve en la lengua del lector.
+// Los casos antiguos solo tienen el texto, así que se muestra tal cual.
+const textoRiesgo = (t, meta) =>
+  meta?.tipoRiesgoId ? t(`profesores.riesgo_${meta.tipoRiesgoId}`) : meta?.tipoRiesgo
+
 // Traduce una clave del espacio informe; si no existe, devuelve el texto original guardado
 function useTr() {
   const t = useT()
@@ -400,7 +405,7 @@ export default function InformeCaso({ params }) {
           <div>
             <span className={styles.kicker}>{t('informe.kickerCaso')}</span>
             <h1>{t('informe.tituloCaso', { id })}</h1>
-            <p className={styles.subtitulo}>{meta.nombreJoven ?? t('informe.sinIdentificar')}{meta.tipoRiesgo ? ` · ${meta.tipoRiesgo}` : ''}</p>
+            <p className={styles.subtitulo}>{meta.nombreJoven ?? t('informe.sinIdentificar')}{meta.tipoRiesgo ? ` · ${textoRiesgo(t, meta)}` : ''}</p>
           </div>
           <dl className={styles.fichaGrid}>
             <dt>{t('informe.dtInicio')}</dt><dd>{fmtFecha(a.inicio, lang)}</dd>

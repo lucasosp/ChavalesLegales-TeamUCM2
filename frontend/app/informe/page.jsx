@@ -7,6 +7,10 @@ import { listarCasos } from '../../lib/casos'
 import { useI18n } from '../../lib/i18n'
 import { localeDe } from './analisis'
 
+// El caso guarda el id del riesgo; el texto se resuelve en la lengua del lector.
+const textoRiesgo = (t, meta) =>
+  meta?.tipoRiesgoId ? t(`profesores.riesgo_${meta.tipoRiesgoId}`) : meta?.tipoRiesgo
+
 export default function ListaInformes() {
   const { t, lang } = useI18n()
   const [casos, setCasos] = useState(null)
@@ -37,7 +41,7 @@ export default function ListaInformes() {
                 <tr key={c.id}>
                   <td><strong>{c.id}</strong></td>
                   <td>{c.meta?.nombreJoven ?? '—'}</td>
-                  <td>{c.meta?.tipoRiesgo ?? '—'}</td>
+                  <td>{c.meta?.tipoRiesgo ? textoRiesgo(t, c.meta) : '—'}</td>
                   <td>{c.meta?.creadoEn ? new Date(c.meta.creadoEn).toLocaleString(localeDe(lang), { dateStyle: 'medium', timeStyle: 'short' }) : '—'}</td>
                   <td>{c.eventos}</td>
                   <td><Link href={`/informe/${encodeURIComponent(c.id)}`} className={styles.btnTop}>{t('informe.verInforme')}</Link></td>
