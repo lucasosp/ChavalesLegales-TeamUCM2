@@ -136,7 +136,7 @@ say("c4-school2", "Sara", "Primero las mates. Si me pierdo en una página, luego
 say("c4-friends", "Paula", "Podemos jugar, escuchar música o no decir nada. No tienes que contarme cómo va todo cada vez que quedemos.", "c4-friends2");
 say("c4-friends2", "Sara", "Pues hoy quiero que me enseñes la canción nueva que te gusta.", "c4-dani-route", { cast: { sara: "happy" } });
 branch("c4-dani-route", { flag: "concernDani" }, "c4-dani", "c4-general");
-say("c4-dani", "Elena", "La otra vez te preocupaba mucho Dani. Hay personas que le están escuchando y cuidando. Hoy puedes pensar en ti, y eso no es fallarle.", "c4-info", { learn: ["brother"] });
+say("c4-dani", "Elena", "La otra vez te preocupaba mucho Dani. Hay personas que lo están escuchando y cuidando. Hoy puedes pensar en ti, y eso no es fallarle.", "c4-info", { learn: ["brother"] });
 say("c4-general", "Elena", "Seguimos pendientes de cómo estáis tú, Dani y tu madre. No hace falta que una sola persona cargue con todo.", "c4-info");
 explain("c4-info", "Elena", "everyday", "c4-choice2");
 choice("c4-choice2", "En clase, un compañero le pregunta por qué ha faltado. ¿Qué quiere hacer Sara?", [
@@ -202,7 +202,7 @@ choice("c6-choice", "Hoy, ¿de qué quiere hablar Sara con Elena?", [
   option("privacy", "Las preguntas que le hacen en clase.", "c6-school", { waiting: "privacy" }),
 ]);
 explain("c6-news", "Elena", "waiting", "c6-03");
-say("c6-dad", "Elena", "Puedes echar de menos los momentos buenos y, a la vez, necesitar estar protegida. No tienes que sentir una sola cosa. Lo que te hizo estuvo mal, aunque le quieras.", "c6-03");
+say("c6-dad", "Elena", "Puedes echar de menos los momentos buenos y, a la vez, necesitar estar protegida. No tienes que sentir una sola cosa. Lo que te hizo estuvo mal, aunque lo quieras.", "c6-03");
 explain("c6-school", "Laura", "school", "c6-03");
 chat("c6-msg", "Irene · abogada", [
   ["Irene", "Hola, Sara. Ya ha salido la sentencia.", "17:30"],
