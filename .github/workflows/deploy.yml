@@ -11,15 +11,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Comprobar configuración de credenciales
+        run: |
+          echo "=== Verificación de credenciales SSH ==="
+          if [ -n "${{ secrets.SERVER_PASSWORD || secrets.PASSWORD || secrets.SSH_PASSWORD || secrets.DATATHON_PASSWORD || vars.SERVER_PASSWORD || vars.PASSWORD }}" ] || [ -n "${{ secrets.SERVER_KEY || secrets.SSH_KEY || secrets.KEY || vars.SERVER_KEY || vars.SSH_KEY }}" ]; then
+            echo " Credencial SSH detectada correctamente."
+          else
+            echo " ERROR: No se ha detectado ninguna contrasena o clave SSH en los secretos del repositorio."
+            echo "Por favor, crea el secreto 'SERVER_PASSWORD' en GitHub: Settings > Secrets and variables > Actions > Repository secrets."
+          fi
+
       - name: Ejecutar despliegue vía SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.SERVER_HOST || secrets.HOST || 'chavaleslegales.fdi.ucm.es' }}
-          username: ${{ secrets.SERVER_USER || secrets.USERNAME || 'datathon' }}
-          password: ${{ secrets.SERVER_PASSWORD || secrets.PASSWORD }}
-          key: ${{ secrets.SERVER_KEY || secrets.SSH_KEY || secrets.KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
-          port: ${{ secrets.SERVER_PORT || secrets.PORT || 22 }}
+          host: ${{ secrets.SERVER_HOST || secrets.HOST || vars.SERVER_HOST || 'chavaleslegales.fdi.ucm.es' }}
+          username: ${{ secrets.SERVER_USER || secrets.USERNAME || vars.SERVER_USER || 'datathon' }}
+          password: ${{ secrets.SERVER_PASSWORD || secrets.PASSWORD || secrets.SSH_PASSWORD || secrets.DATATHON_PASSWORD || vars.SERVER_PASSWORD || vars.PASSWORD }}
+          key: ${{ secrets.SERVER_KEY || secrets.SSH_KEY || secrets.KEY || vars.SERVER_KEY || vars.SSH_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE || vars.PASSPHRASE }}
+          port: ${{ secrets.SERVER_PORT || secrets.PORT || vars.SERVER_PORT || 22 }}
           script: |
             echo "Iniciando despliegue en /var/www/chavaleslegales..."
             cd /var/www/chavaleslegales
