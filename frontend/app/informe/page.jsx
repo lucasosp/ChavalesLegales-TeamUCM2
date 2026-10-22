@@ -16,11 +16,11 @@ export default function ListaInformes() {
 
   return (
     <div className={styles.page}>
-      <div className={styles.toolbar}>
-        <Link href="/profesores" className={styles.btnGhost}>{t('informe.volverPanel')}</Link>
+      <div className={styles.topbar}>
+        <Link href="/profesores" className={styles.btnTopBack}>{t('informe.volverPanel')}</Link>
       </div>
-      <article className={styles.doc}>
-        <header className={styles.portada}>
+      <article className={styles.mainContainer}>
+        <header className={styles.headerCard}>
           <div>
             <span className={styles.kicker}>{t('informe.kickerLista')}</span>
             <h1>{t('informe.tituloLista')}</h1>
@@ -40,7 +40,7 @@ export default function ListaInformes() {
                   <td>{c.meta?.tipoRiesgo ?? '—'}</td>
                   <td>{c.meta?.creadoEn ? new Date(c.meta.creadoEn).toLocaleString(localeDe(lang), { dateStyle: 'medium', timeStyle: 'short' }) : '—'}</td>
                   <td>{c.eventos}</td>
-                  <td><Link href={`/informe/${encodeURIComponent(c.id)}`} className={styles.btn}>{t('informe.verInforme')}</Link></td>
+                  <td><Link href={`/informe/${encodeURIComponent(c.id)}`} className={styles.btnTop}>{t('informe.verInforme')}</Link></td>
                 </tr>
               ))}
             </tbody>

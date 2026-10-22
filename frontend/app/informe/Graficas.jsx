@@ -123,7 +123,7 @@ export function LineaTiempo({ duracion, marcas, eventos = [] }) {
 
 export function Kpi({ etiqueta, valor, nota }) {
   return (
-    <div className={styles.kpi}>
+    <div className={styles.kpiCard}>
       <span className={styles.kpiLabel}>{etiqueta}</span>
       <strong className={styles.kpiValue}>{valor}</strong>
       {nota && <span className={styles.kpiNote}>{nota}</span>}

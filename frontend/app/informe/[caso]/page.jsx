@@ -62,9 +62,9 @@ function detalleEvento(e, a, t) {
 
 function Seccion({ numero, titulo, sub, children }) {
   return (
-    <section className={styles.seccion}>
+    <section className={styles.seccionCard}>
       <header className={styles.seccionHead}>
-        <span className={styles.num}>{numero}</span>
+        <span className={styles.seccionNum}>{numero}</span>
         <div>
           <h2>{titulo}</h2>
           {sub && <p>{sub}</p>}
@@ -383,26 +383,26 @@ export default function InformeCaso({ params }) {
 
   return (
     <div className={styles.page}>
-      <div className={styles.toolbar}>
-        <Link href="/informe" className={styles.btnGhost}>{t('informe.volverCasos')}</Link>
-        <span className={styles.vivo}>{enCurso ? t('informe.sesionEnCurso') : ''}{t('informe.actualizado', { hora: actualizado?.toLocaleTimeString(locale) ?? '' })}</span>
-        <div className={styles.acciones}>
-          <button type="button" className={styles.btnGhost} onClick={() => downloadJson({ caso, analisis: { ...a, eventos: undefined } }, `informe-${id}`)}>{t('informe.exportarJson')}</button>
+      <div className={styles.topbar}>
+        <Link href="/informe" className={styles.btnTopBack}>{t('informe.volverCasos')}</Link>
+        <span className={styles.vivoBadge}>{enCurso ? t('informe.sesionEnCurso') : ''}{t('informe.actualizado', { hora: actualizado?.toLocaleTimeString(locale) ?? '' })}</span>
+        <div className={styles.topActions}>
+          <button type="button" className={styles.btnTopExport} onClick={() => downloadJson({ caso, analisis: { ...a, eventos: undefined } }, `informe-${id}`)}>{t('informe.exportarJson')}</button>
           {/* Eventos crudos: es el formato con el que se puede analizar fuera de la app
               (incluye las imágenes del dibujo y los reports de los minijuegos). */}
-          <button type="button" className={styles.btnGhost} onClick={() => downloadJson({ id, meta, eventos: caso.eventos ?? [] }, `eventos-${id}`)}>{t('informe.exportarEventos')}</button>
-          <button type="button" className={styles.btn} onClick={() => window.print()}>{t('informe.imprimir')}</button>
+          <button type="button" className={styles.btnTopExport} onClick={() => downloadJson({ id, meta, eventos: caso.eventos ?? [] }, `eventos-${id}`)}>{t('informe.exportarEventos')}</button>
+          <button type="button" className={styles.btnTop} onClick={() => window.print()}>{t('informe.imprimir')}</button>
         </div>
       </div>
 
-      <article className={styles.doc}>
-        <header className={styles.portada}>
+      <article className={styles.mainContainer}>
+        <header className={styles.headerCard}>
           <div>
             <span className={styles.kicker}>{t('informe.kickerCaso')}</span>
             <h1>{t('informe.tituloCaso', { id })}</h1>
             <p className={styles.subtitulo}>{meta.nombreJoven ?? t('informe.sinIdentificar')}{meta.tipoRiesgo ? ` · ${meta.tipoRiesgo}` : ''}</p>
           </div>
-          <dl className={styles.ficha}>
+          <dl className={styles.fichaGrid}>
             <dt>{t('informe.dtInicio')}</dt><dd>{fmtFecha(a.inicio, lang)}</dd>
             <dt>{t('informe.dtUltima')}</dt><dd>{fmtFecha(a.ultimo, lang)}</dd>
             <dt>{t('informe.dtEstado')}</dt><dd>{t(a.terminado ? 'informe.estadoCompletada' : enCurso ? 'informe.estadoEnCurso' : a.inicio ? 'informe.estadoIncompleta' : 'informe.estadoSinActividad')}</dd>
@@ -410,12 +410,12 @@ export default function InformeCaso({ params }) {
           </dl>
         </header>
 
-        <div className={styles.aviso}>
+        <div className={styles.avisoCard}>
           <strong>{t('informe.avisoTitulo')}</strong> {t('informe.avisoTexto')}
         </div>
-        {meta.contexto && <p className={styles.contexto}><strong>{t('informe.contextoProfesional')}</strong> {meta.contexto}</p>}
+        {meta.contexto && <p className={styles.contextoCard}><strong>{t('informe.contextoProfesional')}</strong> {meta.contexto}</p>}
 
-        <div className={styles.kpis}>
+        <div className={styles.kpisSection}>
           <Kpi etiqueta={t('informe.kpiDuracion')} valor={fmtDuracion(a.duracionMs)} nota={a.sesiones > 1 ? t('informe.kpiAccesos', { n: a.sesiones }) : undefined} />
           <Kpi etiqueta={t('informe.kpiDecisiones')} valor={a.decisiones.length} />
           <Kpi etiqueta={t('informe.kpiMediana')} valor={fmtSeg(a.latencia.mediana)} nota={a.latencia.mediana ? t('informe.kpiRango', { min: fmtSeg(a.latencia.min), max: fmtSeg(a.latencia.max) }) : undefined} />
